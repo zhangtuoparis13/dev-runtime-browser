@@ -1,0 +1,33 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdoc": "^3.3.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-jsdoc": "^0.6.10",
+    "gulp": "^3.9.0",
+    "jspm": "^0.16.12"
+  },
+  "jspm": {
+    "directories": {
+      "packages": "vendor"
+    },
+    "dependencies": {
+      "core": "github:reTHINK-project/dev-runtime-core@master"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
+}
