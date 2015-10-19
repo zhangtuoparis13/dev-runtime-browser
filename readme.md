@@ -1,6 +1,6 @@
 # dev-runtime-browser
 
-### How to include this runtime-core code into runtime-browser;
+### How to include runtime-core code into runtime-browser;
 
 Verify these use cases:
  1. if you will create a new repository, you can use this template, and can configure your development environment;
