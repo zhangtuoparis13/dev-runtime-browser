@@ -2,13 +2,14 @@ import {Sandbox} from 'runtime-core';
 
 class SandboxBrowser extends Sandbox {
 
-  constructor() {
+  constructor(messageBus) {
 
     super();
 
     let _this = this;
 
     _this.name = 'SandboxBrowser';
+    _this.messageBus = messageBus;
 
     try {
 
@@ -31,6 +32,7 @@ class SandboxBrowser extends Sandbox {
     if (!configuration) throw new Error('Configuration parameter needed!');
 
     let _this = this;
+    console.log('messagebus:', _this);
 
     return new Promise(function(resolve, reject) {
 

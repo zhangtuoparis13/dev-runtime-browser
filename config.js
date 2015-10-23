@@ -17,7 +17,7 @@ System.config({
   map: {
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
-    "core-js": "npm:core-js@1.2.2",
+    "core-js": "npm:core-js@1.2.3",
     "runtime-core": "github:reTHINK-project/dev-runtime-core@master",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -37,7 +37,7 @@ System.config({
     "npm:babel-runtime@5.8.25": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:core-js@1.2.2": {
+    "npm:core-js@1.2.3": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",

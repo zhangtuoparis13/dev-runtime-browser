@@ -1,4 +1,5 @@
 import SandboxBrowser from './SandboxBrowser';
+import AppSandboxBrowser from './AppSandboxBrowser';
 
 class SandboxFactoryBrowser {
 
@@ -15,6 +16,11 @@ class SandboxFactoryBrowser {
   createSandbox() {
     let _this = this;
     return new SandboxBrowser(_this._messageBus);
+  }
+
+  createAppSandbox() {
+    let _this = this;
+    return new AppSandboxBrowser(_this._messageBus);
   }
 
   removeSandbox() {
