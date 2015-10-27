@@ -23,7 +23,7 @@ class AppSandboxBrowser {
         // Instantiate the application inside the AppSandbox
         var script = document.createElement('script');
         script.type = 'text/JavaScript';
-        script.text = 'var callbackMessage = function(msg) { console.log(\'callback message\', msg); self.parent.postMessage(msg, \'*\'); }; self.addEventListener(\'message\', function(event){ var message = event.data; if (message.sourceCode) { eval(message.sourceCode); var code = new VertxProtoStub(message.componentURL, callbackMessage, message.configuration); code.connect(); }});';
+        script.text = 'var callbackMessage = function(msg) { console.log(\'callback message\', msg); self.parent.postMessage(msg, \'*\'); }; self.addEventListener(\'message\', function(event){ var message = event.data; if (message.sourceCode) { eval(message.sourceCode); var code = new self.HypertyHello(); code.activate(); }});';
 
         sandbox.contentWindow.document.getElementsByTagName('body')[0].appendChild(script);
       }
