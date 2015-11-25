@@ -1,5 +1,15 @@
 # dev-runtime-browser
 
+##Introduction
+This repository contain the code necessary to execute the reTHINK runtime core in a browser. reTHINK runtime core can also be executed in other Javascript runtimes such as Node.js.
+
+The execution of the core runtime takes place in an iFrame which isolates it from the main application runtime (the window where the App javascript code is being executed). The only way to transmit messages between the main window and the iFrame is through the ```postMessage()``` method. This way, main application javascript code can not interact with the reTHINK runtime. 
+
+Addtionally to the iFrame, all the hyperties and protoStub will be executed as independient Web Workers (which will extend the sandBox class from the dev-core-runtime repository). This way we keep Hyperties and protoStub runtimes not directly accessible from the core runtime but using also the postMessage() mechanism.
+    
+## rethink.js
+This file will contain all the code necessary to launch the iFrame.
+
 ### How to include runtime-core code into runtime-browser;
 
 Verify these use cases:
