@@ -2,10 +2,9 @@
   "name": "runtime-browser",
   "version": "0.1.0",
   "description": "browser runtime development",
-  "main": "src/runtime-browser.js",
+  "main": "src/rethink.js",
   "scripts": {
-    "init-setup": "npm init && npm install -g jspm karma-cli gulp-cli && npm install && jspm init && node setup.js",
-    "test": "karma start"
+    "test": "jspm bundle rethink && karma start"
   },
   "repository": {
     "type": "git",
@@ -55,7 +54,7 @@
       "packages": "vendor"
     },
     "dependencies": {
-      "runtime-core": "github:reTHINK-project/dev-runtime-core@master"
+      "runtime-core": "github:reTHINK-project/dev-runtime-core@^0.1.1"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
