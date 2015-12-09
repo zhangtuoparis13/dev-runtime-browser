@@ -9,18 +9,22 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: [ 'mocha', 'browserify'],
-    
-    files: [
-        'vendor/system.js',
-        'config.js',
-        'build.js',
-        'test/**/*.js'
-     ],
+    frameworks: [ 'mocha', 'jspm'],
+     
+    jspm:{
+        loadFiles: [
+            'test/**/*.js',
+         ],
+         serveFiles: [ 'src/**/*.js' ],
+         packages: "vendor"
+    },
 
     // Proxy the karmar server
     proxies: {
-      '/': 'http://localhost:4000/'
+        '/test/':'/base/test/',
+        '/vendor/': '/base/vendor/',
+        '/src/': '/base/src/'
+        //'/': 'http://localhost:4000/'
     },
 
     // Define the root
@@ -33,12 +37,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/**/*.spec.js': ['browserify']
-    },
-
-    browserify: {
-      debug: true,
-      transform: ['babelify']
     },
 
     // test results reporter to use
