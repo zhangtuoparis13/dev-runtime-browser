@@ -24,7 +24,6 @@ module.exports = function(config) {
         '/test/':'/base/test/',
         '/vendor/': '/base/vendor/',
         '/src/': '/base/src/'
-        //'/': 'http://localhost:4000/'
     },
 
     // Define the root
