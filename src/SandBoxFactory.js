@@ -1,8 +1,10 @@
-/*jshint esnext: true */
 import SandboxBrowser from './SandboxBrowser';
 
 function createSandbox(){
     return new SandboxBrowser();
 }
 
-export default { createSandbox };
+function createAppSandbox(){
+}
+
+export default { createSandbox, createAppSandbox };

@@ -1,6 +1,6 @@
 import { Sandbox } from 'runtime-core';
 
-const SANDBOX_FILE = 'Sandbox.js';
+const SANDBOX_FILE = 'SandboxBrowserContext.js';
 export default class SandBoxWebWorker extends Sandbox{
    constructor(){
      super();
