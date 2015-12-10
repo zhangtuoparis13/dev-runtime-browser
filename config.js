@@ -18,7 +18,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.29",
     "chai": "npm:chai@3.4.1",
     "core-js": "npm:core-js@1.2.3",
-    "runtime-core": "github:reTHINK-project/dev-runtime-core@0.1.1",
+    "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -33,6 +33,9 @@ System.config({
     },
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
+    },
+    "github:reTHINK-project/dev-runtime-core@dev-0.2": {
+      "service-framework": "github:reTHINK-project/dev-service-framework@develop"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"

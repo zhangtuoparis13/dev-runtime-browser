@@ -49,7 +49,7 @@
       "packages": "vendor"
     },
     "dependencies": {
-      "runtime-core": "github:reTHINK-project/dev-runtime-core@^0.1.1"
+      "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
