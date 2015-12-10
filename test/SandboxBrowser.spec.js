@@ -41,6 +41,6 @@ describe('SandBoxBrowser', function(){
         sandbox.addListener('ua.me/mock', function(msg){
             done();
         });
-        sendMessage({data:{header: {to:'ua.me/mock'}}});
+        sendMessage({data: {to:'ua.me/mock'}});
     });
 });
