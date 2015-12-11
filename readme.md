@@ -7,35 +7,85 @@ The execution of the core runtime takes place in an iFrame which isolates it fro
 
 Addtionally to the iFrame, all the hyperties and protoStub will be executed as independient Web Workers (which will extend the sandBox class from the dev-core-runtime repository). This way we keep Hyperties and protoStub runtimes not directly accessible from the core runtime but using also the postMessage() mechanism.
     
-## rethink.js
-This file will contain all the code necessary to launch the iFrame.
+## How does it work?
 
-### How to include runtime-core code into runtime-browser;
+![Runtime Browser](runtime-browser.png)
 
-Verify these use cases:
- 1. if you will create a new repository, you can use this template, and can configure your development environment;
- 2. if you already have an respository cloned;
+####RuntimeUAStub responsibilities:
 
-for both cases you just have run the command:
+1. Expose loadHyperty and loadProtoStub to **client app**.
+2. if Core Sandbox doesn't exist it creates Core Sandbox.
+3. Route messages from client app to core and vice versa.
+4. Create **AppSandbox** when RuntimeUA set it.
+    Virtually AppSandbox is created by RuntimeUA, but due to AppSandbox is not more a sandbox and run in the window context it should be created by RuntimeUAStub. RuntimeUA will send a message asking it to RuntimeUAStub.
+    ** Note **
+    I don't have clear yet how the communication between these components are going to be managed.
+    Maybe we need to look for another name for AppSandbox since it isn't more a sandbox.
 
-```
-jspm install runtime-core=github:reTHINK-project/dev-runtime-core.git.
-```
+####Core/Service Provider Sandbox responsibilities:
 
-and on javascript code you need import the script like other modules;
+1. Isolate RuntimeUA from client app.
+2. Manage all the communication from and to internal components.
 
-```
-import {RuntimeUA, Sandbox} from 'runtime-core';
+####AppSandbox
+1. Manage all the communication from and to internal components.
 
-console.log('Runtime: ', RuntimeUA);
-console.log('Sandbox: ', Sandbox);
+##Setup Environment
+###Configure jspm access to runtime-core repo
 
-```
+1. generate token with public_repo permission enabled
+2. Then execute the command below and you'll be asked for the credentials: 
+ 
+        jspm registry config github
 
-### Karma
-if you have some problems starting the karma tests, try running this commands for the following order:
+###Configure dependencies
 
- 1. ```npm uninstall karma karma-browserify karma-mocha karma-mocha-reporter karma-chrome-launcher -g```
- 2. ```npm install karma-cli -g```
- 3. ```npm install```
- 4. ```jspm update```
+        npm install -g jspm karma-cli gulp-cli
+        npm install
+        jspm install
+
+or
+
+        npm run init-setup
+
+
+## Unit Testing
+
+Unit testing can be launched manually with **npm test**.
+
+## Javascript Environment
+
+JavaScript code should be written in ES6. There are direct dependencies from nodejs and npm, these can be installed separately or in conjunction with [nvm](https://github.com/creationix/nvm)
+
+### Dependencies
+
+-   nodejs
+-   npm
+-   karma - Make the communication between unit test tool and jenkins. See more on [karma](http://karma-runner.github.io/0.13/index.html)
+-   mocha - Unit test tool. See more on [http://mochajs.org](http://mochajs.org/)
+-   jspm - Don't need compile the code, it uses babel (or traucer or typescript) to run ES6 code on browser. Know more in [jspm.io](http://jspm.io/)
+-   gulp - Automate and enhance your workflow. See more about gulp on [gulp](http://gulpjs.com/)
+
+### Code Style and Hinting
+
+On the root directory you will find **.jshintrc**, this file is a helper to maintain syntax consistency, it signals syntax mistakes and makes the code equal for all developers.
+
+-   [jshint](http://jshint.com/) - Detect errors and potential problems in JavaScript code.
+
+All IDE's and Text Editors can handle these tools.
+<!--
+
+## Example
+
+This repository have a folder with an working example of runtime-browser and we can do:
+
+To run the demo on example folder:
+ - you need **live-server** running in the root folder.
+ ```
+ live-server --port=4000
+ ```
+ - in your browser access to http://localhost:4000/example.
+
+## Distributable file - rethink.js
+
+-->

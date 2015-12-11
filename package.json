@@ -4,7 +4,8 @@
   "description": "browser runtime development",
   "main": "src/rethink.js",
   "scripts": {
-    "test": "jspm bundle rethink && karma start"
+    "test": "karma start",
+    "init-setup": "npm install -g jspm karma-cli gulp-cli && npm install && jspm install"
   },
   "repository": {
     "type": "git",
