@@ -8,10 +8,10 @@ self._miniBus._onPostMessage = function(msg){
     self.postMessage(msg);
 };
 self.addEventListener('message', function(event){
-    self._miniBus.postMessage(event.data);
+    self._miniBus._onMessage(event.data);
 });
 
-self._registry = new SandboxRegistry(miniBus);
+self._registry = new SandboxRegistry(self._miniBus);
 self._registry.create = function(url, sourceCode, config){
     return eval(sourceCode);
 };
