@@ -7,13 +7,20 @@ describe('SandboxBrowser Integration Tests', function(){
         var sandbox = new Sandbox('base/test/resources/environment.js');
 
         setTimeout(()=>{
-            sandbox.postMessage({to:'sandbox://internal',type:'create', body: { config:'', url: 'ua.me', sourceCode: '2+2'} }, function(msg){
+            sandbox.postMessage({to:'sandbox://internal',type:'create', body: { config:'', url: 'ua.me', sourceCode: '(function (url, miniBus, config){ 2+2; })'} }, function(msg){
                     done();
                 });
         }, 1200);
     });
 
-    xit('should create components', function(){
-
+    it('should create components', function(done){
+        this.timeout(0);
+        var sandbox = new Sandbox('base/test/resources/environment.js');
+        sandbox.addListener('ua.me', function(e){
+            done();
+        });
+        setTimeout(()=>{
+            sandbox.postMessage({to:'sandbox://internal',type:'create', body: { config:'', url: 'ua.me', sourceCode: '(function (url, miniBus, config){ self.postMessage({to:"ua.me"}); })'}} );
+        }, 1200);
     });
 });

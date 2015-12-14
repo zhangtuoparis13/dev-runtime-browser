@@ -11,6 +11,7 @@ self.addEventListener('message', function(event){
 
 self._registry = new SandboxRegistry(self._miniBus);
 self._registry._create = function(url, sourceCode, config){
-    return eval(sourceCode);
+    let activate = eval(sourceCode);
+    return activate(url, self._miniBus, config);
 };
 
