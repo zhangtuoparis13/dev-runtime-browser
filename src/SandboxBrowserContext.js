@@ -1,7 +1,5 @@
-"use strict";
-
-var MiniBus = System.get('runtime-core').MiniBus;
-var SandboxRegistry = System.get('runtime-core').SandboxRegistry;
+import { MiniBus } from 'runtime-core';
+import { SandboxRegistry } from 'runtime-core';
 
 self._miniBus = new MiniBus();
 self._miniBus._onPostMessage = function(msg){
@@ -12,7 +10,7 @@ self.addEventListener('message', function(event){
 });
 
 self._registry = new SandboxRegistry(self._miniBus);
-self._registry.create = function(url, sourceCode, config){
+self._registry._create = function(url, sourceCode, config){
     return eval(sourceCode);
 };
 
