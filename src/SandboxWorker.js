@@ -1,6 +1,6 @@
 import { Sandbox } from 'runtime-core';
 
-export default class SandBoxWebWorker extends Sandbox{
+export default class SandboxWorker extends Sandbox{
    constructor(script){
      super();
      if(!!Worker){

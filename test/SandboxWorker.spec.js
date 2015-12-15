@@ -1,6 +1,6 @@
 /*jshint esnext: true */
 import { expect } from 'chai';
-import Sandbox from '../src/SandboxBrowser';
+import Sandbox from '../src/SandboxWorker';
 
 let init, post, sendMessage;
 

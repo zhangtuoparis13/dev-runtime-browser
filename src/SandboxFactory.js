@@ -1,7 +1,8 @@
-import SandboxBrowser from './SandboxBrowser';
+import SandboxWorker from './SandboxWorker';
+import SandboxIframe from './SandboxIframe';
 
 function createSandbox(){
-    return new SandboxBrowser();
+    return new SandboxWorker();
 }
 
 function createAppSandbox(){
