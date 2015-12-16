@@ -17,10 +17,7 @@ Addtionally to the iFrame, all the hyperties and protoStub will be executed as i
 2. if Core Sandbox doesn't exist it creates Core Sandbox.
 3. Route messages from client app to core and vice versa.
 4. Create **AppSandbox** when RuntimeUA set it.
-    Virtually AppSandbox is created by RuntimeUA, but due to AppSandbox is not more a sandbox and run in the window context it should be created by RuntimeUAStub. RuntimeUA will send a message asking it to RuntimeUAStub.
-    ** Note **
-    I don't have clear yet how the communication between these components are going to be managed.
-    Maybe we need to look for another name for AppSandbox since it isn't more a sandbox.
+    Virtually AppSandbox is created by RuntimeUA, but due to AppSandbox is running in the window context it should be created by RuntimeUAStub. RuntimeUA will send a message asking it to RuntimeUAStub.
 
 ####Core/Service Provider Sandbox responsibilities:
 
@@ -73,11 +70,13 @@ On the root directory you will find **.jshintrc**, this file is a helper to main
 -   [jshint](http://jshint.com/) - Detect errors and potential problems in JavaScript code.
 
 All IDE's and Text Editors can handle these tools.
-<!--
 
 ## Example
 
-This repository have a folder with an working example of runtime-browser and we can do:
+This repository have a folder with an use example of rethink.js. It initializes runtime and then you can use the console to invoke:
+
+* rethink.requireHyperty(hypertyDescriptor);
+* rethink.requireProtostub(domain);
 
 To run the demo on example folder:
  - you need **live-server** running in the root folder.
@@ -86,6 +85,5 @@ To run the demo on example folder:
  ```
  - in your browser access to http://localhost:4000/example.
 
-## Distributable file - rethink.js
+## Distributable file - rethink.js, context-core.js, context-service.js
 
--->
