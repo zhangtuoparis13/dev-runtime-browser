@@ -4,10 +4,10 @@ import SandboxFactory from './SandboxFactory';
 let runtime = new RuntimeUA(SandboxFactory);
 
 SandboxFactory.messageBus._onPostMessage = function(msg){
-    self.postMessage(msg);
+    window.postMessage(msg);
 };
 
-self.addEventListener('message', function(event){
+window.addEventListener('message', function(event){
     if(event.data.to==='runtime:loadHyperty'){
         runtime.loadHyperty(event.data.body.descriptor)
             .then((msg)=>self.postMessage(msg));
@@ -17,5 +17,5 @@ self.addEventListener('message', function(event){
     }else{
         SandboxFactory.messageBus._onMessage(event.data);
     }
-});
+}, false);
 

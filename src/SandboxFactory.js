@@ -1,8 +1,9 @@
 import SandboxWorker from './SandboxWorker';
 import SandboxIframe from './SandboxIframe';
 
+//TODO: resources url dependency
 function createSandbox(){
-    return new SandboxWorker();
+    return new SandboxWorker('../dist/context-service.js');
 }
 
 function createAppSandbox(){
