@@ -17,5 +17,5 @@ self.addEventListener('message', function(event){
     }else{
         SandboxFactory.messageBus._onMessage(event.data);
     }
-};
+});
 
