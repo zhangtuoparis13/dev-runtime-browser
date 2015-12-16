@@ -1885,7 +1885,7 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
               if (r(this, t), u(Object.getPrototypeOf(t.prototype), "constructor", this).call(this), !e)
                 throw new Error("runtimeURL is missing.");
               var i = this;
-              i.registryURL = e + "/registry/123", i.appSandbox = n, i.runtimeURL = e, i.remoteRegistry = o, i.hypertyiesList = {}, i.protostubsList = {}, i.sandboxesList = {}, i.pepList = {};
+              i.registryURL = e + "/registry/123", i.appSandbox = n, i.runtimeURL = e, i.remoteRegistry = o, i.hypertiesList = {}, i.protostubsList = {}, i.sandboxesList = {}, i.pepList = {};
             }
             return i(t, e), s(t, [{
               key: "getAppSandbox",
@@ -1898,26 +1898,25 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
               value: function(e, t) {
                 var n = this,
                     o = (0, d.divideURL)(t).domain,
-                    r = new Promise(function(t, r) {
-                      return void 0 !== n._messageBus ? n.resolve("hyperty-runtime://" + o).then(function() {}).then(function() {
-                        var o = n._messageBus.addListener(n.registryURL, function(t) {
-                          var r = t.body.hypertyRuntime;
-                          n.hypertiesList[r] = {identity: r + "/identity"}, n.sandboxesList[r] = e, o.remove();
-                        }),
-                            i = 1,
-                            s = "ua.pt";
-                        n.addressAllocation.create(s, i).then(function(e) {
+                    r = o + "/identity",
+                    i = new Promise(function(t, i) {
+                      return void 0 !== n._messageBus ? n.resolve("hyperty-runtime://" + o).then(function() {
+                        n.hypertiesList.hasOwnProperty(o) && (n.hypertiesList[o] = {identity: r}), n.sandboxesList.hasOwnProperty(o) || (n.sandboxesList[o] = e, e.addListener("*", function(e) {
+                          n._messageBus.postMessage(e);
+                        }));
+                        var s = 1;
+                        n.addressAllocation.create(o, s).then(function(e) {
                           e.forEach(function(e) {
                             n._messageBus.addListener(e + "/status", function(t) {
                               console.log("Message addListener for : ", e + "/status -> " + t);
                             });
                           }), t(e[0]);
                         })["catch"](function(e) {
-                          console.log("Address Reason: ", e), r(e);
+                          console.log("Address Reason: ", e), i(e);
                         });
-                      }) : void r("MessageBus not found on registerStub");
+                      }) : void i("MessageBus not found on registerStub");
                     });
-                return r;
+                return i;
               }
             }, {
               key: "unregisterHyperty",
@@ -1947,9 +1946,7 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
                 var n,
                     o = this,
                     r = new Promise(function(r, i) {
-                      void 0 === o._messageBus && i("MessageBus not found on registerStub");
-                      var s = t;
-                      t.indexOf("msg-node.") || (s = t.substring(t.indexOf(".") + 1)), n = "msg-node." + s + "/protostub/" + Math.floor(1e4 * Math.random() + 1), o.protostubsList[s] = n, o.sandboxesList[n] = e, r(n), o._messageBus.addListener(n + "/status", function(e) {
+                      void 0 === o._messageBus && i("MessageBus not found on registerStub"), t.indexOf("msg-node.") || (t = t.substring(t.indexOf(".") + 1)), n = "msg-node." + t + "/protostub/" + Math.floor(1e4 * Math.random() + 1), o.protostubsList[t] = n, o.sandboxesList[n] = e, r(n), o._messageBus.addListener(n + "/status", function(e) {
                         e.resource === e.to + "/status" && console.log("RuntimeProtostubURL/status message: ", e.body.value);
                       });
                     });
@@ -2030,8 +2027,8 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
           }(c["default"]);
       n["default"] = p, t.exports = n["default"];
     }, {
-      "../utils/EventEmitter": 12,
-      "../utils/utils.js": 13,
+      "../utils/EventEmitter": 14,
+      "../utils/utils.js": 15,
       "./AddressAllocation": 5
     }],
     7: [function(e, t, n) {
@@ -2085,11 +2082,11 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
             }, {
               key: "_makeExternalRequest",
               value: function(e) {
-                return console.log("_makeExternalRequest", e), new Promise(function(t, n) {
+                return new Promise(function(t, n) {
                   var o = new XMLHttpRequest;
                   o.onreadystatechange = function(e) {
                     var o = e.currentTarget;
-                    4 === o.readyState && (console.log("got response:", o), 200 === o.status ? t(o.responseText) : n(o.responseText));
+                    4 === o.readyState && (200 === o.status ? t(o.responseText) : n(o.responseText));
                   }, o.open("GET", e, !0), o.send();
                 });
               }
@@ -2097,19 +2094,35 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
               key: "getHypertyDescriptor",
               value: function(e) {
                 var t = this;
-                return console.log("getHypertyDescriptor", e), new Promise(function(n, o) {
-                  t._makeExternalRequest(e).then(function(e) {
-                    e = JSON.parse(e), e.ERROR ? o(e) : n(e);
-                  });
+                return new Promise(function(n, o) {
+                  var r = e.substr(e.lastIndexOf("/") + 1),
+                      i = {
+                        guid: "guid",
+                        id: "idHyperty",
+                        classname: r,
+                        description: "description of " + r,
+                        kind: "hyperty",
+                        catalogueURL: "....",
+                        sourceCode: "../resources/" + r + ".ES5.js",
+                        dataObject: "",
+                        type: "",
+                        messageSchema: "",
+                        configuration: {runtimeURL: t._runtimeURL},
+                        policies: "",
+                        constraints: "",
+                        hypertyCapabilities: "",
+                        protocolCapabilities: ""
+                      };
+                  n(i);
                 });
               }
             }, {
-              key: "getHypertySourcePackage",
+              key: "getHypertySourceCode",
               value: function(e) {
                 var t = this;
                 return new Promise(function(n, o) {
                   t._makeExternalRequest(e).then(function(e) {
-                    e.ERROR ? o(e) : (e = JSON.parse(e), sourcePackage = JSON.parse(e.sourcePackage), n(sourcePackage));
+                    n(e);
                   })["catch"](function(e) {
                     o(e);
                   });
@@ -2118,14 +2131,33 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
             }, {
               key: "getStubDescriptor",
               value: function(e) {
-                return new Promise(function(t, n) {
-                  _makeExternalRequest(e).then(function(e) {
-                    e = JSON.parse(e), e.ERROR ? n(e) : t(e);
-                  });
+                var t = this;
+                return new Promise(function(e, n) {
+                  var o = {
+                    guid: "guid",
+                    id: "idProtoStub",
+                    classname: "VertxProtoStub",
+                    description: "description of ProtoStub",
+                    kind: "hyperty",
+                    catalogueURL: "....",
+                    sourceCode: "../resources/VertxProtoStub.js",
+                    dataObject: "",
+                    type: "",
+                    messageSchema: "",
+                    configuration: {
+                      url: "ws://localhost:9090/ws",
+                      runtimeURL: t._runtimeURL
+                    },
+                    policies: "",
+                    constraints: "",
+                    hypertyCapabilities: "",
+                    protocolCapabilities: ""
+                  };
+                  e(o);
                 });
               }
             }, {
-              key: "getStubSourcePackage",
+              key: "getStubSourceCode",
               value: function(e) {
                 var t = this;
                 return new Promise(function(n, o) {
@@ -2180,14 +2212,16 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
           d = e("../bus/MessageBus"),
           p = o(d),
           y = e("./RuntimeCatalogue"),
-          v = o(y),
-          g = function() {
+          b = o(y),
+          v = e("../syncher/SyncherManager"),
+          g = o(v),
+          h = function() {
             function e(t) {
               if (r(this, e), !t)
                 throw new Error("The sandbox factory is a needed parameter");
               var n = this;
-              n.sandboxFactory = t, n.runtimeCatalogue = new v["default"];
-              var o = "runtime://sp1/" + Math.floor(1e4 * Math.random() + 1);
+              n.sandboxFactory = t, n.runtimeCatalogue = new b["default"];
+              var o = "runtime://ua.pt/" + Math.floor(1e4 * Math.random() + 1);
               n.runtimeURL = o, n.runtimeCatalogue.runtimeURL = o;
               var i = t.createAppSandbox();
               n.identityModule = new c["default"], n.policyEngine = new f["default"], n.registry = new u["default"](o, i), n.messageBus = new p["default"](n.registry), n.registry.messageBus = n.messageBus, n.registry.addEventListener("runtime:loadStub", function(e) {
@@ -2196,7 +2230,7 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
                 })["catch"](function(e) {
                   console.error(e);
                 });
-              }), t.messageBus = n.messageBus;
+              }), t.messageBus = n.messageBus, n.syncherManager = new g["default"](n.runtimeURL, n.messageBus, {});
             }
             return i(e, [{
               key: "discoverHiperty",
@@ -2220,14 +2254,14 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
                       };
                   console.log("------------------ Hyperty ------------------------"), console.info("Get hyperty descriptor for :", e), t.runtimeCatalogue.getHypertyDescriptor(e).then(function(e) {
                     console.info("1: return hyperty descriptor", e), s = e;
-                    var n = e.sourcePackageURL;
-                    return "/sourcePackage" == n ? JSON.parse(e.sourcePackage) : t.runtimeCatalogue.getHypertySourcePackage(n);
+                    var n = e.sourceCode;
+                    return t.runtimeCatalogue.getHypertySourceCode(n);
                   }).then(function(e) {
-                    console.info("2: return hyperty source package", e), u = e;
+                    console.info("2: return hyperty source code"), u = e;
                     var t = !0;
                     return t;
                   }).then(function(e) {
-                    console.info("3: return policy engine result", e);
+                    console.info("3: return policy engine result");
                     var n = !0,
                         o = void 0;
                     return o = n ? t.registry.getAppSandbox() : t.registry.getSandbox(domain);
@@ -2242,8 +2276,6 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
                   }).then(function(e) {
                     console.info("7: Deploy component status for hyperty: ", r), t.messageBus.addListener(r, function(e) {
                       i.postMessage(e);
-                    }), i.addListener("*", function(e) {
-                      t.messageBus.postMessage(e);
                     });
                     var o = {
                       runtimeHypertyURL: r,
@@ -2273,10 +2305,10 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
                     return console.info("1. Proto Stub not found:", n), t.runtimeCatalogue.getStubDescriptor(e);
                   }).then(function(e) {
                     console.info("2. return the ProtoStub descriptor:", e), i = e;
-                    var n = e.sourcePackageURL;
-                    return n.isEqual("/sourcePackage") ? e.sourcePackage : t.runtimeCatalogue.getStubSourcePackage(n);
+                    var n = e.sourceCode;
+                    return t.runtimeCatalogue.getStubSourceCode(n);
                   }).then(function(e) {
-                    console.info("3. return the ProtoStub Source Package: "), u = e;
+                    console.info("3. return the ProtoStub Source Code: "), u = e;
                     var t = !0;
                     return t;
                   }).then(function(n) {
@@ -2308,12 +2340,13 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
               value: function(e) {}
             }]), e;
           }();
-      n["default"] = g, t.exports = n["default"];
+      n["default"] = h, t.exports = n["default"];
     }, {
       "../bus/MessageBus": 1,
       "../identity/IdentityModule": 3,
       "../policy/PolicyEngine": 4,
       "../registry/Registry": 6,
+      "../syncher/SyncherManager": 13,
       "./RuntimeCatalogue": 8
     }],
     10: [function(e, t, n) {
@@ -2441,20 +2474,13 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
             function e(t) {
               o(this, e);
               var n = this;
-              n._bus = t, n._components = {}, t.addListener(e.InternalDeployAddress, function(t) {
-                console.log("SandboxRegistry-RCV: ", t);
-                ({
-                  id: t.id,
-                  type: "response",
-                  from: e.InternalDeployAddress,
-                  to: e.ExternalDeployAddress
-                });
-                switch (t.type) {
+              n._bus = t, n._components = {}, t.addListener(e.InternalDeployAddress, function(e) {
+                switch (e.type) {
                   case "create":
-                    n._onDeploy(t);
+                    n._onDeploy(e);
                     break;
                   case "delete":
-                    n._onRemove(t);
+                    n._onRemove(e);
                 }
               });
             }
@@ -2532,6 +2558,227 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
         };
       }(),
           i = function() {
+            function e(t, n) {
+              o(this, e);
+              var r = this;
+              r._url = t, r._bus = n;
+            }
+            return r(e, [{
+              key: "create",
+              value: function(e, t) {
+                var n = this,
+                    o = {
+                      type: "create",
+                      from: n._url,
+                      to: "domain://msg-node." + e + "/object-address-allocation",
+                      body: {number: t}
+                    };
+                return new Promise(function(e, t) {
+                  n._bus.postMessage(o, function(n) {
+                    200 === n.body.code ? e(n.body.allocated) : t(n.body.desc);
+                  });
+                });
+              }
+            }, {
+              key: "url",
+              get: function() {
+                return this._url;
+              }
+            }]), e;
+          }();
+      n["default"] = i, t.exports = n["default"];
+    }, {}],
+    13: [function(e, t, n) {
+      "use strict";
+      function o(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      function r(e, t) {
+        if (!(e instanceof t))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var i = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var o = t[n];
+            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+          }
+        }
+        return function(t, n, o) {
+          return n && e(t.prototype, n), o && e(t, o), t;
+        };
+      }(),
+          s = e("../utils/utils"),
+          u = e("./ObjectAllocation"),
+          a = o(u),
+          c = function() {
+            function e(t, n, o, i) {
+              r(this, e);
+              var s = this;
+              s._domain = "ua.pt", s._bus = n, s._registry = o, s._url = t + "/sm", s._objectURL = t + "/object-allocation", s._subscriptions = {}, s._allocator = new a["default"](s._objectURL, n), n.addListener(s._url, function(e) {
+                switch (console.log("SyncherManager-RCV: ", e), e.type) {
+                  case "create":
+                    s._onCreate(e);
+                    break;
+                  case "delete":
+                    s._onDelete(e);
+                }
+              });
+            }
+            return i(e, [{
+              key: "_onCreate",
+              value: function(e) {
+                var t = this,
+                    n = e.from;
+                t._allocator.create(t._domain, 1).then(function(o) {
+                  var r = o[0],
+                      i = r + "/subscription",
+                      u = t._bus.addListener(r, function(e) {
+                        console.log(r + "-RCV: ", e), t._subscriptions[r].subs.forEach(function(n) {
+                          var o = (0, s.deepClone)(e);
+                          o.id = 0, o.from = r, o.to = n, t._bus.postMessage(o);
+                        });
+                      }),
+                      a = t._bus.addListener(i, function(e) {
+                        switch (console.log(i + "-RCV: ", e), e.type) {
+                          case "subscribe":
+                            t._onSubscribe(r, e);
+                            break;
+                          case "unsubscribe":
+                            t._onUnSubscribe(r, e);
+                        }
+                      });
+                  t._subscriptions[r] = {
+                    owner: n,
+                    sl: a,
+                    cl: u,
+                    subs: []
+                  }, t._bus.postMessage({
+                    id: e.id,
+                    type: "response",
+                    from: e.to,
+                    to: n,
+                    body: {
+                      code: 200,
+                      resource: r
+                    }
+                  }), setTimeout(function() {
+                    e.body.authorise.forEach(function(o) {
+                      t._bus.postMessage({
+                        type: "create",
+                        from: n,
+                        to: o,
+                        body: {
+                          schema: e.body.schema,
+                          resource: r,
+                          value: e.body.value
+                        }
+                      });
+                    });
+                  });
+                })["catch"](function(o) {
+                  t._bus.postMessage({
+                    id: e.id,
+                    type: "response",
+                    from: e.to,
+                    to: n,
+                    body: {
+                      code: 500,
+                      desc: o
+                    }
+                  });
+                });
+              }
+            }, {
+              key: "_onDelete",
+              value: function(e) {
+                var t = this,
+                    n = "<objURL>";
+                delete t._subscriptions[n], t._bus.removeAllListenersOf(n), t._bus.removeAllListenersOf(n + "/subscription");
+              }
+            }, {
+              key: "_onSubscribe",
+              value: function(e, t) {
+                var n = this,
+                    o = t.from,
+                    r = n._subscriptions[e];
+                if (r[o]) {
+                  var i = {
+                    id: t.id,
+                    type: "response",
+                    from: t.to,
+                    to: o,
+                    body: {
+                      code: 500,
+                      desc: "Subscription for (" + e + " : " + o + ") already exists!"
+                    }
+                  };
+                  return void n._bus.postMessage(i);
+                }
+                var s = "sub/pub";
+                if ("sub/pub" === s) {
+                  var u = {
+                    type: "forward",
+                    from: n._url,
+                    to: r.owner,
+                    body: {
+                      type: t.type,
+                      from: t.from,
+                      to: e
+                    }
+                  };
+                  t.body && (u.body.body = t.body), n._bus.postMessage(u, function(r) {
+                    console.log("forward-reply: ", r), 200 === r.body.code && n._subscriptions[e].subs.push(o), n._bus.postMessage({
+                      id: t.id,
+                      type: "response",
+                      from: t.to,
+                      to: o,
+                      body: r.body
+                    });
+                  });
+                }
+              }
+            }, {
+              key: "_onUnSubscribe",
+              value: function(e, t) {
+                var n = this,
+                    o = t.from,
+                    r = n._subscriptions[e].subs,
+                    i = r.indexOf(o);
+                r.splice(i, 1);
+              }
+            }, {
+              key: "url",
+              get: function() {
+                return this._url;
+              }
+            }]), e;
+          }();
+      n["default"] = c, t.exports = n["default"];
+    }, {
+      "../utils/utils": 15,
+      "./ObjectAllocation": 12
+    }],
+    14: [function(e, t, n) {
+      "use strict";
+      function o(e, t) {
+        if (!(e instanceof t))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var r = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var o = t[n];
+            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+          }
+        }
+        return function(t, n, o) {
+          return n && e(t.prototype, n), o && e(t, o), t;
+        };
+      }(),
+          i = function() {
             function e() {
               o(this, e);
             }
@@ -2551,10 +2798,10 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
           }();
       n["default"] = i, t.exports = n["default"];
     }, {}],
-    13: [function(e, t, n) {
+    15: [function(e, t, n) {
       "use strict";
       function o(e) {
-        var t = /([a-zA-Z-]*)?:\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b)*(\/[\/\d\w\.-]*)*(?:[\?])*(.+)*/gi,
+        var t = /([a-zA-Z-]*):\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi,
             n = "$1,$2,$3",
             o = e.replace(t, n).split(","),
             r = {
