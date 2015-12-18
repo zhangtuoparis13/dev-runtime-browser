@@ -669,20 +669,1329 @@
 })(typeof self != 'undefined' ? self : global);
 
 "bundle";
-$__System.register('2', ['3', '4', '5', '6', '7'], function (_export) {
-   var Sandbox, _get, _inherits, _createClass, _classCallCheck, SandboxIframe;
+$__System.registerDynamic("2", ["3"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var SYMBOL_ITERATOR = $__require('3')('iterator'),
+      SAFE_CLOSING = false;
+  try {
+    var riter = [7][SYMBOL_ITERATOR]();
+    riter['return'] = function() {
+      SAFE_CLOSING = true;
+    };
+    Array.from(riter, function() {
+      throw 2;
+    });
+  } catch (e) {}
+  module.exports = function(exec, skipClosing) {
+    if (!skipClosing && !SAFE_CLOSING)
+      return false;
+    var safe = false;
+    try {
+      var arr = [7],
+          iter = arr[SYMBOL_ITERATOR]();
+      iter.next = function() {
+        safe = true;
+      };
+      arr[SYMBOL_ITERATOR] = function() {
+        return iter;
+      };
+      exec(arr);
+    } catch (e) {}
+    return safe;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("4", ["5"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $redef = $__require('5');
+  module.exports = function(target, src) {
+    for (var key in src)
+      $redef(target, key, src[key]);
+    return target;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("6", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var process = module.exports = {};
+  var queue = [];
+  var draining = false;
+  var currentQueue;
+  var queueIndex = -1;
+  function cleanUpNextTick() {
+    draining = false;
+    if (currentQueue.length) {
+      queue = currentQueue.concat(queue);
+    } else {
+      queueIndex = -1;
+    }
+    if (queue.length) {
+      drainQueue();
+    }
+  }
+  function drainQueue() {
+    if (draining) {
+      return;
+    }
+    var timeout = setTimeout(cleanUpNextTick);
+    draining = true;
+    var len = queue.length;
+    while (len) {
+      currentQueue = queue;
+      queue = [];
+      while (++queueIndex < len) {
+        if (currentQueue) {
+          currentQueue[queueIndex].run();
+        }
+      }
+      queueIndex = -1;
+      len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    clearTimeout(timeout);
+  }
+  process.nextTick = function(fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+      for (var i = 1; i < arguments.length; i++) {
+        args[i - 1] = arguments[i];
+      }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+      setTimeout(drainQueue, 0);
+    }
+  };
+  function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+  }
+  Item.prototype.run = function() {
+    this.fun.apply(null, this.array);
+  };
+  process.title = 'browser';
+  process.browser = true;
+  process.env = {};
+  process.argv = [];
+  process.version = '';
+  process.versions = {};
+  function noop() {}
+  process.on = noop;
+  process.addListener = noop;
+  process.once = noop;
+  process.off = noop;
+  process.removeListener = noop;
+  process.removeAllListeners = noop;
+  process.emit = noop;
+  process.binding = function(name) {
+    throw new Error('process.binding is not supported');
+  };
+  process.cwd = function() {
+    return '/';
+  };
+  process.chdir = function(dir) {
+    throw new Error('process.chdir is not supported');
+  };
+  process.umask = function() {
+    return 0;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("7", ["6"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('6');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("8", ["7"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__System._nodeRequire ? process : $__require('7');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("9", ["8"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('8');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("a", ["b", "c"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var isObject = $__require('b'),
+      document = $__require('c').document,
+      is = isObject(document) && isObject(document.createElement);
+  module.exports = function(it) {
+    return is ? document.createElement(it) : {};
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("d", ["c"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('c').document && document.documentElement;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("e", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(fn, args, that) {
+    var un = that === undefined;
+    switch (args.length) {
+      case 0:
+        return un ? fn() : fn.call(that);
+      case 1:
+        return un ? fn(args[0]) : fn.call(that, args[0]);
+      case 2:
+        return un ? fn(args[0], args[1]) : fn.call(that, args[0], args[1]);
+      case 3:
+        return un ? fn(args[0], args[1], args[2]) : fn.call(that, args[0], args[1], args[2]);
+      case 4:
+        return un ? fn(args[0], args[1], args[2], args[3]) : fn.call(that, args[0], args[1], args[2], args[3]);
+    }
+    return fn.apply(that, args);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("f", ["10", "e", "d", "a", "c", "11", "9"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ctx = $__require('10'),
+        invoke = $__require('e'),
+        html = $__require('d'),
+        cel = $__require('a'),
+        global = $__require('c'),
+        process = global.process,
+        setTask = global.setImmediate,
+        clearTask = global.clearImmediate,
+        MessageChannel = global.MessageChannel,
+        counter = 0,
+        queue = {},
+        ONREADYSTATECHANGE = 'onreadystatechange',
+        defer,
+        channel,
+        port;
+    var run = function() {
+      var id = +this;
+      if (queue.hasOwnProperty(id)) {
+        var fn = queue[id];
+        delete queue[id];
+        fn();
+      }
+    };
+    var listner = function(event) {
+      run.call(event.data);
+    };
+    if (!setTask || !clearTask) {
+      setTask = function setImmediate(fn) {
+        var args = [],
+            i = 1;
+        while (arguments.length > i)
+          args.push(arguments[i++]);
+        queue[++counter] = function() {
+          invoke(typeof fn == 'function' ? fn : Function(fn), args);
+        };
+        defer(counter);
+        return counter;
+      };
+      clearTask = function clearImmediate(id) {
+        delete queue[id];
+      };
+      if ($__require('11')(process) == 'process') {
+        defer = function(id) {
+          process.nextTick(ctx(run, id, 1));
+        };
+      } else if (MessageChannel) {
+        channel = new MessageChannel;
+        port = channel.port2;
+        channel.port1.onmessage = listner;
+        defer = ctx(port.postMessage, port, 1);
+      } else if (global.addEventListener && typeof postMessage == 'function' && !global.importScripts) {
+        defer = function(id) {
+          global.postMessage(id + '', '*');
+        };
+        global.addEventListener('message', listner, false);
+      } else if (ONREADYSTATECHANGE in cel('script')) {
+        defer = function(id) {
+          html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function() {
+            html.removeChild(this);
+            run.call(id);
+          };
+        };
+      } else {
+        defer = function(id) {
+          setTimeout(ctx(run, id, 1), 0);
+        };
+      }
+    }
+    module.exports = {
+      set: setTask,
+      clear: clearTask
+    };
+  })($__require('9'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("12", ["c", "f", "11", "9"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    var global = $__require('c'),
+        macrotask = $__require('f').set,
+        Observer = global.MutationObserver || global.WebKitMutationObserver,
+        process = global.process,
+        isNode = $__require('11')(process) == 'process',
+        head,
+        last,
+        notify;
+    var flush = function() {
+      var parent,
+          domain;
+      if (isNode && (parent = process.domain)) {
+        process.domain = null;
+        parent.exit();
+      }
+      while (head) {
+        domain = head.domain;
+        if (domain)
+          domain.enter();
+        head.fn.call();
+        if (domain)
+          domain.exit();
+        head = head.next;
+      }
+      last = undefined;
+      if (parent)
+        parent.enter();
+    };
+    if (isNode) {
+      notify = function() {
+        process.nextTick(flush);
+      };
+    } else if (Observer) {
+      var toggle = 1,
+          node = document.createTextNode('');
+      new Observer(flush).observe(node, {characterData: true});
+      notify = function() {
+        node.data = toggle = -toggle;
+      };
+    } else {
+      notify = function() {
+        macrotask.call(global, flush);
+      };
+    }
+    module.exports = function asap(fn) {
+      var task = {
+        fn: fn,
+        next: undefined,
+        domain: isNode && process.domain
+      };
+      if (last)
+        last.next = task;
+      if (!head) {
+        head = task;
+        notify();
+      }
+      last = task;
+    };
+  })($__require('9'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("13", ["14", "15", "3"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var anObject = $__require('14'),
+      aFunction = $__require('15'),
+      SPECIES = $__require('3')('species');
+  module.exports = function(O, D) {
+    var C = anObject(O).constructor,
+        S;
+    return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("16", ["17", "3", "18"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = $__require('17'),
+      SPECIES = $__require('3')('species');
+  module.exports = function(C) {
+    if ($__require('18') && !(SPECIES in C))
+      $.setDesc(C, SPECIES, {
+        configurable: true,
+        get: function() {
+          return this;
+        }
+      });
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("19", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = Object.is || function is(x, y) {
+    return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1a", ["1b", "3", "1c", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var classof = $__require('1b'),
+      ITERATOR = $__require('3')('iterator'),
+      Iterators = $__require('1c');
+  module.exports = $__require('1d').getIteratorMethod = function(it) {
+    if (it != undefined)
+      return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1e", ["1f"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toInteger = $__require('1f'),
+      min = Math.min;
+  module.exports = function(it) {
+    return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("20", ["1c", "3"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var Iterators = $__require('1c'),
+      ITERATOR = $__require('3')('iterator');
+  module.exports = function(it) {
+    return (Iterators.Array || Array.prototype[ITERATOR]) === it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("21", ["14"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var anObject = $__require('14');
+  module.exports = function(iterator, fn, value, entries) {
+    try {
+      return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+    } catch (e) {
+      var ret = iterator['return'];
+      if (ret !== undefined)
+        anObject(ret.call(iterator));
+      throw e;
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("22", ["10", "21", "20", "14", "1e", "1a"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ctx = $__require('10'),
+      call = $__require('21'),
+      isArrayIter = $__require('20'),
+      anObject = $__require('14'),
+      toLength = $__require('1e'),
+      getIterFn = $__require('1a');
+  module.exports = function(iterable, entries, fn, that) {
+    var iterFn = getIterFn(iterable),
+        f = ctx(fn, that, entries ? 2 : 1),
+        index = 0,
+        length,
+        step,
+        iterator;
+    if (typeof iterFn != 'function')
+      throw TypeError(iterable + ' is not iterable!');
+    if (isArrayIter(iterFn))
+      for (length = toLength(iterable.length); length > index; index++) {
+        entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
+      }
+    else
+      for (iterator = iterFn.call(iterable); !(step = iterator.next()).done; ) {
+        call(iterator, f, step.value, entries);
+      }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("23", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it, Constructor, name) {
+    if (!(it instanceof Constructor))
+      throw TypeError(name + ": use the 'new' operator!");
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1b", ["11", "3"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = $__require('11'),
+      TAG = $__require('3')('toStringTag'),
+      ARG = cof(function() {
+        return arguments;
+      }()) == 'Arguments';
+  module.exports = function(it) {
+    var O,
+        T,
+        B;
+    return it === undefined ? 'Undefined' : it === null ? 'Null' : typeof(T = (O = Object(it))[TAG]) == 'string' ? T : ARG ? cof(O) : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("24", ["17", "25", "c", "10", "1b", "26", "b", "14", "15", "23", "22", "27", "19", "16", "3", "13", "28", "12", "18", "4", "29", "1d", "2", "9"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var $ = $__require('17'),
+        LIBRARY = $__require('25'),
+        global = $__require('c'),
+        ctx = $__require('10'),
+        classof = $__require('1b'),
+        $def = $__require('26'),
+        isObject = $__require('b'),
+        anObject = $__require('14'),
+        aFunction = $__require('15'),
+        strictNew = $__require('23'),
+        forOf = $__require('22'),
+        setProto = $__require('27').set,
+        same = $__require('19'),
+        species = $__require('16'),
+        SPECIES = $__require('3')('species'),
+        speciesConstructor = $__require('13'),
+        RECORD = $__require('28')('record'),
+        asap = $__require('12'),
+        PROMISE = 'Promise',
+        process = global.process,
+        isNode = classof(process) == 'process',
+        P = global[PROMISE],
+        Wrapper;
+    var testResolve = function(sub) {
+      var test = new P(function() {});
+      if (sub)
+        test.constructor = Object;
+      return P.resolve(test) === test;
+    };
+    var useNative = function() {
+      var works = false;
+      function P2(x) {
+        var self = new P(x);
+        setProto(self, P2.prototype);
+        return self;
+      }
+      try {
+        works = P && P.resolve && testResolve();
+        setProto(P2, P);
+        P2.prototype = $.create(P.prototype, {constructor: {value: P2}});
+        if (!(P2.resolve(5).then(function() {}) instanceof P2)) {
+          works = false;
+        }
+        if (works && $__require('18')) {
+          var thenableThenGotten = false;
+          P.resolve($.setDesc({}, 'then', {get: function() {
+              thenableThenGotten = true;
+            }}));
+          works = thenableThenGotten;
+        }
+      } catch (e) {
+        works = false;
+      }
+      return works;
+    }();
+    var isPromise = function(it) {
+      return isObject(it) && (useNative ? classof(it) == 'Promise' : RECORD in it);
+    };
+    var sameConstructor = function(a, b) {
+      if (LIBRARY && a === P && b === Wrapper)
+        return true;
+      return same(a, b);
+    };
+    var getConstructor = function(C) {
+      var S = anObject(C)[SPECIES];
+      return S != undefined ? S : C;
+    };
+    var isThenable = function(it) {
+      var then;
+      return isObject(it) && typeof(then = it.then) == 'function' ? then : false;
+    };
+    var notify = function(record, isReject) {
+      if (record.n)
+        return;
+      record.n = true;
+      var chain = record.c;
+      asap(function() {
+        var value = record.v,
+            ok = record.s == 1,
+            i = 0;
+        var run = function(react) {
+          var cb = ok ? react.ok : react.fail,
+              ret,
+              then;
+          try {
+            if (cb) {
+              if (!ok)
+                record.h = true;
+              ret = cb === true ? value : cb(value);
+              if (ret === react.P) {
+                react.rej(TypeError('Promise-chain cycle'));
+              } else if (then = isThenable(ret)) {
+                then.call(ret, react.res, react.rej);
+              } else
+                react.res(ret);
+            } else
+              react.rej(value);
+          } catch (err) {
+            react.rej(err);
+          }
+        };
+        while (chain.length > i)
+          run(chain[i++]);
+        chain.length = 0;
+        record.n = false;
+        if (isReject)
+          setTimeout(function() {
+            var promise = record.p,
+                handler,
+                console;
+            if (isUnhandled(promise)) {
+              if (isNode) {
+                process.emit('unhandledRejection', value, promise);
+              } else if (handler = global.onunhandledrejection) {
+                handler({
+                  promise: promise,
+                  reason: value
+                });
+              } else if ((console = global.console) && console.error) {
+                console.error('Unhandled promise rejection', value);
+              }
+            }
+            record.a = undefined;
+          }, 1);
+      });
+    };
+    var isUnhandled = function(promise) {
+      var record = promise[RECORD],
+          chain = record.a || record.c,
+          i = 0,
+          react;
+      if (record.h)
+        return false;
+      while (chain.length > i) {
+        react = chain[i++];
+        if (react.fail || !isUnhandled(react.P))
+          return false;
+      }
+      return true;
+    };
+    var $reject = function(value) {
+      var record = this;
+      if (record.d)
+        return;
+      record.d = true;
+      record = record.r || record;
+      record.v = value;
+      record.s = 2;
+      record.a = record.c.slice();
+      notify(record, true);
+    };
+    var $resolve = function(value) {
+      var record = this,
+          then;
+      if (record.d)
+        return;
+      record.d = true;
+      record = record.r || record;
+      try {
+        if (then = isThenable(value)) {
+          asap(function() {
+            var wrapper = {
+              r: record,
+              d: false
+            };
+            try {
+              then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+            } catch (e) {
+              $reject.call(wrapper, e);
+            }
+          });
+        } else {
+          record.v = value;
+          record.s = 1;
+          notify(record, false);
+        }
+      } catch (e) {
+        $reject.call({
+          r: record,
+          d: false
+        }, e);
+      }
+    };
+    if (!useNative) {
+      P = function Promise(executor) {
+        aFunction(executor);
+        var record = {
+          p: strictNew(this, P, PROMISE),
+          c: [],
+          a: undefined,
+          s: 0,
+          d: false,
+          v: undefined,
+          h: false,
+          n: false
+        };
+        this[RECORD] = record;
+        try {
+          executor(ctx($resolve, record, 1), ctx($reject, record, 1));
+        } catch (err) {
+          $reject.call(record, err);
+        }
+      };
+      $__require('4')(P.prototype, {
+        then: function then(onFulfilled, onRejected) {
+          var react = {
+            ok: typeof onFulfilled == 'function' ? onFulfilled : true,
+            fail: typeof onRejected == 'function' ? onRejected : false
+          };
+          var promise = react.P = new (speciesConstructor(this, P))(function(res, rej) {
+            react.res = res;
+            react.rej = rej;
+          });
+          aFunction(react.res);
+          aFunction(react.rej);
+          var record = this[RECORD];
+          record.c.push(react);
+          if (record.a)
+            record.a.push(react);
+          if (record.s)
+            notify(record, false);
+          return promise;
+        },
+        'catch': function(onRejected) {
+          return this.then(undefined, onRejected);
+        }
+      });
+    }
+    $def($def.G + $def.W + $def.F * !useNative, {Promise: P});
+    $__require('29')(P, PROMISE);
+    species(P);
+    species(Wrapper = $__require('1d')[PROMISE]);
+    $def($def.S + $def.F * !useNative, PROMISE, {reject: function reject(r) {
+        return new this(function(res, rej) {
+          rej(r);
+        });
+      }});
+    $def($def.S + $def.F * (!useNative || testResolve(true)), PROMISE, {resolve: function resolve(x) {
+        return isPromise(x) && sameConstructor(x.constructor, this) ? x : new this(function(res) {
+          res(x);
+        });
+      }});
+    $def($def.S + $def.F * !(useNative && $__require('2')(function(iter) {
+      P.all(iter)['catch'](function() {});
+    })), PROMISE, {
+      all: function all(iterable) {
+        var C = getConstructor(this),
+            values = [];
+        return new C(function(res, rej) {
+          forOf(iterable, false, values.push, values);
+          var remaining = values.length,
+              results = Array(remaining);
+          if (remaining)
+            $.each.call(values, function(promise, index) {
+              C.resolve(promise).then(function(value) {
+                results[index] = value;
+                --remaining || res(results);
+              }, rej);
+            });
+          else
+            res(results);
+        });
+      },
+      race: function race(iterable) {
+        var C = getConstructor(this);
+        return new C(function(res, rej) {
+          forOf(iterable, false, function(promise) {
+            C.resolve(promise).then(res, rej);
+          });
+        });
+      }
+    });
+  })($__require('9'));
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2a", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(done, value) {
+    return {
+      value: value,
+      done: !!done
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2b", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function() {};
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2c", ["2b", "2a", "1c", "2d", "2e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var setUnscope = $__require('2b'),
+      step = $__require('2a'),
+      Iterators = $__require('1c'),
+      toIObject = $__require('2d');
+  $__require('2e')(Array, 'Array', function(iterated, kind) {
+    this._t = toIObject(iterated);
+    this._i = 0;
+    this._k = kind;
+  }, function() {
+    var O = this._t,
+        kind = this._k,
+        index = this._i++;
+    if (!O || index >= O.length) {
+      this._t = undefined;
+      return step(1);
+    }
+    if (kind == 'keys')
+      return step(0, index);
+    if (kind == 'values')
+      return step(0, O[index]);
+    return step(0, [index, O[index]]);
+  }, 'values');
+  Iterators.Arguments = Iterators.Array;
+  setUnscope('keys');
+  setUnscope('values');
+  setUnscope('entries');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2f", ["2c", "1c"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  $__require('2c');
+  var Iterators = $__require('1c');
+  Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("29", ["17", "30", "3"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var def = $__require('17').setDesc,
+      has = $__require('30'),
+      TAG = $__require('3')('toStringTag');
+  module.exports = function(it, tag, stat) {
+    if (it && !has(it = stat ? it : it.prototype, TAG))
+      def(it, TAG, {
+        configurable: true,
+        value: tag
+      });
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("31", ["17", "32", "3", "33", "29"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = $__require('17'),
+      IteratorPrototype = {};
+  $__require('32')(IteratorPrototype, $__require('3')('iterator'), function() {
+    return this;
+  });
+  module.exports = function(Constructor, NAME, next) {
+    Constructor.prototype = $.create(IteratorPrototype, {next: $__require('33')(1, next)});
+    $__require('29')(Constructor, NAME + ' Iterator');
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1c", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {};
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("28", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var id = 0,
+      px = Math.random();
+  module.exports = function(key) {
+    return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("34", ["c"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var global = $__require('c'),
+      SHARED = '__core-js_shared__',
+      store = global[SHARED] || (global[SHARED] = {});
+  module.exports = function(key) {
+    return store[key] || (store[key] = {});
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3", ["34", "c", "28"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var store = $__require('34')('wks'),
+      Symbol = $__require('c').Symbol;
+  module.exports = function(name) {
+    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || $__require('28'))('Symbol.' + name));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("30", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var hasOwnProperty = {}.hasOwnProperty;
+  module.exports = function(it, key) {
+    return hasOwnProperty.call(it, key);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("18", ["35"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = !$__require('35')(function() {
+    return Object.defineProperty({}, 'a', {get: function() {
+        return 7;
+      }}).a != 7;
+  });
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("33", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(bitmap, value) {
+    return {
+      enumerable: !(bitmap & 1),
+      configurable: !(bitmap & 2),
+      writable: !(bitmap & 4),
+      value: value
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("32", ["17", "33", "18"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = $__require('17'),
+      createDesc = $__require('33');
+  module.exports = $__require('18') ? function(object, key, value) {
+    return $.setDesc(object, key, createDesc(1, value));
+  } : function(object, key, value) {
+    object[key] = value;
+    return object;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("5", ["32"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('32');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("25", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2e", ["25", "26", "5", "32", "30", "3", "1c", "31", "17", "29"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var LIBRARY = $__require('25'),
+      $def = $__require('26'),
+      $redef = $__require('5'),
+      hide = $__require('32'),
+      has = $__require('30'),
+      SYMBOL_ITERATOR = $__require('3')('iterator'),
+      Iterators = $__require('1c'),
+      BUGGY = !([].keys && 'next' in [].keys()),
+      FF_ITERATOR = '@@iterator',
+      KEYS = 'keys',
+      VALUES = 'values';
+  var returnThis = function() {
+    return this;
+  };
+  module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE) {
+    $__require('31')(Constructor, NAME, next);
+    var createMethod = function(kind) {
+      switch (kind) {
+        case KEYS:
+          return function keys() {
+            return new Constructor(this, kind);
+          };
+        case VALUES:
+          return function values() {
+            return new Constructor(this, kind);
+          };
+      }
+      return function entries() {
+        return new Constructor(this, kind);
+      };
+    };
+    var TAG = NAME + ' Iterator',
+        proto = Base.prototype,
+        _native = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT],
+        _default = _native || createMethod(DEFAULT),
+        methods,
+        key;
+    if (_native) {
+      var IteratorPrototype = $__require('17').getProto(_default.call(new Base));
+      $__require('29')(IteratorPrototype, TAG, true);
+      if (!LIBRARY && has(proto, FF_ITERATOR))
+        hide(IteratorPrototype, SYMBOL_ITERATOR, returnThis);
+    }
+    if (!LIBRARY || FORCE)
+      hide(proto, SYMBOL_ITERATOR, _default);
+    Iterators[NAME] = _default;
+    Iterators[TAG] = returnThis;
+    if (DEFAULT) {
+      methods = {
+        values: DEFAULT == VALUES ? _default : createMethod(VALUES),
+        keys: IS_SET ? _default : createMethod(KEYS),
+        entries: DEFAULT != VALUES ? _default : createMethod('entries')
+      };
+      if (FORCE)
+        for (key in methods) {
+          if (!(key in proto))
+            $redef(proto, key, methods[key]);
+        }
+      else
+        $def($def.P + $def.F * BUGGY, NAME, methods);
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("1f", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ceil = Math.ceil,
+      floor = Math.floor;
+  module.exports = function(it) {
+    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("36", ["1f", "37"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toInteger = $__require('1f'),
+      defined = $__require('37');
+  module.exports = function(TO_STRING) {
+    return function(that, pos) {
+      var s = String(defined(that)),
+          i = toInteger(pos),
+          l = s.length,
+          a,
+          b;
+      if (i < 0 || i >= l)
+        return TO_STRING ? '' : undefined;
+      a = s.charCodeAt(i);
+      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("38", ["36", "2e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $at = $__require('36')(true);
+  $__require('2e')(String, 'String', function(iterated) {
+    this._t = String(iterated);
+    this._i = 0;
+  }, function() {
+    var O = this._t,
+        index = this._i,
+        point;
+    if (index >= O.length)
+      return {
+        value: undefined,
+        done: true
+      };
+    point = $at(O, index);
+    this._i += point.length;
+    return {
+      value: point,
+      done: false
+    };
+  });
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("39", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  "format cjs";
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3a", ["39", "38", "2f", "24", "1d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  $__require('39');
+  $__require('38');
+  $__require('2f');
+  $__require('24');
+  module.exports = $__require('1d').Promise;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3b", ["3a"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": $__require('3a'),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.register('3c', ['3b'], function (_export) {
+    var _Promise, postMessage, addListener, deployComponent;
+
+    return {
+        setters: [function (_b) {
+            _Promise = _b['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            postMessage = function postMessage(msg) {
+                return window.postMessage(msg);
+            };
+
+            addListener = function addListener(url, callback) {
+                return window.addEventListener('message', function (e) {
+                    if (e.data.to === 'core:deployResponse') return;
+                    callback;
+                });
+            };
+
+            deployComponent = function deployComponent(sourceCode, url, config) {
+                return new _Promise(function (resolve, rejected) {
+                    window.addEventListener('message', function deployResponse(e) {
+                        if (e.data.to === 'core:deployResponse') {
+                            window.removeEventListener('message', deployResponse);
+                            if (e.data.response === 'deployed') resolve('deployed');else reject(e.data.response);
+                        }
+                    });
+
+                    window.postMessage({
+                        to: 'sandboxApp:deploy',
+                        body: {
+                            "sourceCode": sourceCode,
+                            "url": url,
+                            "config": config
+                        }
+                    });
+                });
+            };
+
+            _export('default', { postMessage: postMessage, addListener: addListener, deployComponent: deployComponent });
+        }
+    };
+});
+$__System.register('3d', ['40', '41', '42', '3f', '3e'], function (_export) {
+   var _inherits, _createClass, _classCallCheck, _get, Sandbox, SandboxIframe;
 
    return {
-      setters: [function (_5) {
-         Sandbox = _5.Sandbox;
-      }, function (_) {
-         _get = _['default'];
+      setters: [function (_) {
+         _inherits = _['default'];
       }, function (_2) {
-         _inherits = _2['default'];
+         _createClass = _2['default'];
       }, function (_3) {
-         _createClass = _3['default'];
-      }, function (_4) {
-         _classCallCheck = _4['default'];
+         _classCallCheck = _3['default'];
+      }, function (_f) {
+         _get = _f['default'];
+      }, function (_e) {
+         Sandbox = _e.Sandbox;
       }],
       execute: function () {
          'use strict';
@@ -710,7 +2019,7 @@ $__System.register('2', ['3', '4', '5', '6', '7'], function (_export) {
                   this.sandbox.contentWindow.document.getElementsByTagName('body')[0].appendChild(script);
                }
 
-               this.sandbox.contentWindow.addEventListener('message', (function (e) {
+               window.addEventListener('message', (function (e) {
                   this._onMessage(e.data);
                }).bind(this));
             }
@@ -729,7 +2038,7 @@ $__System.register('2', ['3', '4', '5', '6', '7'], function (_export) {
       }
    };
 });
-$__System.registerDynamic("7", [], true, function($__require, exports, module) {
+$__System.registerDynamic("42", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -745,12 +2054,12 @@ $__System.registerDynamic("7", [], true, function($__require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("8", ["9"], true, function($__require, exports, module) {
+$__System.registerDynamic("43", ["17"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $ = $__require('9');
+  var $ = $__require('17');
   module.exports = function defineProperty(it, key, desc) {
     return $.setDesc(it, key, desc);
   };
@@ -758,26 +2067,26 @@ $__System.registerDynamic("8", ["9"], true, function($__require, exports, module
   return module.exports;
 });
 
-$__System.registerDynamic("a", ["8"], true, function($__require, exports, module) {
+$__System.registerDynamic("44", ["43"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": $__require('8'),
+    "default": $__require('43'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("6", ["a"], true, function($__require, exports, module) {
+$__System.registerDynamic("41", ["44"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var _Object$defineProperty = $__require('a')["default"];
+  var _Object$defineProperty = $__require('44')["default"];
   exports["default"] = (function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -802,7 +2111,7 @@ $__System.registerDynamic("6", ["a"], true, function($__require, exports, module
   return module.exports;
 });
 
-$__System.registerDynamic("b", [], true, function($__require, exports, module) {
+$__System.registerDynamic("15", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -816,12 +2125,12 @@ $__System.registerDynamic("b", [], true, function($__require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("c", ["b"], true, function($__require, exports, module) {
+$__System.registerDynamic("10", ["15"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var aFunction = $__require('b');
+  var aFunction = $__require('15');
   module.exports = function(fn, that, length) {
     aFunction(fn);
     if (that === undefined)
@@ -848,12 +2157,12 @@ $__System.registerDynamic("c", ["b"], true, function($__require, exports, module
   return module.exports;
 });
 
-$__System.registerDynamic("d", ["e"], true, function($__require, exports, module) {
+$__System.registerDynamic("14", ["b"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var isObject = $__require('e');
+  var isObject = $__require('b');
   module.exports = function(it) {
     if (!isObject(it))
       throw TypeError(it + ' is not an object!');
@@ -863,7 +2172,7 @@ $__System.registerDynamic("d", ["e"], true, function($__require, exports, module
   return module.exports;
 });
 
-$__System.registerDynamic("e", [], true, function($__require, exports, module) {
+$__System.registerDynamic("b", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -875,14 +2184,14 @@ $__System.registerDynamic("e", [], true, function($__require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("f", ["9", "e", "d", "c"], true, function($__require, exports, module) {
+$__System.registerDynamic("27", ["17", "b", "14", "10"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var getDesc = $__require('9').getDesc,
-      isObject = $__require('e'),
-      anObject = $__require('d');
+  var getDesc = $__require('17').getDesc,
+      isObject = $__require('b'),
+      anObject = $__require('14');
   var check = function(O, proto) {
     anObject(O);
     if (!isObject(proto) && proto !== null)
@@ -891,7 +2200,7 @@ $__System.registerDynamic("f", ["9", "e", "d", "c"], true, function($__require, 
   module.exports = {
     set: Object.setPrototypeOf || ('__proto__' in {} ? function(test, buggy, set) {
       try {
-        set = $__require('c')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
+        set = $__require('10')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch (e) {
@@ -912,47 +2221,47 @@ $__System.registerDynamic("f", ["9", "e", "d", "c"], true, function($__require, 
   return module.exports;
 });
 
-$__System.registerDynamic("10", ["11", "f"], true, function($__require, exports, module) {
+$__System.registerDynamic("45", ["26", "27"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $def = $__require('11');
-  $def($def.S, 'Object', {setPrototypeOf: $__require('f').set});
+  var $def = $__require('26');
+  $def($def.S, 'Object', {setPrototypeOf: $__require('27').set});
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("12", ["10", "13"], true, function($__require, exports, module) {
+$__System.registerDynamic("46", ["45", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  $__require('10');
-  module.exports = $__require('13').Object.setPrototypeOf;
+  $__require('45');
+  module.exports = $__require('1d').Object.setPrototypeOf;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["12"], true, function($__require, exports, module) {
+$__System.registerDynamic("47", ["46"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": $__require('12'),
+    "default": $__require('46'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("15", ["9"], true, function($__require, exports, module) {
+$__System.registerDynamic("48", ["17"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $ = $__require('9');
+  var $ = $__require('17');
   module.exports = function create(P, D) {
     return $.create(P, D);
   };
@@ -960,27 +2269,27 @@ $__System.registerDynamic("15", ["9"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("16", ["15"], true, function($__require, exports, module) {
+$__System.registerDynamic("49", ["48"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": $__require('15'),
+    "default": $__require('48'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("5", ["16", "14"], true, function($__require, exports, module) {
+$__System.registerDynamic("40", ["49", "47"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var _Object$create = $__require('16')["default"];
-  var _Object$setPrototypeOf = $__require('14')["default"];
+  var _Object$create = $__require('49')["default"];
+  var _Object$setPrototypeOf = $__require('47')["default"];
   exports["default"] = function(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -999,7 +2308,7 @@ $__System.registerDynamic("5", ["16", "14"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("17", [], true, function($__require, exports, module) {
+$__System.registerDynamic("35", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1015,7 +2324,7 @@ $__System.registerDynamic("17", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("13", [], true, function($__require, exports, module) {
+$__System.registerDynamic("1d", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1027,7 +2336,7 @@ $__System.registerDynamic("13", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("18", [], true, function($__require, exports, module) {
+$__System.registerDynamic("c", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1039,13 +2348,13 @@ $__System.registerDynamic("18", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("11", ["18", "13"], true, function($__require, exports, module) {
+$__System.registerDynamic("26", ["c", "1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var global = $__require('18'),
-      core = $__require('13'),
+  var global = $__require('c'),
+      core = $__require('1d'),
       PROTOTYPE = 'prototype';
   var ctx = function(fn, that) {
     return function() {
@@ -1097,17 +2406,17 @@ $__System.registerDynamic("11", ["18", "13"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("19", ["11", "13", "17"], true, function($__require, exports, module) {
+$__System.registerDynamic("4a", ["26", "1d", "35"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = function(KEY, exec) {
-    var $def = $__require('11'),
-        fn = ($__require('13').Object || {})[KEY] || Object[KEY],
+    var $def = $__require('26'),
+        fn = ($__require('1d').Object || {})[KEY] || Object[KEY],
         exp = {};
     exp[KEY] = exec(fn);
-    $def($def.S + $def.F * $__require('17')(function() {
+    $def($def.S + $def.F * $__require('35')(function() {
       fn(1);
     }), 'Object', exp);
   };
@@ -1115,7 +2424,7 @@ $__System.registerDynamic("19", ["11", "13", "17"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("1a", [], true, function($__require, exports, module) {
+$__System.registerDynamic("37", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1129,7 +2438,7 @@ $__System.registerDynamic("1a", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("1b", [], true, function($__require, exports, module) {
+$__System.registerDynamic("11", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1142,12 +2451,12 @@ $__System.registerDynamic("1b", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("1c", ["1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("4b", ["11"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var cof = $__require('1b');
+  var cof = $__require('11');
   module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
     return cof(it) == 'String' ? it.split('') : Object(it);
   };
@@ -1155,13 +2464,13 @@ $__System.registerDynamic("1c", ["1b"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("1d", ["1c", "1a"], true, function($__require, exports, module) {
+$__System.registerDynamic("2d", ["4b", "37"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var IObject = $__require('1c'),
-      defined = $__require('1a');
+  var IObject = $__require('4b'),
+      defined = $__require('37');
   module.exports = function(it) {
     return IObject(defined(it));
   };
@@ -1169,13 +2478,13 @@ $__System.registerDynamic("1d", ["1c", "1a"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("1e", ["1d", "19"], true, function($__require, exports, module) {
+$__System.registerDynamic("4c", ["2d", "4a"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var toIObject = $__require('1d');
-  $__require('19')('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor) {
+  var toIObject = $__require('2d');
+  $__require('4a')('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor) {
     return function getOwnPropertyDescriptor(it, key) {
       return $getOwnPropertyDescriptor(toIObject(it), key);
     };
@@ -1184,7 +2493,7 @@ $__System.registerDynamic("1e", ["1d", "19"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("9", [], true, function($__require, exports, module) {
+$__System.registerDynamic("17", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1206,13 +2515,13 @@ $__System.registerDynamic("9", [], true, function($__require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("1f", ["9", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("4d", ["17", "4c"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $ = $__require('9');
-  $__require('1e');
+  var $ = $__require('17');
+  $__require('4c');
   module.exports = function getOwnPropertyDescriptor(it, key) {
     return $.getDesc(it, key);
   };
@@ -1220,26 +2529,26 @@ $__System.registerDynamic("1f", ["9", "1e"], true, function($__require, exports,
   return module.exports;
 });
 
-$__System.registerDynamic("20", ["1f"], true, function($__require, exports, module) {
+$__System.registerDynamic("4e", ["4d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": $__require('1f'),
+    "default": $__require('4d'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("4", ["20"], true, function($__require, exports, module) {
+$__System.registerDynamic("3f", ["4e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var _Object$getOwnPropertyDescriptor = $__require('20')["default"];
+  var _Object$getOwnPropertyDescriptor = $__require('4e')["default"];
   exports["default"] = function get(_x, _x2, _x3) {
     var _again = true;
     _function: while (_again) {
@@ -1278,20 +2587,20 @@ $__System.registerDynamic("4", ["20"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.register('21', ['3', '4', '5', '6', '7'], function (_export) {
-    var Sandbox, _get, _inherits, _createClass, _classCallCheck, SandboxWorker;
+$__System.register('4f', ['40', '41', '42', '3f', '3e'], function (_export) {
+    var _inherits, _createClass, _classCallCheck, _get, Sandbox, SandboxWorker;
 
     return {
-        setters: [function (_5) {
-            Sandbox = _5.Sandbox;
-        }, function (_) {
-            _get = _['default'];
+        setters: [function (_) {
+            _inherits = _['default'];
         }, function (_2) {
-            _inherits = _2['default'];
+            _createClass = _2['default'];
         }, function (_3) {
-            _createClass = _3['default'];
-        }, function (_4) {
-            _classCallCheck = _4['default'];
+            _classCallCheck = _3['default'];
+        }, function (_f) {
+            _get = _f['default'];
+        }, function (_e) {
+            Sandbox = _e.Sandbox;
         }],
         execute: function () {
             'use strict';
@@ -1328,23 +2637,27 @@ $__System.register('21', ['3', '4', '5', '6', '7'], function (_export) {
         }
     };
 });
-$__System.register('22', ['2', '21'], function (_export) {
+$__System.register('50', ['4f', '3d', '3c'], function (_export) {
 
     //TODO: resources url dependency
     'use strict';
 
-    var SandboxIframe, SandboxWorker;
+    var SandboxWorker, SandboxIframe, SandboxAppStub;
     function createSandbox() {
         return new SandboxWorker('../dist/context-service.js');
     }
 
-    function createAppSandbox() {}
+    function createAppSandbox() {
+        return SandboxAppStub;
+    }
 
     return {
-        setters: [function (_2) {
-            SandboxIframe = _2['default'];
-        }, function (_) {
-            SandboxWorker = _['default'];
+        setters: [function (_f) {
+            SandboxWorker = _f['default'];
+        }, function (_d) {
+            SandboxIframe = _d['default'];
+        }, function (_c) {
+            SandboxAppStub = _c['default'];
         }],
         execute: function () {
             _export('default', { createSandbox: createSandbox, createAppSandbox: createAppSandbox });
@@ -1353,994 +2666,1357 @@ $__System.register('22', ['2', '21'], function (_export) {
 });
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-!function(e) {
-  if ("object" == typeof exports && "undefined" != typeof module)
-    module.exports = e();
-  else if ("function" == typeof define && define.amd)
-    define("23", [], e);
-  else {
-    var t;
-    t = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, t.runtimeCore = e();
+(function(f) {
+  if (typeof exports === "object" && typeof module !== "undefined") {
+    module.exports = f();
+  } else if (typeof define === "function" && define.amd) {
+    define("51", [], f);
+  } else {
+    var g;
+    if (typeof window !== "undefined") {
+      g = window;
+    } else if (typeof global !== "undefined") {
+      g = global;
+    } else if (typeof self !== "undefined") {
+      g = self;
+    } else {
+      g = this;
+    }
+    g.runtimeCore = f();
   }
-}(function() {
+})(function() {
   var define,
       module,
       exports;
-  return function e(t, n, o) {
-    function r(s, u) {
-      if (!n[s]) {
-        if (!t[s]) {
-          var a = "function" == typeof require && require;
+  return (function e(t, n, r) {
+    function s(o, u) {
+      if (!n[o]) {
+        if (!t[o]) {
+          var a = typeof require == "function" && require;
           if (!u && a)
-            return a(s, !0);
+            return a(o, !0);
           if (i)
-            return i(s, !0);
-          var c = new Error("Cannot find module '" + s + "'");
-          throw c.code = "MODULE_NOT_FOUND", c;
+            return i(o, !0);
+          var f = new Error("Cannot find module '" + o + "'");
+          throw f.code = "MODULE_NOT_FOUND", f;
         }
-        var l = n[s] = {exports: {}};
-        t[s][0].call(l.exports, function(e) {
-          var n = t[s][1][e];
-          return r(n ? n : e);
-        }, l, l.exports, e, t, n, o);
+        var l = n[o] = {exports: {}};
+        t[o][0].call(l.exports, function(e) {
+          var n = t[o][1][e];
+          return s(n ? n : e);
+        }, l, l.exports, e, t, n, r);
       }
-      return n[s].exports;
+      return n[o].exports;
     }
-    for (var i = "function" == typeof require && require,
-        s = 0; s < o.length; s++)
-      r(o[s]);
-    return r;
-  }({
-    1: [function(e, t, n) {
-      "use strict";
-      function o(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function r(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      function i(e, t) {
-        if ("function" != typeof t && null !== t)
-          throw new TypeError("Super expression must either be null or a function, not " + typeof t);
-        e.prototype = Object.create(t && t.prototype, {constructor: {
-            value: e,
-            enumerable: !1,
-            writable: !0,
-            configurable: !0
-          }}), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var s = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    var i = typeof require == "function" && require;
+    for (var o = 0; o < r.length; o++)
+      s(r[o]);
+    return s;
+  })({
+    1: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          u = function(e, t, n) {
-            for (var o = !0; o; ) {
-              var r = e,
-                  i = t,
-                  s = n;
-              o = !1, null === r && (r = Function.prototype);
-              var u = Object.getOwnPropertyDescriptor(r, i);
-              if (void 0 !== u) {
-                if ("value" in u)
-                  return u.value;
-                var a = u.get;
-                if (void 0 === a)
-                  return;
-                return a.call(s);
-              }
-              var c = Object.getPrototypeOf(r);
-              if (null === c)
-                return;
-              e = c, t = i, n = s, o = !0, u = c = void 0;
+      })();
+      var _get = function get(_x, _x2, _x3) {
+        var _again = true;
+        _function: while (_again) {
+          var object = _x,
+              property = _x2,
+              receiver = _x3;
+          _again = false;
+          if (object === null)
+            object = Function.prototype;
+          var desc = Object.getOwnPropertyDescriptor(object, property);
+          if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);
+            if (parent === null) {
+              return undefined;
+            } else {
+              _x = parent;
+              _x2 = property;
+              _x3 = receiver;
+              _again = true;
+              desc = parent = undefined;
+              continue _function;
             }
-          },
-          a = e("./MiniBus"),
-          c = o(a),
-          l = function(e) {
-            function t(e) {
-              r(this, t), u(Object.getPrototypeOf(t.prototype), "constructor", this).call(this), this._registry = e;
+          } else if ('value' in desc) {
+            return desc.value;
+          } else {
+            var getter = desc.get;
+            if (getter === undefined) {
+              return undefined;
             }
-            return i(t, e), s(t, [{
-              key: "_onPostMessage",
-              value: function(e) {
-                var t = this;
-                t._registry.resolve(e.to).then(function(n) {
-                  var o = t._subscriptions[n];
-                  o && t._publishOn(o, e);
-                })["catch"](function(e) {
-                  console.log("PROTO-STUB-ERROR: ", e);
-                });
+            return getter.call(receiver);
+          }
+        }
+      };
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      function _inherits(subClass, superClass) {
+        if (typeof superClass !== 'function' && superClass !== null) {
+          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+        }
+        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }});
+        if (superClass)
+          Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+      }
+      var _MiniBus2 = require('./MiniBus');
+      var _MiniBus3 = _interopRequireDefault(_MiniBus2);
+      var MessageBus = (function(_MiniBus) {
+        _inherits(MessageBus, _MiniBus);
+        function MessageBus(registry) {
+          _classCallCheck(this, MessageBus);
+          _get(Object.getPrototypeOf(MessageBus.prototype), 'constructor', this).call(this);
+          this._registry = registry;
+        }
+        _createClass(MessageBus, [{
+          key: '_onPostMessage',
+          value: function _onPostMessage(msg) {
+            var _this = this;
+            _this._registry.resolve(msg.to).then(function(protoStubURL) {
+              var itemList = _this._subscriptions[protoStubURL];
+              if (itemList) {
+                _this._publishOn(itemList, msg);
               }
-            }]), t;
-          }(c["default"]);
-      n["default"] = l, t.exports = n["default"];
+            })['catch'](function(e) {
+              console.log('PROTO-STUB-ERROR: ', e);
+            });
+          }
+        }]);
+        return MessageBus;
+      })(_MiniBus3['default']);
+      exports['default'] = MessageBus;
+      module.exports = exports['default'];
     }, {"./MiniBus": 2}],
-    2: [function(e, t, n) {
-      "use strict";
-      function o(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    2: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          i = function() {
-            function e() {
-              o(this, e);
-              var t = this;
-              t._msgId = 0, t._subscriptions = {}, t._responseTimeOut = 3e3, t._responseCallbacks = {}, t._registerExternalListener();
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var MiniBus = (function() {
+        function MiniBus() {
+          _classCallCheck(this, MiniBus);
+          var _this = this;
+          _this._msgId = 0;
+          _this._subscriptions = {};
+          _this._responseTimeOut = 3000;
+          _this._responseCallbacks = {};
+          _this._registerExternalListener();
+        }
+        _createClass(MiniBus, [{
+          key: 'addListener',
+          value: function addListener(url, listener) {
+            var _this = this;
+            var item = new MsgListener(_this._subscriptions, url, listener);
+            var itemList = _this._subscriptions[url];
+            if (!itemList) {
+              itemList = [];
+              _this._subscriptions[url] = itemList;
             }
-            return r(e, [{
-              key: "addListener",
-              value: function(e, t) {
-                var n = this,
-                    o = new s(n._subscriptions, e, t),
-                    r = n._subscriptions[e];
-                return r || (r = [], n._subscriptions[e] = r), r.push(o), o;
+            itemList.push(item);
+            return item;
+          }
+        }, {
+          key: 'addResponseListener',
+          value: function addResponseListener(url, msgId, responseListener) {
+            this._responseCallbacks[url + msgId] = responseListener;
+          }
+        }, {
+          key: 'removeResponseListener',
+          value: function removeResponseListener(url, msgId) {
+            delete this._responseCallbacks[url + msgId];
+          }
+        }, {
+          key: 'removeAllListenersOf',
+          value: function removeAllListenersOf(url) {
+            delete this._subscriptions[url];
+          }
+        }, {
+          key: 'postMessage',
+          value: function postMessage(msg, responseCallback) {
+            var _this = this;
+            if (!msg.id || msg.id === 0) {
+              _this._msgId++;
+              msg.id = _this._msgId;
+            }
+            if (responseCallback) {
+              (function() {
+                var responseId = msg.from + msg.id;
+                _this._responseCallbacks[responseId] = responseCallback;
+                setTimeout(function() {
+                  var responseFun = _this._responseCallbacks[responseId];
+                  delete _this._responseCallbacks[responseId];
+                  if (responseFun) {
+                    var errorMsg = {
+                      id: msg.id,
+                      type: 'response',
+                      body: {
+                        code: 'error',
+                        desc: 'Response timeout!'
+                      }
+                    };
+                    responseFun(errorMsg);
+                  }
+                }, _this._responseTimeOut);
+              })();
+            }
+            if (!_this._onResponse(msg)) {
+              var itemList = _this._subscriptions[msg.to];
+              if (itemList) {
+                _this._publishOn(itemList, msg);
+              } else {
+                _this._onPostMessage(msg);
               }
-            }, {
-              key: "addResponseListener",
-              value: function(e, t, n) {
-                this._responseCallbacks[e + t] = n;
+            }
+            return msg.id;
+          }
+        }, {
+          key: 'bind',
+          value: function bind(outUrl, inUrl, target) {
+            var _this2 = this;
+            var _this = this;
+            var thisListn = _this.addListener(outUrl, function(msg) {
+              target.postMessage(msg);
+            });
+            var targetListn = target.addListener(inUrl, function(msg) {
+              _this.postMessage(msg);
+            });
+            return {
+              thisListener: thisListn,
+              targetListener: targetListn,
+              unbind: function unbind() {
+                _this2.thisListener.remove();
+                _this2.targetListener.remove();
               }
-            }, {
-              key: "removeResponseListener",
-              value: function(e, t) {
-                delete this._responseCallbacks[e + t];
+            };
+          }
+        }, {
+          key: '_publishOn',
+          value: function _publishOn(itemList, msg) {
+            itemList.forEach(function(sub) {
+              sub._callback(msg);
+            });
+          }
+        }, {
+          key: '_onResponse',
+          value: function _onResponse(msg) {
+            var _this = this;
+            if (msg.type === 'response') {
+              var responseId = msg.to + msg.id;
+              var responseFun = _this._responseCallbacks[responseId];
+              delete _this._responseCallbacks[responseId];
+              if (responseFun) {
+                responseFun(msg);
+                return true;
               }
-            }, {
-              key: "removeAllListenersOf",
-              value: function(e) {
-                delete this._subscriptions[e];
-              }
-            }, {
-              key: "postMessage",
-              value: function(e, t) {
-                var n = this;
-                if (e.id && 0 !== e.id || (n._msgId++, e.id = n._msgId), t && !function() {
-                  var o = e.from + e.id;
-                  n._responseCallbacks[o] = t, setTimeout(function() {
-                    var t = n._responseCallbacks[o];
-                    if (delete n._responseCallbacks[o], t) {
-                      var r = {
-                        id: e.id,
-                        type: "response",
-                        body: {
-                          code: "error",
-                          desc: "Response timeout!"
-                        }
-                      };
-                      t(r);
-                    }
-                  }, n._responseTimeOut);
-                }(), !n._onResponse(e)) {
-                  var o = n._subscriptions[e.to];
-                  o ? n._publishOn(o, e) : n._onPostMessage(e);
+            }
+            return false;
+          }
+        }, {
+          key: '_onMessage',
+          value: function _onMessage(msg) {
+            var _this = this;
+            if (!_this._onResponse(msg)) {
+              var itemList = _this._subscriptions[msg.to];
+              if (itemList) {
+                _this._publishOn(itemList, msg);
+              } else {
+                itemList = _this._subscriptions['*'];
+                if (itemList) {
+                  _this._publishOn(itemList, msg);
                 }
-                return e.id;
               }
-            }, {
-              key: "bind",
-              value: function(e, t, n) {
-                var o = this,
-                    r = this,
-                    i = r.addListener(e, function(e) {
-                      n.postMessage(e);
-                    }),
-                    s = n.addListener(t, function(e) {
-                      r.postMessage(e);
-                    });
-                return {
-                  thisListener: i,
-                  targetListener: s,
-                  unbind: function() {
-                    o.thisListener.remove(), o.targetListener.remove();
+            }
+          }
+        }, {
+          key: '_onPostMessage',
+          value: function _onPostMessage(msg) {}
+        }, {
+          key: '_registerExternalListener',
+          value: function _registerExternalListener() {}
+        }]);
+        return MiniBus;
+      })();
+      var MsgListener = (function() {
+        function MsgListener(subscriptions, url, callback) {
+          _classCallCheck(this, MsgListener);
+          var _this = this;
+          _this._subscriptions = subscriptions;
+          _this._url = url;
+          _this._callback = callback;
+        }
+        _createClass(MsgListener, [{
+          key: 'remove',
+          value: function remove() {
+            var _this = this;
+            var subs = _this._subscriptions[_this._url];
+            if (subs) {
+              var index = subs.indexOf(_this);
+              subs.splice(index, 1);
+              if (subs.length === 0) {
+                delete _this._subscriptions[_this._url];
+              }
+            }
+          }
+        }, {
+          key: 'url',
+          get: function get() {
+            return this._url;
+          }
+        }]);
+        return MsgListener;
+      })();
+      exports['default'] = MiniBus;
+      module.exports = exports['default'];
+    }, {}],
+    3: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
+        };
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var IdentityModule = (function() {
+        function IdentityModule() {
+          _classCallCheck(this, IdentityModule);
+        }
+        _createClass(IdentityModule, [{
+          key: 'registerIdentity',
+          value: function registerIdentity() {}
+        }, {
+          key: 'registerWithRP',
+          value: function registerWithRP() {}
+        }, {
+          key: 'loginWithRP',
+          value: function loginWithRP(identifier, scope) {
+            var VALIDURL = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
+            var USERINFURL = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=';
+            var OAUTHURL = 'https://accounts.google.com/o/oauth2/auth?';
+            var SCOPE = 'email%20profile';
+            var CLIENTID = '808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com';
+            var REDIRECT = 'http://127.0.0.1:8080/';
+            var LOGOUT = 'http://accounts.google.com/Logout';
+            var TYPE = 'token';
+            var _url = OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
+            var acToken = undefined;
+            var tokenType = undefined;
+            var expiresIn = undefined;
+            var user = undefined;
+            var tokenID = undefined;
+            var loggedIn = false;
+            function gup(url, name) {
+              name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+              var regexS = '[\\#&]' + name + '=([^&#]*)';
+              var regex = new RegExp(regexS);
+              var results = regex.exec(url);
+              if (results === null)
+                return '';
+              else
+                return results[1];
+            }
+            return new Promise(function(resolve, reject) {
+              function validateToken(token) {
+                var req = new XMLHttpRequest();
+                req.open('GET', VALIDURL + token, true);
+                req.onreadystatechange = function(e) {
+                  if (req.readyState == 4) {
+                    if (req.status == 200) {
+                      getIDToken(token);
+                    } else if (req.status == 400) {
+                      reject('There was an error processing the token');
+                    } else {
+                      reject('something else other than 200 was returned');
+                    }
                   }
                 };
+                req.send();
               }
-            }, {
-              key: "_publishOn",
-              value: function(e, t) {
-                e.forEach(function(e) {
-                  e._callback(t);
-                });
+              function getIDToken(token) {
+                var req = new XMLHttpRequest();
+                req.open('GET', USERINFURL + token, true);
+                req.onreadystatechange = function(e) {
+                  if (req.readyState == 4) {
+                    if (req.status == 200) {
+                      console.log('getUserInfo ', req);
+                      tokenID = JSON.parse(req.responseText);
+                      resolve(tokenID);
+                    } else if (req.status == 400) {
+                      reject('There was an error processing the token');
+                    } else {
+                      reject('something else other than 200 was returned');
+                    }
+                  }
+                };
+                req.send();
               }
-            }, {
-              key: "_onResponse",
-              value: function(e) {
-                var t = this;
-                if ("response" === e.type) {
-                  var n = e.to + e.id,
-                      o = t._responseCallbacks[n];
-                  if (delete t._responseCallbacks[n], o)
-                    return o(e), !0;
-                }
-                return !1;
-              }
-            }, {
-              key: "_onMessage",
-              value: function(e) {
-                var t = this;
-                if (!t._onResponse(e)) {
-                  var n = t._subscriptions[e.to];
-                  n ? t._publishOn(n, e) : (n = t._subscriptions["*"], n && t._publishOn(n, e));
-                }
-              }
-            }, {
-              key: "_onPostMessage",
-              value: function(e) {}
-            }, {
-              key: "_registerExternalListener",
-              value: function() {}
-            }]), e;
-          }(),
-          s = function() {
-            function e(t, n, r) {
-              o(this, e);
-              var i = this;
-              i._subscriptions = t, i._url = n, i._callback = r;
-            }
-            return r(e, [{
-              key: "remove",
-              value: function() {
-                var e = this,
-                    t = e._subscriptions[e._url];
-                if (t) {
-                  var n = t.indexOf(e);
-                  t.splice(n, 1), 0 === t.length && delete e._subscriptions[e._url];
-                }
-              }
-            }, {
-              key: "url",
-              get: function() {
-                return this._url;
-              }
-            }]), e;
-          }();
-      n["default"] = i, t.exports = n["default"];
-    }, {}],
-    3: [function(e, t, n) {
-      "use strict";
-      function o(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+              var win = window.open(_url, 'openIDrequest', 'width=800, height=600');
+              var pollTimer = window.setInterval(function() {
+                try {
+                  if (win.closed) {
+                    reject('Some error occured.');
+                    clearInterval(pollTimer);
+                  }
+                  if (win.document.URL.indexOf(REDIRECT) != -1) {
+                    window.clearInterval(pollTimer);
+                    var url = win.document.URL;
+                    acToken = gup(url, 'access_token');
+                    tokenType = gup(url, 'token_type');
+                    expiresIn = gup(url, 'expires_in');
+                    win.close();
+                    validateToken(acToken);
+                  }
+                } catch (e) {}
+              }, 500);
+            });
           }
-        }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
-        };
-      }(),
-          i = function() {
-            function e() {
-              o(this, e);
-            }
-            return r(e, [{
-              key: "registerIdentity",
-              value: function() {}
-            }, {
-              key: "registerWithRP",
-              value: function() {}
-            }, {
-              key: "loginWithRP",
-              value: function(e, t) {
-                function n(e, t) {
-                  t = t.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                  var n = "[\\#&]" + t + "=([^&#]*)",
-                      o = new RegExp(n),
-                      r = o.exec(e);
-                  return null === r ? "" : r[1];
-                }
-                var o = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=",
-                    r = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=",
-                    i = "https://accounts.google.com/o/oauth2/auth?",
-                    s = "email%20profile",
-                    u = "808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com",
-                    a = "http://127.0.0.1:8080/",
-                    c = "token",
-                    l = i + "scope=" + s + "&client_id=" + u + "&redirect_uri=" + a + "&response_type=" + c,
-                    f = void 0,
-                    d = void 0,
-                    p = void 0,
-                    y = void 0;
-                return new Promise(function(e, t) {
-                  function i(e) {
-                    var n = new XMLHttpRequest;
-                    n.open("GET", o + e, !0), n.onreadystatechange = function(o) {
-                      4 == n.readyState && (200 == n.status ? s(e) : t(400 == n.status ? "There was an error processing the token" : "something else other than 200 was returned"));
-                    }, n.send();
-                  }
-                  function s(n) {
-                    var o = new XMLHttpRequest;
-                    o.open("GET", r + n, !0), o.onreadystatechange = function(n) {
-                      4 == o.readyState && (200 == o.status ? (console.log("getUserInfo ", o), y = JSON.parse(o.responseText), e(y)) : t(400 == o.status ? "There was an error processing the token" : "something else other than 200 was returned"));
-                    }, o.send();
-                  }
-                  var u = window.open(l, "openIDrequest", "width=800, height=600"),
-                      c = window.setInterval(function() {
-                        try {
-                          if (u.closed && (t("Some error occured."), clearInterval(c)), -1 != u.document.URL.indexOf(a)) {
-                            window.clearInterval(c);
-                            var e = u.document.URL;
-                            f = n(e, "access_token"), d = n(e, "token_type"), p = n(e, "expires_in"), u.close(), i(f);
-                          }
-                        } catch (o) {}
-                      }, 500);
-                });
-              }
-            }, {
-              key: "setHypertyIdentity",
-              value: function() {}
-            }, {
-              key: "generateAssertion",
-              value: function(e, t, n) {}
-            }, {
-              key: "validateAssertion",
-              value: function(e) {}
-            }, {
-              key: "getAssertionTrustLevel",
-              value: function(e) {}
-            }]), e;
-          }();
-      n["default"] = i, t.exports = n["default"];
+        }, {
+          key: 'setHypertyIdentity',
+          value: function setHypertyIdentity() {}
+        }, {
+          key: 'generateAssertion',
+          value: function generateAssertion(contents, origin, usernameHint) {}
+        }, {
+          key: 'validateAssertion',
+          value: function validateAssertion(assertion) {}
+        }, {
+          key: 'getAssertionTrustLevel',
+          value: function getAssertionTrustLevel(assertion) {}
+        }]);
+        return IdentityModule;
+      })();
+      exports['default'] = IdentityModule;
+      module.exports = exports['default'];
     }, {}],
     4: [function(require, module, exports) {
-      "use strict";
-      function _classCallCheck(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(exports, "__esModule", {value: !0});
-      var _createClass = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          PolicyEngine = function() {
-            function PolicyEngine(e, t) {
-              _classCallCheck(this, PolicyEngine);
-              var n = this;
-              n.idModule = e, n.registry = t, n.policiesTable = new Object, n.blacklist = [];
-            }
-            return _createClass(PolicyEngine, [{
-              key: "addPolicies",
-              value: function(e, t) {
-                var n = this;
-                n.policiesTable[e] = t;
-              }
-            }, {
-              key: "removePolicies",
-              value: function(e) {
-                var t = this;
-                delete t.policiesTable[e];
-              }
-            }, {
-              key: "authorise",
-              value: function(e) {
-                var t = this;
-                return console.log(t.policiesTable), new Promise(function(n, o) {
-                  "allow" == t.checkPolicies(e) ? t.idModule.loginWithRP("google identity", "scope").then(function(t) {
-                    e.body.assertedIdentity = JSON.stringify(t), e.body.authorised = !0, n(e);
-                  }, function(e) {
-                    o(e);
-                  }) : n(!1);
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var PolicyEngine = (function() {
+        function PolicyEngine(identityModule, runtimeRegistry) {
+          _classCallCheck(this, PolicyEngine);
+          var _this = this;
+          _this.idModule = identityModule;
+          _this.registry = runtimeRegistry;
+          _this.policiesTable = new Object();
+          _this.blacklist = [];
+        }
+        _createClass(PolicyEngine, [{
+          key: 'addPolicies',
+          value: function addPolicies(hyperty, policies) {
+            var _this = this;
+            _this.policiesTable[hyperty] = policies;
+          }
+        }, {
+          key: 'removePolicies',
+          value: function removePolicies(hyperty) {
+            var _this = this;
+            delete _this.policiesTable[hyperty];
+          }
+        }, {
+          key: 'authorise',
+          value: function authorise(message) {
+            var _this = this;
+            console.log(_this.policiesTable);
+            return new Promise(function(resolve, reject) {
+              if (_this.checkPolicies(message) == 'allow') {
+                _this.idModule.loginWithRP('google identity', 'scope').then(function(value) {
+                  message.body.assertedIdentity = JSON.stringify(value);
+                  message.body.authorised = true;
+                  resolve(message);
+                }, function(error) {
+                  reject(error);
                 });
+              } else {
+                resolve(false);
               }
-            }, {
-              key: "checkPolicies",
-              value: function checkPolicies(message) {
-                var _this = this,
-                    _results = ["allow"],
-                    _policies = _this.policiesTable[message.body.hypertyURL];
-                if (void 0 != _policies)
-                  for (var _numPolicies = _policies.length,
-                      i = 0; _numPolicies > i; i++) {
-                    var _policy = _policies[i];
-                    console.log(_policy), "blacklist" == _policy.target && _this.blacklist.indexOf(eval(_policy.subject)) > -1 && (console.log("Is in blacklist!"), _results.push(_policy.action)), "whitelist" == _policy.target && _this.whitelist.indexOf(eval(_policy.subject)) > -1 && (console.log("Is in whitelist!"), _results.push(_policy.action));
+            });
+          }
+        }, {
+          key: 'checkPolicies',
+          value: function checkPolicies(message) {
+            var _this = this;
+            var _results = ['allow'];
+            var _policies = _this.policiesTable[message.body.hypertyURL];
+            if (_policies != undefined) {
+              var _numPolicies = _policies.length;
+              for (var i = 0; i < _numPolicies; i++) {
+                var _policy = _policies[i];
+                console.log(_policy);
+                if (_policy.target == 'blacklist') {
+                  if (_this.blacklist.indexOf(eval(_policy.subject)) > -1) {
+                    console.log('Is in blacklist!');
+                    _results.push(_policy.action);
                   }
-                return console.log(_results), _results.indexOf("deny") > -1 ? "deny" : "allow";
+                }
+                if (_policy.target == 'whitelist') {
+                  if (_this.whitelist.indexOf(eval(_policy.subject)) > -1) {
+                    console.log('Is in whitelist!');
+                    _results.push(_policy.action);
+                  }
+                }
               }
-            }]), PolicyEngine;
-          }();
-      exports["default"] = PolicyEngine, module.exports = exports["default"];
+            }
+            console.log(_results);
+            if (_results.indexOf('deny') > -1) {
+              return 'deny';
+            } else {
+              return 'allow';
+            }
+          }
+        }]);
+        return PolicyEngine;
+      })();
+      exports['default'] = PolicyEngine;
+      module.exports = exports['default'];
     }, {}],
-    5: [function(e, t, n) {
-      "use strict";
-      function o(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    5: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          i = function() {
-            function e(t, n) {
-              o(this, e);
-              var r = this;
-              r._url = t, r._bus = n;
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var AddressAllocation = (function() {
+        function AddressAllocation(url, bus) {
+          _classCallCheck(this, AddressAllocation);
+          var _this = this;
+          _this._url = url;
+          _this._bus = bus;
+        }
+        _createClass(AddressAllocation, [{
+          key: 'create',
+          value: function create(domain, number) {
+            var _this = this;
+            var msg = {
+              type: 'create',
+              from: _this._url,
+              to: 'domain://msg-node.' + domain + '/hyperty-address-allocation',
+              body: {number: number}
+            };
+            return new Promise(function(resolve, reject) {
+              _this._bus.postMessage(msg, function(reply) {
+                if (reply.body.code === 200) {
+                  resolve(reply.body.allocated);
+                } else {
+                  reject(reply.body.desc);
+                }
+              });
+            });
+          }
+        }, {
+          key: 'url',
+          get: function get() {
+            return this._url;
+          }
+        }]);
+        return AddressAllocation;
+      })();
+      exports['default'] = AddressAllocation;
+      module.exports = exports['default'];
+    }, {}],
+    6: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
+        };
+      })();
+      var _get = function get(_x, _x2, _x3) {
+        var _again = true;
+        _function: while (_again) {
+          var object = _x,
+              property = _x2,
+              receiver = _x3;
+          _again = false;
+          if (object === null)
+            object = Function.prototype;
+          var desc = Object.getOwnPropertyDescriptor(object, property);
+          if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);
+            if (parent === null) {
+              return undefined;
+            } else {
+              _x = parent;
+              _x2 = property;
+              _x3 = receiver;
+              _again = true;
+              desc = parent = undefined;
+              continue _function;
             }
-            return r(e, [{
-              key: "create",
-              value: function(e, t) {
-                var n = this,
-                    o = {
-                      type: "create",
-                      from: n._url,
-                      to: "domain://msg-node." + e + "/hyperty-address-allocation",
-                      body: {number: t}
-                    };
-                return new Promise(function(e, t) {
-                  n._bus.postMessage(o, function(n) {
-                    200 === n.body.code ? e(n.body.allocated) : t(n.body.desc);
+          } else if ('value' in desc) {
+            return desc.value;
+          } else {
+            var getter = desc.get;
+            if (getter === undefined) {
+              return undefined;
+            }
+            return getter.call(receiver);
+          }
+        }
+      };
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      function _inherits(subClass, superClass) {
+        if (typeof superClass !== 'function' && superClass !== null) {
+          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+        }
+        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }});
+        if (superClass)
+          Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+      }
+      var _utilsEventEmitter = require('../utils/EventEmitter');
+      var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
+      var _AddressAllocation = require('./AddressAllocation');
+      var _AddressAllocation2 = _interopRequireDefault(_AddressAllocation);
+      var _utilsUtilsJs = require('../utils/utils.js');
+      var Registry = (function(_EventEmitter) {
+        _inherits(Registry, _EventEmitter);
+        function Registry(runtimeURL, appSandbox, remoteRegistry) {
+          _classCallCheck(this, Registry);
+          _get(Object.getPrototypeOf(Registry.prototype), 'constructor', this).call(this);
+          if (!runtimeURL)
+            throw new Error('runtimeURL is missing.');
+          var _this = this;
+          _this.registryURL = runtimeURL + '/registry/123';
+          _this.appSandbox = appSandbox;
+          _this.runtimeURL = runtimeURL;
+          _this.remoteRegistry = remoteRegistry;
+          _this.hypertiesList = {};
+          _this.protostubsList = {};
+          _this.sandboxesList = {};
+          _this.pepList = {};
+        }
+        _createClass(Registry, [{
+          key: 'getAppSandbox',
+          value: function getAppSandbox() {
+            var _this = this;
+            return _this.appSandbox;
+          }
+        }, {
+          key: 'registerHyperty',
+          value: function registerHyperty(sandbox, descriptor) {
+            var _this = this;
+            var domainUrl = (0, _utilsUtilsJs.divideURL)(descriptor).domain;
+            var hypertyIdentity = domainUrl + '/identity';
+            var promise = new Promise(function(resolve, reject) {
+              if (_this._messageBus === undefined) {
+                reject('MessageBus not found on registerStub');
+              } else {
+                return _this.resolve('hyperty-runtime://' + domainUrl).then(function() {
+                  if (_this.hypertiesList.hasOwnProperty(domainUrl)) {
+                    _this.hypertiesList[domainUrl] = {identity: hypertyIdentity};
+                  }
+                  if (!_this.sandboxesList.hasOwnProperty(domainUrl)) {
+                    _this.sandboxesList[domainUrl] = sandbox;
+                    sandbox.addListener('*', function(msg) {
+                      _this._messageBus.postMessage(msg);
+                    });
+                  }
+                  var numberOfAddresses = 1;
+                  _this.addressAllocation.create(domainUrl, numberOfAddresses).then(function(adderessList) {
+                    adderessList.forEach(function(address) {
+                      _this._messageBus.addListener(address + '/status', function(msg) {
+                        console.log('Message addListener for : ', address + '/status -> ' + msg);
+                      });
+                    });
+                    resolve(adderessList[0]);
+                  })['catch'](function(reason) {
+                    console.log('Address Reason: ', reason);
+                    reject(reason);
                   });
                 });
               }
-            }, {
-              key: "url",
-              get: function() {
-                return this._url;
-              }
-            }]), e;
-          }();
-      n["default"] = i, t.exports = n["default"];
-    }, {}],
-    6: [function(e, t, n) {
-      "use strict";
-      function o(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function r(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      function i(e, t) {
-        if ("function" != typeof t && null !== t)
-          throw new TypeError("Super expression must either be null or a function, not " + typeof t);
-        e.prototype = Object.create(t && t.prototype, {constructor: {
-            value: e,
-            enumerable: !1,
-            writable: !0,
-            configurable: !0
-          }}), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var s = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+            });
+            return promise;
           }
-        }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
-        };
-      }(),
-          u = function(e, t, n) {
-            for (var o = !0; o; ) {
-              var r = e,
-                  i = t,
-                  s = n;
-              o = !1, null === r && (r = Function.prototype);
-              var u = Object.getOwnPropertyDescriptor(r, i);
-              if (void 0 !== u) {
-                if ("value" in u)
-                  return u.value;
-                var a = u.get;
-                if (void 0 === a)
-                  return;
-                return a.call(s);
+        }, {
+          key: 'unregisterHyperty',
+          value: function unregisterHyperty(url) {
+            var _this = this;
+            var promise = new Promise(function(resolve, reject) {
+              var request = _this.hypertiesList[url];
+              if (request === undefined) {
+                reject('Hyperty not found');
+              } else {
+                resolve('Hyperty successfully deleted');
               }
-              var c = Object.getPrototypeOf(r);
-              if (null === c)
-                return;
-              e = c, t = i, n = s, o = !0, u = c = void 0;
-            }
+            });
+            return promise;
+          }
+        }, {
+          key: 'discoverProtostub',
+          value: function discoverProtostub(url) {
+            if (!url)
+              throw new Error('Parameter url needed');
+            var _this = this;
+            var promise = new Promise(function(resolve, reject) {
+              var request = _this.protostubsList[url];
+              if (request === undefined) {
+                reject('requestUpdate couldn\' get the ProtostubURL');
+              } else {
+                resolve(request);
+              }
+            });
+            return promise;
+          }
+        }, {
+          key: 'registerStub',
+          value: function registerStub(sandbox, domainURL) {
+            var _this = this;
+            var runtimeProtoStubURL;
+            var promise = new Promise(function(resolve, reject) {
+              if (_this._messageBus === undefined) {
+                reject('MessageBus not found on registerStub');
+              }
+              if (!domainURL.indexOf('msg-node.')) {
+                domainURL = domainURL.substring(domainURL.indexOf('.') + 1);
+              }
+              runtimeProtoStubURL = 'msg-node.' + domainURL + '/protostub/' + Math.floor(Math.random() * 10000 + 1);
+              _this.protostubsList[domainURL] = runtimeProtoStubURL;
+              _this.sandboxesList[runtimeProtoStubURL] = sandbox;
+              resolve(runtimeProtoStubURL);
+              _this._messageBus.addListener(runtimeProtoStubURL + '/status', function(msg) {
+                if (msg.resource === msg.to + '/status') {
+                  console.log('RuntimeProtostubURL/status message: ', msg.body.value);
+                }
+              });
+            });
+            return promise;
+          }
+        }, {
+          key: 'unregisterStub',
+          value: function unregisterStub(hypertyRuntimeURL) {
+            var _this = this;
+            var runtimeProtoStubURL;
+            var promise = new Promise(function(resolve, reject) {
+              var data = _this.protostubsList[hypertyRuntimeURL];
+              if (data === undefined) {
+                reject('Error on unregisterStub: Hyperty not found');
+              } else {
+                delete _this.protostubsList[hypertyRuntimeURL];
+                resolve('ProtostubURL removed');
+              }
+            });
+            return promise;
+          }
+        }, {
+          key: 'registerPEP',
+          value: function registerPEP(postMessage, hyperty) {
+            var _this = this;
+            var promise = new Promise(function(resolve, reject) {
+              _this.pepList[hyperty] = postMessage;
+              resolve('PEP registered with success');
+            });
+            return promise;
+          }
+        }, {
+          key: 'unregisterPEP',
+          value: function unregisterPEP(HypertyRuntimeURL) {
+            var _this = this;
+            var promise = new Promise(function(resolve, reject) {
+              var result = _this.pepList[HypertyRuntimeURL];
+              if (result === undefined) {
+                reject('Pep Not found.');
+              } else {
+                resolve('PEP successfully removed.');
+              }
+            });
+            return promise;
+          }
+        }, {
+          key: 'onEvent',
+          value: function onEvent(event) {}
+        }, {
+          key: 'getSandbox',
+          value: function getSandbox(url) {
+            if (!url)
+              throw new Error('Parameter url needed');
+            var _this = this;
+            var promise = new Promise(function(resolve, reject) {
+              var request = _this.sandboxesList[url];
+              if (request === undefined) {
+                reject('Sandbox not found');
+              } else {
+                resolve(request);
+              }
+            });
+            return promise;
+          }
+        }, {
+          key: 'resolve',
+          value: function resolve(url) {
+            console.log('resolve ' + url);
+            var _this = this;
+            var domainUrl = (0, _utilsUtilsJs.divideURL)(url).domain;
+            var promise = new Promise(function(resolve, reject) {
+              if (!domainUrl.indexOf('msg-node.')) {
+                domainUrl = domainUrl.substring(domainUrl.indexOf('.') + 1);
+              }
+              var request = _this.protostubsList[domainUrl];
+              _this.addEventListener('runtime:stubLoaded', function(domainUrl) {
+                resolve(domainUrl);
+              });
+              if (request !== undefined) {
+                resolve(request);
+              } else {
+                _this.trigger('runtime:loadStub', domainUrl);
+              }
+            });
+            return promise;
+          }
+        }, {
+          key: 'messageBus',
+          get: function get() {
+            var _this = this;
+            return _this._messageBus;
           },
-          a = e("../utils/EventEmitter"),
-          c = o(a),
-          l = e("./AddressAllocation"),
-          f = o(l),
-          d = e("../utils/utils.js"),
-          p = function(e) {
-            function t(e, n, o) {
-              if (r(this, t), u(Object.getPrototypeOf(t.prototype), "constructor", this).call(this), !e)
-                throw new Error("runtimeURL is missing.");
-              var i = this;
-              i.registryURL = e + "/registry/123", i.appSandbox = n, i.runtimeURL = e, i.remoteRegistry = o, i.hypertiesList = {}, i.protostubsList = {}, i.sandboxesList = {}, i.pepList = {};
-            }
-            return i(t, e), s(t, [{
-              key: "getAppSandbox",
-              value: function() {
-                var e = this;
-                return e.appSandbox;
-              }
-            }, {
-              key: "registerHyperty",
-              value: function(e, t) {
-                var n = this,
-                    o = (0, d.divideURL)(t).domain,
-                    r = o + "/identity",
-                    i = new Promise(function(t, i) {
-                      return void 0 !== n._messageBus ? n.resolve("hyperty-runtime://" + o).then(function() {
-                        n.hypertiesList.hasOwnProperty(o) && (n.hypertiesList[o] = {identity: r}), n.sandboxesList.hasOwnProperty(o) || (n.sandboxesList[o] = e, e.addListener("*", function(e) {
-                          n._messageBus.postMessage(e);
-                        }));
-                        var s = 1;
-                        n.addressAllocation.create(o, s).then(function(e) {
-                          e.forEach(function(e) {
-                            n._messageBus.addListener(e + "/status", function(t) {
-                              console.log("Message addListener for : ", e + "/status -> " + t);
-                            });
-                          }), t(e[0]);
-                        })["catch"](function(e) {
-                          console.log("Address Reason: ", e), i(e);
-                        });
-                      }) : void i("MessageBus not found on registerStub");
-                    });
-                return i;
-              }
-            }, {
-              key: "unregisterHyperty",
-              value: function(e) {
-                var t = this,
-                    n = new Promise(function(n, o) {
-                      var r = t.hypertiesList[e];
-                      void 0 === r ? o("Hyperty not found") : n("Hyperty successfully deleted");
-                    });
-                return n;
-              }
-            }, {
-              key: "discoverProtostub",
-              value: function(e) {
-                if (!e)
-                  throw new Error("Parameter url needed");
-                var t = this,
-                    n = new Promise(function(n, o) {
-                      var r = t.protostubsList[e];
-                      void 0 === r ? o("requestUpdate couldn' get the ProtostubURL") : n(r);
-                    });
-                return n;
-              }
-            }, {
-              key: "registerStub",
-              value: function(e, t) {
-                var n,
-                    o = this,
-                    r = new Promise(function(r, i) {
-                      void 0 === o._messageBus && i("MessageBus not found on registerStub"), t.indexOf("msg-node.") || (t = t.substring(t.indexOf(".") + 1)), n = "msg-node." + t + "/protostub/" + Math.floor(1e4 * Math.random() + 1), o.protostubsList[t] = n, o.sandboxesList[n] = e, r(n), o._messageBus.addListener(n + "/status", function(e) {
-                        e.resource === e.to + "/status" && console.log("RuntimeProtostubURL/status message: ", e.body.value);
-                      });
-                    });
-                return r;
-              }
-            }, {
-              key: "unregisterStub",
-              value: function(e) {
-                var t = this,
-                    n = new Promise(function(n, o) {
-                      var r = t.protostubsList[e];
-                      void 0 === r ? o("Error on unregisterStub: Hyperty not found") : (delete t.protostubsList[e], n("ProtostubURL removed"));
-                    });
-                return n;
-              }
-            }, {
-              key: "registerPEP",
-              value: function(e, t) {
-                var n = this,
-                    o = new Promise(function(o, r) {
-                      n.pepList[t] = e, o("PEP registered with success");
-                    });
-                return o;
-              }
-            }, {
-              key: "unregisterPEP",
-              value: function(e) {
-                var t = this,
-                    n = new Promise(function(n, o) {
-                      var r = t.pepList[e];
-                      void 0 === r ? o("Pep Not found.") : n("PEP successfully removed.");
-                    });
-                return n;
-              }
-            }, {
-              key: "onEvent",
-              value: function(e) {}
-            }, {
-              key: "getSandbox",
-              value: function(e) {
-                if (!e)
-                  throw new Error("Parameter url needed");
-                var t = this,
-                    n = new Promise(function(n, o) {
-                      var r = t.sandboxesList[e];
-                      void 0 === r ? o("Sandbox not found") : n(r);
-                    });
-                return n;
-              }
-            }, {
-              key: "resolve",
-              value: function(e) {
-                console.log("resolve " + e);
-                var t = this,
-                    n = (0, d.divideURL)(e).domain,
-                    o = new Promise(function(e, o) {
-                      n.indexOf("msg-node.") || (n = n.substring(n.indexOf(".") + 1));
-                      var r = t.protostubsList[n];
-                      t.addEventListener("runtime:stubLoaded", function(t) {
-                        e(t);
-                      }), void 0 !== r ? e(r) : t.trigger("runtime:loadStub", n);
-                    });
-                return o;
-              }
-            }, {
-              key: "messageBus",
-              get: function() {
-                var e = this;
-                return e._messageBus;
-              },
-              set: function(e) {
-                var t = this;
-                t._messageBus = e;
-                var n = new f["default"](t.registryURL, e);
-                t.addressAllocation = n;
-              }
-            }]), t;
-          }(c["default"]);
-      n["default"] = p, t.exports = n["default"];
+          set: function set(messageBus) {
+            var _this = this;
+            _this._messageBus = messageBus;
+            var addressAllocation = new _AddressAllocation2['default'](_this.registryURL, messageBus);
+            _this.addressAllocation = addressAllocation;
+          }
+        }]);
+        return Registry;
+      })(_utilsEventEmitter2['default']);
+      exports['default'] = Registry;
+      module.exports = exports['default'];
     }, {
       "../utils/EventEmitter": 14,
       "../utils/utils.js": 15,
       "./AddressAllocation": 5
     }],
-    7: [function(e, t, n) {
-      "use strict";
-      function o(e) {
-        return e && e.__esModule ? e : {"default": e};
+    7: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
       }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = e("./runtime/RuntimeUA"),
-          i = o(r),
-          s = e("./sandbox/Sandbox"),
-          u = o(s),
-          a = e("./bus/MiniBus"),
-          c = o(a),
-          l = e("./sandbox/SandboxRegistry"),
-          f = o(l);
-      n.RuntimeUA = i["default"], n.Sandbox = u["default"], n.MiniBus = c["default"], n.SandboxRegistry = f["default"];
+      var _runtimeRuntimeUA = require('./runtime/RuntimeUA');
+      var _runtimeRuntimeUA2 = _interopRequireDefault(_runtimeRuntimeUA);
+      var _sandboxSandbox = require('./sandbox/Sandbox');
+      var _sandboxSandbox2 = _interopRequireDefault(_sandboxSandbox);
+      var _busMiniBus = require('./bus/MiniBus');
+      var _busMiniBus2 = _interopRequireDefault(_busMiniBus);
+      var _sandboxSandboxRegistry = require('./sandbox/SandboxRegistry');
+      var _sandboxSandboxRegistry2 = _interopRequireDefault(_sandboxSandboxRegistry);
+      exports.RuntimeUA = _runtimeRuntimeUA2['default'];
+      exports.Sandbox = _sandboxSandbox2['default'];
+      exports.MiniBus = _busMiniBus2['default'];
+      exports.SandboxRegistry = _sandboxSandboxRegistry2['default'];
     }, {
       "./bus/MiniBus": 2,
       "./runtime/RuntimeUA": 9,
       "./sandbox/Sandbox": 10,
       "./sandbox/SandboxRegistry": 11
     }],
-    8: [function(e, t, n) {
-      "use strict";
-      function o(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    8: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          i = function() {
-            function e() {
-              o(this, e), console.log("runtime catalogue");
-            }
-            return r(e, [{
-              key: "getHypertyRuntimeURL",
-              value: function() {
-                return _hypertyRuntimeURL;
-              }
-            }, {
-              key: "_makeExternalRequest",
-              value: function(e) {
-                return new Promise(function(t, n) {
-                  var o = new XMLHttpRequest;
-                  o.onreadystatechange = function(e) {
-                    var o = e.currentTarget;
-                    4 === o.readyState && (200 === o.status ? t(o.responseText) : n(o.responseText));
-                  }, o.open("GET", e, !0), o.send();
-                });
-              }
-            }, {
-              key: "getHypertyDescriptor",
-              value: function(e) {
-                var t = this;
-                return new Promise(function(n, o) {
-                  var r = e.substr(e.lastIndexOf("/") + 1),
-                      i = {
-                        guid: "guid",
-                        id: "idHyperty",
-                        classname: r,
-                        description: "description of " + r,
-                        kind: "hyperty",
-                        catalogueURL: "....",
-                        sourceCode: "../resources/" + r + ".ES5.js",
-                        dataObject: "",
-                        type: "",
-                        messageSchema: "",
-                        configuration: {runtimeURL: t._runtimeURL},
-                        policies: "",
-                        constraints: "",
-                        hypertyCapabilities: "",
-                        protocolCapabilities: ""
-                      };
-                  n(i);
-                });
-              }
-            }, {
-              key: "getHypertySourceCode",
-              value: function(e) {
-                var t = this;
-                return new Promise(function(n, o) {
-                  t._makeExternalRequest(e).then(function(e) {
-                    n(e);
-                  })["catch"](function(e) {
-                    o(e);
-                  });
-                });
-              }
-            }, {
-              key: "getStubDescriptor",
-              value: function(e) {
-                var t = this;
-                return new Promise(function(e, n) {
-                  var o = {
-                    guid: "guid",
-                    id: "idProtoStub",
-                    classname: "VertxProtoStub",
-                    description: "description of ProtoStub",
-                    kind: "hyperty",
-                    catalogueURL: "....",
-                    sourceCode: "../resources/VertxProtoStub.js",
-                    dataObject: "",
-                    type: "",
-                    messageSchema: "",
-                    configuration: {
-                      url: "ws://localhost:9090/ws",
-                      runtimeURL: t._runtimeURL
-                    },
-                    policies: "",
-                    constraints: "",
-                    hypertyCapabilities: "",
-                    protocolCapabilities: ""
-                  };
-                  e(o);
-                });
-              }
-            }, {
-              key: "getStubSourceCode",
-              value: function(e) {
-                var t = this;
-                return new Promise(function(n, o) {
-                  t._makeExternalRequest(e).then(function(e) {
-                    n(e);
-                  })["catch"](function(e) {
-                    o(e);
-                  });
-                });
-              }
-            }, {
-              key: "runtimeURL",
-              set: function(e) {
-                var t = this;
-                t._runtimeURL = e;
-              },
-              get: function() {
-                var e = this;
-                return e._runtimeURL;
-              }
-            }]), e;
-          }();
-      n["default"] = i, t.exports = n["default"];
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var RuntimeCatalogue = (function() {
+        function RuntimeCatalogue() {
+          _classCallCheck(this, RuntimeCatalogue);
+          console.log('runtime catalogue');
+        }
+        _createClass(RuntimeCatalogue, [{
+          key: 'getHypertyRuntimeURL',
+          value: function getHypertyRuntimeURL() {
+            return _hypertyRuntimeURL;
+          }
+        }, {
+          key: '_makeExternalRequest',
+          value: function _makeExternalRequest(url) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function(event) {
+                var xhr = event.currentTarget;
+                if (xhr.readyState === 4) {
+                  if (xhr.status === 200) {
+                    resolve(xhr.responseText);
+                  } else {
+                    reject(xhr.responseText);
+                  }
+                }
+              };
+              xhr.open('GET', url, true);
+              xhr.send();
+            });
+          }
+        }, {
+          key: 'getHypertyDescriptor',
+          value: function getHypertyDescriptor(hypertyURL) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              var hypertyName = hypertyURL.substr(hypertyURL.lastIndexOf('/') + 1);
+              var hypertyDescriptor = {
+                guid: 'guid',
+                id: 'idHyperty',
+                classname: hypertyName,
+                description: 'description of ' + hypertyName,
+                kind: 'hyperty',
+                catalogueURL: '....',
+                sourceCode: '../resources/' + hypertyName + '.ES5.js',
+                dataObject: '',
+                type: '',
+                messageSchema: '',
+                configuration: {runtimeURL: _this._runtimeURL},
+                policies: '',
+                constraints: '',
+                hypertyCapabilities: '',
+                protocolCapabilities: ''
+              };
+              resolve(hypertyDescriptor);
+            });
+          }
+        }, {
+          key: 'getHypertySourceCode',
+          value: function getHypertySourceCode(hypertySourceCodeURL) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              _this._makeExternalRequest(hypertySourceCodeURL).then(function(result) {
+                resolve(result);
+              })['catch'](function(reason) {
+                reject(reason);
+              });
+            });
+          }
+        }, {
+          key: 'getStubDescriptor',
+          value: function getStubDescriptor(domainURL) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              var stubDescriptor = {
+                guid: 'guid',
+                id: 'idProtoStub',
+                classname: 'VertxProtoStub',
+                description: 'description of ProtoStub',
+                kind: 'hyperty',
+                catalogueURL: '....',
+                sourceCode: '../resources/VertxProtoStub.js',
+                dataObject: '',
+                type: '',
+                messageSchema: '',
+                configuration: {
+                  url: 'ws://localhost:9090/ws',
+                  runtimeURL: _this._runtimeURL
+                },
+                policies: '',
+                constraints: '',
+                hypertyCapabilities: '',
+                protocolCapabilities: ''
+              };
+              resolve(stubDescriptor);
+            });
+          }
+        }, {
+          key: 'getStubSourceCode',
+          value: function getStubSourceCode(stubSourceCodeURL) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              _this._makeExternalRequest(stubSourceCodeURL).then(function(result) {
+                resolve(result);
+              })['catch'](function(reason) {
+                reject(reason);
+              });
+            });
+          }
+        }, {
+          key: 'runtimeURL',
+          set: function set(runtimeURL) {
+            var _this = this;
+            _this._runtimeURL = runtimeURL;
+          },
+          get: function get() {
+            var _this = this;
+            return _this._runtimeURL;
+          }
+        }]);
+        return RuntimeCatalogue;
+      })();
+      exports['default'] = RuntimeCatalogue;
+      module.exports = exports['default'];
     }, {}],
-    9: [function(e, t, n) {
-      "use strict";
-      function o(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function r(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var i = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    9: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          s = e("../registry/Registry"),
-          u = o(s),
-          a = e("../identity/IdentityModule"),
-          c = o(a),
-          l = e("../policy/PolicyEngine"),
-          f = o(l),
-          d = e("../bus/MessageBus"),
-          p = o(d),
-          y = e("./RuntimeCatalogue"),
-          b = o(y),
-          v = e("../syncher/SyncherManager"),
-          g = o(v),
-          h = function() {
-            function e(t) {
-              if (r(this, e), !t)
-                throw new Error("The sandbox factory is a needed parameter");
-              var n = this;
-              n.sandboxFactory = t, n.runtimeCatalogue = new b["default"];
-              var o = "runtime://ua.pt/" + Math.floor(1e4 * Math.random() + 1);
-              n.runtimeURL = o, n.runtimeCatalogue.runtimeURL = o;
-              var i = t.createAppSandbox();
-              n.identityModule = new c["default"], n.policyEngine = new f["default"], n.registry = new u["default"](o, i), n.messageBus = new p["default"](n.registry), n.registry.messageBus = n.messageBus, n.registry.addEventListener("runtime:loadStub", function(e) {
-                n.loadStub(e).then(function(t) {
-                  n.registry.trigger("runtime:stubLoaded", e);
-                })["catch"](function(e) {
-                  console.error(e);
+      })();
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var _registryRegistry = require('../registry/Registry');
+      var _registryRegistry2 = _interopRequireDefault(_registryRegistry);
+      var _identityIdentityModule = require('../identity/IdentityModule');
+      var _identityIdentityModule2 = _interopRequireDefault(_identityIdentityModule);
+      var _policyPolicyEngine = require('../policy/PolicyEngine');
+      var _policyPolicyEngine2 = _interopRequireDefault(_policyPolicyEngine);
+      var _busMessageBus = require('../bus/MessageBus');
+      var _busMessageBus2 = _interopRequireDefault(_busMessageBus);
+      var _RuntimeCatalogue = require('./RuntimeCatalogue');
+      var _RuntimeCatalogue2 = _interopRequireDefault(_RuntimeCatalogue);
+      var _syncherSyncherManager = require('../syncher/SyncherManager');
+      var _syncherSyncherManager2 = _interopRequireDefault(_syncherSyncherManager);
+      var RuntimeUA = (function() {
+        function RuntimeUA(sandboxFactory) {
+          _classCallCheck(this, RuntimeUA);
+          if (!sandboxFactory)
+            throw new Error('The sandbox factory is a needed parameter');
+          var _this = this;
+          _this.sandboxFactory = sandboxFactory;
+          _this.runtimeCatalogue = new _RuntimeCatalogue2['default']();
+          var runtimeURL = 'runtime://ua.pt/' + Math.floor(Math.random() * 10000 + 1);
+          _this.runtimeURL = runtimeURL;
+          _this.runtimeCatalogue.runtimeURL = runtimeURL;
+          var appSandbox = sandboxFactory.createAppSandbox();
+          _this.identityModule = new _identityIdentityModule2['default']();
+          _this.policyEngine = new _policyPolicyEngine2['default']();
+          _this.registry = new _registryRegistry2['default'](runtimeURL, appSandbox);
+          _this.messageBus = new _busMessageBus2['default'](_this.registry);
+          _this.registry.messageBus = _this.messageBus;
+          _this.registry.addEventListener('runtime:loadStub', function(domainURL) {
+            _this.loadStub(domainURL).then(function(result) {
+              _this.registry.trigger('runtime:stubLoaded', domainURL);
+            })['catch'](function(reason) {
+              console.error(reason);
+            });
+          });
+          sandboxFactory.messageBus = _this.messageBus;
+          _this.syncherManager = new _syncherSyncherManager2['default'](_this.runtimeURL, _this.messageBus, {});
+        }
+        _createClass(RuntimeUA, [{
+          key: 'discoverHiperty',
+          value: function discoverHiperty(descriptor) {}
+        }, {
+          key: 'registerHyperty',
+          value: function registerHyperty(hypertyInstance, descriptor) {}
+        }, {
+          key: 'loadHyperty',
+          value: function loadHyperty(hypertyDescriptorURL) {
+            var _this = this;
+            if (!hypertyDescriptorURL)
+              throw new Error('Hyperty descriptor url parameter is needed');
+            return new Promise(function(resolve, reject) {
+              var _hypertyURL = undefined;
+              var _hypertySandbox = undefined;
+              var _hypertyDescriptor = undefined;
+              var _hypertySourceCode = undefined;
+              var errorReason = function errorReason(reason) {
+                console.error(reason);
+                reject(reason);
+              };
+              console.log('------------------ Hyperty ------------------------');
+              console.info('Get hyperty descriptor for :', hypertyDescriptorURL);
+              _this.runtimeCatalogue.getHypertyDescriptor(hypertyDescriptorURL).then(function(hypertyDescriptor) {
+                console.info('1: return hyperty descriptor', hypertyDescriptor);
+                _hypertyDescriptor = hypertyDescriptor;
+                var hypertySourceCodeUrl = hypertyDescriptor.sourceCode;
+                return _this.runtimeCatalogue.getHypertySourceCode(hypertySourceCodeUrl);
+              }).then(function(hypertySourceCode) {
+                console.info('2: return hyperty source code');
+                _hypertySourceCode = hypertySourceCode;
+                var policy = true;
+                return policy;
+              }).then(function(policyResult) {
+                console.info('3: return policy engine result');
+                var inSameSandbox = true;
+                var sandbox = undefined;
+                if (inSameSandbox) {
+                  sandbox = _this.registry.getAppSandbox();
+                } else {
+                  sandbox = _this.registry.getSandbox(domain);
+                }
+                return sandbox;
+              }).then(function(sandbox) {
+                console.info('4: return the sandbox', sandbox);
+                return sandbox;
+              }, function(reason) {
+                console.info('4.1: try to register a new sandbox', reason);
+                return _this.sandboxFactory.createSandbox();
+              }).then(function(sandbox) {
+                console.info('5: return sandbox and register');
+                _hypertySandbox = sandbox;
+                return _this.registry.registerHyperty(sandbox, hypertyDescriptorURL);
+              }).then(function(hypertyURL) {
+                console.info('6: Hyperty url, after register hyperty', hypertyURL);
+                _hypertyURL = hypertyURL;
+                return _hypertySandbox.deployComponent(_hypertySourceCode, _hypertyURL, _hypertyDescriptor.configuration);
+              }).then(function(deployComponentStatus) {
+                console.info('7: Deploy component status for hyperty: ', _hypertyURL);
+                _this.messageBus.addListener(_hypertyURL, function(msg) {
+                  _hypertySandbox.postMessage(msg);
                 });
-              }), t.messageBus = n.messageBus, n.syncherManager = new g["default"](n.runtimeURL, n.messageBus, {});
-            }
-            return i(e, [{
-              key: "discoverHiperty",
-              value: function(e) {}
-            }, {
-              key: "registerHyperty",
-              value: function(e, t) {}
-            }, {
-              key: "loadHyperty",
-              value: function(e) {
-                var t = this;
-                if (!e)
-                  throw new Error("Hyperty descriptor url parameter is needed");
-                return new Promise(function(n, o) {
-                  var r = void 0,
-                      i = void 0,
-                      s = void 0,
-                      u = void 0,
-                      a = function(e) {
-                        console.error(e), o(e);
-                      };
-                  console.log("------------------ Hyperty ------------------------"), console.info("Get hyperty descriptor for :", e), t.runtimeCatalogue.getHypertyDescriptor(e).then(function(e) {
-                    console.info("1: return hyperty descriptor", e), s = e;
-                    var n = e.sourceCode;
-                    return t.runtimeCatalogue.getHypertySourceCode(n);
-                  }).then(function(e) {
-                    console.info("2: return hyperty source code"), u = e;
-                    var t = !0;
-                    return t;
-                  }).then(function(e) {
-                    console.info("3: return policy engine result");
-                    var n = !0,
-                        o = void 0;
-                    return o = n ? t.registry.getAppSandbox() : t.registry.getSandbox(domain);
-                  }).then(function(e) {
-                    return console.info("4: return the sandbox", e), e;
-                  }, function(e) {
-                    return console.info("4.1: try to register a new sandbox", e), t.sandboxFactory.createSandbox();
-                  }).then(function(n) {
-                    return console.info("5: return sandbox and register"), i = n, t.registry.registerHyperty(n, e);
-                  }).then(function(e) {
-                    return console.info("6: Hyperty url, after register hyperty", e), r = e, i.deployComponent(u, r, s.configuration);
-                  }).then(function(e) {
-                    console.info("7: Deploy component status for hyperty: ", r), t.messageBus.addListener(r, function(e) {
-                      i.postMessage(e);
-                    });
-                    var o = {
-                      runtimeHypertyURL: r,
-                      status: "Deployed"
-                    };
-                    n(o), console.log("------------------ END ------------------------");
-                  })["catch"](a);
+                var hyperty = {
+                  runtimeHypertyURL: _hypertyURL,
+                  status: 'Deployed'
+                };
+                resolve(hyperty);
+                console.log('------------------ END ------------------------');
+              })['catch'](errorReason);
+            });
+          }
+        }, {
+          key: 'loadStub',
+          value: function loadStub(domain) {
+            var _this = this;
+            if (!domain)
+              throw new Error('domain parameter is needed');
+            return new Promise(function(resolve, reject) {
+              var _stubSandbox = undefined;
+              var _stubDescriptor = undefined;
+              var _runtimeProtoStubURL = undefined;
+              var _protoStubSourceCode = undefined;
+              var errorReason = function errorReason(reason) {
+                console.error(reason);
+                reject(reason);
+              };
+              console.info('------------------- ProtoStub ---------------------------\n');
+              console.info('Discover or Create a new ProtoStub for domain: ', domain);
+              _this.registry.discoverProtostub(domain).then(function(descriptor) {
+                console.info('1. Proto Stub Discovered: ', descriptor);
+                _stubDescriptor = descriptor;
+                return _stubDescriptor;
+              }, function(reason) {
+                console.info('1. Proto Stub not found:', reason);
+                return _this.runtimeCatalogue.getStubDescriptor(domain);
+              }).then(function(descriptor) {
+                console.info('2. return the ProtoStub descriptor:', descriptor);
+                _stubDescriptor = descriptor;
+                var componentDownloadURL = descriptor.sourceCode;
+                return _this.runtimeCatalogue.getStubSourceCode(componentDownloadURL);
+              }).then(function(protoStubSourceCode) {
+                console.info('3. return the ProtoStub Source Code: ');
+                _protoStubSourceCode = protoStubSourceCode;
+                var policy = true;
+                return policy;
+              }).then(function(policy) {
+                return _this.registry.getSandbox(domain);
+              }).then(function(stubSandbox) {
+                console.info('4. if the sandbox is registered then return the sandbox', stubSandbox);
+                _stubSandbox = stubSandbox;
+                return stubSandbox;
+              }, function(reason) {
+                console.info('5. Sandbox was not found, creating a new one');
+                return _this.sandboxFactory.createSandbox();
+              }).then(function(sandbox) {
+                console.info('6. return the sandbox instance and the register', sandbox);
+                _stubSandbox = sandbox;
+                return _this.registry.registerStub(_stubSandbox, domain);
+              }).then(function(runtimeProtoStubURL) {
+                console.info('7. return the runtime protostub url: ', runtimeProtoStubURL);
+                _runtimeProtoStubURL = runtimeProtoStubURL;
+                return _stubSandbox.deployComponent(_protoStubSourceCode, runtimeProtoStubURL, _stubDescriptor.configuration);
+              }).then(function(result) {
+                console.info('8: return deploy component for sandbox status');
+                _this.messageBus.addListener(_runtimeProtoStubURL, function(msg) {
+                  _stubSandbox.postMessage(msg);
                 });
-              }
-            }, {
-              key: "loadStub",
-              value: function(e) {
-                var t = this;
-                if (!e)
-                  throw new Error("domain parameter is needed");
-                return new Promise(function(n, o) {
-                  var r = void 0,
-                      i = void 0,
-                      s = void 0,
-                      u = void 0,
-                      a = function(e) {
-                        console.error(e), o(e);
-                      };
-                  console.info("------------------- ProtoStub ---------------------------\n"), console.info("Discover or Create a new ProtoStub for domain: ", e), t.registry.discoverProtostub(e).then(function(e) {
-                    return console.info("1. Proto Stub Discovered: ", e), i = e;
-                  }, function(n) {
-                    return console.info("1. Proto Stub not found:", n), t.runtimeCatalogue.getStubDescriptor(e);
-                  }).then(function(e) {
-                    console.info("2. return the ProtoStub descriptor:", e), i = e;
-                    var n = e.sourceCode;
-                    return t.runtimeCatalogue.getStubSourceCode(n);
-                  }).then(function(e) {
-                    console.info("3. return the ProtoStub Source Code: "), u = e;
-                    var t = !0;
-                    return t;
-                  }).then(function(n) {
-                    return t.registry.getSandbox(e);
-                  }).then(function(e) {
-                    return console.info("4. if the sandbox is registered then return the sandbox", e), r = e, e;
-                  }, function(e) {
-                    return console.info("5. Sandbox was not found, creating a new one"), t.sandboxFactory.createSandbox();
-                  }).then(function(n) {
-                    return console.info("6. return the sandbox instance and the register", n), r = n, t.registry.registerStub(r, e);
-                  }).then(function(e) {
-                    return console.info("7. return the runtime protostub url: ", e), s = e, r.deployComponent(u, e, i.configuration);
-                  }).then(function(e) {
-                    console.info("8: return deploy component for sandbox status"), t.messageBus.addListener(s, function(e) {
-                      r.postMessage(e);
-                    }), r.addListener("*", function(e) {
-                      t.messageBus.postMessage(e);
-                    });
-                    var o = {
-                      runtimeProtoStubURL: s,
-                      status: "Deployed"
-                    };
-                    n(o), console.info("------------------- END ---------------------------\n");
-                  })["catch"](a);
+                _stubSandbox.addListener('*', function(msg) {
+                  _this.messageBus.postMessage(msg);
                 });
-              }
-            }, {
-              key: "checkForUpdate",
-              value: function(e) {}
-            }]), e;
-          }();
-      n["default"] = h, t.exports = n["default"];
+                var stub = {
+                  runtimeProtoStubURL: _runtimeProtoStubURL,
+                  status: 'Deployed'
+                };
+                resolve(stub);
+                console.info('------------------- END ---------------------------\n');
+              })['catch'](errorReason);
+            });
+          }
+        }, {
+          key: 'checkForUpdate',
+          value: function checkForUpdate(url) {}
+        }]);
+        return RuntimeUA;
+      })();
+      exports['default'] = RuntimeUA;
+      module.exports = exports['default'];
     }, {
       "../bus/MessageBus": 1,
       "../identity/IdentityModule": 3,
@@ -2349,472 +4025,615 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
       "../syncher/SyncherManager": 13,
       "./RuntimeCatalogue": 8
     }],
-    10: [function(e, t, n) {
-      "use strict";
-      function o(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function r(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      function i(e, t) {
-        if ("function" != typeof t && null !== t)
-          throw new TypeError("Super expression must either be null or a function, not " + typeof t);
-        e.prototype = Object.create(t && t.prototype, {constructor: {
-            value: e,
-            enumerable: !1,
-            writable: !0,
-            configurable: !0
-          }}), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var s = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    10: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          u = function(e, t, n) {
-            for (var o = !0; o; ) {
-              var r = e,
-                  i = t,
-                  s = n;
-              o = !1, null === r && (r = Function.prototype);
-              var u = Object.getOwnPropertyDescriptor(r, i);
-              if (void 0 !== u) {
-                if ("value" in u)
-                  return u.value;
-                var a = u.get;
-                if (void 0 === a)
-                  return;
-                return a.call(s);
-              }
-              var c = Object.getPrototypeOf(r);
-              if (null === c)
-                return;
-              e = c, t = i, n = s, o = !0, u = c = void 0;
+      })();
+      var _get = function get(_x, _x2, _x3) {
+        var _again = true;
+        _function: while (_again) {
+          var object = _x,
+              property = _x2,
+              receiver = _x3;
+          _again = false;
+          if (object === null)
+            object = Function.prototype;
+          var desc = Object.getOwnPropertyDescriptor(object, property);
+          if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);
+            if (parent === null) {
+              return undefined;
+            } else {
+              _x = parent;
+              _x2 = property;
+              _x3 = receiver;
+              _again = true;
+              desc = parent = undefined;
+              continue _function;
             }
-          },
-          a = e("../sandbox/SandboxRegistry"),
-          c = o(a),
-          l = e("../bus/MiniBus"),
-          f = o(l),
-          d = function(e) {
-            function t() {
-              r(this, t), u(Object.getPrototypeOf(t.prototype), "constructor", this).call(this);
+          } else if ('value' in desc) {
+            return desc.value;
+          } else {
+            var getter = desc.get;
+            if (getter === undefined) {
+              return undefined;
             }
-            return i(t, e), s(t, [{
-              key: "deployComponent",
-              value: function(e, t, n) {
-                var o = this;
-                return new Promise(function(r, i) {
-                  var s = {
-                    type: "create",
-                    from: c["default"].ExternalDeployAddress,
-                    to: c["default"].InternalDeployAddress,
-                    body: {
-                      url: t,
-                      sourceCode: e,
-                      config: n
-                    }
-                  };
-                  o.postMessage(s, function(e) {
-                    200 === e.body.code ? r("deployed") : i(e.body.desc);
-                  });
-                });
-              }
-            }, {
-              key: "removeComponent",
-              value: function(e) {
-                var t = this;
-                return new Promise(function(n, o) {
-                  var r = {
-                    type: "delete",
-                    from: c["default"].ExternalDeployAddress,
-                    to: c["default"].InternalDeployAddress,
-                    body: {url: e}
-                  };
-                  t.postMessage(r, function(e) {
-                    200 === e.body.code ? n("undeployed") : o(e.body.desc);
-                  });
-                });
-              }
-            }]), t;
-          }(f["default"]);
-      n["default"] = d, t.exports = n["default"];
+            return getter.call(receiver);
+          }
+        }
+      };
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      function _inherits(subClass, superClass) {
+        if (typeof superClass !== 'function' && superClass !== null) {
+          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+        }
+        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }});
+        if (superClass)
+          Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+      }
+      var _sandboxSandboxRegistry = require('../sandbox/SandboxRegistry');
+      var _sandboxSandboxRegistry2 = _interopRequireDefault(_sandboxSandboxRegistry);
+      var _busMiniBus = require('../bus/MiniBus');
+      var _busMiniBus2 = _interopRequireDefault(_busMiniBus);
+      var Sandbox = (function(_MiniBus) {
+        _inherits(Sandbox, _MiniBus);
+        function Sandbox() {
+          _classCallCheck(this, Sandbox);
+          _get(Object.getPrototypeOf(Sandbox.prototype), 'constructor', this).call(this);
+          var _this = this;
+        }
+        _createClass(Sandbox, [{
+          key: 'deployComponent',
+          value: function deployComponent(componentSourceCode, componentURL, configuration) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              var deployMessage = {
+                type: 'create',
+                from: _sandboxSandboxRegistry2['default'].ExternalDeployAddress,
+                to: _sandboxSandboxRegistry2['default'].InternalDeployAddress,
+                body: {
+                  url: componentURL,
+                  sourceCode: componentSourceCode,
+                  config: configuration
+                }
+              };
+              _this.postMessage(deployMessage, function(reply) {
+                if (reply.body.code === 200) {
+                  resolve('deployed');
+                } else {
+                  reject(reply.body.desc);
+                }
+              });
+            });
+          }
+        }, {
+          key: 'removeComponent',
+          value: function removeComponent(componentURL) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              var removeMessage = {
+                type: 'delete',
+                from: _sandboxSandboxRegistry2['default'].ExternalDeployAddress,
+                to: _sandboxSandboxRegistry2['default'].InternalDeployAddress,
+                body: {url: componentURL}
+              };
+              _this.postMessage(removeMessage, function(reply) {
+                if (reply.body.code === 200) {
+                  resolve('undeployed');
+                } else {
+                  reject(reply.body.desc);
+                }
+              });
+            });
+          }
+        }]);
+        return Sandbox;
+      })(_busMiniBus2['default']);
+      exports['default'] = Sandbox;
+      module.exports = exports['default'];
     }, {
       "../bus/MiniBus": 2,
       "../sandbox/SandboxRegistry": 11
     }],
-    11: [function(e, t, n) {
-      "use strict";
-      function o(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    11: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          i = function() {
-            function e(t) {
-              o(this, e);
-              var n = this;
-              n._bus = t, n._components = {}, t.addListener(e.InternalDeployAddress, function(e) {
-                switch (e.type) {
-                  case "create":
-                    n._onDeploy(e);
-                    break;
-                  case "delete":
-                    n._onRemove(e);
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var SandboxRegistry = (function() {
+        function SandboxRegistry(bus) {
+          _classCallCheck(this, SandboxRegistry);
+          var _this = this;
+          _this._bus = bus;
+          _this._components = {};
+          bus.addListener(SandboxRegistry.InternalDeployAddress, function(msg) {
+            switch (msg.type) {
+              case 'create':
+                _this._onDeploy(msg);
+                break;
+              case 'delete':
+                _this._onRemove(msg);
+                break;
+            }
+          });
+        }
+        _createClass(SandboxRegistry, [{
+          key: '_responseMsg',
+          value: function _responseMsg(msg, code, value) {
+            var _this = this;
+            var responseMsg = {
+              id: msg.id,
+              type: 'response',
+              from: SandboxRegistry.InternalDeployAddress,
+              to: SandboxRegistry.ExternalDeployAddress
+            };
+            var body = {};
+            if (code)
+              body.code = code;
+            if (value)
+              body.desc = value;
+            responseMsg.body = body;
+            return responseMsg;
+          }
+        }, {
+          key: '_onDeploy',
+          value: function _onDeploy(msg) {
+            var _this = this;
+            var config = msg.body.config;
+            var componentURL = msg.body.url;
+            var sourceCode = msg.body.sourceCode;
+            var responseCode = undefined;
+            var responseDesc = undefined;
+            if (!_this._components.hasOwnProperty(componentURL)) {
+              try {
+                _this._components[componentURL] = _this._create(componentURL, sourceCode, config);
+                responseCode = 200;
+              } catch (error) {
+                responseCode = 500;
+                responseDesc = error;
+              }
+            } else {
+              responseCode = 500;
+              responseDesc = 'Instance ' + componentURL + ' already exist!';
+            }
+            var responseMsg = _this._responseMsg(msg, responseCode, responseDesc);
+            _this._bus.postMessage(responseMsg);
+          }
+        }, {
+          key: '_onRemove',
+          value: function _onRemove(msg) {
+            var _this = this;
+            var componentURL = msg.body.url;
+            var responseCode = undefined;
+            var responseDesc = undefined;
+            if (_this._components.hasOwnProperty(componentURL)) {
+              delete _this._components[componentURL];
+              _this._bus.removeAllListenersOf(componentURL);
+              responseCode = 200;
+            } else {
+              responseCode = 500;
+              responseDesc = 'Instance ' + componentURL + ' doesn\'t exist!';
+            }
+            var responseMsg = _this._responseMsg(msg, responseCode, responseDesc);
+            _this._bus.postMessage(responseMsg);
+          }
+        }, {
+          key: '_create',
+          value: function _create(url, sourceCode, config) {}
+        }, {
+          key: 'components',
+          get: function get() {
+            return this._components;
+          }
+        }]);
+        return SandboxRegistry;
+      })();
+      SandboxRegistry.ExternalDeployAddress = 'sandbox://external';
+      SandboxRegistry.InternalDeployAddress = 'sandbox://internal';
+      exports['default'] = SandboxRegistry;
+      module.exports = exports['default'];
+    }, {}],
+    12: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
+        };
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var ObjectAllocation = (function() {
+        function ObjectAllocation(url, bus) {
+          _classCallCheck(this, ObjectAllocation);
+          var _this = this;
+          _this._url = url;
+          _this._bus = bus;
+        }
+        _createClass(ObjectAllocation, [{
+          key: 'create',
+          value: function create(domain, number) {
+            var _this = this;
+            var msg = {
+              type: 'create',
+              from: _this._url,
+              to: 'domain://msg-node.' + domain + '/object-address-allocation',
+              body: {number: number}
+            };
+            return new Promise(function(resolve, reject) {
+              _this._bus.postMessage(msg, function(reply) {
+                if (reply.body.code === 200) {
+                  resolve(reply.body.allocated);
+                } else {
+                  reject(reply.body.desc);
                 }
               });
-            }
-            return r(e, [{
-              key: "_responseMsg",
-              value: function(t, n, o) {
-                var r = {
-                  id: t.id,
-                  type: "response",
-                  from: e.InternalDeployAddress,
-                  to: e.ExternalDeployAddress
-                },
-                    i = {};
-                return n && (i.code = n), o && (i.desc = o), r.body = i, r;
-              }
-            }, {
-              key: "_onDeploy",
-              value: function(e) {
-                var t = this,
-                    n = e.body.config,
-                    o = e.body.url,
-                    r = e.body.sourceCode,
-                    i = void 0,
-                    s = void 0;
-                if (t._components.hasOwnProperty(o))
-                  i = 500, s = "Instance " + o + " already exist!";
-                else
-                  try {
-                    t._components[o] = t._create(o, r, n), i = 200;
-                  } catch (u) {
-                    i = 500, s = u;
-                  }
-                var a = t._responseMsg(e, i, s);
-                t._bus.postMessage(a);
-              }
-            }, {
-              key: "_onRemove",
-              value: function(e) {
-                var t = this,
-                    n = e.body.url,
-                    o = void 0,
-                    r = void 0;
-                t._components.hasOwnProperty(n) ? (delete t._components[n], t._bus.removeAllListenersOf(n), o = 200) : (o = 500, r = "Instance " + n + " doesn't exist!");
-                var i = t._responseMsg(e, o, r);
-                t._bus.postMessage(i);
-              }
-            }, {
-              key: "_create",
-              value: function(e, t, n) {}
-            }, {
-              key: "components",
-              get: function() {
-                return this._components;
-              }
-            }]), e;
-          }();
-      i.ExternalDeployAddress = "sandbox://external", i.InternalDeployAddress = "sandbox://internal", n["default"] = i, t.exports = n["default"];
+            });
+          }
+        }, {
+          key: 'url',
+          get: function get() {
+            return this._url;
+          }
+        }]);
+        return ObjectAllocation;
+      })();
+      exports['default'] = ObjectAllocation;
+      module.exports = exports['default'];
     }, {}],
-    12: [function(e, t, n) {
-      "use strict";
-      function o(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+    13: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          i = function() {
-            function e(t, n) {
-              o(this, e);
-              var r = this;
-              r._url = t, r._bus = n;
+      })();
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var _utilsUtils = require('../utils/utils');
+      var _ObjectAllocation = require('./ObjectAllocation');
+      var _ObjectAllocation2 = _interopRequireDefault(_ObjectAllocation);
+      var SyncherManager = (function() {
+        function SyncherManager(runtimeURL, bus, registry, allocator) {
+          _classCallCheck(this, SyncherManager);
+          var _this = this;
+          _this._domain = 'ua.pt';
+          _this._bus = bus;
+          _this._registry = registry;
+          _this._url = runtimeURL + '/sm';
+          _this._objectURL = runtimeURL + '/object-allocation';
+          _this._subscriptions = {};
+          if (allocator) {
+            _this._allocator = allocator;
+          } else {
+            _this._allocator = new _ObjectAllocation2['default'](_this._objectURL, bus);
+          }
+          bus.addListener(_this._url, function(msg) {
+            console.log('SyncherManager-RCV: ', msg);
+            switch (msg.type) {
+              case 'create':
+                _this._onCreate(msg);
+                break;
+              case 'delete':
+                _this._onDelete(msg);
+                break;
             }
-            return r(e, [{
-              key: "create",
-              value: function(e, t) {
-                var n = this,
-                    o = {
-                      type: "create",
-                      from: n._url,
-                      to: "domain://msg-node." + e + "/object-address-allocation",
-                      body: {number: t}
-                    };
-                return new Promise(function(e, t) {
-                  n._bus.postMessage(o, function(n) {
-                    200 === n.body.code ? e(n.body.allocated) : t(n.body.desc);
-                  });
+          });
+        }
+        _createClass(SyncherManager, [{
+          key: '_onCreate',
+          value: function _onCreate(msg) {
+            var _this = this;
+            var owner = msg.from;
+            _this._allocator.create(_this._domain, 1).then(function(allocated) {
+              var objURL = allocated[0];
+              var objSubscriptorURL = objURL + '/subscription';
+              var changeListener = _this._bus.addListener(objURL, function(msg) {
+                console.log(objURL + '-RCV: ', msg);
+                _this._subscriptions[objURL].subs.forEach(function(hypertyUrl) {
+                  var changeMsg = (0, _utilsUtils.deepClone)(msg);
+                  changeMsg.id = 0;
+                  changeMsg.from = objURL;
+                  changeMsg.to = hypertyUrl;
+                  _this._bus.postMessage(changeMsg);
                 });
-              }
-            }, {
-              key: "url",
-              get: function() {
-                return this._url;
-              }
-            }]), e;
-          }();
-      n["default"] = i, t.exports = n["default"];
-    }, {}],
-    13: [function(e, t, n) {
-      "use strict";
-      function o(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function r(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var i = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
-          }
-        }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
-        };
-      }(),
-          s = e("../utils/utils"),
-          u = e("./ObjectAllocation"),
-          a = o(u),
-          c = function() {
-            function e(t, n, o, i) {
-              r(this, e);
-              var s = this;
-              s._domain = "ua.pt", s._bus = n, s._registry = o, s._url = t + "/sm", s._objectURL = t + "/object-allocation", s._subscriptions = {}, s._allocator = new a["default"](s._objectURL, n), n.addListener(s._url, function(e) {
-                switch (console.log("SyncherManager-RCV: ", e), e.type) {
-                  case "create":
-                    s._onCreate(e);
+              });
+              var subscriptorListener = _this._bus.addListener(objSubscriptorURL, function(msg) {
+                console.log(objSubscriptorURL + '-RCV: ', msg);
+                switch (msg.type) {
+                  case 'subscribe':
+                    _this._onSubscribe(objURL, msg);
                     break;
-                  case "delete":
-                    s._onDelete(e);
+                  case 'unsubscribe':
+                    _this._onUnSubscribe(objURL, msg);
+                    break;
                 }
               });
-            }
-            return i(e, [{
-              key: "_onCreate",
-              value: function(e) {
-                var t = this,
-                    n = e.from;
-                t._allocator.create(t._domain, 1).then(function(o) {
-                  var r = o[0],
-                      i = r + "/subscription",
-                      u = t._bus.addListener(r, function(e) {
-                        console.log(r + "-RCV: ", e), t._subscriptions[r].subs.forEach(function(n) {
-                          var o = (0, s.deepClone)(e);
-                          o.id = 0, o.from = r, o.to = n, t._bus.postMessage(o);
-                        });
-                      }),
-                      a = t._bus.addListener(i, function(e) {
-                        switch (console.log(i + "-RCV: ", e), e.type) {
-                          case "subscribe":
-                            t._onSubscribe(r, e);
-                            break;
-                          case "unsubscribe":
-                            t._onUnSubscribe(r, e);
-                        }
-                      });
-                  t._subscriptions[r] = {
-                    owner: n,
-                    sl: a,
-                    cl: u,
-                    subs: []
-                  }, t._bus.postMessage({
-                    id: e.id,
-                    type: "response",
-                    from: e.to,
-                    to: n,
+              _this._subscriptions[objURL] = {
+                owner: owner,
+                sl: subscriptorListener,
+                cl: changeListener,
+                subs: []
+              };
+              _this._bus.postMessage({
+                id: msg.id,
+                type: 'response',
+                from: msg.to,
+                to: owner,
+                body: {
+                  code: 200,
+                  resource: objURL
+                }
+              });
+              setTimeout(function() {
+                msg.body.authorise.forEach(function(hypertyURL) {
+                  _this._bus.postMessage({
+                    type: 'create',
+                    from: owner,
+                    to: hypertyURL,
                     body: {
-                      code: 200,
-                      resource: r
-                    }
-                  }), setTimeout(function() {
-                    e.body.authorise.forEach(function(o) {
-                      t._bus.postMessage({
-                        type: "create",
-                        from: n,
-                        to: o,
-                        body: {
-                          schema: e.body.schema,
-                          resource: r,
-                          value: e.body.value
-                        }
-                      });
-                    });
-                  });
-                })["catch"](function(o) {
-                  t._bus.postMessage({
-                    id: e.id,
-                    type: "response",
-                    from: e.to,
-                    to: n,
-                    body: {
-                      code: 500,
-                      desc: o
+                      schema: msg.body.schema,
+                      resource: objURL,
+                      value: msg.body.value
                     }
                   });
                 });
-              }
-            }, {
-              key: "_onDelete",
-              value: function(e) {
-                var t = this,
-                    n = "<objURL>";
-                delete t._subscriptions[n], t._bus.removeAllListenersOf(n), t._bus.removeAllListenersOf(n + "/subscription");
-              }
-            }, {
-              key: "_onSubscribe",
-              value: function(e, t) {
-                var n = this,
-                    o = t.from,
-                    r = n._subscriptions[e];
-                if (r[o]) {
-                  var i = {
-                    id: t.id,
-                    type: "response",
-                    from: t.to,
-                    to: o,
-                    body: {
-                      code: 500,
-                      desc: "Subscription for (" + e + " : " + o + ") already exists!"
-                    }
-                  };
-                  return void n._bus.postMessage(i);
+              });
+            })['catch'](function(reason) {
+              _this._bus.postMessage({
+                id: msg.id,
+                type: 'response',
+                from: msg.to,
+                to: owner,
+                body: {
+                  code: 500,
+                  desc: reason
                 }
-                var s = "sub/pub";
-                if ("sub/pub" === s) {
-                  var u = {
-                    type: "forward",
-                    from: n._url,
-                    to: r.owner,
-                    body: {
-                      type: t.type,
-                      from: t.from,
-                      to: e
-                    }
-                  };
-                  t.body && (u.body.body = t.body), n._bus.postMessage(u, function(r) {
-                    console.log("forward-reply: ", r), 200 === r.body.code && n._subscriptions[e].subs.push(o), n._bus.postMessage({
-                      id: t.id,
-                      type: "response",
-                      from: t.to,
-                      to: o,
-                      body: r.body
-                    });
-                  });
+              });
+            });
+          }
+        }, {
+          key: '_onDelete',
+          value: function _onDelete(msg) {
+            var _this = this;
+            var objURL = '<objURL>';
+            delete _this._subscriptions[objURL];
+            _this._bus.removeAllListenersOf(objURL);
+            _this._bus.removeAllListenersOf(objURL + '/subscription');
+          }
+        }, {
+          key: '_onSubscribe',
+          value: function _onSubscribe(objURL, msg) {
+            var _this = this;
+            var hypertyUrl = msg.from;
+            var subscription = _this._subscriptions[objURL];
+            if (subscription[hypertyUrl]) {
+              var errorMsg = {
+                id: msg.id,
+                type: 'response',
+                from: msg.to,
+                to: hypertyUrl,
+                body: {
+                  code: 500,
+                  desc: 'Subscription for (' + objURL + ' : ' + hypertyUrl + ') already exists!'
                 }
+              };
+              _this._bus.postMessage(errorMsg);
+              return;
+            }
+            var mode = 'sub/pub';
+            if (mode === 'sub/pub') {
+              var forwardMsg = {
+                type: 'forward',
+                from: _this._url,
+                to: subscription.owner,
+                body: {
+                  type: msg.type,
+                  from: msg.from,
+                  to: objURL
+                }
+              };
+              if (msg.body) {
+                forwardMsg.body.body = msg.body;
               }
-            }, {
-              key: "_onUnSubscribe",
-              value: function(e, t) {
-                var n = this,
-                    o = t.from,
-                    r = n._subscriptions[e].subs,
-                    i = r.indexOf(o);
-                r.splice(i, 1);
-              }
-            }, {
-              key: "url",
-              get: function() {
-                return this._url;
-              }
-            }]), e;
-          }();
-      n["default"] = c, t.exports = n["default"];
+              _this._bus.postMessage(forwardMsg, function(reply) {
+                console.log('forward-reply: ', reply);
+                if (reply.body.code === 200) {
+                  _this._subscriptions[objURL].subs.push(hypertyUrl);
+                }
+                _this._bus.postMessage({
+                  id: msg.id,
+                  type: 'response',
+                  from: msg.to,
+                  to: hypertyUrl,
+                  body: reply.body
+                });
+              });
+            }
+          }
+        }, {
+          key: '_onUnSubscribe',
+          value: function _onUnSubscribe(objURL, msg) {
+            var _this = this;
+            var hypertyUrl = msg.from;
+            var subs = _this._subscriptions[objURL].subs;
+            var index = subs.indexOf(hypertyUrl);
+            subs.splice(index, 1);
+          }
+        }, {
+          key: 'url',
+          get: function get() {
+            return this._url;
+          }
+        }]);
+        return SyncherManager;
+      })();
+      exports['default'] = SyncherManager;
+      module.exports = exports['default'];
     }, {
       "../utils/utils": 15,
       "./ObjectAllocation": 12
     }],
-    14: [function(e, t, n) {
+    14: [function(require, module, exports) {
       "use strict";
-      function o(e, t) {
-        if (!(e instanceof t))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(n, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, t) {
-          for (var n = 0; n < t.length; n++) {
-            var o = t[n];
-            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+      Object.defineProperty(exports, "__esModule", {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(t, n, o) {
-          return n && e(t.prototype, n), o && e(t, o), t;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          i = function() {
-            function e() {
-              o(this, e);
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      }
+      var EventEmitter = (function() {
+        function EventEmitter() {
+          _classCallCheck(this, EventEmitter);
+        }
+        _createClass(EventEmitter, [{
+          key: "addEventListener",
+          value: function addEventListener(eventType, cb) {
+            var _this = this;
+            _this[eventType] = cb;
+          }
+        }, {
+          key: "trigger",
+          value: function trigger(eventType, params) {
+            var _this = this;
+            if (_this[eventType]) {
+              _this[eventType](params);
             }
-            return r(e, [{
-              key: "addEventListener",
-              value: function(e, t) {
-                var n = this;
-                n[e] = t;
-              }
-            }, {
-              key: "trigger",
-              value: function(e, t) {
-                var n = this;
-                n[e] && n[e](t);
-              }
-            }]), e;
-          }();
-      n["default"] = i, t.exports = n["default"];
+          }
+        }]);
+        return EventEmitter;
+      })();
+      exports["default"] = EventEmitter;
+      module.exports = exports["default"];
     }, {}],
-    15: [function(e, t, n) {
-      "use strict";
-      function o(e) {
-        var t = /([a-zA-Z-]*):\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi,
-            n = "$1,$2,$3",
-            o = e.replace(t, n).split(","),
-            r = {
-              type: o[0],
-              domain: o[1],
-              identity: o[2]
-            };
-        return r;
+    15: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      exports.divideURL = divideURL;
+      exports.deepClone = deepClone;
+      function divideURL(url) {
+        var re = /([a-zA-Z-]*):\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi;
+        var subst = '$1,$2,$3';
+        var parts = url.replace(re, subst).split(',');
+        var result = {
+          type: parts[0],
+          domain: parts[1],
+          identity: parts[2]
+        };
+        return result;
       }
-      function r(e) {
-        return JSON.parse(JSON.stringify(e));
+      function deepClone(obj) {
+        return JSON.parse(JSON.stringify(obj));
       }
-      Object.defineProperty(n, "__esModule", {value: !0}), n.divideURL = o, n.deepClone = r;
     }, {}]
   }, {}, [7])(7);
 });
@@ -2823,37 +4642,37 @@ _removeDefine();
 })();
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("3", ["23"], function(main) {
+define("3e", ["51"], function(main) {
   return main;
 });
 
 _removeDefine();
 })();
-$__System.register('1', ['3', '22'], function (_export) {
+$__System.register('1', ['50', '3e'], function (_export) {
     'use strict';
 
-    var RuntimeUA, SandboxFactory, runtime;
+    var SandboxFactory, RuntimeUA, runtime;
     return {
         setters: [function (_) {
-            RuntimeUA = _.RuntimeUA;
-        }, function (_2) {
-            SandboxFactory = _2['default'];
+            SandboxFactory = _['default'];
+        }, function (_e) {
+            RuntimeUA = _e.RuntimeUA;
         }],
         execute: function () {
             runtime = new RuntimeUA(SandboxFactory);
 
             SandboxFactory.messageBus._onPostMessage = function (msg) {
-                window.postMessage(msg);
+                window.postMessage(msg, '*');
             };
 
             window.addEventListener('message', function (event) {
                 if (event.data.to === 'runtime:loadHyperty') {
                     runtime.loadHyperty(event.data.body.descriptor).then(function (msg) {
-                        return self.postMessage(msg);
+                        return event.source.postMessage(msg, '*');
                     });
                 } else if (event.data.to === 'runtime:loadStub') {
                     runtime.loadStub(event.data.body.domain).then(function (msg) {
-                        return self.postMessage(msg);
+                        return event.source.postMessage(msg, '*');
                     });
                 } else {
                     SandboxFactory.messageBus._onMessage(event.data);

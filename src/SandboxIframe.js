@@ -19,7 +19,7 @@ export default class SandboxIframe extends Sandbox{
         this.sandbox.contentWindow.document.getElementsByTagName('body')[0].appendChild(script);
      }
 
-     this.sandbox.contentWindow.addEventListener('message', function(e){
+     window.addEventListener('message', function(e){
          this._onMessage(e.data);
      }.bind(this));
    }
