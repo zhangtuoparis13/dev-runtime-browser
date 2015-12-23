@@ -1,4 +1,4 @@
-import { RuntimeUA } from 'runtime-core';
+import {RuntimeUA} from 'runtime-core/dist/runtime-core';
 import SandboxFactory from './SandboxFactory';
 
 let runtime = new RuntimeUA(SandboxFactory);
@@ -18,4 +18,3 @@ window.addEventListener('message', function(event){
         SandboxFactory.messageBus._onMessage(event.data);
     }
 }, false);
-

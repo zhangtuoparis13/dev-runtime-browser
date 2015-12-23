@@ -14,16 +14,16 @@ System.config({
   },
 
   map: {
-    "babel": "npm:babel-core@5.8.29",
-    "babel-runtime": "npm:babel-runtime@5.8.29",
+    "babel": "npm:babel-core@5.8.34",
+    "babel-runtime": "npm:babel-runtime@5.8.34",
     "chai": "npm:chai@3.4.1",
-    "core-js": "npm:core-js@1.2.3",
-    "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
+    "core-js": "npm:core-js@1.2.6",
+    "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.5.4"
+      "buffer": "npm:buffer@3.5.5"
     },
     "github:jspm/nodelibs-events@0.1.1": {
       "events": "npm:events@1.0.2"
@@ -54,10 +54,11 @@ System.config({
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
     },
-    "github:reTHINK-project/dev-runtime-core@dev-0.2": {
-      "service-framework": "github:reTHINK-project/dev-service-framework@develop"
+    "github:rethink-project/dev-runtime-core@dev-0.2": {
+      "hellojs": "npm:hellojs@1.9.8",
+      "service-framework": "github:rethink-project/dev-service-framework@develop"
     },
-    "github:reTHINK-project/dev-service-framework@develop": {
+    "github:rethink-project/dev-service-framework@develop": {
       "array.observe": "npm:array.observe@0.0.1",
       "babel-polyfill": "npm:babel-polyfill@6.3.14",
       "indexeddbshim": "npm:indexeddbshim@2.2.1",
@@ -74,22 +75,22 @@ System.config({
     },
     "npm:babel-polyfill@6.3.14": {
       "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.3.13",
-      "babel-runtime": "npm:babel-runtime@5.8.29",
-      "core-js": "npm:core-js@1.2.3",
+      "babel-runtime": "npm:babel-runtime@5.8.34",
+      "core-js": "npm:core-js@1.2.6",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:babel-regenerator-runtime@6.3.13": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:babel-runtime@5.8.29": {
+    "npm:babel-runtime@5.8.34": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:buffer@3.5.4": {
+    "npm:buffer@3.5.5": {
       "base64-js": "npm:base64-js@0.0.8",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "ieee754": "npm:ieee754@1.1.6",
-      "isarray": "npm:isarray@0.0.1",
+      "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:chai@3.4.1": {
@@ -100,7 +101,7 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0",
       "type-detect": "npm:type-detect@1.0.0"
     },
-    "npm:core-js@1.2.3": {
+    "npm:core-js@1.2.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -112,6 +113,13 @@ System.config({
     "npm:deep-eql@0.1.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "type-detect": "npm:type-detect@0.1.1"
+    },
+    "npm:hellojs@1.9.8": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "http": "github:jspm/nodelibs-http@1.7.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "url": "github:jspm/nodelibs-url@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:https-browserify@0.0.0": {
       "http": "github:jspm/nodelibs-http@1.7.1"

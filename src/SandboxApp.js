@@ -1,6 +1,6 @@
-import { Sandbox } from 'runtime-core';
-import { MiniBus } from 'runtime-core';
-import { SandboxRegistry } from 'runtime-core';
+import { Sandbox } from 'runtime-core/dist/sandbox';
+import { MiniBus } from 'runtime-core/dist/minibus';
+import { SandboxRegistry } from 'runtime-core/dist/sandbox';
 
 export default class SandboxApp extends Sandbox{
    constructor(){

@@ -1,15 +1,19 @@
-import { Sandbox } from 'runtime-core';
+import {Sandbox} from 'runtime-core/dist/sandbox';
 
-export default class SandboxIframe extends Sandbox{
+class SandboxIframe extends Sandbox{
+
    constructor(scriptUrl){
-     super();
+
+     super(scriptUrl);
+
      this.sandbox = document.getElementById('sandbox');
 
      if(!!!this.sandbox){
         this.sandbox = document.createElement('iframe');
         this.sandbox.setAttribute('id', 'sandbox');
         this.sandbox.setAttribute('seamless', '');
-        this.sandbox.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+        this.sandbox.setAttribute('url', 'http://127.0.0.1:8080/example/');
+        this.sandbox.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
         this.sandbox.style.display = 'none';
         document.querySelector('body').appendChild(this.sandbox);
 
@@ -28,3 +32,5 @@ export default class SandboxIframe extends Sandbox{
        this.sandbox.contentWindow.postMessage(msg, '*');
    }
 }
+
+export default SandboxIframe;

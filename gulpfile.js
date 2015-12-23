@@ -28,24 +28,23 @@ var pkg = require('./package.json');
 
 gulp.task('dist', function() {
 
-  var bundler = browserify('./src/runtime-core.js', {
-    standalone: 'runtime-core', debug: false}).transform(babel);
+  var bundler = browserify('./src/ContextServiceProvider.js', {
+    standalone: 'context-service', debug: false}).transform(babel);
 
   function rebundle() {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function(err) {
         console.error(err);
         this.emit('end');
       })
-      .pipe(source('runtime-core.js'))
+      .pipe(source('context-service.js'))
       .pipe(buffer())
       .pipe(uglify())
-      .pipe(insert.prepend('// Runtime User Agent \n\n// version: {{version}}\n\n'))
       .pipe(replace('{{version}}', pkg.version))
       .pipe(gulp.dest('./dist'));
   }
 
-  rebundle();
+  return rebundle();
 
 });
 
