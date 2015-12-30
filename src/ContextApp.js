@@ -1,12 +1,15 @@
 import { MiniBus } from 'runtime-core/dist/minibus';
 import { SandboxRegistry } from 'runtime-core/dist/sandbox';
 
-export function create(iframe){
+function create(iframe){
     window._miniBus = new MiniBus();
     window._miniBus._onPostMessage = function(msg){
         iframe.contentWindow.postMessage(msg, '*');
     };
     window.addEventListener('message', function(event){
+        if(event.data.to.startsWith('runtime:'))
+            return;
+
         window._miniBus._onMessage(event.data);
     }, false);
 
@@ -16,3 +19,9 @@ export function create(iframe){
         return activate(url, window._miniBus, config);
     };
 };
+
+function getHyperty(hypertyDescriptor){
+    return window._registry.components[hypertyDescriptor]
+};
+
+export default { create, getHyperty };

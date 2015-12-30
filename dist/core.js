@@ -1081,54 +1081,56 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 _removeDefine();
 })();
 $__System.register('3', ['2', '4', '5', '6', '7', '8'], function (_export) {
-   var MiniBus, _get, _inherits, _createClass, _classCallCheck, Sandbox, SandboxRegistry, SandboxApp;
+    var MiniBus, _get, _inherits, _createClass, _classCallCheck, Sandbox, SandboxRegistry, SandboxApp;
 
-   return {
-      setters: [function (_6) {
-         MiniBus = _6.MiniBus;
-      }, function (_) {
-         _get = _['default'];
-      }, function (_2) {
-         _inherits = _2['default'];
-      }, function (_3) {
-         _createClass = _3['default'];
-      }, function (_4) {
-         _classCallCheck = _4['default'];
-      }, function (_5) {
-         Sandbox = _5.Sandbox;
-         SandboxRegistry = _5.SandboxRegistry;
-      }],
-      execute: function () {
-         'use strict';
+    return {
+        setters: [function (_6) {
+            MiniBus = _6.MiniBus;
+        }, function (_) {
+            _get = _['default'];
+        }, function (_2) {
+            _inherits = _2['default'];
+        }, function (_3) {
+            _createClass = _3['default'];
+        }, function (_4) {
+            _classCallCheck = _4['default'];
+        }, function (_5) {
+            Sandbox = _5.Sandbox;
+            SandboxRegistry = _5.SandboxRegistry;
+        }],
+        execute: function () {
+            'use strict';
 
-         SandboxApp = (function (_Sandbox) {
-            _inherits(SandboxApp, _Sandbox);
+            SandboxApp = (function (_Sandbox) {
+                _inherits(SandboxApp, _Sandbox);
 
-            function SandboxApp() {
-               _classCallCheck(this, SandboxApp);
+                function SandboxApp() {
+                    _classCallCheck(this, SandboxApp);
 
-               _get(Object.getPrototypeOf(SandboxApp.prototype), 'constructor', this).call(this);
+                    _get(Object.getPrototypeOf(SandboxApp.prototype), 'constructor', this).call(this);
 
-               window.addEventListener('message', (function (e) {
-                  if (!!!this.origin) this.origin = e.source;
+                    window.addEventListener('message', (function (e) {
+                        if (!!!this.origin) this.origin = e.source;
 
-                  this._onMessage(e.data);
-               }).bind(this));
-            }
+                        if (e.data.to.startsWith('core:')) return;
 
-            _createClass(SandboxApp, [{
-               key: '_onPostMessage',
-               value: function _onPostMessage(msg) {
-                  this.origin.postMessage(msg, '*');
-               }
-            }]);
+                        this._onMessage(e.data);
+                    }).bind(this));
+                }
 
-            return SandboxApp;
-         })(Sandbox);
+                _createClass(SandboxApp, [{
+                    key: '_onPostMessage',
+                    value: function _onPostMessage(msg) {
+                        this.origin.postMessage(msg, '*');
+                    }
+                }]);
 
-         _export('default', SandboxApp);
-      }
-   };
+                return SandboxApp;
+            })(Sandbox);
+
+            _export('default', SandboxApp);
+        }
+    };
 });
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
@@ -8162,6 +8164,11 @@ $__System.register('1', ['23', '24'], function (_export) {
     'use strict';
 
     var SandboxFactory, RuntimeUA, runtime;
+
+    function returnHyperty(source, hyperty) {
+        source.postMessage({ to: 'runtime:loadedHyperty', body: hyperty }, '*');
+    }
+
     return {
         setters: [function (_2) {
             SandboxFactory = _2['default'];
@@ -8172,9 +8179,19 @@ $__System.register('1', ['23', '24'], function (_export) {
             runtime = new RuntimeUA(SandboxFactory);
 
             window.addEventListener('message', function (event) {
-                if (event.data.to === 'runtime:loadHyperty') {
-                    runtime.loadHyperty(event.data.body.descriptor);
-                } else if (event.data.to === 'runtime:loadStub') {
+                if (event.data.to === 'core:loadHyperty') {
+                    (function () {
+                        var descriptor = event.data.body.descriptor;
+                        var hyperty = runtime.registry.hypertiesList.find(function (hi, index, array) {
+                            return hi.descriptor === descriptor;
+                        });
+                        if (hyperty) {
+                            returnHyperty(event.source, { runtimeHypertyURL: hyperty.hypertyURL });
+                        } else {
+                            runtime.loadHyperty(descriptor).then(returnHyperty.bind(null, event.source));
+                        }
+                    })();
+                } else if (event.data.to === 'core:loadStub') {
                     runtime.loadStub(event.data.body.domain);
                 }
             }, false);
