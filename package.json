@@ -4,7 +4,7 @@
   "description": "browser runtime development",
   "main": "src/rethink.js",
   "scripts": {
-    "start": "jspm bundle-sfx src/RuntimeUAStub.js dist/rethink.js && jspm bundle-sfx src/ContextCore.js dist/context-core.js && jspm bundle-sfx src/ContextServiceProvider.js dist/context-service.js && live-server",
+    "start": "jspm bundle-sfx src/RuntimeUAStub.js dist/rethink.js && jspm bundle-sfx src/core.js dist/core.js && jspm bundle-sfx src/ContextServiceProvider.js dist/context-service.js && live-server",
     "test": "karma start",
     "init-setup": "npm install -g jspm karma-cli gulp-cli && npm install && jspm install"
   },
@@ -33,6 +33,7 @@
     "gulp-bump": "^1.0.0",
     "gulp-insert": "^0.5.0",
     "gulp-replace": "^0.5.4",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.2",
     "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
     "jspm": "^0.16.12",

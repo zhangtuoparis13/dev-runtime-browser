@@ -6,19 +6,15 @@ export default class SandboxApp extends Sandbox{
    constructor(){
      super();
 
-     this._miniBus = new MiniBus();
-     this._miniBus._onPostMessage = function(msg){
-         this._onMessage(msg);
-     };
+     window.addEventListener('message', function(e){
+         if(!!!this.origin)
+            this.origin = e.source;
 
-     this._registry = new SandboxRegistry(this._miniBus);
-     this._registry._create = function(url, sourceCode, config){
-         let activate = eval(sourceCode);
-         return activate(url, this._miniBus, config);
-     };
+         this._onMessage(e.data);
+     }.bind(this));
    }
 
    _onPostMessage(msg){
-       this._miniBus._onMessage(msg);
+       this.origin.postMessage(msg, '*');
    }
 }

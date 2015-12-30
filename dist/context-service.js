@@ -288,7 +288,7 @@
       entry.esModule = {};
       
       // don't trigger getters/setters in environments that support them
-      if (typeof exports == 'object' || typeof exports == 'function') {
+      if ((typeof exports == 'object' || typeof exports == 'function') && exports !== global) {
         if (getOwnPropertyDescriptor) {
           var d;
           for (var p in exports)
@@ -671,310 +671,676 @@
 "bundle";
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-!function(e) {
-  if ("object" == typeof exports && "undefined" != typeof module)
-    module.exports = e();
-  else if ("function" == typeof define && define.amd)
-    define("2", [], e);
-  else {
-    var n;
-    n = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, n.MiniBus = e();
+(function(f) {
+  if (typeof exports === "object" && typeof module !== "undefined") {
+    module.exports = f();
+  } else if (typeof define === "function" && define.amd) {
+    define("2", [], f);
+  } else {
+    var g;
+    if (typeof window !== "undefined") {
+      g = window;
+    } else if (typeof global !== "undefined") {
+      g = global;
+    } else if (typeof self !== "undefined") {
+      g = self;
+    } else {
+      g = this;
+    }
+    g.sandbox = f();
   }
-}(function() {
-  return function e(n, t, i) {
-    function r(o, u) {
-      if (!t[o]) {
-        if (!n[o]) {
-          var a = "function" == typeof require && require;
+})(function() {
+  var define,
+      module,
+      exports;
+  return (function e(t, n, r) {
+    function s(o, u) {
+      if (!n[o]) {
+        if (!t[o]) {
+          var a = typeof require == "function" && require;
           if (!u && a)
             return a(o, !0);
-          if (s)
-            return s(o, !0);
-          var l = new Error("Cannot find module '" + o + "'");
-          throw l.code = "MODULE_NOT_FOUND", l;
+          if (i)
+            return i(o, !0);
+          var f = new Error("Cannot find module '" + o + "'");
+          throw f.code = "MODULE_NOT_FOUND", f;
         }
-        var f = t[o] = {exports: {}};
-        n[o][0].call(f.exports, function(e) {
-          var t = n[o][1][e];
-          return r(t ? t : e);
-        }, f, f.exports, e, n, t, i);
+        var l = n[o] = {exports: {}};
+        t[o][0].call(l.exports, function(e) {
+          var n = t[o][1][e];
+          return s(n ? n : e);
+        }, l, l.exports, e, t, n, r);
       }
-      return t[o].exports;
+      return n[o].exports;
     }
-    for (var s = "function" == typeof require && require,
-        o = 0; o < i.length; o++)
-      r(i[o]);
-    return r;
-  }({
-    1: [function(e, n, t) {
-      "use strict";
-      function i(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function r(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var s = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var i = n[t];
-            i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(e, i.key, i);
+    var i = typeof require == "function" && require;
+    for (var o = 0; o < r.length; o++)
+      s(r[o]);
+    return s;
+  })({
+    1: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(n, t, i) {
-          return t && e(n.prototype, t), i && e(n, i), n;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          o = e("./Pipeline"),
-          u = i(o),
-          a = function() {
-            function e() {
-              r(this, e);
-              var n = this;
-              n._msgId = 0, n._subscriptions = {}, n._responseTimeOut = 3e3, n._responseCallbacks = {}, n._pipeline = new u["default"](function(e) {
-                console.log("PIPELINE-ERROR: ", JSON.stringify(e));
-              }), n._registerExternalListener();
+      })();
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var _Pipeline = require('./Pipeline');
+      var _Pipeline2 = _interopRequireDefault(_Pipeline);
+      var MiniBus = (function() {
+        function MiniBus() {
+          _classCallCheck(this, MiniBus);
+          var _this = this;
+          _this._msgId = 0;
+          _this._subscriptions = {};
+          _this._responseTimeOut = 3000;
+          _this._responseCallbacks = {};
+          _this._pipeline = new _Pipeline2['default'](function(error) {
+            console.log('PIPELINE-ERROR: ', JSON.stringify(error));
+          });
+          _this._registerExternalListener();
+        }
+        _createClass(MiniBus, [{
+          key: 'addListener',
+          value: function addListener(url, listener) {
+            var _this = this;
+            var item = new MsgListener(_this._subscriptions, url, listener);
+            var itemList = _this._subscriptions[url];
+            if (!itemList) {
+              itemList = [];
+              _this._subscriptions[url] = itemList;
             }
-            return s(e, [{
-              key: "addListener",
-              value: function(e, n) {
-                var t = this,
-                    i = new l(t._subscriptions, e, n),
-                    r = t._subscriptions[e];
-                return r || (r = [], t._subscriptions[e] = r), r.push(i), i;
-              }
-            }, {
-              key: "addResponseListener",
-              value: function(e, n, t) {
-                this._responseCallbacks[e + n] = t;
-              }
-            }, {
-              key: "removeResponseListener",
-              value: function(e, n) {
-                delete this._responseCallbacks[e + n];
-              }
-            }, {
-              key: "removeAllListenersOf",
-              value: function(e) {
-                delete this._subscriptions[e];
-              }
-            }, {
-              key: "postMessage",
-              value: function(e, n) {
-                var t = this;
-                return e.id && 0 !== e.id || (t._msgId++, e.id = t._msgId), t._pipeline.process(e, function(e) {
-                  if (n && !function() {
-                    var i = e.from + e.id;
-                    t._responseCallbacks[i] = n, setTimeout(function() {
-                      var n = t._responseCallbacks[i];
-                      if (delete t._responseCallbacks[i], n) {
-                        var r = {
-                          id: e.id,
-                          type: "response",
-                          body: {
-                            code: "error",
-                            desc: "Response timeout!"
-                          }
-                        };
-                        n(r);
-                      }
-                    }, t._responseTimeOut);
-                  }(), !t._onResponse(e)) {
-                    var i = t._subscriptions[e.to];
-                    i ? t._publishOn(i, e) : t._onPostMessage(e);
-                  }
-                }), e.id;
-              }
-            }, {
-              key: "bind",
-              value: function(e, n, t) {
-                var i = this,
-                    r = this,
-                    s = r.addListener(e, function(e) {
-                      t.postMessage(e);
-                    }),
-                    o = t.addListener(n, function(e) {
-                      r.postMessage(e);
-                    });
-                return {
-                  thisListener: s,
-                  targetListener: o,
-                  unbind: function() {
-                    i.thisListener.remove(), i.targetListener.remove();
-                  }
-                };
-              }
-            }, {
-              key: "_publishOn",
-              value: function(e, n) {
-                e.forEach(function(e) {
-                  e._callback(n);
-                });
-              }
-            }, {
-              key: "_onResponse",
-              value: function(e) {
-                var n = this;
-                if ("response" === e.type) {
-                  var t = e.to + e.id,
-                      i = n._responseCallbacks[t];
-                  if (delete n._responseCallbacks[t], i)
-                    return i(e), !0;
-                }
-                return !1;
-              }
-            }, {
-              key: "_onMessage",
-              value: function(e) {
-                var n = this;
-                if (!n._onResponse(e)) {
-                  var t = n._subscriptions[e.to];
-                  t ? n._publishOn(t, e) : (t = n._subscriptions["*"], t && n._publishOn(t, e));
-                }
-              }
-            }, {
-              key: "_onPostMessage",
-              value: function(e) {}
-            }, {
-              key: "_registerExternalListener",
-              value: function() {}
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
-            }]), e;
-          }(),
-          l = function() {
-            function e(n, t, i) {
-              r(this, e);
-              var s = this;
-              s._subscriptions = n, s._url = t, s._callback = i;
+            itemList.push(item);
+            return item;
+          }
+        }, {
+          key: 'addResponseListener',
+          value: function addResponseListener(url, msgId, responseListener) {
+            this._responseCallbacks[url + msgId] = responseListener;
+          }
+        }, {
+          key: 'removeResponseListener',
+          value: function removeResponseListener(url, msgId) {
+            delete this._responseCallbacks[url + msgId];
+          }
+        }, {
+          key: 'removeAllListenersOf',
+          value: function removeAllListenersOf(url) {
+            delete this._subscriptions[url];
+          }
+        }, {
+          key: 'postMessage',
+          value: function postMessage(inMsg, responseCallback) {
+            var _this = this;
+            if (!inMsg.id || inMsg.id === 0) {
+              _this._msgId++;
+              inMsg.id = _this._msgId;
             }
-            return s(e, [{
-              key: "remove",
-              value: function() {
-                var e = this,
-                    n = e._subscriptions[e._url];
-                if (n) {
-                  var t = n.indexOf(e);
-                  n.splice(t, 1), 0 === n.length && delete e._subscriptions[e._url];
+            _this._pipeline.process(inMsg, function(msg) {
+              if (responseCallback) {
+                (function() {
+                  var responseId = msg.from + msg.id;
+                  _this._responseCallbacks[responseId] = responseCallback;
+                  setTimeout(function() {
+                    var responseFun = _this._responseCallbacks[responseId];
+                    delete _this._responseCallbacks[responseId];
+                    if (responseFun) {
+                      var errorMsg = {
+                        id: msg.id,
+                        type: 'response',
+                        body: {
+                          code: 'error',
+                          desc: 'Response timeout!'
+                        }
+                      };
+                      responseFun(errorMsg);
+                    }
+                  }, _this._responseTimeOut);
+                })();
+              }
+              if (!_this._onResponse(msg)) {
+                var itemList = _this._subscriptions[msg.to];
+                if (itemList) {
+                  _this._publishOn(itemList, msg);
+                } else {
+                  _this._onPostMessage(msg);
                 }
               }
-            }, {
-              key: "url",
-              get: function() {
-                return this._url;
+            });
+            return inMsg.id;
+          }
+        }, {
+          key: 'bind',
+          value: function bind(outUrl, inUrl, target) {
+            var _this2 = this;
+            var _this = this;
+            var thisListn = _this.addListener(outUrl, function(msg) {
+              target.postMessage(msg);
+            });
+            var targetListn = target.addListener(inUrl, function(msg) {
+              _this.postMessage(msg);
+            });
+            return {
+              thisListener: thisListn,
+              targetListener: targetListn,
+              unbind: function unbind() {
+                _this2.thisListener.remove();
+                _this2.targetListener.remove();
               }
-            }]), e;
-          }();
-      t["default"] = a, n.exports = t["default"];
+            };
+          }
+        }, {
+          key: '_publishOn',
+          value: function _publishOn(itemList, msg) {
+            itemList.forEach(function(sub) {
+              sub._callback(msg);
+            });
+          }
+        }, {
+          key: '_onResponse',
+          value: function _onResponse(msg) {
+            var _this = this;
+            if (msg.type === 'response') {
+              var responseId = msg.to + msg.id;
+              var responseFun = _this._responseCallbacks[responseId];
+              delete _this._responseCallbacks[responseId];
+              if (responseFun) {
+                responseFun(msg);
+                return true;
+              }
+            }
+            return false;
+          }
+        }, {
+          key: '_onMessage',
+          value: function _onMessage(msg) {
+            var _this = this;
+            if (!_this._onResponse(msg)) {
+              var itemList = _this._subscriptions[msg.to];
+              if (itemList) {
+                _this._publishOn(itemList, msg);
+              } else {
+                itemList = _this._subscriptions['*'];
+                if (itemList) {
+                  _this._publishOn(itemList, msg);
+                }
+              }
+            }
+          }
+        }, {
+          key: '_onPostMessage',
+          value: function _onPostMessage(msg) {}
+        }, {
+          key: '_registerExternalListener',
+          value: function _registerExternalListener() {}
+        }, {
+          key: 'pipeline',
+          get: function get() {
+            return this._pipeline;
+          }
+        }]);
+        return MiniBus;
+      })();
+      var MsgListener = (function() {
+        function MsgListener(subscriptions, url, callback) {
+          _classCallCheck(this, MsgListener);
+          var _this = this;
+          _this._subscriptions = subscriptions;
+          _this._url = url;
+          _this._callback = callback;
+        }
+        _createClass(MsgListener, [{
+          key: 'remove',
+          value: function remove() {
+            var _this = this;
+            var subs = _this._subscriptions[_this._url];
+            if (subs) {
+              var index = subs.indexOf(_this);
+              subs.splice(index, 1);
+              if (subs.length === 0) {
+                delete _this._subscriptions[_this._url];
+              }
+            }
+          }
+        }, {
+          key: 'url',
+          get: function get() {
+            return this._url;
+          }
+        }]);
+        return MsgListener;
+      })();
+      exports['default'] = MiniBus;
+      module.exports = exports['default'];
     }, {"./Pipeline": 2}],
-    2: [function(e, n, t) {
+    2: [function(require, module, exports) {
       "use strict";
-      function i(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var i = n[t];
-            i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(e, i.key, i);
+      Object.defineProperty(exports, "__esModule", {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(n, t, i) {
-          return t && e(n.prototype, t), i && e(n, i), n;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          s = function() {
-            function e(n) {
-              i(this, e);
-              var t = this;
-              t.handlers = [], t.onFail = n;
-            }
-            return r(e, [{
-              key: "process",
-              value: function(e, n) {
-                var t = this;
-                if (t.handlers.length > 0) {
-                  var i = new u(t.handlers);
-                  i.next(new o(t, i, e, n));
-                } else
-                  n(e);
-              }
-            }]), e;
-          }(),
-          o = function() {
-            function e(n, t, r, s) {
-              i(this, e);
-              var o = this;
-              o._inStop = !1, o._pipeline = n, o._iter = t, o._msg = r, o._onDeliver = s;
-            }
-            return r(e, [{
-              key: "next",
-              value: function() {
-                var e = this;
-                e._inStop || (e._iter.hasNext ? e._iter.next(e) : e._onDeliver(e._msg));
-              }
-            }, {
-              key: "deliver",
-              value: function() {
-                var e = this;
-                e._inStop || (e._inStop = !0, e._onDeliver(e._msg));
-              }
-            }, {
-              key: "fail",
-              value: function(e) {
-                var n = this;
-                n._inStop || (n._inStop = !0, n._pipeline.onFail && n._pipeline.onFail(e));
-              }
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
-            }, {
-              key: "msg",
-              get: function() {
-                return this._msg;
-              },
-              set: function(e) {
-                this._msg = e;
-              }
-            }]), e;
-          }(),
-          u = function() {
-            function e(n) {
-              i(this, e), this._index = -1, this._array = n;
-            }
-            return r(e, [{
-              key: "hasNext",
-              get: function() {
-                return this._index < this._array.length - 1;
-              }
-            }, {
-              key: "next",
-              get: function() {
-                return this._index++, this._array[this._index];
-              }
-            }]), e;
-          }();
-      t["default"] = s, n.exports = t["default"];
-    }, {}],
-    3: [function(e, n, t) {
-      "use strict";
-      function i(e) {
-        return e && e.__esModule ? e : {"default": e};
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var r = e("./bus/MiniBus"),
-          s = i(r);
-      t.MiniBus = s["default"];
-    }, {"./bus/MiniBus": 1}]
+      var Pipeline = (function() {
+        function Pipeline(_onFail) {
+          _classCallCheck(this, Pipeline);
+          var _this = this;
+          _this.handlers = [];
+          _this.onFail = _onFail;
+        }
+        _createClass(Pipeline, [{
+          key: "process",
+          value: function process(msg, onDeliver) {
+            var _this = this;
+            if (_this.handlers.length > 0) {
+              var iter = new Iterator(_this.handlers);
+              iter.next(new PipeContext(_this, iter, msg, onDeliver));
+            } else {
+              onDeliver(msg);
+            }
+          }
+        }]);
+        return Pipeline;
+      })();
+      var PipeContext = (function() {
+        function PipeContext(pipeline, iter, msg, onDeliver) {
+          _classCallCheck(this, PipeContext);
+          var _this = this;
+          _this._inStop = false;
+          _this._pipeline = pipeline;
+          _this._iter = iter;
+          _this._msg = msg;
+          _this._onDeliver = onDeliver;
+        }
+        _createClass(PipeContext, [{
+          key: "next",
+          value: function next() {
+            var _this = this;
+            if (!_this._inStop) {
+              if (_this._iter.hasNext) {
+                _this._iter.next(_this);
+              } else {
+                _this._onDeliver(_this._msg);
+              }
+            }
+          }
+        }, {
+          key: "deliver",
+          value: function deliver() {
+            var _this = this;
+            if (!_this._inStop) {
+              _this._inStop = true;
+              _this._onDeliver(_this._msg);
+            }
+          }
+        }, {
+          key: "fail",
+          value: function fail(error) {
+            var _this = this;
+            if (!_this._inStop) {
+              _this._inStop = true;
+              if (_this._pipeline.onFail) {
+                _this._pipeline.onFail(error);
+              }
+            }
+          }
+        }, {
+          key: "pipeline",
+          get: function get() {
+            return this._pipeline;
+          }
+        }, {
+          key: "msg",
+          get: function get() {
+            return this._msg;
+          },
+          set: function set(inMsg) {
+            this._msg = inMsg;
+          }
+        }]);
+        return PipeContext;
+      })();
+      var Iterator = (function() {
+        function Iterator(array) {
+          _classCallCheck(this, Iterator);
+          this._index = -1;
+          this._array = array;
+        }
+        _createClass(Iterator, [{
+          key: "hasNext",
+          get: function get() {
+            return this._index < this._array.length - 1;
+          }
+        }, {
+          key: "next",
+          get: function get() {
+            this._index++;
+            return this._array[this._index];
+          }
+        }]);
+        return Iterator;
+      })();
+      exports["default"] = Pipeline;
+      module.exports = exports["default"];
+    }, {}],
+    3: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      var _sandboxSandbox = require('./sandbox/Sandbox');
+      var _sandboxSandbox2 = _interopRequireDefault(_sandboxSandbox);
+      var _sandboxSandboxRegistry = require('./sandbox/SandboxRegistry');
+      var _sandboxSandboxRegistry2 = _interopRequireDefault(_sandboxSandboxRegistry);
+      exports.Sandbox = _sandboxSandbox2['default'];
+      exports.SandboxRegistry = _sandboxSandboxRegistry2['default'];
+    }, {
+      "./sandbox/Sandbox": 4,
+      "./sandbox/SandboxRegistry": 5
+    }],
+    4: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
+        };
+      })();
+      var _get = function get(_x, _x2, _x3) {
+        var _again = true;
+        _function: while (_again) {
+          var object = _x,
+              property = _x2,
+              receiver = _x3;
+          _again = false;
+          if (object === null)
+            object = Function.prototype;
+          var desc = Object.getOwnPropertyDescriptor(object, property);
+          if (desc === undefined) {
+            var parent = Object.getPrototypeOf(object);
+            if (parent === null) {
+              return undefined;
+            } else {
+              _x = parent;
+              _x2 = property;
+              _x3 = receiver;
+              _again = true;
+              desc = parent = undefined;
+              continue _function;
+            }
+          } else if ('value' in desc) {
+            return desc.value;
+          } else {
+            var getter = desc.get;
+            if (getter === undefined) {
+              return undefined;
+            }
+            return getter.call(receiver);
+          }
+        }
+      };
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      function _inherits(subClass, superClass) {
+        if (typeof superClass !== 'function' && superClass !== null) {
+          throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+        }
+        subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }});
+        if (superClass)
+          Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+      }
+      var _sandboxSandboxRegistry = require('../sandbox/SandboxRegistry');
+      var _sandboxSandboxRegistry2 = _interopRequireDefault(_sandboxSandboxRegistry);
+      var _busMiniBus = require('../bus/MiniBus');
+      var _busMiniBus2 = _interopRequireDefault(_busMiniBus);
+      var Sandbox = (function(_MiniBus) {
+        _inherits(Sandbox, _MiniBus);
+        function Sandbox() {
+          _classCallCheck(this, Sandbox);
+          _get(Object.getPrototypeOf(Sandbox.prototype), 'constructor', this).call(this);
+          var _this = this;
+        }
+        _createClass(Sandbox, [{
+          key: 'deployComponent',
+          value: function deployComponent(componentSourceCode, componentURL, configuration) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              var deployMessage = {
+                type: 'create',
+                from: _sandboxSandboxRegistry2['default'].ExternalDeployAddress,
+                to: _sandboxSandboxRegistry2['default'].InternalDeployAddress,
+                body: {
+                  url: componentURL,
+                  sourceCode: componentSourceCode,
+                  config: configuration
+                }
+              };
+              _this.postMessage(deployMessage, function(reply) {
+                if (reply.body.code === 200) {
+                  resolve('deployed');
+                } else {
+                  reject(reply.body.desc);
+                }
+              });
+            });
+          }
+        }, {
+          key: 'removeComponent',
+          value: function removeComponent(componentURL) {
+            var _this = this;
+            return new Promise(function(resolve, reject) {
+              var removeMessage = {
+                type: 'delete',
+                from: _sandboxSandboxRegistry2['default'].ExternalDeployAddress,
+                to: _sandboxSandboxRegistry2['default'].InternalDeployAddress,
+                body: {url: componentURL}
+              };
+              _this.postMessage(removeMessage, function(reply) {
+                if (reply.body.code === 200) {
+                  resolve('undeployed');
+                } else {
+                  reject(reply.body.desc);
+                }
+              });
+            });
+          }
+        }]);
+        return Sandbox;
+      })(_busMiniBus2['default']);
+      exports['default'] = Sandbox;
+      module.exports = exports['default'];
+    }, {
+      "../bus/MiniBus": 1,
+      "../sandbox/SandboxRegistry": 5
+    }],
+    5: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
+        };
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
+        }
+      }
+      var SandboxRegistry = (function() {
+        function SandboxRegistry(bus) {
+          _classCallCheck(this, SandboxRegistry);
+          var _this = this;
+          _this._bus = bus;
+          _this._components = {};
+          bus.addListener(SandboxRegistry.InternalDeployAddress, function(msg) {
+            switch (msg.type) {
+              case 'create':
+                _this._onDeploy(msg);
+                break;
+              case 'delete':
+                _this._onRemove(msg);
+                break;
+            }
+          });
+        }
+        _createClass(SandboxRegistry, [{
+          key: '_responseMsg',
+          value: function _responseMsg(msg, code, value) {
+            var _this = this;
+            var responseMsg = {
+              id: msg.id,
+              type: 'response',
+              from: SandboxRegistry.InternalDeployAddress,
+              to: SandboxRegistry.ExternalDeployAddress
+            };
+            var body = {};
+            if (code)
+              body.code = code;
+            if (value)
+              body.desc = value;
+            responseMsg.body = body;
+            return responseMsg;
+          }
+        }, {
+          key: '_onDeploy',
+          value: function _onDeploy(msg) {
+            var _this = this;
+            var config = msg.body.config;
+            var componentURL = msg.body.url;
+            var sourceCode = msg.body.sourceCode;
+            var responseCode = undefined;
+            var responseDesc = undefined;
+            if (!_this._components.hasOwnProperty(componentURL)) {
+              try {
+                _this._components[componentURL] = _this._create(componentURL, sourceCode, config);
+                responseCode = 200;
+              } catch (error) {
+                responseCode = 500;
+                responseDesc = error;
+              }
+            } else {
+              responseCode = 500;
+              responseDesc = 'Instance ' + componentURL + ' already exist!';
+            }
+            var responseMsg = _this._responseMsg(msg, responseCode, responseDesc);
+            _this._bus.postMessage(responseMsg);
+          }
+        }, {
+          key: '_onRemove',
+          value: function _onRemove(msg) {
+            var _this = this;
+            var componentURL = msg.body.url;
+            var responseCode = undefined;
+            var responseDesc = undefined;
+            if (_this._components.hasOwnProperty(componentURL)) {
+              delete _this._components[componentURL];
+              _this._bus.removeAllListenersOf(componentURL);
+              responseCode = 200;
+            } else {
+              responseCode = 500;
+              responseDesc = 'Instance ' + componentURL + ' doesn\'t exist!';
+            }
+            var responseMsg = _this._responseMsg(msg, responseCode, responseDesc);
+            _this._bus.postMessage(responseMsg);
+          }
+        }, {
+          key: '_create',
+          value: function _create(url, sourceCode, config) {}
+        }, {
+          key: 'components',
+          get: function get() {
+            return this._components;
+          }
+        }]);
+        return SandboxRegistry;
+      })();
+      SandboxRegistry.ExternalDeployAddress = 'sandbox://external';
+      SandboxRegistry.InternalDeployAddress = 'sandbox://internal';
+      exports['default'] = SandboxRegistry;
+      module.exports = exports['default'];
+    }, {}]
   }, {}, [3])(3);
 });
 
@@ -982,505 +1348,410 @@ _removeDefine();
 })();
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-!function(e) {
-  if ("object" == typeof exports && "undefined" != typeof module)
-    module.exports = e();
-  else if ("function" == typeof define && define.amd)
-    define("3", [], e);
-  else {
-    var n;
-    n = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, n.sandbox = e();
-  }
-}(function() {
-  return function e(n, t, r) {
-    function o(s, u) {
-      if (!t[s]) {
-        if (!n[s]) {
-          var a = "function" == typeof require && require;
-          if (!u && a)
-            return a(s, !0);
-          if (i)
-            return i(s, !0);
-          var l = new Error("Cannot find module '" + s + "'");
-          throw l.code = "MODULE_NOT_FOUND", l;
-        }
-        var c = t[s] = {exports: {}};
-        n[s][0].call(c.exports, function(e) {
-          var t = n[s][1][e];
-          return o(t ? t : e);
-        }, c, c.exports, e, n, t, r);
-      }
-      return t[s].exports;
+(function(f) {
+  if (typeof exports === "object" && typeof module !== "undefined") {
+    module.exports = f();
+  } else if (typeof define === "function" && define.amd) {
+    define("3", [], f);
+  } else {
+    var g;
+    if (typeof window !== "undefined") {
+      g = window;
+    } else if (typeof global !== "undefined") {
+      g = global;
+    } else if (typeof self !== "undefined") {
+      g = self;
+    } else {
+      g = this;
     }
-    for (var i = "function" == typeof require && require,
-        s = 0; s < r.length; s++)
-      o(r[s]);
-    return o;
-  }({
-    1: [function(e, n, t) {
-      "use strict";
-      function r(e) {
-        return e && e.__esModule ? e : {"default": e};
+    g.MiniBus = f();
+  }
+})(function() {
+  var define,
+      module,
+      exports;
+  return (function e(t, n, r) {
+    function s(o, u) {
+      if (!n[o]) {
+        if (!t[o]) {
+          var a = typeof require == "function" && require;
+          if (!u && a)
+            return a(o, !0);
+          if (i)
+            return i(o, !0);
+          var f = new Error("Cannot find module '" + o + "'");
+          throw f.code = "MODULE_NOT_FOUND", f;
+        }
+        var l = n[o] = {exports: {}};
+        t[o][0].call(l.exports, function(e) {
+          var n = t[o][1][e];
+          return s(n ? n : e);
+        }, l, l.exports, e, t, n, r);
       }
-      function o(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var i = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+      return n[o].exports;
+    }
+    var i = typeof require == "function" && require;
+    for (var o = 0; o < r.length; o++)
+      s(r[o]);
+    return s;
+  })({
+    1: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ('value' in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          s = e("./Pipeline"),
-          u = r(s),
-          a = function() {
-            function e() {
-              o(this, e);
-              var n = this;
-              n._msgId = 0, n._subscriptions = {}, n._responseTimeOut = 3e3, n._responseCallbacks = {}, n._pipeline = new u["default"](function(e) {
-                console.log("PIPELINE-ERROR: ", JSON.stringify(e));
-              }), n._registerExternalListener();
-            }
-            return i(e, [{
-              key: "addListener",
-              value: function(e, n) {
-                var t = this,
-                    r = new l(t._subscriptions, e, n),
-                    o = t._subscriptions[e];
-                return o || (o = [], t._subscriptions[e] = o), o.push(r), r;
-              }
-            }, {
-              key: "addResponseListener",
-              value: function(e, n, t) {
-                this._responseCallbacks[e + n] = t;
-              }
-            }, {
-              key: "removeResponseListener",
-              value: function(e, n) {
-                delete this._responseCallbacks[e + n];
-              }
-            }, {
-              key: "removeAllListenersOf",
-              value: function(e) {
-                delete this._subscriptions[e];
-              }
-            }, {
-              key: "postMessage",
-              value: function(e, n) {
-                var t = this;
-                return e.id && 0 !== e.id || (t._msgId++, e.id = t._msgId), t._pipeline.process(e, function(e) {
-                  if (n && !function() {
-                    var r = e.from + e.id;
-                    t._responseCallbacks[r] = n, setTimeout(function() {
-                      var n = t._responseCallbacks[r];
-                      if (delete t._responseCallbacks[r], n) {
-                        var o = {
-                          id: e.id,
-                          type: "response",
-                          body: {
-                            code: "error",
-                            desc: "Response timeout!"
-                          }
-                        };
-                        n(o);
-                      }
-                    }, t._responseTimeOut);
-                  }(), !t._onResponse(e)) {
-                    var r = t._subscriptions[e.to];
-                    r ? t._publishOn(r, e) : t._onPostMessage(e);
-                  }
-                }), e.id;
-              }
-            }, {
-              key: "bind",
-              value: function(e, n, t) {
-                var r = this,
-                    o = this,
-                    i = o.addListener(e, function(e) {
-                      t.postMessage(e);
-                    }),
-                    s = t.addListener(n, function(e) {
-                      o.postMessage(e);
-                    });
-                return {
-                  thisListener: i,
-                  targetListener: s,
-                  unbind: function() {
-                    r.thisListener.remove(), r.targetListener.remove();
-                  }
-                };
-              }
-            }, {
-              key: "_publishOn",
-              value: function(e, n) {
-                e.forEach(function(e) {
-                  e._callback(n);
-                });
-              }
-            }, {
-              key: "_onResponse",
-              value: function(e) {
-                var n = this;
-                if ("response" === e.type) {
-                  var t = e.to + e.id,
-                      r = n._responseCallbacks[t];
-                  if (delete n._responseCallbacks[t], r)
-                    return r(e), !0;
-                }
-                return !1;
-              }
-            }, {
-              key: "_onMessage",
-              value: function(e) {
-                var n = this;
-                if (!n._onResponse(e)) {
-                  var t = n._subscriptions[e.to];
-                  t ? n._publishOn(t, e) : (t = n._subscriptions["*"], t && n._publishOn(t, e));
-                }
-              }
-            }, {
-              key: "_onPostMessage",
-              value: function(e) {}
-            }, {
-              key: "_registerExternalListener",
-              value: function() {}
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
-            }]), e;
-          }(),
-          l = function() {
-            function e(n, t, r) {
-              o(this, e);
-              var i = this;
-              i._subscriptions = n, i._url = t, i._callback = r;
-            }
-            return i(e, [{
-              key: "remove",
-              value: function() {
-                var e = this,
-                    n = e._subscriptions[e._url];
-                if (n) {
-                  var t = n.indexOf(e);
-                  n.splice(t, 1), 0 === n.length && delete e._subscriptions[e._url];
-                }
-              }
-            }, {
-              key: "url",
-              get: function() {
-                return this._url;
-              }
-            }]), e;
-          }();
-      t["default"] = a, n.exports = t["default"];
-    }, {"./Pipeline": 2}],
-    2: [function(e, n, t) {
-      "use strict";
-      function r(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
+      })();
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var o = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
-          }
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError('Cannot call a class as a function');
         }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
-        };
-      }(),
-          i = function() {
-            function e(n) {
-              r(this, e);
-              var t = this;
-              t.handlers = [], t.onFail = n;
-            }
-            return o(e, [{
-              key: "process",
-              value: function(e, n) {
-                var t = this;
-                if (t.handlers.length > 0) {
-                  var r = new u(t.handlers);
-                  r.next(new s(t, r, e, n));
-                } else
-                  n(e);
-              }
-            }]), e;
-          }(),
-          s = function() {
-            function e(n, t, o, i) {
-              r(this, e);
-              var s = this;
-              s._inStop = !1, s._pipeline = n, s._iter = t, s._msg = o, s._onDeliver = i;
-            }
-            return o(e, [{
-              key: "next",
-              value: function() {
-                var e = this;
-                e._inStop || (e._iter.hasNext ? e._iter.next(e) : e._onDeliver(e._msg));
-              }
-            }, {
-              key: "deliver",
-              value: function() {
-                var e = this;
-                e._inStop || (e._inStop = !0, e._onDeliver(e._msg));
-              }
-            }, {
-              key: "fail",
-              value: function(e) {
-                var n = this;
-                n._inStop || (n._inStop = !0, n._pipeline.onFail && n._pipeline.onFail(e));
-              }
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
-            }, {
-              key: "msg",
-              get: function() {
-                return this._msg;
-              },
-              set: function(e) {
-                this._msg = e;
-              }
-            }]), e;
-          }(),
-          u = function() {
-            function e(n) {
-              r(this, e), this._index = -1, this._array = n;
-            }
-            return o(e, [{
-              key: "hasNext",
-              get: function() {
-                return this._index < this._array.length - 1;
-              }
-            }, {
-              key: "next",
-              get: function() {
-                return this._index++, this._array[this._index];
-              }
-            }]), e;
-          }();
-      t["default"] = i, n.exports = t["default"];
-    }, {}],
-    3: [function(e, n, t) {
-      "use strict";
-      function r(e) {
-        return e && e.__esModule ? e : {"default": e};
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var o = e("./sandbox/Sandbox"),
-          i = r(o),
-          s = e("./sandbox/SandboxRegistry"),
-          u = r(s);
-      t.Sandbox = i["default"], t.SandboxRegistry = u["default"];
-    }, {
-      "./sandbox/Sandbox": 4,
-      "./sandbox/SandboxRegistry": 5
-    }],
-    4: [function(e, n, t) {
-      "use strict";
-      function r(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function o(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      function i(e, n) {
-        if ("function" != typeof n && null !== n)
-          throw new TypeError("Super expression must either be null or a function, not " + typeof n);
-        e.prototype = Object.create(n && n.prototype, {constructor: {
-            value: e,
-            enumerable: !1,
-            writable: !0,
-            configurable: !0
-          }}), n && (Object.setPrototypeOf ? Object.setPrototypeOf(e, n) : e.__proto__ = n);
-      }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var s = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
-          }
+      var _Pipeline = require('./Pipeline');
+      var _Pipeline2 = _interopRequireDefault(_Pipeline);
+      var MiniBus = (function() {
+        function MiniBus() {
+          _classCallCheck(this, MiniBus);
+          var _this = this;
+          _this._msgId = 0;
+          _this._subscriptions = {};
+          _this._responseTimeOut = 3000;
+          _this._responseCallbacks = {};
+          _this._pipeline = new _Pipeline2['default'](function(error) {
+            console.log('PIPELINE-ERROR: ', JSON.stringify(error));
+          });
+          _this._registerExternalListener();
         }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
-        };
-      }(),
-          u = function(e, n, t) {
-            for (var r = !0; r; ) {
-              var o = e,
-                  i = n,
-                  s = t;
-              r = !1, null === o && (o = Function.prototype);
-              var u = Object.getOwnPropertyDescriptor(o, i);
-              if (void 0 !== u) {
-                if ("value" in u)
-                  return u.value;
-                var a = u.get;
-                if (void 0 === a)
-                  return;
-                return a.call(s);
-              }
-              var l = Object.getPrototypeOf(o);
-              if (null === l)
-                return;
-              e = l, n = i, t = s, r = !0, u = l = void 0;
+        _createClass(MiniBus, [{
+          key: 'addListener',
+          value: function addListener(url, listener) {
+            var _this = this;
+            var item = new MsgListener(_this._subscriptions, url, listener);
+            var itemList = _this._subscriptions[url];
+            if (!itemList) {
+              itemList = [];
+              _this._subscriptions[url] = itemList;
             }
-          },
-          a = e("../sandbox/SandboxRegistry"),
-          l = r(a),
-          c = e("../bus/MiniBus"),
-          f = r(c),
-          d = function(e) {
-            function n() {
-              o(this, n), u(Object.getPrototypeOf(n.prototype), "constructor", this).call(this);
+            itemList.push(item);
+            return item;
+          }
+        }, {
+          key: 'addResponseListener',
+          value: function addResponseListener(url, msgId, responseListener) {
+            this._responseCallbacks[url + msgId] = responseListener;
+          }
+        }, {
+          key: 'removeResponseListener',
+          value: function removeResponseListener(url, msgId) {
+            delete this._responseCallbacks[url + msgId];
+          }
+        }, {
+          key: 'removeAllListenersOf',
+          value: function removeAllListenersOf(url) {
+            delete this._subscriptions[url];
+          }
+        }, {
+          key: 'postMessage',
+          value: function postMessage(inMsg, responseCallback) {
+            var _this = this;
+            if (!inMsg.id || inMsg.id === 0) {
+              _this._msgId++;
+              inMsg.id = _this._msgId;
             }
-            return i(n, e), s(n, [{
-              key: "deployComponent",
-              value: function(e, n, t) {
-                var r = this;
-                return new Promise(function(o, i) {
-                  var s = {
-                    type: "create",
-                    from: l["default"].ExternalDeployAddress,
-                    to: l["default"].InternalDeployAddress,
-                    body: {
-                      url: n,
-                      sourceCode: e,
-                      config: t
+            _this._pipeline.process(inMsg, function(msg) {
+              if (responseCallback) {
+                (function() {
+                  var responseId = msg.from + msg.id;
+                  _this._responseCallbacks[responseId] = responseCallback;
+                  setTimeout(function() {
+                    var responseFun = _this._responseCallbacks[responseId];
+                    delete _this._responseCallbacks[responseId];
+                    if (responseFun) {
+                      var errorMsg = {
+                        id: msg.id,
+                        type: 'response',
+                        body: {
+                          code: 'error',
+                          desc: 'Response timeout!'
+                        }
+                      };
+                      responseFun(errorMsg);
                     }
-                  };
-                  r.postMessage(s, function(e) {
-                    200 === e.body.code ? o("deployed") : i(e.body.desc);
-                  });
-                });
+                  }, _this._responseTimeOut);
+                })();
               }
-            }, {
-              key: "removeComponent",
-              value: function(e) {
-                var n = this;
-                return new Promise(function(t, r) {
-                  var o = {
-                    type: "delete",
-                    from: l["default"].ExternalDeployAddress,
-                    to: l["default"].InternalDeployAddress,
-                    body: {url: e}
-                  };
-                  n.postMessage(o, function(e) {
-                    200 === e.body.code ? t("undeployed") : r(e.body.desc);
-                  });
-                });
+              if (!_this._onResponse(msg)) {
+                var itemList = _this._subscriptions[msg.to];
+                if (itemList) {
+                  _this._publishOn(itemList, msg);
+                } else {
+                  _this._onPostMessage(msg);
+                }
               }
-            }]), n;
-          }(f["default"]);
-      t["default"] = d, n.exports = t["default"];
-    }, {
-      "../bus/MiniBus": 1,
-      "../sandbox/SandboxRegistry": 5
-    }],
-    5: [function(e, n, t) {
+            });
+            return inMsg.id;
+          }
+        }, {
+          key: 'bind',
+          value: function bind(outUrl, inUrl, target) {
+            var _this2 = this;
+            var _this = this;
+            var thisListn = _this.addListener(outUrl, function(msg) {
+              target.postMessage(msg);
+            });
+            var targetListn = target.addListener(inUrl, function(msg) {
+              _this.postMessage(msg);
+            });
+            return {
+              thisListener: thisListn,
+              targetListener: targetListn,
+              unbind: function unbind() {
+                _this2.thisListener.remove();
+                _this2.targetListener.remove();
+              }
+            };
+          }
+        }, {
+          key: '_publishOn',
+          value: function _publishOn(itemList, msg) {
+            itemList.forEach(function(sub) {
+              sub._callback(msg);
+            });
+          }
+        }, {
+          key: '_onResponse',
+          value: function _onResponse(msg) {
+            var _this = this;
+            if (msg.type === 'response') {
+              var responseId = msg.to + msg.id;
+              var responseFun = _this._responseCallbacks[responseId];
+              delete _this._responseCallbacks[responseId];
+              if (responseFun) {
+                responseFun(msg);
+                return true;
+              }
+            }
+            return false;
+          }
+        }, {
+          key: '_onMessage',
+          value: function _onMessage(msg) {
+            var _this = this;
+            if (!_this._onResponse(msg)) {
+              var itemList = _this._subscriptions[msg.to];
+              if (itemList) {
+                _this._publishOn(itemList, msg);
+              } else {
+                itemList = _this._subscriptions['*'];
+                if (itemList) {
+                  _this._publishOn(itemList, msg);
+                }
+              }
+            }
+          }
+        }, {
+          key: '_onPostMessage',
+          value: function _onPostMessage(msg) {}
+        }, {
+          key: '_registerExternalListener',
+          value: function _registerExternalListener() {}
+        }, {
+          key: 'pipeline',
+          get: function get() {
+            return this._pipeline;
+          }
+        }]);
+        return MiniBus;
+      })();
+      var MsgListener = (function() {
+        function MsgListener(subscriptions, url, callback) {
+          _classCallCheck(this, MsgListener);
+          var _this = this;
+          _this._subscriptions = subscriptions;
+          _this._url = url;
+          _this._callback = callback;
+        }
+        _createClass(MsgListener, [{
+          key: 'remove',
+          value: function remove() {
+            var _this = this;
+            var subs = _this._subscriptions[_this._url];
+            if (subs) {
+              var index = subs.indexOf(_this);
+              subs.splice(index, 1);
+              if (subs.length === 0) {
+                delete _this._subscriptions[_this._url];
+              }
+            }
+          }
+        }, {
+          key: 'url',
+          get: function get() {
+            return this._url;
+          }
+        }]);
+        return MsgListener;
+      })();
+      exports['default'] = MiniBus;
+      module.exports = exports['default'];
+    }, {"./Pipeline": 2}],
+    2: [function(require, module, exports) {
       "use strict";
-      function r(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var o = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+      Object.defineProperty(exports, "__esModule", {value: true});
+      var _createClass = (function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
           }
         }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
         };
-      }(),
-          i = function() {
-            function e(n) {
-              r(this, e);
-              var t = this;
-              t._bus = n, t._components = {}, n.addListener(e.InternalDeployAddress, function(e) {
-                switch (e.type) {
-                  case "create":
-                    t._onDeploy(e);
-                    break;
-                  case "delete":
-                    t._onRemove(e);
-                }
-              });
+      })();
+      function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      }
+      var Pipeline = (function() {
+        function Pipeline(_onFail) {
+          _classCallCheck(this, Pipeline);
+          var _this = this;
+          _this.handlers = [];
+          _this.onFail = _onFail;
+        }
+        _createClass(Pipeline, [{
+          key: "process",
+          value: function process(msg, onDeliver) {
+            var _this = this;
+            if (_this.handlers.length > 0) {
+              var iter = new Iterator(_this.handlers);
+              iter.next(new PipeContext(_this, iter, msg, onDeliver));
+            } else {
+              onDeliver(msg);
             }
-            return o(e, [{
-              key: "_responseMsg",
-              value: function(n, t, r) {
-                var o = {
-                  id: n.id,
-                  type: "response",
-                  from: e.InternalDeployAddress,
-                  to: e.ExternalDeployAddress
-                },
-                    i = {};
-                return t && (i.code = t), r && (i.desc = r), o.body = i, o;
+          }
+        }]);
+        return Pipeline;
+      })();
+      var PipeContext = (function() {
+        function PipeContext(pipeline, iter, msg, onDeliver) {
+          _classCallCheck(this, PipeContext);
+          var _this = this;
+          _this._inStop = false;
+          _this._pipeline = pipeline;
+          _this._iter = iter;
+          _this._msg = msg;
+          _this._onDeliver = onDeliver;
+        }
+        _createClass(PipeContext, [{
+          key: "next",
+          value: function next() {
+            var _this = this;
+            if (!_this._inStop) {
+              if (_this._iter.hasNext) {
+                _this._iter.next(_this);
+              } else {
+                _this._onDeliver(_this._msg);
               }
-            }, {
-              key: "_onDeploy",
-              value: function(e) {
-                var n = this,
-                    t = e.body.config,
-                    r = e.body.url,
-                    o = e.body.sourceCode,
-                    i = void 0,
-                    s = void 0;
-                if (n._components.hasOwnProperty(r))
-                  i = 500, s = "Instance " + r + " already exist!";
-                else
-                  try {
-                    n._components[r] = n._create(r, o, t), i = 200;
-                  } catch (u) {
-                    i = 500, s = u;
-                  }
-                var a = n._responseMsg(e, i, s);
-                n._bus.postMessage(a);
+            }
+          }
+        }, {
+          key: "deliver",
+          value: function deliver() {
+            var _this = this;
+            if (!_this._inStop) {
+              _this._inStop = true;
+              _this._onDeliver(_this._msg);
+            }
+          }
+        }, {
+          key: "fail",
+          value: function fail(error) {
+            var _this = this;
+            if (!_this._inStop) {
+              _this._inStop = true;
+              if (_this._pipeline.onFail) {
+                _this._pipeline.onFail(error);
               }
-            }, {
-              key: "_onRemove",
-              value: function(e) {
-                var n = this,
-                    t = e.body.url,
-                    r = void 0,
-                    o = void 0;
-                n._components.hasOwnProperty(t) ? (delete n._components[t], n._bus.removeAllListenersOf(t), r = 200) : (r = 500, o = "Instance " + t + " doesn't exist!");
-                var i = n._responseMsg(e, r, o);
-                n._bus.postMessage(i);
-              }
-            }, {
-              key: "_create",
-              value: function(e, n, t) {}
-            }, {
-              key: "components",
-              get: function() {
-                return this._components;
-              }
-            }]), e;
-          }();
-      i.ExternalDeployAddress = "sandbox://external", i.InternalDeployAddress = "sandbox://internal", t["default"] = i, n.exports = t["default"];
-    }, {}]
+            }
+          }
+        }, {
+          key: "pipeline",
+          get: function get() {
+            return this._pipeline;
+          }
+        }, {
+          key: "msg",
+          get: function get() {
+            return this._msg;
+          },
+          set: function set(inMsg) {
+            this._msg = inMsg;
+          }
+        }]);
+        return PipeContext;
+      })();
+      var Iterator = (function() {
+        function Iterator(array) {
+          _classCallCheck(this, Iterator);
+          this._index = -1;
+          this._array = array;
+        }
+        _createClass(Iterator, [{
+          key: "hasNext",
+          get: function get() {
+            return this._index < this._array.length - 1;
+          }
+        }, {
+          key: "next",
+          get: function get() {
+            this._index++;
+            return this._array[this._index];
+          }
+        }]);
+        return Iterator;
+      })();
+      exports["default"] = Pipeline;
+      module.exports = exports["default"];
+    }, {}],
+    3: [function(require, module, exports) {
+      'use strict';
+      Object.defineProperty(exports, '__esModule', {value: true});
+      function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : {'default': obj};
+      }
+      var _busMiniBus = require('./bus/MiniBus');
+      var _busMiniBus2 = _interopRequireDefault(_busMiniBus);
+      exports.MiniBus = _busMiniBus2['default'];
+    }, {"./bus/MiniBus": 1}]
   }, {}, [3])(3);
 });
 
@@ -1489,29 +1760,18 @@ _removeDefine();
 $__System.register('1', ['2', '3'], function (_export) {
     'use strict';
 
-    var MiniBus, SandboxRegistry;
+    var SandboxRegistry, MiniBus;
     return {
-        setters: [function (_) {
-            MiniBus = _.MiniBus;
-        }, function (_2) {
+        setters: [function (_2) {
             SandboxRegistry = _2.SandboxRegistry;
+        }, function (_) {
+            MiniBus = _.MiniBus;
         }],
         execute: function () {
 
             self._miniBus = new MiniBus();
             self._miniBus._onPostMessage = function (msg) {
-                var response = {
-                    body: {
-                        code: msg.body.code,
-                        desc: msg.body.desc ? msg.body.desc.toString() : null
-                    },
-                    from: msg.from,
-                    to: msg.to,
-                    id: msg.id,
-                    type: msg.type
-                };
-
-                self.postMessage(response);
+                self.postMessage(msg);
             };
             self.addEventListener('message', function (event) {
                 self._miniBus._onMessage(event.data);

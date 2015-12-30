@@ -1,31 +1,15 @@
-import SandboxIframe from './SandboxIframe';
-import SandboxApp from './SandboxApp';
+import { create as createApp } from './ContextApp';
+import { create as createIframe } from './iframe';
 
-//TODO: notify iframe loaded, ask for resources url
-let core = new SandboxIframe('../dist/context-core.js');
-let app = new SandboxApp();
-
-core.addListener('*', function(e){
-    console.log('CORE->RUNTIMESTUB: ' + JSON.stringify(e));
-    if(e.to === 'sandboxApp:deploy'){
-        app.deployComponent(e.data.body.sourceCode, e.data.body.url, e.data.body.config)
-            .then((response)=>core.postMessage({to:'core:deployResponse', body:{"response": response}}));
-        return;
-    }
-    app.postMessage(e);
-});
-
-app.addListener('*', function(e){
-    console.log('RUNTIMESTUB->CORE: ' + JSON.stringify(e));
-    core.postMessage(e);
-});
+var iframe = createIframe('http://127.0.0.1:8080/dist/index.html');
+createApp(iframe);
 
 window.rethink = {
     requireHyperty: (hypertyDescriptor)=>{
-        core.postMessage({to:'runtime:loadHyperty', body:{descriptor: hypertyDescriptor}})
+        iframe.contentWindow.postMessage({to:'runtime:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*')
     },
 
     requireProtostub: (domain)=>{
-        core.postMessage({to:'runtime:loadStub', body:{"domain": domain}})
+        iframe.contentWindow.postMessage({to:'runtime:loadStub', body:{"domain": domain}}, '*')
     },
 };
