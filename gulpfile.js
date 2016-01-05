@@ -53,7 +53,7 @@ gulp.task('build-hyperties', function() {
   function rebundle(filename) {
 
     filename.forEach(function(filename) {
-      var bundler = browserify('./src/hyperties/' + filename + '.js', {
+      var bundler = browserify('./resources/' + filename + '.js', {
         standalone: filename,
         debug: true}).transform(babel);
       console.log('bundle hyperty', filename);
@@ -62,13 +62,13 @@ gulp.task('build-hyperties', function() {
           console.error(err);
           this.emit('end');
         })
-        .pipe(source(filename + '.js'))
-        .pipe(gulp.dest('./dist'));
+        .pipe(source(filename + '.ES5.js'))
+        .pipe(gulp.dest('./resources'));
     });
 
   }
 
-  rebundle(['HypertyHello']);
+  rebundle(['HelloHyperty']);
 
 });
 
