@@ -1,5 +1,5 @@
-import { MiniBus } from 'runtime-core/dist/minibus';
-import { SandboxRegistry } from 'runtime-core/dist/sandbox';
+import MiniBus from 'runtime-core/dist/minibus';
+import {Sandbox, SandboxRegistry} from 'runtime-core/dist/sandbox';
 
 function create(iframe){
     window._miniBus = new MiniBus();

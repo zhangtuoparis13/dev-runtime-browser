@@ -1,4 +1,4 @@
-import {RuntimeUA} from 'runtime-core/dist/runtime-core';
+import RuntimeUA from 'runtime-core/dist/runtimeUA';
 import SandboxFactory from './SandboxFactory';
 
 function returnHyperty(source, hyperty){
