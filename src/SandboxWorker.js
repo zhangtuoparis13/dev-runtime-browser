@@ -1,8 +1,8 @@
-import { Sandbox } from 'runtime-core';
+import {Sandbox, SandboxRegistry} from 'runtime-core/dist/sandbox';
 
 export default class SandboxWorker extends Sandbox{
    constructor(script){
-     super();
+     super(script);
      if(!!Worker){
          this._worker = new Worker(script);
          this._worker.addEventListener('message', function(e){

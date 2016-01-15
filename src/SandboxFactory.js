@@ -1,6 +1,5 @@
 import SandboxWorker from './SandboxWorker';
-import SandboxIframe from './SandboxIframe';
-import SandboxAppStub from './SandboxAppStub';
+import SandboxApp from './SandboxApp';
 
 //TODO: resources url dependency
 function createSandbox(){
@@ -8,7 +7,7 @@ function createSandbox(){
 }
 
 function createAppSandbox(){
-    return SandboxAppStub;
+    return new SandboxApp();
 }
 
 export default { createSandbox, createAppSandbox };

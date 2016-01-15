@@ -28,24 +28,23 @@ var pkg = require('./package.json');
 
 gulp.task('dist', function() {
 
-  var bundler = browserify('./src/runtime-core.js', {
-    standalone: 'runtime-core', debug: false}).transform(babel);
+  var bundler = browserify('./src/ContextServiceProvider.js', {
+    standalone: 'context-service', debug: false}).transform(babel);
 
   function rebundle() {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function(err) {
         console.error(err);
         this.emit('end');
       })
-      .pipe(source('runtime-core.js'))
+      .pipe(source('context-service.js'))
       .pipe(buffer())
       .pipe(uglify())
-      .pipe(insert.prepend('// Runtime User Agent \n\n// version: {{version}}\n\n'))
       .pipe(replace('{{version}}', pkg.version))
       .pipe(gulp.dest('./dist'));
   }
 
-  rebundle();
+  return rebundle();
 
 });
 
@@ -54,7 +53,7 @@ gulp.task('build-hyperties', function() {
   function rebundle(filename) {
 
     filename.forEach(function(filename) {
-      var bundler = browserify('./src/hyperties/' + filename + '.js', {
+      var bundler = browserify('./resources/' + filename + '.js', {
         standalone: filename,
         debug: true}).transform(babel);
       console.log('bundle hyperty', filename);
@@ -63,13 +62,13 @@ gulp.task('build-hyperties', function() {
           console.error(err);
           this.emit('end');
         })
-        .pipe(source(filename + '.js'))
-        .pipe(gulp.dest('./dist'));
+        .pipe(source(filename + '.ES5.js'))
+        .pipe(gulp.dest('./resources'));
     });
 
   }
 
-  rebundle(['HypertyHello']);
+  rebundle(['HelloHyperty']);
 
 });
 

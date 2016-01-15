@@ -1,31 +1,24 @@
-import SandboxIframe from './SandboxIframe';
-import SandboxApp from './SandboxApp';
+import app from './ContextApp';
+import { create as createIframe } from './iframe';
 
-//TODO: notify iframe loaded, ask for resources url
-let core = new SandboxIframe('../dist/context-core.js');
-let app = new SandboxApp();
-
-core.addListener('*', function(e){
-    console.log('CORE->RUNTIMESTUB: ' + JSON.stringify(e));
-    if(e.to === 'sandboxApp:deploy'){
-        app.deployComponent(e.data.body.sourceCode, e.data.body.url, e.data.body.config)
-            .then((response)=>core.postMessage({to:'core:deployResponse', body:{"response": response}}));
-        return;
-    }
-    app.postMessage(e);
-});
-
-app.addListener('*', function(e){
-    console.log('RUNTIMESTUB->CORE: ' + JSON.stringify(e));
-    core.postMessage(e);
-});
+var iframe = createIframe('http://127.0.0.1:8080/dist/index.html');
+app.create(iframe);
 
 window.rethink = {
     requireHyperty: (hypertyDescriptor)=>{
-        core.postMessage({to:'runtime:loadHyperty', body:{descriptor: hypertyDescriptor}})
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(app.getHyperty(e.data.body.runtimeHypertyURL));
+                }
+            };
+            window.addEventListener('message', loaded);                     
+            iframe.contentWindow.postMessage({to:'core:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*');
+        });
     },
 
     requireProtostub: (domain)=>{
-        core.postMessage({to:'runtime:loadStub', body:{"domain": domain}})
+        iframe.contentWindow.postMessage({to:'core:loadStub', body:{"domain": domain}}, '*')
     },
 };

@@ -1,24 +1,22 @@
-import { Sandbox } from 'runtime-core';
-import { MiniBus } from 'runtime-core';
-import { SandboxRegistry } from 'runtime-core';
+import {Sandbox, SandboxRegistry} from 'runtime-core/dist/sandbox';
+import MiniBus from 'runtime-core/dist/minibus';
 
 export default class SandboxApp extends Sandbox{
    constructor(){
      super();
 
-     this._miniBus = new MiniBus();
-     this._miniBus._onPostMessage = function(msg){
-         this._onMessage(msg);
-     };
+     window.addEventListener('message', function(e){
+         if(!!!this.origin)
+            this.origin = e.source;
 
-     this._registry = new SandboxRegistry(this._miniBus);
-     this._registry._create = function(url, sourceCode, config){
-         let activate = eval(sourceCode);
-         return activate(url, this._miniBus, config);
-     };
+         if(e.data.to.startsWith('core:'))
+             return;
+
+         this._onMessage(e.data);
+     }.bind(this));
    }
 
    _onPostMessage(msg){
-       this._miniBus._onMessage(msg);
+       this.origin.postMessage(msg, '*');
    }
 }

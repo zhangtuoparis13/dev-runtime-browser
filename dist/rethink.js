@@ -669,2315 +669,895 @@
 })(typeof self != 'undefined' ? self : global);
 
 "bundle";
-$__System.register('2', ['3', '4', '5', '6', '7'], function (_export) {
-    var Sandbox, MiniBus, SandboxRegistry, _get, _inherits, _createClass, _classCallCheck, SandboxApp;
+$__System.register('2', [], function (_export) {
+    'use strict';
+
+    _export('create', create);
+
+    function create(src) {
+        var iframe = document.createElement('iframe');
+        iframe.setAttribute('id', 'rethink');
+        iframe.setAttribute('seamless', '');
+        iframe.setAttribute('src', src);
+        iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin allow-popups');
+        iframe.style.display = 'none';
+        document.querySelector('body').appendChild(iframe);
+
+        return iframe;
+    }
 
     return {
-        setters: [function (_5) {
-            Sandbox = _5.Sandbox;
-            MiniBus = _5.MiniBus;
-            SandboxRegistry = _5.SandboxRegistry;
+        setters: [],
+        execute: function () {
+            ;
+        }
+    };
+});
+(function() {
+var _removeDefine = $__System.get("@@amd-helpers").createDefine();
+!function(e) {
+  if ("object" == typeof exports && "undefined" != typeof module)
+    module.exports = e();
+  else if ("function" == typeof define && define.amd)
+    define("3", [], e);
+  else {
+    var n;
+    n = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, n.sandbox = e();
+  }
+}(function() {
+  return function e(n, t, r) {
+    function o(s, u) {
+      if (!t[s]) {
+        if (!n[s]) {
+          var a = "function" == typeof require && require;
+          if (!u && a)
+            return a(s, !0);
+          if (i)
+            return i(s, !0);
+          var l = new Error("Cannot find module '" + s + "'");
+          throw l.code = "MODULE_NOT_FOUND", l;
+        }
+        var c = t[s] = {exports: {}};
+        n[s][0].call(c.exports, function(e) {
+          var t = n[s][1][e];
+          return o(t ? t : e);
+        }, c, c.exports, e, n, t, r);
+      }
+      return t[s].exports;
+    }
+    for (var i = "function" == typeof require && require,
+        s = 0; s < r.length; s++)
+      o(r[s]);
+    return o;
+  }({
+    1: [function(e, n, t) {
+      "use strict";
+      function r(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      function o(e, n) {
+        if (!(e instanceof n))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var i = function() {
+        function e(e, n) {
+          for (var t = 0; t < n.length; t++) {
+            var r = n[t];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+          }
+        }
+        return function(n, t, r) {
+          return t && e(n.prototype, t), r && e(n, r), n;
+        };
+      }(),
+          s = e("./Pipeline"),
+          u = r(s),
+          a = function() {
+            function e() {
+              o(this, e);
+              var n = this;
+              n._msgId = 0, n._subscriptions = {}, n._responseTimeOut = 3e3, n._responseCallbacks = {}, n._pipeline = new u["default"](function(e) {
+                console.log("PIPELINE-ERROR: ", JSON.stringify(e));
+              }), n._registerExternalListener();
+            }
+            return i(e, [{
+              key: "addListener",
+              value: function(e, n) {
+                var t = this,
+                    r = new l(t._subscriptions, e, n),
+                    o = t._subscriptions[e];
+                return o || (o = [], t._subscriptions[e] = o), o.push(r), r;
+              }
+            }, {
+              key: "addResponseListener",
+              value: function(e, n, t) {
+                this._responseCallbacks[e + n] = t;
+              }
+            }, {
+              key: "removeResponseListener",
+              value: function(e, n) {
+                delete this._responseCallbacks[e + n];
+              }
+            }, {
+              key: "removeAllListenersOf",
+              value: function(e) {
+                delete this._subscriptions[e];
+              }
+            }, {
+              key: "postMessage",
+              value: function(e, n) {
+                var t = this;
+                return e.id && 0 !== e.id || (t._msgId++, e.id = t._msgId), t._pipeline.process(e, function(e) {
+                  if (n && !function() {
+                    var r = e.from + e.id;
+                    t._responseCallbacks[r] = n, setTimeout(function() {
+                      var n = t._responseCallbacks[r];
+                      if (delete t._responseCallbacks[r], n) {
+                        var o = {
+                          id: e.id,
+                          type: "response",
+                          body: {
+                            code: "error",
+                            desc: "Response timeout!"
+                          }
+                        };
+                        n(o);
+                      }
+                    }, t._responseTimeOut);
+                  }(), !t._onResponse(e)) {
+                    var r = t._subscriptions[e.to];
+                    r ? t._publishOn(r, e) : t._onPostMessage(e);
+                  }
+                }), e.id;
+              }
+            }, {
+              key: "bind",
+              value: function(e, n, t) {
+                var r = this,
+                    o = this,
+                    i = o.addListener(e, function(e) {
+                      t.postMessage(e);
+                    }),
+                    s = t.addListener(n, function(e) {
+                      o.postMessage(e);
+                    });
+                return {
+                  thisListener: i,
+                  targetListener: s,
+                  unbind: function() {
+                    r.thisListener.remove(), r.targetListener.remove();
+                  }
+                };
+              }
+            }, {
+              key: "_publishOn",
+              value: function(e, n) {
+                e.forEach(function(e) {
+                  e._callback(n);
+                });
+              }
+            }, {
+              key: "_onResponse",
+              value: function(e) {
+                var n = this;
+                if ("response" === e.type) {
+                  var t = e.to + e.id,
+                      r = n._responseCallbacks[t];
+                  if (delete n._responseCallbacks[t], r)
+                    return r(e), !0;
+                }
+                return !1;
+              }
+            }, {
+              key: "_onMessage",
+              value: function(e) {
+                var n = this;
+                if (!n._onResponse(e)) {
+                  var t = n._subscriptions[e.to];
+                  t ? n._publishOn(t, e) : (t = n._subscriptions["*"], t && n._publishOn(t, e));
+                }
+              }
+            }, {
+              key: "_onPostMessage",
+              value: function(e) {}
+            }, {
+              key: "_registerExternalListener",
+              value: function() {}
+            }, {
+              key: "pipeline",
+              get: function() {
+                return this._pipeline;
+              }
+            }]), e;
+          }(),
+          l = function() {
+            function e(n, t, r) {
+              o(this, e);
+              var i = this;
+              i._subscriptions = n, i._url = t, i._callback = r;
+            }
+            return i(e, [{
+              key: "remove",
+              value: function() {
+                var e = this,
+                    n = e._subscriptions[e._url];
+                if (n) {
+                  var t = n.indexOf(e);
+                  n.splice(t, 1), 0 === n.length && delete e._subscriptions[e._url];
+                }
+              }
+            }, {
+              key: "url",
+              get: function() {
+                return this._url;
+              }
+            }]), e;
+          }();
+      t["default"] = a, n.exports = t["default"];
+    }, {"./Pipeline": 2}],
+    2: [function(e, n, t) {
+      "use strict";
+      function r(e, n) {
+        if (!(e instanceof n))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var o = function() {
+        function e(e, n) {
+          for (var t = 0; t < n.length; t++) {
+            var r = n[t];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+          }
+        }
+        return function(n, t, r) {
+          return t && e(n.prototype, t), r && e(n, r), n;
+        };
+      }(),
+          i = function() {
+            function e(n) {
+              r(this, e);
+              var t = this;
+              t.handlers = [], t.onFail = n;
+            }
+            return o(e, [{
+              key: "process",
+              value: function(e, n) {
+                var t = this;
+                if (t.handlers.length > 0) {
+                  var r = new u(t.handlers);
+                  r.next(new s(t, r, e, n));
+                } else
+                  n(e);
+              }
+            }]), e;
+          }(),
+          s = function() {
+            function e(n, t, o, i) {
+              r(this, e);
+              var s = this;
+              s._inStop = !1, s._pipeline = n, s._iter = t, s._msg = o, s._onDeliver = i;
+            }
+            return o(e, [{
+              key: "next",
+              value: function() {
+                var e = this;
+                e._inStop || (e._iter.hasNext ? e._iter.next(e) : e._onDeliver(e._msg));
+              }
+            }, {
+              key: "deliver",
+              value: function() {
+                var e = this;
+                e._inStop || (e._inStop = !0, e._onDeliver(e._msg));
+              }
+            }, {
+              key: "fail",
+              value: function(e) {
+                var n = this;
+                n._inStop || (n._inStop = !0, n._pipeline.onFail && n._pipeline.onFail(e));
+              }
+            }, {
+              key: "pipeline",
+              get: function() {
+                return this._pipeline;
+              }
+            }, {
+              key: "msg",
+              get: function() {
+                return this._msg;
+              },
+              set: function(e) {
+                this._msg = e;
+              }
+            }]), e;
+          }(),
+          u = function() {
+            function e(n) {
+              r(this, e), this._index = -1, this._array = n;
+            }
+            return o(e, [{
+              key: "hasNext",
+              get: function() {
+                return this._index < this._array.length - 1;
+              }
+            }, {
+              key: "next",
+              get: function() {
+                return this._index++, this._array[this._index];
+              }
+            }]), e;
+          }();
+      t["default"] = i, n.exports = t["default"];
+    }, {}],
+    3: [function(e, n, t) {
+      "use strict";
+      function r(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var o = e("./sandbox/Sandbox"),
+          i = r(o),
+          s = e("./sandbox/SandboxRegistry"),
+          u = r(s);
+      t.Sandbox = i["default"], t.SandboxRegistry = u["default"];
+    }, {
+      "./sandbox/Sandbox": 4,
+      "./sandbox/SandboxRegistry": 5
+    }],
+    4: [function(e, n, t) {
+      "use strict";
+      function r(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      function o(e, n) {
+        if (!(e instanceof n))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      function i(e, n) {
+        if ("function" != typeof n && null !== n)
+          throw new TypeError("Super expression must either be null or a function, not " + typeof n);
+        e.prototype = Object.create(n && n.prototype, {constructor: {
+            value: e,
+            enumerable: !1,
+            writable: !0,
+            configurable: !0
+          }}), n && (Object.setPrototypeOf ? Object.setPrototypeOf(e, n) : e.__proto__ = n);
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var s = function() {
+        function e(e, n) {
+          for (var t = 0; t < n.length; t++) {
+            var r = n[t];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+          }
+        }
+        return function(n, t, r) {
+          return t && e(n.prototype, t), r && e(n, r), n;
+        };
+      }(),
+          u = function(e, n, t) {
+            for (var r = !0; r; ) {
+              var o = e,
+                  i = n,
+                  s = t;
+              r = !1, null === o && (o = Function.prototype);
+              var u = Object.getOwnPropertyDescriptor(o, i);
+              if (void 0 !== u) {
+                if ("value" in u)
+                  return u.value;
+                var a = u.get;
+                if (void 0 === a)
+                  return;
+                return a.call(s);
+              }
+              var l = Object.getPrototypeOf(o);
+              if (null === l)
+                return;
+              e = l, n = i, t = s, r = !0, u = l = void 0;
+            }
+          },
+          a = e("../sandbox/SandboxRegistry"),
+          l = r(a),
+          c = e("../bus/MiniBus"),
+          f = r(c),
+          d = function(e) {
+            function n() {
+              o(this, n), u(Object.getPrototypeOf(n.prototype), "constructor", this).call(this);
+            }
+            return i(n, e), s(n, [{
+              key: "deployComponent",
+              value: function(e, n, t) {
+                var r = this;
+                return new Promise(function(o, i) {
+                  var s = {
+                    type: "create",
+                    from: l["default"].ExternalDeployAddress,
+                    to: l["default"].InternalDeployAddress,
+                    body: {
+                      url: n,
+                      sourceCode: e,
+                      config: t
+                    }
+                  };
+                  r.postMessage(s, function(e) {
+                    200 === e.body.code ? o("deployed") : i(e.body.desc);
+                  });
+                });
+              }
+            }, {
+              key: "removeComponent",
+              value: function(e) {
+                var n = this;
+                return new Promise(function(t, r) {
+                  var o = {
+                    type: "delete",
+                    from: l["default"].ExternalDeployAddress,
+                    to: l["default"].InternalDeployAddress,
+                    body: {url: e}
+                  };
+                  n.postMessage(o, function(e) {
+                    200 === e.body.code ? t("undeployed") : r(e.body.desc);
+                  });
+                });
+              }
+            }]), n;
+          }(f["default"]);
+      t["default"] = d, n.exports = t["default"];
+    }, {
+      "../bus/MiniBus": 1,
+      "../sandbox/SandboxRegistry": 5
+    }],
+    5: [function(e, n, t) {
+      "use strict";
+      function r(e, n) {
+        if (!(e instanceof n))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var o = function() {
+        function e(e, n) {
+          for (var t = 0; t < n.length; t++) {
+            var r = n[t];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+          }
+        }
+        return function(n, t, r) {
+          return t && e(n.prototype, t), r && e(n, r), n;
+        };
+      }(),
+          i = function() {
+            function e(n) {
+              r(this, e);
+              var t = this;
+              t._bus = n, t._components = {}, n.addListener(e.InternalDeployAddress, function(e) {
+                switch (e.type) {
+                  case "create":
+                    t._onDeploy(e);
+                    break;
+                  case "delete":
+                    t._onRemove(e);
+                }
+              });
+            }
+            return o(e, [{
+              key: "_responseMsg",
+              value: function(n, t, r) {
+                var o = {
+                  id: n.id,
+                  type: "response",
+                  from: e.InternalDeployAddress,
+                  to: e.ExternalDeployAddress
+                },
+                    i = {};
+                return t && (i.code = t), r && (i.desc = r), o.body = i, o;
+              }
+            }, {
+              key: "_onDeploy",
+              value: function(e) {
+                var n = this,
+                    t = e.body.config,
+                    r = e.body.url,
+                    o = e.body.sourceCode,
+                    i = void 0,
+                    s = void 0;
+                if (n._components.hasOwnProperty(r))
+                  i = 500, s = "Instance " + r + " already exist!";
+                else
+                  try {
+                    n._components[r] = n._create(r, o, t), i = 200;
+                  } catch (u) {
+                    i = 500, s = u;
+                  }
+                var a = n._responseMsg(e, i, s);
+                n._bus.postMessage(a);
+              }
+            }, {
+              key: "_onRemove",
+              value: function(e) {
+                var n = this,
+                    t = e.body.url,
+                    r = void 0,
+                    o = void 0;
+                n._components.hasOwnProperty(t) ? (delete n._components[t], n._bus.removeAllListenersOf(t), r = 200) : (r = 500, o = "Instance " + t + " doesn't exist!");
+                var i = n._responseMsg(e, r, o);
+                n._bus.postMessage(i);
+              }
+            }, {
+              key: "_create",
+              value: function(e, n, t) {}
+            }, {
+              key: "components",
+              get: function() {
+                return this._components;
+              }
+            }]), e;
+          }();
+      i.ExternalDeployAddress = "sandbox://external", i.InternalDeployAddress = "sandbox://internal", t["default"] = i, n.exports = t["default"];
+    }, {}]
+  }, {}, [3])(3);
+});
+
+_removeDefine();
+})();
+(function() {
+var _removeDefine = $__System.get("@@amd-helpers").createDefine();
+!function(e) {
+  if ("object" == typeof exports && "undefined" != typeof module)
+    module.exports = e();
+  else if ("function" == typeof define && define.amd)
+    define("4", [], e);
+  else {
+    var n;
+    n = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, n.MiniBus = e();
+  }
+}(function() {
+  return function e(n, t, i) {
+    function r(o, u) {
+      if (!t[o]) {
+        if (!n[o]) {
+          var a = "function" == typeof require && require;
+          if (!u && a)
+            return a(o, !0);
+          if (s)
+            return s(o, !0);
+          var l = new Error("Cannot find module '" + o + "'");
+          throw l.code = "MODULE_NOT_FOUND", l;
+        }
+        var f = t[o] = {exports: {}};
+        n[o][0].call(f.exports, function(e) {
+          var t = n[o][1][e];
+          return r(t ? t : e);
+        }, f, f.exports, e, n, t, i);
+      }
+      return t[o].exports;
+    }
+    for (var s = "function" == typeof require && require,
+        o = 0; o < i.length; o++)
+      r(i[o]);
+    return r;
+  }({
+    1: [function(e, n, t) {
+      "use strict";
+      function i(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      function r(e, n) {
+        if (!(e instanceof n))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var s = function() {
+        function e(e, n) {
+          for (var t = 0; t < n.length; t++) {
+            var i = n[t];
+            i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(e, i.key, i);
+          }
+        }
+        return function(n, t, i) {
+          return t && e(n.prototype, t), i && e(n, i), n;
+        };
+      }(),
+          o = e("./Pipeline"),
+          u = i(o),
+          a = function() {
+            function e() {
+              r(this, e);
+              var n = this;
+              n._msgId = 0, n._subscriptions = {}, n._responseTimeOut = 3e3, n._responseCallbacks = {}, n._pipeline = new u["default"](function(e) {
+                console.log("PIPELINE-ERROR: ", JSON.stringify(e));
+              }), n._registerExternalListener();
+            }
+            return s(e, [{
+              key: "addListener",
+              value: function(e, n) {
+                var t = this,
+                    i = new l(t._subscriptions, e, n),
+                    r = t._subscriptions[e];
+                return r || (r = [], t._subscriptions[e] = r), r.push(i), i;
+              }
+            }, {
+              key: "addResponseListener",
+              value: function(e, n, t) {
+                this._responseCallbacks[e + n] = t;
+              }
+            }, {
+              key: "removeResponseListener",
+              value: function(e, n) {
+                delete this._responseCallbacks[e + n];
+              }
+            }, {
+              key: "removeAllListenersOf",
+              value: function(e) {
+                delete this._subscriptions[e];
+              }
+            }, {
+              key: "postMessage",
+              value: function(e, n) {
+                var t = this;
+                return e.id && 0 !== e.id || (t._msgId++, e.id = t._msgId), t._pipeline.process(e, function(e) {
+                  if (n && !function() {
+                    var i = e.from + e.id;
+                    t._responseCallbacks[i] = n, setTimeout(function() {
+                      var n = t._responseCallbacks[i];
+                      if (delete t._responseCallbacks[i], n) {
+                        var r = {
+                          id: e.id,
+                          type: "response",
+                          body: {
+                            code: "error",
+                            desc: "Response timeout!"
+                          }
+                        };
+                        n(r);
+                      }
+                    }, t._responseTimeOut);
+                  }(), !t._onResponse(e)) {
+                    var i = t._subscriptions[e.to];
+                    i ? t._publishOn(i, e) : t._onPostMessage(e);
+                  }
+                }), e.id;
+              }
+            }, {
+              key: "bind",
+              value: function(e, n, t) {
+                var i = this,
+                    r = this,
+                    s = r.addListener(e, function(e) {
+                      t.postMessage(e);
+                    }),
+                    o = t.addListener(n, function(e) {
+                      r.postMessage(e);
+                    });
+                return {
+                  thisListener: s,
+                  targetListener: o,
+                  unbind: function() {
+                    i.thisListener.remove(), i.targetListener.remove();
+                  }
+                };
+              }
+            }, {
+              key: "_publishOn",
+              value: function(e, n) {
+                e.forEach(function(e) {
+                  e._callback(n);
+                });
+              }
+            }, {
+              key: "_onResponse",
+              value: function(e) {
+                var n = this;
+                if ("response" === e.type) {
+                  var t = e.to + e.id,
+                      i = n._responseCallbacks[t];
+                  if (delete n._responseCallbacks[t], i)
+                    return i(e), !0;
+                }
+                return !1;
+              }
+            }, {
+              key: "_onMessage",
+              value: function(e) {
+                var n = this;
+                if (!n._onResponse(e)) {
+                  var t = n._subscriptions[e.to];
+                  t ? n._publishOn(t, e) : (t = n._subscriptions["*"], t && n._publishOn(t, e));
+                }
+              }
+            }, {
+              key: "_onPostMessage",
+              value: function(e) {}
+            }, {
+              key: "_registerExternalListener",
+              value: function() {}
+            }, {
+              key: "pipeline",
+              get: function() {
+                return this._pipeline;
+              }
+            }]), e;
+          }(),
+          l = function() {
+            function e(n, t, i) {
+              r(this, e);
+              var s = this;
+              s._subscriptions = n, s._url = t, s._callback = i;
+            }
+            return s(e, [{
+              key: "remove",
+              value: function() {
+                var e = this,
+                    n = e._subscriptions[e._url];
+                if (n) {
+                  var t = n.indexOf(e);
+                  n.splice(t, 1), 0 === n.length && delete e._subscriptions[e._url];
+                }
+              }
+            }, {
+              key: "url",
+              get: function() {
+                return this._url;
+              }
+            }]), e;
+          }();
+      t["default"] = a, n.exports = t["default"];
+    }, {"./Pipeline": 2}],
+    2: [function(e, n, t) {
+      "use strict";
+      function i(e, n) {
+        if (!(e instanceof n))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var r = function() {
+        function e(e, n) {
+          for (var t = 0; t < n.length; t++) {
+            var i = n[t];
+            i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(e, i.key, i);
+          }
+        }
+        return function(n, t, i) {
+          return t && e(n.prototype, t), i && e(n, i), n;
+        };
+      }(),
+          s = function() {
+            function e(n) {
+              i(this, e);
+              var t = this;
+              t.handlers = [], t.onFail = n;
+            }
+            return r(e, [{
+              key: "process",
+              value: function(e, n) {
+                var t = this;
+                if (t.handlers.length > 0) {
+                  var i = new u(t.handlers);
+                  i.next(new o(t, i, e, n));
+                } else
+                  n(e);
+              }
+            }]), e;
+          }(),
+          o = function() {
+            function e(n, t, r, s) {
+              i(this, e);
+              var o = this;
+              o._inStop = !1, o._pipeline = n, o._iter = t, o._msg = r, o._onDeliver = s;
+            }
+            return r(e, [{
+              key: "next",
+              value: function() {
+                var e = this;
+                e._inStop || (e._iter.hasNext ? e._iter.next(e) : e._onDeliver(e._msg));
+              }
+            }, {
+              key: "deliver",
+              value: function() {
+                var e = this;
+                e._inStop || (e._inStop = !0, e._onDeliver(e._msg));
+              }
+            }, {
+              key: "fail",
+              value: function(e) {
+                var n = this;
+                n._inStop || (n._inStop = !0, n._pipeline.onFail && n._pipeline.onFail(e));
+              }
+            }, {
+              key: "pipeline",
+              get: function() {
+                return this._pipeline;
+              }
+            }, {
+              key: "msg",
+              get: function() {
+                return this._msg;
+              },
+              set: function(e) {
+                this._msg = e;
+              }
+            }]), e;
+          }(),
+          u = function() {
+            function e(n) {
+              i(this, e), this._index = -1, this._array = n;
+            }
+            return r(e, [{
+              key: "hasNext",
+              get: function() {
+                return this._index < this._array.length - 1;
+              }
+            }, {
+              key: "next",
+              get: function() {
+                return this._index++, this._array[this._index];
+              }
+            }]), e;
+          }();
+      t["default"] = s, n.exports = t["default"];
+    }, {}],
+    3: [function(e, n, t) {
+      "use strict";
+      function i(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      Object.defineProperty(t, "__esModule", {value: !0});
+      var r = e("./bus/MiniBus"),
+          s = i(r);
+      t["default"] = s["default"], n.exports = t["default"];
+    }, {"./bus/MiniBus": 1}]
+  }, {}, [3])(3);
+});
+
+_removeDefine();
+})();
+$__System.register('5', ['3', '4'], function (_export) {
+    'use strict';
+
+    var Sandbox, SandboxRegistry, MiniBus;
+
+    function create(iframe) {
+        window._miniBus = new MiniBus();
+        window._miniBus._onPostMessage = function (msg) {
+            iframe.contentWindow.postMessage(msg, '*');
+        };
+        window.addEventListener('message', function (event) {
+            if (event.data.to.startsWith('runtime:')) return;
+
+            window._miniBus._onMessage(event.data);
+        }, false);
+
+        window._registry = new SandboxRegistry(window._miniBus);
+        window._registry._create = function (url, sourceCode, config) {
+            eval(sourceCode);
+            return activate(url, window._miniBus, config);
+        };
+    }
+
+    function getHyperty(hypertyDescriptor) {
+        return window._registry.components[hypertyDescriptor];
+    }return {
+        setters: [function (_2) {
+            Sandbox = _2.Sandbox;
+            SandboxRegistry = _2.SandboxRegistry;
         }, function (_) {
-            _get = _['default'];
-        }, function (_2) {
-            _inherits = _2['default'];
-        }, function (_3) {
-            _createClass = _3['default'];
-        }, function (_4) {
-            _classCallCheck = _4['default'];
+            MiniBus = _['default'];
         }],
         execute: function () {
-            'use strict';
+            ;;
 
-            SandboxApp = (function (_Sandbox) {
-                _inherits(SandboxApp, _Sandbox);
-
-                function SandboxApp() {
-                    _classCallCheck(this, SandboxApp);
-
-                    _get(Object.getPrototypeOf(SandboxApp.prototype), 'constructor', this).call(this);
-
-                    this._miniBus = new MiniBus();
-                    this._miniBus._onPostMessage = function (msg) {
-                        this._onMessage(msg);
-                    };
-
-                    this._registry = new SandboxRegistry(this._miniBus);
-                    this._registry._create = function (url, sourceCode, config) {
-                        var activate = eval(sourceCode);
-                        return activate(url, this._miniBus, config);
-                    };
-                }
-
-                _createClass(SandboxApp, [{
-                    key: '_onPostMessage',
-                    value: function _onPostMessage(msg) {
-                        this._miniBus._onMessage(msg);
-                    }
-                }]);
-
-                return SandboxApp;
-            })(Sandbox);
-
-            _export('default', SandboxApp);
+            _export('default', { create: create, getHyperty: getHyperty });
         }
     };
 });
-$__System.register('8', ['6', '7'], function (_export) {
-  var _createClass, _classCallCheck, SandboxRegistry;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }],
-    execute: function () {
-      /**
-       * @author micaelpedrosa@gmail.com
-       * Base class to implement internal deploy manager of components.
-       */
-
-      // import MessageFactory from '../../resources/MessageFactory';
-
-      'use strict';
-
-      SandboxRegistry = (function () {
-        /* private
-        _components: <url: instance>
-        */
-
-        function SandboxRegistry(bus) {
-          _classCallCheck(this, SandboxRegistry);
-
-          var _this = this;
-
-          _this._bus = bus;
-          _this._components = {};
-
-          // Add Message Factory
-          // let messageFactory = new MessageFactory();
-          // _this.messageFactory = messageFactory;
-
-          bus.addListener(SandboxRegistry.InternalDeployAddress, function (msg) {
-            //console.log('SandboxRegistry-RCV: ', msg);
-            // let responseMsg = {
-            //   id: msg.id, type: 'response', from: SandboxRegistry.InternalDeployAddress, to: SandboxRegistry.ExternalDeployAddress
-            // };
-
-            switch (msg.type) {
-              case 'create':
-                _this._onDeploy(msg);break;
-              case 'delete':
-                _this._onRemove(msg);break;
-            }
-          });
-        }
-
-        _createClass(SandboxRegistry, [{
-          key: '_responseMsg',
-          value: function _responseMsg(msg, code, value) {
-
-            var _this = this;
-
-            // let messageFactory = _this.messageFactory;
-
-            var responseMsg = {
-              id: msg.id, type: 'response', from: SandboxRegistry.InternalDeployAddress, to: SandboxRegistry.ExternalDeployAddress
-            };
-
-            // Chanege the origin message, because the response;
-            // msg.from = SandboxRegistry.InternalDeployAddress;
-            // msg.to = SandboxRegistry.ExternalDeployAddress;
-
-            var body = {};
-            if (code) body.code = code;
-            if (value) body.desc = value;
-
-            responseMsg.body = body;
-
-            // return messageFactory.createResponse(msg, code, value);
-            return responseMsg;
-          }
-        }, {
-          key: '_onDeploy',
-          value: function _onDeploy(msg) {
-            var _this = this;
-            var config = msg.body.config;
-            var componentURL = msg.body.url;
-            var sourceCode = msg.body.sourceCode;
-            var responseCode = undefined;
-            var responseDesc = undefined;
-
-            if (!_this._components.hasOwnProperty(componentURL)) {
-              try {
-                _this._components[componentURL] = _this._create(componentURL, sourceCode, config);
-                responseCode = 200;
-              } catch (error) {
-                responseCode = 500;
-                responseDesc = error;
-              }
-            } else {
-              responseCode = 500;
-              responseDesc = 'Instance ' + componentURL + ' already exist!';
-            }
-
-            // Create response message with MessageFactory
-            var responseMsg = _this._responseMsg(msg, responseCode, responseDesc);
-            _this._bus.postMessage(responseMsg);
-          }
-        }, {
-          key: '_onRemove',
-          value: function _onRemove(msg) {
-            var _this = this;
-            var componentURL = msg.body.url;
-            var responseCode = undefined;
-            var responseDesc = undefined;
-
-            if (_this._components.hasOwnProperty(componentURL)) {
-              //remove component from the pool and all listeners
-              delete _this._components[componentURL];
-              _this._bus.removeAllListenersOf(componentURL);
-              responseCode = 200;
-            } else {
-              responseCode = 500;
-              responseDesc = 'Instance ' + componentURL + ' doesn\'t exist!';
-            }
-
-            var responseMsg = _this._responseMsg(msg, responseCode, responseDesc);
-
-            _this._bus.postMessage(responseMsg);
-          }
-
-          /**
-           * This method should be implemented by the internal sandbox code.
-           * @param  {ComponentURL} url URL used for the instance
-           * @param  {string} sourceCode Code of the component
-           * @param  {Config} config Configuration parameters
-           * @return {Object} Returns instance of the component or throw an error "throw 'error message'"
-           */
-        }, {
-          key: '_create',
-          value: function _create(url, sourceCode, config) {
-            //implementation specific
-            /* example code:
-              eval(sourceCode);
-              return activate(url, _this._bus, config);
-            */
-          }
-        }, {
-          key: 'components',
-          get: function get() {
-            return this._components;
-          }
-        }]);
-
-        return SandboxRegistry;
-      })();
-
-      SandboxRegistry.ExternalDeployAddress = 'sandbox://external';
-      SandboxRegistry.InternalDeployAddress = 'sandbox://internal';
-
-      _export('default', SandboxRegistry);
-    }
-  };
-});
-$__System.register('9', ['4', '5', '6', '7', '8', 'a', 'b'], function (_export) {
-  var _get, _inherits, _createClass, _classCallCheck, SandboxRegistry, _Promise, MiniBus, Sandbox;
-
-  return {
-    setters: [function (_) {
-      _get = _['default'];
-    }, function (_2) {
-      _inherits = _2['default'];
-    }, function (_3) {
-      _createClass = _3['default'];
-    }, function (_4) {
-      _classCallCheck = _4['default'];
-    }, function (_5) {
-      SandboxRegistry = _5['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }, function (_b) {
-      MiniBus = _b['default'];
-    }],
-    execute: function () {
-      // import MessageFactory from '../../resources/MessageFactory';
-
-      /**
-       * @author micaelpedrosa@gmail.com
-       * Base class to implement external sandbox component
-       */
-      'use strict';
-
-      Sandbox = (function (_MiniBus) {
-        _inherits(Sandbox, _MiniBus);
-
-        function Sandbox() {
-          _classCallCheck(this, Sandbox);
-
-          _get(Object.getPrototypeOf(Sandbox.prototype), 'constructor', this).call(this);
-
-          var _this = this;
-
-          // Add Message Factory
-          // let messageFactory = new MessageFactory();
-          // _this.messageFactory = messageFactory;
-        }
-
-        /**
-         * Deploy an instance of the component into the sandbox.
-         * @param  {string} componentSourceCode Component source code (Hyperty, ProtoStub, etc)
-         * @param  {URL} componentURL Hyperty, ProtoStub, or any other component address.
-         * @param  {Config} configuration Config parameters of the component
-         * @return {Promise<string>} return deployed if successful, or any other string with an error
-         */
-
-        _createClass(Sandbox, [{
-          key: 'deployComponent',
-          value: function deployComponent(componentSourceCode, componentURL, configuration) {
-
-            var _this = this;
-
-            // let messageFactory = _this.messageFactory;
-
-            return new _Promise(function (resolve, reject) {
-              //TODO: message format is not properly defined yet
-              var deployMessage = {
-                type: 'create', from: SandboxRegistry.ExternalDeployAddress, to: SandboxRegistry.InternalDeployAddress,
-                body: { url: componentURL, sourceCode: componentSourceCode, config: configuration }
-              };
-
-              // createMessageRequest(from, to, contextId, value, policy, idToken, accessToken, resource, signature)
-              // let deployMessage = messageFactory.createMessageRequest(SandboxRegistry.ExternalDeployAddress, SandboxRegistry.InternalDeployAddress, 'deploy', {url: componentURL, sourceCode: componentSourceCode, config: configuration});
-
-              //send message into the sandbox internals and wait for reply
-              _this.postMessage(deployMessage, function (reply) {
-                if (reply.body.code === 200) {
-                  //is this response complaint with the spec?
-                  resolve('deployed');
-                } else {
-                  reject(reply.body.desc);
-                }
-              });
-            });
-          }
-
-          /**
-           * Remove the instance of a previously deployed component.
-           * @param  {URL} componentURL Hyperty, ProtoStub, or any other component address.
-           * @return {Promise<string>} return undeployed if successful, or any other string with an error
-           */
-        }, {
-          key: 'removeComponent',
-          value: function removeComponent(componentURL) {
-            var _this = this;
-
-            return new _Promise(function (resolve, reject) {
-              //TODO: message format is not properly defined yet
-              var removeMessage = {
-                type: 'delete', from: SandboxRegistry.ExternalDeployAddress, to: SandboxRegistry.InternalDeployAddress,
-                body: { url: componentURL }
-              };
-
-              //send message into the sandbox internals and wait for reply
-              _this.postMessage(removeMessage, function (reply) {
-                if (reply.body.code === 200) {
-                  //is this response complaint with the spec?
-                  resolve('undeployed');
-                } else {
-                  reject(reply.body.desc);
-                }
-              });
-            });
-          }
-        }]);
-
-        return Sandbox;
-      })(MiniBus);
-
-      _export('default', Sandbox);
-    }
-  };
-});
-$__System.register('c', ['6', '7', 'a'], function (_export) {
-  var _createClass, _classCallCheck, _Promise, ObjectAllocation;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      ObjectAllocation = (function () {
-        /* private
-        _url: URL
-        _bus: MiniBus
-        */
-
-        /**
-         * Create an Object Allocation
-         * @param  {URL.URL}      url - url from who is sending the message
-         * @param  {MiniBus}      bus - MiniBus used for address allocation
-         */
-
-        function ObjectAllocation(url, bus) {
-          _classCallCheck(this, ObjectAllocation);
-
-          var _this = this;
-
-          _this._url = url;
-          _this._bus = bus;
-        }
-
-        /**
-         * get the URL value
-         * @return {string} The url value;
-         */
-
-        _createClass(ObjectAllocation, [{
-          key: 'create',
-
-          /**
-           * Ask for creation of a number of Object addresses, to the domain message node.
-           * @param  {Domain} domain - Domain of the message node.
-           * @param  {number} number - Number of addresses to request
-           * @returns {Promise<ObjectURL>}  A list of ObjectURL's
-           */
-          value: function create(domain, number) {
-            var _this = this;
-
-            var msg = {
-              type: 'create', from: _this._url, to: 'domain://msg-node.' + domain + '/object-address-allocation',
-              body: { number: number }
-            };
-
-            return new _Promise(function (resolve, reject) {
-              _this._bus.postMessage(msg, function (reply) {
-                if (reply.body.code === 200) {
-                  resolve(reply.body.allocated);
-                } else {
-                  reject(reply.body.desc);
-                }
-              });
-            });
-          }
-        }, {
-          key: 'url',
-          get: function get() {
-            return this._url;
-          }
-        }]);
-
-        return ObjectAllocation;
-      })();
-
-      _export('default', ObjectAllocation);
-    }
-  };
-});
-$__System.register('d', ['6', '7', 'e', 'c'], function (_export) {
-  var _createClass, _classCallCheck, divideURL, deepClone, ObjectAllocation, SyncherManager;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }, function (_e) {
-      divideURL = _e.divideURL;
-      deepClone = _e.deepClone;
-    }, function (_c) {
-      ObjectAllocation = _c['default'];
-    }],
-    execute: function () {
-
-      /**
-       * @author micaelpedrosa@gmail.com
-       * Core Syncronization system.
-       */
-      'use strict';
-
-      SyncherManager = (function () {
-        /* private
-        _url: URL
-        _bus: MiniBus
-        _registry: Registry
-        _allocator: ObjectAllocation
-         _subscriptions: { ObjectURL: { owner: HypertyURL, schema: Schema, sl: MsgListener, cl: MsgListener, subs: [HypertyURL] } }
-        */
-
-        function SyncherManager(runtimeURL, bus, registry, allocator) {
-          _classCallCheck(this, SyncherManager);
-
-          var _this = this;
-
-          //TODO: this should not be hardcoded!
-          _this._domain = 'ua.pt';
-
-          _this._bus = bus;
-          _this._registry = registry;
-
-          //TODO: these should be saved in persistence engine?
-          _this._url = runtimeURL + '/sm';
-          _this._objectURL = runtimeURL + '/object-allocation';
-          _this._subscriptions = {};
-
-          if (allocator) {
-            _this._allocator = allocator;
-          } else {
-            _this._allocator = new ObjectAllocation(_this._objectURL, bus);
-          }
-
-          bus.addListener(_this._url, function (msg) {
-            console.log('SyncherManager-RCV: ', msg);
-            switch (msg.type) {
-              case 'create':
-                _this._onCreate(msg);break;
-              case 'delete':
-                _this._onDelete(msg);break;
-            }
-          });
-        }
-
-        _createClass(SyncherManager, [{
-          key: '_onCreate',
-          value: function _onCreate(msg) {
-            var _this = this;
-            var owner = msg.from;
-
-            //TODO: 5-7 authorizeObjectCreation(owner, obj ???? )
-            //TODO: other optional steps
-
-            _this._allocator.create(_this._domain, 1).then(function (allocated) {
-              //TODO: get address from address allocator ?
-              var objURL = allocated[0];
-              var objSubscriptorURL = objURL + '/subscription';
-
-              //TODO: register objectURL so that it can be discovered in the network
-
-              //register change listener
-              var changeListener = _this._bus.addListener(objURL, function (msg) {
-                console.log(objURL + '-RCV: ', msg);
-                _this._subscriptions[objURL].subs.forEach(function (hypertyUrl) {
-                  var changeMsg = deepClone(msg);
-                  changeMsg.id = 0;
-                  changeMsg.from = objURL;
-                  changeMsg.to = hypertyUrl;
-
-                  //forward to hyperty observer
-                  _this._bus.postMessage(changeMsg);
-                });
-              });
-
-              //15. add subscription listener
-              var subscriptorListener = _this._bus.addListener(objSubscriptorURL, function (msg) {
-                console.log(objSubscriptorURL + '-RCV: ', msg);
-                switch (msg.type) {
-                  case 'subscribe':
-                    _this._onSubscribe(objURL, msg);break;
-                  case 'unsubscribe':
-                    _this._onUnSubscribe(objURL, msg);break;
-                }
-              });
-
-              _this._subscriptions[objURL] = { owner: owner, sl: subscriptorListener, cl: changeListener, subs: [] };
-
-              //all ok, send response
-              _this._bus.postMessage({
-                id: msg.id, type: 'response', from: msg.to, to: owner,
-                body: { code: 200, resource: objURL }
-              });
-
-              //19. send create to all observers, responses will be deliver to the Hyperty owner?
-              setTimeout(function () {
-                //schedule for next cycle needed, because the Reporter should be available.
-                msg.body.authorise.forEach(function (hypertyURL) {
-                  _this._bus.postMessage({
-                    type: 'create', from: owner, to: hypertyURL,
-                    body: { schema: msg.body.schema, resource: objURL, value: msg.body.value }
-                  });
-                });
-              });
-            })['catch'](function (reason) {
-              _this._bus.postMessage({
-                id: msg.id, type: 'response', from: msg.to, to: owner,
-                body: { code: 500, desc: reason }
-              });
-            });
-          }
-        }, {
-          key: '_onDelete',
-          value: function _onDelete(msg) {
-            var _this = this;
-
-            //TODO: where to get objectURL ?
-            var objURL = '<objURL>';
-
-            //destroy all objURL listeners
-            delete _this._subscriptions[objURL];
-            _this._bus.removeAllListenersOf(objURL);
-            _this._bus.removeAllListenersOf(objURL + '/subscription');
-
-            //TODO: destroy object in the registry?
-          }
-        }, {
-          key: '_onSubscribe',
-          value: function _onSubscribe(objURL, msg) {
-            var _this = this;
-            var hypertyUrl = msg.from;
-
-            var subscription = _this._subscriptions[objURL];
-
-            //27. validate if subscription already exists?
-            if (subscription[hypertyUrl]) {
-              var errorMsg = {
-                id: msg.id, type: 'response', from: msg.to, to: hypertyUrl,
-                body: { code: 500, desc: 'Subscription for (' + objURL + ' : ' + hypertyUrl + ') already exists!' }
-              };
-
-              _this._bus.postMessage(errorMsg);
-              return;
-            }
-
-            //31. ask to subscribe to Syncher? (depends on the operation mode)
-            //TODO: get mode from object!
-            var mode = 'sub/pub';
-
-            if (mode === 'sub/pub') {
-              //forward to Hyperty owner
-              var forwardMsg = {
-                type: 'forward', from: _this._url, to: subscription.owner,
-                body: { type: msg.type, from: msg.from, to: objURL }
-              };
-
-              if (msg.body) {
-                forwardMsg.body.body = msg.body;
-              }
-
-              _this._bus.postMessage(forwardMsg, function (reply) {
-                console.log('forward-reply: ', reply);
-                if (reply.body.code === 200) {
-                  //subscription accepted
-                  _this._subscriptions[objURL].subs.push(hypertyUrl);
-                }
-
-                //send subscribe-response
-                _this._bus.postMessage({
-                  id: msg.id, type: 'response', from: msg.to, to: hypertyUrl,
-                  body: reply.body
-                });
-              });
-            }
-          }
-        }, {
-          key: '_onUnSubscribe',
-          value: function _onUnSubscribe(objURL, msg) {
-            var _this = this;
-            var hypertyUrl = msg.from;
-
-            var subs = _this._subscriptions[objURL].subs;
-            var index = subs.indexOf(hypertyUrl);
-            subs.splice(index, 1);
-
-            //TODO: send un-subscribe message to Syncher? (depends on the operation mode)
-          }
-        }, {
-          key: 'url',
-          get: function get() {
-            return this._url;
-          }
-        }]);
-
-        return SyncherManager;
-      })();
-
-      _export('default', SyncherManager);
-    }
-  };
-});
-$__System.register('f', ['6', '7', 'a'], function (_export) {
-  var _createClass, _classCallCheck, _Promise, RuntimeCatalogue;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }],
-    execute: function () {
-      'use strict';
-
-      RuntimeCatalogue = (function () {
-        function RuntimeCatalogue() {
-          _classCallCheck(this, RuntimeCatalogue);
-
-          console.log('runtime catalogue');
-
-          var _this = this;
-        }
-
-        _createClass(RuntimeCatalogue, [{
-          key: 'getHypertyRuntimeURL',
-
-          /**
-          * Get hypertyRuntimeURL
-          */
-          value: function getHypertyRuntimeURL() {
-            // TODO: check if this is real needed;
-            return _hypertyRuntimeURL;
-          }
-        }, {
-          key: '_makeExternalRequest',
-          value: function _makeExternalRequest(url) {
-
-            var _this = this;
-
-            return new _Promise(function (resolve, reject) {
-
-              // TODO: implementation
-              // Simulate getting hypertySourceCode through the XMLHttpRequest
-              // but in node this should be overrided to other method to make a
-              // ajax request;
-              // i think we can use a factory like we used in for the sandboxes,
-              // an sandboxFactory;
-              var xhr = new XMLHttpRequest();
-
-              xhr.onreadystatechange = function (event) {
-                var xhr = event.currentTarget;
-                if (xhr.readyState === 4) {
-                  if (xhr.status === 200) {
-                    resolve(xhr.responseText);
-                  } else {
-                    reject(xhr.responseText);
-                  }
-                }
-              };
-
-              xhr.open('GET', url, true);
-              xhr.send();
-            });
-          }
-
-          /**
-          * Get HypertyDescriptor
-          */
-        }, {
-          key: 'getHypertyDescriptor',
-          value: function getHypertyDescriptor(hypertyURL) {
-
-            var _this = this;
-
-            return new _Promise(function (resolve, reject) {
-
-              //hyperty-catalogue://sp1/HelloHyperty
-              var hypertyName = hypertyURL.substr(hypertyURL.lastIndexOf('/') + 1);
-
-              var hypertyDescriptor = {
-                guid: 'guid',
-                id: 'idHyperty',
-                classname: hypertyName,
-                description: 'description of ' + hypertyName,
-                kind: 'hyperty',
-                catalogueURL: '....',
-                sourcePackageURL: '../resources/' + hypertyName + '-sourcePackageURL.json',
-                dataObject: '',
-                type: '',
-                messageSchema: '',
-                policies: '',
-                constraints: '',
-                hypertyCapabilities: '',
-                protocolCapabilities: ''
-              };
-
-              resolve(hypertyDescriptor);
-            });
-          }
-
-          /**
-          * Get hypertySourceCode
-          */
-        }, {
-          key: 'getHypertySourcePackage',
-          value: function getHypertySourcePackage(hypertyPackage) {
-            var _this = this;
-
-            return new _Promise(function (resolve, reject) {
-
-              _this._makeExternalRequest(hypertyPackage).then(function (result) {
-
-                try {
-
-                  var sourcePackage = JSON.parse(result);
-                  var sourceCode = window.atob(sourcePackage.sourceCode);
-                  sourcePackage.sourceCode = sourceCode;
-
-                  resolve(sourcePackage);
-                } catch (e) {
-                  reject(e);
-                }
-              })['catch'](function (reason) {
-                reject(reason);
-              });
-            });
-          }
-
-          /**
-          * Get StubDescriptor
-          */
-        }, {
-          key: 'getStubDescriptor',
-          value: function getStubDescriptor(domainURL) {
-
-            var _this = this;
-
-            return new _Promise(function (resolve, reject) {
-
-              var stubDescriptor = {
-                guid: 'guid',
-                id: 'idProtoStub',
-                classname: 'VertxProtoStub',
-                description: 'description of ProtoStub',
-                kind: 'hyperty',
-                catalogueURL: '....',
-                sourcePackageURL: '../resources/Vertx-sourcePackageURL.json',
-                dataObject: '',
-                type: '',
-                messageSchema: '',
-                configuration: {
-                  url: 'wss://msg-node.ua.pt:9090/ws'
-                },
-                policies: '',
-                constraints: '',
-                hypertyCapabilities: '',
-                protocolCapabilities: ''
-              };
-
-              resolve(stubDescriptor);
-            });
-          }
-
-          /**
-          * Get protostubSourceCode
-          */
-        }, {
-          key: 'getStubSourcePackage',
-          value: function getStubSourcePackage(sourcePackageURL) {
-            var _this = this;
-
-            return new _Promise(function (resolve, reject) {
-
-              _this._makeExternalRequest(sourcePackageURL).then(function (result) {
-
-                try {
-                  var sourcePackage = JSON.parse(result);
-                  var sourceCode = window.atob(sourcePackage.sourceCode);
-                  sourcePackage.sourceCode = sourceCode;
-
-                  resolve(sourcePackage);
-                } catch (e) {
-                  reject(e);
-                }
-              })['catch'](function (reason) {
-                console.error(reason);
-                reject(reason);
-              });
-            });
-          }
-        }, {
-          key: 'runtimeURL',
-          set: function set(runtimeURL) {
-            var _this = this;
-            _this._runtimeURL = runtimeURL;
-          },
-          get: function get() {
-            var _this = this;
-            return _this._runtimeURL;
-          }
-        }]);
-
-        return RuntimeCatalogue;
-      })();
-
-      _export('default', RuntimeCatalogue);
-    }
-  };
-});
-$__System.register('b', ['6', '7'], function (_export) {
-  var _createClass, _classCallCheck, MiniBus, MsgListener;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }],
-    execute: function () {
-      /**
-      * @author micaelpedrosa@gmail.com
-      * Minimal interface and implementation to send and receive messages. It can be reused in many type of components.
-      * Components that need a message system should receive this class as a dependency or extend it.
-      * Extensions should implement the following private methods: _onPostMessage and _registerExternalListener
-      */
-      'use strict';
-
-      MiniBus = (function () {
-        /* private
-        _msgId: number;
-        _subscriptions: <url: MsgListener[]>
-         _responseTimeOut: number
-        _responseCallbacks: <url+id: (msg) => void>
-        */
-
-        function MiniBus() {
-          _classCallCheck(this, MiniBus);
-
-          var _this = this;
-          _this._msgId = 0;
-          _this._subscriptions = {};
-
-          _this._responseTimeOut = 3000; //default to 3s
-          _this._responseCallbacks = {};
-
-          _this._registerExternalListener();
-        }
-
-        /**
-        * Register listener to receive message when "msg.to === url".
-        * Special url "*" for default listener is accepted to intercept all messages.
-        * @param {URL} url Address to intercept, tha is in the message "to"
-        * @param {Listener} listener listener
-        * @return {MsgListener} instance of MsgListener
-        */
-
-        _createClass(MiniBus, [{
-          key: 'addListener',
-          value: function addListener(url, listener) {
-            var _this = this;
-
-            var item = new MsgListener(_this._subscriptions, url, listener);
-            var itemList = _this._subscriptions[url];
-            if (!itemList) {
-              itemList = [];
-              _this._subscriptions[url] = itemList;
-            }
-
-            itemList.push(item);
-            return item;
-          }
-
-          /**
-           * Manually add a response listener. Only one listener per message ID should exist.
-           * ATENTION, there is no timeout for this listener.
-           * The listener should be removed with a removeResponseListener, failing to do this will result in a unreleased memory problem.
-           * @param {URL} url Origin address of the message sent, "msg.from".
-           * @param {number} msgId Message ID that is returned from the postMessage.
-           * @param {Function} responseListener Callback function for the response
-           */
-        }, {
-          key: 'addResponseListener',
-          value: function addResponseListener(url, msgId, responseListener) {
-            this._responseCallbacks[url + msgId] = responseListener;
-          }
-
-          /**
-           * Remove the response listener.
-           * @param {URL} url Origin address of the message sent, "msg.from".
-           * @param {number} msgId  Message ID that is returned from the postMessage
-           */
-        }, {
-          key: 'removeResponseListener',
-          value: function removeResponseListener(url, msgId) {
-            delete this._responseCallbacks[url + msgId];
-          }
-
-          /**
-           * Remove all existent listeners for the URL
-           * @param  {URL} url Address registered
-           */
-        }, {
-          key: 'removeAllListenersOf',
-          value: function removeAllListenersOf(url) {
-            delete this._subscriptions[url];
-          }
-
-          /**
-          * Send messages to local listeners, or if not exists to external listeners.
-          * It's has an optional mechanism for automatic management of response handlers.
-          * The response handler will be unregistered after receiving the response, or after response timeout (default to 3s).
-          * @param  {Message} msg Message to send. Message ID is automatically added to the message.
-          * @param  {Function} responseCallback Optional parameter, if the developer what's automatic response management.
-          * @return {number} Returns the message ID, in case it should be needed for manual management of the response handler.
-          */
-        }, {
-          key: 'postMessage',
-          value: function postMessage(msg, responseCallback) {
-            var _this = this;
-
-            //TODO: how do we manage message ID's? Should it be a global runtime counter, or per URL address?
-            //Global counter will not work, because there will be multiple MiniBus instances!
-            //Per URL, can be a lot of data to maintain!
-            //Maybe a counter per MiniBus instance. This is the assumed solution for now.
-            if (!msg.id || msg.id === 0) {
-              _this._msgId++;
-              msg.id = _this._msgId;
-            }
-
-            //automatic management of response handlers
-            if (responseCallback) {
-              (function () {
-                var responseId = msg.from + msg.id;
-                _this._responseCallbacks[responseId] = responseCallback;
-
-                setTimeout(function () {
-                  var responseFun = _this._responseCallbacks[responseId];
-                  delete _this._responseCallbacks[responseId];
-
-                  if (responseFun) {
-                    var errorMsg = {
-                      id: msg.id, type: 'response',
-                      body: { code: 'error', desc: 'Response timeout!' }
-                    };
-
-                    responseFun(errorMsg);
-                  }
-                }, _this._responseTimeOut);
-              })();
-            }
-
-            if (!_this._onResponse(msg)) {
-              var itemList = _this._subscriptions[msg.to];
-              if (itemList) {
-                //do not publish on default address, because of loopback cycle
-                _this._publishOn(itemList, msg);
-              } else {
-                //if there is no listener, send to external interface
-                _this._onPostMessage(msg);
-              }
-            }
-
-            return msg.id;
-          }
-
-          /**
-           * Helper method to bind listeners (in both directions) into other MiniBus target.
-           * @param  {URL} outUrl Outbound URL, register listener for url in direction "this -> target"
-           * @param  {URL} inUrl Inbound URL, register listener for url in direction "target -> this"
-           * @param  {MiniBus} target The other target MiniBus
-           * @return {Bound} an object that contains the properties [thisListener, targetListener] and the unbind method.
-           */
-        }, {
-          key: 'bind',
-          value: function bind(outUrl, inUrl, target) {
-            var _this2 = this;
-
-            var _this = this;
-
-            var thisListn = _this.addListener(outUrl, function (msg) {
-              target.postMessage(msg);
-            });
-
-            var targetListn = target.addListener(inUrl, function (msg) {
-              _this.postMessage(msg);
-            });
-
-            return {
-              thisListener: thisListn,
-              targetListener: targetListn,
-              unbind: function unbind() {
-                _this2.thisListener.remove();
-                _this2.targetListener.remove();
-              }
-            };
-          }
-
-          //publish on a subscription list.
-        }, {
-          key: '_publishOn',
-          value: function _publishOn(itemList, msg) {
-            itemList.forEach(function (sub) {
-              sub._callback(msg);
-            });
-          }
-        }, {
-          key: '_onResponse',
-          value: function _onResponse(msg) {
-            var _this = this;
-
-            if (msg.type === 'response') {
-              var responseId = msg.to + msg.id;
-              var responseFun = _this._responseCallbacks[responseId];
-              delete _this._responseCallbacks[responseId];
-
-              if (responseFun) {
-                responseFun(msg);
-                return true;
-              }
-            }
-
-            return false;
-          }
-
-          //receive messages from external interface
-        }, {
-          key: '_onMessage',
-          value: function _onMessage(msg) {
-            var _this = this;
-
-            if (!_this._onResponse(msg)) {
-              var itemList = _this._subscriptions[msg.to];
-              if (itemList) {
-                _this._publishOn(itemList, msg);
-              } else {
-                //is there any "*" (default) listeners?
-                itemList = _this._subscriptions['*'];
-                if (itemList) {
-                  _this._publishOn(itemList, msg);
-                }
-              }
-            }
-          }
-
-          /**
-           * Not public available, used by the class extension implementation, to process messages from the public "postMessage" without a registered listener.
-           * Used to send the message to an external interface, like a WebWorker, IFrame, etc.
-           * @param  {Message.Message} msg Message
-           */
-        }, {
-          key: '_onPostMessage',
-          value: function _onPostMessage(msg) {} /*implementation will send message to external system*/
-
-          /**
-           * Not public available, used by the class extension implementation, to process all messages that enter the MiniBus from an external interface, like a WebWorker, IFrame, etc.
-           * This method is called one time in the constructor to register external listeners.
-           * The implementation will probably call the "_onMessage" method to publish in the local listeners.
-           * DO NOT call "postMessage", there is a danger that the message enters in a cycle!
-           */
-
-        }, {
-          key: '_registerExternalListener',
-          value: function _registerExternalListener() {/*implementation will register external listener and call "this._onMessage(msg)" */}
-        }]);
-
-        return MiniBus;
-      })();
-
-      MsgListener = (function () {
-        /* private
-        _subscriptions: <string: MsgListener[]>;
-        _url: string;
-        _callback: (msg) => void;
-        */
-
-        function MsgListener(subscriptions, url, callback) {
-          _classCallCheck(this, MsgListener);
-
-          var _this = this;
-
-          _this._subscriptions = subscriptions;
-          _this._url = url;
-          _this._callback = callback;
-        }
-
-        _createClass(MsgListener, [{
-          key: 'remove',
-          value: function remove() {
-            var _this = this;
-
-            var subs = _this._subscriptions[_this._url];
-            if (subs) {
-              var index = subs.indexOf(_this);
-              subs.splice(index, 1);
-
-              //if there are no listeners, remove the subscription entirely.
-              if (subs.length === 0) {
-                delete _this._subscriptions[_this._url];
-              }
-            }
-          }
-        }, {
-          key: 'url',
-          get: function get() {
-            return this._url;
-          }
-        }]);
-
-        return MsgListener;
-      })();
-
-      _export('default', MiniBus);
-    }
-  };
-});
-$__System.register('10', ['4', '5', '6', '7', 'b'], function (_export) {
-  var _get, _inherits, _createClass, _classCallCheck, MiniBus, MessageBus;
-
-  return {
-    setters: [function (_) {
-      _get = _['default'];
-    }, function (_2) {
-      _inherits = _2['default'];
-    }, function (_3) {
-      _createClass = _3['default'];
-    }, function (_4) {
-      _classCallCheck = _4['default'];
-    }, function (_b) {
-      MiniBus = _b['default'];
-    }],
-    execute: function () {
-      /**
-      * Message BUS Interface is an extension of the MiniBus
-      * It doesn't support the default '*' listener, instead it uses the registry.resolve(..)
-      */
-      'use strict';
-
-      MessageBus = (function (_MiniBus) {
-        _inherits(MessageBus, _MiniBus);
-
-        /* private
-        _registry: Registry
-        */
-
-        //TODO: future optimization
-        //1. message batch processing with setInterval
-        //2. resolve default gateway/protostub with register.resolve
-
-        function MessageBus(registry) {
-          _classCallCheck(this, MessageBus);
-
-          _get(Object.getPrototypeOf(MessageBus.prototype), 'constructor', this).call(this);
-          this._registry = registry;
-        }
-
-        _createClass(MessageBus, [{
-          key: '_onPostMessage',
-          value: function _onPostMessage(msg) {
-            var _this = this;
-
-            //resolve external protostub...
-            _this._registry.resolve(msg.to).then(function (protoStubURL) {
-
-              var itemList = _this._subscriptions[protoStubURL];
-              if (itemList) {
-                _this._publishOn(itemList, msg);
-              }
-            })['catch'](function (e) {
-              console.log('PROTO-STUB-ERROR: ', e);
-            });
-          }
-        }]);
-
-        return MessageBus;
-      })(MiniBus);
-
-      _export('default', MessageBus);
-    }
-  };
-});
-$__System.register('11', ['6', '7', 'a'], function (_export) {
-  var _createClass, _classCallCheck, _Promise, PolicyEngine;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }],
-    execute: function () {
-      /**
-       * Core Policy Engine (PDP/PEP) Interface
-       * According to: https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/runtime-apis.md#core-policy-engine-pdppep-interface
-       */
-      'use strict';
-
-      PolicyEngine = (function () {
-
-        /**
-        * To initialise the Policy Engine
-        * @param  {Identity Module}      identityModule      identityModule
-        * @param  {Runtime Registry}    runtimeRegistry     runtimeRegistry
-        */
-
-        function PolicyEngine(identityModule, runtimeRegistry) {
-          _classCallCheck(this, PolicyEngine);
-
-          var _this = this;
-          _this.idModule = identityModule;
-          _this.registry = runtimeRegistry;
-          _this.policiesTable = new Object();
-          /* assumes the Policy Engine has the blacklist */
-          _this.blacklist = [];
-          /* _this.blacklist.push('Alice');*/
-        }
-
-        /**
-         * To add policies to be enforced for a certain deployed Hyperty Instance
-         * Example of an hyperty: hyperty-instance://tecnico.pt/e1b8fb0b-95e2-4f44-aa18-b40984741196
-         * Example of a policy: {subject: 'message.header.from', target: 'blacklist', action: 'deny'}
-         * @param {URL.HypertyURL}     hyperty  hyperty
-         * @param {HypertyPolicyList}  policies policies
-         */
-
-        _createClass(PolicyEngine, [{
-          key: 'addPolicies',
-          value: function addPolicies(hyperty, policies) {
-            var _this = this;
-            _this.policiesTable[hyperty] = policies;
-          }
-
-          /**
-           * To remove previously added policies for a certain deployed Hyperty Instance
-           * @param  {URL.HypertyURL}  hyperty       hyperty
-           */
-        }, {
-          key: 'removePolicies',
-          value: function removePolicies(hyperty) {
-            var _this = this;
-            delete _this.policiesTable[hyperty];
-          }
-
-          /**
-           * Authorisation request to accept a Subscription for a certain resource. Returns a Response Message to be returned to Subscription requester
-           * @param  {Message.Message} message       message
-           * @return {AuthorisationResponse}                 AuthorisationResponse
-           */
-        }, {
-          key: 'authorise',
-          value: function authorise(message) {
-            var _this = this;
-            console.log(_this.policiesTable);
-            return new _Promise(function (resolve, reject) {
-              if (_this.checkPolicies(message) == 'allow') {
-                /*let hypertyIdentity = _this.registry.getHypertyIdentity(message.body.hypertyURL);
-                //this step assume the hypertyIdentity will be google */
-                _this.idModule.loginWithRP('google identity', 'scope').then(function (value) {
-                  message.body.assertedIdentity = JSON.stringify(value);
-                  message.body.authorised = true;
-                  resolve(message);
-                }, function (error) {
-                  reject(error);
-                });
-              } else {
-                resolve(false);
-              }
-            });
-          }
-        }, {
-          key: 'checkPolicies',
-          value: function checkPolicies(message) {
-            var _this = this;
-            var _results = ['allow']; /* by default, all messages are allowed */
-            var _policies = _this.policiesTable[message.body.hypertyURL];
-            if (_policies != undefined) {
-              /* if there are applicable policies, checks them */
-              var _numPolicies = _policies.length;
-
-              for (var i = 0; i < _numPolicies; i++) {
-                var _policy = _policies[i];
-                console.log(_policy);
-                if (_policy.target == 'blacklist') {
-                  if (_this.blacklist.indexOf(eval(_policy.subject)) > -1) {
-                    console.log('Is in blacklist!');
-                    _results.push(_policy.action);
-                  }
-                }
-                if (_policy.target == 'whitelist') {
-                  if (_this.whitelist.indexOf(eval(_policy.subject)) > -1) {
-                    console.log('Is in whitelist!');
-                    _results.push(_policy.action);
-                  }
-                }
-              }
-            }
-            console.log(_results);
-            if (_results.indexOf('deny') > -1) {
-              /* if one policy evaluates to 'deny', the result is 'deny' */
-              return 'deny';
-            } else {
-              return 'allow';
-            }
-          }
-        }]);
-
-        return PolicyEngine;
-      })();
-
-      _export('default', PolicyEngine);
-    }
-  };
-});
-$__System.register('12', ['6', '7', 'a'], function (_export) {
-  var _createClass, _classCallCheck, _Promise, IdentityModule;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }],
-    execute: function () {
-      /**
-      * IdentityModule
-      *
-      * Initial specification: D4.1
-      *
-      * The IdentityModule is a component managing user Identity. It downloads, instantiates
-      * and manage Identity Provider Proxy (IdP) for its own user identity or for external
-      * user identity verification.
-      *
-      */
-      'use strict';
-
-      IdentityModule = (function () {
-
-        /**
-        * USER'S OWN IDENTITY
-        */
-
-        function IdentityModule() {
-          _classCallCheck(this, IdentityModule);
-        }
-
-        /**
-        * Register a new Identity with an Identity Provider
-        */
-
-        _createClass(IdentityModule, [{
-          key: 'registerIdentity',
-          value: function registerIdentity() {}
-          // Body...
-
-          /**
-          * In relation with a classical Relying Party: Registration
-          */
-
-        }, {
-          key: 'registerWithRP',
-          value: function registerWithRP() {}
-          // Body...
-
-          /**
-          * In relation with a classical Relying Party: Login
-          * @param  {Identifier}      identifier      identifier
-          * @param  {Scope}           scope           scope
-          * @return {Promise}         Promise         IDToken
-          */
-
-        }, {
-          key: 'loginWithRP',
-          value: function loginWithRP(identifier, scope) {
-
-            /*
-              When calling this function, if everything is fine, a small pop-up will open requesting a login with a google account. After the login is made, the pop-up will close and the function will return the ID token.
-              This function was tested with the URL: http://127.0.0.1:8080/ and with the same redirect URI
-             	In case the redirect URI is not accepted or is required to add others redirect URIs, a little information is provided to fix the problem:
-             	So that an application can use Google's OAuth 2.0 authentication system for user login,
-            	first is required to set up a project in the Google Developers Console to obtain OAuth 2.0 credentials and set a redirect URI.
-            	A test account was created to set the project in the Google Developers Console to obtain OAuth 2.0 credentials,	with the following credentials:
-                 	username: openidtest10@gmail.com
-                   password: testOpenID10
-             	To add more URI's, follow the steps:
-            	1º choose the project ( can be the My OpenID Project)	 from  https://console.developers.google.com/projectselector/apis/credentials using the credentials provided above.
-            	2º Open The Client Web 1 listed in OAuth 2.0 Client ID's
-            	3º Add the URI  in the authorized redirect URI section.
-              4º change the REDIRECT parameter bellow with the pretended URI
-             */
-            var VALIDURL = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
-            var USERINFURL = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=';
-            var OAUTHURL = 'https://accounts.google.com/o/oauth2/auth?';
-            var SCOPE = 'email%20profile';
-            var CLIENTID = '808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com';
-            var REDIRECT = 'http://127.0.0.1:8080/';
-
-            //let REDIRECT   =   document.URL.substring(0, document.URL.length - 1); //remove the '#' character
-            var LOGOUT = 'http://accounts.google.com/Logout';
-            var TYPE = 'token';
-            var _url = OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
-            var acToken = undefined;
-            var tokenType = undefined;
-            var expiresIn = undefined;
-            var user = undefined;
-            var tokenID = undefined;
-            var loggedIn = false;
-
-            //function to parse the query string in the given URL to obatin certain values
-            function gup(url, name) {
-              name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
-              var regexS = '[\\#&]' + name + '=([^&#]*)';
-              var regex = new RegExp(regexS);
-              var results = regex.exec(url);
-              if (results === null) return '';else return results[1];
-            }
-
-            return new _Promise(function (resolve, reject) {
-
-              //function to validate the access token received during the authentication
-              function validateToken(token) {
-                var req = new XMLHttpRequest();
-                req.open('GET', VALIDURL + token, true);
-
-                req.onreadystatechange = function (e) {
-                  if (req.readyState == 4) {
-                    if (req.status == 200) {
-                      //console.log('validateToken ', e);
-
-                      getIDToken(token);
-                    } else if (req.status == 400) {
-                      reject('There was an error processing the token');
-                    } else {
-                      reject('something else other than 200 was returned');
-                    }
-                  }
-                };
-                req.send();
-              }
-
-              //function to exchange the access token with an ID Token containing the information
-              function getIDToken(token) {
-                var req = new XMLHttpRequest();
-                req.open('GET', USERINFURL + token, true);
-
-                req.onreadystatechange = function (e) {
-                  if (req.readyState == 4) {
-                    if (req.status == 200) {
-                      console.log('getUserInfo ', req);
-                      tokenID = JSON.parse(req.responseText);
-                      resolve(tokenID);
-                    } else if (req.status == 400) {
-                      reject('There was an error processing the token');
-                    } else {
-                      reject('something else other than 200 was returned');
-                    }
-                  }
-                };
-                req.send();
-              }
-
-              //this will open a window with the URL which will open a page sent by google for the user to insert the credentials
-              // when the google validates the credentials then send a access token
-              var win = window.open(_url, 'openIDrequest', 'width=800, height=600');
-              var pollTimer = window.setInterval(function () {
-                try {
-                  //console.log(win.document.URL);
-
-                  if (win.closed) {
-                    reject('Some error occured.');
-                    clearInterval(pollTimer);
-                  }
-
-                  if (win.document.URL.indexOf(REDIRECT) != -1) {
-                    window.clearInterval(pollTimer);
-                    var url = win.document.URL;
-                    acToken = gup(url, 'access_token');
-                    tokenType = gup(url, 'token_type');
-                    expiresIn = gup(url, 'expires_in');
-                    win.close();
-
-                    //after receiving the access token, google requires to validate first the token to prevent confused deputy problem.
-                    validateToken(acToken);
-                  }
-                } catch (e) {
-                  //console.log(e);
-                }
-              }, 500);
-            });
-          }
-
-          /**
-          * In relation with a Hyperty Instance: Associate identity
-          */
-        }, {
-          key: 'setHypertyIdentity',
-          value: function setHypertyIdentity() {}
-          // Body...
-
-          /**
-          * Generates an Identity Assertion for a call session
-          * @param  {DOMString} contents     contents
-          * @param  {DOMString} origin       origin
-          * @param  {DOMString} usernameHint usernameHint
-          * @return {IdAssertion}              IdAssertion
-          */
-
-        }, {
-          key: 'generateAssertion',
-          value: function generateAssertion(contents, origin, usernameHint) {}
-          // Body...
-
-          /**
-          * OTHER USER'S IDENTITY
-          */
-
-          /**
-          * Verification of a received IdAssertion validity
-          * @param  {DOMString} assertion assertion
-          */
-
-        }, {
-          key: 'validateAssertion',
-          value: function validateAssertion(assertion) {}
-          // Body...
-
-          /**
-          * Trust level evaluation of a received IdAssertion
-          * @param  {DOMString} assertion assertion
-          */
-
-        }, {
-          key: 'getAssertionTrustLevel',
-          value: function getAssertionTrustLevel(assertion) {
-            // Body...
-          }
-        }]);
-
-        return IdentityModule;
-      })();
-
-      _export('default', IdentityModule);
-    }
-  };
-});
-$__System.register('e', [], function (_export) {
-  /**
-   * Support module with some functions will be useful
-   * @module utils
-   */
-
-  /**
-   * @typedef divideURL
-   * @type Object
-   * @property {string} type The type of URL
-   * @property {string} domain The domain of URL
-   * @property {string} identity The identity of URL
-   */
-
-  /**
-   * Divide an url in type, domain and identity
-   * @param  {URL.URL} url - url address
-   * @return {divideURL} the result of divideURL
-   */
-  'use strict';
-
-  /**
-   * Make a COPY of the original data
-   * @param  {Object}  obj - object to be cloned
-   * @return {Object}
-   */
-
-  _export('divideURL', divideURL);
-
-  _export('deepClone', deepClone);
-
-  function divideURL(url) {
-
-    // let re = /([a-zA-Z-]*)?:\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b)*(\/[\/\d\w\.-]*)*(?:[\?])*(.+)*/gi;
-    var re = /([a-zA-Z-]*):\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi;
-    var subst = '$1,$2,$3';
-    var parts = url.replace(re, subst).split(',');
-    var result = {
-      type: parts[0],
-      domain: parts[1],
-      identity: parts[2]
-    };
-
-    return result;
-  }
-
-  function deepClone(obj) {
-    //TODO: simple but inefficient JSON deep clone...
-    return JSON.parse(JSON.stringify(obj));
-  }
-
-  return {
-    setters: [],
-    execute: function () {}
-  };
-});
-$__System.register('13', ['6', '7', 'a'], function (_export) {
-  var _createClass, _classCallCheck, _Promise, AddressAllocation;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }],
-    execute: function () {
-      // import MessageFactory from '../../resources/MessageFactory';
-
-      /**
-       * Class will ask to the message node for addresses
-       */
-      'use strict';
-
-      AddressAllocation = (function () {
-        /* private
-        _url: URL
-        _bus: MiniBus
-        */
-
-        /**
-         * Create an Address Allocation
-         * @param  {URL.URL}      url - url from who is sending the message
-         * @param  {MiniBus}      bus - MiniBus used for address allocation
-         */
-
-        function AddressAllocation(url, bus) {
-          _classCallCheck(this, AddressAllocation);
-
-          var _this = this;
-
-          // let messageFactory = new MessageFactory();
-          //
-          // _this._messageFactory = messageFactory;
-          _this._url = url;
-          _this._bus = bus;
-        }
-
-        /**
-         * get the URL value
-         * @return {string} The url value;
-         */
-
-        _createClass(AddressAllocation, [{
-          key: 'create',
-
-          /**
-           * Ask for creation of a number of Hyperty addresses, to the domain message node.
-           * @param  {Domain} domain - Domain of the message node.
-           * @param  {number} number - Number of addresses to request
-           * @returns {Promise<HypertyURL>}  A list of HypertyURL's
-           */
-          value: function create(domain, number) {
-            var _this = this;
-
-            // let messageFactory = _this._messageFactory;
-
-            var msg = {
-              type: 'create', from: _this._url, to: 'domain://msg-node.' + domain + '/hyperty-address-allocation',
-              body: { number: number }
-            };
-
-            // TODO: Apply the message factory
-            // The msg-node-vertx should be changed the body field to receive
-            // the following format body: {value: {number: number}} because
-            // the message is generated in that way by the message factory;
-            // let msg = messageFactory.createMessageRequest(_this._url, 'domain://msg-node.' + domain + '/hyperty-address-allocation', '', {number: number});
-
-            return new _Promise(function (resolve, reject) {
-
-              // TODO: change this response Message using the MessageFactory
-              _this._bus.postMessage(msg, function (reply) {
-                if (reply.body.code === 200) {
-                  resolve(reply.body.allocated);
-                } else {
-                  reject(reply.body.desc);
-                }
-              });
-            });
-          }
-        }, {
-          key: 'url',
-          get: function get() {
-            return this._url;
-          }
-        }]);
-
-        return AddressAllocation;
-      })();
-
-      _export('default', AddressAllocation);
-    }
-  };
-});
-$__System.register("14", ["6", "7"], function (_export) {
-  var _createClass, _classCallCheck, EventEmitter;
-
-  return {
-    setters: [function (_) {
-      _createClass = _["default"];
-    }, function (_2) {
-      _classCallCheck = _2["default"];
-    }],
-    execute: function () {
-      /**
-       * EventEmitter
-       * All classes which extends this, can have addEventListener and trigger events;
-       */
-      "use strict";
-
-      EventEmitter = (function () {
-        function EventEmitter() {
-          _classCallCheck(this, EventEmitter);
-        }
-
-        _createClass(EventEmitter, [{
-          key: "addEventListener",
-
-          /**
-           * addEventListener listen for an eventType
-           * @param  {string}         eventType - listening for this type of event
-           * @param  {Function}       cb        - callback function will be executed when the event it is invoked
-           */
-          value: function addEventListener(eventType, cb) {
-            var _this = this;
-            _this[eventType] = cb;
-          }
-
-          /**
-           * Invoke the eventType
-           * @param  {string} eventType - event will be invoked
-           * @param  {object} params - parameters will be passed to the addEventListener
-           */
-        }, {
-          key: "trigger",
-          value: function trigger(eventType, params) {
-            var _this = this;
-
-            if (_this[eventType]) {
-              _this[eventType](params);
-            }
-          }
-        }]);
-
-        return EventEmitter;
-      })();
-
-      _export("default", EventEmitter);
-    }
-  };
-});
-$__System.register('15', ['4', '5', '6', '7', '13', '14', 'a', 'e'], function (_export) {
-  var _get, _inherits, _createClass, _classCallCheck, AddressAllocation, EventEmitter, _Promise, divideURL, Registry;
-
-  return {
-    setters: [function (_) {
-      _get = _['default'];
-    }, function (_2) {
-      _inherits = _2['default'];
-    }, function (_3) {
-      _createClass = _3['default'];
-    }, function (_4) {
-      _classCallCheck = _4['default'];
-    }, function (_6) {
-      AddressAllocation = _6['default'];
-    }, function (_5) {
-      EventEmitter = _5['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }, function (_e) {
-      divideURL = _e.divideURL;
-    }],
-    execute: function () {
-
-      /**
-      * Runtime Registry Interface
-      */
-      'use strict';
-
-      Registry = (function (_EventEmitter) {
-        _inherits(Registry, _EventEmitter);
-
-        /**
-        * To initialise the Runtime Registry with the RuntimeURL that will be the basis to derive the internal runtime addresses when allocating addresses to internal runtime component. In addition, the Registry domain back-end to be used to remotely register Runtime components, is also passed as input parameter.
-        * @param  {MessageBus}          msgbus                msgbus
-        * @param  {HypertyRuntimeURL}   runtimeURL            runtimeURL
-        * @param  {AppSandbox}          appSandbox            appSandbox
-        * @param  {DomainURL}           remoteRegistry        remoteRegistry
-        */
-
-        function Registry(runtimeURL, appSandbox, remoteRegistry) {
-          _classCallCheck(this, Registry);
-
-          _get(Object.getPrototypeOf(Registry.prototype), 'constructor', this).call(this);
-
-          // how some functions receive the parameters for example:
-          // new Registry(msgbus, 'hyperty-runtime://sp1/123', appSandbox, remoteRegistry);
-          // registry.registerStub(sandbox, 'sp1');
-          // registry.registerHyperty(sandBox, 'hyperty-runtime://sp1/123');
-          // registry.resolve('hyperty-runtime://sp1/123');
-
-          if (!runtimeURL) throw new Error('runtimeURL is missing.');
-          /*if (!remoteRegistry) throw new Error('remoteRegistry is missing');*/
-
-          var _this = this;
-
-          _this.registryURL = runtimeURL + '/registry/123';
-          _this.appSandbox = appSandbox;
-          _this.runtimeURL = runtimeURL;
-          _this.remoteRegistry = remoteRegistry;
-
-          _this.hypertiesList = {};
-          _this.protostubsList = {};
-          _this.sandboxesList = {};
-          _this.pepList = {};
-        }
-
-        /**
-        * return the messageBus in this Registry
-        * @param {MessageBus}           messageBus
-        */
-
-        _createClass(Registry, [{
-          key: 'getAppSandbox',
-
-          /**
-          * This function is used to return the sandbox instance where the Application is executing. It is assumed there is just one App per Runtime instance.
-          */
-          value: function getAppSandbox() {
-            var _this = this;
-            return _this.appSandbox;
-          }
-
-          /**
-          * To register a new Hyperty in the runtime which returns the HypertyURL allocated to the new Hyperty.
-          * @param  {Sandbox}             sandbox               sandbox
-          * @param  {HypertyCatalogueURL} HypertyCatalogueURL   descriptor
-          * @return {HypertyURL}          HypertyURL
-          */
-        }, {
-          key: 'registerHyperty',
-          value: function registerHyperty(sandbox, descriptor) {
-            var _this = this;
-
-            //assuming descriptor come in this format, the service-provider-domain url is retrieved by a split instruction
-            //hyperty-catalogue://<service-provider-domain>/<catalogue-object-identifier>
-            var domainUrl = divideURL(descriptor).domain;
-
-            //TODO Call get Identity and set Identity to Identity Module
-            //for simplicity added an identity
-            var hypertyIdentity = domainUrl + '/identity';
-
-            var promise = new _Promise(function (resolve, reject) {
-
-              if (_this._messageBus === undefined) {
-                reject('MessageBus not found on registerStub');
-              } else {
-                //call check if the protostub exist
-                return _this.resolve('hyperty-runtime://' + domainUrl).then(function () {
-
-                  if (_this.hypertiesList.hasOwnProperty(domainUrl)) {
-                    _this.hypertiesList[domainUrl] = { identity: hypertyIdentity };
-                  }
-
-                  if (!_this.sandboxesList.hasOwnProperty(domainUrl)) {
-                    _this.sandboxesList[domainUrl] = sandbox;
-                    sandbox.addListener('*', function (msg) {
-                      _this._messageBus.postMessage(msg);
-                    });
-                  }
-
-                  // // addListener with the callback to execute when receive a message from the address-allocation
-                  // let item = _this._messageBus.addListener(_this.registryURL, (msg) => {
-                  //   let url = msg.body.hypertyRuntime;
-                  //
-                  //   _this.hypertiesList[domainUrl] = {identity: url + '/identity'};
-                  //   _this.sandboxesList[domainUrl] = sandbox;
-                  //
-                  //   //TODO register this hyperty in the Global Registry
-                  //
-                  //   item.remove();
-                  //
-                  // });
-
-                  // TODO: should be implemented with addresses poll
-                  // In this case we will request and return only one
-                  // address
-                  var numberOfAddresses = 1;
-                  _this.addressAllocation.create(domainUrl, numberOfAddresses).then(function (adderessList) {
-
-                    adderessList.forEach(function (address) {
-
-                      _this._messageBus.addListener(address + '/status', function (msg) {
-                        console.log('Message addListener for : ', address + '/status -> ' + msg);
-                      });
-                    });
-
-                    resolve(adderessList[0]);
-                  })['catch'](function (reason) {
-                    console.log('Address Reason: ', reason);
-                    reject(reason);
-                  });
-
-                  //TODO call the post message with create hypertyRegistration msg
-                });
-              }
-            });
-
-            return promise;
-          }
-
-          /**
-          * To unregister a previously registered Hyperty
-          * @param  {HypertyURL}          HypertyURL url        url
-          */
-        }, {
-          key: 'unregisterHyperty',
-          value: function unregisterHyperty(url) {
-            var _this = this;
-
-            var promise = new _Promise(function (resolve, reject) {
-
-              var request = _this.hypertiesList[url];
-
-              if (request === undefined) {
-                reject('Hyperty not found');
-              } else {
-                resolve('Hyperty successfully deleted');
-              }
-            });
-
-            return promise;
-          }
-
-          /**
-          * To discover protocol stubs available in the runtime for a certain domain. If available, it returns the runtime url for the protocol stub that connects to the requested domain. Required by the runtime BUS to route messages to remote servers or peers (do we need something similar for Hyperties?).
-          * @param  {DomainURL}           DomainURL            url
-          * @return {RuntimeURL}           RuntimeURL
-          */
-        }, {
-          key: 'discoverProtostub',
-          value: function discoverProtostub(url) {
-            if (!url) throw new Error('Parameter url needed');
-            var _this = this;
-
-            var promise = new _Promise(function (resolve, reject) {
-
-              var request = _this.protostubsList[url];
-
-              if (request === undefined) {
-                reject('requestUpdate couldn\' get the ProtostubURL');
-              } else {
-                resolve(request);
-              }
-            });
-
-            return promise;
-          }
-
-          /**
-           * To register a new Protocol Stub in the runtime including as input parameters the function to postMessage, the DomainURL that is connected with the stub, which returns the RuntimeURL allocated to the new ProtocolStub.
-           * @param {Sandbox}        Sandbox
-           * @param  {DomainURL}     DomainURL service provider domain
-           * @return {RuntimeProtoStubURL}
-           */
-        }, {
-          key: 'registerStub',
-          value: function registerStub(sandbox, domainURL) {
-            var _this = this;
-            var runtimeProtoStubURL;
-
-            var promise = new _Promise(function (resolve, reject) {
-
-              //check if messageBus is registered in registry or not
-              if (_this._messageBus === undefined) {
-                reject('MessageBus not found on registerStub');
-              }
-
-              //TODO implement a unique number for the protostubURL
-              if (!domainURL.indexOf('msg-node.')) {
-                domainURL = domainURL.substring(domainURL.indexOf('.') + 1);
-              }
-
-              runtimeProtoStubURL = 'msg-node.' + domainURL + '/protostub/' + Math.floor(Math.random() * 10000 + 1);
-
-              // TODO: Optimize this
-              _this.protostubsList[domainURL] = runtimeProtoStubURL;
-              _this.sandboxesList[runtimeProtoStubURL] = sandbox;
-
-              sandbox.addListener('*', function (msg) {
-                _this._messageBus.postMessage(msg);
-              });
-
-              resolve(runtimeProtoStubURL);
-
-              _this._messageBus.addListener(runtimeProtoStubURL + '/status', function (msg) {
-                if (msg.resource === msg.to + '/status') {
-                  console.log('RuntimeProtostubURL/status message: ', msg.body.value);
-                }
-              });
-            });
-
-            return promise;
-          }
-
-          /**
-          * To unregister a previously registered protocol stub
-          * @param  {HypertyRuntimeURL}   HypertyRuntimeURL     hypertyRuntimeURL
-          */
-        }, {
-          key: 'unregisterStub',
-          value: function unregisterStub(hypertyRuntimeURL) {
-            var _this = this;
-            var runtimeProtoStubURL;
-
-            var promise = new _Promise(function (resolve, reject) {
-
-              var data = _this.protostubsList[hypertyRuntimeURL];
-
-              if (data === undefined) {
-                reject('Error on unregisterStub: Hyperty not found');
-              } else {
-                delete _this.protostubsList[hypertyRuntimeURL];
-                resolve('ProtostubURL removed');
-              }
-            });
-
-            return promise;
-          }
-
-          /**
-          * To register a new Policy Enforcer in the runtime including as input parameters the function to postMessage, the HypertyURL associated with the PEP, which returns the RuntimeURL allocated to the new Policy Enforcer component.
-          * @param  {Message.Message} postMessage postMessage
-          * @param  {HypertyURL}          HypertyURL            hyperty
-          * @return {HypertyRuntimeURL}   HypertyRuntimeURL
-          */
-        }, {
-          key: 'registerPEP',
-          value: function registerPEP(postMessage, hyperty) {
-            var _this = this;
-
-            var promise = new _Promise(function (resolve, reject) {
-              //TODO check what parameter in the postMessage the pep is.
-              _this.pepList[hyperty] = postMessage;
-              resolve('PEP registered with success');
-            });
-
-            return promise;
-          }
-
-          /**
-          * To unregister a previously registered protocol stub
-          * @param  {HypertyRuntimeURL}   HypertyRuntimeURL     HypertyRuntimeURL
-          */
-        }, {
-          key: 'unregisterPEP',
-          value: function unregisterPEP(HypertyRuntimeURL) {
-            var _this = this;
-
-            var promise = new _Promise(function (resolve, reject) {
-
-              var result = _this.pepList[HypertyRuntimeURL];
-
-              if (result === undefined) {
-                reject('Pep Not found.');
-              } else {
-                resolve('PEP successfully removed.');
-              }
-            });
-
-            return promise;
-          }
-
-          /**
-          * To receive status events from components registered in the Registry.
-          * @param  {Message.Message}     Message.Message       event
-          */
-        }, {
-          key: 'onEvent',
-          value: function onEvent(event) {}
-          // TODO body...
-
-          /**
-          * To discover sandboxes available in the runtime for a certain domain. Required by the runtime UA to avoid more than one sandbox for the same domain.
-          * @param  {DomainURL} DomainURL url
-          * @return {RuntimeSandbox}           RuntimeSandbox
-          */
-
-        }, {
-          key: 'getSandbox',
-          value: function getSandbox(url) {
-            if (!url) throw new Error('Parameter url needed');
-            var _this = this;
-            var promise = new _Promise(function (resolve, reject) {
-
-              var request = _this.sandboxesList[url];
-
-              if (request === undefined) {
-                reject('Sandbox not found');
-              } else {
-                resolve(request);
-              }
-            });
-            return promise;
-          }
-
-          /**
-          * To verify if source is valid and to resolve target runtime url address if needed (eg protostub runtime url in case the message is to be dispatched to a remote endpoint).
-          * @param  {URL.URL}  url       url
-          * @return {Promise<URL.URL>}                 Promise <URL.URL>
-          */
-        }, {
-          key: 'resolve',
-          value: function resolve(url) {
-            console.log('resolve ' + url);
-            var _this = this;
-
-            //split the url to find the domainURL. deals with the url for example as:
-            //"hyperty-runtime://sp1/protostub/123",
-            var domainUrl = divideURL(url).domain;
-
-            var promise = new _Promise(function (resolve, reject) {
-
-              if (!domainUrl.indexOf('msg-node.')) {
-                domainUrl = domainUrl.substring(domainUrl.indexOf('.') + 1);
-              }
-
-              var request = _this.protostubsList[domainUrl];
-
-              _this.addEventListener('runtime:stubLoaded', function (domainUrl) {
-                resolve(domainUrl);
-              });
-
-              if (request !== undefined) {
-                resolve(request);
-              } else {
-                _this.trigger('runtime:loadStub', domainUrl);
-              }
-            });
-            return promise;
-          }
-        }, {
-          key: 'messageBus',
-          get: function get() {
-            var _this = this;
-            return _this._messageBus;
-          },
-
-          /**
-          * Set the messageBus in this Registry
-          * @param {MessageBus}           messageBus
-          */
-          set: function set(messageBus) {
-            var _this = this;
-            _this._messageBus = messageBus;
-
-            // Install AddressAllocation
-            var addressAllocation = new AddressAllocation(_this.registryURL, messageBus);
-            _this.addressAllocation = addressAllocation;
-          }
-        }]);
-
-        return Registry;
-      })(EventEmitter);
-
-      _export('default', Registry);
-    }
-  };
-});
-$__System.registerDynamic("16", ["17"], true, function($__require, exports, module) {
+$__System.registerDynamic("6", ["7"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var defined = $__require('17');
-  module.exports = function(it) {
-    return Object(defined(it));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("18", ["19", "16", "1a", "1b"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('19'),
-      toObject = $__require('16'),
-      IObject = $__require('1a');
-  module.exports = $__require('1b')(function() {
-    var a = Object.assign,
-        A = {},
-        B = {},
-        S = Symbol(),
-        K = 'abcdefghijklmnopqrst';
-    A[S] = 7;
-    K.split('').forEach(function(k) {
-      B[k] = k;
-    });
-    return a({}, A)[S] != 7 || Object.keys(a({}, B)).join('') != K;
-  }) ? function assign(target, source) {
-    var T = toObject(target),
-        $$ = arguments,
-        $$len = $$.length,
-        index = 1,
-        getKeys = $.getKeys,
-        getSymbols = $.getSymbols,
-        isEnum = $.isEnum;
-    while ($$len > index) {
-      var S = IObject($$[index++]),
-          keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S),
-          length = keys.length,
-          j = 0,
-          key;
-      while (length > j)
-        if (isEnum.call(S, key = keys[j++]))
-          T[key] = S[key];
-    }
-    return T;
-  } : Object.assign;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1c", ["1d", "18"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $def = $__require('1d');
-  $def($def.S + $def.F, 'Object', {assign: $__require('18')});
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1e", ["1c", "1f"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('1c');
-  module.exports = $__require('1f').Object.assign;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("20", ["1e"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('1e'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("21", ["22"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var SYMBOL_ITERATOR = $__require('22')('iterator'),
+  var ITERATOR = $__require('7')('iterator'),
       SAFE_CLOSING = false;
   try {
-    var riter = [7][SYMBOL_ITERATOR]();
+    var riter = [7][ITERATOR]();
     riter['return'] = function() {
       SAFE_CLOSING = true;
     };
@@ -2991,11 +1571,11 @@ $__System.registerDynamic("21", ["22"], true, function($__require, exports, modu
     var safe = false;
     try {
       var arr = [7],
-          iter = arr[SYMBOL_ITERATOR]();
+          iter = arr[ITERATOR]();
       iter.next = function() {
         safe = true;
       };
-      arr[SYMBOL_ITERATOR] = function() {
+      arr[ITERATOR] = function() {
         return iter;
       };
       exec(arr);
@@ -3006,22 +1586,46 @@ $__System.registerDynamic("21", ["22"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("23", ["24"], true, function($__require, exports, module) {
+$__System.registerDynamic("8", ["9", "a", "b", "7"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $redef = $__require('24');
+  var core = $__require('9'),
+      $ = $__require('a'),
+      DESCRIPTORS = $__require('b'),
+      SPECIES = $__require('7')('species');
+  module.exports = function(KEY) {
+    var C = core[KEY];
+    if (DESCRIPTORS && C && !C[SPECIES])
+      $.setDesc(C, SPECIES, {
+        configurable: true,
+        get: function() {
+          return this;
+        }
+      });
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("c", ["d"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var redefine = $__require('d');
   module.exports = function(target, src) {
     for (var key in src)
-      $redef(target, key, src[key]);
+      redefine(target, key, src[key]);
     return target;
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("25", [], true, function($__require, exports, module) {
+$__System.registerDynamic("e", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3113,43 +1717,43 @@ $__System.registerDynamic("25", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("26", ["25"], true, function($__require, exports, module) {
+$__System.registerDynamic("f", ["e"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('25');
+  module.exports = $__require('e');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("27", ["26"], true, function($__require, exports, module) {
+$__System.registerDynamic("10", ["f"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__System._nodeRequire ? process : $__require('26');
+  module.exports = $__System._nodeRequire ? process : $__require('f');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("28", ["27"], true, function($__require, exports, module) {
+$__System.registerDynamic("11", ["10"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('27');
+  module.exports = $__require('10');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("29", ["2a", "2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("12", ["13", "14"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var isObject = $__require('2a'),
-      document = $__require('2b').document,
+  var isObject = $__require('13'),
+      document = $__require('14').document,
       is = isObject(document) && isObject(document.createElement);
   module.exports = function(it) {
     return is ? document.createElement(it) : {};
@@ -3158,17 +1762,17 @@ $__System.registerDynamic("29", ["2a", "2b"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("2c", ["2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("15", ["14"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('2b').document && document.documentElement;
+  module.exports = $__require('14').document && document.documentElement;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2d", [], true, function($__require, exports, module) {
+$__System.registerDynamic("16", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3193,18 +1797,17 @@ $__System.registerDynamic("2d", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("2e", ["2f", "2d", "2c", "29", "2b", "30", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("17", ["18", "16", "15", "12", "14", "19", "11"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
-    'use strict';
-    var ctx = $__require('2f'),
-        invoke = $__require('2d'),
-        html = $__require('2c'),
-        cel = $__require('29'),
-        global = $__require('2b'),
+    var ctx = $__require('18'),
+        invoke = $__require('16'),
+        html = $__require('15'),
+        cel = $__require('12'),
+        global = $__require('14'),
         process = global.process,
         setTask = global.setImmediate,
         clearTask = global.clearImmediate,
@@ -3241,7 +1844,7 @@ $__System.registerDynamic("2e", ["2f", "2d", "2c", "29", "2b", "30", "28"], true
       clearTask = function clearImmediate(id) {
         delete queue[id];
       };
-      if ($__require('30')(process) == 'process') {
+      if ($__require('19')(process) == 'process') {
         defer = function(id) {
           process.nextTick(ctx(run, id, 1));
         };
@@ -3272,37 +1875,40 @@ $__System.registerDynamic("2e", ["2f", "2d", "2c", "29", "2b", "30", "28"], true
       set: setTask,
       clear: clearTask
     };
-  })($__require('28'));
+  })($__require('11'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("31", ["2b", "2e", "30", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("1a", ["14", "17", "19", "11"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
-    var global = $__require('2b'),
-        macrotask = $__require('2e').set,
+    var global = $__require('14'),
+        macrotask = $__require('17').set,
         Observer = global.MutationObserver || global.WebKitMutationObserver,
         process = global.process,
-        isNode = $__require('30')(process) == 'process',
+        Promise = global.Promise,
+        isNode = $__require('19')(process) == 'process',
         head,
         last,
         notify;
     var flush = function() {
       var parent,
-          domain;
+          domain,
+          fn;
       if (isNode && (parent = process.domain)) {
         process.domain = null;
         parent.exit();
       }
       while (head) {
         domain = head.domain;
+        fn = head.fn;
         if (domain)
           domain.enter();
-        head.fn.call();
+        fn();
         if (domain)
           domain.exit();
         head = head.next;
@@ -3321,6 +1927,10 @@ $__System.registerDynamic("31", ["2b", "2e", "30", "28"], true, function($__requ
       new Observer(flush).observe(node, {characterData: true});
       notify = function() {
         node.data = toggle = -toggle;
+      };
+    } else if (Promise && Promise.resolve) {
+      notify = function() {
+        Promise.resolve().then(flush);
       };
     } else {
       notify = function() {
@@ -3341,19 +1951,19 @@ $__System.registerDynamic("31", ["2b", "2e", "30", "28"], true, function($__requ
       }
       last = task;
     };
-  })($__require('28'));
+  })($__require('11'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("32", ["33", "34", "22"], true, function($__require, exports, module) {
+$__System.registerDynamic("1b", ["1c", "1d", "7"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var anObject = $__require('33'),
-      aFunction = $__require('34'),
-      SPECIES = $__require('22')('species');
+  var anObject = $__require('1c'),
+      aFunction = $__require('1d'),
+      SPECIES = $__require('7')('species');
   module.exports = function(O, D) {
     var C = anObject(O).constructor,
         S;
@@ -3363,28 +1973,7 @@ $__System.registerDynamic("32", ["33", "34", "22"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("35", ["19", "22", "36"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('19'),
-      SPECIES = $__require('22')('species');
-  module.exports = function(C) {
-    if ($__require('36') && !(SPECIES in C))
-      $.setDesc(C, SPECIES, {
-        configurable: true,
-        get: function() {
-          return this;
-        }
-      });
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("37", [], true, function($__require, exports, module) {
+$__System.registerDynamic("1e", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3396,15 +1985,52 @@ $__System.registerDynamic("37", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("38", ["39", "22", "3a", "1f"], true, function($__require, exports, module) {
+$__System.registerDynamic("1f", ["a", "13", "1c", "18"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var classof = $__require('39'),
-      ITERATOR = $__require('22')('iterator'),
-      Iterators = $__require('3a');
-  module.exports = $__require('1f').getIteratorMethod = function(it) {
+  var getDesc = $__require('a').getDesc,
+      isObject = $__require('13'),
+      anObject = $__require('1c');
+  var check = function(O, proto) {
+    anObject(O);
+    if (!isObject(proto) && proto !== null)
+      throw TypeError(proto + ": can't set as prototype!");
+  };
+  module.exports = {
+    set: Object.setPrototypeOf || ('__proto__' in {} ? function(test, buggy, set) {
+      try {
+        set = $__require('18')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
+        set(test, []);
+        buggy = !(test instanceof Array);
+      } catch (e) {
+        buggy = true;
+      }
+      return function setPrototypeOf(O, proto) {
+        check(O, proto);
+        if (buggy)
+          O.__proto__ = proto;
+        else
+          set(O, proto);
+        return O;
+      };
+    }({}, false) : undefined),
+    check: check
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("20", ["21", "7", "22", "9"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var classof = $__require('21'),
+      ITERATOR = $__require('7')('iterator'),
+      Iterators = $__require('22');
+  module.exports = $__require('9').getIteratorMethod = function(it) {
     if (it != undefined)
       return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
   };
@@ -3412,12 +2038,12 @@ $__System.registerDynamic("38", ["39", "22", "3a", "1f"], true, function($__requ
   return module.exports;
 });
 
-$__System.registerDynamic("3b", ["3c"], true, function($__require, exports, module) {
+$__System.registerDynamic("23", ["24"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var toInteger = $__require('3c'),
+  var toInteger = $__require('24'),
       min = Math.min;
   module.exports = function(it) {
     return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0;
@@ -3426,26 +2052,27 @@ $__System.registerDynamic("3b", ["3c"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("3d", ["3a", "22"], true, function($__require, exports, module) {
+$__System.registerDynamic("25", ["22", "7"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var Iterators = $__require('3a'),
-      ITERATOR = $__require('22')('iterator');
+  var Iterators = $__require('22'),
+      ITERATOR = $__require('7')('iterator'),
+      ArrayProto = Array.prototype;
   module.exports = function(it) {
-    return (Iterators.Array || Array.prototype[ITERATOR]) === it;
+    return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3e", ["33"], true, function($__require, exports, module) {
+$__System.registerDynamic("26", ["1c"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var anObject = $__require('33');
+  var anObject = $__require('1c');
   module.exports = function(iterator, fn, value, entries) {
     try {
       return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -3460,17 +2087,17 @@ $__System.registerDynamic("3e", ["33"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("3f", ["2f", "3e", "3d", "33", "3b", "38"], true, function($__require, exports, module) {
+$__System.registerDynamic("27", ["18", "26", "25", "1c", "23", "20"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ctx = $__require('2f'),
-      call = $__require('3e'),
-      isArrayIter = $__require('3d'),
-      anObject = $__require('33'),
-      toLength = $__require('3b'),
-      getIterFn = $__require('38');
+  var ctx = $__require('18'),
+      call = $__require('26'),
+      isArrayIter = $__require('25'),
+      anObject = $__require('1c'),
+      toLength = $__require('23'),
+      getIterFn = $__require('20');
   module.exports = function(iterable, entries, fn, that) {
     var iterFn = getIterFn(iterable),
         f = ctx(fn, that, entries ? 2 : 1),
@@ -3493,7 +2120,7 @@ $__System.registerDynamic("3f", ["2f", "3e", "3d", "33", "3b", "38"], true, func
   return module.exports;
 });
 
-$__System.registerDynamic("40", [], true, function($__require, exports, module) {
+$__System.registerDynamic("28", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3507,13 +2134,40 @@ $__System.registerDynamic("40", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("39", ["30", "22"], true, function($__require, exports, module) {
+$__System.registerDynamic("1c", ["13"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var cof = $__require('30'),
-      TAG = $__require('22')('toStringTag'),
+  var isObject = $__require('13');
+  module.exports = function(it) {
+    if (!isObject(it))
+      throw TypeError(it + ' is not an object!');
+    return it;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("13", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(it) {
+    return typeof it === 'object' ? it !== null : typeof it === 'function';
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("21", ["19", "7"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = $__require('19'),
+      TAG = $__require('7')('toStringTag'),
       ARG = cof(function() {
         return arguments;
       }()) == 'Arguments';
@@ -3527,31 +2181,29 @@ $__System.registerDynamic("39", ["30", "22"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33", "34", "40", "3f", "43", "37", "35", "22", "32", "44", "31", "36", "23", "45", "1f", "21", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("29", ["a", "2a", "14", "18", "21", "2b", "13", "1c", "1d", "28", "27", "1f", "1e", "7", "1b", "1a", "b", "c", "2c", "8", "9", "6", "11"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var $ = $__require('19'),
-        LIBRARY = $__require('42'),
-        global = $__require('2b'),
-        ctx = $__require('2f'),
-        classof = $__require('39'),
-        $def = $__require('1d'),
-        isObject = $__require('2a'),
-        anObject = $__require('33'),
-        aFunction = $__require('34'),
-        strictNew = $__require('40'),
-        forOf = $__require('3f'),
-        setProto = $__require('43').set,
-        same = $__require('37'),
-        species = $__require('35'),
-        SPECIES = $__require('22')('species'),
-        speciesConstructor = $__require('32'),
-        RECORD = $__require('44')('record'),
-        asap = $__require('31'),
+    var $ = $__require('a'),
+        LIBRARY = $__require('2a'),
+        global = $__require('14'),
+        ctx = $__require('18'),
+        classof = $__require('21'),
+        $export = $__require('2b'),
+        isObject = $__require('13'),
+        anObject = $__require('1c'),
+        aFunction = $__require('1d'),
+        strictNew = $__require('28'),
+        forOf = $__require('27'),
+        setProto = $__require('1f').set,
+        same = $__require('1e'),
+        SPECIES = $__require('7')('species'),
+        speciesConstructor = $__require('1b'),
+        asap = $__require('1a'),
         PROMISE = 'Promise',
         process = global.process,
         isNode = classof(process) == 'process',
@@ -3563,7 +2215,7 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
         test.constructor = Object;
       return P.resolve(test) === test;
     };
-    var useNative = function() {
+    var USE_NATIVE = function() {
       var works = false;
       function P2(x) {
         var self = new P(x);
@@ -3577,7 +2229,7 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
         if (!(P2.resolve(5).then(function() {}) instanceof P2)) {
           works = false;
         }
-        if (works && $__require('36')) {
+        if (works && $__require('b')) {
           var thenableThenGotten = false;
           P.resolve($.setDesc({}, 'then', {get: function() {
               thenableThenGotten = true;
@@ -3589,9 +2241,6 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
       }
       return works;
     }();
-    var isPromise = function(it) {
-      return isObject(it) && (useNative ? classof(it) == 'Promise' : RECORD in it);
-    };
     var sameConstructor = function(a, b) {
       if (LIBRARY && a === P && b === Wrapper)
         return true;
@@ -3605,6 +2254,24 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
       var then;
       return isObject(it) && typeof(then = it.then) == 'function' ? then : false;
     };
+    var PromiseCapability = function(C) {
+      var resolve,
+          reject;
+      this.promise = new C(function($$resolve, $$reject) {
+        if (resolve !== undefined || reject !== undefined)
+          throw TypeError('Bad Promise constructor');
+        resolve = $$resolve;
+        reject = $$reject;
+      });
+      this.resolve = aFunction(resolve), this.reject = aFunction(reject);
+    };
+    var perform = function(exec) {
+      try {
+        exec();
+      } catch (e) {
+        return {error: e};
+      }
+    };
     var notify = function(record, isReject) {
       if (record.n)
         return;
@@ -3614,25 +2281,27 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
         var value = record.v,
             ok = record.s == 1,
             i = 0;
-        var run = function(react) {
-          var cb = ok ? react.ok : react.fail,
-              ret,
+        var run = function(reaction) {
+          var handler = ok ? reaction.ok : reaction.fail,
+              resolve = reaction.resolve,
+              reject = reaction.reject,
+              result,
               then;
           try {
-            if (cb) {
+            if (handler) {
               if (!ok)
                 record.h = true;
-              ret = cb === true ? value : cb(value);
-              if (ret === react.P) {
-                react.rej(TypeError('Promise-chain cycle'));
-              } else if (then = isThenable(ret)) {
-                then.call(ret, react.res, react.rej);
+              result = handler === true ? value : handler(value);
+              if (result === reaction.promise) {
+                reject(TypeError('Promise-chain cycle'));
+              } else if (then = isThenable(result)) {
+                then.call(result, resolve, reject);
               } else
-                react.res(ret);
+                resolve(result);
             } else
-              react.rej(value);
-          } catch (err) {
-            react.rej(err);
+              reject(value);
+          } catch (e) {
+            reject(e);
           }
         };
         while (chain.length > i)
@@ -3661,15 +2330,15 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
       });
     };
     var isUnhandled = function(promise) {
-      var record = promise[RECORD],
+      var record = promise._d,
           chain = record.a || record.c,
           i = 0,
-          react;
+          reaction;
       if (record.h)
         return false;
       while (chain.length > i) {
-        react = chain[i++];
-        if (react.fail || !isUnhandled(react.P))
+        reaction = chain[i++];
+        if (reaction.fail || !isUnhandled(reaction.promise))
           return false;
       }
       return true;
@@ -3693,6 +2362,8 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
       record.d = true;
       record = record.r || record;
       try {
+        if (record.p === value)
+          throw TypeError("Promise can't be resolved itself");
         if (then = isThenable(value)) {
           asap(function() {
             var wrapper = {
@@ -3717,10 +2388,10 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
         }, e);
       }
     };
-    if (!useNative) {
+    if (!USE_NATIVE) {
       P = function Promise(executor) {
         aFunction(executor);
-        var record = {
+        var record = this._d = {
           p: strictNew(this, P, PROMISE),
           c: [],
           a: undefined,
@@ -3730,29 +2401,22 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
           h: false,
           n: false
         };
-        this[RECORD] = record;
         try {
           executor(ctx($resolve, record, 1), ctx($reject, record, 1));
         } catch (err) {
           $reject.call(record, err);
         }
       };
-      $__require('23')(P.prototype, {
+      $__require('c')(P.prototype, {
         then: function then(onFulfilled, onRejected) {
-          var react = {
-            ok: typeof onFulfilled == 'function' ? onFulfilled : true,
-            fail: typeof onRejected == 'function' ? onRejected : false
-          };
-          var promise = react.P = new (speciesConstructor(this, P))(function(res, rej) {
-            react.res = res;
-            react.rej = rej;
-          });
-          aFunction(react.res);
-          aFunction(react.rej);
-          var record = this[RECORD];
-          record.c.push(react);
+          var reaction = new PromiseCapability(speciesConstructor(this, P)),
+              promise = reaction.promise,
+              record = this._d;
+          reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true;
+          reaction.fail = typeof onRejected == 'function' && onRejected;
+          record.c.push(reaction);
           if (record.a)
-            record.a.push(react);
+            record.a.push(reaction);
           if (record.s)
             notify(record, false);
           return promise;
@@ -3762,56 +2426,115 @@ $__System.registerDynamic("41", ["19", "42", "2b", "2f", "39", "1d", "2a", "33",
         }
       });
     }
-    $def($def.G + $def.W + $def.F * !useNative, {Promise: P});
-    $__require('45')(P, PROMISE);
-    species(P);
-    species(Wrapper = $__require('1f')[PROMISE]);
-    $def($def.S + $def.F * !useNative, PROMISE, {reject: function reject(r) {
-        return new this(function(res, rej) {
-          rej(r);
-        });
+    $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: P});
+    $__require('2c')(P, PROMISE);
+    $__require('8')(PROMISE);
+    Wrapper = $__require('9')[PROMISE];
+    $export($export.S + $export.F * !USE_NATIVE, PROMISE, {reject: function reject(r) {
+        var capability = new PromiseCapability(this),
+            $$reject = capability.reject;
+        $$reject(r);
+        return capability.promise;
       }});
-    $def($def.S + $def.F * (!useNative || testResolve(true)), PROMISE, {resolve: function resolve(x) {
-        return isPromise(x) && sameConstructor(x.constructor, this) ? x : new this(function(res) {
-          res(x);
-        });
+    $export($export.S + $export.F * (!USE_NATIVE || testResolve(true)), PROMISE, {resolve: function resolve(x) {
+        if (x instanceof P && sameConstructor(x.constructor, this))
+          return x;
+        var capability = new PromiseCapability(this),
+            $$resolve = capability.resolve;
+        $$resolve(x);
+        return capability.promise;
       }});
-    $def($def.S + $def.F * !(useNative && $__require('21')(function(iter) {
+    $export($export.S + $export.F * !(USE_NATIVE && $__require('6')(function(iter) {
       P.all(iter)['catch'](function() {});
     })), PROMISE, {
       all: function all(iterable) {
         var C = getConstructor(this),
+            capability = new PromiseCapability(C),
+            resolve = capability.resolve,
+            reject = capability.reject,
             values = [];
-        return new C(function(res, rej) {
+        var abrupt = perform(function() {
           forOf(iterable, false, values.push, values);
           var remaining = values.length,
               results = Array(remaining);
           if (remaining)
             $.each.call(values, function(promise, index) {
+              var alreadyCalled = false;
               C.resolve(promise).then(function(value) {
+                if (alreadyCalled)
+                  return;
+                alreadyCalled = true;
                 results[index] = value;
-                --remaining || res(results);
-              }, rej);
+                --remaining || resolve(results);
+              }, reject);
             });
           else
-            res(results);
+            resolve(results);
         });
+        if (abrupt)
+          reject(abrupt.error);
+        return capability.promise;
       },
       race: function race(iterable) {
-        var C = getConstructor(this);
-        return new C(function(res, rej) {
+        var C = getConstructor(this),
+            capability = new PromiseCapability(C),
+            reject = capability.reject;
+        var abrupt = perform(function() {
           forOf(iterable, false, function(promise) {
-            C.resolve(promise).then(res, rej);
+            C.resolve(promise).then(capability.resolve, reject);
           });
         });
+        if (abrupt)
+          reject(abrupt.error);
+        return capability.promise;
       }
     });
-  })($__require('28'));
+  })($__require('11'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("46", [], true, function($__require, exports, module) {
+$__System.registerDynamic("19", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var toString = {}.toString;
+  module.exports = function(it) {
+    return toString.call(it).slice(8, -1);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2d", ["19"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var cof = $__require('19');
+  module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
+    return cof(it) == 'String' ? it.split('') : Object(it);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("2e", ["2d", "2f"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var IObject = $__require('2d'),
+      defined = $__require('2f');
+  module.exports = function(it) {
+    return IObject(defined(it));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("30", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3826,7 +2549,7 @@ $__System.registerDynamic("46", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("47", [], true, function($__require, exports, module) {
+$__System.registerDynamic("31", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3836,17 +2559,17 @@ $__System.registerDynamic("47", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("48", ["47", "46", "3a", "49", "4a"], true, function($__require, exports, module) {
+$__System.registerDynamic("32", ["31", "30", "22", "2e", "33"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var setUnscope = $__require('47'),
-      step = $__require('46'),
-      Iterators = $__require('3a'),
-      toIObject = $__require('49');
-  $__require('4a')(Array, 'Array', function(iterated, kind) {
+  var addToUnscopables = $__require('31'),
+      step = $__require('30'),
+      Iterators = $__require('22'),
+      toIObject = $__require('2e');
+  module.exports = $__require('33')(Array, 'Array', function(iterated, kind) {
     this._t = toIObject(iterated);
     this._i = 0;
     this._k = kind;
@@ -3865,74 +2588,26 @@ $__System.registerDynamic("48", ["47", "46", "3a", "49", "4a"], true, function($
     return step(0, [index, O[index]]);
   }, 'values');
   Iterators.Arguments = Iterators.Array;
-  setUnscope('keys');
-  setUnscope('values');
-  setUnscope('entries');
+  addToUnscopables('keys');
+  addToUnscopables('values');
+  addToUnscopables('entries');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("4b", ["48", "3a"], true, function($__require, exports, module) {
+$__System.registerDynamic("34", ["32", "22"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  $__require('48');
-  var Iterators = $__require('3a');
+  $__require('32');
+  var Iterators = $__require('22');
   Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("45", ["19", "4c", "22"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var def = $__require('19').setDesc,
-      has = $__require('4c'),
-      TAG = $__require('22')('toStringTag');
-  module.exports = function(it, tag, stat) {
-    if (it && !has(it = stat ? it : it.prototype, TAG))
-      def(it, TAG, {
-        configurable: true,
-        value: tag
-      });
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4d", ["19", "4e", "22", "4f", "45"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('19'),
-      IteratorPrototype = {};
-  $__require('4e')(IteratorPrototype, $__require('22')('iterator'), function() {
-    return this;
-  });
-  module.exports = function(Constructor, NAME, next) {
-    Constructor.prototype = $.create(IteratorPrototype, {next: $__require('4f')(1, next)});
-    $__require('45')(Constructor, NAME + ' Iterator');
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3a", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {};
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("44", [], true, function($__require, exports, module) {
+$__System.registerDynamic("35", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3946,12 +2621,12 @@ $__System.registerDynamic("44", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("50", ["2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("36", ["14"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var global = $__require('2b'),
+  var global = $__require('14'),
       SHARED = '__core-js_shared__',
       store = global[SHARED] || (global[SHARED] = {});
   module.exports = function(key) {
@@ -3961,21 +2636,72 @@ $__System.registerDynamic("50", ["2b"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("22", ["50", "2b", "44"], true, function($__require, exports, module) {
+$__System.registerDynamic("7", ["36", "35", "14"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var store = $__require('50')('wks'),
-      Symbol = $__require('2b').Symbol;
+  var store = $__require('36')('wks'),
+      uid = $__require('35'),
+      Symbol = $__require('14').Symbol;
   module.exports = function(name) {
-    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || $__require('44'))('Symbol.' + name));
+    return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("4c", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2c", ["a", "37", "7"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var def = $__require('a').setDesc,
+      has = $__require('37'),
+      TAG = $__require('7')('toStringTag');
+  module.exports = function(it, tag, stat) {
+    if (it && !has(it = stat ? it : it.prototype, TAG))
+      def(it, TAG, {
+        configurable: true,
+        value: tag
+      });
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("38", ["a", "39", "2c", "3a", "7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = $__require('a'),
+      descriptor = $__require('39'),
+      setToStringTag = $__require('2c'),
+      IteratorPrototype = {};
+  $__require('3a')(IteratorPrototype, $__require('7')('iterator'), function() {
+    return this;
+  });
+  module.exports = function(Constructor, NAME, next) {
+    Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
+    setToStringTag(Constructor, NAME + ' Iterator');
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("22", [], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {};
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("37", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -3988,12 +2714,28 @@ $__System.registerDynamic("4c", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("36", ["1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("3b", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = !$__require('1b')(function() {
+  module.exports = function(exec) {
+    try {
+      return !!exec();
+    } catch (e) {
+      return true;
+    }
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("b", ["3b"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = !$__require('3b')(function() {
     return Object.defineProperty({}, 'a', {get: function() {
         return 7;
       }}).a != 7;
@@ -4002,7 +2744,7 @@ $__System.registerDynamic("36", ["1b"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("4f", [], true, function($__require, exports, module) {
+$__System.registerDynamic("39", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -4019,14 +2761,36 @@ $__System.registerDynamic("4f", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("4e", ["19", "4f", "36"], true, function($__require, exports, module) {
+$__System.registerDynamic("a", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $ = $__require('19'),
-      createDesc = $__require('4f');
-  module.exports = $__require('36') ? function(object, key, value) {
+  var $Object = Object;
+  module.exports = {
+    create: $Object.create,
+    getProto: $Object.getPrototypeOf,
+    isEnum: {}.propertyIsEnumerable,
+    getDesc: $Object.getOwnPropertyDescriptor,
+    setDesc: $Object.defineProperty,
+    setDescs: $Object.defineProperties,
+    getKeys: $Object.keys,
+    getNames: $Object.getOwnPropertyNames,
+    getSymbols: $Object.getOwnPropertySymbols,
+    each: [].forEach
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("3a", ["a", "39", "b"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var $ = $__require('a'),
+      createDesc = $__require('39');
+  module.exports = $__require('b') ? function(object, key, value) {
     return $.setDesc(object, key, createDesc(1, value));
   } : function(object, key, value) {
     object[key] = value;
@@ -4036,733 +2800,17 @@ $__System.registerDynamic("4e", ["19", "4f", "36"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("24", ["4e"], true, function($__require, exports, module) {
+$__System.registerDynamic("d", ["3a"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('4e');
+  module.exports = $__require('3a');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("42", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("4a", ["42", "1d", "24", "4e", "4c", "22", "3a", "4d", "19", "45"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var LIBRARY = $__require('42'),
-      $def = $__require('1d'),
-      $redef = $__require('24'),
-      hide = $__require('4e'),
-      has = $__require('4c'),
-      SYMBOL_ITERATOR = $__require('22')('iterator'),
-      Iterators = $__require('3a'),
-      BUGGY = !([].keys && 'next' in [].keys()),
-      FF_ITERATOR = '@@iterator',
-      KEYS = 'keys',
-      VALUES = 'values';
-  var returnThis = function() {
-    return this;
-  };
-  module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE) {
-    $__require('4d')(Constructor, NAME, next);
-    var createMethod = function(kind) {
-      switch (kind) {
-        case KEYS:
-          return function keys() {
-            return new Constructor(this, kind);
-          };
-        case VALUES:
-          return function values() {
-            return new Constructor(this, kind);
-          };
-      }
-      return function entries() {
-        return new Constructor(this, kind);
-      };
-    };
-    var TAG = NAME + ' Iterator',
-        proto = Base.prototype,
-        _native = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT],
-        _default = _native || createMethod(DEFAULT),
-        methods,
-        key;
-    if (_native) {
-      var IteratorPrototype = $__require('19').getProto(_default.call(new Base));
-      $__require('45')(IteratorPrototype, TAG, true);
-      if (!LIBRARY && has(proto, FF_ITERATOR))
-        hide(IteratorPrototype, SYMBOL_ITERATOR, returnThis);
-    }
-    if (!LIBRARY || FORCE)
-      hide(proto, SYMBOL_ITERATOR, _default);
-    Iterators[NAME] = _default;
-    Iterators[TAG] = returnThis;
-    if (DEFAULT) {
-      methods = {
-        values: DEFAULT == VALUES ? _default : createMethod(VALUES),
-        keys: IS_SET ? _default : createMethod(KEYS),
-        entries: DEFAULT != VALUES ? _default : createMethod('entries')
-      };
-      if (FORCE)
-        for (key in methods) {
-          if (!(key in proto))
-            $redef(proto, key, methods[key]);
-        }
-      else
-        $def($def.P + $def.F * BUGGY, NAME, methods);
-    }
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("3c", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ceil = Math.ceil,
-      floor = Math.floor;
-  module.exports = function(it) {
-    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("51", ["3c", "17"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toInteger = $__require('3c'),
-      defined = $__require('17');
-  module.exports = function(TO_STRING) {
-    return function(that, pos) {
-      var s = String(defined(that)),
-          i = toInteger(pos),
-          l = s.length,
-          a,
-          b;
-      if (i < 0 || i >= l)
-        return TO_STRING ? '' : undefined;
-      a = s.charCodeAt(i);
-      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-    };
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("52", ["51", "4a"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $at = $__require('51')(true);
-  $__require('4a')(String, 'String', function(iterated) {
-    this._t = String(iterated);
-    this._i = 0;
-  }, function() {
-    var O = this._t,
-        index = this._i,
-        point;
-    if (index >= O.length)
-      return {
-        value: undefined,
-        done: true
-      };
-    point = $at(O, index);
-    this._i += point.length;
-    return {
-      value: point,
-      done: false
-    };
-  });
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("53", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  "format cjs";
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("54", ["53", "52", "4b", "41", "1f"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('53');
-  $__require('52');
-  $__require('4b');
-  $__require('41');
-  module.exports = $__require('1f').Promise;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("a", ["54"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('54'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.register('55', ['6', '7', '10', '11', '12', '15', '20', 'a', 'f', 'd'], function (_export) {
-  var _createClass, _classCallCheck, MessageBus, PolicyEngine, IdentityModule, Registry, _Object$assign, _Promise, RuntimeCatalogue, SyncherManager, RuntimeUA;
-
-  return {
-    setters: [function (_) {
-      _createClass = _['default'];
-    }, function (_2) {
-      _classCallCheck = _2['default'];
-    }, function (_7) {
-      MessageBus = _7['default'];
-    }, function (_6) {
-      PolicyEngine = _6['default'];
-    }, function (_5) {
-      IdentityModule = _5['default'];
-    }, function (_4) {
-      Registry = _4['default'];
-    }, function (_3) {
-      _Object$assign = _3['default'];
-    }, function (_a) {
-      _Promise = _a['default'];
-    }, function (_f) {
-      RuntimeCatalogue = _f['default'];
-    }, function (_d) {
-      SyncherManager = _d['default'];
-    }],
-    execute: function () {
-      //Main dependecies
-
-      /**
-       * Runtime User Agent Interface will process all the dependecies of the core runtime;
-       * @author Vitor Silva [vitor-t-silva@telecom.pt]
-       * @version 0.2.0
-       *
-       * @property {sandboxFactory} sandboxFactory - Specific implementation of sandbox;
-       * @property {RuntimeCatalogue} runtimeCatalogue - Catalogue of components can be installed;
-       * @property {runtimeURL} runtimeURL - This identify the core runtime, should be unique;
-       * @property {IdentityModule} identityModule - Identity Module;
-       * @property {PolicyEngine} policyEngine - Policy Engine Module;
-       * @property {Registry} registry - Registry Module;
-       * @property {MessageBus} messageBus - Message Bus is used like a router to redirect the messages from one component to other(s)
-       */
-      'use strict';
-
-      RuntimeUA = (function () {
-
-        /**
-         * Create a new instance of Runtime User Agent
-         * @param {sandboxFactory} sandboxFactory - Specific implementation for the environment where the core runtime will run;
-         */
-
-        function RuntimeUA(sandboxFactory) {
-          _classCallCheck(this, RuntimeUA);
-
-          if (!sandboxFactory) throw new Error('The sandbox factory is a needed parameter');
-
-          var _this = this;
-
-          _this.sandboxFactory = sandboxFactory;
-
-          _this.runtimeCatalogue = new RuntimeCatalogue();
-
-          // TODO: post and return registry/hypertyRuntimeInstance to and from Back-end Service
-          // the response is like: runtime://sp1/123
-
-          var runtimeURL = 'runtime://ua.pt/' + Math.floor(Math.random() * 10000 + 1);
-          _this.runtimeURL = runtimeURL;
-
-          // TODO: check if runtime catalogue need the runtimeURL;
-          _this.runtimeCatalogue.runtimeURL = runtimeURL;
-
-          // Use the sandbox factory to create an AppSandbox;
-          // In the future can be decided by policyEngine if we need
-          // create a AppSandbox or not;
-          var appSandbox = sandboxFactory.createAppSandbox();
-
-          // Instantiate the identity Module
-          _this.identityModule = new IdentityModule();
-
-          // Instantiate the Policy Engine
-          _this.policyEngine = new PolicyEngine();
-
-          // Instantiate the Registry Module
-          _this.registry = new Registry(runtimeURL, appSandbox);
-
-          // Instantiate the Message Bus
-          _this.messageBus = new MessageBus(_this.registry);
-
-          // Register messageBus on Registry
-          _this.registry.messageBus = _this.messageBus;
-
-          _this.registry.addEventListener('runtime:loadStub', function (domainURL) {
-
-            _this.loadStub(domainURL).then(function (result) {
-              _this.registry.trigger('runtime:stubLoaded', domainURL);
-            })['catch'](function (reason) {
-              console.error(reason);
-            });
-          });
-
-          // Use sandbox factory to use specific methods
-          // and set the message bus to the factory
-          sandboxFactory.messageBus = _this.messageBus;
-
-          // Instanciate the SyncherManager;
-          _this.syncherManager = new SyncherManager(_this.runtimeURL, _this.messageBus, {});
-        }
-
-        /**
-        * Accomodate interoperability in H2H and proto on the fly for newly discovered devices in M2M
-        * @param  {CatalogueDataObject.HypertyDescriptor}   descriptor    descriptor
-        */
-
-        _createClass(RuntimeUA, [{
-          key: 'discoverHiperty',
-          value: function discoverHiperty(descriptor) {}
-          // Body...
-
-          /**
-          * Register Hyperty deployed by the App that is passed as input parameter. To be used when App and Hyperties are from the same domain otherwise the RuntimeUA will raise an exception and the App has to use the loadHyperty(..) function.
-          * @param  {Object} Object                   hypertyInstance
-          * @param  {URL.HypertyCatalogueURL}         descriptor      descriptor
-          */
-
-        }, {
-          key: 'registerHyperty',
-          value: function registerHyperty(hypertyInstance, descriptor) {}
-          // Body...
-
-          /**
-          * Deploy Hyperty from Catalogue URL
-          * @param  {URL.URL}    hyperty hypertyInstance url;
-          */
-
-        }, {
-          key: 'loadHyperty',
-          value: function loadHyperty(hypertyDescriptorURL) {
-
-            var _this = this;
-
-            if (!hypertyDescriptorURL) throw new Error('Hyperty descriptor url parameter is needed');
-
-            return new _Promise(function (resolve, reject) {
-
-              var _hypertyURL = undefined;
-              var _hypertySandbox = undefined;
-              var _hypertyDescriptor = undefined;
-              var _hypertySourcePackage = undefined;
-
-              var errorReason = function errorReason(reason) {
-                console.error(reason);
-                reject(reason);
-              };
-
-              // Get Hyperty descriptor
-              // TODO: the request Module should be changed,
-              // because at this moment it is incompatible with nodejs;
-              // Probably we need to pass a factory like we do for sandboxes;
-              console.log('------------------ Hyperty ------------------------');
-              console.info('Get hyperty descriptor for :', hypertyDescriptorURL);
-              _this.runtimeCatalogue.getHypertyDescriptor(hypertyDescriptorURL).then(function (hypertyDescriptor) {
-                // at this point, we have completed "step 2 and 3" as shown in https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md
-                console.info('1: return hyperty descriptor', hypertyDescriptor);
-
-                // hyperty contains the full path of the catalogue URL, e.g.
-                // catalogue.rethink.eu/.well-known/..........
-                _hypertyDescriptor = hypertyDescriptor;
-
-                var sourcePackageURL = hypertyDescriptor.sourcePackageURL;
-
-                // Get the hyperty source code
-                return _this.runtimeCatalogue.getHypertySourcePackage(sourcePackageURL);
-              }).then(function (sourcePackage) {
-                console.info('2: return hyperty source code');
-
-                // at this point, we have completed "step 4 and 5" as shown in https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md
-
-                _hypertySourcePackage = sourcePackage;
-
-                //
-                // steps 6 -- 9 are skipped.
-                // TODO: on release of core 0.2;
-                // TODO: Promise to check the policy engine
-
-                // mock-up code;
-                // temporary code, only
-                var policy = true;
-
-                return policy;
-              }).then(function (policyResult) {
-                console.info('3: return policy engine result');
-
-                // we have completed step 6 to 9 of https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md right now.
-                //
-                // Steps 6 -- 9
-                // As a result of the sipped steps, we know at this point if we execute
-                // inSameSandbox or not.
-                //
-
-                // For testing, just assume we execute in same Sandbox.
-                var inSameSandbox = true;
-                var sandbox = undefined;
-
-                if (inSameSandbox) {
-
-                  // this don't need be a Promise;
-                  sandbox = _this.registry.getAppSandbox();
-
-                  // we have completed step 11 here.
-                } else {
-
-                    // getSandbox, this will return a promise;
-                    sandbox = _this.registry.getSandbox(domain);
-                  }
-
-                // this will return the sandbox or one promise to getSandbox;
-                return sandbox;
-              }).then(function (sandbox) {
-                console.info('4: return the sandbox', sandbox);
-
-                // Return the sandbox indepentely if it running in the same sandbox or not
-                // we have completed step 14 here.
-                return sandbox;
-              }, function (reason) {
-                console.error('4.1: try to register a new sandbox', reason);
-
-                // check if the sandbox is registed for this hyperty descriptor url;
-                // Make Steps xxx --- xxx
-                // Instantiate the Sandbox
-                return _this.sandboxFactory.createSandbox();
-              }).then(function (sandbox) {
-                console.info('5: return sandbox and register');
-
-                _hypertySandbox = sandbox;
-
-                // Register hyperty
-                return _this.registry.registerHyperty(sandbox, hypertyDescriptorURL);
-              }).then(function (hypertyURL) {
-                console.info('6: Hyperty url, after register hyperty', hypertyURL);
-
-                // we have completed step 16 of https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md right now.
-
-                _hypertyURL = hypertyURL;
-
-                // Extend original hyperty configuration;
-                var configuration = _Object$assign({}, _hypertyDescriptor.configuration);
-                configuration.runtimeURL = _this.runtimeURL;
-
-                // We will deploy the component - step 17 of https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md right now.
-                return _hypertySandbox.deployComponent(_hypertySourcePackage.sourceCode, _hypertyURL, configuration);
-              }).then(function (deployComponentStatus) {
-                console.info('7: Deploy component status for hyperty: ', deployComponentStatus);
-
-                // we have completed step 19 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md right now.
-
-                // Add the message bus listener to the appSandbox or hypertSandbox;
-                _this.messageBus.addListener(_hypertyURL, function (msg) {
-                  _hypertySandbox.postMessage(msg);
-                });
-
-                // we have completed step 20 of https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md right now.
-                var hyperty = {
-                  runtimeHypertyURL: _hypertyURL,
-                  status: deployComponentStatus
-                };
-
-                resolve(hyperty);
-
-                // we have completed step 21 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-hyperty.md right now.
-                console.log('------------------ END ------------------------');
-              })['catch'](errorReason);
-            });
-          }
-
-          /**
-          * Deploy Stub from Catalogue URL or domain url
-          * @param  {URL.URL}     domain          domain
-          */
-        }, {
-          key: 'loadStub',
-          value: function loadStub(domain) {
-
-            var _this = this;
-
-            if (!domain) throw new Error('domain parameter is needed');
-
-            return new _Promise(function (resolve, reject) {
-
-              var _stubSandbox = undefined;
-              var _stubDescriptor = undefined;
-              var _runtimeProtoStubURL = undefined;
-              var _stubSourcePackage = undefined;
-
-              var errorReason = function errorReason(reason) {
-                console.error(reason);
-                reject(reason);
-              };
-
-              // Discover Protocol Stub
-              console.info('------------------- ProtoStub ---------------------------\n');
-              console.info('Discover or Create a new ProtoStub for domain: ', domain);
-              _this.registry.discoverProtostub(domain).then(function (descriptor) {
-                // Is registed?
-                console.info('1. Proto Stub Discovered: ', descriptor);
-                _stubDescriptor = descriptor;
-
-                // we have completed step 2 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                return _stubDescriptor;
-              }, function (reason) {
-                // is not registed?
-                console.info('1. Proto Stub not found:', reason);
-
-                // we have completed step 3 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                // we need to get ProtoStub descriptor step 4 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-                return _this.runtimeCatalogue.getStubDescriptor(domain);
-              }).then(function (stubDescriptor) {
-
-                console.info('2. return the ProtoStub descriptor:', stubDescriptor);
-
-                // we have completed step 5 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                _stubDescriptor = stubDescriptor;
-
-                var sourcePackageURL = stubDescriptor.sourcePackageURL;
-
-                console.log(stubDescriptor.sourcePackageURL);
-
-                // we need to get ProtoStub Source code from descriptor - step 6 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-                return _this.runtimeCatalogue.getStubSourcePackage(sourcePackageURL);
-              }).then(function (stubSourcePackage) {
-                console.info('3. return the ProtoStub Source Code: ', stubSourcePackage);
-
-                // we have completed step 7 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                _stubSourcePackage = stubSourcePackage;
-
-                // TODO: Check on PEP (policy Engine) if we need the sandbox and check if the Sandbox Factory have the context sandbox;
-                var policy = true;
-                return policy;
-              }).then(function (policy) {
-                // this will return the sandbox or one promise to getSandbox;
-                return _this.registry.getSandbox(domain);
-              }).then(function (stubSandbox) {
-
-                console.info('4. if the sandbox is registered then return the sandbox', stubSandbox);
-
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                _stubSandbox = stubSandbox;
-                return stubSandbox;
-              }, function (reason) {
-                console.info('5. Sandbox was not found, creating a new one');
-
-                // check if the sandbox is registed for this stub descriptor url;
-                // Make Steps xxx --- xxx
-                // Instantiate the Sandbox
-                return _this.sandboxFactory.createSandbox();
-              }).then(function (sandbox) {
-                console.info('6. return the sandbox instance and the register', sandbox);
-
-                _stubSandbox = sandbox;
-
-                // we need register stub on registry - step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-                return _this.registry.registerStub(_stubSandbox, domain);
-              }).then(function (runtimeProtoStubURL) {
-
-                console.info('7. return the runtime protostub url: ', runtimeProtoStubURL);
-
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                _runtimeProtoStubURL = runtimeProtoStubURL;
-
-                // Extend original hyperty configuration;
-                var configuration = _Object$assign({}, _stubDescriptor.configuration);
-                configuration.runtimeURL = _this.runtimeURL;
-
-                console.log(_stubSourcePackage);
-
-                // Deploy Component step xxx
-                return _stubSandbox.deployComponent(_stubSourcePackage.sourceCode, runtimeProtoStubURL, configuration);
-              }).then(function (deployComponentStatus) {
-                console.info('8: return deploy component for sandbox status: ', deployComponentStatus);
-
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                // Add the message bus listener
-                _this.messageBus.addListener(_runtimeProtoStubURL, function (msg) {
-                  _stubSandbox.postMessage(msg);
-                });
-
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-
-                // Load Stub function resolved with success;
-                var stub = {
-                  runtimeProtoStubURL: _runtimeProtoStubURL,
-                  status: deployComponentStatus
-                };
-
-                resolve(stub);
-                console.info('------------------- END ---------------------------\n');
-              })['catch'](errorReason);
-            });
-          }
-
-          /**
-          * Used to check for updates about components handled in the Catalogue including protocol stubs and Hyperties. check relationship with lifecycle management provided by Service Workers
-          * @param  {CatalogueURL}       url url
-          */
-        }, {
-          key: 'checkForUpdate',
-          value: function checkForUpdate(url) {
-            // Body...
-          }
-        }]);
-
-        return RuntimeUA;
-      })();
-
-      _export('default', RuntimeUA);
-    }
-  };
-});
-$__System.register('56', ['8', '9', '55', 'b'], function (_export) {
-  'use strict';
-
-  var SandboxRegistry, Sandbox, RuntimeUA, MiniBus;
-  return {
-    setters: [function (_3) {
-      SandboxRegistry = _3['default'];
-    }, function (_2) {
-      Sandbox = _2['default'];
-    }, function (_) {
-      RuntimeUA = _['default'];
-    }, function (_b) {
-      MiniBus = _b['default'];
-    }],
-    execute: function () {
-      _export('RuntimeUA', RuntimeUA);
-
-      _export('Sandbox', Sandbox);
-
-      _export('MiniBus', MiniBus);
-
-      _export('SandboxRegistry', SandboxRegistry);
-    }
-  };
-});
-(function() {
-var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("3", ["56"], function(main) {
-  return main;
-});
-
-_removeDefine();
-})();
-$__System.registerDynamic("7", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  exports["default"] = function(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("57", ["19"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('19');
-  module.exports = function defineProperty(it, key, desc) {
-    return $.setDesc(it, key, desc);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("58", ["57"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('57'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("6", ["58"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var _Object$defineProperty = $__require('58')["default"];
-  exports["default"] = (function() {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor)
-          descriptor.writable = true;
-        _Object$defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-    return function(Constructor, protoProps, staticProps) {
-      if (protoProps)
-        defineProperties(Constructor.prototype, protoProps);
-      if (staticProps)
-        defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  })();
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("34", [], true, function($__require, exports, module) {
+$__System.registerDynamic("1d", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -4776,12 +2824,12 @@ $__System.registerDynamic("34", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("2f", ["34"], true, function($__require, exports, module) {
+$__System.registerDynamic("18", ["1d"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var aFunction = $__require('34');
+  var aFunction = $__require('1d');
   module.exports = function(fn, that, length) {
     aFunction(fn);
     if (that === undefined)
@@ -4808,186 +2856,19 @@ $__System.registerDynamic("2f", ["34"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("33", ["2a"], true, function($__require, exports, module) {
+$__System.registerDynamic("9", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var isObject = $__require('2a');
-  module.exports = function(it) {
-    if (!isObject(it))
-      throw TypeError(it + ' is not an object!');
-    return it;
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("2a", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(it) {
-    return typeof it === 'object' ? it !== null : typeof it === 'function';
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("43", ["19", "2a", "33", "2f"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var getDesc = $__require('19').getDesc,
-      isObject = $__require('2a'),
-      anObject = $__require('33');
-  var check = function(O, proto) {
-    anObject(O);
-    if (!isObject(proto) && proto !== null)
-      throw TypeError(proto + ": can't set as prototype!");
-  };
-  module.exports = {
-    set: Object.setPrototypeOf || ('__proto__' in {} ? function(test, buggy, set) {
-      try {
-        set = $__require('2f')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
-        set(test, []);
-        buggy = !(test instanceof Array);
-      } catch (e) {
-        buggy = true;
-      }
-      return function setPrototypeOf(O, proto) {
-        check(O, proto);
-        if (buggy)
-          O.__proto__ = proto;
-        else
-          set(O, proto);
-        return O;
-      };
-    }({}, false) : undefined),
-    check: check
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("59", ["1d", "43"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $def = $__require('1d');
-  $def($def.S, 'Object', {setPrototypeOf: $__require('43').set});
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5a", ["59", "1f"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('59');
-  module.exports = $__require('1f').Object.setPrototypeOf;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5b", ["5a"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('5a'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5c", ["19"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('19');
-  module.exports = function create(P, D) {
-    return $.create(P, D);
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5d", ["5c"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = {
-    "default": $__require('5c'),
-    __esModule: true
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5", ["5d", "5b"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var _Object$create = $__require('5d')["default"];
-  var _Object$setPrototypeOf = $__require('5b')["default"];
-  exports["default"] = function(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-    }
-    subClass.prototype = _Object$create(superClass && superClass.prototype, {constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }});
-    if (superClass)
-      _Object$setPrototypeOf ? _Object$setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1b", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = function(exec) {
-    try {
-      return !!exec();
-    } catch (e) {
-      return true;
-    }
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("1f", [], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var core = module.exports = {version: '1.2.3'};
+  var core = module.exports = {version: '1.2.6'};
   if (typeof __e == 'number')
     __e = core;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2b", [], true, function($__require, exports, module) {
+$__System.registerDynamic("14", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -4999,83 +2880,154 @@ $__System.registerDynamic("2b", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("1d", ["2b", "1f"], true, function($__require, exports, module) {
+$__System.registerDynamic("2b", ["14", "9", "18"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var global = $__require('2b'),
-      core = $__require('1f'),
+  var global = $__require('14'),
+      core = $__require('9'),
+      ctx = $__require('18'),
       PROTOTYPE = 'prototype';
-  var ctx = function(fn, that) {
-    return function() {
-      return fn.apply(that, arguments);
-    };
-  };
-  var $def = function(type, name, source) {
-    var key,
+  var $export = function(type, name, source) {
+    var IS_FORCED = type & $export.F,
+        IS_GLOBAL = type & $export.G,
+        IS_STATIC = type & $export.S,
+        IS_PROTO = type & $export.P,
+        IS_BIND = type & $export.B,
+        IS_WRAP = type & $export.W,
+        exports = IS_GLOBAL ? core : core[name] || (core[name] = {}),
+        target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE],
+        key,
         own,
-        out,
-        exp,
-        isGlobal = type & $def.G,
-        isProto = type & $def.P,
-        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {})[PROTOTYPE],
-        exports = isGlobal ? core : core[name] || (core[name] = {});
-    if (isGlobal)
+        out;
+    if (IS_GLOBAL)
       source = name;
     for (key in source) {
-      own = !(type & $def.F) && target && key in target;
+      own = !IS_FORCED && target && key in target;
       if (own && key in exports)
         continue;
       out = own ? target[key] : source[key];
-      if (isGlobal && typeof target[key] != 'function')
-        exp = source[key];
-      else if (type & $def.B && own)
-        exp = ctx(out, global);
-      else if (type & $def.W && target[key] == out)
-        !function(C) {
-          exp = function(param) {
-            return this instanceof C ? new C(param) : C(param);
-          };
-          exp[PROTOTYPE] = C[PROTOTYPE];
-        }(out);
-      else
-        exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
-      exports[key] = exp;
-      if (isProto)
+      exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key] : IS_BIND && own ? ctx(out, global) : IS_WRAP && target[key] == out ? (function(C) {
+        var F = function(param) {
+          return this instanceof C ? new C(param) : C(param);
+        };
+        F[PROTOTYPE] = C[PROTOTYPE];
+        return F;
+      })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+      if (IS_PROTO)
         (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
     }
   };
-  $def.F = 1;
-  $def.G = 2;
-  $def.S = 4;
-  $def.P = 8;
-  $def.B = 16;
-  $def.W = 32;
-  module.exports = $def;
+  $export.F = 1;
+  $export.G = 2;
+  $export.S = 4;
+  $export.P = 8;
+  $export.B = 16;
+  $export.W = 32;
+  module.exports = $export;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("5e", ["1d", "1f", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("2a", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = function(KEY, exec) {
-    var $def = $__require('1d'),
-        fn = ($__require('1f').Object || {})[KEY] || Object[KEY],
-        exp = {};
-    exp[KEY] = exec(fn);
-    $def($def.S + $def.F * $__require('1b')(function() {
-      fn(1);
-    }), 'Object', exp);
+  module.exports = true;
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("33", ["2a", "2b", "d", "3a", "37", "22", "38", "2c", "a", "7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var LIBRARY = $__require('2a'),
+      $export = $__require('2b'),
+      redefine = $__require('d'),
+      hide = $__require('3a'),
+      has = $__require('37'),
+      Iterators = $__require('22'),
+      $iterCreate = $__require('38'),
+      setToStringTag = $__require('2c'),
+      getProto = $__require('a').getProto,
+      ITERATOR = $__require('7')('iterator'),
+      BUGGY = !([].keys && 'next' in [].keys()),
+      FF_ITERATOR = '@@iterator',
+      KEYS = 'keys',
+      VALUES = 'values';
+  var returnThis = function() {
+    return this;
+  };
+  module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
+    $iterCreate(Constructor, NAME, next);
+    var getMethod = function(kind) {
+      if (!BUGGY && kind in proto)
+        return proto[kind];
+      switch (kind) {
+        case KEYS:
+          return function keys() {
+            return new Constructor(this, kind);
+          };
+        case VALUES:
+          return function values() {
+            return new Constructor(this, kind);
+          };
+      }
+      return function entries() {
+        return new Constructor(this, kind);
+      };
+    };
+    var TAG = NAME + ' Iterator',
+        DEF_VALUES = DEFAULT == VALUES,
+        VALUES_BUG = false,
+        proto = Base.prototype,
+        $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT],
+        $default = $native || getMethod(DEFAULT),
+        methods,
+        key;
+    if ($native) {
+      var IteratorPrototype = getProto($default.call(new Base));
+      setToStringTag(IteratorPrototype, TAG, true);
+      if (!LIBRARY && has(proto, FF_ITERATOR))
+        hide(IteratorPrototype, ITERATOR, returnThis);
+      if (DEF_VALUES && $native.name !== VALUES) {
+        VALUES_BUG = true;
+        $default = function values() {
+          return $native.call(this);
+        };
+      }
+    }
+    if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
+      hide(proto, ITERATOR, $default);
+    }
+    Iterators[NAME] = $default;
+    Iterators[TAG] = returnThis;
+    if (DEFAULT) {
+      methods = {
+        values: DEF_VALUES ? $default : getMethod(VALUES),
+        keys: IS_SET ? $default : getMethod(KEYS),
+        entries: !DEF_VALUES ? $default : getMethod('entries')
+      };
+      if (FORCED)
+        for (key in methods) {
+          if (!(key in proto))
+            redefine(proto, key, methods[key]);
+        }
+      else
+        $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+    }
+    return methods;
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("17", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2f", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -5089,254 +3041,145 @@ $__System.registerDynamic("17", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("30", [], true, function($__require, exports, module) {
+$__System.registerDynamic("24", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var toString = {}.toString;
+  var ceil = Math.ceil,
+      floor = Math.floor;
   module.exports = function(it) {
-    return toString.call(it).slice(8, -1);
+    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1a", ["30"], true, function($__require, exports, module) {
+$__System.registerDynamic("3c", ["24", "2f"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var cof = $__require('30');
-  module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
-    return cof(it) == 'String' ? it.split('') : Object(it);
+  var toInteger = $__require('24'),
+      defined = $__require('2f');
+  module.exports = function(TO_STRING) {
+    return function(that, pos) {
+      var s = String(defined(that)),
+          i = toInteger(pos),
+          l = s.length,
+          a,
+          b;
+      if (i < 0 || i >= l)
+        return TO_STRING ? '' : undefined;
+      a = s.charCodeAt(i);
+      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+    };
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("49", ["1a", "17"], true, function($__require, exports, module) {
+$__System.registerDynamic("3d", ["3c", "33"], true, function($__require, exports, module) {
+  "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var IObject = $__require('1a'),
-      defined = $__require('17');
-  module.exports = function(it) {
-    return IObject(defined(it));
-  };
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("5f", ["49", "5e"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toIObject = $__require('49');
-  $__require('5e')('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor) {
-    return function getOwnPropertyDescriptor(it, key) {
-      return $getOwnPropertyDescriptor(toIObject(it), key);
+  var $at = $__require('3c')(true);
+  $__require('33')(String, 'String', function(iterated) {
+    this._t = String(iterated);
+    this._i = 0;
+  }, function() {
+    var O = this._t,
+        index = this._i,
+        point;
+    if (index >= O.length)
+      return {
+        value: undefined,
+        done: true
+      };
+    point = $at(O, index);
+    this._i += point.length;
+    return {
+      value: point,
+      done: false
     };
   });
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("19", [], true, function($__require, exports, module) {
+$__System.registerDynamic("3e", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $Object = Object;
-  module.exports = {
-    create: $Object.create,
-    getProto: $Object.getPrototypeOf,
-    isEnum: {}.propertyIsEnumerable,
-    getDesc: $Object.getOwnPropertyDescriptor,
-    setDesc: $Object.defineProperty,
-    setDescs: $Object.defineProperties,
-    getKeys: $Object.keys,
-    getNames: $Object.getOwnPropertyNames,
-    getSymbols: $Object.getOwnPropertySymbols,
-    each: [].forEach
-  };
+  "format cjs";
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("60", ["19", "5f"], true, function($__require, exports, module) {
+$__System.registerDynamic("3f", ["3e", "3d", "34", "29", "9"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var $ = $__require('19');
-  $__require('5f');
-  module.exports = function getOwnPropertyDescriptor(it, key) {
-    return $.getDesc(it, key);
-  };
+  $__require('3e');
+  $__require('3d');
+  $__require('34');
+  $__require('29');
+  module.exports = $__require('9').Promise;
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("61", ["60"], true, function($__require, exports, module) {
+$__System.registerDynamic("40", ["3f"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": $__require('60'),
+    "default": $__require('3f'),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("4", ["61"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var _Object$getOwnPropertyDescriptor = $__require('61')["default"];
-  exports["default"] = function get(_x, _x2, _x3) {
-    var _again = true;
-    _function: while (_again) {
-      var object = _x,
-          property = _x2,
-          receiver = _x3;
-      _again = false;
-      if (object === null)
-        object = Function.prototype;
-      var desc = _Object$getOwnPropertyDescriptor(object, property);
-      if (desc === undefined) {
-        var parent = Object.getPrototypeOf(object);
-        if (parent === null) {
-          return undefined;
-        } else {
-          _x = parent;
-          _x2 = property;
-          _x3 = receiver;
-          _again = true;
-          desc = parent = undefined;
-          continue _function;
-        }
-      } else if ("value" in desc) {
-        return desc.value;
-      } else {
-        var getter = desc.get;
-        if (getter === undefined) {
-          return undefined;
-        }
-        return getter.call(receiver);
-      }
-    }
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
+$__System.register('1', ['2', '5', '40'], function (_export) {
+    var createIframe, app, _Promise, iframe;
 
-$__System.register('62', ['3', '4', '5', '6', '7'], function (_export) {
-   var Sandbox, _get, _inherits, _createClass, _classCallCheck, SandboxIframe;
-
-   return {
-      setters: [function (_5) {
-         Sandbox = _5.Sandbox;
-      }, function (_) {
-         _get = _['default'];
-      }, function (_2) {
-         _inherits = _2['default'];
-      }, function (_3) {
-         _createClass = _3['default'];
-      }, function (_4) {
-         _classCallCheck = _4['default'];
-      }],
-      execute: function () {
-         'use strict';
-
-         SandboxIframe = (function (_Sandbox) {
-            _inherits(SandboxIframe, _Sandbox);
-
-            function SandboxIframe(scriptUrl) {
-               _classCallCheck(this, SandboxIframe);
-
-               _get(Object.getPrototypeOf(SandboxIframe.prototype), 'constructor', this).call(this);
-               this.sandbox = document.getElementById('sandbox');
-
-               if (!!!this.sandbox) {
-                  this.sandbox = document.createElement('iframe');
-                  this.sandbox.setAttribute('id', 'sandbox');
-                  this.sandbox.setAttribute('seamless', '');
-                  this.sandbox.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-                  this.sandbox.style.display = 'none';
-                  document.querySelector('body').appendChild(this.sandbox);
-
-                  var script = document.createElement('script');
-                  script.type = 'text/JavaScript';
-                  script.src = scriptUrl;
-                  this.sandbox.contentWindow.document.getElementsByTagName('body')[0].appendChild(script);
-               }
-
-               window.addEventListener('message', (function (e) {
-                  this._onMessage(e.data);
-               }).bind(this));
-            }
-
-            _createClass(SandboxIframe, [{
-               key: '_onPostMessage',
-               value: function _onPostMessage(msg) {
-                  this.sandbox.contentWindow.postMessage(msg, '*');
-               }
-            }]);
-
-            return SandboxIframe;
-         })(Sandbox);
-
-         _export('default', SandboxIframe);
-      }
-   };
-});
-$__System.register('1', ['2', '62'], function (_export) {
-
-    //TODO: notify iframe loaded, ask for resources url
-    'use strict';
-
-    var SandboxApp, SandboxIframe, core, app;
     return {
-        setters: [function (_2) {
-            SandboxApp = _2['default'];
+        setters: [function (_3) {
+            createIframe = _3.create;
+        }, function (_2) {
+            app = _2['default'];
         }, function (_) {
-            SandboxIframe = _['default'];
+            _Promise = _['default'];
         }],
         execute: function () {
-            core = new SandboxIframe('../dist/context-core.js');
-            app = new SandboxApp();
+            'use strict';
 
-            core.addListener('*', function (e) {
-                console.log('CORE->RUNTIMESTUB: ' + JSON.stringify(e));
-                if (e.to === 'sandboxApp:deploy') {
-                    app.deployComponent(e.data.body.sourceCode, e.data.body.url, e.data.body.config).then(function (response) {
-                        return core.postMessage({ to: 'core:deployResponse', body: { "response": response } });
-                    });
-                    return;
-                }
-                app.postMessage(e);
-            });
+            iframe = createIframe('http://127.0.0.1:8080/dist/index.html');
 
-            app.addListener('*', function (e) {
-                console.log('RUNTIMESTUB->CORE: ' + JSON.stringify(e));
-                core.postMessage(e);
-            });
+            app.create(iframe);
 
             window.rethink = {
                 requireHyperty: function requireHyperty(hypertyDescriptor) {
-                    core.postMessage({ to: 'runtime:loadHyperty', body: { descriptor: hypertyDescriptor } });
+                    return new _Promise(function (resolve, reject) {
+                        var loaded = function loaded(e) {
+                            if (e.data.to === 'runtime:loadedHyperty') {
+                                window.removeEventListener('message', loaded);
+                                resolve(app.getHyperty(e.data.body.runtimeHypertyURL));
+                            }
+                        };
+                        window.addEventListener('message', loaded);
+                        iframe.contentWindow.postMessage({ to: 'core:loadHyperty', body: { descriptor: hypertyDescriptor } }, '*');
+                    });
                 },
 
                 requireProtostub: function requireProtostub(domain) {
-                    core.postMessage({ to: 'runtime:loadStub', body: { "domain": domain } });
+                    iframe.contentWindow.postMessage({ to: 'core:loadStub', body: { "domain": domain } }, '*');
                 }
             };
         }

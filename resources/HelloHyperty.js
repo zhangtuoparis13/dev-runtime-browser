@@ -8,21 +8,28 @@ class HelloHyperty {
     _this.hypertyURL = hypertyURL;
 
     _this.bus.addListener(hypertyURL, function(msg) {
-      console.log('Hello Hyperty: ', msg);
+        if(_this._onMessage)
+            _this._onMessage(msg);
     });
 
   }
+  
+  set onMessage(value){
+      this._onMessage = value;
+  }
 
-  sendMessage() {
+  sendMessage(toURL, text) {
 
     var _this = this;
 
     _this.bus.postMessage({
-      from: _this.hypertyURL,
-      to: 'hyperty-runtime://sp1/WorldHyperty',
-      body: {
-        value: 'Hello from world hyperty instance'
-      }
+        from: _this.hypertyURL,
+        to: toURL,
+        type: 'MESSAGE',
+
+        body: {
+          value: text
+        }
     });
 
   }
