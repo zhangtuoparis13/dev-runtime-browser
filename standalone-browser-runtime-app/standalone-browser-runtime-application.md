@@ -5,14 +5,17 @@ The client side of the reTHINK architecture has been designed to be executed in 
 This allows to be able to access to servcies provided through the reTHINK network from almost any device. Nowadays it is possible to run web browser in almost any 
 personal gadget, however there may be devices where either is it not possible to run a browser or the available browsers does not suport the APIs required by the reTHINK browser runtime. For example, the browsers in iOS does not currently support the WebRTC API. 
 
-
+![Web App executed in browser](html5WebApphybris.png)
 
 That is the main reason why the creation of an application which can run the reTHINK client applications has been identified as a need. 
 The use of web applications embedded in native application or even replacing them has become a common practice in the last years. This allows to re-use all the code developed for web applications therefore reducing the cost and time-to-market of new applications.
+
+![Hybrid App](hybridApp.png)
+
 There are several alternatives to execute web applications as native apps. In Android there webview elements directly provided by the OS and there are projects which allows to create native apps for both iOS and Android.
 For reTHINK the Crosswalk Project has been chosen to implement the native apps.
 
-#Crosswalk
+#Crosswalk Project
 
 reTHINk standalone application allows to execute reTHINK runtime in Android and iOS devices without the need of having installed a browser will full support of the required APIs.
 The standalone application is based on the [Crosswalk Project](https://crosswalk-project.org/) from Intel. Crosswalk Project is an HTML application runtime, built on open source foundations, which extends the web platform with new capabilities. 
