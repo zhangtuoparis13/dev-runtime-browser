@@ -69,7 +69,8 @@ It is also possible to build the standalone application using Eclipse.
 
 
 #iOS standalone application
-In iOS the architecture is slightly different from the Android architecture. Cordova is also use to build the application but the WebRTC stack will be provided by the eface2face plugin which includes a complete WebRTC library. In the Android App this is provided by Crosswalk. The rest of the Javascript APIs will be provided by Cordova. 
+In iOS the architecture is slightly different from the Android architecture. Cordova is also use to build the application but the WebRTC stack will be provided by the eface2face plugin which includes a complete WebRTC library. In the Android App this is provided by Crosswalk. In iOS a complete simulation of the official WebRTC stack is provided by   [!cordova-plugin-iosrtc](https://github.com/eface2face/cordova-plugin-iosrtc). It implementes the official [!WebRTC W3C API](https://www.w3.org/TR/webrtc/) and includes a compiled library with all the WebRTC code. 
+The rest of the Javascript APIs that are required to execute the reTHINK runtime will be provided by Cordova. 
 
 ![Standalone iOS App](MobileAppiOSDiagram.png)
 
