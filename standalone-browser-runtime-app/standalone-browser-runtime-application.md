@@ -24,7 +24,10 @@ It is possible to create webviews for Android and iOS, but also for Windows and 
 
 WebRTC APIs are available in Crosswalk 5 or later on ARM; and Crosswalk 7.36.154.6 or later for x86. Web workers (also required for the browser runtime) is also supported by Crosswalk since previous versions.
 
+#Android standalone application
+The diagram below shows the architecture of the appplication. The hybrid application is created with Cordova which allows to access different sensors and services of the phone through a Javascript API. Cordova connects the App the Crosswalk Webview which is the part of the code which implements the WebRTC stack. Crosswalk will give a consistent Webview implementation across all the Android versions and it will guarantee that the reTHINK runtime will be executed correctly.
 
+![Standalone Android App](MobileAppAndroidDiagram.png)
 
 
 #Building the reTHINK Android application
@@ -63,3 +66,12 @@ It is also possible to build the standalone application using Eclipse.
 3. Import Cordova project (3rdparty/crosswalk-cordova-android/framework/)
 4. Import Sippo project (Sippo)
 5. Build Sippo project as Android application
+
+
+#iOS standalone application
+In iOS the architecture is slightly different from the Android architecture. Cordova is also use to build the application but the WebRTC stack will be provided by the eface2face plugin which includes a complete WebRTC library. In the Android App this is provided by Crosswalk. The rest of the Javascript APIs will be provided by Cordova. 
+
+![Standalone iOS App](MobileAppiOSDiagram.png)
+
+
+
