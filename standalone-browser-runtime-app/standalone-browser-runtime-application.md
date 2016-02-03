@@ -60,12 +60,14 @@ This last command will install the default list of packages. This process may ta
 
 
 ##Build the standalone application with Eclipse
-It is also possible to build the standalone application using Eclipse. 
+It is also possible to build the standalone application using Eclipse. The general steps to build the application are included below:
+
 1. Launch eclipse
 2. Import xwalk-core-library project (3rdparty/xwalk_core_library/)
 3. Import Cordova project (3rdparty/crosswalk-cordova-android/framework/)
-4. Import Sippo project (Sippo)
-5. Build Sippo project as Android application
+4. Import standalone-ios project
+5. Set the URL of the web application using reTHINK framework to be executed in the runtime application.
+6. Build standalon-ios project as an Android application
 
 
 #iOS standalone application
