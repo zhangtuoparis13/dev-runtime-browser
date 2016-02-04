@@ -53,6 +53,9 @@ This last command will install the default list of packages. This process may ta
 
 
 ##Building the application
+It is necessary to indicate the public URL of the Web App which is going to be loaded in the hybrid App. In next releases it may be possible to load the HTML5/CSS/JS files in the own App.
+
+<code>make RETHINKWEBAPPURI="http://..."</code>
 
 <code>source build.env</code>
 
