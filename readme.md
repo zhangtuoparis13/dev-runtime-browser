@@ -47,7 +47,7 @@ To run the demo on example folder:
 * context-service.js
 
 ###Developer view    
-## How does it work?
+#### How does it work?
 
 ![Runtime Browser](runtime-browser.png)
 
