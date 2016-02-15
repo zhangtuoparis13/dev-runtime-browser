@@ -46,11 +46,11 @@ To run the demo on example folder:
     * requireHyperty(hypertyDescriptor)
     * requireProtoStub(domain)
 
-    Moreover it create the App Sandbox, where the hyperties are loaded and the iframe where the core is loaded.
+    Moreover it create the ContextApp, where the hyperties are loaded and the iframe where the core is loaded.
 
 * context-core.js. It includes the runtime core (RuntimeUA, MiniBus and SandBox) and defines browser implementations of SandboxFactory, SandboxWorker and SandboxApp. SandboxWorker and SandboxApp are responsibles for manage communication between boundaries.
 
-* context-service.js It is responsible for load hyperties and protostub.
+* context-service.js It is responsible for load hyperties and protostub like ContextApp but in an isolated way.
 
 ###Developer view    
 #### How does it work?
