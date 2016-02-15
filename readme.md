@@ -42,9 +42,15 @@ To run the demo on example folder:
  - in your browser access to http://localhost:4000/example.
 
 #### Distributable files
-* rethink.js 
-* context-core.js
-* context-service.js
+* rethink.js. It is the public interface. It exposes two methods:
+    * requireHyperty(hypertyDescriptor)
+    * requireProtoStub(domain)
+
+    Moreover it create the App Sandbox, where the hyperties are loaded and the iframe where the core is loaded.
+
+* context-core.js. It includes the runtime core (RuntimeUA, MiniBus and SandBox) and defines browser implementations of SandboxFactory, SandboxWorker and SandboxApp. SandboxWorker and SandboxApp are responsibles for manage communication between boundaries.
+
+* context-service.js It is responsible for load hyperties and protostub.
 
 ###Developer view    
 #### How does it work?
