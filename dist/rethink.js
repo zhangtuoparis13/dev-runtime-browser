@@ -701,83 +701,76 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
   else if ("function" == typeof define && define.amd)
     define("3", [], e);
   else {
-    var n;
-    n = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, n.sandbox = e();
+    var t;
+    t = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, t.sandbox = e();
   }
 }(function() {
-  return function e(n, t, r) {
-    function o(s, u) {
-      if (!t[s]) {
-        if (!n[s]) {
+  return function e(t, n, o) {
+    function r(i, u) {
+      if (!n[i]) {
+        if (!t[i]) {
           var a = "function" == typeof require && require;
           if (!u && a)
-            return a(s, !0);
-          if (i)
-            return i(s, !0);
-          var l = new Error("Cannot find module '" + s + "'");
+            return a(i, !0);
+          if (s)
+            return s(i, !0);
+          var l = new Error("Cannot find module '" + i + "'");
           throw l.code = "MODULE_NOT_FOUND", l;
         }
-        var c = t[s] = {exports: {}};
-        n[s][0].call(c.exports, function(e) {
-          var t = n[s][1][e];
-          return o(t ? t : e);
-        }, c, c.exports, e, n, t, r);
+        var c = n[i] = {exports: {}};
+        t[i][0].call(c.exports, function(e) {
+          var n = t[i][1][e];
+          return r(n ? n : e);
+        }, c, c.exports, e, t, n, o);
       }
-      return t[s].exports;
+      return n[i].exports;
     }
-    for (var i = "function" == typeof require && require,
-        s = 0; s < r.length; s++)
-      o(r[s]);
-    return o;
+    for (var s = "function" == typeof require && require,
+        i = 0; i < o.length; i++)
+      r(o[i]);
+    return r;
   }({
-    1: [function(e, n, t) {
+    1: [function(e, t, n) {
       "use strict";
-      function r(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function o(e, n) {
-        if (!(e instanceof n))
+      function o(e, t) {
+        if (!(e instanceof t))
           throw new TypeError("Cannot call a class as a function");
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var i = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var r = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var o = t[n];
+            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
           }
         }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
+        return function(t, n, o) {
+          return n && e(t.prototype, n), o && e(t, o), t;
         };
       }(),
-          s = e("./Pipeline"),
-          u = r(s),
-          a = function() {
+          s = function() {
             function e() {
               o(this, e);
-              var n = this;
-              n._msgId = 0, n._subscriptions = {}, n._responseTimeOut = 3e3, n._responseCallbacks = {}, n._pipeline = new u["default"](function(e) {
-                console.log("PIPELINE-ERROR: ", JSON.stringify(e));
-              }), n._registerExternalListener();
+              var t = this;
+              t._msgId = 0, t._subscriptions = {}, t._responseTimeOut = 5e3, t._responseCallbacks = {}, t._registerExternalListener();
             }
-            return i(e, [{
+            return r(e, [{
               key: "addListener",
-              value: function(e, n) {
-                var t = this,
-                    r = new l(t._subscriptions, e, n),
-                    o = t._subscriptions[e];
-                return o || (o = [], t._subscriptions[e] = o), o.push(r), r;
+              value: function(e, t) {
+                var n = this,
+                    o = new i(n._subscriptions, e, t),
+                    r = n._subscriptions[e];
+                return r || (r = [], n._subscriptions[e] = r), r.push(o), o;
               }
             }, {
               key: "addResponseListener",
-              value: function(e, n, t) {
-                this._responseCallbacks[e + n] = t;
+              value: function(e, t, n) {
+                this._responseCallbacks[e + t] = n;
               }
             }, {
               key: "removeResponseListener",
-              value: function(e, n) {
-                delete this._responseCallbacks[e + n];
+              value: function(e, t) {
+                delete this._responseCallbacks[e + t];
               }
             }, {
               key: "removeAllListenersOf",
@@ -785,106 +778,111 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
                 delete this._subscriptions[e];
               }
             }, {
-              key: "postMessage",
-              value: function(e, n) {
-                var t = this;
-                return e.id && 0 !== e.id || (t._msgId++, e.id = t._msgId), t._pipeline.process(e, function(e) {
-                  if (n && !function() {
-                    var r = e.from + e.id;
-                    t._responseCallbacks[r] = n, setTimeout(function() {
-                      var n = t._responseCallbacks[r];
-                      if (delete t._responseCallbacks[r], n) {
-                        var o = {
-                          id: e.id,
-                          type: "response",
-                          body: {
-                            code: "error",
-                            desc: "Response timeout!"
-                          }
-                        };
-                        n(o);
-                      }
-                    }, t._responseTimeOut);
-                  }(), !t._onResponse(e)) {
-                    var r = t._subscriptions[e.to];
-                    r ? t._publishOn(r, e) : t._onPostMessage(e);
-                  }
-                }), e.id;
-              }
-            }, {
               key: "bind",
-              value: function(e, n, t) {
-                var r = this,
-                    o = this,
-                    i = o.addListener(e, function(e) {
-                      t.postMessage(e);
+              value: function(e, t, n) {
+                var o = this,
+                    r = this,
+                    s = r.addListener(e, function(e) {
+                      n.postMessage(e);
                     }),
-                    s = t.addListener(n, function(e) {
-                      o.postMessage(e);
+                    i = n.addListener(t, function(e) {
+                      r.postMessage(e);
                     });
                 return {
-                  thisListener: i,
-                  targetListener: s,
+                  thisListener: s,
+                  targetListener: i,
                   unbind: function() {
-                    r.thisListener.remove(), r.targetListener.remove();
+                    o.thisListener.remove(), o.targetListener.remove();
                   }
                 };
               }
             }, {
+              key: "_publishOnDefault",
+              value: function(e) {
+                var t = this._subscriptions["*"];
+                t && this._publishOn(t, e);
+              }
+            }, {
               key: "_publishOn",
-              value: function(e, n) {
+              value: function(e, t) {
                 e.forEach(function(e) {
-                  e._callback(n);
+                  e._callback(t);
                 });
+              }
+            }, {
+              key: "_responseCallback",
+              value: function(e, t) {
+                var n = this;
+                t && !function() {
+                  var o = e.from + e.id;
+                  n._responseCallbacks[o] = t, setTimeout(function() {
+                    var t = n._responseCallbacks[o];
+                    if (delete n._responseCallbacks[o], t) {
+                      var r = {
+                        id: e.id,
+                        type: "response",
+                        body: {
+                          code: 408,
+                          desc: "Response timeout!",
+                          value: e
+                        }
+                      };
+                      t(r);
+                    }
+                  }, n._responseTimeOut);
+                }();
               }
             }, {
               key: "_onResponse",
               value: function(e) {
-                var n = this;
+                var t = this;
                 if ("response" === e.type) {
-                  var t = e.to + e.id,
-                      r = n._responseCallbacks[t];
-                  if (delete n._responseCallbacks[t], r)
-                    return r(e), !0;
+                  var n = e.to + e.id,
+                      o = t._responseCallbacks[n];
+                  if (e.body.code >= 200 && delete t._responseCallbacks[n], o)
+                    return o(e), !0;
                 }
                 return !1;
               }
             }, {
               key: "_onMessage",
               value: function(e) {
-                var n = this;
-                if (!n._onResponse(e)) {
-                  var t = n._subscriptions[e.to];
-                  t ? n._publishOn(t, e) : (t = n._subscriptions["*"], t && n._publishOn(t, e));
+                var t = this;
+                if (!t._onResponse(e)) {
+                  var n = t._subscriptions[e.to];
+                  n ? t._publishOn(n, e) : t._publishOnDefault(e);
                 }
               }
+            }, {
+              key: "_genId",
+              value: function(e) {
+                e.id && 0 !== e.id || (this._msgId++, e.id = this._msgId);
+              }
+            }, {
+              key: "postMessage",
+              value: function(e, t) {}
             }, {
               key: "_onPostMessage",
               value: function(e) {}
             }, {
               key: "_registerExternalListener",
               value: function() {}
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
             }]), e;
           }(),
-          l = function() {
-            function e(n, t, r) {
+          i = function() {
+            function e(t, n, r) {
               o(this, e);
-              var i = this;
-              i._subscriptions = n, i._url = t, i._callback = r;
+              var s = this;
+              s._subscriptions = t, s._url = n, s._callback = r;
             }
-            return i(e, [{
+            return r(e, [{
               key: "remove",
               value: function() {
                 var e = this,
-                    n = e._subscriptions[e._url];
-                if (n) {
-                  var t = n.indexOf(e);
-                  n.splice(t, 1), 0 === n.length && delete e._subscriptions[e._url];
+                    t = e._subscriptions[e._url];
+                if (t) {
+                  var n = t.indexOf(e);
+                  t.splice(n, 1), 0 === t.length && delete e._subscriptions[e._url];
                 }
               }
             }, {
@@ -894,297 +892,281 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
               }
             }]), e;
           }();
-      t["default"] = a, n.exports = t["default"];
-    }, {"./Pipeline": 2}],
-    2: [function(e, n, t) {
-      "use strict";
-      function r(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var o = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
-          }
-        }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
-        };
-      }(),
-          i = function() {
-            function e(n) {
-              r(this, e);
-              var t = this;
-              t.handlers = [], t.onFail = n;
-            }
-            return o(e, [{
-              key: "process",
-              value: function(e, n) {
-                var t = this;
-                if (t.handlers.length > 0) {
-                  var r = new u(t.handlers);
-                  r.next(new s(t, r, e, n));
-                } else
-                  n(e);
-              }
-            }]), e;
-          }(),
-          s = function() {
-            function e(n, t, o, i) {
-              r(this, e);
-              var s = this;
-              s._inStop = !1, s._pipeline = n, s._iter = t, s._msg = o, s._onDeliver = i;
-            }
-            return o(e, [{
-              key: "next",
-              value: function() {
-                var e = this;
-                e._inStop || (e._iter.hasNext ? e._iter.next(e) : e._onDeliver(e._msg));
-              }
-            }, {
-              key: "deliver",
-              value: function() {
-                var e = this;
-                e._inStop || (e._inStop = !0, e._onDeliver(e._msg));
-              }
-            }, {
-              key: "fail",
-              value: function(e) {
-                var n = this;
-                n._inStop || (n._inStop = !0, n._pipeline.onFail && n._pipeline.onFail(e));
-              }
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
-            }, {
-              key: "msg",
-              get: function() {
-                return this._msg;
-              },
-              set: function(e) {
-                this._msg = e;
-              }
-            }]), e;
-          }(),
-          u = function() {
-            function e(n) {
-              r(this, e), this._index = -1, this._array = n;
-            }
-            return o(e, [{
-              key: "hasNext",
-              get: function() {
-                return this._index < this._array.length - 1;
-              }
-            }, {
-              key: "next",
-              get: function() {
-                return this._index++, this._array[this._index];
-              }
-            }]), e;
-          }();
-      t["default"] = i, n.exports = t["default"];
+      n["default"] = s, t.exports = n["default"];
     }, {}],
-    3: [function(e, n, t) {
+    2: [function(e, t, n) {
       "use strict";
-      function r(e) {
+      function o(e) {
         return e && e.__esModule ? e : {"default": e};
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var o = e("./sandbox/Sandbox"),
-          i = r(o),
-          s = e("./sandbox/SandboxRegistry"),
-          u = r(s);
-      t.Sandbox = i["default"], t.SandboxRegistry = u["default"];
-    }, {
-      "./sandbox/Sandbox": 4,
-      "./sandbox/SandboxRegistry": 5
-    }],
-    4: [function(e, n, t) {
-      "use strict";
-      function r(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function o(e, n) {
-        if (!(e instanceof n))
+      function r(e, t) {
+        if (!(e instanceof t))
           throw new TypeError("Cannot call a class as a function");
       }
-      function i(e, n) {
-        if ("function" != typeof n && null !== n)
-          throw new TypeError("Super expression must either be null or a function, not " + typeof n);
-        e.prototype = Object.create(n && n.prototype, {constructor: {
+      function s(e, t) {
+        if ("function" != typeof t && null !== t)
+          throw new TypeError("Super expression must either be null or a function, not " + typeof t);
+        e.prototype = Object.create(t && t.prototype, {constructor: {
             value: e,
             enumerable: !1,
             writable: !0,
             configurable: !0
-          }}), n && (Object.setPrototypeOf ? Object.setPrototypeOf(e, n) : e.__proto__ = n);
+          }}), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var s = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var i = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var o = t[n];
+            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
           }
         }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
+        return function(t, n, o) {
+          return n && e(t.prototype, n), o && e(t, o), t;
         };
       }(),
-          u = function(e, n, t) {
-            for (var r = !0; r; ) {
-              var o = e,
-                  i = n,
-                  s = t;
-              r = !1, null === o && (o = Function.prototype);
-              var u = Object.getOwnPropertyDescriptor(o, i);
+          u = function(e, t, n) {
+            for (var o = !0; o; ) {
+              var r = e,
+                  s = t,
+                  i = n;
+              o = !1, null === r && (r = Function.prototype);
+              var u = Object.getOwnPropertyDescriptor(r, s);
               if (void 0 !== u) {
                 if ("value" in u)
                   return u.value;
                 var a = u.get;
                 if (void 0 === a)
                   return;
-                return a.call(s);
+                return a.call(i);
               }
-              var l = Object.getPrototypeOf(o);
+              var l = Object.getPrototypeOf(r);
               if (null === l)
                 return;
-              e = l, n = i, t = s, r = !0, u = l = void 0;
+              e = l, t = s, n = i, o = !0, u = l = void 0;
+            }
+          },
+          a = e("./Bus"),
+          l = o(a),
+          c = function(e) {
+            function t() {
+              r(this, t), u(Object.getPrototypeOf(t.prototype), "constructor", this).call(this);
+            }
+            return s(t, e), i(t, [{
+              key: "postMessage",
+              value: function(e, t) {
+                var n = this;
+                return n._genId(e), n._responseCallback(e, t), n._onPostMessage(e), e.id;
+              }
+            }, {
+              key: "_onMessage",
+              value: function(e) {
+                var t = this;
+                if (!t._onResponse(e)) {
+                  var n = t._subscriptions[e.to];
+                  n ? (t._publishOn(n, e), e.to.startsWith("hyperty") || t._publishOnDefault(e)) : t._publishOnDefault(e);
+                }
+              }
+            }]), t;
+          }(l["default"]);
+      n["default"] = c, t.exports = n["default"];
+    }, {"./Bus": 1}],
+    3: [function(e, t, n) {
+      "use strict";
+      function o(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var r = e("./sandbox/Sandbox"),
+          s = o(r),
+          i = e("./sandbox/SandboxRegistry"),
+          u = o(i);
+      n.Sandbox = s["default"], n.SandboxRegistry = u["default"];
+    }, {
+      "./sandbox/Sandbox": 4,
+      "./sandbox/SandboxRegistry": 5
+    }],
+    4: [function(e, t, n) {
+      "use strict";
+      function o(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      function r(e, t) {
+        if (!(e instanceof t))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      function s(e, t) {
+        if ("function" != typeof t && null !== t)
+          throw new TypeError("Super expression must either be null or a function, not " + typeof t);
+        e.prototype = Object.create(t && t.prototype, {constructor: {
+            value: e,
+            enumerable: !1,
+            writable: !0,
+            configurable: !0
+          }}), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
+      }
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var i = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var o = t[n];
+            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
+          }
+        }
+        return function(t, n, o) {
+          return n && e(t.prototype, n), o && e(t, o), t;
+        };
+      }(),
+          u = function(e, t, n) {
+            for (var o = !0; o; ) {
+              var r = e,
+                  s = t,
+                  i = n;
+              o = !1, null === r && (r = Function.prototype);
+              var u = Object.getOwnPropertyDescriptor(r, s);
+              if (void 0 !== u) {
+                if ("value" in u)
+                  return u.value;
+                var a = u.get;
+                if (void 0 === a)
+                  return;
+                return a.call(i);
+              }
+              var l = Object.getPrototypeOf(r);
+              if (null === l)
+                return;
+              e = l, t = s, n = i, o = !0, u = l = void 0;
             }
           },
           a = e("../sandbox/SandboxRegistry"),
-          l = r(a),
+          l = o(a),
           c = e("../bus/MiniBus"),
-          f = r(c),
+          f = o(c),
           d = function(e) {
-            function n() {
-              o(this, n), u(Object.getPrototypeOf(n.prototype), "constructor", this).call(this);
+            function t() {
+              r(this, t), u(Object.getPrototypeOf(t.prototype), "constructor", this).call(this);
             }
-            return i(n, e), s(n, [{
+            return s(t, e), i(t, [{
               key: "deployComponent",
-              value: function(e, n, t) {
-                var r = this;
-                return new Promise(function(o, i) {
-                  var s = {
+              value: function(e, t, n) {
+                var o = this;
+                return new Promise(function(r, s) {
+                  var i = {
                     type: "create",
                     from: l["default"].ExternalDeployAddress,
                     to: l["default"].InternalDeployAddress,
                     body: {
-                      url: n,
+                      url: t,
                       sourceCode: e,
-                      config: t
+                      config: n
                     }
                   };
-                  r.postMessage(s, function(e) {
-                    200 === e.body.code ? o("deployed") : i(e.body.desc);
+                  o.postMessage(i, function(e) {
+                    200 === e.body.code ? r("deployed") : s(e.body.desc);
                   });
                 });
               }
             }, {
               key: "removeComponent",
               value: function(e) {
-                var n = this;
-                return new Promise(function(t, r) {
-                  var o = {
+                var t = this;
+                return new Promise(function(n, o) {
+                  var r = {
                     type: "delete",
                     from: l["default"].ExternalDeployAddress,
                     to: l["default"].InternalDeployAddress,
                     body: {url: e}
                   };
-                  n.postMessage(o, function(e) {
-                    200 === e.body.code ? t("undeployed") : r(e.body.desc);
+                  t.postMessage(r, function(e) {
+                    200 === e.body.code ? n("undeployed") : o(e.body.desc);
                   });
                 });
               }
-            }]), n;
+            }]), t;
           }(f["default"]);
-      t["default"] = d, n.exports = t["default"];
+      n["default"] = d, t.exports = n["default"];
     }, {
-      "../bus/MiniBus": 1,
+      "../bus/MiniBus": 2,
       "../sandbox/SandboxRegistry": 5
     }],
-    5: [function(e, n, t) {
+    5: [function(e, t, n) {
       "use strict";
-      function r(e, n) {
-        if (!(e instanceof n))
+      function o(e, t) {
+        if (!(e instanceof t))
           throw new TypeError("Cannot call a class as a function");
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var o = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var r = n[t];
-            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var r = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var o = t[n];
+            o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o);
           }
         }
-        return function(n, t, r) {
-          return t && e(n.prototype, t), r && e(n, r), n;
+        return function(t, n, o) {
+          return n && e(t.prototype, n), o && e(t, o), t;
         };
       }(),
-          i = function() {
-            function e(n) {
-              r(this, e);
-              var t = this;
-              t._bus = n, t._components = {}, n.addListener(e.InternalDeployAddress, function(e) {
+          s = function() {
+            function e(t) {
+              o(this, e);
+              var n = this;
+              n._bus = t, n._components = {}, t.addListener(e.InternalDeployAddress, function(e) {
                 switch (e.type) {
                   case "create":
-                    t._onDeploy(e);
+                    n._onDeploy(e);
                     break;
                   case "delete":
-                    t._onRemove(e);
+                    n._onRemove(e);
                 }
               });
             }
-            return o(e, [{
+            return r(e, [{
               key: "_responseMsg",
-              value: function(n, t, r) {
-                var o = {
-                  id: n.id,
+              value: function(t, n, o) {
+                var r = {
+                  id: t.id,
                   type: "response",
                   from: e.InternalDeployAddress,
                   to: e.ExternalDeployAddress
                 },
-                    i = {};
-                return t && (i.code = t), r && (i.desc = r), o.body = i, o;
+                    s = {};
+                return n && (s.code = n), o && (s.desc = o), r.body = s, r;
               }
             }, {
               key: "_onDeploy",
               value: function(e) {
-                var n = this,
-                    t = e.body.config,
-                    r = e.body.url,
-                    o = e.body.sourceCode,
-                    i = void 0,
-                    s = void 0;
-                if (n._components.hasOwnProperty(r))
-                  i = 500, s = "Instance " + r + " already exist!";
+                var t = this,
+                    n = e.body.config,
+                    o = e.body.url,
+                    r = e.body.sourceCode,
+                    s = void 0,
+                    i = void 0;
+                if (t._components.hasOwnProperty(o))
+                  s = 500, i = "Instance " + o + " already exist!";
                 else
                   try {
-                    n._components[r] = n._create(r, o, t), i = 200;
+                    t._components[o] = t._create(o, r, n), s = 200;
                   } catch (u) {
-                    i = 500, s = u;
+                    s = 500, i = u;
                   }
-                var a = n._responseMsg(e, i, s);
-                n._bus.postMessage(a);
+                var a = t._responseMsg(e, s, i);
+                t._bus.postMessage(a);
               }
             }, {
               key: "_onRemove",
               value: function(e) {
-                var n = this,
-                    t = e.body.url,
-                    r = void 0,
-                    o = void 0;
-                n._components.hasOwnProperty(t) ? (delete n._components[t], n._bus.removeAllListenersOf(t), r = 200) : (r = 500, o = "Instance " + t + " doesn't exist!");
-                var i = n._responseMsg(e, r, o);
-                n._bus.postMessage(i);
+                var t = this,
+                    n = e.body.url,
+                    o = void 0,
+                    r = void 0;
+                t._components.hasOwnProperty(n) ? (delete t._components[n], t._bus.removeAllListenersOf(n), o = 200) : (o = 500, r = "Instance " + n + " doesn't exist!");
+                var s = t._responseMsg(e, o, r);
+                t._bus.postMessage(s);
               }
             }, {
               key: "_create",
-              value: function(e, n, t) {}
+              value: function(e, t, n) {}
             }, {
               key: "components",
               get: function() {
@@ -1192,7 +1174,7 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
               }
             }]), e;
           }();
-      i.ExternalDeployAddress = "sandbox://external", i.InternalDeployAddress = "sandbox://internal", t["default"] = i, n.exports = t["default"];
+      s.ExternalDeployAddress = "hyperty-runtime://sandbox/external", s.InternalDeployAddress = "hyperty-runtime://sandbox/internal", n["default"] = s, t.exports = n["default"];
     }, {}]
   }, {}, [3])(3);
 });
@@ -1207,83 +1189,76 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
   else if ("function" == typeof define && define.amd)
     define("4", [], e);
   else {
-    var n;
-    n = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, n.MiniBus = e();
+    var t;
+    t = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, t.MiniBus = e();
   }
 }(function() {
-  return function e(n, t, i) {
-    function r(o, u) {
-      if (!t[o]) {
-        if (!n[o]) {
+  return function e(t, n, r) {
+    function o(s, u) {
+      if (!n[s]) {
+        if (!t[s]) {
           var a = "function" == typeof require && require;
           if (!u && a)
-            return a(o, !0);
-          if (s)
-            return s(o, !0);
-          var l = new Error("Cannot find module '" + o + "'");
+            return a(s, !0);
+          if (i)
+            return i(s, !0);
+          var l = new Error("Cannot find module '" + s + "'");
           throw l.code = "MODULE_NOT_FOUND", l;
         }
-        var f = t[o] = {exports: {}};
-        n[o][0].call(f.exports, function(e) {
-          var t = n[o][1][e];
-          return r(t ? t : e);
-        }, f, f.exports, e, n, t, i);
+        var f = n[s] = {exports: {}};
+        t[s][0].call(f.exports, function(e) {
+          var n = t[s][1][e];
+          return o(n ? n : e);
+        }, f, f.exports, e, t, n, r);
       }
-      return t[o].exports;
+      return n[s].exports;
     }
-    for (var s = "function" == typeof require && require,
-        o = 0; o < i.length; o++)
-      r(i[o]);
-    return r;
+    for (var i = "function" == typeof require && require,
+        s = 0; s < r.length; s++)
+      o(r[s]);
+    return o;
   }({
-    1: [function(e, n, t) {
+    1: [function(e, t, n) {
       "use strict";
-      function i(e) {
-        return e && e.__esModule ? e : {"default": e};
-      }
-      function r(e, n) {
-        if (!(e instanceof n))
+      function r(e, t) {
+        if (!(e instanceof t))
           throw new TypeError("Cannot call a class as a function");
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var s = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var i = n[t];
-            i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(e, i.key, i);
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var o = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var r = t[n];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
           }
         }
-        return function(n, t, i) {
-          return t && e(n.prototype, t), i && e(n, i), n;
+        return function(t, n, r) {
+          return n && e(t.prototype, n), r && e(t, r), t;
         };
       }(),
-          o = e("./Pipeline"),
-          u = i(o),
-          a = function() {
+          i = function() {
             function e() {
               r(this, e);
-              var n = this;
-              n._msgId = 0, n._subscriptions = {}, n._responseTimeOut = 3e3, n._responseCallbacks = {}, n._pipeline = new u["default"](function(e) {
-                console.log("PIPELINE-ERROR: ", JSON.stringify(e));
-              }), n._registerExternalListener();
+              var t = this;
+              t._msgId = 0, t._subscriptions = {}, t._responseTimeOut = 5e3, t._responseCallbacks = {}, t._registerExternalListener();
             }
-            return s(e, [{
+            return o(e, [{
               key: "addListener",
-              value: function(e, n) {
-                var t = this,
-                    i = new l(t._subscriptions, e, n),
-                    r = t._subscriptions[e];
-                return r || (r = [], t._subscriptions[e] = r), r.push(i), i;
+              value: function(e, t) {
+                var n = this,
+                    r = new s(n._subscriptions, e, t),
+                    o = n._subscriptions[e];
+                return o || (o = [], n._subscriptions[e] = o), o.push(r), r;
               }
             }, {
               key: "addResponseListener",
-              value: function(e, n, t) {
-                this._responseCallbacks[e + n] = t;
+              value: function(e, t, n) {
+                this._responseCallbacks[e + t] = n;
               }
             }, {
               key: "removeResponseListener",
-              value: function(e, n) {
-                delete this._responseCallbacks[e + n];
+              value: function(e, t) {
+                delete this._responseCallbacks[e + t];
               }
             }, {
               key: "removeAllListenersOf",
@@ -1291,106 +1266,111 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
                 delete this._subscriptions[e];
               }
             }, {
-              key: "postMessage",
-              value: function(e, n) {
-                var t = this;
-                return e.id && 0 !== e.id || (t._msgId++, e.id = t._msgId), t._pipeline.process(e, function(e) {
-                  if (n && !function() {
-                    var i = e.from + e.id;
-                    t._responseCallbacks[i] = n, setTimeout(function() {
-                      var n = t._responseCallbacks[i];
-                      if (delete t._responseCallbacks[i], n) {
-                        var r = {
-                          id: e.id,
-                          type: "response",
-                          body: {
-                            code: "error",
-                            desc: "Response timeout!"
-                          }
-                        };
-                        n(r);
-                      }
-                    }, t._responseTimeOut);
-                  }(), !t._onResponse(e)) {
-                    var i = t._subscriptions[e.to];
-                    i ? t._publishOn(i, e) : t._onPostMessage(e);
-                  }
-                }), e.id;
-              }
-            }, {
               key: "bind",
-              value: function(e, n, t) {
-                var i = this,
-                    r = this,
-                    s = r.addListener(e, function(e) {
-                      t.postMessage(e);
+              value: function(e, t, n) {
+                var r = this,
+                    o = this,
+                    i = o.addListener(e, function(e) {
+                      n.postMessage(e);
                     }),
-                    o = t.addListener(n, function(e) {
-                      r.postMessage(e);
+                    s = n.addListener(t, function(e) {
+                      o.postMessage(e);
                     });
                 return {
-                  thisListener: s,
-                  targetListener: o,
+                  thisListener: i,
+                  targetListener: s,
                   unbind: function() {
-                    i.thisListener.remove(), i.targetListener.remove();
+                    r.thisListener.remove(), r.targetListener.remove();
                   }
                 };
               }
             }, {
+              key: "_publishOnDefault",
+              value: function(e) {
+                var t = this._subscriptions["*"];
+                t && this._publishOn(t, e);
+              }
+            }, {
               key: "_publishOn",
-              value: function(e, n) {
+              value: function(e, t) {
                 e.forEach(function(e) {
-                  e._callback(n);
+                  e._callback(t);
                 });
+              }
+            }, {
+              key: "_responseCallback",
+              value: function(e, t) {
+                var n = this;
+                t && !function() {
+                  var r = e.from + e.id;
+                  n._responseCallbacks[r] = t, setTimeout(function() {
+                    var t = n._responseCallbacks[r];
+                    if (delete n._responseCallbacks[r], t) {
+                      var o = {
+                        id: e.id,
+                        type: "response",
+                        body: {
+                          code: 408,
+                          desc: "Response timeout!",
+                          value: e
+                        }
+                      };
+                      t(o);
+                    }
+                  }, n._responseTimeOut);
+                }();
               }
             }, {
               key: "_onResponse",
               value: function(e) {
-                var n = this;
+                var t = this;
                 if ("response" === e.type) {
-                  var t = e.to + e.id,
-                      i = n._responseCallbacks[t];
-                  if (delete n._responseCallbacks[t], i)
-                    return i(e), !0;
+                  var n = e.to + e.id,
+                      r = t._responseCallbacks[n];
+                  if (e.body.code >= 200 && delete t._responseCallbacks[n], r)
+                    return r(e), !0;
                 }
                 return !1;
               }
             }, {
               key: "_onMessage",
               value: function(e) {
-                var n = this;
-                if (!n._onResponse(e)) {
-                  var t = n._subscriptions[e.to];
-                  t ? n._publishOn(t, e) : (t = n._subscriptions["*"], t && n._publishOn(t, e));
+                var t = this;
+                if (!t._onResponse(e)) {
+                  var n = t._subscriptions[e.to];
+                  n ? t._publishOn(n, e) : t._publishOnDefault(e);
                 }
               }
+            }, {
+              key: "_genId",
+              value: function(e) {
+                e.id && 0 !== e.id || (this._msgId++, e.id = this._msgId);
+              }
+            }, {
+              key: "postMessage",
+              value: function(e, t) {}
             }, {
               key: "_onPostMessage",
               value: function(e) {}
             }, {
               key: "_registerExternalListener",
               value: function() {}
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
             }]), e;
           }(),
-          l = function() {
-            function e(n, t, i) {
+          s = function() {
+            function e(t, n, o) {
               r(this, e);
-              var s = this;
-              s._subscriptions = n, s._url = t, s._callback = i;
+              var i = this;
+              i._subscriptions = t, i._url = n, i._callback = o;
             }
-            return s(e, [{
+            return o(e, [{
               key: "remove",
               value: function() {
                 var e = this,
-                    n = e._subscriptions[e._url];
-                if (n) {
-                  var t = n.indexOf(e);
-                  n.splice(t, 1), 0 === n.length && delete e._subscriptions[e._url];
+                    t = e._subscriptions[e._url];
+                if (t) {
+                  var n = t.indexOf(e);
+                  t.splice(n, 1), 0 === t.length && delete e._subscriptions[e._url];
                 }
               }
             }, {
@@ -1400,111 +1380,95 @@ var _removeDefine = $__System.get("@@amd-helpers").createDefine();
               }
             }]), e;
           }();
-      t["default"] = a, n.exports = t["default"];
-    }, {"./Pipeline": 2}],
-    2: [function(e, n, t) {
-      "use strict";
-      function i(e, n) {
-        if (!(e instanceof n))
-          throw new TypeError("Cannot call a class as a function");
-      }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var r = function() {
-        function e(e, n) {
-          for (var t = 0; t < n.length; t++) {
-            var i = n[t];
-            i.enumerable = i.enumerable || !1, i.configurable = !0, "value" in i && (i.writable = !0), Object.defineProperty(e, i.key, i);
-          }
-        }
-        return function(n, t, i) {
-          return t && e(n.prototype, t), i && e(n, i), n;
-        };
-      }(),
-          s = function() {
-            function e(n) {
-              i(this, e);
-              var t = this;
-              t.handlers = [], t.onFail = n;
-            }
-            return r(e, [{
-              key: "process",
-              value: function(e, n) {
-                var t = this;
-                if (t.handlers.length > 0) {
-                  var i = new u(t.handlers);
-                  i.next(new o(t, i, e, n));
-                } else
-                  n(e);
-              }
-            }]), e;
-          }(),
-          o = function() {
-            function e(n, t, r, s) {
-              i(this, e);
-              var o = this;
-              o._inStop = !1, o._pipeline = n, o._iter = t, o._msg = r, o._onDeliver = s;
-            }
-            return r(e, [{
-              key: "next",
-              value: function() {
-                var e = this;
-                e._inStop || (e._iter.hasNext ? e._iter.next(e) : e._onDeliver(e._msg));
-              }
-            }, {
-              key: "deliver",
-              value: function() {
-                var e = this;
-                e._inStop || (e._inStop = !0, e._onDeliver(e._msg));
-              }
-            }, {
-              key: "fail",
-              value: function(e) {
-                var n = this;
-                n._inStop || (n._inStop = !0, n._pipeline.onFail && n._pipeline.onFail(e));
-              }
-            }, {
-              key: "pipeline",
-              get: function() {
-                return this._pipeline;
-              }
-            }, {
-              key: "msg",
-              get: function() {
-                return this._msg;
-              },
-              set: function(e) {
-                this._msg = e;
-              }
-            }]), e;
-          }(),
-          u = function() {
-            function e(n) {
-              i(this, e), this._index = -1, this._array = n;
-            }
-            return r(e, [{
-              key: "hasNext",
-              get: function() {
-                return this._index < this._array.length - 1;
-              }
-            }, {
-              key: "next",
-              get: function() {
-                return this._index++, this._array[this._index];
-              }
-            }]), e;
-          }();
-      t["default"] = s, n.exports = t["default"];
+      n["default"] = i, t.exports = n["default"];
     }, {}],
-    3: [function(e, n, t) {
+    2: [function(e, t, n) {
       "use strict";
-      function i(e) {
+      function r(e) {
         return e && e.__esModule ? e : {"default": e};
       }
-      Object.defineProperty(t, "__esModule", {value: !0});
-      var r = e("./bus/MiniBus"),
-          s = i(r);
-      t["default"] = s["default"], n.exports = t["default"];
-    }, {"./bus/MiniBus": 1}]
+      function o(e, t) {
+        if (!(e instanceof t))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      function i(e, t) {
+        if ("function" != typeof t && null !== t)
+          throw new TypeError("Super expression must either be null or a function, not " + typeof t);
+        e.prototype = Object.create(t && t.prototype, {constructor: {
+            value: e,
+            enumerable: !1,
+            writable: !0,
+            configurable: !0
+          }}), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
+      }
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var s = function() {
+        function e(e, t) {
+          for (var n = 0; n < t.length; n++) {
+            var r = t[n];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+          }
+        }
+        return function(t, n, r) {
+          return n && e(t.prototype, n), r && e(t, r), t;
+        };
+      }(),
+          u = function(e, t, n) {
+            for (var r = !0; r; ) {
+              var o = e,
+                  i = t,
+                  s = n;
+              r = !1, null === o && (o = Function.prototype);
+              var u = Object.getOwnPropertyDescriptor(o, i);
+              if (void 0 !== u) {
+                if ("value" in u)
+                  return u.value;
+                var a = u.get;
+                if (void 0 === a)
+                  return;
+                return a.call(s);
+              }
+              var l = Object.getPrototypeOf(o);
+              if (null === l)
+                return;
+              e = l, t = i, n = s, r = !0, u = l = void 0;
+            }
+          },
+          a = e("./Bus"),
+          l = r(a),
+          f = function(e) {
+            function t() {
+              o(this, t), u(Object.getPrototypeOf(t.prototype), "constructor", this).call(this);
+            }
+            return i(t, e), s(t, [{
+              key: "postMessage",
+              value: function(e, t) {
+                var n = this;
+                return n._genId(e), n._responseCallback(e, t), n._onPostMessage(e), e.id;
+              }
+            }, {
+              key: "_onMessage",
+              value: function(e) {
+                var t = this;
+                if (!t._onResponse(e)) {
+                  var n = t._subscriptions[e.to];
+                  n ? (t._publishOn(n, e), e.to.startsWith("hyperty") || t._publishOnDefault(e)) : t._publishOnDefault(e);
+                }
+              }
+            }]), t;
+          }(l["default"]);
+      n["default"] = f, t.exports = n["default"];
+    }, {"./Bus": 1}],
+    3: [function(e, t, n) {
+      "use strict";
+      function r(e) {
+        return e && e.__esModule ? e : {"default": e};
+      }
+      Object.defineProperty(n, "__esModule", {value: !0});
+      var o = e("./bus/MiniBus"),
+          i = r(o);
+      n["default"] = i["default"], t.exports = n["default"];
+    }, {"./bus/MiniBus": 2}]
   }, {}, [3])(3);
 });
 

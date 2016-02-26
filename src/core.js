@@ -5,7 +5,7 @@ function returnHyperty(source, hyperty){
     source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
 }
 
-let runtime = new RuntimeUA(SandboxFactory);
+let runtime = new RuntimeUA(SandboxFactory, 'ua.pt');
 
 window.addEventListener('message', function(event){
     if(event.data.to==='core:loadHyperty'){
