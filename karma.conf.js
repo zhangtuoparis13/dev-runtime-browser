@@ -13,7 +13,7 @@ module.exports = function(config) {
      
     jspm:{
         loadFiles: [
-            'test/*.js',
+            'test/RuntimeLoader.spec.js',
          ],
          serveFiles: [ 'src/**/*.js', 'test/resources/*.js' ],
          packages: "vendor"

@@ -4,7 +4,7 @@
   "description": "browser runtime development",
   "main": "src/rethink.js",
   "scripts": {
-    "start": "jspm bundle-sfx src/RuntimeUAStub.js dist/rethink.js && jspm bundle-sfx src/core.js dist/core.js && jspm bundle-sfx src/ContextServiceProvider.js dist/context-service.js && live-server",
+    "start": "jspm bundle-sfx src/RuntimeLoader.js dist/rethink.js && jspm bundle-sfx src/core.js dist/core.js && jspm bundle-sfx src/ContextServiceProvider.js dist/context-service.js && live-server",
     "test": "karma start",
     "init-setup": "npm install -g jspm karma-cli gulp-cli && npm install && jspm install"
   },

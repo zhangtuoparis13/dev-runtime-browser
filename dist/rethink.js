@@ -3110,8 +3110,8 @@ $__System.registerDynamic("40", ["3f"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.register('1', ['2', '5', '40'], function (_export) {
-    var createIframe, app, _Promise, iframe;
+$__System.register('41', ['2', '5', '40'], function (_export) {
+    var createIframe, app, _Promise, RethinkBrowser;
 
     return {
         setters: [function (_3) {
@@ -3124,28 +3124,55 @@ $__System.register('1', ['2', '5', '40'], function (_export) {
         execute: function () {
             'use strict';
 
-            iframe = createIframe('http://127.0.0.1:8080/dist/index.html');
+            RethinkBrowser = {
+                install: function install() {
+                    var iframe = createIframe('http://127.0.0.1:8080/dist/index.html');
+                    app.create(iframe);
 
-            app.create(iframe);
+                    return {
+                        requireHyperty: function requireHyperty(hypertyDescriptor) {
+                            return new _Promise(function (resolve, reject) {
+                                var loaded = function loaded(e) {
+                                    if (e.data.to === 'runtime:loadedHyperty') {
+                                        window.removeEventListener('message', loaded);
+                                        resolve(app.getHyperty(e.data.body.runtimeHypertyURL));
+                                    }
+                                };
+                                window.addEventListener('message', loaded);
+                                iframe.contentWindow.postMessage({ to: 'core:loadHyperty', body: { descriptor: hypertyDescriptor } }, '*');
+                            });
+                        },
 
-            window.rethink = {
-                requireHyperty: function requireHyperty(hypertyDescriptor) {
-                    return new _Promise(function (resolve, reject) {
-                        var loaded = function loaded(e) {
-                            if (e.data.to === 'runtime:loadedHyperty') {
-                                window.removeEventListener('message', loaded);
-                                resolve(app.getHyperty(e.data.body.runtimeHypertyURL));
-                            }
-                        };
-                        window.addEventListener('message', loaded);
-                        iframe.contentWindow.postMessage({ to: 'core:loadHyperty', body: { descriptor: hypertyDescriptor } }, '*');
-                    });
-                },
-
-                requireProtostub: function requireProtostub(domain) {
-                    iframe.contentWindow.postMessage({ to: 'core:loadStub', body: { "domain": domain } }, '*');
+                        requireProtostub: function requireProtostub(domain) {
+                            iframe.contentWindow.postMessage({ to: 'core:loadStub', body: { "domain": domain } }, '*');
+                        }
+                    };
                 }
             };
+
+            _export('default', RethinkBrowser);
+        }
+    };
+});
+$__System.register('1', ['41'], function (_export) {
+    'use strict';
+
+    var RethinkBrowser, rethink;
+    return {
+        setters: [function (_) {
+            RethinkBrowser = _['default'];
+        }],
+        execute: function () {
+            rethink = undefined;
+
+            if (typeof window != undefined && window != null) {
+                rethink = RethinkBrowser.install();
+                window.rethink = rethink;
+            } else {
+                rethink = undefined;
+            }
+
+            _export('default', rethink);
         }
     };
 });

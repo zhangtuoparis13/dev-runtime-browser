@@ -1,6 +1,6 @@
 window.onload = ()=>loadHyperties()
 
-var hypertiesList = ['hyperty-catalogue://ua.pt/HelloHyperty'];
+var hypertiesList = ['hyperty-catalogue://localhost/HelloHyperty'];
 
 function errorMessage(reason) {
   console.log(reason);
