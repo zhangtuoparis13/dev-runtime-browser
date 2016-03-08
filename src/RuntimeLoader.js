@@ -4,7 +4,6 @@ let rethink;
 
 if( typeof window != undefined && window != null ){
     rethink = RethinkBrowser.install()
-    window.rethink = rethink
 }else{
     rethink = undefined
 }

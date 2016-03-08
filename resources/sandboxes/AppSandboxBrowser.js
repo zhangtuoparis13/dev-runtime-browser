@@ -1,6 +1,5 @@
-import MiniBus from '../../src/bus/MiniBus';
-import Sandbox from '../../src/sandbox/Sandbox';
-import SandboxRegistry from '../../src/sandbox/SandboxRegistry';
+import MiniBus from 'runtime-core/dist/minibus';
+import {Sandbox, SandboxRegistry} from 'runtime-core/dist/sandbox';
 
 // Mockup code for testing
 class AppSandboxBrowser extends Sandbox {
@@ -13,7 +12,7 @@ class AppSandboxBrowser extends Sandbox {
     //simulate sandbox frontier
     _this._bus = new MiniBus();
     _this._bus._onPostMessage = function(msg) {
-      console.log('AppSandboxBrowser._onPostMessage -> external: ', JSON.stringify(msg));
+      console.log('AppSandboxBrowser._onPostMessage -> external (out)', 'from: ', msg.from, 'to: ', msg.to, 'msg: ', msg);
 
       //redirect messages to the external part of the sandbox
       _this._onMessage(msg);
@@ -32,7 +31,7 @@ class AppSandboxBrowser extends Sandbox {
 
   _onPostMessage(msg) {
     let _this = this;
-    console.log('AppSandboxBrowser._onPostMessage -> internal: ', JSON.stringify(msg));
+    console.log('AppSandboxBrowser._onPostMessage -> internal (in)', 'from: ', msg.from, 'to: ', msg.to, 'msg: ', msg);
 
     //redirect messages to the internal part of the sandbox
     _this._bus._onMessage(msg);

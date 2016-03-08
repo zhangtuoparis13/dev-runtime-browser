@@ -1,11 +1,11 @@
-import RuntimeUA from 'runtime-core/dist/runtimeUA';
+import RuntimeUA from 'runtime-core/src/runtime/runtimeua';
 import SandboxFactory from './SandboxFactory';
 
 function returnHyperty(source, hyperty){
     source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
 }
 
-let runtime = new RuntimeUA(SandboxFactory, 'ua.pt');
+let runtime = new RuntimeUA(SandboxFactory, 'localhost');
 
 window.addEventListener('message', function(event){
     if(event.data.to==='core:loadHyperty'){

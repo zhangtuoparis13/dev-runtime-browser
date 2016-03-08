@@ -1,4 +1,4 @@
-import {Sandbox, SandboxRegistry} from 'runtime-core/dist/sandbox';
+import Sandbox from 'runtime-core/src/sandbox/sandbox';
 
 export default class SandboxWorker extends Sandbox{
    constructor(script){
