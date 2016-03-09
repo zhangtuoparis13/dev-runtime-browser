@@ -8,7 +8,7 @@ function create(iframe){
         iframe.contentWindow.postMessage(msg, '*');
     };
     window.addEventListener('message', function(event){
-        if(event.data.to.startsWith('runtime:'))
+        if(event.data.to.startsWith('runtime:loadedHyperty'))
             return;
 
         window._miniBus._onMessage(event.data);
