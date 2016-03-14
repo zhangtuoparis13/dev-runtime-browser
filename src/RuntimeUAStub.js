@@ -3,7 +3,7 @@ import { create as createIframe } from './iframe';
 
 let RethinkBrowser = {
     install: function(){
-        var iframe = createIframe('http://127.0.0.1:8080/dist/index.html');
+        var iframe = createIframe('https://localhost/dist/index.html');
         app.create(iframe);
 
         return {

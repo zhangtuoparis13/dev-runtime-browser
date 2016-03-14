@@ -1,5 +1,6 @@
 import SandboxWorker from './SandboxWorker';
 import SandboxApp from './SandboxApp';
+import Request from './Request';
 
 //TODO: resources url dependency
 function createSandbox(){
@@ -10,4 +11,9 @@ function createAppSandbox(){
     return new SandboxApp();
 }
 
-export default { createSandbox, createAppSandbox };
+function createHttpRequest() {
+    let request = new Request();
+    return request;
+}
+
+export default { createSandbox, createAppSandbox ,createHttpRequest};

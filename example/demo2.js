@@ -2,7 +2,6 @@
 /* global Handlebars */
 /* global Materialize */
 
-import config from '../system.config.json!json';
 import {removeLoader, ready, errorMessage} from './support';
 
 // polyfills
@@ -12,8 +11,7 @@ import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
-import RuntimeLoader from '../src/runtime-loader/RuntimeLoader';
-import CoreFactory from '../resources/CoreFactory';
+import runtimeLoader from '../src/RuntimeLoader';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -23,7 +21,7 @@ import CoreFactory from '../resources/CoreFactory';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = config.domain;
+let domain = "localhost";
 //
 // let runtime = new RuntimeUA(sandboxFactory, domain);
 // window.runtime = runtime;
@@ -45,13 +43,13 @@ function documentReady() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
 
-  let core = new CoreFactory();
-  let runtimeLoader = new RuntimeLoader(core);
-
   // Load First Hyperty
-  runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
-    errorMessage(reason);
-  });
+  setTimeout(function(){
+      // Load First Hyperty
+      runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+        errorMessage(reason);
+      });
+  }, 10000);
 
 }
 

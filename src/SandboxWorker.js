@@ -1,8 +1,11 @@
 import Sandbox from 'runtime-core/src/sandbox/Sandbox';
+import {SandboxType} from 'runtime-core/src/sandbox/Sandbox';
 
 export default class SandboxWorker extends Sandbox{
    constructor(script){
      super(script);
+
+     this.type = SandboxType.NORMAL;
      if(!!Worker){
          this._worker = new Worker(script);
          this._worker.addEventListener('message', function(e){
