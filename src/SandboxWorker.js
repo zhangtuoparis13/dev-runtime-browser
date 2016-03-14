@@ -1,4 +1,4 @@
-import Sandbox from 'runtime-core/src/sandbox/sandbox';
+import Sandbox from 'runtime-core/src/sandbox/Sandbox';
 
 export default class SandboxWorker extends Sandbox{
    constructor(script){

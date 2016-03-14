@@ -1,6 +1,8 @@
 // jshint browser:true, jquery: true
+// jshint varstmt: true
 
-import {ready, errorMessage} from './support';
+import {ready, errorMessage, getUserMedia} from './support';
+
 
 // polyfills
 import 'babel-polyfill';
@@ -19,10 +21,11 @@ import runtimeLoader from '../src/RuntimeLoader';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = "localhost";
+let domain ="localhost" ;
 
-// let runtime = new RuntimeUA(sandboxFactory, domain);
-// window.runtime = runtime;
+
+// Hack because the GraphConnector jsrsasign module;
+window.KJUR = {};
 
 // Check if the document is ready
 if (document.readyState === 'complete') {
@@ -31,6 +34,7 @@ if (document.readyState === 'complete') {
   window.addEventListener('onload', documentReady, false);
   document.addEventListener('DOMContentLoaded', documentReady, false);
 }
+
 
 function documentReady() {
 
@@ -70,6 +74,8 @@ function hypertyDeployed(result) {
   // Prepare the chat
   let messageChat = $('.hyperty-chat');
   messageChat.removeClass('hide');
+
+  console.log(result);
 
   connector = result.instance;
 
@@ -161,11 +167,15 @@ function openChat(result, video) {
 
   if (video) {
 
-    connector.connect(toUser).then(function(controller) {
+    let options = options || {video: true, audio: true};
+    getUserMedia(options).then(function(mediaStream) {
+      console.info('recived media stream: ', mediaStream);
+      return connector.connect(toUser, mediaStream);
+    })
+    .then(function(controller) {
 
       showVideo(controller);
 
-      controller.addEventListener('stream:added', processVideo);
       controller.addEventListener('on:notification', notification);
       controller.addEventListener('on:subscribe', function(controller) {
         console.info('on:subscribe:event ', controller);
@@ -198,11 +208,13 @@ function openChat(result, video) {
 
 }
 
-function processVideo(stream) {
+function processVideo(event) {
+
+  console.log('Process Video: ', event);
 
   let messageChat = $('.hyperty-chat');
   let video = messageChat.find('.video');
-  video[0].src = stream;
+  video[0].src = URL.createObjectURL(event.stream);
 
 }
 
@@ -254,7 +266,12 @@ function notificationHandler(controller, event) {
 
     e.preventDefault();
 
-    controller.accept().then(function(result) {
+    let options = options || {video: true, audio: true};
+    getUserMedia(options).then(function(mediaStream) {
+      console.info('recived media stream: ', mediaStream);
+      return controller.accept(mediaStream);
+    })
+    .then(function(result) {
       console.log(result);
     }).catch(function(reason) {
       console.error(reason);
@@ -298,6 +315,15 @@ function notificationHandler(controller, event) {
   $('.modal-call').openModal();
 
 }
+
+// function processLocalVideo(controller) {
+//
+//   let localStreams = controller.getLocalStreams;
+//   for (let stream of localStreams) {
+//     console.log('Local stream: ' + stream.id);
+//   }
+//
+// }
 
 function showVideo(controller) {
   let messageChat = $('.hyperty-chat');

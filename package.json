@@ -52,7 +52,9 @@
     "babel-polyfill": "^6.6.1",
     "indexeddbshim": "^2.2.1",
     "mutationobserver-shim": "^0.3.1",
-    "object.observe": "^0.2.6"
+    "object.observe": "^0.2.6",
+    "runtime-core": "github:rethink-project/dev-runtime-core#dev-0.4",
+    "service-framework": "github:rethink-project/dev-service-framework#develop"
   },
   "jspm": {
     "directories": {
@@ -64,7 +66,8 @@
       "indexeddbshim": "npm:indexeddbshim@^2.2.1",
       "mutationobserver-shim": "npm:mutationobserver-shim@^0.3.1",
       "object.observe": "npm:object.observe@^0.2.6",
-      "runtime-core": "github:rethink-project/dev-runtime-core@master"
+      "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
+      "service-framework": "github:rethink-project/dev-service-framework@develop"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",

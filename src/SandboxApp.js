@@ -1,5 +1,5 @@
-import Sandbox from 'runtime-core/src/sandbox/sandbox';
-import MiniBus from 'runtime-core/src/bus/minibus';
+import Sandbox from 'runtime-core/src/sandbox/Sandbox';
+import MiniBus from 'runtime-core/src/bus/MiniBus';
 
 export default class SandboxApp extends Sandbox{
    constructor(){

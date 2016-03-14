@@ -1,6 +1,6 @@
-import Sandbox from 'runtime-core/src/sandbox/sandbox';
-import SandboxRegistry from 'runtime-core/src/sandbox/sandboxregistry';
-import MiniBus from 'runtime-core/src/bus/minibus';
+import Sandbox from 'runtime-core/src/sandbox/Sandbox';
+import SandboxRegistry from 'runtime-core/src/sandbox/SandboxRegistry';
+import MiniBus from 'runtime-core/src/bus/MiniBus';
 
 self._miniBus = new MiniBus();
 self._miniBus._onPostMessage = function(msg){

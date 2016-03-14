@@ -16,14 +16,15 @@ System.config({
   map: {
     "array.observe": "npm:array.observe@0.0.1",
     "babel": "npm:babel-core@5.8.35",
-    "babel-polyfill": "npm:babel-polyfill@6.6.1",
+    "babel-polyfill": "npm:babel-polyfill@6.7.2",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "chai": "npm:chai@3.5.0",
     "core-js": "npm:core-js@1.2.6",
     "indexeddbshim": "npm:indexeddbshim@2.2.1",
     "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
     "object.observe": "npm:object.observe@0.2.6",
-    "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
+    "runtime-core": "github:rethink-project/dev-runtime-core@master",
+    "service-framework": "github:rethink-project/dev-service-framework@develop",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -86,9 +87,29 @@ System.config({
       "service-framework": "github:rethink-project/dev-service-framework@develop",
       "sjcl": "npm:sjcl@1.0.3"
     },
+    "github:rethink-project/dev-runtime-core@master": {
+      "base64-url": "npm:base64-url@1.2.1",
+      "bip39": "npm:bip39@2.2.0",
+      "bitcoinjs-lib": "npm:bitcoinjs-lib@2.2.0",
+      "hellojs": "npm:hellojs@1.12.0",
+      "jsrsasign": "npm:jsrsasign@5.0.7",
+      "service-framework": "github:rethink-project/dev-service-framework@master",
+      "sjcl": "npm:sjcl@1.0.3"
+    },
     "github:rethink-project/dev-service-framework@develop": {
       "array.observe": "npm:array.observe@0.0.1",
-      "babel-polyfill": "npm:babel-polyfill@6.6.1",
+      "babel-polyfill": "npm:babel-polyfill@6.7.2",
+      "indexeddbshim": "npm:indexeddbshim@2.2.1",
+      "json": "github:systemjs/plugin-json@0.1.0",
+      "object.observe": "npm:object.observe@0.2.6",
+      "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
+      "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
+      "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.10",
+      "webrtc-shim": "npm:webrtc-shim@0.1.2"
+    },
+    "github:rethink-project/dev-service-framework@master": {
+      "array.observe": "npm:array.observe@0.0.1",
+      "babel-polyfill": "npm:babel-polyfill@6.7.2",
       "indexeddbshim": "npm:indexeddbshim@2.2.1",
       "json": "github:systemjs/plugin-json@0.1.0",
       "object.observe": "npm:object.observe@0.2.6",
@@ -99,9 +120,9 @@ System.config({
     "npm:array.observe@0.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:asn1.js@4.5.1": {
+    "npm:asn1.js@4.5.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
@@ -111,10 +132,10 @@ System.config({
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
     },
-    "npm:babel-polyfill@6.6.1": {
+    "npm:babel-polyfill@6.7.2": {
       "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0",
       "babel-runtime": "npm:babel-runtime@5.8.35",
-      "core-js": "npm:core-js@2.1.3",
+      "core-js": "npm:core-js@2.1.5",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:babel-regenerator-runtime@6.5.0": {
@@ -151,7 +172,7 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "buffer-compare": "npm:buffer-compare@1.1.1",
       "buffer-equals": "npm:buffer-equals@1.0.3",
-      "buffer-reverse": "npm:buffer-reverse@1.0.0",
+      "buffer-reverse": "npm:buffer-reverse@1.0.1",
       "create-hash": "npm:create-hash@1.1.2",
       "create-hmac": "npm:create-hmac@1.1.4",
       "ecurve": "npm:ecurve@1.0.2",
@@ -160,7 +181,7 @@ System.config({
       "typeforce": "npm:typeforce@1.6.2",
       "wif": "npm:wif@1.2.1"
     },
-    "npm:bn.js@4.10.5": {
+    "npm:bn.js@4.11.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:browserify-aes@1.0.6": {
@@ -189,14 +210,14 @@ System.config({
       "inherits": "npm:inherits@2.0.1"
     },
     "npm:browserify-rsa@4.0.1": {
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "constants": "github:jspm/nodelibs-constants@0.1.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "randombytes": "npm:randombytes@2.0.3"
     },
     "npm:browserify-sign@4.0.0": {
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "browserify-rsa": "npm:browserify-rsa@4.0.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.2",
@@ -219,9 +240,8 @@ System.config({
     "npm:buffer-equals@1.0.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:buffer-reverse@1.0.0": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    "npm:buffer-reverse@1.0.1": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:buffer-xor@1.0.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -258,7 +278,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:core-js@2.1.3": {
+    "npm:core-js@2.1.5": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -268,7 +288,7 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:create-ecdh@4.0.0": {
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "elliptic": "npm:elliptic@6.2.3"
@@ -311,7 +331,7 @@ System.config({
       "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
     },
     "npm:diffie-hellman@5.0.2": {
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "miller-rabin": "npm:miller-rabin@4.0.0",
@@ -325,7 +345,7 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:elliptic@6.2.3": {
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "brorand": "npm:brorand@1.0.5",
       "hash.js": "npm:hash.js@1.0.3",
       "inherits": "npm:inherits@2.0.1",
@@ -369,7 +389,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:miller-rabin@4.0.0": {
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "brorand": "npm:brorand@1.0.5"
     },
     "npm:object.observe@0.2.6": {
@@ -384,7 +404,7 @@ System.config({
       "os": "github:jspm/nodelibs-os@0.1.0"
     },
     "npm:parse-asn1@5.0.0": {
-      "asn1.js": "npm:asn1.js@4.5.1",
+      "asn1.js": "npm:asn1.js@4.5.2",
       "browserify-aes": "npm:browserify-aes@1.0.6",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.2",
@@ -408,7 +428,7 @@ System.config({
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
     "npm:public-encrypt@4.0.0": {
-      "bn.js": "npm:bn.js@4.10.5",
+      "bn.js": "npm:bn.js@4.11.0",
       "browserify-rsa": "npm:browserify-rsa@4.0.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.2",
