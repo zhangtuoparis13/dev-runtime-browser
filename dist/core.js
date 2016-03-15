@@ -59771,6 +59771,28 @@ $__System.register('140', ['14', '15', '141', 'e', 'f'], function (_export) {
             _classCallCheck = _f['default'];
         }],
         execute: function () {
+            /**
+            * Copyright 2016 PT Inovação e Sistemas SA
+            * Copyright 2016 INESC-ID
+            * Copyright 2016 QUOBIS NETWORKS SL
+            * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+            * Copyright 2016 ORANGE SA
+            * Copyright 2016 Deutsche Telekom AG
+            * Copyright 2016 Apizee
+            * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+            *
+            * Licensed under the Apache License, Version 2.0 (the "License");
+            * you may not use this file except in compliance with the License.
+            * You may obtain a copy of the License at
+            *
+            *   http://www.apache.org/licenses/LICENSE-2.0
+            *
+            * Unless required by applicable law or agreed to in writing, software
+            * distributed under the License is distributed on an "AS IS" BASIS,
+            * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            * See the License for the specific language governing permissions and
+            * limitations under the License.
+            **/
             'use strict';
 
             SandboxWorker = (function (_Sandbox) {
@@ -60645,6 +60667,28 @@ $__System.register('14f', ['14', '15', '141', '143', 'e', 'f'], function (_expor
             _classCallCheck = _f['default'];
         }],
         execute: function () {
+            /**
+            * Copyright 2016 PT Inovação e Sistemas SA
+            * Copyright 2016 INESC-ID
+            * Copyright 2016 QUOBIS NETWORKS SL
+            * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+            * Copyright 2016 ORANGE SA
+            * Copyright 2016 Deutsche Telekom AG
+            * Copyright 2016 Apizee
+            * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+            *
+            * Licensed under the Apache License, Version 2.0 (the "License");
+            * you may not use this file except in compliance with the License.
+            * You may obtain a copy of the License at
+            *
+            *   http://www.apache.org/licenses/LICENSE-2.0
+            *
+            * Unless required by applicable law or agreed to in writing, software
+            * distributed under the License is distributed on an "AS IS" BASIS,
+            * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            * See the License for the specific language governing permissions and
+            * limitations under the License.
+            **/
             'use strict';
 
             SandboxApp = (function (_Sandbox) {
@@ -62367,6 +62411,28 @@ $__System.register('173', ['11', 'e', 'f', '13b'], function (_export) {
       _Object$keys = _b['default'];
     }],
     execute: function () {
+      /**
+      * Copyright 2016 PT Inovação e Sistemas SA
+      * Copyright 2016 INESC-ID
+      * Copyright 2016 QUOBIS NETWORKS SL
+      * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+      * Copyright 2016 ORANGE SA
+      * Copyright 2016 Deutsche Telekom AG
+      * Copyright 2016 Apizee
+      * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+      *
+      * Licensed under the Apache License, Version 2.0 (the "License");
+      * you may not use this file except in compliance with the License.
+      * You may obtain a copy of the License at
+      *
+      *   http://www.apache.org/licenses/LICENSE-2.0
+      *
+      * Unless required by applicable law or agreed to in writing, software
+      * distributed under the License is distributed on an "AS IS" BASIS,
+      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      * See the License for the specific language governing permissions and
+      * limitations under the License.
+      **/
       'use strict';
 
       methods = { GET: 'get', POST: 'post', DELETE: 'delete', UPDATE: 'update' };
@@ -62462,6 +62528,28 @@ $__System.register('173', ['11', 'e', 'f', '13b'], function (_export) {
   };
 });
 $__System.register('174', ['140', '173', '14f'], function (_export) {
+    /**
+    * Copyright 2016 PT Inovação e Sistemas SA
+    * Copyright 2016 INESC-ID
+    * Copyright 2016 QUOBIS NETWORKS SL
+    * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+    * Copyright 2016 ORANGE SA
+    * Copyright 2016 Deutsche Telekom AG
+    * Copyright 2016 Apizee
+    * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *   http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    **/
 
     //TODO: resources url dependency
     'use strict';
@@ -62494,6 +62582,28 @@ $__System.register('174', ['140', '173', '14f'], function (_export) {
     };
 });
 $__System.register('1', ['174', '13f'], function (_export) {
+    /**
+    * Copyright 2016 PT Inovação e Sistemas SA
+    * Copyright 2016 INESC-ID
+    * Copyright 2016 QUOBIS NETWORKS SL
+    * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+    * Copyright 2016 ORANGE SA
+    * Copyright 2016 Deutsche Telekom AG
+    * Copyright 2016 Apizee
+    * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *   http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    **/
     'use strict';
 
     var SandboxFactory, RuntimeUA, runtime;
