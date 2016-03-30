@@ -25,7 +25,7 @@ import RethinkBrowser from './RuntimeUAStub'
 let rethink;
 
 if( typeof window != undefined && window != null ){
-    rethink = RethinkBrowser.install()
+    rethink = RethinkBrowser
 }else{
     rethink = undefined
 }

@@ -94,13 +94,13 @@ var define = $__System.amdDefine;
     function i(a, s) {
       if (!r[a]) {
         if (!e[a]) {
-          var u = "function" == typeof require && require;
-          if (!s && u)
-            return u(a, !0);
+          var c = "function" == typeof require && require;
+          if (!s && c)
+            return c(a, !0);
           if (o)
             return o(a, !0);
-          var c = new Error("Cannot find module '" + a + "'");
-          throw c.code = "MODULE_NOT_FOUND", c;
+          var u = new Error("Cannot find module '" + a + "'");
+          throw u.code = "MODULE_NOT_FOUND", u;
         }
         var l = r[a] = {exports: {}};
         e[a][0].call(l.exports, function(t) {
@@ -182,7 +182,7 @@ var define = $__System.amdDefine;
         return e && e.__esModule ? e : {"default": e};
       }
       r.__esModule = !0;
-      var i = e("../core-js/object/define-property"),
+      var i = e("babel-runtime/core-js/object/define-property"),
           o = n(i);
       r["default"] = function() {
         function e(e, t) {
@@ -195,23 +195,23 @@ var define = $__System.amdDefine;
           return r && e(t.prototype, r), n && e(t, n), t;
         };
       }();
-    }, {"../core-js/object/define-property": 2}],
+    }, {"babel-runtime/core-js/object/define-property": 2}],
     13: [function(e, t, r) {
       "use strict";
       function n(e) {
         return e && e.__esModule ? e : {"default": e};
       }
       r.__esModule = !0;
-      var i = e("../core-js/object/get-prototype-of"),
+      var i = e("babel-runtime/core-js/object/get-prototype-of"),
           o = n(i),
-          a = e("../core-js/object/get-own-property-descriptor"),
+          a = e("babel-runtime/core-js/object/get-own-property-descriptor"),
           s = n(a);
-      r["default"] = function u(e, t, r) {
+      r["default"] = function c(e, t, r) {
         null === e && (e = Function.prototype);
         var n = (0, s["default"])(e, t);
         if (void 0 === n) {
           var i = (0, o["default"])(e);
-          return null === i ? void 0 : u(i, t, r);
+          return null === i ? void 0 : c(i, t, r);
         }
         if ("value" in n)
           return n.value;
@@ -220,8 +220,8 @@ var define = $__System.amdDefine;
           return a.call(r);
       };
     }, {
-      "../core-js/object/get-own-property-descriptor": 3,
-      "../core-js/object/get-prototype-of": 4
+      "babel-runtime/core-js/object/get-own-property-descriptor": 3,
+      "babel-runtime/core-js/object/get-prototype-of": 4
     }],
     14: [function(e, t, r) {
       "use strict";
@@ -229,15 +229,15 @@ var define = $__System.amdDefine;
         return e && e.__esModule ? e : {"default": e};
       }
       r.__esModule = !0;
-      var i = e("../core-js/object/set-prototype-of"),
+      var i = e("babel-runtime/core-js/object/set-prototype-of"),
           o = n(i),
-          a = e("../core-js/object/create"),
+          a = e("babel-runtime/core-js/object/create"),
           s = n(a),
-          u = e("../helpers/typeof"),
-          c = n(u);
+          c = e("babel-runtime/helpers/typeof"),
+          u = n(c);
       r["default"] = function(e, t) {
         if ("function" != typeof t && null !== t)
-          throw new TypeError("Super expression must either be null or a function, not " + ("undefined" == typeof t ? "undefined" : (0, c["default"])(t)));
+          throw new TypeError("Super expression must either be null or a function, not " + ("undefined" == typeof t ? "undefined" : (0, u["default"])(t)));
         e.prototype = (0, s["default"])(t && t.prototype, {constructor: {
             value: e,
             enumerable: !1,
@@ -246,9 +246,9 @@ var define = $__System.amdDefine;
           }}), t && (o["default"] ? (0, o["default"])(e, t) : e.__proto__ = t);
       };
     }, {
-      "../core-js/object/create": 1,
-      "../core-js/object/set-prototype-of": 5,
-      "../helpers/typeof": 17
+      "babel-runtime/core-js/object/create": 1,
+      "babel-runtime/core-js/object/set-prototype-of": 5,
+      "babel-runtime/helpers/typeof": 17
     }],
     15: [function(e, t, r) {
       t.exports = e("./interopRequireDefault.js");
@@ -264,80 +264,89 @@ var define = $__System.amdDefine;
       function n(e) {
         return e && e.__esModule ? e : {"default": e};
       }
-      var i = "function" == typeof _Symbol && "symbol" == typeof _Symbol$iterator ? function(e) {
-        return typeof e;
-      } : function(e) {
-        return e && "function" == typeof _Symbol && e.constructor === _Symbol ? "symbol" : typeof e;
-      };
       r.__esModule = !0;
-      var o = e("../core-js/symbol/iterator"),
-          a = n(o),
-          s = e("../core-js/symbol"),
-          u = n(s);
-      r["default"] = "function" == typeof u["default"] && "symbol" === i(a["default"]) ? function(e) {
-        return "undefined" == typeof e ? "undefined" : i(e);
+      var i = e("babel-runtime/core-js/symbol/iterator"),
+          o = n(i),
+          a = e("babel-runtime/core-js/symbol"),
+          s = n(a),
+          c = "function" == typeof s["default"] && "symbol" == typeof o["default"] ? function(e) {
+            return typeof e;
+          } : function(e) {
+            return e && "function" == typeof s["default"] && e.constructor === s["default"] ? "symbol" : typeof e;
+          };
+      r["default"] = "function" == typeof s["default"] && "symbol" === c(o["default"]) ? function(e) {
+        return "undefined" == typeof e ? "undefined" : c(e);
       } : function(e) {
-        return e && "function" == typeof u["default"] && e.constructor === u["default"] ? "symbol" : "undefined" == typeof e ? "undefined" : i(e);
+        return e && "function" == typeof s["default"] && e.constructor === s["default"] ? "symbol" : "undefined" == typeof e ? "undefined" : c(e);
       };
     }, {
-      "../core-js/symbol": 7,
-      "../core-js/symbol/iterator": 8
+      "babel-runtime/core-js/symbol": 7,
+      "babel-runtime/core-js/symbol/iterator": 8
     }],
     18: [function(e, t, r) {
-      var n = e("../../modules/$");
+      e("../../modules/es6.object.create");
+      var n = e("../../modules/_core").Object;
       t.exports = function(e, t) {
         return n.create(e, t);
       };
-    }, {"../../modules/$": 56}],
+    }, {
+      "../../modules/_core": 33,
+      "../../modules/es6.object.create": 96
+    }],
     19: [function(e, t, r) {
-      var n = e("../../modules/$");
+      e("../../modules/es6.object.define-property");
+      var n = e("../../modules/_core").Object;
       t.exports = function(e, t, r) {
-        return n.setDesc(e, t, r);
-      };
-    }, {"../../modules/$": 56}],
-    20: [function(e, t, r) {
-      var n = e("../../modules/$");
-      e("../../modules/es6.object.get-own-property-descriptor"), t.exports = function(e, t) {
-        return n.getDesc(e, t);
+        return n.defineProperty(e, t, r);
       };
     }, {
-      "../../modules/$": 56,
-      "../../modules/es6.object.get-own-property-descriptor": 81
+      "../../modules/_core": 33,
+      "../../modules/es6.object.define-property": 97
+    }],
+    20: [function(e, t, r) {
+      e("../../modules/es6.object.get-own-property-descriptor");
+      var n = e("../../modules/_core").Object;
+      t.exports = function(e, t) {
+        return n.getOwnPropertyDescriptor(e, t);
+      };
+    }, {
+      "../../modules/_core": 33,
+      "../../modules/es6.object.get-own-property-descriptor": 98
     }],
     21: [function(e, t, r) {
-      e("../../modules/es6.object.get-prototype-of"), t.exports = e("../../modules/$.core").Object.getPrototypeOf;
+      e("../../modules/es6.object.get-prototype-of"), t.exports = e("../../modules/_core").Object.getPrototypeOf;
     }, {
-      "../../modules/$.core": 31,
-      "../../modules/es6.object.get-prototype-of": 82
+      "../../modules/_core": 33,
+      "../../modules/es6.object.get-prototype-of": 99
     }],
     22: [function(e, t, r) {
-      e("../../modules/es6.object.set-prototype-of"), t.exports = e("../../modules/$.core").Object.setPrototypeOf;
+      e("../../modules/es6.object.set-prototype-of"), t.exports = e("../../modules/_core").Object.setPrototypeOf;
     }, {
-      "../../modules/$.core": 31,
-      "../../modules/es6.object.set-prototype-of": 83
+      "../../modules/_core": 33,
+      "../../modules/es6.object.set-prototype-of": 100
     }],
     23: [function(e, t, r) {
-      e("../modules/es6.object.to-string"), e("../modules/es6.string.iterator"), e("../modules/web.dom.iterable"), e("../modules/es6.promise"), t.exports = e("../modules/$.core").Promise;
+      e("../modules/es6.object.to-string"), e("../modules/es6.string.iterator"), e("../modules/web.dom.iterable"), e("../modules/es6.promise"), t.exports = e("../modules/_core").Promise;
     }, {
-      "../modules/$.core": 31,
-      "../modules/es6.object.to-string": 84,
-      "../modules/es6.promise": 85,
-      "../modules/es6.string.iterator": 86,
-      "../modules/web.dom.iterable": 88
+      "../modules/_core": 33,
+      "../modules/es6.object.to-string": 101,
+      "../modules/es6.promise": 102,
+      "../modules/es6.string.iterator": 103,
+      "../modules/web.dom.iterable": 105
     }],
     24: [function(e, t, r) {
-      e("../../modules/es6.symbol"), e("../../modules/es6.object.to-string"), t.exports = e("../../modules/$.core").Symbol;
+      e("../../modules/es6.symbol"), e("../../modules/es6.object.to-string"), t.exports = e("../../modules/_core").Symbol;
     }, {
-      "../../modules/$.core": 31,
-      "../../modules/es6.object.to-string": 84,
-      "../../modules/es6.symbol": 87
+      "../../modules/_core": 33,
+      "../../modules/es6.object.to-string": 101,
+      "../../modules/es6.symbol": 104
     }],
     25: [function(e, t, r) {
-      e("../../modules/es6.string.iterator"), e("../../modules/web.dom.iterable"), t.exports = e("../../modules/$.wks")("iterator");
+      e("../../modules/es6.string.iterator"), e("../../modules/web.dom.iterable"), t.exports = e("../../modules/_wks")("iterator");
     }, {
-      "../../modules/$.wks": 78,
-      "../../modules/es6.string.iterator": 86,
-      "../../modules/web.dom.iterable": 88
+      "../../modules/_wks": 93,
+      "../../modules/es6.string.iterator": 103,
+      "../../modules/web.dom.iterable": 105
     }],
     26: [function(e, t, r) {
       t.exports = function(e) {
@@ -350,41 +359,79 @@ var define = $__System.amdDefine;
       t.exports = function() {};
     }, {}],
     28: [function(e, t, r) {
-      var n = e("./$.is-object");
+      t.exports = function(e, t, r, n) {
+        if (!(e instanceof t) || void 0 !== n && n in e)
+          throw TypeError(r + ": incorrect invocation!");
+        return e;
+      };
+    }, {}],
+    29: [function(e, t, r) {
+      var n = e("./_is-object");
       t.exports = function(e) {
         if (!n(e))
           throw TypeError(e + " is not an object!");
         return e;
       };
-    }, {"./$.is-object": 49}],
-    29: [function(e, t, r) {
-      var n = e("./$.cof"),
-          i = e("./$.wks")("toStringTag"),
+    }, {"./_is-object": 52}],
+    30: [function(e, t, r) {
+      var n = e("./_to-iobject"),
+          i = e("./_to-length"),
+          o = e("./_to-index");
+      t.exports = function(e) {
+        return function(t, r, a) {
+          var s,
+              c = n(t),
+              u = i(c.length),
+              l = o(a, u);
+          if (e && r != r) {
+            for (; u > l; )
+              if (s = c[l++], s != s)
+                return !0;
+          } else
+            for (; u > l; l++)
+              if ((e || l in c) && c[l] === r)
+                return e || l;
+          return !e && -1;
+        };
+      };
+    }, {
+      "./_to-index": 86,
+      "./_to-iobject": 88,
+      "./_to-length": 89
+    }],
+    31: [function(e, t, r) {
+      var n = e("./_cof"),
+          i = e("./_wks")("toStringTag"),
           o = "Arguments" == n(function() {
             return arguments;
-          }());
+          }()),
+          a = function(e, t) {
+            try {
+              return e[t];
+            } catch (r) {}
+          };
       t.exports = function(e) {
         var t,
             r,
-            a;
-        return void 0 === e ? "Undefined" : null === e ? "Null" : "string" == typeof(r = (t = Object(e))[i]) ? r : o ? n(t) : "Object" == (a = n(t)) && "function" == typeof t.callee ? "Arguments" : a;
+            s;
+        return void 0 === e ? "Undefined" : null === e ? "Null" : "string" == typeof(r = a(t = Object(e), i)) ? r : o ? n(t) : "Object" == (s = n(t)) && "function" == typeof t.callee ? "Arguments" : s;
       };
     }, {
-      "./$.cof": 30,
-      "./$.wks": 78
+      "./_cof": 32,
+      "./_wks": 93
     }],
-    30: [function(e, t, r) {
+    32: [function(e, t, r) {
       var n = {}.toString;
       t.exports = function(e) {
         return n.call(e).slice(8, -1);
       };
     }, {}],
-    31: [function(e, t, r) {
-      var n = t.exports = {version: "1.2.6"};
+    33: [function(e, t, r) {
+      var n = t.exports = {version: "2.2.1"};
       "number" == typeof __e && (__e = n);
     }, {}],
-    32: [function(e, t, r) {
-      var n = e("./$.a-function");
+    34: [function(e, t, r) {
+      var n = e("./_a-function");
       t.exports = function(e, t, r) {
         if (n(e), void 0 === t)
           return e;
@@ -406,79 +453,102 @@ var define = $__System.amdDefine;
           return e.apply(t, arguments);
         };
       };
-    }, {"./$.a-function": 26}],
-    33: [function(e, t, r) {
+    }, {"./_a-function": 26}],
+    35: [function(e, t, r) {
       t.exports = function(e) {
         if (void 0 == e)
           throw TypeError("Can't call method on  " + e);
         return e;
       };
     }, {}],
-    34: [function(e, t, r) {
-      t.exports = !e("./$.fails")(function() {
+    36: [function(e, t, r) {
+      t.exports = !e("./_fails")(function() {
         return 7 != Object.defineProperty({}, "a", {get: function() {
             return 7;
           }}).a;
       });
-    }, {"./$.fails": 38}],
-    35: [function(e, t, r) {
-      var n = e("./$.is-object"),
-          i = e("./$.global").document,
+    }, {"./_fails": 41}],
+    37: [function(e, t, r) {
+      var n = e("./_is-object"),
+          i = e("./_global").document,
           o = n(i) && n(i.createElement);
       t.exports = function(e) {
         return o ? i.createElement(e) : {};
       };
     }, {
-      "./$.global": 41,
-      "./$.is-object": 49
-    }],
-    36: [function(e, t, r) {
-      var n = e("./$");
-      t.exports = function(e) {
-        var t = n.getKeys(e),
-            r = n.getSymbols;
-        if (r)
-          for (var i,
-              o = r(e),
-              a = n.isEnum,
-              s = 0; o.length > s; )
-            a.call(e, i = o[s++]) && t.push(i);
-        return t;
-      };
-    }, {"./$": 56}],
-    37: [function(e, t, r) {
-      var n = e("./$.global"),
-          i = e("./$.core"),
-          o = e("./$.ctx"),
-          a = "prototype",
-          s = function(e, t, r) {
-            var u,
-                c,
-                l,
-                f = e & s.F,
-                p = e & s.G,
-                h = e & s.S,
-                d = e & s.P,
-                y = e & s.B,
-                m = e & s.W,
-                g = p ? i : i[t] || (i[t] = {}),
-                v = p ? n : h ? n[t] : (n[t] || {})[a];
-            p && (r = t);
-            for (u in r)
-              c = !f && v && u in v, c && u in g || (l = c ? v[u] : r[u], g[u] = p && "function" != typeof v[u] ? r[u] : y && c ? o(l, n) : m && v[u] == l ? function(e) {
-                var t = function(t) {
-                  return this instanceof e ? new e(t) : e(t);
-                };
-                return t[a] = e[a], t;
-              }(l) : d && "function" == typeof l ? o(Function.call, l) : l, d && ((g[a] || (g[a] = {}))[u] = l));
-          };
-      s.F = 1, s.G = 2, s.S = 4, s.P = 8, s.B = 16, s.W = 32, t.exports = s;
-    }, {
-      "./$.core": 31,
-      "./$.ctx": 32,
-      "./$.global": 41
+      "./_global": 43,
+      "./_is-object": 52
     }],
     38: [function(e, t, r) {
+      t.exports = "constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",");
+    }, {}],
+    39: [function(e, t, r) {
+      var n = e("./_object-keys"),
+          i = e("./_object-gops"),
+          o = e("./_object-pie");
+      t.exports = function(e) {
+        var t = n(e),
+            r = i.f;
+        if (r)
+          for (var a,
+              s = r(e),
+              c = o.f,
+              u = 0; s.length > u; )
+            c.call(e, a = s[u++]) && t.push(a);
+        return t;
+      };
+    }, {
+      "./_object-gops": 69,
+      "./_object-keys": 72,
+      "./_object-pie": 73
+    }],
+    40: [function(e, t, r) {
+      var n = e("./_global"),
+          i = e("./_core"),
+          o = e("./_ctx"),
+          a = e("./_hide"),
+          s = "prototype",
+          c = function(e, t, r) {
+            var u,
+                l,
+                f,
+                p = e & c.F,
+                h = e & c.G,
+                d = e & c.S,
+                y = e & c.P,
+                _ = e & c.B,
+                m = e & c.W,
+                b = h ? i : i[t] || (i[t] = {}),
+                v = b[s],
+                g = h ? n : d ? n[t] : (n[t] || {})[s];
+            h && (r = t);
+            for (u in r)
+              l = !p && g && void 0 !== g[u], l && u in b || (f = l ? g[u] : r[u], b[u] = h && "function" != typeof g[u] ? r[u] : _ && l ? o(f, n) : m && g[u] == f ? function(e) {
+                var t = function(t, r, n) {
+                  if (this instanceof e) {
+                    switch (arguments.length) {
+                      case 0:
+                        return new e;
+                      case 1:
+                        return new e(t);
+                      case 2:
+                        return new e(t, r);
+                    }
+                    return new e(t, r, n);
+                  }
+                  return e.apply(this, arguments);
+                };
+                return t[s] = e[s], t;
+              }(f) : y && "function" == typeof f ? o(Function.call, f) : f, y && ((b.virtual || (b.virtual = {}))[u] = f, e & c.R && v && !v[u] && a(v, u, f)));
+          };
+      c.F = 1, c.G = 2, c.S = 4, c.P = 8, c.B = 16, c.W = 32, c.U = 64, c.R = 128, t.exports = c;
+    }, {
+      "./_core": 33,
+      "./_ctx": 34,
+      "./_global": 43,
+      "./_hide": 45
+    }],
+    41: [function(e, t, r) {
       t.exports = function(e) {
         try {
           return !!e();
@@ -487,83 +557,77 @@ var define = $__System.amdDefine;
         }
       };
     }, {}],
-    39: [function(e, t, r) {
-      var n = e("./$.ctx"),
-          i = e("./$.iter-call"),
-          o = e("./$.is-array-iter"),
-          a = e("./$.an-object"),
-          s = e("./$.to-length"),
-          u = e("./core.get-iterator-method");
-      t.exports = function(e, t, r, c) {
-        var l,
-            f,
+    42: [function(e, t, r) {
+      var n = e("./_ctx"),
+          i = e("./_iter-call"),
+          o = e("./_is-array-iter"),
+          a = e("./_an-object"),
+          s = e("./_to-length"),
+          c = e("./core.get-iterator-method");
+      t.exports = function(e, t, r, u, l) {
+        var f,
             p,
-            h = u(e),
-            d = n(r, c, t ? 2 : 1),
-            y = 0;
-        if ("function" != typeof h)
+            h,
+            d = l ? function() {
+              return e;
+            } : c(e),
+            y = n(r, u, t ? 2 : 1),
+            _ = 0;
+        if ("function" != typeof d)
           throw TypeError(e + " is not iterable!");
-        if (o(h))
-          for (l = s(e.length); l > y; y++)
-            t ? d(a(f = e[y])[0], f[1]) : d(e[y]);
+        if (o(d))
+          for (f = s(e.length); f > _; _++)
+            t ? y(a(p = e[_])[0], p[1]) : y(e[_]);
         else
-          for (p = h.call(e); !(f = p.next()).done; )
-            i(p, d, f.value, t);
+          for (h = d.call(e); !(p = h.next()).done; )
+            i(h, y, p.value, t);
       };
     }, {
-      "./$.an-object": 28,
-      "./$.ctx": 32,
-      "./$.is-array-iter": 47,
-      "./$.iter-call": 50,
-      "./$.to-length": 75,
-      "./core.get-iterator-method": 79
+      "./_an-object": 29,
+      "./_ctx": 34,
+      "./_is-array-iter": 50,
+      "./_iter-call": 53,
+      "./_to-length": 89,
+      "./core.get-iterator-method": 94
     }],
-    40: [function(e, t, r) {
-      var n = e("./$.to-iobject"),
-          i = e("./$").getNames,
-          o = {}.toString,
-          a = "object" == typeof window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [],
-          s = function(e) {
-            try {
-              return i(e);
-            } catch (t) {
-              return a.slice();
-            }
-          };
-      t.exports.get = function(e) {
-        return a && "[object Window]" == o.call(e) ? s(e) : i(n(e));
-      };
-    }, {
-      "./$": 56,
-      "./$.to-iobject": 74
-    }],
-    41: [function(e, t, r) {
+    43: [function(e, t, r) {
       var n = t.exports = "undefined" != typeof window && window.Math == Math ? window : "undefined" != typeof self && self.Math == Math ? self : Function("return this")();
       "number" == typeof __g && (__g = n);
     }, {}],
-    42: [function(e, t, r) {
+    44: [function(e, t, r) {
       var n = {}.hasOwnProperty;
       t.exports = function(e, t) {
         return n.call(e, t);
       };
     }, {}],
-    43: [function(e, t, r) {
-      var n = e("./$"),
-          i = e("./$.property-desc");
-      t.exports = e("./$.descriptors") ? function(e, t, r) {
-        return n.setDesc(e, t, i(1, r));
+    45: [function(e, t, r) {
+      var n = e("./_object-dp"),
+          i = e("./_property-desc");
+      t.exports = e("./_descriptors") ? function(e, t, r) {
+        return n.f(e, t, i(1, r));
       } : function(e, t, r) {
         return e[t] = r, e;
       };
     }, {
-      "./$": 56,
-      "./$.descriptors": 34,
-      "./$.property-desc": 61
+      "./_descriptors": 36,
+      "./_object-dp": 64,
+      "./_property-desc": 75
     }],
-    44: [function(e, t, r) {
-      t.exports = e("./$.global").document && document.documentElement;
-    }, {"./$.global": 41}],
-    45: [function(e, t, r) {
+    46: [function(e, t, r) {
+      t.exports = e("./_global").document && document.documentElement;
+    }, {"./_global": 43}],
+    47: [function(e, t, r) {
+      t.exports = !e("./_descriptors") && !e("./_fails")(function() {
+        return 7 != Object.defineProperty(e("./_dom-create")("div"), "a", {get: function() {
+            return 7;
+          }}).a;
+      });
+    }, {
+      "./_descriptors": 36,
+      "./_dom-create": 37,
+      "./_fails": 41
+    }],
+    48: [function(e, t, r) {
       t.exports = function(e, t, r) {
         var n = void 0 === r;
         switch (t.length) {
@@ -581,36 +645,36 @@ var define = $__System.amdDefine;
         return e.apply(r, t);
       };
     }, {}],
-    46: [function(e, t, r) {
-      var n = e("./$.cof");
+    49: [function(e, t, r) {
+      var n = e("./_cof");
       t.exports = Object("z").propertyIsEnumerable(0) ? Object : function(e) {
         return "String" == n(e) ? e.split("") : Object(e);
       };
-    }, {"./$.cof": 30}],
-    47: [function(e, t, r) {
-      var n = e("./$.iterators"),
-          i = e("./$.wks")("iterator"),
+    }, {"./_cof": 32}],
+    50: [function(e, t, r) {
+      var n = e("./_iterators"),
+          i = e("./_wks")("iterator"),
           o = Array.prototype;
       t.exports = function(e) {
         return void 0 !== e && (n.Array === e || o[i] === e);
       };
     }, {
-      "./$.iterators": 55,
-      "./$.wks": 78
+      "./_iterators": 58,
+      "./_wks": 93
     }],
-    48: [function(e, t, r) {
-      var n = e("./$.cof");
+    51: [function(e, t, r) {
+      var n = e("./_cof");
       t.exports = Array.isArray || function(e) {
         return "Array" == n(e);
       };
-    }, {"./$.cof": 30}],
-    49: [function(e, t, r) {
+    }, {"./_cof": 32}],
+    52: [function(e, t, r) {
       t.exports = function(e) {
         return "object" == typeof e ? null !== e : "function" == typeof e;
       };
     }, {}],
-    50: [function(e, t, r) {
-      var n = e("./$.an-object");
+    53: [function(e, t, r) {
+      var n = e("./_an-object");
       t.exports = function(e, t, r, i) {
         try {
           return i ? t(n(r)[0], r[1]) : t(r);
@@ -619,57 +683,58 @@ var define = $__System.amdDefine;
           throw void 0 !== a && n(a.call(e)), o;
         }
       };
-    }, {"./$.an-object": 28}],
-    51: [function(e, t, r) {
+    }, {"./_an-object": 29}],
+    54: [function(e, t, r) {
       "use strict";
-      var n = e("./$"),
-          i = e("./$.property-desc"),
-          o = e("./$.set-to-string-tag"),
+      var n = e("./_object-create"),
+          i = e("./_property-desc"),
+          o = e("./_set-to-string-tag"),
           a = {};
-      e("./$.hide")(a, e("./$.wks")("iterator"), function() {
+      e("./_hide")(a, e("./_wks")("iterator"), function() {
         return this;
       }), t.exports = function(e, t, r) {
-        e.prototype = n.create(a, {next: i(1, r)}), o(e, t + " Iterator");
+        e.prototype = n(a, {next: i(1, r)}), o(e, t + " Iterator");
       };
     }, {
-      "./$": 56,
-      "./$.hide": 43,
-      "./$.property-desc": 61,
-      "./$.set-to-string-tag": 67,
-      "./$.wks": 78
+      "./_hide": 45,
+      "./_object-create": 63,
+      "./_property-desc": 75,
+      "./_set-to-string-tag": 80,
+      "./_wks": 93
     }],
-    52: [function(e, t, r) {
+    55: [function(e, t, r) {
       "use strict";
-      var n = e("./$.library"),
-          i = e("./$.export"),
-          o = e("./$.redefine"),
-          a = e("./$.hide"),
-          s = e("./$.has"),
-          u = e("./$.iterators"),
-          c = e("./$.iter-create"),
-          l = e("./$.set-to-string-tag"),
-          f = e("./$").getProto,
-          p = e("./$.wks")("iterator"),
+      var n = e("./_library"),
+          i = e("./_export"),
+          o = e("./_redefine"),
+          a = e("./_hide"),
+          s = e("./_has"),
+          c = e("./_iterators"),
+          u = e("./_iter-create"),
+          l = e("./_set-to-string-tag"),
+          f = e("./_object-gpo"),
+          p = e("./_wks")("iterator"),
           h = !([].keys && "next" in [].keys()),
           d = "@@iterator",
           y = "keys",
-          m = "values",
-          g = function() {
+          _ = "values",
+          m = function() {
             return this;
           };
-      t.exports = function(e, t, r, v, b, _, O) {
-        c(r, t, v);
-        var $,
+      t.exports = function(e, t, r, b, v, g, j) {
+        u(r, t, b);
+        var O,
             E,
-            P = function(e) {
-              if (!h && e in w)
-                return w[e];
+            P,
+            k = function(e) {
+              if (!h && e in x)
+                return x[e];
               switch (e) {
                 case y:
                   return function() {
                     return new r(this, e);
                   };
-                case m:
+                case _:
                   return function() {
                     return new r(this, e);
                   };
@@ -678,44 +743,42 @@ var define = $__System.amdDefine;
                 return new r(this, e);
               };
             },
-            j = t + " Iterator",
-            k = b == m,
-            S = !1,
-            w = e.prototype,
-            R = w[p] || w[d] || b && w[b],
-            x = R || P(b);
-        if (R) {
-          var M = f(x.call(new e));
-          l(M, j, !0), !n && s(w, d) && a(M, p, g), k && R.name !== m && (S = !0, x = function() {
-            return R.call(this);
-          });
-        }
-        if (n && !O || !h && !S && w[p] || a(w, p, x), u[t] = x, u[j] = g, b)
-          if ($ = {
-            values: k ? x : P(m),
-            keys: _ ? x : P(y),
-            entries: k ? P("entries") : x
-          }, O)
-            for (E in $)
-              E in w || o(w, E, $[E]);
+            S = t + " Iterator",
+            w = v == _,
+            R = !1,
+            x = e.prototype,
+            M = x[p] || x[d] || v && x[v],
+            A = M || k(v),
+            T = v ? w ? k("entries") : A : void 0,
+            N = "Array" == t ? x.entries || M : M;
+        if (N && (P = f(N.call(new e)), P !== Object.prototype && (l(P, S, !0), n || s(P, p) || a(P, p, m))), w && M && M.name !== _ && (R = !0, A = function() {
+          return M.call(this);
+        }), n && !j || !h && !R && x[p] || a(x, p, A), c[t] = A, c[S] = m, v)
+          if (O = {
+            values: w ? A : k(_),
+            keys: g ? A : k(y),
+            entries: T
+          }, j)
+            for (E in O)
+              E in x || o(x, E, O[E]);
           else
-            i(i.P + i.F * (h || S), t, $);
-        return $;
+            i(i.P + i.F * (h || R), t, O);
+        return O;
       };
     }, {
-      "./$": 56,
-      "./$.export": 37,
-      "./$.has": 42,
-      "./$.hide": 43,
-      "./$.iter-create": 51,
-      "./$.iterators": 55,
-      "./$.library": 58,
-      "./$.redefine": 63,
-      "./$.set-to-string-tag": 67,
-      "./$.wks": 78
+      "./_export": 40,
+      "./_has": 44,
+      "./_hide": 45,
+      "./_iter-create": 54,
+      "./_iterators": 58,
+      "./_library": 60,
+      "./_object-gpo": 70,
+      "./_redefine": 77,
+      "./_set-to-string-tag": 80,
+      "./_wks": 93
     }],
-    53: [function(e, t, r) {
-      var n = e("./$.wks")("iterator"),
+    56: [function(e, t, r) {
+      var n = e("./_wks")("iterator"),
           i = !1;
       try {
         var o = [7][n]();
@@ -740,8 +803,8 @@ var define = $__System.amdDefine;
         } catch (s) {}
         return r;
       };
-    }, {"./$.wks": 78}],
-    54: [function(e, t, r) {
+    }, {"./_wks": 93}],
+    57: [function(e, t, r) {
       t.exports = function(e, t) {
         return {
           value: t,
@@ -749,70 +812,111 @@ var define = $__System.amdDefine;
         };
       };
     }, {}],
-    55: [function(e, t, r) {
+    58: [function(e, t, r) {
       t.exports = {};
     }, {}],
-    56: [function(e, t, r) {
-      var n = Object;
-      t.exports = {
-        create: n.create,
-        getProto: n.getPrototypeOf,
-        isEnum: {}.propertyIsEnumerable,
-        getDesc: n.getOwnPropertyDescriptor,
-        setDesc: n.defineProperty,
-        setDescs: n.defineProperties,
-        getKeys: n.keys,
-        getNames: n.getOwnPropertyNames,
-        getSymbols: n.getOwnPropertySymbols,
-        each: [].forEach
-      };
-    }, {}],
-    57: [function(e, t, r) {
-      var n = e("./$"),
-          i = e("./$.to-iobject");
+    59: [function(e, t, r) {
+      var n = e("./_object-keys"),
+          i = e("./_to-iobject");
       t.exports = function(e, t) {
         for (var r,
             o = i(e),
-            a = n.getKeys(o),
+            a = n(o),
             s = a.length,
-            u = 0; s > u; )
-          if (o[r = a[u++]] === t)
+            c = 0; s > c; )
+          if (o[r = a[c++]] === t)
             return r;
       };
     }, {
-      "./$": 56,
-      "./$.to-iobject": 74
+      "./_object-keys": 72,
+      "./_to-iobject": 88
     }],
-    58: [function(e, t, r) {
+    60: [function(e, t, r) {
       t.exports = !0;
     }, {}],
-    59: [function(e, t, r) {
+    61: [function(e, t, r) {
+      var n = e("./_uid")("meta"),
+          i = e("./_is-object"),
+          o = e("./_has"),
+          a = e("./_object-dp").f,
+          s = 0,
+          c = Object.isExtensible || function() {
+            return !0;
+          },
+          u = !e("./_fails")(function() {
+            return c(Object.preventExtensions({}));
+          }),
+          l = function(e) {
+            a(e, n, {value: {
+                i: "O" + ++s,
+                w: {}
+              }});
+          },
+          f = function(e, t) {
+            if (!i(e))
+              return "symbol" == typeof e ? e : ("string" == typeof e ? "S" : "P") + e;
+            if (!o(e, n)) {
+              if (!c(e))
+                return "F";
+              if (!t)
+                return "E";
+              l(e);
+            }
+            return e[n].i;
+          },
+          p = function(e, t) {
+            if (!o(e, n)) {
+              if (!c(e))
+                return !0;
+              if (!t)
+                return !1;
+              l(e);
+            }
+            return e[n].w;
+          },
+          h = function(e) {
+            return u && d.NEED && c(e) && !o(e, n) && l(e), e;
+          },
+          d = t.exports = {
+            KEY: n,
+            NEED: !1,
+            fastKey: f,
+            getWeak: p,
+            onFreeze: h
+          };
+    }, {
+      "./_fails": 41,
+      "./_has": 44,
+      "./_is-object": 52,
+      "./_object-dp": 64,
+      "./_uid": 92
+    }],
+    62: [function(e, t, r) {
       var n,
           i,
           o,
-          a = e("./$.global"),
-          s = e("./$.task").set,
-          u = a.MutationObserver || a.WebKitMutationObserver,
-          c = a.process,
+          a = e("./_global"),
+          s = e("./_task").set,
+          c = a.MutationObserver || a.WebKitMutationObserver,
+          u = a.process,
           l = a.Promise,
-          f = "process" == e("./$.cof")(c),
+          f = "process" == e("./_cof")(u),
           p = function() {
             var e,
-                t,
-                r;
-            for (f && (e = c.domain) && (c.domain = null, e.exit()); n; )
-              t = n.domain, r = n.fn, t && t.enter(), r(), t && t.exit(), n = n.next;
+                t;
+            for (f && (e = u.domain) && e.exit(); n; )
+              t = n.fn, t(), n = n.next;
             i = void 0, e && e.enter();
           };
       if (f)
         o = function() {
-          c.nextTick(p);
+          u.nextTick(p);
         };
-      else if (u) {
-        var h = 1,
+      else if (c) {
+        var h = !0,
             d = document.createTextNode("");
-        new u(p).observe(d, {characterData: !0}), o = function() {
-          d.data = h = -h;
+        new c(p).observe(d, {characterData: !0}), o = function() {
+          d.data = h = !h;
         };
       } else
         o = l && l.resolve ? function() {
@@ -823,20 +927,190 @@ var define = $__System.amdDefine;
       t.exports = function(e) {
         var t = {
           fn: e,
-          next: void 0,
-          domain: f && c.domain
+          next: void 0
         };
         i && (i.next = t), n || (n = t, o()), i = t;
       };
     }, {
-      "./$.cof": 30,
-      "./$.global": 41,
-      "./$.task": 72
+      "./_cof": 32,
+      "./_global": 43,
+      "./_task": 85
     }],
-    60: [function(e, t, r) {
-      var n = e("./$.export"),
-          i = e("./$.core"),
-          o = e("./$.fails");
+    63: [function(e, t, r) {
+      var n = e("./_an-object"),
+          i = e("./_object-dps"),
+          o = e("./_enum-bug-keys"),
+          a = e("./_shared-key")("IE_PROTO"),
+          s = function() {},
+          c = "prototype",
+          u = function() {
+            var t,
+                r = e("./_dom-create")("iframe"),
+                n = o.length,
+                i = ">";
+            for (r.style.display = "none", e("./_html").appendChild(r), r.src = "javascript:", t = r.contentWindow.document, t.open(), t.write("<script>document.F=Object</script" + i), t.close(), u = t.F; n--; )
+              delete u[c][o[n]];
+            return u();
+          };
+      t.exports = Object.create || function(e, t) {
+        var r;
+        return null !== e ? (s[c] = n(e), r = new s, s[c] = null, r[a] = e) : r = u(), void 0 === t ? r : i(r, t);
+      };
+    }, {
+      "./_an-object": 29,
+      "./_dom-create": 37,
+      "./_enum-bug-keys": 38,
+      "./_html": 46,
+      "./_object-dps": 65,
+      "./_shared-key": 81
+    }],
+    64: [function(e, t, r) {
+      var n = e("./_an-object"),
+          i = e("./_ie8-dom-define"),
+          o = e("./_to-primitive"),
+          a = Object.defineProperty;
+      r.f = e("./_descriptors") ? Object.defineProperty : function(e, t, r) {
+        if (n(e), t = o(t, !0), n(r), i)
+          try {
+            return a(e, t, r);
+          } catch (s) {}
+        if ("get" in r || "set" in r)
+          throw TypeError("Accessors not supported!");
+        return "value" in r && (e[t] = r.value), e;
+      };
+    }, {
+      "./_an-object": 29,
+      "./_descriptors": 36,
+      "./_ie8-dom-define": 47,
+      "./_to-primitive": 91
+    }],
+    65: [function(e, t, r) {
+      var n = e("./_object-dp"),
+          i = e("./_an-object"),
+          o = e("./_object-keys");
+      t.exports = e("./_descriptors") ? Object.defineProperties : function(e, t) {
+        i(e);
+        for (var r,
+            a = o(t),
+            s = a.length,
+            c = 0; s > c; )
+          n.f(e, r = a[c++], t[r]);
+        return e;
+      };
+    }, {
+      "./_an-object": 29,
+      "./_descriptors": 36,
+      "./_object-dp": 64,
+      "./_object-keys": 72
+    }],
+    66: [function(e, t, r) {
+      var n = e("./_object-pie"),
+          i = e("./_property-desc"),
+          o = e("./_to-iobject"),
+          a = e("./_to-primitive"),
+          s = e("./_has"),
+          c = e("./_ie8-dom-define"),
+          u = Object.getOwnPropertyDescriptor;
+      r.f = e("./_descriptors") ? u : function(e, t) {
+        if (e = o(e), t = a(t, !0), c)
+          try {
+            return u(e, t);
+          } catch (r) {}
+        return s(e, t) ? i(!n.f.call(e, t), e[t]) : void 0;
+      };
+    }, {
+      "./_descriptors": 36,
+      "./_has": 44,
+      "./_ie8-dom-define": 47,
+      "./_object-pie": 73,
+      "./_property-desc": 75,
+      "./_to-iobject": 88,
+      "./_to-primitive": 91
+    }],
+    67: [function(e, t, r) {
+      var n = e("./_to-iobject"),
+          i = e("./_object-gopn").f,
+          o = {}.toString,
+          a = "object" == typeof window && window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [],
+          s = function(e) {
+            try {
+              return i(e);
+            } catch (t) {
+              return a.slice();
+            }
+          };
+      t.exports.f = function(e) {
+        return a && "[object Window]" == o.call(e) ? s(e) : i(n(e));
+      };
+    }, {
+      "./_object-gopn": 68,
+      "./_to-iobject": 88
+    }],
+    68: [function(e, t, r) {
+      var n = e("./_object-keys-internal"),
+          i = e("./_enum-bug-keys").concat("length", "prototype");
+      r.f = Object.getOwnPropertyNames || function(e) {
+        return n(e, i);
+      };
+    }, {
+      "./_enum-bug-keys": 38,
+      "./_object-keys-internal": 71
+    }],
+    69: [function(e, t, r) {
+      r.f = Object.getOwnPropertySymbols;
+    }, {}],
+    70: [function(e, t, r) {
+      var n = e("./_has"),
+          i = e("./_to-object"),
+          o = e("./_shared-key")("IE_PROTO"),
+          a = Object.prototype;
+      t.exports = Object.getPrototypeOf || function(e) {
+        return e = i(e), n(e, o) ? e[o] : "function" == typeof e.constructor && e instanceof e.constructor ? e.constructor.prototype : e instanceof Object ? a : null;
+      };
+    }, {
+      "./_has": 44,
+      "./_shared-key": 81,
+      "./_to-object": 90
+    }],
+    71: [function(e, t, r) {
+      var n = e("./_has"),
+          i = e("./_to-iobject"),
+          o = e("./_array-includes")(!1),
+          a = e("./_shared-key")("IE_PROTO");
+      t.exports = function(e, t) {
+        var r,
+            s = i(e),
+            c = 0,
+            u = [];
+        for (r in s)
+          r != a && n(s, r) && u.push(r);
+        for (; t.length > c; )
+          n(s, r = t[c++]) && (~o(u, r) || u.push(r));
+        return u;
+      };
+    }, {
+      "./_array-includes": 30,
+      "./_has": 44,
+      "./_shared-key": 81,
+      "./_to-iobject": 88
+    }],
+    72: [function(e, t, r) {
+      var n = e("./_object-keys-internal"),
+          i = e("./_enum-bug-keys");
+      t.exports = Object.keys || function(e) {
+        return n(e, i);
+      };
+    }, {
+      "./_enum-bug-keys": 38,
+      "./_object-keys-internal": 71
+    }],
+    73: [function(e, t, r) {
+      r.f = {}.propertyIsEnumerable;
+    }, {}],
+    74: [function(e, t, r) {
+      var n = e("./_export"),
+          i = e("./_core"),
+          o = e("./_fails");
       t.exports = function(e, t) {
         var r = (i.Object || {})[e] || Object[e],
             a = {};
@@ -845,11 +1119,11 @@ var define = $__System.amdDefine;
         }), "Object", a);
       };
     }, {
-      "./$.core": 31,
-      "./$.export": 37,
-      "./$.fails": 38
+      "./_core": 33,
+      "./_export": 40,
+      "./_fails": 41
     }],
-    61: [function(e, t, r) {
+    75: [function(e, t, r) {
       t.exports = function(e, t) {
         return {
           enumerable: !(1 & e),
@@ -859,58 +1133,53 @@ var define = $__System.amdDefine;
         };
       };
     }, {}],
-    62: [function(e, t, r) {
-      var n = e("./$.redefine");
-      t.exports = function(e, t) {
-        for (var r in t)
-          n(e, r, t[r]);
+    76: [function(e, t, r) {
+      var n = e("./_hide");
+      t.exports = function(e, t, r) {
+        for (var i in t)
+          r && e[i] ? e[i] = t[i] : n(e, i, t[i]);
         return e;
       };
-    }, {"./$.redefine": 63}],
-    63: [function(e, t, r) {
-      t.exports = e("./$.hide");
-    }, {"./$.hide": 43}],
-    64: [function(e, t, r) {
-      t.exports = Object.is || function(e, t) {
-        return e === t ? 0 !== e || 1 / e === 1 / t : e != e && t != t;
-      };
-    }, {}],
-    65: [function(e, t, r) {
-      var n = e("./$").getDesc,
-          i = e("./$.is-object"),
-          o = e("./$.an-object"),
-          a = function(e, t) {
-            if (o(e), !i(t) && null !== t)
+    }, {"./_hide": 45}],
+    77: [function(e, t, r) {
+      t.exports = e("./_hide");
+    }, {"./_hide": 45}],
+    78: [function(e, t, r) {
+      var n = e("./_is-object"),
+          i = e("./_an-object"),
+          o = function(e, t) {
+            if (i(e), !n(t) && null !== t)
               throw TypeError(t + ": can't set as prototype!");
           };
       t.exports = {
-        set: Object.setPrototypeOf || ("__proto__" in {} ? function(t, r, i) {
+        set: Object.setPrototypeOf || ("__proto__" in {} ? function(t, r, n) {
           try {
-            i = e("./$.ctx")(Function.call, n(Object.prototype, "__proto__").set, 2), i(t, []), r = !(t instanceof Array);
-          } catch (o) {
+            n = e("./_ctx")(Function.call, e("./_object-gopd").f(Object.prototype, "__proto__").set, 2), n(t, []), r = !(t instanceof Array);
+          } catch (i) {
             r = !0;
           }
           return function(e, t) {
-            return a(e, t), r ? e.__proto__ = t : i(e, t), e;
+            return o(e, t), r ? e.__proto__ = t : n(e, t), e;
           };
         }({}, !1) : void 0),
-        check: a
+        check: o
       };
     }, {
-      "./$": 56,
-      "./$.an-object": 28,
-      "./$.ctx": 32,
-      "./$.is-object": 49
+      "./_an-object": 29,
+      "./_ctx": 34,
+      "./_is-object": 52,
+      "./_object-gopd": 66
     }],
-    66: [function(e, t, r) {
+    79: [function(e, t, r) {
       "use strict";
-      var n = e("./$.core"),
-          i = e("./$"),
-          o = e("./$.descriptors"),
-          a = e("./$.wks")("species");
+      var n = e("./_global"),
+          i = e("./_core"),
+          o = e("./_object-dp"),
+          a = e("./_descriptors"),
+          s = e("./_wks")("species");
       t.exports = function(e) {
-        var t = n[e];
-        o && t && !t[a] && i.setDesc(t, a, {
+        var t = "function" == typeof i[e] ? i[e] : n[e];
+        a && t && !t[s] && o.f(t, s, {
           configurable: !0,
           get: function() {
             return this;
@@ -918,15 +1187,16 @@ var define = $__System.amdDefine;
         });
       };
     }, {
-      "./$": 56,
-      "./$.core": 31,
-      "./$.descriptors": 34,
-      "./$.wks": 78
+      "./_core": 33,
+      "./_descriptors": 36,
+      "./_global": 43,
+      "./_object-dp": 64,
+      "./_wks": 93
     }],
-    67: [function(e, t, r) {
-      var n = e("./$").setDesc,
-          i = e("./$.has"),
-          o = e("./$.wks")("toStringTag");
+    80: [function(e, t, r) {
+      var n = e("./_object-dp").f,
+          i = e("./_has"),
+          o = e("./_wks")("toStringTag");
       t.exports = function(e, t, r) {
         e && !i(e = r ? e : e.prototype, o) && n(e, o, {
           configurable: !0,
@@ -934,182 +1204,210 @@ var define = $__System.amdDefine;
         });
       };
     }, {
-      "./$": 56,
-      "./$.has": 42,
-      "./$.wks": 78
+      "./_has": 44,
+      "./_object-dp": 64,
+      "./_wks": 93
     }],
-    68: [function(e, t, r) {
-      var n = e("./$.global"),
+    81: [function(e, t, r) {
+      var n = e("./_shared")("keys"),
+          i = e("./_uid");
+      t.exports = function(e) {
+        return n[e] || (n[e] = i(e));
+      };
+    }, {
+      "./_shared": 82,
+      "./_uid": 92
+    }],
+    82: [function(e, t, r) {
+      var n = e("./_global"),
           i = "__core-js_shared__",
           o = n[i] || (n[i] = {});
       t.exports = function(e) {
         return o[e] || (o[e] = {});
       };
-    }, {"./$.global": 41}],
-    69: [function(e, t, r) {
-      var n = e("./$.an-object"),
-          i = e("./$.a-function"),
-          o = e("./$.wks")("species");
+    }, {"./_global": 43}],
+    83: [function(e, t, r) {
+      var n = e("./_an-object"),
+          i = e("./_a-function"),
+          o = e("./_wks")("species");
       t.exports = function(e, t) {
         var r,
             a = n(e).constructor;
         return void 0 === a || void 0 == (r = n(a)[o]) ? t : i(r);
       };
     }, {
-      "./$.a-function": 26,
-      "./$.an-object": 28,
-      "./$.wks": 78
+      "./_a-function": 26,
+      "./_an-object": 29,
+      "./_wks": 93
     }],
-    70: [function(e, t, r) {
-      t.exports = function(e, t, r) {
-        if (!(e instanceof t))
-          throw TypeError(r + ": use the 'new' operator!");
-        return e;
-      };
-    }, {}],
-    71: [function(e, t, r) {
-      var n = e("./$.to-integer"),
-          i = e("./$.defined");
+    84: [function(e, t, r) {
+      var n = e("./_to-integer"),
+          i = e("./_defined");
       t.exports = function(e) {
         return function(t, r) {
           var o,
               a,
               s = String(i(t)),
-              u = n(r),
-              c = s.length;
-          return 0 > u || u >= c ? e ? "" : void 0 : (o = s.charCodeAt(u), 55296 > o || o > 56319 || u + 1 === c || (a = s.charCodeAt(u + 1)) < 56320 || a > 57343 ? e ? s.charAt(u) : o : e ? s.slice(u, u + 2) : (o - 55296 << 10) + (a - 56320) + 65536);
+              c = n(r),
+              u = s.length;
+          return 0 > c || c >= u ? e ? "" : void 0 : (o = s.charCodeAt(c), 55296 > o || o > 56319 || c + 1 === u || (a = s.charCodeAt(c + 1)) < 56320 || a > 57343 ? e ? s.charAt(c) : o : e ? s.slice(c, c + 2) : (o - 55296 << 10) + (a - 56320) + 65536);
         };
       };
     }, {
-      "./$.defined": 33,
-      "./$.to-integer": 73
+      "./_defined": 35,
+      "./_to-integer": 87
     }],
-    72: [function(e, t, r) {
+    85: [function(e, t, r) {
       var n,
           i,
           o,
-          a = e("./$.ctx"),
-          s = e("./$.invoke"),
-          u = e("./$.html"),
-          c = e("./$.dom-create"),
-          l = e("./$.global"),
+          a = e("./_ctx"),
+          s = e("./_invoke"),
+          c = e("./_html"),
+          u = e("./_dom-create"),
+          l = e("./_global"),
           f = l.process,
           p = l.setImmediate,
           h = l.clearImmediate,
           d = l.MessageChannel,
           y = 0,
-          m = {},
-          g = "onreadystatechange",
-          v = function() {
+          _ = {},
+          m = "onreadystatechange",
+          b = function() {
             var e = +this;
-            if (m.hasOwnProperty(e)) {
-              var t = m[e];
-              delete m[e], t();
+            if (_.hasOwnProperty(e)) {
+              var t = _[e];
+              delete _[e], t();
             }
           },
-          b = function(e) {
-            v.call(e.data);
+          v = function(e) {
+            b.call(e.data);
           };
       p && h || (p = function(e) {
         for (var t = [],
             r = 1; arguments.length > r; )
           t.push(arguments[r++]);
-        return m[++y] = function() {
+        return _[++y] = function() {
           s("function" == typeof e ? e : Function(e), t);
         }, n(y), y;
       }, h = function(e) {
-        delete m[e];
-      }, "process" == e("./$.cof")(f) ? n = function(e) {
-        f.nextTick(a(v, e, 1));
-      } : d ? (i = new d, o = i.port2, i.port1.onmessage = b, n = a(o.postMessage, o, 1)) : l.addEventListener && "function" == typeof postMessage && !l.importScripts ? (n = function(e) {
+        delete _[e];
+      }, "process" == e("./_cof")(f) ? n = function(e) {
+        f.nextTick(a(b, e, 1));
+      } : d ? (i = new d, o = i.port2, i.port1.onmessage = v, n = a(o.postMessage, o, 1)) : l.addEventListener && "function" == typeof postMessage && !l.importScripts ? (n = function(e) {
         l.postMessage(e + "", "*");
-      }, l.addEventListener("message", b, !1)) : n = g in c("script") ? function(e) {
-        u.appendChild(c("script"))[g] = function() {
-          u.removeChild(this), v.call(e);
+      }, l.addEventListener("message", v, !1)) : n = m in u("script") ? function(e) {
+        c.appendChild(u("script"))[m] = function() {
+          c.removeChild(this), b.call(e);
         };
       } : function(e) {
-        setTimeout(a(v, e, 1), 0);
+        setTimeout(a(b, e, 1), 0);
       }), t.exports = {
         set: p,
         clear: h
       };
     }, {
-      "./$.cof": 30,
-      "./$.ctx": 32,
-      "./$.dom-create": 35,
-      "./$.global": 41,
-      "./$.html": 44,
-      "./$.invoke": 45
+      "./_cof": 32,
+      "./_ctx": 34,
+      "./_dom-create": 37,
+      "./_global": 43,
+      "./_html": 46,
+      "./_invoke": 48
     }],
-    73: [function(e, t, r) {
+    86: [function(e, t, r) {
+      var n = e("./_to-integer"),
+          i = Math.max,
+          o = Math.min;
+      t.exports = function(e, t) {
+        return e = n(e), 0 > e ? i(e + t, 0) : o(e, t);
+      };
+    }, {"./_to-integer": 87}],
+    87: [function(e, t, r) {
       var n = Math.ceil,
           i = Math.floor;
       t.exports = function(e) {
         return isNaN(e = +e) ? 0 : (e > 0 ? i : n)(e);
       };
     }, {}],
-    74: [function(e, t, r) {
-      var n = e("./$.iobject"),
-          i = e("./$.defined");
+    88: [function(e, t, r) {
+      var n = e("./_iobject"),
+          i = e("./_defined");
       t.exports = function(e) {
         return n(i(e));
       };
     }, {
-      "./$.defined": 33,
-      "./$.iobject": 46
+      "./_defined": 35,
+      "./_iobject": 49
     }],
-    75: [function(e, t, r) {
-      var n = e("./$.to-integer"),
+    89: [function(e, t, r) {
+      var n = e("./_to-integer"),
           i = Math.min;
       t.exports = function(e) {
         return e > 0 ? i(n(e), 9007199254740991) : 0;
       };
-    }, {"./$.to-integer": 73}],
-    76: [function(e, t, r) {
-      var n = e("./$.defined");
+    }, {"./_to-integer": 87}],
+    90: [function(e, t, r) {
+      var n = e("./_defined");
       t.exports = function(e) {
         return Object(n(e));
       };
-    }, {"./$.defined": 33}],
-    77: [function(e, t, r) {
+    }, {"./_defined": 35}],
+    91: [function(e, t, r) {
+      var n = e("./_is-object");
+      t.exports = function(e, t) {
+        if (!n(e))
+          return e;
+        var r,
+            i;
+        if (t && "function" == typeof(r = e.toString) && !n(i = r.call(e)))
+          return i;
+        if ("function" == typeof(r = e.valueOf) && !n(i = r.call(e)))
+          return i;
+        if (!t && "function" == typeof(r = e.toString) && !n(i = r.call(e)))
+          return i;
+        throw TypeError("Can't convert object to primitive value");
+      };
+    }, {"./_is-object": 52}],
+    92: [function(e, t, r) {
       var n = 0,
           i = Math.random();
       t.exports = function(e) {
         return "Symbol(".concat(void 0 === e ? "" : e, ")_", (++n + i).toString(36));
       };
     }, {}],
-    78: [function(e, t, r) {
-      var n = e("./$.shared")("wks"),
-          i = e("./$.uid"),
-          o = e("./$.global").Symbol;
+    93: [function(e, t, r) {
+      var n = e("./_shared")("wks"),
+          i = e("./_uid"),
+          o = e("./_global").Symbol,
+          a = "function" == typeof o;
       t.exports = function(e) {
-        return n[e] || (n[e] = o && o[e] || (o || i)("Symbol." + e));
+        return n[e] || (n[e] = a && o[e] || (a ? o : i)("Symbol." + e));
       };
     }, {
-      "./$.global": 41,
-      "./$.shared": 68,
-      "./$.uid": 77
+      "./_global": 43,
+      "./_shared": 82,
+      "./_uid": 92
     }],
-    79: [function(e, t, r) {
-      var n = e("./$.classof"),
-          i = e("./$.wks")("iterator"),
-          o = e("./$.iterators");
-      t.exports = e("./$.core").getIteratorMethod = function(e) {
+    94: [function(e, t, r) {
+      var n = e("./_classof"),
+          i = e("./_wks")("iterator"),
+          o = e("./_iterators");
+      t.exports = e("./_core").getIteratorMethod = function(e) {
         return void 0 != e ? e[i] || e["@@iterator"] || o[n(e)] : void 0;
       };
     }, {
-      "./$.classof": 29,
-      "./$.core": 31,
-      "./$.iterators": 55,
-      "./$.wks": 78
+      "./_classof": 31,
+      "./_core": 33,
+      "./_iterators": 58,
+      "./_wks": 93
     }],
-    80: [function(e, t, r) {
+    95: [function(e, t, r) {
       "use strict";
-      var n = e("./$.add-to-unscopables"),
-          i = e("./$.iter-step"),
-          o = e("./$.iterators"),
-          a = e("./$.to-iobject");
-      t.exports = e("./$.iter-define")(Array, "Array", function(e, t) {
+      var n = e("./_add-to-unscopables"),
+          i = e("./_iter-step"),
+          o = e("./_iterators"),
+          a = e("./_to-iobject");
+      t.exports = e("./_iter-define")(Array, "Array", function(e, t) {
         this._t = a(e), this._i = 0, this._k = t;
       }, function() {
         var e = this._t,
@@ -1118,104 +1416,110 @@ var define = $__System.amdDefine;
         return !e || r >= e.length ? (this._t = void 0, i(1)) : "keys" == t ? i(0, r) : "values" == t ? i(0, e[r]) : i(0, [r, e[r]]);
       }, "values"), o.Arguments = o.Array, n("keys"), n("values"), n("entries");
     }, {
-      "./$.add-to-unscopables": 27,
-      "./$.iter-define": 52,
-      "./$.iter-step": 54,
-      "./$.iterators": 55,
-      "./$.to-iobject": 74
+      "./_add-to-unscopables": 27,
+      "./_iter-define": 55,
+      "./_iter-step": 57,
+      "./_iterators": 58,
+      "./_to-iobject": 88
     }],
-    81: [function(e, t, r) {
-      var n = e("./$.to-iobject");
-      e("./$.object-sap")("getOwnPropertyDescriptor", function(e) {
-        return function(t, r) {
-          return e(n(t), r);
+    96: [function(e, t, r) {
+      var n = e("./_export");
+      n(n.S, "Object", {create: e("./_object-create")});
+    }, {
+      "./_export": 40,
+      "./_object-create": 63
+    }],
+    97: [function(e, t, r) {
+      var n = e("./_export");
+      n(n.S + n.F * !e("./_descriptors"), "Object", {defineProperty: e("./_object-dp").f});
+    }, {
+      "./_descriptors": 36,
+      "./_export": 40,
+      "./_object-dp": 64
+    }],
+    98: [function(e, t, r) {
+      var n = e("./_to-iobject"),
+          i = e("./_object-gopd").f;
+      e("./_object-sap")("getOwnPropertyDescriptor", function() {
+        return function(e, t) {
+          return i(n(e), t);
         };
       });
     }, {
-      "./$.object-sap": 60,
-      "./$.to-iobject": 74
+      "./_object-gopd": 66,
+      "./_object-sap": 74,
+      "./_to-iobject": 88
     }],
-    82: [function(e, t, r) {
-      var n = e("./$.to-object");
-      e("./$.object-sap")("getPrototypeOf", function(e) {
-        return function(t) {
-          return e(n(t));
+    99: [function(e, t, r) {
+      var n = e("./_to-object"),
+          i = e("./_object-gpo");
+      e("./_object-sap")("getPrototypeOf", function() {
+        return function(e) {
+          return i(n(e));
         };
       });
     }, {
-      "./$.object-sap": 60,
-      "./$.to-object": 76
+      "./_object-gpo": 70,
+      "./_object-sap": 74,
+      "./_to-object": 90
     }],
-    83: [function(e, t, r) {
-      var n = e("./$.export");
-      n(n.S, "Object", {setPrototypeOf: e("./$.set-proto").set});
+    100: [function(e, t, r) {
+      var n = e("./_export");
+      n(n.S, "Object", {setPrototypeOf: e("./_set-proto").set});
     }, {
-      "./$.export": 37,
-      "./$.set-proto": 65
+      "./_export": 40,
+      "./_set-proto": 78
     }],
-    84: [function(e, t, r) {}, {}],
-    85: [function(e, t, r) {
+    101: [function(e, t, r) {}, {}],
+    102: [function(e, t, r) {
       "use strict";
       var n,
-          i = e("./$"),
-          o = e("./$.library"),
-          a = e("./$.global"),
-          s = e("./$.ctx"),
-          u = e("./$.classof"),
-          c = e("./$.export"),
-          l = e("./$.is-object"),
-          f = e("./$.an-object"),
-          p = e("./$.a-function"),
-          h = e("./$.strict-new"),
-          d = e("./$.for-of"),
-          y = e("./$.set-proto").set,
-          m = e("./$.same-value"),
-          g = e("./$.wks")("species"),
-          v = e("./$.species-constructor"),
-          b = e("./$.microtask"),
-          _ = "Promise",
-          O = a.process,
-          $ = "process" == u(O),
-          E = a[_],
-          P = function(e) {
-            var t = new E(function() {});
-            return e && (t.constructor = Object), E.resolve(t) === t;
-          },
-          j = function() {
-            function t(e) {
-              var r = new E(e);
-              return y(r, t.prototype), r;
-            }
-            var r = !1;
+          i,
+          o,
+          a = e("./_library"),
+          s = e("./_global"),
+          c = e("./_ctx"),
+          u = e("./_classof"),
+          l = e("./_export"),
+          f = e("./_is-object"),
+          p = (e("./_an-object"), e("./_a-function")),
+          h = e("./_an-instance"),
+          d = e("./_for-of"),
+          y = (e("./_set-proto").set, e("./_species-constructor")),
+          _ = e("./_task").set,
+          m = e("./_microtask"),
+          b = "Promise",
+          v = s.TypeError,
+          g = s.process,
+          j = s[b],
+          g = s.process,
+          O = "process" == u(g),
+          E = function() {},
+          P = !!function() {
             try {
-              if (r = E && E.resolve && P(), y(t, E), t.prototype = i.create(E.prototype, {constructor: {value: t}}), t.resolve(5).then(function() {}) instanceof t || (r = !1), r && e("./$.descriptors")) {
-                var n = !1;
-                E.resolve(i.setDesc({}, "then", {get: function() {
-                    n = !0;
-                  }})), r = n;
-              }
-            } catch (o) {
-              r = !1;
-            }
-            return r;
+              var t = j.resolve(1),
+                  r = (t.constructor = {})[e("./_wks")("species")] = function(e) {
+                    e(E, E);
+                  };
+              return (O || "function" == typeof PromiseRejectionEvent) && t.then(E) instanceof r;
+            } catch (n) {}
           }(),
           k = function(e, t) {
-            return o && e === E && t === n ? !0 : m(e, t);
+            return e === t || e === j && t === o;
           },
           S = function(e) {
-            var t = f(e)[g];
-            return void 0 != t ? t : e;
+            var t;
+            return f(e) && "function" == typeof(t = e.then) ? t : !1;
           },
           w = function(e) {
-            var t;
-            return l(e) && "function" == typeof(t = e.then) ? t : !1;
+            return k(j, e) ? new R(e) : new i(e);
           },
-          R = function(e) {
+          R = i = function(e) {
             var t,
                 r;
             this.promise = new e(function(e, n) {
               if (void 0 !== t || void 0 !== r)
-                throw TypeError("Bad Promise constructor");
+                throw v("Bad Promise constructor");
               t = e, r = n;
             }), this.resolve = p(t), this.reject = p(r);
           },
@@ -1227,143 +1531,151 @@ var define = $__System.amdDefine;
             }
           },
           M = function(e, t) {
-            if (!e.n) {
-              e.n = !0;
-              var r = e.c;
-              b(function() {
-                for (var n = e.v,
-                    i = 1 == e.s,
+            if (!e._n) {
+              e._n = !0;
+              var r = e._c;
+              m(function() {
+                for (var n = e._v,
+                    i = 1 == e._s,
                     o = 0,
-                    s = function(t) {
+                    a = function(t) {
                       var r,
                           o,
                           a = i ? t.ok : t.fail,
                           s = t.resolve,
-                          u = t.reject;
+                          c = t.reject,
+                          u = t.domain;
                       try {
-                        a ? (i || (e.h = !0), r = a === !0 ? n : a(n), r === t.promise ? u(TypeError("Promise-chain cycle")) : (o = w(r)) ? o.call(r, s, u) : s(r)) : u(n);
-                      } catch (c) {
-                        u(c);
+                        a ? (i || (2 == e._h && N(e), e._h = 1), a === !0 ? r = n : (u && u.enter(), r = a(n), u && u.exit()), r === t.promise ? c(v("Promise-chain cycle")) : (o = S(r)) ? o.call(r, s, c) : s(r)) : c(n);
+                      } catch (l) {
+                        c(l);
                       }
                     }; r.length > o; )
-                  s(r[o++]);
-                r.length = 0, e.n = !1, t && setTimeout(function() {
-                  var t,
-                      r,
-                      i = e.p;
-                  A(i) && ($ ? O.emit("unhandledRejection", n, i) : (t = a.onunhandledrejection) ? t({
-                    promise: i,
-                    reason: n
-                  }) : (r = a.console) && r.error && r.error("Unhandled promise rejection", n)), e.a = void 0;
-                }, 1);
+                  a(r[o++]);
+                e._c = [], e._n = !1, t && !e._h && A(e);
               });
             }
           },
           A = function(e) {
-            var t,
-                r = e._d,
-                n = r.a || r.c,
-                i = 0;
-            if (r.h)
+            _.call(s, function() {
+              var t,
+                  r,
+                  n,
+                  i = e._v;
+              if (T(e) && (t = x(function() {
+                O ? g.emit("unhandledRejection", i, e) : (r = s.onunhandledrejection) ? r({
+                  promise: e,
+                  reason: i
+                }) : (n = s.console) && n.error && n.error("Unhandled promise rejection", i);
+              }), e._h = O || T(e) ? 2 : 1), e._a = void 0, t)
+                throw t.error;
+            });
+          },
+          T = function(e) {
+            if (1 == e._h)
               return !1;
-            for (; n.length > i; )
-              if (t = n[i++], t.fail || !A(t.promise))
+            for (var t,
+                r = e._a || e._c,
+                n = 0; r.length > n; )
+              if (t = r[n++], t.fail || !T(t.promise))
                 return !1;
             return !0;
           },
           N = function(e) {
-            var t = this;
-            t.d || (t.d = !0, t = t.r || t, t.v = e, t.s = 2, t.a = t.c.slice(), M(t, !0));
+            _.call(s, function() {
+              var t;
+              O ? g.emit("rejectionHandled", e) : (t = s.onrejectionhandled) && t({
+                promise: e,
+                reason: e._v
+              });
+            });
           },
-          T = function(e) {
+          I = function(e) {
+            var t = this;
+            t._d || (t._d = !0, t = t._w || t, t._v = e, t._s = 2, t._a || (t._a = t._c.slice()), M(t, !0));
+          },
+          C = function(e) {
             var t,
                 r = this;
-            if (!r.d) {
-              r.d = !0, r = r.r || r;
+            if (!r._d) {
+              r._d = !0, r = r._w || r;
               try {
-                if (r.p === e)
-                  throw TypeError("Promise can't be resolved itself");
-                (t = w(e)) ? b(function() {
+                if (r === e)
+                  throw v("Promise can't be resolved itself");
+                (t = S(e)) ? m(function() {
                   var n = {
-                    r: r,
-                    d: !1
+                    _w: r,
+                    _d: !1
                   };
                   try {
-                    t.call(e, s(T, n, 1), s(N, n, 1));
+                    t.call(e, c(C, n, 1), c(I, n, 1));
                   } catch (i) {
-                    N.call(n, i);
+                    I.call(n, i);
                   }
-                }) : (r.v = e, r.s = 1, M(r, !1));
+                }) : (r._v = e, r._s = 1, M(r, !1));
               } catch (n) {
-                N.call({
-                  r: r,
-                  d: !1
+                I.call({
+                  _w: r,
+                  _d: !1
                 }, n);
               }
             }
           };
-      j || (E = function(e) {
-        p(e);
-        var t = this._d = {
-          p: h(this, E, _),
-          c: [],
-          a: void 0,
-          s: 0,
-          d: !1,
-          v: void 0,
-          h: !1,
-          n: !1
-        };
+      P || (j = function(e) {
+        h(this, j, b, "_h"), p(e), n.call(this);
         try {
-          e(s(T, t, 1), s(N, t, 1));
-        } catch (r) {
-          N.call(t, r);
+          e(c(C, this, 1), c(I, this, 1));
+        } catch (t) {
+          I.call(this, t);
         }
-      }, e("./$.redefine-all")(E.prototype, {
+      }, n = function(e) {
+        this._c = [], this._a = void 0, this._s = 0, this._d = !1, this._v = void 0, this._h = 0, this._n = !1;
+      }, n.prototype = e("./_redefine-all")(j.prototype, {
         then: function(e, t) {
-          var r = new R(v(this, E)),
-              n = r.promise,
-              i = this._d;
-          return r.ok = "function" == typeof e ? e : !0, r.fail = "function" == typeof t && t, i.c.push(r), i.a && i.a.push(r), i.s && M(i, !1), n;
+          var r = w(y(this, j));
+          return r.ok = "function" == typeof e ? e : !0, r.fail = "function" == typeof t && t, r.domain = O ? g.domain : void 0, this._c.push(r), this._a && this._a.push(r), this._s && M(this, !1), r.promise;
         },
         "catch": function(e) {
           return this.then(void 0, e);
         }
-      })), c(c.G + c.W + c.F * !j, {Promise: E}), e("./$.set-to-string-tag")(E, _), e("./$.set-species")(_), n = e("./$.core")[_], c(c.S + c.F * !j, _, {reject: function(e) {
-          var t = new R(this),
+      }), R = function() {
+        var e = new n;
+        this.promise = e, this.resolve = c(C, e, 1), this.reject = c(I, e, 1);
+      }), l(l.G + l.W + l.F * !P, {Promise: j}), e("./_set-to-string-tag")(j, b), e("./_set-species")(b), o = e("./_core")[b], l(l.S + l.F * !P, b, {reject: function(e) {
+          var t = w(this),
               r = t.reject;
           return r(e), t.promise;
-        }}), c(c.S + c.F * (!j || P(!0)), _, {resolve: function(e) {
-          if (e instanceof E && k(e.constructor, this))
+        }}), l(l.S + l.F * (a || !P), b, {resolve: function(e) {
+          if (e instanceof j && k(e.constructor, this))
             return e;
-          var t = new R(this),
+          var t = w(this),
               r = t.resolve;
           return r(e), t.promise;
-        }}), c(c.S + c.F * !(j && e("./$.iter-detect")(function(e) {
-        E.all(e)["catch"](function() {});
-      })), _, {
+        }}), l(l.S + l.F * !(P && e("./_iter-detect")(function(e) {
+        j.all(e)["catch"](E);
+      })), b, {
         all: function(e) {
-          var t = S(this),
-              r = new R(t),
+          var t = this,
+              r = w(t),
               n = r.resolve,
-              o = r.reject,
-              a = [],
-              s = x(function() {
-                d(e, !1, a.push, a);
-                var r = a.length,
-                    s = Array(r);
-                r ? i.each.call(a, function(e, i) {
-                  var a = !1;
-                  t.resolve(e).then(function(e) {
-                    a || (a = !0, s[i] = e, --r || n(s));
-                  }, o);
-                }) : n(s);
+              i = r.reject,
+              o = x(function() {
+                var r = [],
+                    o = 0,
+                    a = 1;
+                d(e, !1, function(e) {
+                  var s = o++,
+                      c = !1;
+                  r.push(void 0), a++, t.resolve(e).then(function(e) {
+                    c || (c = !0, r[s] = e, --a || n(r));
+                  }, i);
+                }), --a || n(r);
               });
-          return s && o(s.error), r.promise;
+          return o && i(o.error), r.promise;
         },
         race: function(e) {
-          var t = S(this),
-              r = new R(t),
+          var t = this,
+              r = w(t),
               n = r.reject,
               i = x(function() {
                 d(e, !1, function(e) {
@@ -1374,33 +1686,31 @@ var define = $__System.amdDefine;
         }
       });
     }, {
-      "./$": 56,
-      "./$.a-function": 26,
-      "./$.an-object": 28,
-      "./$.classof": 29,
-      "./$.core": 31,
-      "./$.ctx": 32,
-      "./$.descriptors": 34,
-      "./$.export": 37,
-      "./$.for-of": 39,
-      "./$.global": 41,
-      "./$.is-object": 49,
-      "./$.iter-detect": 53,
-      "./$.library": 58,
-      "./$.microtask": 59,
-      "./$.redefine-all": 62,
-      "./$.same-value": 64,
-      "./$.set-proto": 65,
-      "./$.set-species": 66,
-      "./$.set-to-string-tag": 67,
-      "./$.species-constructor": 69,
-      "./$.strict-new": 70,
-      "./$.wks": 78
+      "./_a-function": 26,
+      "./_an-instance": 28,
+      "./_an-object": 29,
+      "./_classof": 31,
+      "./_core": 33,
+      "./_ctx": 34,
+      "./_export": 40,
+      "./_for-of": 42,
+      "./_global": 43,
+      "./_is-object": 52,
+      "./_iter-detect": 56,
+      "./_library": 60,
+      "./_microtask": 62,
+      "./_redefine-all": 76,
+      "./_set-proto": 78,
+      "./_set-species": 79,
+      "./_set-to-string-tag": 80,
+      "./_species-constructor": 83,
+      "./_task": 85,
+      "./_wks": 93
     }],
-    86: [function(e, t, r) {
+    103: [function(e, t, r) {
       "use strict";
-      var n = e("./$.string-at")(!0);
-      e("./$.iter-define")(String, "String", function(e) {
+      var n = e("./_string-at")(!0);
+      e("./_iter-define")(String, "String", function(e) {
         this._t = String(e), this._i = 0;
       }, function() {
         var e,
@@ -1415,183 +1725,215 @@ var define = $__System.amdDefine;
         });
       });
     }, {
-      "./$.iter-define": 52,
-      "./$.string-at": 71
+      "./_iter-define": 55,
+      "./_string-at": 84
     }],
-    87: [function(e, t, r) {
+    104: [function(e, t, r) {
       "use strict";
-      var n = e("./$"),
-          i = e("./$.global"),
-          o = e("./$.has"),
-          a = e("./$.descriptors"),
-          s = e("./$.export"),
-          u = e("./$.redefine"),
-          c = e("./$.fails"),
-          l = e("./$.shared"),
-          f = e("./$.set-to-string-tag"),
-          p = e("./$.uid"),
-          h = e("./$.wks"),
-          d = e("./$.keyof"),
-          y = e("./$.get-names"),
-          m = e("./$.enum-keys"),
-          g = e("./$.is-array"),
-          v = e("./$.an-object"),
-          b = e("./$.to-iobject"),
-          _ = e("./$.property-desc"),
-          O = n.getDesc,
-          $ = n.setDesc,
-          E = n.create,
-          P = y.get,
-          j = i.Symbol,
-          k = i.JSON,
-          S = k && k.stringify,
-          w = !1,
-          R = h("_hidden"),
-          x = n.isEnum,
-          M = l("symbol-registry"),
-          A = l("symbols"),
-          N = "function" == typeof j,
-          T = Object.prototype,
-          I = a && c(function() {
-            return 7 != E($({}, "a", {get: function() {
-                return $(this, "a", {value: 7}).a;
+      var n = e("./_global"),
+          i = e("./_core"),
+          o = e("./_has"),
+          a = e("./_descriptors"),
+          s = e("./_export"),
+          c = e("./_redefine"),
+          u = e("./_meta").KEY,
+          l = e("./_fails"),
+          f = e("./_shared"),
+          p = e("./_set-to-string-tag"),
+          h = e("./_uid"),
+          d = e("./_wks"),
+          y = e("./_keyof"),
+          _ = e("./_enum-keys"),
+          m = e("./_is-array"),
+          b = e("./_an-object"),
+          v = e("./_to-iobject"),
+          g = e("./_to-primitive"),
+          j = e("./_property-desc"),
+          O = e("./_object-create"),
+          E = e("./_object-gopn-ext"),
+          P = e("./_object-gopd"),
+          k = e("./_object-dp"),
+          S = P.f,
+          w = k.f,
+          R = E.f,
+          x = n.Symbol,
+          M = n.JSON,
+          A = M && M.stringify,
+          T = !1,
+          N = "prototype",
+          I = d("_hidden"),
+          C = d("toPrimitive"),
+          U = {}.propertyIsEnumerable,
+          D = f("symbol-registry"),
+          L = f("symbols"),
+          F = Object[N],
+          H = "function" == typeof x,
+          Y = n.QObject,
+          B = a && l(function() {
+            return 7 != O(w({}, "a", {get: function() {
+                return w(this, "a", {value: 7}).a;
               }})).a;
           }) ? function(e, t, r) {
-            var n = O(T, t);
-            n && delete T[t], $(e, t, r), n && e !== T && $(T, t, n);
-          } : $,
-          C = function(e) {
-            var t = A[e] = E(j.prototype);
-            return t._k = e, a && w && I(T, e, {
+            var n = S(F, t);
+            n && delete F[t], w(e, t, r), n && e !== F && w(F, t, n);
+          } : w,
+          q = function(e) {
+            var t = L[e] = O(x[N]);
+            return t._k = e, a && T && B(F, e, {
               configurable: !0,
               set: function(t) {
-                o(this, R) && o(this[R], e) && (this[R][e] = !1), I(this, e, _(1, t));
+                o(this, I) && o(this[I], e) && (this[I][e] = !1), B(this, e, j(1, t));
               }
             }), t;
           },
-          U = function(e) {
+          K = H && "symbol" == typeof x.iterator ? function(e) {
             return "symbol" == typeof e;
+          } : function(e) {
+            return e instanceof x;
           },
-          D = function(e, t, r) {
-            return r && o(A, t) ? (r.enumerable ? (o(e, R) && e[R][t] && (e[R][t] = !1), r = E(r, {enumerable: _(0, !1)})) : (o(e, R) || $(e, R, _(1, {})), e[R][t] = !0), I(e, t, r)) : $(e, t, r);
+          J = function(e, t, r) {
+            return b(e), t = g(t, !0), b(r), o(L, t) ? (r.enumerable ? (o(e, I) && e[I][t] && (e[I][t] = !1), r = O(r, {enumerable: j(0, !1)})) : (o(e, I) || w(e, I, j(1, {})), e[I][t] = !0), B(e, t, r)) : w(e, t, r);
           },
-          L = function(e, t) {
-            v(e);
+          G = function(e, t) {
+            b(e);
             for (var r,
-                n = m(t = b(t)),
+                n = _(t = v(t)),
                 i = 0,
                 o = n.length; o > i; )
-              D(e, r = n[i++], t[r]);
+              J(e, r = n[i++], t[r]);
             return e;
           },
-          F = function(e, t) {
-            return void 0 === t ? E(e) : L(E(e), t);
+          W = function(e, t) {
+            return void 0 === t ? O(e) : G(O(e), t);
           },
-          H = function(e) {
-            var t = x.call(this, e);
-            return t || !o(this, e) || !o(A, e) || o(this, R) && this[R][e] ? t : !0;
+          V = function(e) {
+            var t = U.call(this, e = g(e, !0));
+            return t || !o(this, e) || !o(L, e) || o(this, I) && this[I][e] ? t : !0;
           },
-          Y = function(e, t) {
-            var r = O(e = b(e), t);
-            return !r || !o(A, t) || o(e, R) && e[R][t] || (r.enumerable = !0), r;
+          z = function(e, t) {
+            var r = S(e = v(e), t = g(t, !0));
+            return !r || !o(L, t) || o(e, I) && e[I][t] || (r.enumerable = !0), r;
           },
-          B = function(e) {
+          $ = function(e) {
             for (var t,
-                r = P(b(e)),
+                r = R(v(e)),
                 n = [],
                 i = 0; r.length > i; )
-              o(A, t = r[i++]) || t == R || n.push(t);
+              o(L, t = r[i++]) || t == I || t == u || n.push(t);
             return n;
           },
-          K = function(e) {
+          X = function(e) {
             for (var t,
-                r = P(b(e)),
+                r = R(v(e)),
                 n = [],
                 i = 0; r.length > i; )
-              o(A, t = r[i++]) && n.push(A[t]);
+              o(L, t = r[i++]) && n.push(L[t]);
             return n;
           },
-          q = function(e) {
-            if (void 0 !== e && !U(e)) {
+          Q = function(e) {
+            if (void 0 !== e && !K(e)) {
               for (var t,
                   r,
                   n = [e],
-                  i = 1,
-                  o = arguments; o.length > i; )
-                n.push(o[i++]);
-              return t = n[1], "function" == typeof t && (r = t), (r || !g(t)) && (t = function(e, t) {
-                return r && (t = r.call(this, e, t)), U(t) ? void 0 : t;
-              }), n[1] = t, S.apply(k, n);
+                  i = 1; arguments.length > i; )
+                n.push(arguments[i++]);
+              return t = n[1], "function" == typeof t && (r = t), !r && m(t) || (t = function(e, t) {
+                return r && (t = r.call(this, e, t)), K(t) ? void 0 : t;
+              }), n[1] = t, A.apply(M, n);
             }
           },
-          J = c(function() {
-            var e = j();
-            return "[null]" != S([e]) || "{}" != S({a: e}) || "{}" != S(Object(e));
+          Z = l(function() {
+            var e = x();
+            return "[null]" != A([e]) || "{}" != A({a: e}) || "{}" != A(Object(e));
           });
-      N || (j = function() {
-        if (U(this))
-          throw TypeError("Symbol is not a constructor");
-        return C(p(arguments.length > 0 ? arguments[0] : void 0));
-      }, u(j.prototype, "toString", function() {
+      H || (x = function() {
+        if (this instanceof x)
+          throw TypeError("Symbol is not a constructor!");
+        return q(h(arguments.length > 0 ? arguments[0] : void 0));
+      }, c(x[N], "toString", function() {
         return this._k;
-      }), U = function(e) {
-        return e instanceof j;
-      }, n.create = F, n.isEnum = H, n.getDesc = Y, n.setDesc = D, n.setDescs = L, n.getNames = y.get = B, n.getSymbols = K, a && !e("./$.library") && u(T, "propertyIsEnumerable", H, !0));
-      var G = {
+      }), P.f = z, k.f = J, e("./_object-gopn").f = E.f = $, e("./_object-pie").f = V, e("./_object-gops").f = X, a && !e("./_library") && c(F, "propertyIsEnumerable", V, !0)), s(s.G + s.W + s.F * !H, {Symbol: x});
+      for (var ee = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),
+          te = 0; ee.length > te; ) {
+        var re = ee[te++],
+            ne = i.Symbol,
+            ie = d(re);
+        re in ne || w(ne, re, {value: H ? ie : q(ie)});
+      }
+      Y && Y[N] && Y[N].findChild || (T = !0), s(s.S + s.F * !H, "Symbol", {
         "for": function(e) {
-          return o(M, e += "") ? M[e] : M[e] = j(e);
+          return o(D, e += "") ? D[e] : D[e] = x(e);
         },
         keyFor: function(e) {
-          return d(M, e);
+          if (K(e))
+            return y(D, e);
+          throw TypeError(e + " is not a symbol!");
         },
         useSetter: function() {
-          w = !0;
+          T = !0;
         },
         useSimple: function() {
-          w = !1;
+          T = !1;
         }
-      };
-      n.each.call("hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), function(e) {
-        var t = h(e);
-        G[e] = N ? t : C(t);
-      }), w = !0, s(s.G + s.W, {Symbol: j}), s(s.S, "Symbol", G), s(s.S + s.F * !N, "Object", {
-        create: F,
-        defineProperty: D,
-        defineProperties: L,
-        getOwnPropertyDescriptor: Y,
-        getOwnPropertyNames: B,
-        getOwnPropertySymbols: K
-      }), k && s(s.S + s.F * (!N || J), "JSON", {stringify: q}), f(j, "Symbol"), f(Math, "Math", !0), f(i.JSON, "JSON", !0);
+      }), s(s.S + s.F * !H, "Object", {
+        create: W,
+        defineProperty: J,
+        defineProperties: G,
+        getOwnPropertyDescriptor: z,
+        getOwnPropertyNames: $,
+        getOwnPropertySymbols: X
+      }), M && s(s.S + s.F * (!H || Z), "JSON", {stringify: Q}), x[N][C] || e("./_hide")(x[N], C, x[N].valueOf), p(x, "Symbol"), p(Math, "Math", !0), p(n.JSON, "JSON", !0);
     }, {
-      "./$": 56,
-      "./$.an-object": 28,
-      "./$.descriptors": 34,
-      "./$.enum-keys": 36,
-      "./$.export": 37,
-      "./$.fails": 38,
-      "./$.get-names": 40,
-      "./$.global": 41,
-      "./$.has": 42,
-      "./$.is-array": 48,
-      "./$.keyof": 57,
-      "./$.library": 58,
-      "./$.property-desc": 61,
-      "./$.redefine": 63,
-      "./$.set-to-string-tag": 67,
-      "./$.shared": 68,
-      "./$.to-iobject": 74,
-      "./$.uid": 77,
-      "./$.wks": 78
+      "./_an-object": 29,
+      "./_core": 33,
+      "./_descriptors": 36,
+      "./_enum-keys": 39,
+      "./_export": 40,
+      "./_fails": 41,
+      "./_global": 43,
+      "./_has": 44,
+      "./_hide": 45,
+      "./_is-array": 51,
+      "./_keyof": 59,
+      "./_library": 60,
+      "./_meta": 61,
+      "./_object-create": 63,
+      "./_object-dp": 64,
+      "./_object-gopd": 66,
+      "./_object-gopn": 68,
+      "./_object-gopn-ext": 67,
+      "./_object-gops": 69,
+      "./_object-pie": 73,
+      "./_property-desc": 75,
+      "./_redefine": 77,
+      "./_set-to-string-tag": 80,
+      "./_shared": 82,
+      "./_to-iobject": 88,
+      "./_to-primitive": 91,
+      "./_uid": 92,
+      "./_wks": 93
     }],
-    88: [function(e, t, r) {
+    105: [function(e, t, r) {
       e("./es6.array.iterator");
-      var n = e("./$.iterators");
-      n.NodeList = n.HTMLCollection = n.Array;
+      for (var n = e("./_global"),
+          i = e("./_hide"),
+          o = e("./_iterators"),
+          a = e("./_wks")("toStringTag"),
+          s = ["NodeList", "DOMTokenList", "MediaList", "StyleSheetList", "CSSRuleList"],
+          c = 0; 5 > c; c++) {
+        var u = s[c],
+            l = n[u],
+            f = l && l.prototype;
+        f && !f[a] && i(f, a, u), o[u] = o.Array;
+      }
     }, {
-      "./$.iterators": 55,
-      "./es6.array.iterator": 80
+      "./_global": 43,
+      "./_hide": 45,
+      "./_iterators": 58,
+      "./_wks": 93,
+      "./es6.array.iterator": 95
     }],
-    89: [function(t, r, n) {
+    106: [function(t, r, n) {
       !function(t, n) {
         "function" == typeof e && e.amd ? e([], n) : "undefined" != typeof r && r.exports ? r.exports = n() : t.tv4 = n();
       }(this, function() {
@@ -1609,35 +1951,35 @@ var define = $__System.amdDefine;
               a = !1,
               s = !1;
           "+" === r ? o = !1 : "." === r ? (i = ".", n = ".") : "/" === r ? (i = "/", n = "/") : "#" === r ? (i = "#", o = !1) : ";" === r ? (i = ";", n = ";", a = !0, s = !0) : "?" === r ? (i = "?", n = "&", a = !0) : "&" === r && (i = "&", n = "&", a = !0);
-          for (var u = [],
-              c = t.split(","),
+          for (var c = [],
+              u = t.split(","),
               l = [],
               f = {},
-              d = 0; d < c.length; d++) {
-            var y = c[d],
-                m = null;
+              d = 0; d < u.length; d++) {
+            var y = u[d],
+                _ = null;
             if (-1 !== y.indexOf(":")) {
-              var g = y.split(":");
-              y = g[0], m = parseInt(g[1], 10);
+              var m = y.split(":");
+              y = m[0], _ = parseInt(m[1], 10);
             }
-            for (var v = {}; h[y.charAt(y.length - 1)]; )
-              v[y.charAt(y.length - 1)] = !0, y = y.substring(0, y.length - 1);
-            var b = {
-              truncate: m,
+            for (var b = {}; h[y.charAt(y.length - 1)]; )
+              b[y.charAt(y.length - 1)] = !0, y = y.substring(0, y.length - 1);
+            var v = {
+              truncate: _,
               name: y,
-              suffices: v
+              suffices: b
             };
-            l.push(b), f[y] = b, u.push(y);
+            l.push(v), f[y] = v, c.push(y);
           }
-          var _ = function(t) {
+          var g = function(t) {
             for (var r = "",
-                u = 0,
-                c = 0; c < l.length; c++) {
-              var f = l[c],
+                c = 0,
+                u = 0; u < l.length; u++) {
+              var f = l[u],
                   p = t(f.name);
               if (null === p || void 0 === p || Array.isArray(p) && 0 === p.length || "object" == typeof p && 0 === Object.keys(p).length)
-                u++;
-              else if (r += c === u ? i : n || ",", Array.isArray(p)) {
+                c++;
+              else if (r += u === c ? i : n || ",", Array.isArray(p)) {
                 a && (r += f.name + "=");
                 for (var h = 0; h < p.length; h++)
                   h > 0 && (r += f.suffices["*"] ? n || "," : ",", f.suffices["*"] && a && (r += f.name + "=")), r += o ? encodeURIComponent(p[h]).replace(/!/g, "%21") : e(p[h]);
@@ -1651,9 +1993,9 @@ var define = $__System.amdDefine;
             }
             return r;
           };
-          return _.varNames = u, {
+          return g.varNames = c, {
             prefix: i,
-            substitution: _
+            substitution: g
           };
         }
         function r(e) {
@@ -1664,10 +2006,10 @@ var define = $__System.amdDefine;
               o = [],
               a = [],
               s = []; n.length > 0; ) {
-            var u = n.shift(),
-                c = u.split("}")[0],
-                l = u.substring(c.length + 1),
-                f = t(c);
+            var c = n.shift(),
+                u = c.split("}")[0],
+                l = c.substring(u.length + 1),
+                f = t(u);
             a.push(f.substitution), o.push(f.prefix), i.push(l), s = s.concat(f.substitution.varNames);
           }
           this.fill = function(e) {
@@ -1744,11 +2086,11 @@ var define = $__System.amdDefine;
                 "enum" !== n && s(e[n], t);
             }
         }
-        function u(e) {
+        function c(e) {
           e = e || "en";
-          var t = O[e];
+          var t = j[e];
           return function(e) {
-            var r = t[e.code] || _[e.code];
+            var r = t[e.code] || g[e.code];
             if ("string" != typeof r)
               return "Unknown error code " + e.code + ": " + JSON.stringify(e.messageParams);
             var n = e.params;
@@ -1758,7 +2100,7 @@ var define = $__System.amdDefine;
             });
           };
         }
-        function c(e, t, r, n, i) {
+        function u(e, t, r, n, i) {
           if (Error.call(this), void 0 === e)
             throw new Error("No error code supplied: " + n);
           this.message = "", this.params = t, this.code = e, this.dataPath = r || "", this.schemaPath = n || "", this.subErrors = i || null;
@@ -1790,19 +2132,19 @@ var define = $__System.amdDefine;
                   n.addFormat.apply(n, arguments);
                 },
                 language: function(e) {
-                  return e ? (O[e] || (e = e.split("-")[0]), O[e] ? (t = e, e) : !1) : t;
+                  return e ? (j[e] || (e = e.split("-")[0]), j[e] ? (t = e, e) : !1) : t;
                 },
                 addLanguage: function(e, t) {
                   var r;
-                  for (r in g)
-                    t[r] && !t[g[r]] && (t[g[r]] = t[r]);
+                  for (r in m)
+                    t[r] && !t[m[r]] && (t[m[r]] = t[r]);
                   var n = e.split("-")[0];
-                  if (O[n]) {
-                    O[e] = Object.create(O[n]);
+                  if (j[n]) {
+                    j[e] = Object.create(j[n]);
                     for (r in t)
-                      "undefined" == typeof O[n][r] && (O[n][r] = t[r]), O[e][r] = t[r];
+                      "undefined" == typeof j[n][r] && (j[n][r] = t[r]), j[e][r] = t[r];
                   } else
-                    O[e] = t, O[n] = t;
+                    j[e] = t, j[n] = t;
                   return this;
                 },
                 freshApi: function(e) {
@@ -1810,11 +2152,11 @@ var define = $__System.amdDefine;
                   return e && t.language(e), t;
                 },
                 validate: function(e, i, o, a) {
-                  var s = u(t),
-                      c = r ? function(e, t, n) {
+                  var s = c(t),
+                      u = r ? function(e, t, n) {
                         return r(e, t, n) || s(e, t, n);
                       } : s,
-                      l = new d(n, !1, c, o, a);
+                      l = new d(n, !1, u, o, a);
                   "string" == typeof i && (i = {$ref: i}), l.addSchema("", i);
                   var f = l.validateAll(e, i, null, null, "");
                   return !f && a && (f = l.banUnknownProperties(e, i)), this.error = f, this.missing = l.missing, this.valid = null === f, this.valid;
@@ -1824,11 +2166,11 @@ var define = $__System.amdDefine;
                   return this.validate.apply(e, arguments), e;
                 },
                 validateMultiple: function(e, i, o, a) {
-                  var s = u(t),
-                      c = r ? function(e, t, n) {
+                  var s = c(t),
+                      u = r ? function(e, t, n) {
                         return r(e, t, n) || s(e, t, n);
                       } : s,
-                      l = new d(n, !0, c, o, a);
+                      l = new d(n, !0, u, o, a);
                   "string" == typeof i && (i = {$ref: i}), l.addSchema("", i), l.validateAll(e, i, null, null, ""), a && l.banUnknownProperties(e, i);
                   var f = {};
                   return f.errors = l.errors, f.missing = l.missing, f.valid = 0 === f.errors.length, f;
@@ -1859,13 +2201,13 @@ var define = $__System.amdDefine;
                     throw new Error("Code name must be a string in UPPER_CASE_WITH_UNDERSCORES");
                   if ("number" != typeof t || t % 1 !== 0 || 1e4 > t)
                     throw new Error("Code number must be an integer > 10000");
-                  if ("undefined" != typeof g[e])
-                    throw new Error("Error already defined: " + e + " as " + g[e]);
-                  if ("undefined" != typeof v[t])
-                    throw new Error("Error code already used: " + v[t] + " as " + t);
-                  g[e] = t, v[t] = e, _[e] = _[t] = r;
-                  for (var n in O) {
-                    var i = O[n];
+                  if ("undefined" != typeof m[e])
+                    throw new Error("Error already defined: " + e + " as " + m[e]);
+                  if ("undefined" != typeof b[t])
+                    throw new Error("Error code already used: " + b[t] + " as " + t);
+                  m[e] = t, b[t] = e, g[e] = g[t] = r;
+                  for (var n in j) {
+                    var i = j[n];
                     i[e] && (i[t] = i[t] || i[e]);
                   }
                 },
@@ -1878,7 +2220,7 @@ var define = $__System.amdDefine;
                 normSchema: s,
                 resolveUrl: o,
                 getDocumentUri: a,
-                errorCodes: g
+                errorCodes: m
               };
           return i.language(e || "en"), i;
         }
@@ -1951,7 +2293,7 @@ var define = $__System.amdDefine;
           }
         };
         var d = function(e, t, r, n, i) {
-          if (this.missing = [], this.missingMap = {}, this.formatValidators = e ? Object.create(e.formatValidators) : {}, this.schemas = e ? Object.create(e.schemas) : {}, this.collectMultiple = t, this.errors = [], this.handleError = t ? this.collectError : this.returnError, n && (this.checkRecursive = !0, this.scanned = [], this.scannedFrozen = [], this.scannedFrozenSchemas = [], this.scannedFrozenValidationErrors = [], this.validatedSchemasKey = "tv4_validation_id", this.validationErrorsKey = "tv4_validation_errors_id"), i && (this.trackUnknownProperties = !0, this.knownPropertyPaths = {}, this.unknownPropertyPaths = {}), this.errorReporter = r || u("en"), "string" == typeof this.errorReporter)
+          if (this.missing = [], this.missingMap = {}, this.formatValidators = e ? Object.create(e.formatValidators) : {}, this.schemas = e ? Object.create(e.schemas) : {}, this.collectMultiple = t, this.errors = [], this.handleError = t ? this.collectError : this.returnError, n && (this.checkRecursive = !0, this.scanned = [], this.scannedFrozen = [], this.scannedFrozenSchemas = [], this.scannedFrozenValidationErrors = [], this.validatedSchemasKey = "tv4_validation_id", this.validationErrorsKey = "tv4_validation_errors_id"), i && (this.trackUnknownProperties = !0, this.knownPropertyPaths = {}, this.unknownPropertyPaths = {}), this.errorReporter = r || c("en"), "string" == typeof this.errorReporter)
             throw new Error("debug");
           if (this.definedKeywords = {}, e)
             for (var o in e.definedKeywords)
@@ -1960,7 +2302,7 @@ var define = $__System.amdDefine;
         d.prototype.defineKeyword = function(e, t) {
           this.definedKeywords[e] = this.definedKeywords[e] || [], this.definedKeywords[e].push(t);
         }, d.prototype.createError = function(e, t, r, n, i, o, a) {
-          var s = new c(e, t, r, n, i);
+          var s = new u(e, t, r, n, i);
           return s.message = this.errorReporter(s, o, a), s;
         }, d.prototype.returnError = function(e) {
           return e;
@@ -1972,7 +2314,7 @@ var define = $__System.amdDefine;
           return this;
         }, d.prototype.banUnknownProperties = function(e, t) {
           for (var r in this.unknownPropertyPaths) {
-            var n = this.createError(g.UNKNOWN_PROPERTY, {path: r}, r, "", null, e, t),
+            var n = this.createError(m.UNKNOWN_PROPERTY, {path: r}, r, "", null, e, t),
                 i = this.handleError(n);
             if (i)
               return i;
@@ -1988,7 +2330,7 @@ var define = $__System.amdDefine;
         }, d.prototype.resolveRefs = function(e, t) {
           if (void 0 !== e.$ref) {
             if (t = t || {}, t[e.$ref])
-              return this.createError(g.CIRCULAR_REFERENCE, {urls: Object.keys(t).join(", ")}, "", "", null, void 0, e);
+              return this.createError(m.CIRCULAR_REFERENCE, {urls: Object.keys(t).join(", ")}, "", "", null, void 0, e);
             t[e.$ref] = !0, e = this.getSchema(e.$ref, t);
           }
           return e;
@@ -2007,12 +2349,12 @@ var define = $__System.amdDefine;
               return;
             for (var a = o.split("/").slice(1),
                 s = 0; s < a.length; s++) {
-              var u = a[s].replace(/~1/g, "/").replace(/~0/g, "~");
-              if (void 0 === r[u]) {
+              var c = a[s].replace(/~1/g, "/").replace(/~0/g, "~");
+              if (void 0 === r[c]) {
                 r = void 0;
                 break;
               }
-              r = r[u];
+              r = r[c];
             }
             if (void 0 !== r)
               return this.resolveRefs(r, t);
@@ -2048,12 +2390,12 @@ var define = $__System.amdDefine;
         }, d.prototype.getSchemaUris = function(e) {
           var t = [];
           for (var r in this.schemas)
-            (!e || e.test(r)) && t.push(r);
+            e && !e.test(r) || t.push(r);
           return t;
         }, d.prototype.getMissingUris = function(e) {
           var t = [];
           for (var r in this.missingMap)
-            (!e || e.test(r)) && t.push(r);
+            e && !e.test(r) || t.push(r);
           return t;
         }, d.prototype.dropSchemas = function() {
           this.schemas = {}, this.reset();
@@ -2063,11 +2405,11 @@ var define = $__System.amdDefine;
           var o;
           if (t = this.resolveRefs(t), !t)
             return null;
-          if (t instanceof c)
+          if (t instanceof u)
             return this.errors.push(t), t;
           var a,
               s = this.errors.length,
-              u = null,
+              c = null,
               l = null;
           if (this.checkRecursive && e && "object" == typeof e) {
             if (o = !this.scanned.length, e[this.validatedSchemasKey]) {
@@ -2081,7 +2423,7 @@ var define = $__System.amdDefine;
                 return this.errors = this.errors.concat(this.scannedFrozenValidationErrors[a][p]), null;
             }
             if (this.scanned.push(e), Object.isFrozen(e))
-              -1 === a && (a = this.scannedFrozen.length, this.scannedFrozen.push(e), this.scannedFrozenSchemas.push([])), u = this.scannedFrozenSchemas[a].length, this.scannedFrozenSchemas[a][u] = t, this.scannedFrozenValidationErrors[a][u] = [];
+              -1 === a && (a = this.scannedFrozen.length, this.scannedFrozen.push(e), this.scannedFrozenSchemas.push([])), c = this.scannedFrozenSchemas[a].length, this.scannedFrozenSchemas[a][c] = t, this.scannedFrozenValidationErrors[a][c] = [];
             else {
               if (!e[this.validatedSchemasKey])
                 try {
@@ -2102,23 +2444,23 @@ var define = $__System.amdDefine;
               y = this.validateBasic(e, t, i) || this.validateNumeric(e, t, i) || this.validateString(e, t, i) || this.validateArray(e, t, i) || this.validateObject(e, t, i) || this.validateCombinations(e, t, i) || this.validateHypermedia(e, t, i) || this.validateFormat(e, t, i) || this.validateDefinedKeywords(e, t, i) || null;
           if (o) {
             for (; this.scanned.length; ) {
-              var m = this.scanned.pop();
-              delete m[this.validatedSchemasKey];
+              var _ = this.scanned.pop();
+              delete _[this.validatedSchemasKey];
             }
             this.scannedFrozen = [], this.scannedFrozenSchemas = [];
           }
           if (y || d !== this.errors.length)
             for (; r && r.length || n && n.length; ) {
-              var g = r && r.length ? "" + r.pop() : null,
-                  v = n && n.length ? "" + n.pop() : null;
-              y && (y = y.prefixWith(g, v)), this.prefixErrors(d, g, v);
+              var m = r && r.length ? "" + r.pop() : null,
+                  b = n && n.length ? "" + n.pop() : null;
+              y && (y = y.prefixWith(m, b)), this.prefixErrors(d, m, b);
             }
-          return null !== u ? this.scannedFrozenValidationErrors[a][u] = this.errors.slice(s) : null !== l && (e[this.validationErrorsKey][l] = this.errors.slice(s)), this.handleError(y);
+          return null !== c ? this.scannedFrozenValidationErrors[a][c] = this.errors.slice(s) : null !== l && (e[this.validationErrorsKey][l] = this.errors.slice(s)), this.handleError(y);
         }, d.prototype.validateFormat = function(e, t) {
           if ("string" != typeof t.format || !this.formatValidators[t.format])
             return null;
           var r = this.formatValidators[t.format].call(null, e, t);
-          return "string" == typeof r || "number" == typeof r ? this.createError(g.FORMAT_CUSTOM, {message: r}, "", "/format", null, e, t) : r && "object" == typeof r ? this.createError(g.FORMAT_CUSTOM, {message: r.message || "?"}, r.dataPath || "", r.schemaPath || "/format", null, e, t) : null;
+          return "string" == typeof r || "number" == typeof r ? this.createError(m.FORMAT_CUSTOM, {message: r}, "", "/format", null, e, t) : r && "object" == typeof r ? this.createError(m.FORMAT_CUSTOM, {message: r.message || "?"}, r.dataPath || "", r.schemaPath || "/format", null, e, t) : null;
         }, d.prototype.validateDefinedKeywords = function(e, t, r) {
           for (var n in this.definedKeywords)
             if ("undefined" != typeof t[n])
@@ -2127,24 +2469,24 @@ var define = $__System.amdDefine;
                 var a = i[o],
                     s = a(e, t[n], t, r);
                 if ("string" == typeof s || "number" == typeof s)
-                  return this.createError(g.KEYWORD_CUSTOM, {
+                  return this.createError(m.KEYWORD_CUSTOM, {
                     key: n,
                     message: s
                   }, "", "", null, e, t).prefixWith(null, n);
                 if (s && "object" == typeof s) {
-                  var u = s.code;
-                  if ("string" == typeof u) {
-                    if (!g[u])
-                      throw new Error("Undefined error code (use defineError): " + u);
-                    u = g[u];
+                  var c = s.code;
+                  if ("string" == typeof c) {
+                    if (!m[c])
+                      throw new Error("Undefined error code (use defineError): " + c);
+                    c = m[c];
                   } else
-                    "number" != typeof u && (u = g.KEYWORD_CUSTOM);
-                  var c = "object" == typeof s.message ? s.message : {
+                    "number" != typeof c && (c = m.KEYWORD_CUSTOM);
+                  var u = "object" == typeof s.message ? s.message : {
                     key: n,
                     message: s.message || "?"
                   },
                       l = s.schemaPath || "/" + n.replace(/~/g, "~0").replace(/\//g, "~1");
-                  return this.createError(u, c, s.dataPath || null, l, null, e, t);
+                  return this.createError(c, u, s.dataPath || null, l, null, e, t);
                 }
               }
           return null;
@@ -2163,7 +2505,7 @@ var define = $__System.amdDefine;
             if (o === r || "integer" === o && "number" === r && e % 1 === 0)
               return null;
           }
-          return this.createError(g.INVALID_TYPE, {
+          return this.createError(m.INVALID_TYPE, {
             type: r,
             expected: n.join("/")
           }, "", "", null, e, t);
@@ -2175,20 +2517,20 @@ var define = $__System.amdDefine;
             if (n(e, i))
               return null;
           }
-          return this.createError(g.ENUM_MISMATCH, {value: "undefined" != typeof JSON ? JSON.stringify(e) : e}, "", "", null, e, t);
+          return this.createError(m.ENUM_MISMATCH, {value: "undefined" != typeof JSON ? JSON.stringify(e) : e}, "", "", null, e, t);
         }, d.prototype.validateNumeric = function(e, t, r) {
           return this.validateMultipleOf(e, t, r) || this.validateMinMax(e, t, r) || this.validateNaN(e, t, r) || null;
         };
         var y = Math.pow(2, -51),
-            m = 1 - y;
+            _ = 1 - y;
         d.prototype.validateMultipleOf = function(e, t) {
           var r = t.multipleOf || t.divisibleBy;
           if (void 0 === r)
             return null;
           if ("number" == typeof e) {
             var n = e / r % 1;
-            if (n >= y && m > n)
-              return this.createError(g.NUMBER_MULTIPLE_OF, {
+            if (n >= y && _ > n)
+              return this.createError(m.NUMBER_MULTIPLE_OF, {
                 value: e,
                 multipleOf: r
               }, "", "", null, e, t);
@@ -2199,38 +2541,38 @@ var define = $__System.amdDefine;
             return null;
           if (void 0 !== t.minimum) {
             if (e < t.minimum)
-              return this.createError(g.NUMBER_MINIMUM, {
+              return this.createError(m.NUMBER_MINIMUM, {
                 value: e,
                 minimum: t.minimum
               }, "", "/minimum", null, e, t);
             if (t.exclusiveMinimum && e === t.minimum)
-              return this.createError(g.NUMBER_MINIMUM_EXCLUSIVE, {
+              return this.createError(m.NUMBER_MINIMUM_EXCLUSIVE, {
                 value: e,
                 minimum: t.minimum
               }, "", "/exclusiveMinimum", null, e, t);
           }
           if (void 0 !== t.maximum) {
             if (e > t.maximum)
-              return this.createError(g.NUMBER_MAXIMUM, {
+              return this.createError(m.NUMBER_MAXIMUM, {
                 value: e,
                 maximum: t.maximum
               }, "", "/maximum", null, e, t);
             if (t.exclusiveMaximum && e === t.maximum)
-              return this.createError(g.NUMBER_MAXIMUM_EXCLUSIVE, {
+              return this.createError(m.NUMBER_MAXIMUM_EXCLUSIVE, {
                 value: e,
                 maximum: t.maximum
               }, "", "/exclusiveMaximum", null, e, t);
           }
           return null;
         }, d.prototype.validateNaN = function(e, t) {
-          return "number" != typeof e ? null : isNaN(e) === !0 || e === 1 / 0 || e === -(1 / 0) ? this.createError(g.NUMBER_NOT_A_NUMBER, {value: e}, "", "/type", null, e, t) : null;
+          return "number" != typeof e ? null : isNaN(e) === !0 || e === 1 / 0 || e === -(1 / 0) ? this.createError(m.NUMBER_NOT_A_NUMBER, {value: e}, "", "/type", null, e, t) : null;
         }, d.prototype.validateString = function(e, t, r) {
           return this.validateStringLength(e, t, r) || this.validateStringPattern(e, t, r) || null;
         }, d.prototype.validateStringLength = function(e, t) {
-          return "string" != typeof e ? null : void 0 !== t.minLength && e.length < t.minLength ? this.createError(g.STRING_LENGTH_SHORT, {
+          return "string" != typeof e ? null : void 0 !== t.minLength && e.length < t.minLength ? this.createError(m.STRING_LENGTH_SHORT, {
             length: e.length,
             minimum: t.minLength
-          }, "", "/minLength", null, e, t) : void 0 !== t.maxLength && e.length > t.maxLength ? this.createError(g.STRING_LENGTH_LONG, {
+          }, "", "/minLength", null, e, t) : void 0 !== t.maxLength && e.length > t.maxLength ? this.createError(m.STRING_LENGTH_LONG, {
             length: e.length,
             maximum: t.maxLength
           }, "", "/maxLength", null, e, t) : null;
@@ -2246,15 +2588,15 @@ var define = $__System.amdDefine;
                 o = t.pattern.match(/^\/(.+)\/([img]*)$/);
             o ? (n = o[1], i = o[2]) : n = t.pattern, r = new RegExp(n, i);
           }
-          return r.test(e) ? null : this.createError(g.STRING_PATTERN, {pattern: t.pattern}, "", "/pattern", null, e, t);
+          return r.test(e) ? null : this.createError(m.STRING_PATTERN, {pattern: t.pattern}, "", "/pattern", null, e, t);
         }, d.prototype.validateArray = function(e, t, r) {
           return Array.isArray(e) ? this.validateArrayLength(e, t, r) || this.validateArrayUniqueItems(e, t, r) || this.validateArrayItems(e, t, r) || null : null;
         }, d.prototype.validateArrayLength = function(e, t) {
           var r;
-          return void 0 !== t.minItems && e.length < t.minItems && (r = this.createError(g.ARRAY_LENGTH_SHORT, {
+          return void 0 !== t.minItems && e.length < t.minItems && (r = this.createError(m.ARRAY_LENGTH_SHORT, {
             length: e.length,
             minimum: t.minItems
-          }, "", "/minItems", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxItems && e.length > t.maxItems && (r = this.createError(g.ARRAY_LENGTH_LONG, {
+          }, "", "/minItems", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxItems && e.length > t.maxItems && (r = this.createError(m.ARRAY_LENGTH_LONG, {
             length: e.length,
             maximum: t.maxItems
           }, "", "/maxItems", null, e, t), this.handleError(r)) ? r : null;
@@ -2263,7 +2605,7 @@ var define = $__System.amdDefine;
             for (var r = 0; r < e.length; r++)
               for (var i = r + 1; i < e.length; i++)
                 if (n(e[r], e[i])) {
-                  var o = this.createError(g.ARRAY_UNIQUE, {
+                  var o = this.createError(m.ARRAY_UNIQUE, {
                     match1: r,
                     match2: i
                   }, "", "/uniqueItems", null, e, t);
@@ -2283,7 +2625,7 @@ var define = $__System.amdDefine;
                   return n;
               } else if (void 0 !== t.additionalItems)
                 if ("boolean" == typeof t.additionalItems) {
-                  if (!t.additionalItems && (n = this.createError(g.ARRAY_ADDITIONAL_ITEMS, {}, "/" + i, "/additionalItems", null, e, t), this.handleError(n)))
+                  if (!t.additionalItems && (n = this.createError(m.ARRAY_ADDITIONAL_ITEMS, {}, "/" + i, "/additionalItems", null, e, t), this.handleError(n)))
                     return n;
                 } else if (n = this.validateAll(e[i], t.additionalItems, [i], ["additionalItems"], r + "/" + i))
                   return n;
@@ -2297,10 +2639,10 @@ var define = $__System.amdDefine;
         }, d.prototype.validateObjectMinMaxProperties = function(e, t) {
           var r,
               n = Object.keys(e);
-          return void 0 !== t.minProperties && n.length < t.minProperties && (r = this.createError(g.OBJECT_PROPERTIES_MINIMUM, {
+          return void 0 !== t.minProperties && n.length < t.minProperties && (r = this.createError(m.OBJECT_PROPERTIES_MINIMUM, {
             propertyCount: n.length,
             minimum: t.minProperties
-          }, "", "/minProperties", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxProperties && n.length > t.maxProperties && (r = this.createError(g.OBJECT_PROPERTIES_MAXIMUM, {
+          }, "", "/minProperties", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxProperties && n.length > t.maxProperties && (r = this.createError(m.OBJECT_PROPERTIES_MAXIMUM, {
             propertyCount: n.length,
             maximum: t.maxProperties
           }, "", "/maxProperties", null, e, t), this.handleError(r)) ? r : null;
@@ -2309,7 +2651,7 @@ var define = $__System.amdDefine;
             for (var r = 0; r < t.required.length; r++) {
               var n = t.required[r];
               if (void 0 === e[n]) {
-                var i = this.createError(g.OBJECT_REQUIRED, {key: n}, "", "/required/" + r, null, e, t);
+                var i = this.createError(m.OBJECT_REQUIRED, {key: n}, "", "/required/" + r, null, e, t);
                 if (this.handleError(i))
                   return i;
               }
@@ -2324,15 +2666,15 @@ var define = $__System.amdDefine;
               return n;
             if (void 0 !== t.patternProperties)
               for (var s in t.patternProperties) {
-                var u = new RegExp(s);
-                if (u.test(i) && (a = !0, n = this.validateAll(e[i], t.patternProperties[s], [i], ["patternProperties", s], o)))
+                var c = new RegExp(s);
+                if (c.test(i) && (a = !0, n = this.validateAll(e[i], t.patternProperties[s], [i], ["patternProperties", s], o)))
                   return n;
               }
             if (a)
               this.trackUnknownProperties && (this.knownPropertyPaths[o] = !0, delete this.unknownPropertyPaths[o]);
             else if (void 0 !== t.additionalProperties) {
               if (this.trackUnknownProperties && (this.knownPropertyPaths[o] = !0, delete this.unknownPropertyPaths[o]), "boolean" == typeof t.additionalProperties) {
-                if (!t.additionalProperties && (n = this.createError(g.OBJECT_ADDITIONAL_PROPERTIES, {key: i}, "", "/additionalProperties", null, e, t).prefixWith(i, null), this.handleError(n)))
+                if (!t.additionalProperties && (n = this.createError(m.OBJECT_ADDITIONAL_PROPERTIES, {key: i}, "", "/additionalProperties", null, e, t).prefixWith(i, null), this.handleError(n)))
                   return n;
               } else if (n = this.validateAll(e[i], t.additionalProperties, [i], ["additionalProperties"], o))
                 return n;
@@ -2347,7 +2689,7 @@ var define = $__System.amdDefine;
               if (void 0 !== e[i]) {
                 var o = t.dependencies[i];
                 if ("string" == typeof o) {
-                  if (void 0 === e[o] && (n = this.createError(g.OBJECT_DEPENDENCY_KEY, {
+                  if (void 0 === e[o] && (n = this.createError(m.OBJECT_DEPENDENCY_KEY, {
                     key: i,
                     missing: o
                   }, "", "", null, e, t).prefixWith(null, i).prefixWith(null, "dependencies"), this.handleError(n)))
@@ -2355,7 +2697,7 @@ var define = $__System.amdDefine;
                 } else if (Array.isArray(o))
                   for (var a = 0; a < o.length; a++) {
                     var s = o[a];
-                    if (void 0 === e[s] && (n = this.createError(g.OBJECT_DEPENDENCY_KEY, {
+                    if (void 0 === e[s] && (n = this.createError(m.OBJECT_DEPENDENCY_KEY, {
                       key: i,
                       missing: s
                     }, "", "/" + a, null, e, t).prefixWith(null, i).prefixWith(null, "dependencies"), this.handleError(n)))
@@ -2386,11 +2728,11 @@ var define = $__System.amdDefine;
               a = this.errors.length;
           this.trackUnknownProperties && (n = this.unknownPropertyPaths, i = this.knownPropertyPaths);
           for (var s = !0,
-              u = 0; u < t.anyOf.length; u++) {
+              c = 0; c < t.anyOf.length; c++) {
             this.trackUnknownProperties && (this.unknownPropertyPaths = {}, this.knownPropertyPaths = {});
-            var c = t.anyOf[u],
+            var u = t.anyOf[c],
                 l = this.errors.length,
-                f = this.validateAll(e, c, [], ["anyOf", u], r);
+                f = this.validateAll(e, u, [], ["anyOf", c], r);
             if (null === f && l === this.errors.length) {
               if (this.errors = this.errors.slice(0, a), this.trackUnknownProperties) {
                 for (var p in this.knownPropertyPaths)
@@ -2402,9 +2744,9 @@ var define = $__System.amdDefine;
               }
               return null;
             }
-            f && o.push(f.prefixWith(null, "" + u).prefixWith(null, "anyOf"));
+            f && o.push(f.prefixWith(null, "" + c).prefixWith(null, "anyOf"));
           }
-          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = i), s ? (o = o.concat(this.errors.slice(a)), this.errors = this.errors.slice(0, a), this.createError(g.ANY_OF_MISSING, {}, "", "/anyOf", o, e, t)) : void 0;
+          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = i), s ? (o = o.concat(this.errors.slice(a)), this.errors = this.errors.slice(0, a), this.createError(m.ANY_OF_MISSING, {}, "", "/anyOf", o, e, t)) : void 0;
         }, d.prototype.validateOneOf = function(e, t, r) {
           if (void 0 === t.oneOf)
             return null;
@@ -2414,18 +2756,18 @@ var define = $__System.amdDefine;
               a = [],
               s = this.errors.length;
           this.trackUnknownProperties && (n = this.unknownPropertyPaths, i = this.knownPropertyPaths);
-          for (var u = 0; u < t.oneOf.length; u++) {
+          for (var c = 0; c < t.oneOf.length; c++) {
             this.trackUnknownProperties && (this.unknownPropertyPaths = {}, this.knownPropertyPaths = {});
-            var c = t.oneOf[u],
+            var u = t.oneOf[c],
                 l = this.errors.length,
-                f = this.validateAll(e, c, [], ["oneOf", u], r);
+                f = this.validateAll(e, u, [], ["oneOf", c], r);
             if (null === f && l === this.errors.length) {
               if (null !== o)
-                return this.errors = this.errors.slice(0, s), this.createError(g.ONE_OF_MULTIPLE, {
+                return this.errors = this.errors.slice(0, s), this.createError(m.ONE_OF_MULTIPLE, {
                   index1: o,
-                  index2: u
+                  index2: c
                 }, "", "/oneOf", null, e, t);
-              if (o = u, this.trackUnknownProperties) {
+              if (o = c, this.trackUnknownProperties) {
                 for (var p in this.knownPropertyPaths)
                   i[p] = !0, delete n[p];
                 for (var h in this.unknownPropertyPaths)
@@ -2434,7 +2776,7 @@ var define = $__System.amdDefine;
             } else
               f && a.push(f);
           }
-          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = i), null === o ? (a = a.concat(this.errors.slice(s)), this.errors = this.errors.slice(0, s), this.createError(g.ONE_OF_MISSING, {}, "", "/oneOf", a, e, t)) : (this.errors = this.errors.slice(0, s), null);
+          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = i), null === o ? (a = a.concat(this.errors.slice(s)), this.errors = this.errors.slice(0, s), this.createError(m.ONE_OF_MISSING, {}, "", "/oneOf", a, e, t)) : (this.errors = this.errors.slice(0, s), null);
         }, d.prototype.validateNot = function(e, t, r) {
           if (void 0 === t.not)
             return null;
@@ -2444,7 +2786,7 @@ var define = $__System.amdDefine;
           this.trackUnknownProperties && (n = this.unknownPropertyPaths, i = this.knownPropertyPaths, this.unknownPropertyPaths = {}, this.knownPropertyPaths = {});
           var a = this.validateAll(e, t.not, null, null, r),
               s = this.errors.slice(o);
-          return this.errors = this.errors.slice(0, o), this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = i), null === a && 0 === s.length ? this.createError(g.NOT_PASSED, {}, "", "/not", null, e, t) : null;
+          return this.errors = this.errors.slice(0, o), this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = i), null === a && 0 === s.length ? this.createError(m.NOT_PASSED, {}, "", "/not", null, e, t) : null;
         }, d.prototype.validateHypermedia = function(e, t, n) {
           if (!t.links)
             return null;
@@ -2453,13 +2795,13 @@ var define = $__System.amdDefine;
             var a = t.links[o];
             if ("describedby" === a.rel) {
               for (var s = new r(a.href),
-                  u = !0,
-                  c = 0; c < s.varNames.length; c++)
-                if (!(s.varNames[c] in e)) {
-                  u = !1;
+                  c = !0,
+                  u = 0; u < s.varNames.length; u++)
+                if (!(s.varNames[u] in e)) {
+                  c = !1;
                   break;
                 }
-              if (u) {
+              if (c) {
                 var l = s.fillFromObject(e),
                     f = {$ref: l};
                 if (i = this.validateAll(e, f, [], ["links", o], n))
@@ -2468,7 +2810,7 @@ var define = $__System.amdDefine;
             }
           }
         };
-        var g = {
+        var m = {
           INVALID_TYPE: 0,
           ENUM_MISMATCH: 1,
           ANY_OF_MISSING: 10,
@@ -2498,10 +2840,10 @@ var define = $__System.amdDefine;
           CIRCULAR_REFERENCE: 600,
           UNKNOWN_PROPERTY: 1e3
         },
-            v = {};
-        for (var b in g)
-          v[g[b]] = b;
-        var _ = {
+            b = {};
+        for (var v in m)
+          b[m[v]] = v;
+        var g = {
           INVALID_TYPE: "Invalid type: {type} (expected {expected})",
           ENUM_MISMATCH: "No enum match for: {value}",
           ANY_OF_MISSING: 'Data does not match any schemas from "anyOf"',
@@ -2531,18 +2873,18 @@ var define = $__System.amdDefine;
           CIRCULAR_REFERENCE: "Circular $refs: {urls}",
           UNKNOWN_PROPERTY: "Unknown property (not in schema)"
         };
-        c.prototype = Object.create(Error.prototype), c.prototype.constructor = c, c.prototype.name = "ValidationError", c.prototype.prefixWith = function(e, t) {
+        u.prototype = Object.create(Error.prototype), u.prototype.constructor = u, u.prototype.name = "ValidationError", u.prototype.prefixWith = function(e, t) {
           if (null !== e && (e = e.replace(/~/g, "~0").replace(/\//g, "~1"), this.dataPath = "/" + e + this.dataPath), null !== t && (t = t.replace(/~/g, "~0").replace(/\//g, "~1"), this.schemaPath = "/" + t + this.schemaPath), null !== this.subErrors)
             for (var r = 0; r < this.subErrors.length; r++)
               this.subErrors[r].prefixWith(e, t);
           return this;
         };
-        var O = {},
-            $ = f();
-        return $.addLanguage("en-gb", _), $.tv4 = $, $;
+        var j = {},
+            O = f();
+        return O.addLanguage("en-gb", g), O.tv4 = O, O;
       });
     }, {}],
-    90: [function(e, t, r) {
+    107: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
@@ -2550,17 +2892,17 @@ var define = $__System.amdDefine;
           o = n(i);
       r["default"] = o["default"], t.exports = r["default"];
     }, {
-      "./runtime-catalogue/RuntimeCatalogue-Local": 100,
+      "./runtime-catalogue/RuntimeCatalogue-Local": 117,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    91: [function(e, t, r) {
+    108: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           i = e("babel-runtime/helpers/class-call-check")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
       var o = function() {
-        function e(t, r, n, o, a, s) {
-          i(this, e), this._guid = t, this._type = r, this._objectName = n, this._description = o, this._language = a, this._sourcePackageURL = s, this._signature = null, this._sourcePackage = null;
+        function e(t, r, n, o, a, s, c) {
+          i(this, e), this._guid = t, this._type = r, this._version = n, this._objectName = o, this._description = a, this._language = s, this._sourcePackageURL = c, this._signature = null, this._sourcePackage = null;
         }
         return n(e, [{
           key: "guid",
@@ -2577,6 +2919,14 @@ var define = $__System.amdDefine;
           },
           set: function(e) {
             e && (this._type = e);
+          }
+        }, {
+          key: "version",
+          get: function() {
+            return this._version;
+          },
+          set: function(e) {
+            e && (this._version = e);
           }
         }, {
           key: "objectName",
@@ -2650,7 +3000,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11
     }],
-    92: [function(e, t, r) {
+    109: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           i = e("babel-runtime/helpers/inherits")["default"],
@@ -2658,67 +3008,67 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/helpers/class-call-check")["default"],
           s = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
-      var u = e("../reTHINKObject/RethinkObject"),
-          c = s(u),
+      var c = e("../reTHINKObject/RethinkObject"),
+          u = s(c),
           l = e("./CatalogueDataObject"),
           f = s(l),
           p = e("./SourcePackage"),
           h = s(p),
           d = e("./HypertyDescriptor"),
           y = s(d),
-          m = e("./ProtocolStubDescriptor"),
-          g = s(m),
-          v = e("./HypertyRuntimeDescriptor"),
-          b = s(v),
-          _ = e("./PolicyEnforcerDescriptor"),
-          O = s(_),
-          $ = e("./DataObjectSchema"),
-          E = s($),
+          _ = e("./ProtocolStubDescriptor"),
+          m = s(_),
+          b = e("./HypertyRuntimeDescriptor"),
+          v = s(b),
+          g = e("./PolicyEnforcerDescriptor"),
+          j = s(g),
+          O = e("./DataObjectSchema"),
+          E = s(O),
           P = function(e) {
             function t(e, r) {
               a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r);
             }
             return i(t, e), o(t, [{
               key: "createCatalogueDataObject",
-              value: function(e, t, r, n, i, o) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o)
+              value: function(e, t, r, n, i, o, a) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a)
                   throw new Error("Invalid parameters!");
-                return new f["default"](e, t, r, n, i, o);
+                return new f["default"](e, t, r, n, i, o, a);
               }
             }, {
               key: "createHypertyDescriptorObject",
-              value: function(e, t, r, n, i, o, a) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a)
+              value: function(e, t, r, n, i, o, a, s) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a || "undefined" == typeof s)
                   throw new Error("Invalid parameters!");
-                return new y["default"](e, l.CatalogueObjectType.HYPERTY, t, r, n, i, o, a);
+                return new y["default"](e, l.CatalogueObjectType.HYPERTY, t, r, n, i, o, a, s);
               }
             }, {
               key: "createProtoStubDescriptorObject",
-              value: function(e, t, r, n, i, o, a, s) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a || "undefined" == typeof s)
+              value: function(e, t, r, n, i, o, a, s, c) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a || "undefined" == typeof s || "undefined" == typeof c)
                   throw new Error("Invalid parameters!");
-                return new g["default"](e, l.CatalogueObjectType.PROTOSTUB, t, r, n, i, o, a, s);
+                return new m["default"](e, l.CatalogueObjectType.PROTOSTUB, t, r, n, i, o, a, s, c);
               }
             }, {
               key: "createHypertyRuntimeDescriptorObject",
-              value: function(e, t, r, n, i, o, a, s) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a || "undefined" == typeof s)
+              value: function(e, t, r, n, i, o, a, s, c) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a || "undefined" == typeof s || "undefined" == typeof c)
                   throw new Error("Invalid parameters!");
-                return new b["default"](e, l.CatalogueObjectType.HYPERTY_RUNTIME, t, r, n, i, o, a, s);
+                return new v["default"](e, l.CatalogueObjectType.HYPERTY_RUNTIME, t, r, n, i, o, a, s, c);
               }
             }, {
               key: "createPolicyEnforcerDescriptorObject",
-              value: function(e, t, r, n, i, o, a) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a)
+              value: function(e, t, r, n, i, o, a, s) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o || "undefined" == typeof a || "undefined" == typeof s)
                   throw new Error("Invalid parameters!");
-                return new O["default"](e, l.CatalogueObjectType.POLICY_ENFORCER, t, r, n, i, o, a);
+                return new j["default"](e, l.CatalogueObjectType.POLICY_ENFORCER, t, r, n, i, o, a, s);
               }
             }, {
               key: "createDataObjectSchema",
-              value: function(e, t, r, n, i) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i)
+              value: function(e, t, r, n, i, o) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof i || "undefined" == typeof o)
                   throw new Error("Invalid parameters!");
-                return new E["default"](e, l.CatalogueObjectType.DATA_SCHEMA, t, r, n, i);
+                return new E["default"](e, l.CatalogueObjectType.DATA_SCHEMA, t, r, n, i, o);
               }
             }, {
               key: "createSourcePackage",
@@ -2728,24 +3078,24 @@ var define = $__System.amdDefine;
                 return new h["default"](e, t);
               }
             }]), t;
-          }(c["default"]);
+          }(u["default"]);
       r["default"] = P, t.exports = r["default"];
     }, {
-      "../reTHINKObject/RethinkObject": 99,
-      "./CatalogueDataObject": 91,
-      "./DataObjectSchema": 93,
-      "./HypertyDescriptor": 94,
-      "./HypertyRuntimeDescriptor": 95,
-      "./PolicyEnforcerDescriptor": 96,
-      "./ProtocolStubDescriptor": 97,
-      "./SourcePackage": 98,
+      "../reTHINKObject/RethinkObject": 116,
+      "./CatalogueDataObject": 108,
+      "./DataObjectSchema": 110,
+      "./HypertyDescriptor": 111,
+      "./HypertyRuntimeDescriptor": 112,
+      "./PolicyEnforcerDescriptor": 113,
+      "./ProtocolStubDescriptor": 114,
+      "./SourcePackage": 115,
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11,
       "babel-runtime/helpers/get": 13,
       "babel-runtime/helpers/inherits": 14,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    93: [function(e, t, r) {
+    110: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           i = e("babel-runtime/helpers/inherits")["default"],
@@ -2753,63 +3103,63 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
       var s = e("./CatalogueDataObject"),
-          u = a(s),
-          c = function(e) {
-            function t(e, r, i, a, s, u) {
-              o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, u);
+          c = a(s),
+          u = function(e) {
+            function t(e, r, i, a, s, c, u) {
+              o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, c, u);
             }
             return i(t, e), t;
-          }(u["default"]),
+          }(c["default"]),
           l = function(e) {
-            function t(e, r, i, a, s, u) {
-              o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, u);
+            function t(e, r, i, a, s, c, u) {
+              o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, c, u);
             }
             return i(t, e), t;
-          }(c);
+          }(u);
       r.MessageDataObjectSchema = l;
       var f = function(e) {
-        function t(e, r, i, a, s, u, c) {
-          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, u), this._accessControlPolicy = c;
+        function t(e, r, i, a, s, c, u, l) {
+          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, c, u), this._accessControlPolicy = l;
         }
         return i(t, e), t;
-      }(c);
+      }(u);
       r.HypertyDataObjectSchema = f;
       var p = function(e) {
-        function t(e, r, i, a, s, u, c) {
-          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, u, c);
+        function t(e, r, i, a, s, c, u, l) {
+          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, c, u, l);
         }
         return i(t, e), t;
       }(f);
       r.CommunicationDataObjectSchema = p;
       var h = function(e) {
-        function t(e, r, i, a, s, u, c) {
-          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, u, c);
+        function t(e, r, i, a, s, c, u, l) {
+          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, c, u, l);
         }
         return i(t, e), t;
       }(f);
       r.ConnectionDataObjectSchema = h;
       var d = function(e) {
-        function t(e, r, i, a, s, u, c) {
-          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, u, c);
+        function t(e, r, i, a, s, c, u, l) {
+          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, c, u, l);
         }
         return i(t, e), t;
       }(f);
       r.IdentifyDataObjectSchema = d;
       var y = function(e) {
-        function t(e, r, i, a, s, u, c) {
-          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, u, c);
+        function t(e, r, i, a, s, c, u, l) {
+          o(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, a, s, c, u, l);
         }
         return i(t, e), t;
       }(f);
-      r.ContextDataObjectSchema = y, r["default"] = c;
+      r.ContextDataObjectSchema = y, r["default"] = u;
     }, {
-      "./CatalogueDataObject": 91,
+      "./CatalogueDataObject": 108,
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/get": 13,
       "babel-runtime/helpers/inherits": 14,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    94: [function(e, t, r) {
+    111: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           i = e("babel-runtime/helpers/inherits")["default"],
@@ -2817,11 +3167,11 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/helpers/class-call-check")["default"],
           s = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
-      var u = e("./CatalogueDataObject"),
-          c = s(u),
+      var c = e("./CatalogueDataObject"),
+          u = s(c),
           l = function(e) {
-            function t(e, r, i, o, s, u, c, l) {
-              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, u), this._configuration = {}, this._constraints = {}, this._policies = {}, this._messageSchema = null, this._hypertyType = c, this._dataObjects = l;
+            function t(e, r, i, o, s, c, u, l, f) {
+              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, c, u), this._configuration = {}, this._constraints = {}, this._policies = {}, this._messageSchema = null, this._hypertyType = l, this._dataObjects = f;
             }
             return i(t, e), o(t, [{
               key: "hypertyType",
@@ -2872,7 +3222,7 @@ var define = $__System.amdDefine;
                 e && (this._policies = e);
               }
             }]), t;
-          }(c["default"]),
+          }(u["default"]),
           f = {};
       r.RuntimeHypertyCapabilityType = f;
       var p = {
@@ -2882,14 +3232,14 @@ var define = $__System.amdDefine;
       };
       r.HypertyType = p, r["default"] = l;
     }, {
-      "./CatalogueDataObject": 91,
+      "./CatalogueDataObject": 108,
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11,
       "babel-runtime/helpers/get": 13,
       "babel-runtime/helpers/inherits": 14,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    95: [function(e, t, r) {
+    112: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           i = e("babel-runtime/helpers/inherits")["default"],
@@ -2897,11 +3247,11 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/helpers/class-call-check")["default"],
           s = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
-      var u = e("./CatalogueDataObject"),
-          c = s(u),
+      var c = e("./CatalogueDataObject"),
+          u = s(c),
           l = function(e) {
-            function t(e, r, i, o, s, u, c, l, f) {
-              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, u), this._runtimeType = c, l ? this._hypertyCapabilities = l : this._hypertyCapabilities = {}, f ? this._protocolCapabilities = f : this._protocolCapabilities = {};
+            function t(e, r, i, o, s, c, u, l, f, p) {
+              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, c, u), this._runtimeType = l, f ? this._hypertyCapabilities = f : this._hypertyCapabilities = {}, p ? this._protocolCapabilities = p : this._protocolCapabilities = {};
             }
             return i(t, e), o(t, [{
               key: "runtimeType",
@@ -2928,7 +3278,7 @@ var define = $__System.amdDefine;
                 e && (this._protocolCapabilities = e);
               }
             }]), t;
-          }(c["default"]),
+          }(u["default"]),
           f = {
             BROWSER: "browser",
             STANDALONE: "standalone",
@@ -2954,14 +3304,14 @@ var define = $__System.amdDefine;
       };
       r.RuntimeProtocolCapabilityType = h, r["default"] = l;
     }, {
-      "./CatalogueDataObject": 91,
+      "./CatalogueDataObject": 108,
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11,
       "babel-runtime/helpers/get": 13,
       "babel-runtime/helpers/inherits": 14,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    96: [function(e, t, r) {
+    113: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           i = e("babel-runtime/helpers/inherits")["default"],
@@ -2969,11 +3319,11 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/helpers/class-call-check")["default"],
           s = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
-      var u = e("./CatalogueDataObject"),
-          c = s(u),
+      var c = e("./CatalogueDataObject"),
+          u = s(c),
           l = function(e) {
-            function t(e, r, i, o, s, u, c, l) {
-              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, u), this._configuration = c, this._policies = l;
+            function t(e, r, i, o, s, c, u, l, f) {
+              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, c, u), this._configuration = l, this._policies = f;
             }
             return i(t, e), o(t, [{
               key: "configuration",
@@ -2992,17 +3342,17 @@ var define = $__System.amdDefine;
                 this._policies = e;
               }
             }]), t;
-          }(c["default"]);
+          }(u["default"]);
       r["default"] = l, t.exports = r["default"];
     }, {
-      "./CatalogueDataObject": 91,
+      "./CatalogueDataObject": 108,
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11,
       "babel-runtime/helpers/get": 13,
       "babel-runtime/helpers/inherits": 14,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    97: [function(e, t, r) {
+    114: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           i = e("babel-runtime/helpers/inherits")["default"],
@@ -3010,12 +3360,12 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/helpers/class-call-check")["default"],
           s = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
-      var u = e("./CatalogueDataObject"),
-          c = s(u),
+      var c = e("./CatalogueDataObject"),
+          u = s(c),
           l = e("./HypertyRuntimeDescriptor"),
           f = (s(l), function(e) {
-            function t(e, r, i, o, s, u, c, l, f) {
-              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, u), this._messageSchemas = c, l ? this._configuration = l : this._configuration = {}, f ? this._constraints = f : this._constraints = {};
+            function t(e, r, i, o, s, c, u, l, f, p) {
+              a(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, i, o, s, c, u), this._messageSchemas = l, f ? this._configuration = f : this._configuration = {}, p ? this._constraints = p : this._constraints = {};
             }
             return i(t, e), o(t, [{
               key: "messageSchemas",
@@ -3042,18 +3392,18 @@ var define = $__System.amdDefine;
                 e && (this._configuration = e);
               }
             }]), t;
-          }(c["default"]));
+          }(u["default"]));
       r["default"] = f, t.exports = r["default"];
     }, {
-      "./CatalogueDataObject": 91,
-      "./HypertyRuntimeDescriptor": 95,
+      "./CatalogueDataObject": 108,
+      "./HypertyRuntimeDescriptor": 112,
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11,
       "babel-runtime/helpers/get": 13,
       "babel-runtime/helpers/inherits": 14,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    98: [function(e, t, r) {
+    115: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           i = e("babel-runtime/helpers/class-call-check")["default"];
@@ -3101,7 +3451,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11
     }],
-    99: [function(e, t, r) {
+    116: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           i = e("babel-runtime/helpers/class-call-check")["default"],
@@ -3109,7 +3459,7 @@ var define = $__System.amdDefine;
       Object.defineProperty(r, "__esModule", {value: !0});
       var a = e("tv4"),
           s = o(a),
-          u = function() {
+          c = function() {
             function e(t, r) {
               i(this, e);
               this.validation = t, this.schema = r;
@@ -3121,14 +3471,14 @@ var define = $__System.amdDefine;
               }
             }]), e;
           }();
-      r.RethinkObject = u, r["default"] = u;
+      r.RethinkObject = c, r["default"] = c;
     }, {
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11,
       "babel-runtime/helpers/interop-require-default": 15,
-      tv4: 89
+      tv4: 106
     }],
-    100: [function(e, t, r) {
+    117: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           i = e("babel-runtime/helpers/class-call-check")["default"],
@@ -3136,14 +3486,14 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
       var s = e("../utils/utils"),
-          u = e("../catalogue-factory/CatalogueDataObjectFactory"),
-          c = a(u),
+          c = e("../catalogue-factory/CatalogueDataObjectFactory"),
+          u = a(c),
           l = function() {
             function e(t) {
               if (i(this, e), !t)
                 throw Error("The catalogue needs the runtimeFactory");
               var r = this;
-              r._factory = new c["default"](!1, void 0), r.httpRequest = t.createHttpRequest();
+              r._factory = new u["default"](!1, void 0), r.httpRequest = t.createHttpRequest();
             }
             return n(e, [{
               key: "getHypertyRuntimeURL",
@@ -3159,14 +3509,14 @@ var define = $__System.amdDefine;
                   var i = (0, s.divideURL)(e),
                       o = i.type,
                       a = i.domain,
-                      u = i.identity;
-                  a || (a = e), u && (u = u.substring(u.lastIndexOf("/") + 1)), t.httpRequest.get(o + "://" + a + "/resources/descriptors/Hyperties.json").then(function(e) {
+                      c = i.identity;
+                  a || (a = e), c && (c = c.substring(c.lastIndexOf("/") + 1)), t.httpRequest.get(o + "://" + a + "/resources/descriptors/Hyperties.json").then(function(e) {
                     t.Hyperties = JSON.parse(e);
-                    var i = t.Hyperties[u];
+                    var i = t.Hyperties[c];
                     if (i.error)
                       n(i);
                     else {
-                      var o = t._factory.createHypertyDescriptorObject(i.cguid, i.objectName, i.description, i.language, i.sourcePackageURL, i.type || i.hypertyType, i.dataObjects);
+                      var o = t._factory.createHypertyDescriptorObject(i.cguid, i.version, i.objectName, i.description, i.language, i.sourcePackageURL, i.type || i.hypertyType, i.dataObjects);
                       o.configuration = i.configuration, o.constraints = i.constraints, o.messageSchema = i.messageSchema, o.policies = i.policies, o.signature = i.signature;
                       var a = i.sourcePackage;
                       a && (o.sourcePackage = t._createSourcePackage(t._factory, a)), console.log("hyperty has sourcePackage:", o), r(o);
@@ -3182,10 +3532,10 @@ var define = $__System.amdDefine;
                   var i = (0, s.divideURL)(e),
                       o = i.type,
                       a = i.domain,
-                      u = i.identity;
-                  u && (u = u.substring(u.lastIndexOf("/") + 1)), t.httpRequest.get(o + "://" + a + "/resources/descriptors/Runtimes.json").then(function(e) {
+                      c = i.identity;
+                  c && (c = c.substring(c.lastIndexOf("/") + 1)), t.httpRequest.get(o + "://" + a + "/resources/descriptors/Runtimes.json").then(function(e) {
                     t.Runtimes = JSON.parse(e);
-                    var i = t.Runtimes[u];
+                    var i = t.Runtimes[c];
                     if (i.ERROR)
                       n(i);
                     else {
@@ -3193,7 +3543,7 @@ var define = $__System.amdDefine;
                         i.hypertyCapabilities = JSON.parse(i.hypertyCapabilities), i.protocolCapabilities = JSON.parse(i.protocolCapabilities);
                       } catch (o) {}
                       console.log("creating runtime descriptor based on: ", i);
-                      var a = t._factory.createHypertyRuntimeDescriptorObject(i.cguid, i.objectName, i.description, i.language, i.sourcePackageURL, i.type || i.runtimeType, i.hypertyCapabilities, i.protocolCapabilities);
+                      var a = t._factory.createHypertyRuntimeDescriptorObject(i.cguid, i.version, i.objectName, i.description, i.language, i.sourcePackageURL, i.type || i.runtimeType, i.hypertyCapabilities, i.protocolCapabilities);
                       console.log("created runtime descriptor object:", a);
                       var s = i.sourcePackage;
                       s && (a.sourcePackage = t._createSourcePackage(t._factory, s)), r(a);
@@ -3209,17 +3559,18 @@ var define = $__System.amdDefine;
                   var i = (0, s.divideURL)(e),
                       o = i.type,
                       a = i.domain,
-                      u = i.identity;
-                  u && (u = u.substring(u.lastIndexOf("/") + 1)), t.httpRequest.get(o + "://" + a + "/resources/descriptors/IDPProxys.json").then(function(e) {
+                      c = i.identity;
+                  c && (c = c.substring(c.lastIndexOf("/") + 1)), t.httpRequest.get(o + "://" + a + "/resources/descriptors/IDPProxys.json").then(function(e) {
                     t.IDPProxys = JSON.parse(e);
-                    var r = t.IDPProxys[u];
-                    if (!r.ERROR) {
-                      var i = t._factory.createProtoStubDescriptorObject(r.cguid, r.objectName, r.description, r.language, r.sourcePackageURL, r.messageSchemas, r.configuration, r.constraints);
-                      i.signature = r.signature;
-                      var o = r.sourcePackage;
-                      return o && (o = t._createSourcePackage(t, o), i.sourcePackage = o), i;
+                    var i = t.IDPProxys[c];
+                    if (i.ERROR)
+                      n(i);
+                    else {
+                      var o = t._factory.createProtoStubDescriptorObject(i.cguid, i.version, i.objectName, i.description, i.language, i.sourcePackageURL, i.messageSchemas, JSON.stringify(i.configuration), i.constraints);
+                      o.signature = i.signature;
+                      var a = i.sourcePackage;
+                      a && (a = t._createSourcePackage(t._factory, a), o.sourcePackage = a), r(o);
                     }
-                    n(r);
                   });
                 });
               }
@@ -3231,19 +3582,43 @@ var define = $__System.amdDefine;
                   var i = (0, s.divideURL)(e),
                       o = i.type,
                       a = i.domain,
-                      u = i.identity;
-                  a || (a = e), u = u ? u.substring(u.lastIndexOf("/") + 1) : "default", t.httpRequest.get(o + "://" + a + "/resources/descriptors/ProtoStubs.json").then(function(e) {
-                    t.ProtoStubs = JSON.parse(e);
-                    var i = t.ProtoStubs[u];
-                    if (i.error)
-                      n(i);
-                    else {
-                      console.log("creating stub descriptor based on: ", i);
-                      var o = t._factory.createProtoStubDescriptorObject(i.cguid, i.objectName, i.description, i.language, i.sourcePackageURL, i.messageSchemas, JSON.stringify(i.configuration), i.constraints),
-                          a = i.sourcePackage;
-                      a && (a = t._createSourcePackage(t._factory, a), o.sourcePackage = a), r(o);
-                    }
+                      c = i.identity,
+                      u = (0, s.divideURL)(t.runtimeURL),
+                      l = u.domain;
+                  a || (a = e), c = a !== l && c ? c.substring(c.lastIndexOf("/") + 1) : "default", t.httpRequest.get(o + "://" + a + "/resources/descriptors/ProtoStubs.json").then(function(e) {
+                    return e;
+                  })["catch"](function(e) {
+                    return c = a, a = l, console.log("Get an specific protostub for domain", a, " specific for: ", c), t.httpRequest.get(o + "://" + a + "/resources/descriptors/ProtoStubs.json");
+                  }).then(function(e) {
+                    t.processStubDescriptor(e, c).then(function(e) {
+                      r(e);
+                    })["catch"](function(e) {
+                      n(e);
+                    });
+                  })["catch"](function(e) {
+                    n(e);
                   });
+                });
+              }
+            }, {
+              key: "processStubDescriptor",
+              value: function(e, t) {
+                var r = this;
+                return new o(function(n, i) {
+                  try {
+                    r.ProtoStubs = JSON.parse(e);
+                  } catch (o) {
+                    console.log("Already parsed");
+                  }
+                  var a = r.ProtoStubs[t];
+                  if (a.error)
+                    i(a);
+                  else {
+                    console.log("creating stub descriptor based on: ", a);
+                    var s = r._factory.createProtoStubDescriptorObject(a.cguid, a.version, a.objectName, a.description, a.language, a.sourcePackageURL, a.messageSchemas, JSON.stringify(a.configuration), a.constraints),
+                        c = a.sourcePackage;
+                    c && (c = r._createSourcePackage(r._factory, c), s.sourcePackage = c), n(s);
+                  }
                 });
               }
             }, {
@@ -3254,15 +3629,15 @@ var define = $__System.amdDefine;
                   var i = (0, s.divideURL)(e),
                       o = i.type,
                       a = i.domain,
-                      u = i.identity;
-                  u && (u = u.substring(u.lastIndexOf("/") + 1)), console.log("getDataSchemaDescriptor: ", e, i), t.httpRequest.get(o + "://" + a + "/resources/descriptors/DataSchemas.json").then(function(e) {
+                      c = i.identity;
+                  c && (c = c.substring(c.lastIndexOf("/") + 1)), console.log("getDataSchemaDescriptor: ", e, i), t.httpRequest.get(o + "://" + a + "/resources/descriptors/DataSchemas.json").then(function(e) {
                     t.DataSchemas = JSON.parse(e);
-                    var i = t.DataSchemas[u];
+                    var i = t.DataSchemas[c];
                     if (i.ERROR)
                       n(i);
                     else {
                       console.log("creating dataSchema based on: ", i);
-                      var o = t._factory.createDataObjectSchema(i.cguid, i.objectName, i.description, i.language, i.sourcePackageURL);
+                      var o = t._factory.createDataObjectSchema(i.cguid, i.version, i.objectName, i.description, i.language, i.sourcePackageURL);
                       o.signature = i.signature, console.log("created dataSchema descriptor object:", o);
                       var a = i.sourcePackage;
                       a && (o.sourcePackage = t._createSourcePackage(t._factory, a), "string" == typeof o.sourcePackage.sourceCode && (o.sourcePackage.sourceCode = JSON.parse(o.sourcePackage.sourceCode))), r(o);
@@ -3314,14 +3689,14 @@ var define = $__System.amdDefine;
           }();
       r["default"] = l, t.exports = r["default"];
     }, {
-      "../catalogue-factory/CatalogueDataObjectFactory": 92,
-      "../utils/utils": 101,
+      "../catalogue-factory/CatalogueDataObjectFactory": 109,
+      "../utils/utils": 118,
       "babel-runtime/core-js/promise": 6,
       "babel-runtime/helpers/class-call-check": 9,
       "babel-runtime/helpers/create-class": 11,
       "babel-runtime/helpers/interop-require-default": 15
     }],
-    101: [function(e, t, r) {
+    118: [function(e, t, r) {
       "use strict";
       function n(e) {
         var t = /([a-zA-Z-]*):\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi,
@@ -3340,7 +3715,7 @@ var define = $__System.amdDefine;
       }
       Object.defineProperty(r, "__esModule", {value: !0}), r.divideURL = n, r.deepClone = i;
     }, {}]
-  }, {}, [90])(90);
+  }, {}, [107])(107);
 });
 
 })();
@@ -3480,6 +3855,35 @@ $__System.register('10', ['11', 'e', 'f'], function (_export) {
               _this._bus.postMessage(msg, function (reply) {
                 if (reply.body.code === 200) {
                   resolve(reply.body.value.allocated);
+                } else {
+                  reject(reply.body.desc);
+                }
+              });
+            });
+          }
+
+          /**
+          * Send a request to the domain message node, to deallocate one or more addresses
+          * @param  {Domain} domain - Domain of the message node.
+          * @param  {addresses} addresses to request the deallocation
+          * @returns {Promise}  the response by the message node
+          */
+        }, {
+          key: 'delete',
+          value: function _delete(domain, addresses) {
+            var _this = this;
+
+            var message = {
+              type: 'delete', from: _this._url, to: 'domain://msg-node.' + domain + '/hyperty-address-allocation',
+              body: { childrenResources: addresses }
+            };
+
+            return new _Promise(function (resolve, reject) {
+
+              _this._bus.postMessage(message, function (reply) {
+                console.log('reply', reply);
+                if (reply.body.code === 200) {
+                  resolve(reply.body.code);
                 } else {
                   reject(reply.body.desc);
                 }
@@ -3739,7 +4143,7 @@ var define = $__System.amdDefine;
         return e && e.__esModule ? e : {"default": e};
       }
       r.__esModule = !0;
-      var o = e("../core-js/object/define-property"),
+      var o = e("babel-runtime/core-js/object/define-property"),
           i = n(o);
       r["default"] = function() {
         function e(e, t) {
@@ -3752,16 +4156,16 @@ var define = $__System.amdDefine;
           return r && e(t.prototype, r), n && e(t, n), t;
         };
       }();
-    }, {"../core-js/object/define-property": 2}],
+    }, {"babel-runtime/core-js/object/define-property": 2}],
     15: [function(e, t, r) {
       "use strict";
       function n(e) {
         return e && e.__esModule ? e : {"default": e};
       }
       r.__esModule = !0;
-      var o = e("../core-js/object/get-prototype-of"),
+      var o = e("babel-runtime/core-js/object/get-prototype-of"),
           i = n(o),
-          s = e("../core-js/object/get-own-property-descriptor"),
+          s = e("babel-runtime/core-js/object/get-own-property-descriptor"),
           a = n(s);
       r["default"] = function u(e, t, r) {
         null === e && (e = Function.prototype);
@@ -3777,8 +4181,8 @@ var define = $__System.amdDefine;
           return s.call(r);
       };
     }, {
-      "../core-js/object/get-own-property-descriptor": 4,
-      "../core-js/object/get-prototype-of": 5
+      "babel-runtime/core-js/object/get-own-property-descriptor": 4,
+      "babel-runtime/core-js/object/get-prototype-of": 5
     }],
     16: [function(e, t, r) {
       "use strict";
@@ -3786,11 +4190,11 @@ var define = $__System.amdDefine;
         return e && e.__esModule ? e : {"default": e};
       }
       r.__esModule = !0;
-      var o = e("../core-js/object/set-prototype-of"),
+      var o = e("babel-runtime/core-js/object/set-prototype-of"),
           i = n(o),
-          s = e("../core-js/object/create"),
+          s = e("babel-runtime/core-js/object/create"),
           a = n(s),
-          u = e("../helpers/typeof"),
+          u = e("babel-runtime/helpers/typeof"),
           c = n(u);
       r["default"] = function(e, t) {
         if ("function" != typeof t && null !== t)
@@ -3803,9 +4207,9 @@ var define = $__System.amdDefine;
           }}), t && (i["default"] ? (0, i["default"])(e, t) : e.__proto__ = t);
       };
     }, {
-      "../core-js/object/create": 1,
-      "../core-js/object/set-prototype-of": 7,
-      "../helpers/typeof": 19
+      "babel-runtime/core-js/object/create": 1,
+      "babel-runtime/core-js/object/set-prototype-of": 7,
+      "babel-runtime/helpers/typeof": 19
     }],
     17: [function(e, t, r) {
       t.exports = e("./interopRequireDefault.js");
@@ -3821,24 +4225,24 @@ var define = $__System.amdDefine;
       function n(e) {
         return e && e.__esModule ? e : {"default": e};
       }
-      var o = "function" == typeof _Symbol && "symbol" == typeof _Symbol$iterator ? function(e) {
-        return typeof e;
-      } : function(e) {
-        return e && "function" == typeof _Symbol && e.constructor === _Symbol ? "symbol" : typeof e;
-      };
       r.__esModule = !0;
-      var i = e("../core-js/symbol/iterator"),
-          s = n(i),
-          a = e("../core-js/symbol"),
-          u = n(a);
-      r["default"] = "function" == typeof u["default"] && "symbol" === o(s["default"]) ? function(e) {
-        return "undefined" == typeof e ? "undefined" : o(e);
+      var o = e("babel-runtime/core-js/symbol/iterator"),
+          i = n(o),
+          s = e("babel-runtime/core-js/symbol"),
+          a = n(s),
+          u = "function" == typeof a["default"] && "symbol" == typeof i["default"] ? function(e) {
+            return typeof e;
+          } : function(e) {
+            return e && "function" == typeof a["default"] && e.constructor === a["default"] ? "symbol" : typeof e;
+          };
+      r["default"] = "function" == typeof a["default"] && "symbol" === u(i["default"]) ? function(e) {
+        return "undefined" == typeof e ? "undefined" : u(e);
       } : function(e) {
-        return e && "function" == typeof u["default"] && e.constructor === u["default"] ? "symbol" : "undefined" == typeof e ? "undefined" : o(e);
+        return e && "function" == typeof a["default"] && e.constructor === a["default"] ? "symbol" : "undefined" == typeof e ? "undefined" : u(e);
       };
     }, {
-      "../core-js/symbol": 9,
-      "../core-js/symbol/iterator": 10
+      "babel-runtime/core-js/symbol": 9,
+      "babel-runtime/core-js/symbol/iterator": 10
     }],
     20: [function(e, t, r) {
       (function(r) {
@@ -3865,23 +4269,23 @@ var define = $__System.amdDefine;
         function o(e) {
           return e && e.__esModule ? e : {"default": e};
         }
-        var i = e("../core-js/promise"),
+        var i = e("babel-runtime/core-js/promise"),
             s = o(i),
-            a = e("../core-js/object/set-prototype-of"),
+            a = e("babel-runtime/core-js/object/set-prototype-of"),
             u = o(a),
-            c = e("../core-js/object/create"),
+            c = e("babel-runtime/core-js/object/create"),
             l = o(c),
-            f = e("../helpers/typeof"),
+            f = e("babel-runtime/helpers/typeof"),
             p = o(f),
-            h = e("../core-js/symbol/iterator"),
-            d = o(h),
-            y = e("../core-js/symbol"),
-            b = o(y);
+            d = e("babel-runtime/core-js/symbol/iterator"),
+            h = o(d),
+            b = e("babel-runtime/core-js/symbol"),
+            y = o(b);
         !function(e) {
           function n(e, t, r, n) {
             var o = (0, l["default"])((t || i).prototype),
-                s = new _(n || []);
-            return o._invoke = v(e, r, s), o;
+                s = new g(n || []);
+            return o._invoke = _(e, r, s), o;
           }
           function o(e, t, r) {
             try {
@@ -3906,14 +4310,14 @@ var define = $__System.amdDefine;
               };
             });
           }
-          function h(e) {
+          function d(e) {
             this.arg = e;
           }
-          function y(e) {
+          function b(e) {
             function t(t, r) {
               var n = e[t](r),
                   o = n.value;
-              return o instanceof h ? s["default"].resolve(o.arg).then(i, a) : s["default"].resolve(o).then(function(e) {
+              return o instanceof d ? s["default"].resolve(o.arg).then(i, a) : s["default"].resolve(o).then(function(e) {
                 return n.value = e, n;
               });
             }
@@ -3932,15 +4336,15 @@ var define = $__System.amdDefine;
             t.bind(e, "return");
             this._invoke = n;
           }
-          function v(e, t, r) {
-            var n = R;
+          function _(e, t, r) {
+            var n = S;
             return function(i, s) {
-              if (n === M)
+              if (n === x)
                 throw new Error("Generator is already running");
               if (n === T) {
                 if ("throw" === i)
                   throw s;
-                return j();
+                return O();
               }
               for (; ; ) {
                 var a = r.delegate;
@@ -3966,26 +4370,26 @@ var define = $__System.amdDefine;
                   i = "next", s = E;
                   var l = c.arg;
                   if (!l.done)
-                    return n = S, l;
+                    return n = M, l;
                   r[a.resultName] = l.value, r.next = a.nextLoc, r.delegate = null;
                 }
                 if ("next" === i)
-                  r._sent = s, n === S ? r.sent = s : r.sent = E;
+                  r._sent = s, n === M ? r.sent = s : r.sent = E;
                 else if ("throw" === i) {
-                  if (n === R)
+                  if (n === S)
                     throw n = T, s;
                   r.dispatchException(s) && (i = "next", s = E);
                 } else
                   "return" === i && r.abrupt("return", s);
-                n = M;
+                n = x;
                 var c = o(e, t, r);
                 if ("normal" === c.type) {
-                  n = r.done ? T : S;
+                  n = r.done ? T : M;
                   var l = {
                     value: c.arg,
                     done: r.done
                   };
-                  if (c.arg !== x)
+                  if (c.arg !== A)
                     return l;
                   r.delegate && "next" === i && (s = E);
                 } else
@@ -3993,18 +4397,18 @@ var define = $__System.amdDefine;
               }
             };
           }
-          function m(e) {
+          function v(e) {
             var t = {tryLoc: e[0]};
             1 in e && (t.catchLoc = e[1]), 2 in e && (t.finallyLoc = e[2], t.afterLoc = e[3]), this.tryEntries.push(t);
           }
-          function g(e) {
+          function m(e) {
             var t = e.completion || {};
             t.type = "normal", delete t.arg, e.completion = t;
           }
-          function _(e) {
-            this.tryEntries = [{tryLoc: "root"}], e.forEach(m, this), this.reset(!0);
+          function g(e) {
+            this.tryEntries = [{tryLoc: "root"}], e.forEach(v, this), this.reset(!0);
           }
-          function O(e) {
+          function j(e) {
             if (e) {
               var t = e[k];
               if (t)
@@ -4022,9 +4426,9 @@ var define = $__System.amdDefine;
                 return n.next = n;
               }
             }
-            return {next: j};
+            return {next: O};
           }
-          function j() {
+          function O() {
             return {
               value: E,
               done: !0
@@ -4032,35 +4436,35 @@ var define = $__System.amdDefine;
           }
           var E,
               w = Object.prototype.hasOwnProperty,
-              k = "function" == typeof b["default"] && d["default"] || "@@iterator",
-              $ = "object" === ("undefined" == typeof t ? "undefined" : (0, p["default"])(t)),
-              P = e.regeneratorRuntime;
-          if (P)
-            return void($ && (t.exports = P));
-          P = e.regeneratorRuntime = $ ? t.exports : {}, P.wrap = n;
-          var R = "suspendedStart",
-              S = "suspendedYield",
-              M = "executing",
+              k = "function" == typeof y["default"] && h["default"] || "@@iterator",
+              P = "object" === ("undefined" == typeof t ? "undefined" : (0, p["default"])(t)),
+              R = e.regeneratorRuntime;
+          if (R)
+            return void(P && (t.exports = R));
+          R = e.regeneratorRuntime = P ? t.exports : {}, R.wrap = n;
+          var S = "suspendedStart",
+              M = "suspendedYield",
+              x = "executing",
               T = "completed",
-              x = {},
-              A = c.prototype = i.prototype;
-          a.prototype = A.constructor = c, c.constructor = a, a.displayName = "GeneratorFunction", P.isGeneratorFunction = function(e) {
+              A = {},
+              N = c.prototype = i.prototype;
+          a.prototype = N.constructor = c, c.constructor = a, a.displayName = "GeneratorFunction", R.isGeneratorFunction = function(e) {
             var t = "function" == typeof e && e.constructor;
             return t ? t === a || "GeneratorFunction" === (t.displayName || t.name) : !1;
-          }, P.mark = function(e) {
-            return u["default"] ? (0, u["default"])(e, c) : e.__proto__ = c, e.prototype = (0, l["default"])(A), e;
-          }, P.awrap = function(e) {
-            return new h(e);
-          }, f(y.prototype), P.async = function(e, t, r, o) {
-            var i = new y(n(e, t, r, o));
-            return P.isGeneratorFunction(t) ? i : i.next().then(function(e) {
+          }, R.mark = function(e) {
+            return u["default"] ? (0, u["default"])(e, c) : e.__proto__ = c, e.prototype = (0, l["default"])(N), e;
+          }, R.awrap = function(e) {
+            return new d(e);
+          }, f(b.prototype), R.async = function(e, t, r, o) {
+            var i = new b(n(e, t, r, o));
+            return R.isGeneratorFunction(t) ? i : i.next().then(function(e) {
               return e.done ? e.value : i.next();
             });
-          }, f(A), A[k] = function() {
+          }, f(N), N[k] = function() {
             return this;
-          }, A.toString = function() {
+          }, N.toString = function() {
             return "[object Generator]";
-          }, P.keys = function(e) {
+          }, R.keys = function(e) {
             var t = [];
             for (var r in e)
               t.push(r);
@@ -4072,10 +4476,10 @@ var define = $__System.amdDefine;
               }
               return n.done = !0, n;
             };
-          }, P.values = O, _.prototype = {
-            constructor: _,
+          }, R.values = j, g.prototype = {
+            constructor: g,
             reset: function(e) {
-              if (this.prev = 0, this.next = 0, this.sent = E, this.done = !1, this.delegate = null, this.tryEntries.forEach(g), !e)
+              if (this.prev = 0, this.next = 0, this.sent = E, this.done = !1, this.delegate = null, this.tryEntries.forEach(m), !e)
                 for (var t in this)
                   "t" === t.charAt(0) && w.call(this, t) && !isNaN(+t.slice(1)) && (this[t] = E);
             },
@@ -4129,7 +4533,7 @@ var define = $__System.amdDefine;
               }
               o && ("break" === e || "continue" === e) && o.tryLoc <= t && t <= o.finallyLoc && (o = null);
               var i = o ? o.completion : {};
-              return i.type = e, i.arg = t, o ? this.next = o.finallyLoc : this.complete(i), x;
+              return i.type = e, i.arg = t, o ? this.next = o.finallyLoc : this.complete(i), A;
             },
             complete: function(e, t) {
               if ("throw" === e.type)
@@ -4140,7 +4544,7 @@ var define = $__System.amdDefine;
               for (var t = this.tryEntries.length - 1; t >= 0; --t) {
                 var r = this.tryEntries[t];
                 if (r.finallyLoc === e)
-                  return this.complete(r.completion, r.afterLoc), g(r), x;
+                  return this.complete(r.completion, r.afterLoc), m(r), A;
               }
             },
             "catch": function(e) {
@@ -4150,7 +4554,7 @@ var define = $__System.amdDefine;
                   var n = r.completion;
                   if ("throw" === n.type) {
                     var o = n.arg;
-                    g(r);
+                    m(r);
                   }
                   return o;
                 }
@@ -4159,90 +4563,99 @@ var define = $__System.amdDefine;
             },
             delegateYield: function(e, t, r) {
               return this.delegate = {
-                iterator: O(e),
+                iterator: j(e),
                 resultName: t,
                 nextLoc: r
-              }, x;
+              }, A;
             }
           };
         }("object" === ("undefined" == typeof n ? "undefined" : (0, p["default"])(n)) ? n : "object" === ("undefined" == typeof window ? "undefined" : (0, p["default"])(window)) ? window : "object" === ("undefined" == typeof self ? "undefined" : (0, p["default"])(self)) ? self : void 0);
       }).call(this, e("_process"), "undefined" != typeof global ? global : "undefined" != typeof self ? self : "undefined" != typeof window ? window : {});
     }, {
-      "../core-js/object/create": 1,
-      "../core-js/object/set-prototype-of": 7,
-      "../core-js/promise": 8,
-      "../core-js/symbol": 9,
-      "../core-js/symbol/iterator": 10,
-      "../helpers/typeof": 19,
-      _process: 97
+      _process: 114,
+      "babel-runtime/core-js/object/create": 1,
+      "babel-runtime/core-js/object/set-prototype-of": 7,
+      "babel-runtime/core-js/promise": 8,
+      "babel-runtime/core-js/symbol": 9,
+      "babel-runtime/core-js/symbol/iterator": 10,
+      "babel-runtime/helpers/typeof": 19
     }],
     22: [function(e, t, r) {
-      var n = e("../../modules/$");
+      e("../../modules/es6.object.create");
+      var n = e("../../modules/_core").Object;
       t.exports = function(e, t) {
         return n.create(e, t);
       };
-    }, {"../../modules/$": 62}],
-    23: [function(e, t, r) {
-      var n = e("../../modules/$");
-      t.exports = function(e, t, r) {
-        return n.setDesc(e, t, r);
-      };
-    }, {"../../modules/$": 62}],
-    24: [function(e, t, r) {
-      e("../../modules/es6.object.freeze"), t.exports = e("../../modules/$.core").Object.freeze;
     }, {
-      "../../modules/$.core": 37,
-      "../../modules/es6.object.freeze": 87
+      "../../modules/_core": 39,
+      "../../modules/es6.object.create": 102
+    }],
+    23: [function(e, t, r) {
+      e("../../modules/es6.object.define-property");
+      var n = e("../../modules/_core").Object;
+      t.exports = function(e, t, r) {
+        return n.defineProperty(e, t, r);
+      };
+    }, {
+      "../../modules/_core": 39,
+      "../../modules/es6.object.define-property": 103
+    }],
+    24: [function(e, t, r) {
+      e("../../modules/es6.object.freeze"), t.exports = e("../../modules/_core").Object.freeze;
+    }, {
+      "../../modules/_core": 39,
+      "../../modules/es6.object.freeze": 104
     }],
     25: [function(e, t, r) {
-      var n = e("../../modules/$");
-      e("../../modules/es6.object.get-own-property-descriptor"), t.exports = function(e, t) {
-        return n.getDesc(e, t);
+      e("../../modules/es6.object.get-own-property-descriptor");
+      var n = e("../../modules/_core").Object;
+      t.exports = function(e, t) {
+        return n.getOwnPropertyDescriptor(e, t);
       };
     }, {
-      "../../modules/$": 62,
-      "../../modules/es6.object.get-own-property-descriptor": 88
+      "../../modules/_core": 39,
+      "../../modules/es6.object.get-own-property-descriptor": 105
     }],
     26: [function(e, t, r) {
-      e("../../modules/es6.object.get-prototype-of"), t.exports = e("../../modules/$.core").Object.getPrototypeOf;
+      e("../../modules/es6.object.get-prototype-of"), t.exports = e("../../modules/_core").Object.getPrototypeOf;
     }, {
-      "../../modules/$.core": 37,
-      "../../modules/es6.object.get-prototype-of": 89
+      "../../modules/_core": 39,
+      "../../modules/es6.object.get-prototype-of": 106
     }],
     27: [function(e, t, r) {
-      e("../../modules/es6.object.keys"), t.exports = e("../../modules/$.core").Object.keys;
+      e("../../modules/es6.object.keys"), t.exports = e("../../modules/_core").Object.keys;
     }, {
-      "../../modules/$.core": 37,
-      "../../modules/es6.object.keys": 90
+      "../../modules/_core": 39,
+      "../../modules/es6.object.keys": 107
     }],
     28: [function(e, t, r) {
-      e("../../modules/es6.object.set-prototype-of"), t.exports = e("../../modules/$.core").Object.setPrototypeOf;
+      e("../../modules/es6.object.set-prototype-of"), t.exports = e("../../modules/_core").Object.setPrototypeOf;
     }, {
-      "../../modules/$.core": 37,
-      "../../modules/es6.object.set-prototype-of": 91
+      "../../modules/_core": 39,
+      "../../modules/es6.object.set-prototype-of": 108
     }],
     29: [function(e, t, r) {
-      e("../modules/es6.object.to-string"), e("../modules/es6.string.iterator"), e("../modules/web.dom.iterable"), e("../modules/es6.promise"), t.exports = e("../modules/$.core").Promise;
+      e("../modules/es6.object.to-string"), e("../modules/es6.string.iterator"), e("../modules/web.dom.iterable"), e("../modules/es6.promise"), t.exports = e("../modules/_core").Promise;
     }, {
-      "../modules/$.core": 37,
-      "../modules/es6.object.to-string": 92,
-      "../modules/es6.promise": 93,
-      "../modules/es6.string.iterator": 94,
-      "../modules/web.dom.iterable": 96
+      "../modules/_core": 39,
+      "../modules/es6.object.to-string": 109,
+      "../modules/es6.promise": 110,
+      "../modules/es6.string.iterator": 111,
+      "../modules/web.dom.iterable": 113
     }],
     30: [function(e, t, r) {
-      e("../../modules/es6.symbol"), e("../../modules/es6.object.to-string"), t.exports = e("../../modules/$.core").Symbol;
+      e("../../modules/es6.symbol"), e("../../modules/es6.object.to-string"), t.exports = e("../../modules/_core").Symbol;
     }, {
-      "../../modules/$.core": 37,
-      "../../modules/es6.object.to-string": 92,
-      "../../modules/es6.symbol": 95
+      "../../modules/_core": 39,
+      "../../modules/es6.object.to-string": 109,
+      "../../modules/es6.symbol": 112
     }],
     31: [function(e, t, r) {
-      e("../../modules/es6.string.iterator"), e("../../modules/web.dom.iterable"), t.exports = e("../../modules/$.wks")("iterator");
+      e("../../modules/es6.string.iterator"), e("../../modules/web.dom.iterable"), t.exports = e("../../modules/_wks")("iterator");
     }, {
-      "../../modules/$.wks": 84,
-      "../../modules/es6.string.iterator": 94,
-      "../../modules/web.dom.iterable": 96
+      "../../modules/_wks": 99,
+      "../../modules/es6.string.iterator": 111,
+      "../../modules/web.dom.iterable": 113
     }],
     32: [function(e, t, r) {
       t.exports = function(e) {
@@ -4255,41 +4668,79 @@ var define = $__System.amdDefine;
       t.exports = function() {};
     }, {}],
     34: [function(e, t, r) {
-      var n = e("./$.is-object");
+      t.exports = function(e, t, r, n) {
+        if (!(e instanceof t) || void 0 !== n && n in e)
+          throw TypeError(r + ": incorrect invocation!");
+        return e;
+      };
+    }, {}],
+    35: [function(e, t, r) {
+      var n = e("./_is-object");
       t.exports = function(e) {
         if (!n(e))
           throw TypeError(e + " is not an object!");
         return e;
       };
-    }, {"./$.is-object": 55}],
-    35: [function(e, t, r) {
-      var n = e("./$.cof"),
-          o = e("./$.wks")("toStringTag"),
+    }, {"./_is-object": 58}],
+    36: [function(e, t, r) {
+      var n = e("./_to-iobject"),
+          o = e("./_to-length"),
+          i = e("./_to-index");
+      t.exports = function(e) {
+        return function(t, r, s) {
+          var a,
+              u = n(t),
+              c = o(u.length),
+              l = i(s, c);
+          if (e && r != r) {
+            for (; c > l; )
+              if (a = u[l++], a != a)
+                return !0;
+          } else
+            for (; c > l; l++)
+              if ((e || l in u) && u[l] === r)
+                return e || l;
+          return !e && -1;
+        };
+      };
+    }, {
+      "./_to-index": 92,
+      "./_to-iobject": 94,
+      "./_to-length": 95
+    }],
+    37: [function(e, t, r) {
+      var n = e("./_cof"),
+          o = e("./_wks")("toStringTag"),
           i = "Arguments" == n(function() {
             return arguments;
-          }());
+          }()),
+          s = function(e, t) {
+            try {
+              return e[t];
+            } catch (r) {}
+          };
       t.exports = function(e) {
         var t,
             r,
-            s;
-        return void 0 === e ? "Undefined" : null === e ? "Null" : "string" == typeof(r = (t = Object(e))[o]) ? r : i ? n(t) : "Object" == (s = n(t)) && "function" == typeof t.callee ? "Arguments" : s;
+            a;
+        return void 0 === e ? "Undefined" : null === e ? "Null" : "string" == typeof(r = s(t = Object(e), o)) ? r : i ? n(t) : "Object" == (a = n(t)) && "function" == typeof t.callee ? "Arguments" : a;
       };
     }, {
-      "./$.cof": 36,
-      "./$.wks": 84
+      "./_cof": 38,
+      "./_wks": 99
     }],
-    36: [function(e, t, r) {
+    38: [function(e, t, r) {
       var n = {}.toString;
       t.exports = function(e) {
         return n.call(e).slice(8, -1);
       };
     }, {}],
-    37: [function(e, t, r) {
-      var n = t.exports = {version: "1.2.6"};
+    39: [function(e, t, r) {
+      var n = t.exports = {version: "2.2.1"};
       "number" == typeof __e && (__e = n);
     }, {}],
-    38: [function(e, t, r) {
-      var n = e("./$.a-function");
+    40: [function(e, t, r) {
+      var n = e("./_a-function");
       t.exports = function(e, t, r) {
         if (n(e), void 0 === t)
           return e;
@@ -4311,79 +4762,102 @@ var define = $__System.amdDefine;
           return e.apply(t, arguments);
         };
       };
-    }, {"./$.a-function": 32}],
-    39: [function(e, t, r) {
+    }, {"./_a-function": 32}],
+    41: [function(e, t, r) {
       t.exports = function(e) {
         if (void 0 == e)
           throw TypeError("Can't call method on  " + e);
         return e;
       };
     }, {}],
-    40: [function(e, t, r) {
-      t.exports = !e("./$.fails")(function() {
+    42: [function(e, t, r) {
+      t.exports = !e("./_fails")(function() {
         return 7 != Object.defineProperty({}, "a", {get: function() {
             return 7;
           }}).a;
       });
-    }, {"./$.fails": 44}],
-    41: [function(e, t, r) {
-      var n = e("./$.is-object"),
-          o = e("./$.global").document,
+    }, {"./_fails": 47}],
+    43: [function(e, t, r) {
+      var n = e("./_is-object"),
+          o = e("./_global").document,
           i = n(o) && n(o.createElement);
       t.exports = function(e) {
         return i ? o.createElement(e) : {};
       };
     }, {
-      "./$.global": 47,
-      "./$.is-object": 55
-    }],
-    42: [function(e, t, r) {
-      var n = e("./$");
-      t.exports = function(e) {
-        var t = n.getKeys(e),
-            r = n.getSymbols;
-        if (r)
-          for (var o,
-              i = r(e),
-              s = n.isEnum,
-              a = 0; i.length > a; )
-            s.call(e, o = i[a++]) && t.push(o);
-        return t;
-      };
-    }, {"./$": 62}],
-    43: [function(e, t, r) {
-      var n = e("./$.global"),
-          o = e("./$.core"),
-          i = e("./$.ctx"),
-          s = "prototype",
-          a = function(e, t, r) {
-            var u,
-                c,
-                l,
-                f = e & a.F,
-                p = e & a.G,
-                h = e & a.S,
-                d = e & a.P,
-                y = e & a.B,
-                b = e & a.W,
-                v = p ? o : o[t] || (o[t] = {}),
-                m = p ? n : h ? n[t] : (n[t] || {})[s];
-            p && (r = t);
-            for (u in r)
-              c = !f && m && u in m, c && u in v || (l = c ? m[u] : r[u], v[u] = p && "function" != typeof m[u] ? r[u] : y && c ? i(l, n) : b && m[u] == l ? function(e) {
-                var t = function(t) {
-                  return this instanceof e ? new e(t) : e(t);
-                };
-                return t[s] = e[s], t;
-              }(l) : d && "function" == typeof l ? i(Function.call, l) : l, d && ((v[s] || (v[s] = {}))[u] = l));
-          };
-      a.F = 1, a.G = 2, a.S = 4, a.P = 8, a.B = 16, a.W = 32, t.exports = a;
-    }, {
-      "./$.core": 37,
-      "./$.ctx": 38,
-      "./$.global": 47
+      "./_global": 49,
+      "./_is-object": 58
     }],
     44: [function(e, t, r) {
+      t.exports = "constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",");
+    }, {}],
+    45: [function(e, t, r) {
+      var n = e("./_object-keys"),
+          o = e("./_object-gops"),
+          i = e("./_object-pie");
+      t.exports = function(e) {
+        var t = n(e),
+            r = o.f;
+        if (r)
+          for (var s,
+              a = r(e),
+              u = i.f,
+              c = 0; a.length > c; )
+            u.call(e, s = a[c++]) && t.push(s);
+        return t;
+      };
+    }, {
+      "./_object-gops": 75,
+      "./_object-keys": 78,
+      "./_object-pie": 79
+    }],
+    46: [function(e, t, r) {
+      var n = e("./_global"),
+          o = e("./_core"),
+          i = e("./_ctx"),
+          s = e("./_hide"),
+          a = "prototype",
+          u = function(e, t, r) {
+            var c,
+                l,
+                f,
+                p = e & u.F,
+                d = e & u.G,
+                h = e & u.S,
+                b = e & u.P,
+                y = e & u.B,
+                _ = e & u.W,
+                v = d ? o : o[t] || (o[t] = {}),
+                m = v[a],
+                g = d ? n : h ? n[t] : (n[t] || {})[a];
+            d && (r = t);
+            for (c in r)
+              l = !p && g && void 0 !== g[c], l && c in v || (f = l ? g[c] : r[c], v[c] = d && "function" != typeof g[c] ? r[c] : y && l ? i(f, n) : _ && g[c] == f ? function(e) {
+                var t = function(t, r, n) {
+                  if (this instanceof e) {
+                    switch (arguments.length) {
+                      case 0:
+                        return new e;
+                      case 1:
+                        return new e(t);
+                      case 2:
+                        return new e(t, r);
+                    }
+                    return new e(t, r, n);
+                  }
+                  return e.apply(this, arguments);
+                };
+                return t[a] = e[a], t;
+              }(f) : b && "function" == typeof f ? i(Function.call, f) : f, b && ((v.virtual || (v.virtual = {}))[c] = f, e & u.R && m && !m[c] && s(m, c, f)));
+          };
+      u.F = 1, u.G = 2, u.S = 4, u.P = 8, u.B = 16, u.W = 32, u.U = 64, u.R = 128, t.exports = u;
+    }, {
+      "./_core": 39,
+      "./_ctx": 40,
+      "./_global": 49,
+      "./_hide": 51
+    }],
+    47: [function(e, t, r) {
       t.exports = function(e) {
         try {
           return !!e();
@@ -4392,83 +4866,77 @@ var define = $__System.amdDefine;
         }
       };
     }, {}],
-    45: [function(e, t, r) {
-      var n = e("./$.ctx"),
-          o = e("./$.iter-call"),
-          i = e("./$.is-array-iter"),
-          s = e("./$.an-object"),
-          a = e("./$.to-length"),
+    48: [function(e, t, r) {
+      var n = e("./_ctx"),
+          o = e("./_iter-call"),
+          i = e("./_is-array-iter"),
+          s = e("./_an-object"),
+          a = e("./_to-length"),
           u = e("./core.get-iterator-method");
-      t.exports = function(e, t, r, c) {
-        var l,
-            f,
+      t.exports = function(e, t, r, c, l) {
+        var f,
             p,
-            h = u(e),
-            d = n(r, c, t ? 2 : 1),
+            d,
+            h = l ? function() {
+              return e;
+            } : u(e),
+            b = n(r, c, t ? 2 : 1),
             y = 0;
         if ("function" != typeof h)
           throw TypeError(e + " is not iterable!");
         if (i(h))
-          for (l = a(e.length); l > y; y++)
-            t ? d(s(f = e[y])[0], f[1]) : d(e[y]);
+          for (f = a(e.length); f > y; y++)
+            t ? b(s(p = e[y])[0], p[1]) : b(e[y]);
         else
-          for (p = h.call(e); !(f = p.next()).done; )
-            o(p, d, f.value, t);
+          for (d = h.call(e); !(p = d.next()).done; )
+            o(d, b, p.value, t);
       };
     }, {
-      "./$.an-object": 34,
-      "./$.ctx": 38,
-      "./$.is-array-iter": 53,
-      "./$.iter-call": 56,
-      "./$.to-length": 81,
-      "./core.get-iterator-method": 85
+      "./_an-object": 35,
+      "./_ctx": 40,
+      "./_is-array-iter": 56,
+      "./_iter-call": 59,
+      "./_to-length": 95,
+      "./core.get-iterator-method": 100
     }],
-    46: [function(e, t, r) {
-      var n = e("./$.to-iobject"),
-          o = e("./$").getNames,
-          i = {}.toString,
-          s = "object" == typeof window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [],
-          a = function(e) {
-            try {
-              return o(e);
-            } catch (t) {
-              return s.slice();
-            }
-          };
-      t.exports.get = function(e) {
-        return s && "[object Window]" == i.call(e) ? a(e) : o(n(e));
-      };
-    }, {
-      "./$": 62,
-      "./$.to-iobject": 80
-    }],
-    47: [function(e, t, r) {
+    49: [function(e, t, r) {
       var n = t.exports = "undefined" != typeof window && window.Math == Math ? window : "undefined" != typeof self && self.Math == Math ? self : Function("return this")();
       "number" == typeof __g && (__g = n);
     }, {}],
-    48: [function(e, t, r) {
+    50: [function(e, t, r) {
       var n = {}.hasOwnProperty;
       t.exports = function(e, t) {
         return n.call(e, t);
       };
     }, {}],
-    49: [function(e, t, r) {
-      var n = e("./$"),
-          o = e("./$.property-desc");
-      t.exports = e("./$.descriptors") ? function(e, t, r) {
-        return n.setDesc(e, t, o(1, r));
+    51: [function(e, t, r) {
+      var n = e("./_object-dp"),
+          o = e("./_property-desc");
+      t.exports = e("./_descriptors") ? function(e, t, r) {
+        return n.f(e, t, o(1, r));
       } : function(e, t, r) {
         return e[t] = r, e;
       };
     }, {
-      "./$": 62,
-      "./$.descriptors": 40,
-      "./$.property-desc": 67
+      "./_descriptors": 42,
+      "./_object-dp": 70,
+      "./_property-desc": 81
     }],
-    50: [function(e, t, r) {
-      t.exports = e("./$.global").document && document.documentElement;
-    }, {"./$.global": 47}],
-    51: [function(e, t, r) {
+    52: [function(e, t, r) {
+      t.exports = e("./_global").document && document.documentElement;
+    }, {"./_global": 49}],
+    53: [function(e, t, r) {
+      t.exports = !e("./_descriptors") && !e("./_fails")(function() {
+        return 7 != Object.defineProperty(e("./_dom-create")("div"), "a", {get: function() {
+            return 7;
+          }}).a;
+      });
+    }, {
+      "./_descriptors": 42,
+      "./_dom-create": 43,
+      "./_fails": 47
+    }],
+    54: [function(e, t, r) {
       t.exports = function(e, t, r) {
         var n = void 0 === r;
         switch (t.length) {
@@ -4486,36 +4954,36 @@ var define = $__System.amdDefine;
         return e.apply(r, t);
       };
     }, {}],
-    52: [function(e, t, r) {
-      var n = e("./$.cof");
+    55: [function(e, t, r) {
+      var n = e("./_cof");
       t.exports = Object("z").propertyIsEnumerable(0) ? Object : function(e) {
         return "String" == n(e) ? e.split("") : Object(e);
       };
-    }, {"./$.cof": 36}],
-    53: [function(e, t, r) {
-      var n = e("./$.iterators"),
-          o = e("./$.wks")("iterator"),
+    }, {"./_cof": 38}],
+    56: [function(e, t, r) {
+      var n = e("./_iterators"),
+          o = e("./_wks")("iterator"),
           i = Array.prototype;
       t.exports = function(e) {
         return void 0 !== e && (n.Array === e || i[o] === e);
       };
     }, {
-      "./$.iterators": 61,
-      "./$.wks": 84
+      "./_iterators": 64,
+      "./_wks": 99
     }],
-    54: [function(e, t, r) {
-      var n = e("./$.cof");
+    57: [function(e, t, r) {
+      var n = e("./_cof");
       t.exports = Array.isArray || function(e) {
         return "Array" == n(e);
       };
-    }, {"./$.cof": 36}],
-    55: [function(e, t, r) {
+    }, {"./_cof": 38}],
+    58: [function(e, t, r) {
       t.exports = function(e) {
         return "object" == typeof e ? null !== e : "function" == typeof e;
       };
     }, {}],
-    56: [function(e, t, r) {
-      var n = e("./$.an-object");
+    59: [function(e, t, r) {
+      var n = e("./_an-object");
       t.exports = function(e, t, r, o) {
         try {
           return o ? t(n(r)[0], r[1]) : t(r);
@@ -4524,57 +4992,58 @@ var define = $__System.amdDefine;
           throw void 0 !== s && n(s.call(e)), i;
         }
       };
-    }, {"./$.an-object": 34}],
-    57: [function(e, t, r) {
+    }, {"./_an-object": 35}],
+    60: [function(e, t, r) {
       "use strict";
-      var n = e("./$"),
-          o = e("./$.property-desc"),
-          i = e("./$.set-to-string-tag"),
+      var n = e("./_object-create"),
+          o = e("./_property-desc"),
+          i = e("./_set-to-string-tag"),
           s = {};
-      e("./$.hide")(s, e("./$.wks")("iterator"), function() {
+      e("./_hide")(s, e("./_wks")("iterator"), function() {
         return this;
       }), t.exports = function(e, t, r) {
-        e.prototype = n.create(s, {next: o(1, r)}), i(e, t + " Iterator");
+        e.prototype = n(s, {next: o(1, r)}), i(e, t + " Iterator");
       };
     }, {
-      "./$": 62,
-      "./$.hide": 49,
-      "./$.property-desc": 67,
-      "./$.set-to-string-tag": 73,
-      "./$.wks": 84
+      "./_hide": 51,
+      "./_object-create": 69,
+      "./_property-desc": 81,
+      "./_set-to-string-tag": 86,
+      "./_wks": 99
     }],
-    58: [function(e, t, r) {
+    61: [function(e, t, r) {
       "use strict";
-      var n = e("./$.library"),
-          o = e("./$.export"),
-          i = e("./$.redefine"),
-          s = e("./$.hide"),
-          a = e("./$.has"),
-          u = e("./$.iterators"),
-          c = e("./$.iter-create"),
-          l = e("./$.set-to-string-tag"),
-          f = e("./$").getProto,
-          p = e("./$.wks")("iterator"),
-          h = !([].keys && "next" in [].keys()),
-          d = "@@iterator",
-          y = "keys",
-          b = "values",
-          v = function() {
+      var n = e("./_library"),
+          o = e("./_export"),
+          i = e("./_redefine"),
+          s = e("./_hide"),
+          a = e("./_has"),
+          u = e("./_iterators"),
+          c = e("./_iter-create"),
+          l = e("./_set-to-string-tag"),
+          f = e("./_object-gpo"),
+          p = e("./_wks")("iterator"),
+          d = !([].keys && "next" in [].keys()),
+          h = "@@iterator",
+          b = "keys",
+          y = "values",
+          _ = function() {
             return this;
           };
-      t.exports = function(e, t, r, m, g, _, O) {
-        c(r, t, m);
-        var j,
+      t.exports = function(e, t, r, v, m, g, j) {
+        c(r, t, v);
+        var O,
             E,
-            w = function(e) {
-              if (!h && e in R)
-                return R[e];
+            w,
+            k = function(e) {
+              if (!d && e in M)
+                return M[e];
               switch (e) {
-                case y:
+                case b:
                   return function() {
                     return new r(this, e);
                   };
-                case b:
+                case y:
                   return function() {
                     return new r(this, e);
                   };
@@ -4583,44 +5052,42 @@ var define = $__System.amdDefine;
                 return new r(this, e);
               };
             },
-            k = t + " Iterator",
-            $ = g == b,
-            P = !1,
-            R = e.prototype,
-            S = R[p] || R[d] || g && R[g],
-            M = S || w(g);
-        if (S) {
-          var T = f(M.call(new e));
-          l(T, k, !0), !n && a(R, d) && s(T, p, v), $ && S.name !== b && (P = !0, M = function() {
-            return S.call(this);
-          });
-        }
-        if (n && !O || !h && !P && R[p] || s(R, p, M), u[t] = M, u[k] = v, g)
-          if (j = {
-            values: $ ? M : w(b),
-            keys: _ ? M : w(y),
-            entries: $ ? w("entries") : M
-          }, O)
-            for (E in j)
-              E in R || i(R, E, j[E]);
+            P = t + " Iterator",
+            R = m == y,
+            S = !1,
+            M = e.prototype,
+            x = M[p] || M[h] || m && M[m],
+            T = x || k(m),
+            A = m ? R ? k("entries") : T : void 0,
+            N = "Array" == t ? M.entries || x : x;
+        if (N && (w = f(N.call(new e)), w !== Object.prototype && (l(w, P, !0), n || a(w, p) || s(w, p, _))), R && x && x.name !== y && (S = !0, T = function() {
+          return x.call(this);
+        }), n && !j || !d && !S && M[p] || s(M, p, T), u[t] = T, u[P] = _, m)
+          if (O = {
+            values: R ? T : k(y),
+            keys: g ? T : k(b),
+            entries: A
+          }, j)
+            for (E in O)
+              E in M || i(M, E, O[E]);
           else
-            o(o.P + o.F * (h || P), t, j);
-        return j;
+            o(o.P + o.F * (d || S), t, O);
+        return O;
       };
     }, {
-      "./$": 62,
-      "./$.export": 43,
-      "./$.has": 48,
-      "./$.hide": 49,
-      "./$.iter-create": 57,
-      "./$.iterators": 61,
-      "./$.library": 64,
-      "./$.redefine": 69,
-      "./$.set-to-string-tag": 73,
-      "./$.wks": 84
+      "./_export": 46,
+      "./_has": 50,
+      "./_hide": 51,
+      "./_iter-create": 60,
+      "./_iterators": 64,
+      "./_library": 66,
+      "./_object-gpo": 76,
+      "./_redefine": 83,
+      "./_set-to-string-tag": 86,
+      "./_wks": 99
     }],
-    59: [function(e, t, r) {
-      var n = e("./$.wks")("iterator"),
+    62: [function(e, t, r) {
+      var n = e("./_wks")("iterator"),
           o = !1;
       try {
         var i = [7][n]();
@@ -4645,8 +5112,8 @@ var define = $__System.amdDefine;
         } catch (a) {}
         return r;
       };
-    }, {"./$.wks": 84}],
-    60: [function(e, t, r) {
+    }, {"./_wks": 99}],
+    63: [function(e, t, r) {
       t.exports = function(e, t) {
         return {
           value: t,
@@ -4654,59 +5121,100 @@ var define = $__System.amdDefine;
         };
       };
     }, {}],
-    61: [function(e, t, r) {
+    64: [function(e, t, r) {
       t.exports = {};
     }, {}],
-    62: [function(e, t, r) {
-      var n = Object;
-      t.exports = {
-        create: n.create,
-        getProto: n.getPrototypeOf,
-        isEnum: {}.propertyIsEnumerable,
-        getDesc: n.getOwnPropertyDescriptor,
-        setDesc: n.defineProperty,
-        setDescs: n.defineProperties,
-        getKeys: n.keys,
-        getNames: n.getOwnPropertyNames,
-        getSymbols: n.getOwnPropertySymbols,
-        each: [].forEach
-      };
-    }, {}],
-    63: [function(e, t, r) {
-      var n = e("./$"),
-          o = e("./$.to-iobject");
+    65: [function(e, t, r) {
+      var n = e("./_object-keys"),
+          o = e("./_to-iobject");
       t.exports = function(e, t) {
         for (var r,
             i = o(e),
-            s = n.getKeys(i),
+            s = n(i),
             a = s.length,
             u = 0; a > u; )
           if (i[r = s[u++]] === t)
             return r;
       };
     }, {
-      "./$": 62,
-      "./$.to-iobject": 80
+      "./_object-keys": 78,
+      "./_to-iobject": 94
     }],
-    64: [function(e, t, r) {
+    66: [function(e, t, r) {
       t.exports = !0;
     }, {}],
-    65: [function(e, t, r) {
+    67: [function(e, t, r) {
+      var n = e("./_uid")("meta"),
+          o = e("./_is-object"),
+          i = e("./_has"),
+          s = e("./_object-dp").f,
+          a = 0,
+          u = Object.isExtensible || function() {
+            return !0;
+          },
+          c = !e("./_fails")(function() {
+            return u(Object.preventExtensions({}));
+          }),
+          l = function(e) {
+            s(e, n, {value: {
+                i: "O" + ++a,
+                w: {}
+              }});
+          },
+          f = function(e, t) {
+            if (!o(e))
+              return "symbol" == typeof e ? e : ("string" == typeof e ? "S" : "P") + e;
+            if (!i(e, n)) {
+              if (!u(e))
+                return "F";
+              if (!t)
+                return "E";
+              l(e);
+            }
+            return e[n].i;
+          },
+          p = function(e, t) {
+            if (!i(e, n)) {
+              if (!u(e))
+                return !0;
+              if (!t)
+                return !1;
+              l(e);
+            }
+            return e[n].w;
+          },
+          d = function(e) {
+            return c && h.NEED && u(e) && !i(e, n) && l(e), e;
+          },
+          h = t.exports = {
+            KEY: n,
+            NEED: !1,
+            fastKey: f,
+            getWeak: p,
+            onFreeze: d
+          };
+    }, {
+      "./_fails": 47,
+      "./_has": 50,
+      "./_is-object": 58,
+      "./_object-dp": 70,
+      "./_uid": 98
+    }],
+    68: [function(e, t, r) {
       var n,
           o,
           i,
-          s = e("./$.global"),
-          a = e("./$.task").set,
+          s = e("./_global"),
+          a = e("./_task").set,
           u = s.MutationObserver || s.WebKitMutationObserver,
           c = s.process,
           l = s.Promise,
-          f = "process" == e("./$.cof")(c),
+          f = "process" == e("./_cof")(c),
           p = function() {
             var e,
-                t,
-                r;
-            for (f && (e = c.domain) && (c.domain = null, e.exit()); n; )
-              t = n.domain, r = n.fn, t && t.enter(), r(), t && t.exit(), n = n.next;
+                t;
+            for (f && (e = c.domain) && e.exit(); n; )
+              t = n.fn, t(), n = n.next;
             o = void 0, e && e.enter();
           };
       if (f)
@@ -4714,10 +5222,10 @@ var define = $__System.amdDefine;
           c.nextTick(p);
         };
       else if (u) {
-        var h = 1,
-            d = document.createTextNode("");
-        new u(p).observe(d, {characterData: !0}), i = function() {
-          d.data = h = -h;
+        var d = !0,
+            h = document.createTextNode("");
+        new u(p).observe(h, {characterData: !0}), i = function() {
+          h.data = d = !d;
         };
       } else
         i = l && l.resolve ? function() {
@@ -4728,20 +5236,190 @@ var define = $__System.amdDefine;
       t.exports = function(e) {
         var t = {
           fn: e,
-          next: void 0,
-          domain: f && c.domain
+          next: void 0
         };
         o && (o.next = t), n || (n = t, i()), o = t;
       };
     }, {
-      "./$.cof": 36,
-      "./$.global": 47,
-      "./$.task": 78
+      "./_cof": 38,
+      "./_global": 49,
+      "./_task": 91
     }],
-    66: [function(e, t, r) {
-      var n = e("./$.export"),
-          o = e("./$.core"),
-          i = e("./$.fails");
+    69: [function(e, t, r) {
+      var n = e("./_an-object"),
+          o = e("./_object-dps"),
+          i = e("./_enum-bug-keys"),
+          s = e("./_shared-key")("IE_PROTO"),
+          a = function() {},
+          u = "prototype",
+          c = function() {
+            var t,
+                r = e("./_dom-create")("iframe"),
+                n = i.length,
+                o = ">";
+            for (r.style.display = "none", e("./_html").appendChild(r), r.src = "javascript:", t = r.contentWindow.document, t.open(), t.write("<script>document.F=Object</script" + o), t.close(), c = t.F; n--; )
+              delete c[u][i[n]];
+            return c();
+          };
+      t.exports = Object.create || function(e, t) {
+        var r;
+        return null !== e ? (a[u] = n(e), r = new a, a[u] = null, r[s] = e) : r = c(), void 0 === t ? r : o(r, t);
+      };
+    }, {
+      "./_an-object": 35,
+      "./_dom-create": 43,
+      "./_enum-bug-keys": 44,
+      "./_html": 52,
+      "./_object-dps": 71,
+      "./_shared-key": 87
+    }],
+    70: [function(e, t, r) {
+      var n = e("./_an-object"),
+          o = e("./_ie8-dom-define"),
+          i = e("./_to-primitive"),
+          s = Object.defineProperty;
+      r.f = e("./_descriptors") ? Object.defineProperty : function(e, t, r) {
+        if (n(e), t = i(t, !0), n(r), o)
+          try {
+            return s(e, t, r);
+          } catch (a) {}
+        if ("get" in r || "set" in r)
+          throw TypeError("Accessors not supported!");
+        return "value" in r && (e[t] = r.value), e;
+      };
+    }, {
+      "./_an-object": 35,
+      "./_descriptors": 42,
+      "./_ie8-dom-define": 53,
+      "./_to-primitive": 97
+    }],
+    71: [function(e, t, r) {
+      var n = e("./_object-dp"),
+          o = e("./_an-object"),
+          i = e("./_object-keys");
+      t.exports = e("./_descriptors") ? Object.defineProperties : function(e, t) {
+        o(e);
+        for (var r,
+            s = i(t),
+            a = s.length,
+            u = 0; a > u; )
+          n.f(e, r = s[u++], t[r]);
+        return e;
+      };
+    }, {
+      "./_an-object": 35,
+      "./_descriptors": 42,
+      "./_object-dp": 70,
+      "./_object-keys": 78
+    }],
+    72: [function(e, t, r) {
+      var n = e("./_object-pie"),
+          o = e("./_property-desc"),
+          i = e("./_to-iobject"),
+          s = e("./_to-primitive"),
+          a = e("./_has"),
+          u = e("./_ie8-dom-define"),
+          c = Object.getOwnPropertyDescriptor;
+      r.f = e("./_descriptors") ? c : function(e, t) {
+        if (e = i(e), t = s(t, !0), u)
+          try {
+            return c(e, t);
+          } catch (r) {}
+        return a(e, t) ? o(!n.f.call(e, t), e[t]) : void 0;
+      };
+    }, {
+      "./_descriptors": 42,
+      "./_has": 50,
+      "./_ie8-dom-define": 53,
+      "./_object-pie": 79,
+      "./_property-desc": 81,
+      "./_to-iobject": 94,
+      "./_to-primitive": 97
+    }],
+    73: [function(e, t, r) {
+      var n = e("./_to-iobject"),
+          o = e("./_object-gopn").f,
+          i = {}.toString,
+          s = "object" == typeof window && window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [],
+          a = function(e) {
+            try {
+              return o(e);
+            } catch (t) {
+              return s.slice();
+            }
+          };
+      t.exports.f = function(e) {
+        return s && "[object Window]" == i.call(e) ? a(e) : o(n(e));
+      };
+    }, {
+      "./_object-gopn": 74,
+      "./_to-iobject": 94
+    }],
+    74: [function(e, t, r) {
+      var n = e("./_object-keys-internal"),
+          o = e("./_enum-bug-keys").concat("length", "prototype");
+      r.f = Object.getOwnPropertyNames || function(e) {
+        return n(e, o);
+      };
+    }, {
+      "./_enum-bug-keys": 44,
+      "./_object-keys-internal": 77
+    }],
+    75: [function(e, t, r) {
+      r.f = Object.getOwnPropertySymbols;
+    }, {}],
+    76: [function(e, t, r) {
+      var n = e("./_has"),
+          o = e("./_to-object"),
+          i = e("./_shared-key")("IE_PROTO"),
+          s = Object.prototype;
+      t.exports = Object.getPrototypeOf || function(e) {
+        return e = o(e), n(e, i) ? e[i] : "function" == typeof e.constructor && e instanceof e.constructor ? e.constructor.prototype : e instanceof Object ? s : null;
+      };
+    }, {
+      "./_has": 50,
+      "./_shared-key": 87,
+      "./_to-object": 96
+    }],
+    77: [function(e, t, r) {
+      var n = e("./_has"),
+          o = e("./_to-iobject"),
+          i = e("./_array-includes")(!1),
+          s = e("./_shared-key")("IE_PROTO");
+      t.exports = function(e, t) {
+        var r,
+            a = o(e),
+            u = 0,
+            c = [];
+        for (r in a)
+          r != s && n(a, r) && c.push(r);
+        for (; t.length > u; )
+          n(a, r = t[u++]) && (~i(c, r) || c.push(r));
+        return c;
+      };
+    }, {
+      "./_array-includes": 36,
+      "./_has": 50,
+      "./_shared-key": 87,
+      "./_to-iobject": 94
+    }],
+    78: [function(e, t, r) {
+      var n = e("./_object-keys-internal"),
+          o = e("./_enum-bug-keys");
+      t.exports = Object.keys || function(e) {
+        return n(e, o);
+      };
+    }, {
+      "./_enum-bug-keys": 44,
+      "./_object-keys-internal": 77
+    }],
+    79: [function(e, t, r) {
+      r.f = {}.propertyIsEnumerable;
+    }, {}],
+    80: [function(e, t, r) {
+      var n = e("./_export"),
+          o = e("./_core"),
+          i = e("./_fails");
       t.exports = function(e, t) {
         var r = (o.Object || {})[e] || Object[e],
             s = {};
@@ -4750,11 +5428,11 @@ var define = $__System.amdDefine;
         }), "Object", s);
       };
     }, {
-      "./$.core": 37,
-      "./$.export": 43,
-      "./$.fails": 44
+      "./_core": 39,
+      "./_export": 46,
+      "./_fails": 47
     }],
-    67: [function(e, t, r) {
+    81: [function(e, t, r) {
       t.exports = function(e, t) {
         return {
           enumerable: !(1 & e),
@@ -4764,58 +5442,53 @@ var define = $__System.amdDefine;
         };
       };
     }, {}],
-    68: [function(e, t, r) {
-      var n = e("./$.redefine");
-      t.exports = function(e, t) {
-        for (var r in t)
-          n(e, r, t[r]);
+    82: [function(e, t, r) {
+      var n = e("./_hide");
+      t.exports = function(e, t, r) {
+        for (var o in t)
+          r && e[o] ? e[o] = t[o] : n(e, o, t[o]);
         return e;
       };
-    }, {"./$.redefine": 69}],
-    69: [function(e, t, r) {
-      t.exports = e("./$.hide");
-    }, {"./$.hide": 49}],
-    70: [function(e, t, r) {
-      t.exports = Object.is || function(e, t) {
-        return e === t ? 0 !== e || 1 / e === 1 / t : e != e && t != t;
-      };
-    }, {}],
-    71: [function(e, t, r) {
-      var n = e("./$").getDesc,
-          o = e("./$.is-object"),
-          i = e("./$.an-object"),
-          s = function(e, t) {
-            if (i(e), !o(t) && null !== t)
+    }, {"./_hide": 51}],
+    83: [function(e, t, r) {
+      t.exports = e("./_hide");
+    }, {"./_hide": 51}],
+    84: [function(e, t, r) {
+      var n = e("./_is-object"),
+          o = e("./_an-object"),
+          i = function(e, t) {
+            if (o(e), !n(t) && null !== t)
               throw TypeError(t + ": can't set as prototype!");
           };
       t.exports = {
-        set: Object.setPrototypeOf || ("__proto__" in {} ? function(t, r, o) {
+        set: Object.setPrototypeOf || ("__proto__" in {} ? function(t, r, n) {
           try {
-            o = e("./$.ctx")(Function.call, n(Object.prototype, "__proto__").set, 2), o(t, []), r = !(t instanceof Array);
-          } catch (i) {
+            n = e("./_ctx")(Function.call, e("./_object-gopd").f(Object.prototype, "__proto__").set, 2), n(t, []), r = !(t instanceof Array);
+          } catch (o) {
             r = !0;
           }
           return function(e, t) {
-            return s(e, t), r ? e.__proto__ = t : o(e, t), e;
+            return i(e, t), r ? e.__proto__ = t : n(e, t), e;
           };
         }({}, !1) : void 0),
-        check: s
+        check: i
       };
     }, {
-      "./$": 62,
-      "./$.an-object": 34,
-      "./$.ctx": 38,
-      "./$.is-object": 55
+      "./_an-object": 35,
+      "./_ctx": 40,
+      "./_is-object": 58,
+      "./_object-gopd": 72
     }],
-    72: [function(e, t, r) {
+    85: [function(e, t, r) {
       "use strict";
-      var n = e("./$.core"),
-          o = e("./$"),
-          i = e("./$.descriptors"),
-          s = e("./$.wks")("species");
+      var n = e("./_global"),
+          o = e("./_core"),
+          i = e("./_object-dp"),
+          s = e("./_descriptors"),
+          a = e("./_wks")("species");
       t.exports = function(e) {
-        var t = n[e];
-        i && t && !t[s] && o.setDesc(t, s, {
+        var t = "function" == typeof o[e] ? o[e] : n[e];
+        s && t && !t[a] && i.f(t, a, {
           configurable: !0,
           get: function() {
             return this;
@@ -4823,15 +5496,16 @@ var define = $__System.amdDefine;
         });
       };
     }, {
-      "./$": 62,
-      "./$.core": 37,
-      "./$.descriptors": 40,
-      "./$.wks": 84
+      "./_core": 39,
+      "./_descriptors": 42,
+      "./_global": 49,
+      "./_object-dp": 70,
+      "./_wks": 99
     }],
-    73: [function(e, t, r) {
-      var n = e("./$").setDesc,
-          o = e("./$.has"),
-          i = e("./$.wks")("toStringTag");
+    86: [function(e, t, r) {
+      var n = e("./_object-dp").f,
+          o = e("./_has"),
+          i = e("./_wks")("toStringTag");
       t.exports = function(e, t, r) {
         e && !o(e = r ? e : e.prototype, i) && n(e, i, {
           configurable: !0,
@@ -4839,42 +5513,45 @@ var define = $__System.amdDefine;
         });
       };
     }, {
-      "./$": 62,
-      "./$.has": 48,
-      "./$.wks": 84
+      "./_has": 50,
+      "./_object-dp": 70,
+      "./_wks": 99
     }],
-    74: [function(e, t, r) {
-      var n = e("./$.global"),
+    87: [function(e, t, r) {
+      var n = e("./_shared")("keys"),
+          o = e("./_uid");
+      t.exports = function(e) {
+        return n[e] || (n[e] = o(e));
+      };
+    }, {
+      "./_shared": 88,
+      "./_uid": 98
+    }],
+    88: [function(e, t, r) {
+      var n = e("./_global"),
           o = "__core-js_shared__",
           i = n[o] || (n[o] = {});
       t.exports = function(e) {
         return i[e] || (i[e] = {});
       };
-    }, {"./$.global": 47}],
-    75: [function(e, t, r) {
-      var n = e("./$.an-object"),
-          o = e("./$.a-function"),
-          i = e("./$.wks")("species");
+    }, {"./_global": 49}],
+    89: [function(e, t, r) {
+      var n = e("./_an-object"),
+          o = e("./_a-function"),
+          i = e("./_wks")("species");
       t.exports = function(e, t) {
         var r,
             s = n(e).constructor;
         return void 0 === s || void 0 == (r = n(s)[i]) ? t : o(r);
       };
     }, {
-      "./$.a-function": 32,
-      "./$.an-object": 34,
-      "./$.wks": 84
+      "./_a-function": 32,
+      "./_an-object": 35,
+      "./_wks": 99
     }],
-    76: [function(e, t, r) {
-      t.exports = function(e, t, r) {
-        if (!(e instanceof t))
-          throw TypeError(r + ": use the 'new' operator!");
-        return e;
-      };
-    }, {}],
-    77: [function(e, t, r) {
-      var n = e("./$.to-integer"),
-          o = e("./$.defined");
+    90: [function(e, t, r) {
+      var n = e("./_to-integer"),
+          o = e("./_defined");
       t.exports = function(e) {
         return function(t, r) {
           var i,
@@ -4886,135 +5563,160 @@ var define = $__System.amdDefine;
         };
       };
     }, {
-      "./$.defined": 39,
-      "./$.to-integer": 79
+      "./_defined": 41,
+      "./_to-integer": 93
     }],
-    78: [function(e, t, r) {
+    91: [function(e, t, r) {
       var n,
           o,
           i,
-          s = e("./$.ctx"),
-          a = e("./$.invoke"),
-          u = e("./$.html"),
-          c = e("./$.dom-create"),
-          l = e("./$.global"),
+          s = e("./_ctx"),
+          a = e("./_invoke"),
+          u = e("./_html"),
+          c = e("./_dom-create"),
+          l = e("./_global"),
           f = l.process,
           p = l.setImmediate,
-          h = l.clearImmediate,
-          d = l.MessageChannel,
-          y = 0,
-          b = {},
-          v = "onreadystatechange",
-          m = function() {
+          d = l.clearImmediate,
+          h = l.MessageChannel,
+          b = 0,
+          y = {},
+          _ = "onreadystatechange",
+          v = function() {
             var e = +this;
-            if (b.hasOwnProperty(e)) {
-              var t = b[e];
-              delete b[e], t();
+            if (y.hasOwnProperty(e)) {
+              var t = y[e];
+              delete y[e], t();
             }
           },
-          g = function(e) {
-            m.call(e.data);
+          m = function(e) {
+            v.call(e.data);
           };
-      p && h || (p = function(e) {
+      p && d || (p = function(e) {
         for (var t = [],
             r = 1; arguments.length > r; )
           t.push(arguments[r++]);
-        return b[++y] = function() {
+        return y[++b] = function() {
           a("function" == typeof e ? e : Function(e), t);
-        }, n(y), y;
-      }, h = function(e) {
-        delete b[e];
-      }, "process" == e("./$.cof")(f) ? n = function(e) {
-        f.nextTick(s(m, e, 1));
-      } : d ? (o = new d, i = o.port2, o.port1.onmessage = g, n = s(i.postMessage, i, 1)) : l.addEventListener && "function" == typeof postMessage && !l.importScripts ? (n = function(e) {
+        }, n(b), b;
+      }, d = function(e) {
+        delete y[e];
+      }, "process" == e("./_cof")(f) ? n = function(e) {
+        f.nextTick(s(v, e, 1));
+      } : h ? (o = new h, i = o.port2, o.port1.onmessage = m, n = s(i.postMessage, i, 1)) : l.addEventListener && "function" == typeof postMessage && !l.importScripts ? (n = function(e) {
         l.postMessage(e + "", "*");
-      }, l.addEventListener("message", g, !1)) : n = v in c("script") ? function(e) {
-        u.appendChild(c("script"))[v] = function() {
-          u.removeChild(this), m.call(e);
+      }, l.addEventListener("message", m, !1)) : n = _ in c("script") ? function(e) {
+        u.appendChild(c("script"))[_] = function() {
+          u.removeChild(this), v.call(e);
         };
       } : function(e) {
-        setTimeout(s(m, e, 1), 0);
+        setTimeout(s(v, e, 1), 0);
       }), t.exports = {
         set: p,
-        clear: h
+        clear: d
       };
     }, {
-      "./$.cof": 36,
-      "./$.ctx": 38,
-      "./$.dom-create": 41,
-      "./$.global": 47,
-      "./$.html": 50,
-      "./$.invoke": 51
+      "./_cof": 38,
+      "./_ctx": 40,
+      "./_dom-create": 43,
+      "./_global": 49,
+      "./_html": 52,
+      "./_invoke": 54
     }],
-    79: [function(e, t, r) {
+    92: [function(e, t, r) {
+      var n = e("./_to-integer"),
+          o = Math.max,
+          i = Math.min;
+      t.exports = function(e, t) {
+        return e = n(e), 0 > e ? o(e + t, 0) : i(e, t);
+      };
+    }, {"./_to-integer": 93}],
+    93: [function(e, t, r) {
       var n = Math.ceil,
           o = Math.floor;
       t.exports = function(e) {
         return isNaN(e = +e) ? 0 : (e > 0 ? o : n)(e);
       };
     }, {}],
-    80: [function(e, t, r) {
-      var n = e("./$.iobject"),
-          o = e("./$.defined");
+    94: [function(e, t, r) {
+      var n = e("./_iobject"),
+          o = e("./_defined");
       t.exports = function(e) {
         return n(o(e));
       };
     }, {
-      "./$.defined": 39,
-      "./$.iobject": 52
+      "./_defined": 41,
+      "./_iobject": 55
     }],
-    81: [function(e, t, r) {
-      var n = e("./$.to-integer"),
+    95: [function(e, t, r) {
+      var n = e("./_to-integer"),
           o = Math.min;
       t.exports = function(e) {
         return e > 0 ? o(n(e), 9007199254740991) : 0;
       };
-    }, {"./$.to-integer": 79}],
-    82: [function(e, t, r) {
-      var n = e("./$.defined");
+    }, {"./_to-integer": 93}],
+    96: [function(e, t, r) {
+      var n = e("./_defined");
       t.exports = function(e) {
         return Object(n(e));
       };
-    }, {"./$.defined": 39}],
-    83: [function(e, t, r) {
+    }, {"./_defined": 41}],
+    97: [function(e, t, r) {
+      var n = e("./_is-object");
+      t.exports = function(e, t) {
+        if (!n(e))
+          return e;
+        var r,
+            o;
+        if (t && "function" == typeof(r = e.toString) && !n(o = r.call(e)))
+          return o;
+        if ("function" == typeof(r = e.valueOf) && !n(o = r.call(e)))
+          return o;
+        if (!t && "function" == typeof(r = e.toString) && !n(o = r.call(e)))
+          return o;
+        throw TypeError("Can't convert object to primitive value");
+      };
+    }, {"./_is-object": 58}],
+    98: [function(e, t, r) {
       var n = 0,
           o = Math.random();
       t.exports = function(e) {
         return "Symbol(".concat(void 0 === e ? "" : e, ")_", (++n + o).toString(36));
       };
     }, {}],
-    84: [function(e, t, r) {
-      var n = e("./$.shared")("wks"),
-          o = e("./$.uid"),
-          i = e("./$.global").Symbol;
+    99: [function(e, t, r) {
+      var n = e("./_shared")("wks"),
+          o = e("./_uid"),
+          i = e("./_global").Symbol,
+          s = "function" == typeof i;
       t.exports = function(e) {
-        return n[e] || (n[e] = i && i[e] || (i || o)("Symbol." + e));
+        return n[e] || (n[e] = s && i[e] || (s ? i : o)("Symbol." + e));
       };
     }, {
-      "./$.global": 47,
-      "./$.shared": 74,
-      "./$.uid": 83
+      "./_global": 49,
+      "./_shared": 88,
+      "./_uid": 98
     }],
-    85: [function(e, t, r) {
-      var n = e("./$.classof"),
-          o = e("./$.wks")("iterator"),
-          i = e("./$.iterators");
-      t.exports = e("./$.core").getIteratorMethod = function(e) {
+    100: [function(e, t, r) {
+      var n = e("./_classof"),
+          o = e("./_wks")("iterator"),
+          i = e("./_iterators");
+      t.exports = e("./_core").getIteratorMethod = function(e) {
         return void 0 != e ? e[o] || e["@@iterator"] || i[n(e)] : void 0;
       };
     }, {
-      "./$.classof": 35,
-      "./$.core": 37,
-      "./$.iterators": 61,
-      "./$.wks": 84
+      "./_classof": 37,
+      "./_core": 39,
+      "./_iterators": 64,
+      "./_wks": 99
     }],
-    86: [function(e, t, r) {
+    101: [function(e, t, r) {
       "use strict";
-      var n = e("./$.add-to-unscopables"),
-          o = e("./$.iter-step"),
-          i = e("./$.iterators"),
-          s = e("./$.to-iobject");
-      t.exports = e("./$.iter-define")(Array, "Array", function(e, t) {
+      var n = e("./_add-to-unscopables"),
+          o = e("./_iter-step"),
+          i = e("./_iterators"),
+          s = e("./_to-iobject");
+      t.exports = e("./_iter-define")(Array, "Array", function(e, t) {
         this._t = s(e), this._i = 0, this._k = t;
       }, function() {
         var e = this._t,
@@ -5023,126 +5725,136 @@ var define = $__System.amdDefine;
         return !e || r >= e.length ? (this._t = void 0, o(1)) : "keys" == t ? o(0, r) : "values" == t ? o(0, e[r]) : o(0, [r, e[r]]);
       }, "values"), i.Arguments = i.Array, n("keys"), n("values"), n("entries");
     }, {
-      "./$.add-to-unscopables": 33,
-      "./$.iter-define": 58,
-      "./$.iter-step": 60,
-      "./$.iterators": 61,
-      "./$.to-iobject": 80
+      "./_add-to-unscopables": 33,
+      "./_iter-define": 61,
+      "./_iter-step": 63,
+      "./_iterators": 64,
+      "./_to-iobject": 94
     }],
-    87: [function(e, t, r) {
-      var n = e("./$.is-object");
-      e("./$.object-sap")("freeze", function(e) {
+    102: [function(e, t, r) {
+      var n = e("./_export");
+      n(n.S, "Object", {create: e("./_object-create")});
+    }, {
+      "./_export": 46,
+      "./_object-create": 69
+    }],
+    103: [function(e, t, r) {
+      var n = e("./_export");
+      n(n.S + n.F * !e("./_descriptors"), "Object", {defineProperty: e("./_object-dp").f});
+    }, {
+      "./_descriptors": 42,
+      "./_export": 46,
+      "./_object-dp": 70
+    }],
+    104: [function(e, t, r) {
+      var n = e("./_is-object"),
+          o = e("./_meta").onFreeze;
+      e("./_object-sap")("freeze", function(e) {
         return function(t) {
-          return e && n(t) ? e(t) : t;
+          return e && n(t) ? e(o(t)) : t;
         };
       });
     }, {
-      "./$.is-object": 55,
-      "./$.object-sap": 66
+      "./_is-object": 58,
+      "./_meta": 67,
+      "./_object-sap": 80
     }],
-    88: [function(e, t, r) {
-      var n = e("./$.to-iobject");
-      e("./$.object-sap")("getOwnPropertyDescriptor", function(e) {
-        return function(t, r) {
-          return e(n(t), r);
+    105: [function(e, t, r) {
+      var n = e("./_to-iobject"),
+          o = e("./_object-gopd").f;
+      e("./_object-sap")("getOwnPropertyDescriptor", function() {
+        return function(e, t) {
+          return o(n(e), t);
         };
       });
     }, {
-      "./$.object-sap": 66,
-      "./$.to-iobject": 80
+      "./_object-gopd": 72,
+      "./_object-sap": 80,
+      "./_to-iobject": 94
     }],
-    89: [function(e, t, r) {
-      var n = e("./$.to-object");
-      e("./$.object-sap")("getPrototypeOf", function(e) {
-        return function(t) {
-          return e(n(t));
+    106: [function(e, t, r) {
+      var n = e("./_to-object"),
+          o = e("./_object-gpo");
+      e("./_object-sap")("getPrototypeOf", function() {
+        return function(e) {
+          return o(n(e));
         };
       });
     }, {
-      "./$.object-sap": 66,
-      "./$.to-object": 82
+      "./_object-gpo": 76,
+      "./_object-sap": 80,
+      "./_to-object": 96
     }],
-    90: [function(e, t, r) {
-      var n = e("./$.to-object");
-      e("./$.object-sap")("keys", function(e) {
-        return function(t) {
-          return e(n(t));
+    107: [function(e, t, r) {
+      var n = e("./_to-object"),
+          o = e("./_object-keys");
+      e("./_object-sap")("keys", function() {
+        return function(e) {
+          return o(n(e));
         };
       });
     }, {
-      "./$.object-sap": 66,
-      "./$.to-object": 82
+      "./_object-keys": 78,
+      "./_object-sap": 80,
+      "./_to-object": 96
     }],
-    91: [function(e, t, r) {
-      var n = e("./$.export");
-      n(n.S, "Object", {setPrototypeOf: e("./$.set-proto").set});
+    108: [function(e, t, r) {
+      var n = e("./_export");
+      n(n.S, "Object", {setPrototypeOf: e("./_set-proto").set});
     }, {
-      "./$.export": 43,
-      "./$.set-proto": 71
+      "./_export": 46,
+      "./_set-proto": 84
     }],
-    92: [function(e, t, r) {}, {}],
-    93: [function(e, t, r) {
+    109: [function(e, t, r) {}, {}],
+    110: [function(e, t, r) {
       "use strict";
       var n,
-          o = e("./$"),
-          i = e("./$.library"),
-          s = e("./$.global"),
-          a = e("./$.ctx"),
-          u = e("./$.classof"),
-          c = e("./$.export"),
-          l = e("./$.is-object"),
-          f = e("./$.an-object"),
-          p = e("./$.a-function"),
-          h = e("./$.strict-new"),
-          d = e("./$.for-of"),
-          y = e("./$.set-proto").set,
-          b = e("./$.same-value"),
-          v = e("./$.wks")("species"),
-          m = e("./$.species-constructor"),
-          g = e("./$.microtask"),
-          _ = "Promise",
-          O = s.process,
-          j = "process" == u(O),
-          E = s[_],
-          w = function(e) {
-            var t = new E(function() {});
-            return e && (t.constructor = Object), E.resolve(t) === t;
-          },
-          k = function() {
-            function t(e) {
-              var r = new E(e);
-              return y(r, t.prototype), r;
-            }
-            var r = !1;
+          o,
+          i,
+          s = e("./_library"),
+          a = e("./_global"),
+          u = e("./_ctx"),
+          c = e("./_classof"),
+          l = e("./_export"),
+          f = e("./_is-object"),
+          p = (e("./_an-object"), e("./_a-function")),
+          d = e("./_an-instance"),
+          h = e("./_for-of"),
+          b = (e("./_set-proto").set, e("./_species-constructor")),
+          y = e("./_task").set,
+          _ = e("./_microtask"),
+          v = "Promise",
+          m = a.TypeError,
+          g = a.process,
+          j = a[v],
+          g = a.process,
+          O = "process" == c(g),
+          E = function() {},
+          w = !!function() {
             try {
-              if (r = E && E.resolve && w(), y(t, E), t.prototype = o.create(E.prototype, {constructor: {value: t}}), t.resolve(5).then(function() {}) instanceof t || (r = !1), r && e("./$.descriptors")) {
-                var n = !1;
-                E.resolve(o.setDesc({}, "then", {get: function() {
-                    n = !0;
-                  }})), r = n;
-              }
-            } catch (i) {
-              r = !1;
-            }
-            return r;
+              var t = j.resolve(1),
+                  r = (t.constructor = {})[e("./_wks")("species")] = function(e) {
+                    e(E, E);
+                  };
+              return (O || "function" == typeof PromiseRejectionEvent) && t.then(E) instanceof r;
+            } catch (n) {}
           }(),
-          $ = function(e, t) {
-            return i && e === E && t === n ? !0 : b(e, t);
+          k = function(e, t) {
+            return e === t || e === j && t === i;
           },
           P = function(e) {
-            var t = f(e)[v];
-            return void 0 != t ? t : e;
+            var t;
+            return f(e) && "function" == typeof(t = e.then) ? t : !1;
           },
           R = function(e) {
-            var t;
-            return l(e) && "function" == typeof(t = e.then) ? t : !1;
+            return k(j, e) ? new S(e) : new o(e);
           },
-          S = function(e) {
+          S = o = function(e) {
             var t,
                 r;
             this.promise = new e(function(e, n) {
               if (void 0 !== t || void 0 !== r)
-                throw TypeError("Bad Promise constructor");
+                throw m("Bad Promise constructor");
               t = e, r = n;
             }), this.resolve = p(t), this.reject = p(r);
           },
@@ -5153,147 +5865,155 @@ var define = $__System.amdDefine;
               return {error: t};
             }
           },
-          T = function(e, t) {
-            if (!e.n) {
-              e.n = !0;
-              var r = e.c;
-              g(function() {
-                for (var n = e.v,
-                    o = 1 == e.s,
+          x = function(e, t) {
+            if (!e._n) {
+              e._n = !0;
+              var r = e._c;
+              _(function() {
+                for (var n = e._v,
+                    o = 1 == e._s,
                     i = 0,
-                    a = function(t) {
+                    s = function(t) {
                       var r,
                           i,
                           s = o ? t.ok : t.fail,
                           a = t.resolve,
-                          u = t.reject;
+                          u = t.reject,
+                          c = t.domain;
                       try {
-                        s ? (o || (e.h = !0), r = s === !0 ? n : s(n), r === t.promise ? u(TypeError("Promise-chain cycle")) : (i = R(r)) ? i.call(r, a, u) : a(r)) : u(n);
-                      } catch (c) {
-                        u(c);
+                        s ? (o || (2 == e._h && N(e), e._h = 1), s === !0 ? r = n : (c && c.enter(), r = s(n), c && c.exit()), r === t.promise ? u(m("Promise-chain cycle")) : (i = P(r)) ? i.call(r, a, u) : a(r)) : u(n);
+                      } catch (l) {
+                        u(l);
                       }
                     }; r.length > i; )
-                  a(r[i++]);
-                r.length = 0, e.n = !1, t && setTimeout(function() {
-                  var t,
-                      r,
-                      o = e.p;
-                  x(o) && (j ? O.emit("unhandledRejection", n, o) : (t = s.onunhandledrejection) ? t({
-                    promise: o,
-                    reason: n
-                  }) : (r = s.console) && r.error && r.error("Unhandled promise rejection", n)), e.a = void 0;
-                }, 1);
+                  s(r[i++]);
+                e._c = [], e._n = !1, t && !e._h && T(e);
               });
             }
           },
-          x = function(e) {
-            var t,
-                r = e._d,
-                n = r.a || r.c,
-                o = 0;
-            if (r.h)
+          T = function(e) {
+            y.call(a, function() {
+              var t,
+                  r,
+                  n,
+                  o = e._v;
+              if (A(e) && (t = M(function() {
+                O ? g.emit("unhandledRejection", o, e) : (r = a.onunhandledrejection) ? r({
+                  promise: e,
+                  reason: o
+                }) : (n = a.console) && n.error && n.error("Unhandled promise rejection", o);
+              }), e._h = O || A(e) ? 2 : 1), e._a = void 0, t)
+                throw t.error;
+            });
+          },
+          A = function(e) {
+            if (1 == e._h)
               return !1;
-            for (; n.length > o; )
-              if (t = n[o++], t.fail || !x(t.promise))
+            for (var t,
+                r = e._a || e._c,
+                n = 0; r.length > n; )
+              if (t = r[n++], t.fail || !A(t.promise))
                 return !1;
             return !0;
           },
-          A = function(e) {
-            var t = this;
-            t.d || (t.d = !0, t = t.r || t, t.v = e, t.s = 2, t.a = t.c.slice(), T(t, !0));
-          },
           N = function(e) {
+            y.call(a, function() {
+              var t;
+              O ? g.emit("rejectionHandled", e) : (t = a.onrejectionhandled) && t({
+                promise: e,
+                reason: e._v
+              });
+            });
+          },
+          C = function(e) {
+            var t = this;
+            t._d || (t._d = !0, t = t._w || t, t._v = e, t._s = 2, t._a || (t._a = t._c.slice()), x(t, !0));
+          },
+          I = function(e) {
             var t,
                 r = this;
-            if (!r.d) {
-              r.d = !0, r = r.r || r;
+            if (!r._d) {
+              r._d = !0, r = r._w || r;
               try {
-                if (r.p === e)
-                  throw TypeError("Promise can't be resolved itself");
-                (t = R(e)) ? g(function() {
+                if (r === e)
+                  throw m("Promise can't be resolved itself");
+                (t = P(e)) ? _(function() {
                   var n = {
-                    r: r,
-                    d: !1
+                    _w: r,
+                    _d: !1
                   };
                   try {
-                    t.call(e, a(N, n, 1), a(A, n, 1));
+                    t.call(e, u(I, n, 1), u(C, n, 1));
                   } catch (o) {
-                    A.call(n, o);
+                    C.call(n, o);
                   }
-                }) : (r.v = e, r.s = 1, T(r, !1));
+                }) : (r._v = e, r._s = 1, x(r, !1));
               } catch (n) {
-                A.call({
-                  r: r,
-                  d: !1
+                C.call({
+                  _w: r,
+                  _d: !1
                 }, n);
               }
             }
           };
-      k || (E = function(e) {
-        p(e);
-        var t = this._d = {
-          p: h(this, E, _),
-          c: [],
-          a: void 0,
-          s: 0,
-          d: !1,
-          v: void 0,
-          h: !1,
-          n: !1
-        };
+      w || (j = function(e) {
+        d(this, j, v, "_h"), p(e), n.call(this);
         try {
-          e(a(N, t, 1), a(A, t, 1));
-        } catch (r) {
-          A.call(t, r);
+          e(u(I, this, 1), u(C, this, 1));
+        } catch (t) {
+          C.call(this, t);
         }
-      }, e("./$.redefine-all")(E.prototype, {
+      }, n = function(e) {
+        this._c = [], this._a = void 0, this._s = 0, this._d = !1, this._v = void 0, this._h = 0, this._n = !1;
+      }, n.prototype = e("./_redefine-all")(j.prototype, {
         then: function(e, t) {
-          var r = new S(m(this, E)),
-              n = r.promise,
-              o = this._d;
-          return r.ok = "function" == typeof e ? e : !0, r.fail = "function" == typeof t && t, o.c.push(r), o.a && o.a.push(r), o.s && T(o, !1), n;
+          var r = R(b(this, j));
+          return r.ok = "function" == typeof e ? e : !0, r.fail = "function" == typeof t && t, r.domain = O ? g.domain : void 0, this._c.push(r), this._a && this._a.push(r), this._s && x(this, !1), r.promise;
         },
         "catch": function(e) {
           return this.then(void 0, e);
         }
-      })), c(c.G + c.W + c.F * !k, {Promise: E}), e("./$.set-to-string-tag")(E, _), e("./$.set-species")(_), n = e("./$.core")[_], c(c.S + c.F * !k, _, {reject: function(e) {
-          var t = new S(this),
+      }), S = function() {
+        var e = new n;
+        this.promise = e, this.resolve = u(I, e, 1), this.reject = u(C, e, 1);
+      }), l(l.G + l.W + l.F * !w, {Promise: j}), e("./_set-to-string-tag")(j, v), e("./_set-species")(v), i = e("./_core")[v], l(l.S + l.F * !w, v, {reject: function(e) {
+          var t = R(this),
               r = t.reject;
           return r(e), t.promise;
-        }}), c(c.S + c.F * (!k || w(!0)), _, {resolve: function(e) {
-          if (e instanceof E && $(e.constructor, this))
+        }}), l(l.S + l.F * (s || !w), v, {resolve: function(e) {
+          if (e instanceof j && k(e.constructor, this))
             return e;
-          var t = new S(this),
+          var t = R(this),
               r = t.resolve;
           return r(e), t.promise;
-        }}), c(c.S + c.F * !(k && e("./$.iter-detect")(function(e) {
-        E.all(e)["catch"](function() {});
-      })), _, {
+        }}), l(l.S + l.F * !(w && e("./_iter-detect")(function(e) {
+        j.all(e)["catch"](E);
+      })), v, {
         all: function(e) {
-          var t = P(this),
-              r = new S(t),
+          var t = this,
+              r = R(t),
               n = r.resolve,
-              i = r.reject,
-              s = [],
-              a = M(function() {
-                d(e, !1, s.push, s);
-                var r = s.length,
-                    a = Array(r);
-                r ? o.each.call(s, function(e, o) {
-                  var s = !1;
-                  t.resolve(e).then(function(e) {
-                    s || (s = !0, a[o] = e, --r || n(a));
-                  }, i);
-                }) : n(a);
+              o = r.reject,
+              i = M(function() {
+                var r = [],
+                    i = 0,
+                    s = 1;
+                h(e, !1, function(e) {
+                  var a = i++,
+                      u = !1;
+                  r.push(void 0), s++, t.resolve(e).then(function(e) {
+                    u || (u = !0, r[a] = e, --s || n(r));
+                  }, o);
+                }), --s || n(r);
               });
-          return a && i(a.error), r.promise;
+          return i && o(i.error), r.promise;
         },
         race: function(e) {
-          var t = P(this),
-              r = new S(t),
+          var t = this,
+              r = R(t),
               n = r.reject,
               o = M(function() {
-                d(e, !1, function(e) {
+                h(e, !1, function(e) {
                   t.resolve(e).then(r.resolve, n);
                 });
               });
@@ -5301,33 +6021,31 @@ var define = $__System.amdDefine;
         }
       });
     }, {
-      "./$": 62,
-      "./$.a-function": 32,
-      "./$.an-object": 34,
-      "./$.classof": 35,
-      "./$.core": 37,
-      "./$.ctx": 38,
-      "./$.descriptors": 40,
-      "./$.export": 43,
-      "./$.for-of": 45,
-      "./$.global": 47,
-      "./$.is-object": 55,
-      "./$.iter-detect": 59,
-      "./$.library": 64,
-      "./$.microtask": 65,
-      "./$.redefine-all": 68,
-      "./$.same-value": 70,
-      "./$.set-proto": 71,
-      "./$.set-species": 72,
-      "./$.set-to-string-tag": 73,
-      "./$.species-constructor": 75,
-      "./$.strict-new": 76,
-      "./$.wks": 84
+      "./_a-function": 32,
+      "./_an-instance": 34,
+      "./_an-object": 35,
+      "./_classof": 37,
+      "./_core": 39,
+      "./_ctx": 40,
+      "./_export": 46,
+      "./_for-of": 48,
+      "./_global": 49,
+      "./_is-object": 58,
+      "./_iter-detect": 62,
+      "./_library": 66,
+      "./_microtask": 68,
+      "./_redefine-all": 82,
+      "./_set-proto": 84,
+      "./_set-species": 85,
+      "./_set-to-string-tag": 86,
+      "./_species-constructor": 89,
+      "./_task": 91,
+      "./_wks": 99
     }],
-    94: [function(e, t, r) {
+    111: [function(e, t, r) {
       "use strict";
-      var n = e("./$.string-at")(!0);
-      e("./$.iter-define")(String, "String", function(e) {
+      var n = e("./_string-at")(!0);
+      e("./_iter-define")(String, "String", function(e) {
         this._t = String(e), this._i = 0;
       }, function() {
         var e,
@@ -5342,183 +6060,215 @@ var define = $__System.amdDefine;
         });
       });
     }, {
-      "./$.iter-define": 58,
-      "./$.string-at": 77
+      "./_iter-define": 61,
+      "./_string-at": 90
     }],
-    95: [function(e, t, r) {
+    112: [function(e, t, r) {
       "use strict";
-      var n = e("./$"),
-          o = e("./$.global"),
-          i = e("./$.has"),
-          s = e("./$.descriptors"),
-          a = e("./$.export"),
-          u = e("./$.redefine"),
-          c = e("./$.fails"),
-          l = e("./$.shared"),
-          f = e("./$.set-to-string-tag"),
-          p = e("./$.uid"),
-          h = e("./$.wks"),
-          d = e("./$.keyof"),
-          y = e("./$.get-names"),
-          b = e("./$.enum-keys"),
-          v = e("./$.is-array"),
-          m = e("./$.an-object"),
-          g = e("./$.to-iobject"),
-          _ = e("./$.property-desc"),
-          O = n.getDesc,
-          j = n.setDesc,
-          E = n.create,
-          w = y.get,
-          k = o.Symbol,
-          $ = o.JSON,
-          P = $ && $.stringify,
-          R = !1,
-          S = h("_hidden"),
-          M = n.isEnum,
-          T = l("symbol-registry"),
-          x = l("symbols"),
-          A = "function" == typeof k,
-          N = Object.prototype,
-          C = s && c(function() {
-            return 7 != E(j({}, "a", {get: function() {
-                return j(this, "a", {value: 7}).a;
+      var n = e("./_global"),
+          o = e("./_core"),
+          i = e("./_has"),
+          s = e("./_descriptors"),
+          a = e("./_export"),
+          u = e("./_redefine"),
+          c = e("./_meta").KEY,
+          l = e("./_fails"),
+          f = e("./_shared"),
+          p = e("./_set-to-string-tag"),
+          d = e("./_uid"),
+          h = e("./_wks"),
+          b = e("./_keyof"),
+          y = e("./_enum-keys"),
+          _ = e("./_is-array"),
+          v = e("./_an-object"),
+          m = e("./_to-iobject"),
+          g = e("./_to-primitive"),
+          j = e("./_property-desc"),
+          O = e("./_object-create"),
+          E = e("./_object-gopn-ext"),
+          w = e("./_object-gopd"),
+          k = e("./_object-dp"),
+          P = w.f,
+          R = k.f,
+          S = E.f,
+          M = n.Symbol,
+          x = n.JSON,
+          T = x && x.stringify,
+          A = !1,
+          N = "prototype",
+          C = h("_hidden"),
+          I = h("toPrimitive"),
+          U = {}.propertyIsEnumerable,
+          D = f("symbol-registry"),
+          L = f("symbols"),
+          F = Object[N],
+          B = "function" == typeof M,
+          H = n.QObject,
+          q = s && l(function() {
+            return 7 != O(R({}, "a", {get: function() {
+                return R(this, "a", {value: 7}).a;
               }})).a;
           }) ? function(e, t, r) {
-            var n = O(N, t);
-            n && delete N[t], j(e, t, r), n && e !== N && j(N, t, n);
-          } : j,
-          I = function(e) {
-            var t = x[e] = E(k.prototype);
-            return t._k = e, s && R && C(N, e, {
+            var n = P(F, t);
+            n && delete F[t], R(e, t, r), n && e !== F && R(F, t, n);
+          } : R,
+          Y = function(e) {
+            var t = L[e] = O(M[N]);
+            return t._k = e, s && A && q(F, e, {
               configurable: !0,
               set: function(t) {
-                i(this, S) && i(this[S], e) && (this[S][e] = !1), C(this, e, _(1, t));
+                i(this, C) && i(this[C], e) && (this[C][e] = !1), q(this, e, j(1, t));
               }
             }), t;
           },
-          D = function(e) {
+          G = B && "symbol" == typeof M.iterator ? function(e) {
             return "symbol" == typeof e;
+          } : function(e) {
+            return e instanceof M;
           },
-          U = function(e, t, r) {
-            return r && i(x, t) ? (r.enumerable ? (i(e, S) && e[S][t] && (e[S][t] = !1), r = E(r, {enumerable: _(0, !1)})) : (i(e, S) || j(e, S, _(1, {})), e[S][t] = !0), C(e, t, r)) : j(e, t, r);
+          K = function(e, t, r) {
+            return v(e), t = g(t, !0), v(r), i(L, t) ? (r.enumerable ? (i(e, C) && e[C][t] && (e[C][t] = !1), r = O(r, {enumerable: j(0, !1)})) : (i(e, C) || R(e, C, j(1, {})), e[C][t] = !0), q(e, t, r)) : R(e, t, r);
           },
-          L = function(e, t) {
-            m(e);
+          V = function(e, t) {
+            v(e);
             for (var r,
-                n = b(t = g(t)),
+                n = y(t = m(t)),
                 o = 0,
                 i = n.length; i > o; )
-              U(e, r = n[o++], t[r]);
+              K(e, r = n[o++], t[r]);
             return e;
           },
-          F = function(e, t) {
-            return void 0 === t ? E(e) : L(E(e), t);
+          W = function(e, t) {
+            return void 0 === t ? O(e) : V(O(e), t);
           },
-          B = function(e) {
-            var t = M.call(this, e);
-            return t || !i(this, e) || !i(x, e) || i(this, S) && this[S][e] ? t : !0;
+          z = function(e) {
+            var t = U.call(this, e = g(e, !0));
+            return t || !i(this, e) || !i(L, e) || i(this, C) && this[C][e] ? t : !0;
           },
-          H = function(e, t) {
-            var r = O(e = g(e), t);
-            return !r || !i(x, t) || i(e, S) && e[S][t] || (r.enumerable = !0), r;
+          J = function(e, t) {
+            var r = P(e = m(e), t = g(t, !0));
+            return !r || !i(L, t) || i(e, C) && e[C][t] || (r.enumerable = !0), r;
           },
-          q = function(e) {
+          $ = function(e) {
             for (var t,
-                r = w(g(e)),
+                r = S(m(e)),
                 n = [],
                 o = 0; r.length > o; )
-              i(x, t = r[o++]) || t == S || n.push(t);
+              i(L, t = r[o++]) || t == C || t == c || n.push(t);
             return n;
           },
-          Y = function(e) {
+          X = function(e) {
             for (var t,
-                r = w(g(e)),
+                r = S(m(e)),
                 n = [],
                 o = 0; r.length > o; )
-              i(x, t = r[o++]) && n.push(x[t]);
+              i(L, t = r[o++]) && n.push(L[t]);
             return n;
           },
-          G = function(e) {
-            if (void 0 !== e && !D(e)) {
+          Q = function(e) {
+            if (void 0 !== e && !G(e)) {
               for (var t,
                   r,
                   n = [e],
-                  o = 1,
-                  i = arguments; i.length > o; )
-                n.push(i[o++]);
-              return t = n[1], "function" == typeof t && (r = t), (r || !v(t)) && (t = function(e, t) {
-                return r && (t = r.call(this, e, t)), D(t) ? void 0 : t;
-              }), n[1] = t, P.apply($, n);
+                  o = 1; arguments.length > o; )
+                n.push(arguments[o++]);
+              return t = n[1], "function" == typeof t && (r = t), !r && _(t) || (t = function(e, t) {
+                return r && (t = r.call(this, e, t)), G(t) ? void 0 : t;
+              }), n[1] = t, T.apply(x, n);
             }
           },
-          K = c(function() {
-            var e = k();
-            return "[null]" != P([e]) || "{}" != P({a: e}) || "{}" != P(Object(e));
+          Z = l(function() {
+            var e = M();
+            return "[null]" != T([e]) || "{}" != T({a: e}) || "{}" != T(Object(e));
           });
-      A || (k = function() {
-        if (D(this))
-          throw TypeError("Symbol is not a constructor");
-        return I(p(arguments.length > 0 ? arguments[0] : void 0));
-      }, u(k.prototype, "toString", function() {
+      B || (M = function() {
+        if (this instanceof M)
+          throw TypeError("Symbol is not a constructor!");
+        return Y(d(arguments.length > 0 ? arguments[0] : void 0));
+      }, u(M[N], "toString", function() {
         return this._k;
-      }), D = function(e) {
-        return e instanceof k;
-      }, n.create = F, n.isEnum = B, n.getDesc = H, n.setDesc = U, n.setDescs = L, n.getNames = y.get = q, n.getSymbols = Y, s && !e("./$.library") && u(N, "propertyIsEnumerable", B, !0));
-      var V = {
+      }), w.f = J, k.f = K, e("./_object-gopn").f = E.f = $, e("./_object-pie").f = z, e("./_object-gops").f = X, s && !e("./_library") && u(F, "propertyIsEnumerable", z, !0)), a(a.G + a.W + a.F * !B, {Symbol: M});
+      for (var ee = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),
+          te = 0; ee.length > te; ) {
+        var re = ee[te++],
+            ne = o.Symbol,
+            oe = h(re);
+        re in ne || R(ne, re, {value: B ? oe : Y(oe)});
+      }
+      H && H[N] && H[N].findChild || (A = !0), a(a.S + a.F * !B, "Symbol", {
         "for": function(e) {
-          return i(T, e += "") ? T[e] : T[e] = k(e);
+          return i(D, e += "") ? D[e] : D[e] = M(e);
         },
         keyFor: function(e) {
-          return d(T, e);
+          if (G(e))
+            return b(D, e);
+          throw TypeError(e + " is not a symbol!");
         },
         useSetter: function() {
-          R = !0;
+          A = !0;
         },
         useSimple: function() {
-          R = !1;
+          A = !1;
         }
-      };
-      n.each.call("hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), function(e) {
-        var t = h(e);
-        V[e] = A ? t : I(t);
-      }), R = !0, a(a.G + a.W, {Symbol: k}), a(a.S, "Symbol", V), a(a.S + a.F * !A, "Object", {
-        create: F,
-        defineProperty: U,
-        defineProperties: L,
-        getOwnPropertyDescriptor: H,
-        getOwnPropertyNames: q,
-        getOwnPropertySymbols: Y
-      }), $ && a(a.S + a.F * (!A || K), "JSON", {stringify: G}), f(k, "Symbol"), f(Math, "Math", !0), f(o.JSON, "JSON", !0);
+      }), a(a.S + a.F * !B, "Object", {
+        create: W,
+        defineProperty: K,
+        defineProperties: V,
+        getOwnPropertyDescriptor: J,
+        getOwnPropertyNames: $,
+        getOwnPropertySymbols: X
+      }), x && a(a.S + a.F * (!B || Z), "JSON", {stringify: Q}), M[N][I] || e("./_hide")(M[N], I, M[N].valueOf), p(M, "Symbol"), p(Math, "Math", !0), p(n.JSON, "JSON", !0);
     }, {
-      "./$": 62,
-      "./$.an-object": 34,
-      "./$.descriptors": 40,
-      "./$.enum-keys": 42,
-      "./$.export": 43,
-      "./$.fails": 44,
-      "./$.get-names": 46,
-      "./$.global": 47,
-      "./$.has": 48,
-      "./$.is-array": 54,
-      "./$.keyof": 63,
-      "./$.library": 64,
-      "./$.property-desc": 67,
-      "./$.redefine": 69,
-      "./$.set-to-string-tag": 73,
-      "./$.shared": 74,
-      "./$.to-iobject": 80,
-      "./$.uid": 83,
-      "./$.wks": 84
+      "./_an-object": 35,
+      "./_core": 39,
+      "./_descriptors": 42,
+      "./_enum-keys": 45,
+      "./_export": 46,
+      "./_fails": 47,
+      "./_global": 49,
+      "./_has": 50,
+      "./_hide": 51,
+      "./_is-array": 57,
+      "./_keyof": 65,
+      "./_library": 66,
+      "./_meta": 67,
+      "./_object-create": 69,
+      "./_object-dp": 70,
+      "./_object-gopd": 72,
+      "./_object-gopn": 74,
+      "./_object-gopn-ext": 73,
+      "./_object-gops": 75,
+      "./_object-pie": 79,
+      "./_property-desc": 81,
+      "./_redefine": 83,
+      "./_set-to-string-tag": 86,
+      "./_shared": 88,
+      "./_to-iobject": 94,
+      "./_to-primitive": 97,
+      "./_uid": 98,
+      "./_wks": 99
     }],
-    96: [function(e, t, r) {
+    113: [function(e, t, r) {
       e("./es6.array.iterator");
-      var n = e("./$.iterators");
-      n.NodeList = n.HTMLCollection = n.Array;
+      for (var n = e("./_global"),
+          o = e("./_hide"),
+          i = e("./_iterators"),
+          s = e("./_wks")("toStringTag"),
+          a = ["NodeList", "DOMTokenList", "MediaList", "StyleSheetList", "CSSRuleList"],
+          u = 0; 5 > u; u++) {
+        var c = a[u],
+            l = n[c],
+            f = l && l.prototype;
+        f && !f[s] && o(f, s, c), i[c] = i.Array;
+      }
     }, {
-      "./$.iterators": 61,
-      "./es6.array.iterator": 86
+      "./_global": 49,
+      "./_hide": 51,
+      "./_iterators": 64,
+      "./_wks": 99,
+      "./es6.array.iterator": 101
     }],
-    97: [function(e, t, r) {
+    114: [function(e, t, r) {
       function n() {
         l = !1, a.length ? c = a.concat(c) : f = -1, c.length && o();
       }
@@ -5561,7 +6311,7 @@ var define = $__System.amdDefine;
         return 0;
       };
     }, {}],
-    98: [function(t, r, n) {
+    115: [function(t, r, n) {
       !function(t, n) {
         "function" == typeof e && e.amd ? e([], n) : "undefined" != typeof r && r.exports ? r.exports = n() : t.tv4 = n();
       }(this, function() {
@@ -5583,23 +6333,23 @@ var define = $__System.amdDefine;
               c = t.split(","),
               l = [],
               f = {},
-              d = 0; d < c.length; d++) {
-            var y = c[d],
-                b = null;
-            if (-1 !== y.indexOf(":")) {
-              var v = y.split(":");
-              y = v[0], b = parseInt(v[1], 10);
+              h = 0; h < c.length; h++) {
+            var b = c[h],
+                y = null;
+            if (-1 !== b.indexOf(":")) {
+              var _ = b.split(":");
+              b = _[0], y = parseInt(_[1], 10);
             }
-            for (var m = {}; h[y.charAt(y.length - 1)]; )
-              m[y.charAt(y.length - 1)] = !0, y = y.substring(0, y.length - 1);
-            var g = {
-              truncate: b,
-              name: y,
-              suffices: m
+            for (var v = {}; d[b.charAt(b.length - 1)]; )
+              v[b.charAt(b.length - 1)] = !0, b = b.substring(0, b.length - 1);
+            var m = {
+              truncate: y,
+              name: b,
+              suffices: v
             };
-            l.push(g), f[y] = g, u.push(y);
+            l.push(m), f[b] = m, u.push(b);
           }
-          var _ = function(t) {
+          var g = function(t) {
             for (var r = "",
                 u = 0,
                 c = 0; c < l.length; c++) {
@@ -5609,21 +6359,21 @@ var define = $__System.amdDefine;
                 u++;
               else if (r += c === u ? o : n || ",", Array.isArray(p)) {
                 s && (r += f.name + "=");
-                for (var h = 0; h < p.length; h++)
-                  h > 0 && (r += f.suffices["*"] ? n || "," : ",", f.suffices["*"] && s && (r += f.name + "=")), r += i ? encodeURIComponent(p[h]).replace(/!/g, "%21") : e(p[h]);
+                for (var d = 0; d < p.length; d++)
+                  d > 0 && (r += f.suffices["*"] ? n || "," : ",", f.suffices["*"] && s && (r += f.name + "=")), r += i ? encodeURIComponent(p[d]).replace(/!/g, "%21") : e(p[d]);
               } else if ("object" == typeof p) {
                 s && !f.suffices["*"] && (r += f.name + "=");
-                var d = !0;
-                for (var y in p)
-                  d || (r += f.suffices["*"] ? n || "," : ","), d = !1, r += i ? encodeURIComponent(y).replace(/!/g, "%21") : e(y), r += f.suffices["*"] ? "=" : ",", r += i ? encodeURIComponent(p[y]).replace(/!/g, "%21") : e(p[y]);
+                var h = !0;
+                for (var b in p)
+                  h || (r += f.suffices["*"] ? n || "," : ","), h = !1, r += i ? encodeURIComponent(b).replace(/!/g, "%21") : e(b), r += f.suffices["*"] ? "=" : ",", r += i ? encodeURIComponent(p[b]).replace(/!/g, "%21") : e(p[b]);
               } else
                 s && (r += f.name, a && "" === p || (r += "=")), null != f.truncate && (p = p.substring(0, f.truncate)), r += i ? encodeURIComponent(p).replace(/!/g, "%21") : e(p);
             }
             return r;
           };
-          return _.varNames = u, {
+          return g.varNames = u, {
             prefix: o,
-            substitution: _
+            substitution: g
           };
         }
         function r(e) {
@@ -5716,9 +6466,9 @@ var define = $__System.amdDefine;
         }
         function u(e) {
           e = e || "en";
-          var t = O[e];
+          var t = j[e];
           return function(e) {
-            var r = t[e.code] || _[e.code];
+            var r = t[e.code] || g[e.code];
             if ("string" != typeof r)
               return "Unknown error code " + e.code + ": " + JSON.stringify(e.messageParams);
             var n = e.params;
@@ -5751,7 +6501,7 @@ var define = $__System.amdDefine;
         function f(e) {
           var t,
               r,
-              n = new d,
+              n = new h,
               o = {
                 setErrorReporter: function(e) {
                   return "string" == typeof e ? this.language(e) : (r = e, !0);
@@ -5760,19 +6510,19 @@ var define = $__System.amdDefine;
                   n.addFormat.apply(n, arguments);
                 },
                 language: function(e) {
-                  return e ? (O[e] || (e = e.split("-")[0]), O[e] ? (t = e, e) : !1) : t;
+                  return e ? (j[e] || (e = e.split("-")[0]), j[e] ? (t = e, e) : !1) : t;
                 },
                 addLanguage: function(e, t) {
                   var r;
-                  for (r in v)
-                    t[r] && !t[v[r]] && (t[v[r]] = t[r]);
+                  for (r in _)
+                    t[r] && !t[_[r]] && (t[_[r]] = t[r]);
                   var n = e.split("-")[0];
-                  if (O[n]) {
-                    O[e] = Object.create(O[n]);
+                  if (j[n]) {
+                    j[e] = Object.create(j[n]);
                     for (r in t)
-                      "undefined" == typeof O[n][r] && (O[n][r] = t[r]), O[e][r] = t[r];
+                      "undefined" == typeof j[n][r] && (j[n][r] = t[r]), j[e][r] = t[r];
                   } else
-                    O[e] = t, O[n] = t;
+                    j[e] = t, j[n] = t;
                   return this;
                 },
                 freshApi: function(e) {
@@ -5784,7 +6534,7 @@ var define = $__System.amdDefine;
                       c = r ? function(e, t, n) {
                         return r(e, t, n) || a(e, t, n);
                       } : a,
-                      l = new d(n, !1, c, i, s);
+                      l = new h(n, !1, c, i, s);
                   "string" == typeof o && (o = {$ref: o}), l.addSchema("", o);
                   var f = l.validateAll(e, o, null, null, "");
                   return !f && s && (f = l.banUnknownProperties(e, o)), this.error = f, this.missing = l.missing, this.valid = null === f, this.valid;
@@ -5798,7 +6548,7 @@ var define = $__System.amdDefine;
                       c = r ? function(e, t, n) {
                         return r(e, t, n) || a(e, t, n);
                       } : a,
-                      l = new d(n, !0, c, i, s);
+                      l = new h(n, !0, c, i, s);
                   "string" == typeof o && (o = {$ref: o}), l.addSchema("", o), l.validateAll(e, o, null, null, ""), s && l.banUnknownProperties(e, o);
                   var f = {};
                   return f.errors = l.errors, f.missing = l.missing, f.valid = 0 === f.errors.length, f;
@@ -5829,13 +6579,13 @@ var define = $__System.amdDefine;
                     throw new Error("Code name must be a string in UPPER_CASE_WITH_UNDERSCORES");
                   if ("number" != typeof t || t % 1 !== 0 || 1e4 > t)
                     throw new Error("Code number must be an integer > 10000");
-                  if ("undefined" != typeof v[e])
-                    throw new Error("Error already defined: " + e + " as " + v[e]);
-                  if ("undefined" != typeof m[t])
-                    throw new Error("Error code already used: " + m[t] + " as " + t);
-                  v[e] = t, m[t] = e, _[e] = _[t] = r;
-                  for (var n in O) {
-                    var o = O[n];
+                  if ("undefined" != typeof _[e])
+                    throw new Error("Error already defined: " + e + " as " + _[e]);
+                  if ("undefined" != typeof v[t])
+                    throw new Error("Error code already used: " + v[t] + " as " + t);
+                  _[e] = t, v[t] = e, g[e] = g[t] = r;
+                  for (var n in j) {
+                    var o = j[n];
                     o[e] && (o[t] = o[t] || o[e]);
                   }
                 },
@@ -5848,7 +6598,7 @@ var define = $__System.amdDefine;
                 normSchema: a,
                 resolveUrl: i,
                 getDocumentUri: s,
-                errorCodes: v
+                errorCodes: _
               };
           return o.language(e || "en"), o;
         }
@@ -5909,7 +6659,7 @@ var define = $__System.amdDefine;
           "?": !0,
           "&": !0
         },
-            h = {"*": !0};
+            d = {"*": !0};
         r.prototype = {
           toString: function() {
             return this.template;
@@ -5920,49 +6670,49 @@ var define = $__System.amdDefine;
             });
           }
         };
-        var d = function(e, t, r, n, o) {
+        var h = function(e, t, r, n, o) {
           if (this.missing = [], this.missingMap = {}, this.formatValidators = e ? Object.create(e.formatValidators) : {}, this.schemas = e ? Object.create(e.schemas) : {}, this.collectMultiple = t, this.errors = [], this.handleError = t ? this.collectError : this.returnError, n && (this.checkRecursive = !0, this.scanned = [], this.scannedFrozen = [], this.scannedFrozenSchemas = [], this.scannedFrozenValidationErrors = [], this.validatedSchemasKey = "tv4_validation_id", this.validationErrorsKey = "tv4_validation_errors_id"), o && (this.trackUnknownProperties = !0, this.knownPropertyPaths = {}, this.unknownPropertyPaths = {}), this.errorReporter = r || u("en"), "string" == typeof this.errorReporter)
             throw new Error("debug");
           if (this.definedKeywords = {}, e)
             for (var i in e.definedKeywords)
               this.definedKeywords[i] = e.definedKeywords[i].slice(0);
         };
-        d.prototype.defineKeyword = function(e, t) {
+        h.prototype.defineKeyword = function(e, t) {
           this.definedKeywords[e] = this.definedKeywords[e] || [], this.definedKeywords[e].push(t);
-        }, d.prototype.createError = function(e, t, r, n, o, i, s) {
+        }, h.prototype.createError = function(e, t, r, n, o, i, s) {
           var a = new c(e, t, r, n, o);
           return a.message = this.errorReporter(a, i, s), a;
-        }, d.prototype.returnError = function(e) {
+        }, h.prototype.returnError = function(e) {
           return e;
-        }, d.prototype.collectError = function(e) {
+        }, h.prototype.collectError = function(e) {
           return e && this.errors.push(e), null;
-        }, d.prototype.prefixErrors = function(e, t, r) {
+        }, h.prototype.prefixErrors = function(e, t, r) {
           for (var n = e; n < this.errors.length; n++)
             this.errors[n] = this.errors[n].prefixWith(t, r);
           return this;
-        }, d.prototype.banUnknownProperties = function(e, t) {
+        }, h.prototype.banUnknownProperties = function(e, t) {
           for (var r in this.unknownPropertyPaths) {
-            var n = this.createError(v.UNKNOWN_PROPERTY, {path: r}, r, "", null, e, t),
+            var n = this.createError(_.UNKNOWN_PROPERTY, {path: r}, r, "", null, e, t),
                 o = this.handleError(n);
             if (o)
               return o;
           }
           return null;
-        }, d.prototype.addFormat = function(e, t) {
+        }, h.prototype.addFormat = function(e, t) {
           if ("object" == typeof e) {
             for (var r in e)
               this.addFormat(r, e[r]);
             return this;
           }
           this.formatValidators[e] = t;
-        }, d.prototype.resolveRefs = function(e, t) {
+        }, h.prototype.resolveRefs = function(e, t) {
           if (void 0 !== e.$ref) {
             if (t = t || {}, t[e.$ref])
-              return this.createError(v.CIRCULAR_REFERENCE, {urls: Object.keys(t).join(", ")}, "", "", null, void 0, e);
+              return this.createError(_.CIRCULAR_REFERENCE, {urls: Object.keys(t).join(", ")}, "", "", null, void 0, e);
             t[e.$ref] = !0, e = this.getSchema(e.$ref, t);
           }
           return e;
-        }, d.prototype.getSchema = function(e, t) {
+        }, h.prototype.getSchema = function(e, t) {
           var r;
           if (void 0 !== this.schemas[e])
             return r = this.schemas[e], this.resolveRefs(r, t);
@@ -5988,7 +6738,7 @@ var define = $__System.amdDefine;
               return this.resolveRefs(r, t);
           }
           void 0 === this.missing[n] && (this.missing.push(n), this.missing[n] = n, this.missingMap[n] = n);
-        }, d.prototype.searchSchemas = function(e, t) {
+        }, h.prototype.searchSchemas = function(e, t) {
           if (Array.isArray(e))
             for (var r = 0; r < e.length; r++)
               this.searchSchemas(e[r], t);
@@ -6003,33 +6753,33 @@ var define = $__System.amdDefine;
                   o && void 0 === this.schemas[o] && void 0 === this.missingMap[o] && (this.missingMap[o] = o);
                 }
           }
-        }, d.prototype.addSchema = function(e, t) {
+        }, h.prototype.addSchema = function(e, t) {
           if ("string" != typeof e || "undefined" == typeof t) {
             if ("object" != typeof e || "string" != typeof e.id)
               return;
             t = e, e = t.id;
           }
           e === s(e) + "#" && (e = s(e)), this.schemas[e] = t, delete this.missingMap[e], a(t, e), this.searchSchemas(t, e);
-        }, d.prototype.getSchemaMap = function() {
+        }, h.prototype.getSchemaMap = function() {
           var e = {};
           for (var t in this.schemas)
             e[t] = this.schemas[t];
           return e;
-        }, d.prototype.getSchemaUris = function(e) {
+        }, h.prototype.getSchemaUris = function(e) {
           var t = [];
           for (var r in this.schemas)
-            (!e || e.test(r)) && t.push(r);
+            e && !e.test(r) || t.push(r);
           return t;
-        }, d.prototype.getMissingUris = function(e) {
+        }, h.prototype.getMissingUris = function(e) {
           var t = [];
           for (var r in this.missingMap)
-            (!e || e.test(r)) && t.push(r);
+            e && !e.test(r) || t.push(r);
           return t;
-        }, d.prototype.dropSchemas = function() {
+        }, h.prototype.dropSchemas = function() {
           this.schemas = {}, this.reset();
-        }, d.prototype.reset = function() {
+        }, h.prototype.reset = function() {
           this.missing = [], this.missingMap = {}, this.errors = [];
-        }, d.prototype.validateAll = function(e, t, r, n, o) {
+        }, h.prototype.validateAll = function(e, t, r, n, o) {
           var i;
           if (t = this.resolveRefs(t), !t)
             return null;
@@ -6062,34 +6812,34 @@ var define = $__System.amdDefine;
                     value: [],
                     configurable: !0
                   });
-                } catch (h) {
+                } catch (d) {
                   e[this.validatedSchemasKey] = [], e[this.validationErrorsKey] = [];
                 }
               l = e[this.validatedSchemasKey].length, e[this.validatedSchemasKey][l] = t, e[this.validationErrorsKey][l] = [];
             }
           }
-          var d = this.errors.length,
-              y = this.validateBasic(e, t, o) || this.validateNumeric(e, t, o) || this.validateString(e, t, o) || this.validateArray(e, t, o) || this.validateObject(e, t, o) || this.validateCombinations(e, t, o) || this.validateHypermedia(e, t, o) || this.validateFormat(e, t, o) || this.validateDefinedKeywords(e, t, o) || null;
+          var h = this.errors.length,
+              b = this.validateBasic(e, t, o) || this.validateNumeric(e, t, o) || this.validateString(e, t, o) || this.validateArray(e, t, o) || this.validateObject(e, t, o) || this.validateCombinations(e, t, o) || this.validateHypermedia(e, t, o) || this.validateFormat(e, t, o) || this.validateDefinedKeywords(e, t, o) || null;
           if (i) {
             for (; this.scanned.length; ) {
-              var b = this.scanned.pop();
-              delete b[this.validatedSchemasKey];
+              var y = this.scanned.pop();
+              delete y[this.validatedSchemasKey];
             }
             this.scannedFrozen = [], this.scannedFrozenSchemas = [];
           }
-          if (y || d !== this.errors.length)
+          if (b || h !== this.errors.length)
             for (; r && r.length || n && n.length; ) {
-              var v = r && r.length ? "" + r.pop() : null,
-                  m = n && n.length ? "" + n.pop() : null;
-              y && (y = y.prefixWith(v, m)), this.prefixErrors(d, v, m);
+              var _ = r && r.length ? "" + r.pop() : null,
+                  v = n && n.length ? "" + n.pop() : null;
+              b && (b = b.prefixWith(_, v)), this.prefixErrors(h, _, v);
             }
-          return null !== u ? this.scannedFrozenValidationErrors[s][u] = this.errors.slice(a) : null !== l && (e[this.validationErrorsKey][l] = this.errors.slice(a)), this.handleError(y);
-        }, d.prototype.validateFormat = function(e, t) {
+          return null !== u ? this.scannedFrozenValidationErrors[s][u] = this.errors.slice(a) : null !== l && (e[this.validationErrorsKey][l] = this.errors.slice(a)), this.handleError(b);
+        }, h.prototype.validateFormat = function(e, t) {
           if ("string" != typeof t.format || !this.formatValidators[t.format])
             return null;
           var r = this.formatValidators[t.format].call(null, e, t);
-          return "string" == typeof r || "number" == typeof r ? this.createError(v.FORMAT_CUSTOM, {message: r}, "", "/format", null, e, t) : r && "object" == typeof r ? this.createError(v.FORMAT_CUSTOM, {message: r.message || "?"}, r.dataPath || "", r.schemaPath || "/format", null, e, t) : null;
-        }, d.prototype.validateDefinedKeywords = function(e, t, r) {
+          return "string" == typeof r || "number" == typeof r ? this.createError(_.FORMAT_CUSTOM, {message: r}, "", "/format", null, e, t) : r && "object" == typeof r ? this.createError(_.FORMAT_CUSTOM, {message: r.message || "?"}, r.dataPath || "", r.schemaPath || "/format", null, e, t) : null;
+        }, h.prototype.validateDefinedKeywords = function(e, t, r) {
           for (var n in this.definedKeywords)
             if ("undefined" != typeof t[n])
               for (var o = this.definedKeywords[n],
@@ -6097,18 +6847,18 @@ var define = $__System.amdDefine;
                 var s = o[i],
                     a = s(e, t[n], t, r);
                 if ("string" == typeof a || "number" == typeof a)
-                  return this.createError(v.KEYWORD_CUSTOM, {
+                  return this.createError(_.KEYWORD_CUSTOM, {
                     key: n,
                     message: a
                   }, "", "", null, e, t).prefixWith(null, n);
                 if (a && "object" == typeof a) {
                   var u = a.code;
                   if ("string" == typeof u) {
-                    if (!v[u])
+                    if (!_[u])
                       throw new Error("Undefined error code (use defineError): " + u);
-                    u = v[u];
+                    u = _[u];
                   } else
-                    "number" != typeof u && (u = v.KEYWORD_CUSTOM);
+                    "number" != typeof u && (u = _.KEYWORD_CUSTOM);
                   var c = "object" == typeof a.message ? a.message : {
                     key: n,
                     message: a.message || "?"
@@ -6118,10 +6868,10 @@ var define = $__System.amdDefine;
                 }
               }
           return null;
-        }, d.prototype.validateBasic = function(e, t, r) {
+        }, h.prototype.validateBasic = function(e, t, r) {
           var n;
           return (n = this.validateType(e, t, r)) ? n.prefixWith(null, "type") : (n = this.validateEnum(e, t, r)) ? n.prefixWith(null, "type") : null;
-        }, d.prototype.validateType = function(e, t) {
+        }, h.prototype.validateType = function(e, t) {
           if (void 0 === t.type)
             return null;
           var r = typeof e;
@@ -6133,11 +6883,11 @@ var define = $__System.amdDefine;
             if (i === r || "integer" === i && "number" === r && e % 1 === 0)
               return null;
           }
-          return this.createError(v.INVALID_TYPE, {
+          return this.createError(_.INVALID_TYPE, {
             type: r,
             expected: n.join("/")
           }, "", "", null, e, t);
-        }, d.prototype.validateEnum = function(e, t) {
+        }, h.prototype.validateEnum = function(e, t) {
           if (void 0 === t["enum"])
             return null;
           for (var r = 0; r < t["enum"].length; r++) {
@@ -6145,66 +6895,66 @@ var define = $__System.amdDefine;
             if (n(e, o))
               return null;
           }
-          return this.createError(v.ENUM_MISMATCH, {value: "undefined" != typeof JSON ? JSON.stringify(e) : e}, "", "", null, e, t);
-        }, d.prototype.validateNumeric = function(e, t, r) {
+          return this.createError(_.ENUM_MISMATCH, {value: "undefined" != typeof JSON ? JSON.stringify(e) : e}, "", "", null, e, t);
+        }, h.prototype.validateNumeric = function(e, t, r) {
           return this.validateMultipleOf(e, t, r) || this.validateMinMax(e, t, r) || this.validateNaN(e, t, r) || null;
         };
-        var y = Math.pow(2, -51),
-            b = 1 - y;
-        d.prototype.validateMultipleOf = function(e, t) {
+        var b = Math.pow(2, -51),
+            y = 1 - b;
+        h.prototype.validateMultipleOf = function(e, t) {
           var r = t.multipleOf || t.divisibleBy;
           if (void 0 === r)
             return null;
           if ("number" == typeof e) {
             var n = e / r % 1;
-            if (n >= y && b > n)
-              return this.createError(v.NUMBER_MULTIPLE_OF, {
+            if (n >= b && y > n)
+              return this.createError(_.NUMBER_MULTIPLE_OF, {
                 value: e,
                 multipleOf: r
               }, "", "", null, e, t);
           }
           return null;
-        }, d.prototype.validateMinMax = function(e, t) {
+        }, h.prototype.validateMinMax = function(e, t) {
           if ("number" != typeof e)
             return null;
           if (void 0 !== t.minimum) {
             if (e < t.minimum)
-              return this.createError(v.NUMBER_MINIMUM, {
+              return this.createError(_.NUMBER_MINIMUM, {
                 value: e,
                 minimum: t.minimum
               }, "", "/minimum", null, e, t);
             if (t.exclusiveMinimum && e === t.minimum)
-              return this.createError(v.NUMBER_MINIMUM_EXCLUSIVE, {
+              return this.createError(_.NUMBER_MINIMUM_EXCLUSIVE, {
                 value: e,
                 minimum: t.minimum
               }, "", "/exclusiveMinimum", null, e, t);
           }
           if (void 0 !== t.maximum) {
             if (e > t.maximum)
-              return this.createError(v.NUMBER_MAXIMUM, {
+              return this.createError(_.NUMBER_MAXIMUM, {
                 value: e,
                 maximum: t.maximum
               }, "", "/maximum", null, e, t);
             if (t.exclusiveMaximum && e === t.maximum)
-              return this.createError(v.NUMBER_MAXIMUM_EXCLUSIVE, {
+              return this.createError(_.NUMBER_MAXIMUM_EXCLUSIVE, {
                 value: e,
                 maximum: t.maximum
               }, "", "/exclusiveMaximum", null, e, t);
           }
           return null;
-        }, d.prototype.validateNaN = function(e, t) {
-          return "number" != typeof e ? null : isNaN(e) === !0 || e === 1 / 0 || e === -(1 / 0) ? this.createError(v.NUMBER_NOT_A_NUMBER, {value: e}, "", "/type", null, e, t) : null;
-        }, d.prototype.validateString = function(e, t, r) {
+        }, h.prototype.validateNaN = function(e, t) {
+          return "number" != typeof e ? null : isNaN(e) === !0 || e === 1 / 0 || e === -(1 / 0) ? this.createError(_.NUMBER_NOT_A_NUMBER, {value: e}, "", "/type", null, e, t) : null;
+        }, h.prototype.validateString = function(e, t, r) {
           return this.validateStringLength(e, t, r) || this.validateStringPattern(e, t, r) || null;
-        }, d.prototype.validateStringLength = function(e, t) {
-          return "string" != typeof e ? null : void 0 !== t.minLength && e.length < t.minLength ? this.createError(v.STRING_LENGTH_SHORT, {
+        }, h.prototype.validateStringLength = function(e, t) {
+          return "string" != typeof e ? null : void 0 !== t.minLength && e.length < t.minLength ? this.createError(_.STRING_LENGTH_SHORT, {
             length: e.length,
             minimum: t.minLength
-          }, "", "/minLength", null, e, t) : void 0 !== t.maxLength && e.length > t.maxLength ? this.createError(v.STRING_LENGTH_LONG, {
+          }, "", "/minLength", null, e, t) : void 0 !== t.maxLength && e.length > t.maxLength ? this.createError(_.STRING_LENGTH_LONG, {
             length: e.length,
             maximum: t.maxLength
           }, "", "/maxLength", null, e, t) : null;
-        }, d.prototype.validateStringPattern = function(e, t) {
+        }, h.prototype.validateStringPattern = function(e, t) {
           if ("string" != typeof e || "string" != typeof t.pattern && !(t.pattern instanceof RegExp))
             return null;
           var r;
@@ -6216,24 +6966,24 @@ var define = $__System.amdDefine;
                 i = t.pattern.match(/^\/(.+)\/([img]*)$/);
             i ? (n = i[1], o = i[2]) : n = t.pattern, r = new RegExp(n, o);
           }
-          return r.test(e) ? null : this.createError(v.STRING_PATTERN, {pattern: t.pattern}, "", "/pattern", null, e, t);
-        }, d.prototype.validateArray = function(e, t, r) {
+          return r.test(e) ? null : this.createError(_.STRING_PATTERN, {pattern: t.pattern}, "", "/pattern", null, e, t);
+        }, h.prototype.validateArray = function(e, t, r) {
           return Array.isArray(e) ? this.validateArrayLength(e, t, r) || this.validateArrayUniqueItems(e, t, r) || this.validateArrayItems(e, t, r) || null : null;
-        }, d.prototype.validateArrayLength = function(e, t) {
+        }, h.prototype.validateArrayLength = function(e, t) {
           var r;
-          return void 0 !== t.minItems && e.length < t.minItems && (r = this.createError(v.ARRAY_LENGTH_SHORT, {
+          return void 0 !== t.minItems && e.length < t.minItems && (r = this.createError(_.ARRAY_LENGTH_SHORT, {
             length: e.length,
             minimum: t.minItems
-          }, "", "/minItems", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxItems && e.length > t.maxItems && (r = this.createError(v.ARRAY_LENGTH_LONG, {
+          }, "", "/minItems", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxItems && e.length > t.maxItems && (r = this.createError(_.ARRAY_LENGTH_LONG, {
             length: e.length,
             maximum: t.maxItems
           }, "", "/maxItems", null, e, t), this.handleError(r)) ? r : null;
-        }, d.prototype.validateArrayUniqueItems = function(e, t) {
+        }, h.prototype.validateArrayUniqueItems = function(e, t) {
           if (t.uniqueItems)
             for (var r = 0; r < e.length; r++)
               for (var o = r + 1; o < e.length; o++)
                 if (n(e[r], e[o])) {
-                  var i = this.createError(v.ARRAY_UNIQUE, {
+                  var i = this.createError(_.ARRAY_UNIQUE, {
                     match1: r,
                     match2: o
                   }, "", "/uniqueItems", null, e, t);
@@ -6241,7 +6991,7 @@ var define = $__System.amdDefine;
                     return i;
                 }
           return null;
-        }, d.prototype.validateArrayItems = function(e, t, r) {
+        }, h.prototype.validateArrayItems = function(e, t, r) {
           if (void 0 === t.items)
             return null;
           var n,
@@ -6253,7 +7003,7 @@ var define = $__System.amdDefine;
                   return n;
               } else if (void 0 !== t.additionalItems)
                 if ("boolean" == typeof t.additionalItems) {
-                  if (!t.additionalItems && (n = this.createError(v.ARRAY_ADDITIONAL_ITEMS, {}, "/" + o, "/additionalItems", null, e, t), this.handleError(n)))
+                  if (!t.additionalItems && (n = this.createError(_.ARRAY_ADDITIONAL_ITEMS, {}, "/" + o, "/additionalItems", null, e, t), this.handleError(n)))
                     return n;
                 } else if (n = this.validateAll(e[o], t.additionalItems, [o], ["additionalItems"], r + "/" + o))
                   return n;
@@ -6262,30 +7012,30 @@ var define = $__System.amdDefine;
               if (n = this.validateAll(e[o], t.items, [o], ["items"], r + "/" + o))
                 return n;
           return null;
-        }, d.prototype.validateObject = function(e, t, r) {
+        }, h.prototype.validateObject = function(e, t, r) {
           return "object" != typeof e || null === e || Array.isArray(e) ? null : this.validateObjectMinMaxProperties(e, t, r) || this.validateObjectRequiredProperties(e, t, r) || this.validateObjectProperties(e, t, r) || this.validateObjectDependencies(e, t, r) || null;
-        }, d.prototype.validateObjectMinMaxProperties = function(e, t) {
+        }, h.prototype.validateObjectMinMaxProperties = function(e, t) {
           var r,
               n = Object.keys(e);
-          return void 0 !== t.minProperties && n.length < t.minProperties && (r = this.createError(v.OBJECT_PROPERTIES_MINIMUM, {
+          return void 0 !== t.minProperties && n.length < t.minProperties && (r = this.createError(_.OBJECT_PROPERTIES_MINIMUM, {
             propertyCount: n.length,
             minimum: t.minProperties
-          }, "", "/minProperties", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxProperties && n.length > t.maxProperties && (r = this.createError(v.OBJECT_PROPERTIES_MAXIMUM, {
+          }, "", "/minProperties", null, e, t), this.handleError(r)) ? r : void 0 !== t.maxProperties && n.length > t.maxProperties && (r = this.createError(_.OBJECT_PROPERTIES_MAXIMUM, {
             propertyCount: n.length,
             maximum: t.maxProperties
           }, "", "/maxProperties", null, e, t), this.handleError(r)) ? r : null;
-        }, d.prototype.validateObjectRequiredProperties = function(e, t) {
+        }, h.prototype.validateObjectRequiredProperties = function(e, t) {
           if (void 0 !== t.required)
             for (var r = 0; r < t.required.length; r++) {
               var n = t.required[r];
               if (void 0 === e[n]) {
-                var o = this.createError(v.OBJECT_REQUIRED, {key: n}, "", "/required/" + r, null, e, t);
+                var o = this.createError(_.OBJECT_REQUIRED, {key: n}, "", "/required/" + r, null, e, t);
                 if (this.handleError(o))
                   return o;
               }
             }
           return null;
-        }, d.prototype.validateObjectProperties = function(e, t, r) {
+        }, h.prototype.validateObjectProperties = function(e, t, r) {
           var n;
           for (var o in e) {
             var i = r + "/" + o.replace(/~/g, "~0").replace(/\//g, "~1"),
@@ -6302,7 +7052,7 @@ var define = $__System.amdDefine;
               this.trackUnknownProperties && (this.knownPropertyPaths[i] = !0, delete this.unknownPropertyPaths[i]);
             else if (void 0 !== t.additionalProperties) {
               if (this.trackUnknownProperties && (this.knownPropertyPaths[i] = !0, delete this.unknownPropertyPaths[i]), "boolean" == typeof t.additionalProperties) {
-                if (!t.additionalProperties && (n = this.createError(v.OBJECT_ADDITIONAL_PROPERTIES, {key: o}, "", "/additionalProperties", null, e, t).prefixWith(o, null), this.handleError(n)))
+                if (!t.additionalProperties && (n = this.createError(_.OBJECT_ADDITIONAL_PROPERTIES, {key: o}, "", "/additionalProperties", null, e, t).prefixWith(o, null), this.handleError(n)))
                   return n;
               } else if (n = this.validateAll(e[o], t.additionalProperties, [o], ["additionalProperties"], i))
                 return n;
@@ -6310,14 +7060,14 @@ var define = $__System.amdDefine;
               this.trackUnknownProperties && !this.knownPropertyPaths[i] && (this.unknownPropertyPaths[i] = !0);
           }
           return null;
-        }, d.prototype.validateObjectDependencies = function(e, t, r) {
+        }, h.prototype.validateObjectDependencies = function(e, t, r) {
           var n;
           if (void 0 !== t.dependencies)
             for (var o in t.dependencies)
               if (void 0 !== e[o]) {
                 var i = t.dependencies[o];
                 if ("string" == typeof i) {
-                  if (void 0 === e[i] && (n = this.createError(v.OBJECT_DEPENDENCY_KEY, {
+                  if (void 0 === e[i] && (n = this.createError(_.OBJECT_DEPENDENCY_KEY, {
                     key: o,
                     missing: i
                   }, "", "", null, e, t).prefixWith(null, o).prefixWith(null, "dependencies"), this.handleError(n)))
@@ -6325,7 +7075,7 @@ var define = $__System.amdDefine;
                 } else if (Array.isArray(i))
                   for (var s = 0; s < i.length; s++) {
                     var a = i[s];
-                    if (void 0 === e[a] && (n = this.createError(v.OBJECT_DEPENDENCY_KEY, {
+                    if (void 0 === e[a] && (n = this.createError(_.OBJECT_DEPENDENCY_KEY, {
                       key: o,
                       missing: a
                     }, "", "/" + s, null, e, t).prefixWith(null, o).prefixWith(null, "dependencies"), this.handleError(n)))
@@ -6335,9 +7085,9 @@ var define = $__System.amdDefine;
                   return n;
               }
           return null;
-        }, d.prototype.validateCombinations = function(e, t, r) {
+        }, h.prototype.validateCombinations = function(e, t, r) {
           return this.validateAllOf(e, t, r) || this.validateAnyOf(e, t, r) || this.validateOneOf(e, t, r) || this.validateNot(e, t, r) || null;
-        }, d.prototype.validateAllOf = function(e, t, r) {
+        }, h.prototype.validateAllOf = function(e, t, r) {
           if (void 0 === t.allOf)
             return null;
           for (var n,
@@ -6347,7 +7097,7 @@ var define = $__System.amdDefine;
               return n;
           }
           return null;
-        }, d.prototype.validateAnyOf = function(e, t, r) {
+        }, h.prototype.validateAnyOf = function(e, t, r) {
           if (void 0 === t.anyOf)
             return null;
           var n,
@@ -6365,8 +7115,8 @@ var define = $__System.amdDefine;
               if (this.errors = this.errors.slice(0, s), this.trackUnknownProperties) {
                 for (var p in this.knownPropertyPaths)
                   o[p] = !0, delete n[p];
-                for (var h in this.unknownPropertyPaths)
-                  o[h] || (n[h] = !0);
+                for (var d in this.unknownPropertyPaths)
+                  o[d] || (n[d] = !0);
                 a = !1;
                 continue;
               }
@@ -6374,8 +7124,8 @@ var define = $__System.amdDefine;
             }
             f && i.push(f.prefixWith(null, "" + u).prefixWith(null, "anyOf"));
           }
-          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = o), a ? (i = i.concat(this.errors.slice(s)), this.errors = this.errors.slice(0, s), this.createError(v.ANY_OF_MISSING, {}, "", "/anyOf", i, e, t)) : void 0;
-        }, d.prototype.validateOneOf = function(e, t, r) {
+          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = o), a ? (i = i.concat(this.errors.slice(s)), this.errors = this.errors.slice(0, s), this.createError(_.ANY_OF_MISSING, {}, "", "/anyOf", i, e, t)) : void 0;
+        }, h.prototype.validateOneOf = function(e, t, r) {
           if (void 0 === t.oneOf)
             return null;
           var n,
@@ -6391,21 +7141,21 @@ var define = $__System.amdDefine;
                 f = this.validateAll(e, c, [], ["oneOf", u], r);
             if (null === f && l === this.errors.length) {
               if (null !== i)
-                return this.errors = this.errors.slice(0, a), this.createError(v.ONE_OF_MULTIPLE, {
+                return this.errors = this.errors.slice(0, a), this.createError(_.ONE_OF_MULTIPLE, {
                   index1: i,
                   index2: u
                 }, "", "/oneOf", null, e, t);
               if (i = u, this.trackUnknownProperties) {
                 for (var p in this.knownPropertyPaths)
                   o[p] = !0, delete n[p];
-                for (var h in this.unknownPropertyPaths)
-                  o[h] || (n[h] = !0);
+                for (var d in this.unknownPropertyPaths)
+                  o[d] || (n[d] = !0);
               }
             } else
               f && s.push(f);
           }
-          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = o), null === i ? (s = s.concat(this.errors.slice(a)), this.errors = this.errors.slice(0, a), this.createError(v.ONE_OF_MISSING, {}, "", "/oneOf", s, e, t)) : (this.errors = this.errors.slice(0, a), null);
-        }, d.prototype.validateNot = function(e, t, r) {
+          return this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = o), null === i ? (s = s.concat(this.errors.slice(a)), this.errors = this.errors.slice(0, a), this.createError(_.ONE_OF_MISSING, {}, "", "/oneOf", s, e, t)) : (this.errors = this.errors.slice(0, a), null);
+        }, h.prototype.validateNot = function(e, t, r) {
           if (void 0 === t.not)
             return null;
           var n,
@@ -6414,8 +7164,8 @@ var define = $__System.amdDefine;
           this.trackUnknownProperties && (n = this.unknownPropertyPaths, o = this.knownPropertyPaths, this.unknownPropertyPaths = {}, this.knownPropertyPaths = {});
           var s = this.validateAll(e, t.not, null, null, r),
               a = this.errors.slice(i);
-          return this.errors = this.errors.slice(0, i), this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = o), null === s && 0 === a.length ? this.createError(v.NOT_PASSED, {}, "", "/not", null, e, t) : null;
-        }, d.prototype.validateHypermedia = function(e, t, n) {
+          return this.errors = this.errors.slice(0, i), this.trackUnknownProperties && (this.unknownPropertyPaths = n, this.knownPropertyPaths = o), null === s && 0 === a.length ? this.createError(_.NOT_PASSED, {}, "", "/not", null, e, t) : null;
+        }, h.prototype.validateHypermedia = function(e, t, n) {
           if (!t.links)
             return null;
           for (var o,
@@ -6438,7 +7188,7 @@ var define = $__System.amdDefine;
             }
           }
         };
-        var v = {
+        var _ = {
           INVALID_TYPE: 0,
           ENUM_MISMATCH: 1,
           ANY_OF_MISSING: 10,
@@ -6468,10 +7218,10 @@ var define = $__System.amdDefine;
           CIRCULAR_REFERENCE: 600,
           UNKNOWN_PROPERTY: 1e3
         },
-            m = {};
-        for (var g in v)
-          m[v[g]] = g;
-        var _ = {
+            v = {};
+        for (var m in _)
+          v[_[m]] = m;
+        var g = {
           INVALID_TYPE: "Invalid type: {type} (expected {expected})",
           ENUM_MISMATCH: "No enum match for: {value}",
           ANY_OF_MISSING: 'Data does not match any schemas from "anyOf"',
@@ -6507,19 +7257,19 @@ var define = $__System.amdDefine;
               this.subErrors[r].prefixWith(e, t);
           return this;
         };
-        var O = {},
-            j = f();
-        return j.addLanguage("en-gb", _), j.tv4 = j, j;
+        var j = {},
+            O = f();
+        return O.addLanguage("en-gb", g), O.tv4 = O, O;
       });
     }, {}],
-    99: [function(e, t, r) {
+    116: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
       var i = function() {
-        function e(t, r, n, i, s, a) {
-          o(this, e), this._guid = t, this._type = r, this._objectName = n, this._description = i, this._language = s, this._sourcePackageURL = a, this._signature = null, this._sourcePackage = null;
+        function e(t, r, n, i, s, a, u) {
+          o(this, e), this._guid = t, this._type = r, this._version = n, this._objectName = i, this._description = s, this._language = a, this._sourcePackageURL = u, this._signature = null, this._sourcePackage = null;
         }
         return n(e, [{
           key: "guid",
@@ -6536,6 +7286,14 @@ var define = $__System.amdDefine;
           },
           set: function(e) {
             e && (this._type = e);
+          }
+        }, {
+          key: "version",
+          get: function() {
+            return this._version;
+          },
+          set: function(e) {
+            e && (this._version = e);
           }
         }, {
           key: "objectName",
@@ -6609,7 +7367,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13
     }],
-    100: [function(e, t, r) {
+    117: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -6622,89 +7380,89 @@ var define = $__System.amdDefine;
           l = e("./CatalogueDataObject"),
           f = a(l),
           p = e("./SourcePackage"),
-          h = a(p),
-          d = e("./HypertyDescriptor"),
-          y = a(d),
-          b = e("./ProtocolStubDescriptor"),
-          v = a(b),
-          m = e("./HypertyRuntimeDescriptor"),
-          g = a(m),
-          _ = e("./PolicyEnforcerDescriptor"),
-          O = a(_),
-          j = e("./DataObjectSchema"),
-          E = a(j),
+          d = a(p),
+          h = e("./HypertyDescriptor"),
+          b = a(h),
+          y = e("./ProtocolStubDescriptor"),
+          _ = a(y),
+          v = e("./HypertyRuntimeDescriptor"),
+          m = a(v),
+          g = e("./PolicyEnforcerDescriptor"),
+          j = a(g),
+          O = e("./DataObjectSchema"),
+          E = a(O),
           w = function(e) {
             function t(e, r) {
               s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r);
             }
             return o(t, e), i(t, [{
               key: "createCatalogueDataObject",
-              value: function(e, t, r, n, o, i) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i)
+              value: function(e, t, r, n, o, i, s) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s)
                   throw new Error("Invalid parameters!");
-                return new f["default"](e, t, r, n, o, i);
+                return new f["default"](e, t, r, n, o, i, s);
               }
             }, {
               key: "createHypertyDescriptorObject",
-              value: function(e, t, r, n, o, i, s) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s)
+              value: function(e, t, r, n, o, i, s, a) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s || "undefined" == typeof a)
                   throw new Error("Invalid parameters!");
-                return new y["default"](e, l.CatalogueObjectType.HYPERTY, t, r, n, o, i, s);
+                return new b["default"](e, l.CatalogueObjectType.HYPERTY, t, r, n, o, i, s, a);
               }
             }, {
               key: "createProtoStubDescriptorObject",
-              value: function(e, t, r, n, o, i, s, a) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s || "undefined" == typeof a)
+              value: function(e, t, r, n, o, i, s, a, u) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s || "undefined" == typeof a || "undefined" == typeof u)
                   throw new Error("Invalid parameters!");
-                return new v["default"](e, l.CatalogueObjectType.PROTOSTUB, t, r, n, o, i, s, a);
+                return new _["default"](e, l.CatalogueObjectType.PROTOSTUB, t, r, n, o, i, s, a, u);
               }
             }, {
               key: "createHypertyRuntimeDescriptorObject",
-              value: function(e, t, r, n, o, i, s, a) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s || "undefined" == typeof a)
+              value: function(e, t, r, n, o, i, s, a, u) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s || "undefined" == typeof a || "undefined" == typeof u)
                   throw new Error("Invalid parameters!");
-                return new g["default"](e, l.CatalogueObjectType.HYPERTY_RUNTIME, t, r, n, o, i, s, a);
+                return new m["default"](e, l.CatalogueObjectType.HYPERTY_RUNTIME, t, r, n, o, i, s, a, u);
               }
             }, {
               key: "createPolicyEnforcerDescriptorObject",
-              value: function(e, t, r, n, o, i, s) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s)
+              value: function(e, t, r, n, o, i, s, a) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i || "undefined" == typeof s || "undefined" == typeof a)
                   throw new Error("Invalid parameters!");
-                return new O["default"](e, l.CatalogueObjectType.POLICY_ENFORCER, t, r, n, o, i, s);
+                return new j["default"](e, l.CatalogueObjectType.POLICY_ENFORCER, t, r, n, o, i, s, a);
               }
             }, {
               key: "createDataObjectSchema",
-              value: function(e, t, r, n, o) {
-                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o)
+              value: function(e, t, r, n, o, i) {
+                if ("undefined" == typeof e || "undefined" == typeof t || "undefined" == typeof r || "undefined" == typeof n || "undefined" == typeof o || "undefined" == typeof i)
                   throw new Error("Invalid parameters!");
-                return new E["default"](e, l.CatalogueObjectType.DATA_SCHEMA, t, r, n, o);
+                return new E["default"](e, l.CatalogueObjectType.DATA_SCHEMA, t, r, n, o, i);
               }
             }, {
               key: "createSourcePackage",
               value: function(e, t) {
                 if ("undefined" == typeof t || "undefined" == typeof e)
                   throw new Error("Invalid parameters!");
-                return new h["default"](e, t);
+                return new d["default"](e, t);
               }
             }]), t;
           }(c["default"]);
       r["default"] = w, t.exports = r["default"];
     }, {
-      "../reTHINKObject/RethinkObject": 110,
-      "./CatalogueDataObject": 99,
-      "./DataObjectSchema": 101,
-      "./HypertyDescriptor": 102,
-      "./HypertyRuntimeDescriptor": 103,
-      "./PolicyEnforcerDescriptor": 104,
-      "./ProtocolStubDescriptor": 105,
-      "./SourcePackage": 106,
+      "../reTHINKObject/RethinkObject": 127,
+      "./CatalogueDataObject": 116,
+      "./DataObjectSchema": 118,
+      "./HypertyDescriptor": 119,
+      "./HypertyRuntimeDescriptor": 120,
+      "./PolicyEnforcerDescriptor": 121,
+      "./ProtocolStubDescriptor": 122,
+      "./SourcePackage": 123,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    101: [function(e, t, r) {
+    118: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -6714,61 +7472,61 @@ var define = $__System.amdDefine;
       var a = e("./CatalogueDataObject"),
           u = s(a),
           c = function(e) {
-            function t(e, r, o, s, a, u) {
-              i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u);
+            function t(e, r, o, s, a, u, c) {
+              i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c);
             }
             return o(t, e), t;
           }(u["default"]),
           l = function(e) {
-            function t(e, r, o, s, a, u) {
-              i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u);
+            function t(e, r, o, s, a, u, c) {
+              i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c);
             }
             return o(t, e), t;
           }(c);
       r.MessageDataObjectSchema = l;
       var f = function(e) {
-        function t(e, r, o, s, a, u, c) {
-          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u), this._accessControlPolicy = c;
+        function t(e, r, o, s, a, u, c, l) {
+          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c), this._accessControlPolicy = l;
         }
         return o(t, e), t;
       }(c);
       r.HypertyDataObjectSchema = f;
       var p = function(e) {
-        function t(e, r, o, s, a, u, c) {
-          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c);
+        function t(e, r, o, s, a, u, c, l) {
+          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c, l);
         }
         return o(t, e), t;
       }(f);
       r.CommunicationDataObjectSchema = p;
-      var h = function(e) {
-        function t(e, r, o, s, a, u, c) {
-          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c);
-        }
-        return o(t, e), t;
-      }(f);
-      r.ConnectionDataObjectSchema = h;
       var d = function(e) {
-        function t(e, r, o, s, a, u, c) {
-          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c);
+        function t(e, r, o, s, a, u, c, l) {
+          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c, l);
         }
         return o(t, e), t;
       }(f);
-      r.IdentifyDataObjectSchema = d;
-      var y = function(e) {
-        function t(e, r, o, s, a, u, c) {
-          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c);
+      r.ConnectionDataObjectSchema = d;
+      var h = function(e) {
+        function t(e, r, o, s, a, u, c, l) {
+          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c, l);
         }
         return o(t, e), t;
       }(f);
-      r.ContextDataObjectSchema = y, r["default"] = c;
+      r.IdentifyDataObjectSchema = h;
+      var b = function(e) {
+        function t(e, r, o, s, a, u, c, l) {
+          i(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, s, a, u, c, l);
+        }
+        return o(t, e), t;
+      }(f);
+      r.ContextDataObjectSchema = b, r["default"] = c;
     }, {
-      "./CatalogueDataObject": 99,
+      "./CatalogueDataObject": 116,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    102: [function(e, t, r) {
+    119: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -6779,8 +7537,8 @@ var define = $__System.amdDefine;
       var u = e("./CatalogueDataObject"),
           c = a(u),
           l = function(e) {
-            function t(e, r, o, i, a, u, c, l) {
-              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u), this._configuration = {}, this._constraints = {}, this._policies = {}, this._messageSchema = null, this._hypertyType = c, this._dataObjects = l;
+            function t(e, r, o, i, a, u, c, l, f) {
+              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u, c), this._configuration = {}, this._constraints = {}, this._policies = {}, this._messageSchema = null, this._hypertyType = l, this._dataObjects = f;
             }
             return o(t, e), i(t, [{
               key: "hypertyType",
@@ -6841,14 +7599,14 @@ var define = $__System.amdDefine;
       };
       r.HypertyType = p, r["default"] = l;
     }, {
-      "./CatalogueDataObject": 99,
+      "./CatalogueDataObject": 116,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    103: [function(e, t, r) {
+    120: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -6859,8 +7617,8 @@ var define = $__System.amdDefine;
       var u = e("./CatalogueDataObject"),
           c = a(u),
           l = function(e) {
-            function t(e, r, o, i, a, u, c, l, f) {
-              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u), this._runtimeType = c, l ? this._hypertyCapabilities = l : this._hypertyCapabilities = {}, f ? this._protocolCapabilities = f : this._protocolCapabilities = {};
+            function t(e, r, o, i, a, u, c, l, f, p) {
+              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u, c), this._runtimeType = l, f ? this._hypertyCapabilities = f : this._hypertyCapabilities = {}, p ? this._protocolCapabilities = p : this._protocolCapabilities = {};
             }
             return o(t, e), i(t, [{
               key: "runtimeType",
@@ -6903,7 +7661,7 @@ var define = $__System.amdDefine;
         ORTC: "ortc"
       };
       r.RuntimeHypertyCapabilityType = p;
-      var h = {
+      var d = {
         HTTP: "http",
         HTTPS: "https",
         WS: "ws",
@@ -6911,16 +7669,16 @@ var define = $__System.amdDefine;
         COAP: "coap",
         DATACHANEL: "datachannel"
       };
-      r.RuntimeProtocolCapabilityType = h, r["default"] = l;
+      r.RuntimeProtocolCapabilityType = d, r["default"] = l;
     }, {
-      "./CatalogueDataObject": 99,
+      "./CatalogueDataObject": 116,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    104: [function(e, t, r) {
+    121: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -6931,8 +7689,8 @@ var define = $__System.amdDefine;
       var u = e("./CatalogueDataObject"),
           c = a(u),
           l = function(e) {
-            function t(e, r, o, i, a, u, c, l) {
-              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u), this._configuration = c, this._policies = l;
+            function t(e, r, o, i, a, u, c, l, f) {
+              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u, c), this._configuration = l, this._policies = f;
             }
             return o(t, e), i(t, [{
               key: "configuration",
@@ -6954,14 +7712,14 @@ var define = $__System.amdDefine;
           }(c["default"]);
       r["default"] = l, t.exports = r["default"];
     }, {
-      "./CatalogueDataObject": 99,
+      "./CatalogueDataObject": 116,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    105: [function(e, t, r) {
+    122: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -6973,8 +7731,8 @@ var define = $__System.amdDefine;
           c = a(u),
           l = e("./HypertyRuntimeDescriptor"),
           f = (a(l), function(e) {
-            function t(e, r, o, i, a, u, c, l, f) {
-              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u), this._messageSchemas = c, l ? this._configuration = l : this._configuration = {}, f ? this._constraints = f : this._constraints = {};
+            function t(e, r, o, i, a, u, c, l, f, p) {
+              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u, c), this._messageSchemas = l, f ? this._configuration = f : this._configuration = {}, p ? this._constraints = p : this._constraints = {};
             }
             return o(t, e), i(t, [{
               key: "messageSchemas",
@@ -7004,15 +7762,15 @@ var define = $__System.amdDefine;
           }(c["default"]));
       r["default"] = f, t.exports = r["default"];
     }, {
-      "./CatalogueDataObject": 99,
-      "./HypertyRuntimeDescriptor": 103,
+      "./CatalogueDataObject": 116,
+      "./HypertyRuntimeDescriptor": 120,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    106: [function(e, t, r) {
+    123: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"];
@@ -7060,7 +7818,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13
     }],
-    107: [function(e, t, r) {
+    124: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"];
@@ -7111,7 +7869,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13
     }],
-    108: [function(e, t, r) {
+    125: [function(e, t, r) {
       "use strict";
       function n(e) {
         var t = a(e).reduce(function(t, r) {
@@ -7129,8 +7887,8 @@ var define = $__System.amdDefine;
           a = e("babel-runtime/core-js/object/keys")["default"],
           u = e("babel-runtime/core-js/object/freeze")["default"];
       Object.defineProperty(r, "__esModule", {value: !0}), r.Enum = n;
-      var c = function m(e, t, r, n, i) {
-        o(this, m), this.idToken = e, this.accessToken = t, this.resource = r, this.schema = n, this.assertedIdentity = i;
+      var c = function v(e, t, r, n, i) {
+        o(this, v), this.idToken = e, this.accessToken = t, this.resource = r, this.schema = n, this.assertedIdentity = i;
       };
       r.MessageBody = c;
       var l = function(e) {
@@ -7156,28 +7914,28 @@ var define = $__System.amdDefine;
         return s(t, e), t;
       }(c);
       r.DeleteMessageBody = p;
-      var h = function(e) {
+      var d = function(e) {
         function t(e, r, n, s, a, u, c) {
           o(this, t), i(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, n, s, a), this.attribute = u, this.value = c;
         }
         return s(t, e), t;
       }(c);
-      r.UpdateMessageBody = h;
-      var d = function(e) {
+      r.UpdateMessageBody = d;
+      var h = function(e) {
         function t(e, r, n, s, a, u) {
           o(this, t), i(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, n, s, a), this.message = u;
         }
         return s(t, e), t;
       }(c);
-      r.ForwardMessageBody = d;
-      var y = function(e) {
+      r.ForwardMessageBody = h;
+      var b = function(e) {
         function t(e, r, n, s, a) {
-          o(this, t), i(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, n), s && (this.code = s, this.description = v[s]), a && (this.value = a);
+          o(this, t), i(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, n), s && (this.code = s, this.description = _[s]), a && (this.value = a);
         }
         return s(t, e), t;
       }(c);
-      r.ResponseMessageBody = y;
-      var b = n({
+      r.ResponseMessageBody = b;
+      var y = n({
         100: "100",
         101: "101",
         200: "200",
@@ -7220,8 +7978,8 @@ var define = $__System.amdDefine;
         504: "504",
         505: "505"
       });
-      r.RESPONSE_CODE = b;
-      var v = n({
+      r.RESPONSE_CODE = y;
+      var _ = n({
         100: "Continue",
         101: "Switching Protocols",
         200: "OK",
@@ -7264,7 +8022,7 @@ var define = $__System.amdDefine;
         504: "Gateway Time-out",
         505: "HTTP Version Not Supported"
       });
-      r.REASON_PHRASE = v, r["default"] = c;
+      r.REASON_PHRASE = _, r["default"] = c;
     }, {
       "babel-runtime/core-js/object/freeze": 3,
       "babel-runtime/core-js/object/keys": 6,
@@ -7272,7 +8030,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16
     }],
-    109: [function(e, t, r) {
+    126: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -7285,10 +8043,10 @@ var define = $__System.amdDefine;
           l = u(c),
           f = e("./Message.js"),
           p = u(f),
-          h = e("./MessageBody.js"),
-          d = function(e) {
+          d = e("./MessageBody.js"),
+          h = function(e) {
             function t(e, r) {
-              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r), this.myGenerator = (new y).idMaker();
+              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r), this.myGenerator = (new b).idMaker();
             }
             return o(t, e), i(t, [{
               key: "validate",
@@ -7301,7 +8059,7 @@ var define = $__System.amdDefine;
                 if (!e || !t || !r)
                   throw new Error("from, to, and value of object to be created MUST be specified");
                 var o = this.myGenerator.next().value,
-                    i = new h.CreateMessageBody(r, n, null, null, null, null, null),
+                    i = new d.CreateMessageBody(r, n, null, null, null, null, null),
                     s = new p["default"](o, e, t, f.MessageType.CREATE, i);
                 return s;
               }
@@ -7311,7 +8069,7 @@ var define = $__System.amdDefine;
                 if (!e || !t || !r)
                   throw new Error("from, to, and message to forward MUST be specified");
                 var n = this.myGenerator.next().value,
-                    o = new h.ForwardMessageBody(null, null, null, null, null, r),
+                    o = new d.ForwardMessageBody(null, null, null, null, null, r),
                     i = new p["default"](n, e, t, f.MessageType.FORWARD, o);
                 return i;
               }
@@ -7321,7 +8079,7 @@ var define = $__System.amdDefine;
                 if (!e || !t)
                   throw new Error("from and to parameters MUST be specified");
                 var o = this.myGenerator.next().value,
-                    i = new h.DeleteMessageBody(null, null, r, n, null, null),
+                    i = new d.DeleteMessageBody(null, null, r, n, null, null),
                     s = new p["default"](o, e, t, f.MessageType.DELETE, i);
                 return s;
               }
@@ -7331,7 +8089,7 @@ var define = $__System.amdDefine;
                 if (!e || !t || !r)
                   throw new Error("from, and to and value MUST be specified");
                 var i = this.myGenerator.next().value,
-                    s = new h.UpdateMessageBody(null, null, n, null, null, o, r),
+                    s = new d.UpdateMessageBody(null, null, n, null, null, o, r),
                     a = new p["default"](i, e, t, f.MessageType.UPDATE, s);
                 return a;
               }
@@ -7341,7 +8099,7 @@ var define = $__System.amdDefine;
                 if (!e || !t || !r)
                   throw new Error("from, to and the resource to read from MUST be specified");
                 var o = this.myGenerator.next().value,
-                    i = new h.ReadMessageBody(null, null, r, null, null, n, null, null),
+                    i = new d.ReadMessageBody(null, null, r, null, null, n, null, null),
                     s = new p["default"](o, e, t, f.MessageType.READ, i);
                 return s;
               }
@@ -7351,7 +8109,7 @@ var define = $__System.amdDefine;
                 if (!e || !t || !r)
                   throw new Error("from, to and the resource to subscribe to MUST be specified");
                 var n = this.myGenerator.next().value,
-                    o = new h.MessageBody(null, null, r, null, null),
+                    o = new d.MessageBody(null, null, r, null, null),
                     i = new p["default"](n, e, t, f.MessageType.SUBSCRIBE, o);
                 return i;
               }
@@ -7361,7 +8119,7 @@ var define = $__System.amdDefine;
                 if (!e || !t || !r)
                   throw new Error("from, to and the resource to subscribe to MUST be specified");
                 var n = this.myGenerator.next().value,
-                    o = new h.MessageBody(null, null, r, null, null),
+                    o = new d.MessageBody(null, null, r, null, null),
                     i = new p["default"](n, e, t, f.MessageType.UNSUBSCRIBE, o);
                 return i;
               }
@@ -7370,7 +8128,7 @@ var define = $__System.amdDefine;
               value: function(e, t, r, n) {
                 if (!t)
                   throw new Error("response Code MUST be specified");
-                var o = new h.ResponseMessageBody(null, null, null, t, r, n);
+                var o = new d.ResponseMessageBody(null, null, null, t, r, n);
                 return new p["default"](e.id, e.to, e.from, f.MessageType.RESPONSE, o);
               }
             }, {
@@ -7382,13 +8140,13 @@ var define = $__System.amdDefine;
                     o = n.idToken,
                     i = n.accessToken,
                     s = n.resource,
-                    a = new h.ResponseMessageBody(o, i, s, t, r),
+                    a = new d.ResponseMessageBody(o, i, s, t, r),
                     u = this.myGenerator.next().value;
                 return new p["default"](u, e.to, e.from, f.MessageType.RESPONSE, a);
               }
             }]), t;
           }(l["default"]),
-          y = function() {
+          b = function() {
             function e() {
               s(this, e);
             }
@@ -7418,11 +8176,11 @@ var define = $__System.amdDefine;
               })
             }]), e;
           }();
-      r.IdGenerator = y, r["default"] = d;
+      r.IdGenerator = b, r["default"] = h;
     }, {
-      "../reTHINKObject/RethinkObject.js": 110,
-      "./Message.js": 107,
-      "./MessageBody.js": 108,
+      "../reTHINKObject/RethinkObject.js": 127,
+      "./Message.js": 124,
+      "./MessageBody.js": 125,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/get": 15,
@@ -7430,7 +8188,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/interop-require-default": 17,
       "babel-runtime/regenerator": 20
     }],
-    110: [function(e, t, r) {
+    127: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"],
@@ -7455,9 +8213,9 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/interop-require-default": 17,
-      tv4: 98
+      tv4: 115
     }],
-    111: [function(e, t, r) {
+    128: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
@@ -7470,26 +8228,26 @@ var define = $__System.amdDefine;
           l = e("./syncher/DataObjectReporter"),
           f = n(l),
           p = e("./syncher/DataObjectObserver"),
-          h = n(p),
-          d = e("./catalogue-factory/HypertyDescriptor"),
-          y = n(d),
-          b = e("./catalogue-factory/ProtocolStubDescriptor"),
-          v = n(b),
-          m = e("./catalogue-factory/SourcePackage"),
-          g = n(m);
-      r.CatalogueFactory = i["default"], r.MessageFactory = a["default"], r.Syncher = c["default"], r.DataObjectReporter = f["default"], r.DataObjectObserver = h["default"], r.HypertyDescriptor = y["default"], r.ProtocolStubDescriptor = v["default"], r.SourcePackage = g["default"];
+          d = n(p),
+          h = e("./catalogue-factory/HypertyDescriptor"),
+          b = n(h),
+          y = e("./catalogue-factory/ProtocolStubDescriptor"),
+          _ = n(y),
+          v = e("./catalogue-factory/SourcePackage"),
+          m = n(v);
+      r.CatalogueFactory = i["default"], r.MessageFactory = a["default"], r.Syncher = c["default"], r.DataObjectReporter = f["default"], r.DataObjectObserver = d["default"], r.HypertyDescriptor = b["default"], r.ProtocolStubDescriptor = _["default"], r.SourcePackage = m["default"];
     }, {
-      "./catalogue-factory/CatalogueDataObjectFactory": 100,
-      "./catalogue-factory/HypertyDescriptor": 102,
-      "./catalogue-factory/ProtocolStubDescriptor": 105,
-      "./catalogue-factory/SourcePackage": 106,
-      "./message-factory/MessageFactory": 109,
-      "./syncher/DataObjectObserver": 114,
-      "./syncher/DataObjectReporter": 115,
-      "./syncher/Syncher": 118,
+      "./catalogue-factory/CatalogueDataObjectFactory": 117,
+      "./catalogue-factory/HypertyDescriptor": 119,
+      "./catalogue-factory/ProtocolStubDescriptor": 122,
+      "./catalogue-factory/SourcePackage": 123,
+      "./message-factory/MessageFactory": 126,
+      "./syncher/DataObjectObserver": 131,
+      "./syncher/DataObjectReporter": 132,
+      "./syncher/Syncher": 135,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    112: [function(e, t, r) {
+    129: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"],
@@ -7502,7 +8260,7 @@ var define = $__System.amdDefine;
           l = e("./DataObjectChild"),
           f = a(l),
           p = e("../utils/utils.js"),
-          h = function() {
+          d = function() {
             function e(t, r, n, i, s, a) {
               o(this, e);
               var u = this;
@@ -7517,8 +8275,8 @@ var define = $__System.amdDefine;
                 t._childrens && t._childrens.forEach(function(n) {
                   var o = r + n,
                       i = t._bus.addListener(o, function(r) {
-                        if (console.log("DataObject-Children-RCV: ", r), r.from !== e._owner)
-                          switch (r.type) {
+                        if (r.from !== e._owner)
+                          switch (console.log("DataObject-Children-RCV: ", r), r.type) {
                             case "create":
                               t._onChildrenCreate(r);
                               break;
@@ -7576,7 +8334,7 @@ var define = $__System.amdDefine;
                 return new s(function(e) {
                   var s = r._bus.postMessage(i);
                   console.log("create-reporter-child( " + r._owner + " ): ", i);
-                  var a = new f["default"](r, r._owner, n, s, t);
+                  var a = new f["default"](r, n, t, r._owner, s);
                   a.onChange(function(e) {
                     r._onChange(e, {
                       path: o,
@@ -7596,7 +8354,7 @@ var define = $__System.amdDefine;
                 var t = this,
                     r = e.body.resource;
                 console.log("create-observer-child( " + t._owner + " ): ", e);
-                var n = new f["default"](t, e.from, r, 0, e.body.value);
+                var n = new f["default"](t, r, e.body.value);
                 t._childrenObjects[r] = n, setTimeout(function() {
                   t._bus.postMessage({
                     id: e.id,
@@ -7629,6 +8387,7 @@ var define = $__System.amdDefine;
                     to: r._url + "/changes",
                     body: {
                       version: r._version,
+                      source: r._owner,
                       attribute: e.field
                     }
                   };
@@ -7690,24 +8449,24 @@ var define = $__System.amdDefine;
                 return this._syncObj.data;
               }
             }, {
-              key: "children",
+              key: "childrens",
               get: function() {
                 return this._childrenObjects;
               }
             }]), e;
           }();
-      r["default"] = h, t.exports = r["default"];
+      r["default"] = d, t.exports = r["default"];
     }, {
-      "../utils/utils.js": 119,
-      "./DataObjectChild": 113,
-      "./SyncObject": 117,
+      "../utils/utils.js": 136,
+      "./DataObjectChild": 130,
+      "./SyncObject": 134,
       "babel-runtime/core-js/object/keys": 6,
       "babel-runtime/core-js/promise": 8,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    113: [function(e, t, r) {
+    130: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"],
@@ -7719,21 +8478,21 @@ var define = $__System.amdDefine;
             function e(t, r, n, i, s) {
               o(this, e);
               var u = this;
-              u._parent = t, u._owner = r, u._childId = n, u._msgId = i, u._syncObj = new a["default"](s), u._bus = t._bus, u._allocateListeners();
+              u._parent = t, u._childId = r, u._owner = i, u._msgId = s, u._syncObj = new a["default"](n), u._bus = t._bus, u._allocateListeners();
             }
             return n(e, [{
               key: "_allocateListeners",
               value: function() {
                 var e = this;
-                e._listener = e._bus.addListener(e._owner, function(t) {
+                e._owner && (e._listener = e._bus.addListener(e._owner, function(t) {
                   "response" === t.type && t.id === e._msgId && (console.log("DataObjectChild.onResponse:", t), e._onResponse(t));
-                });
+                }));
               }
             }, {
               key: "_releaseListeners",
               value: function() {
                 var e = this;
-                e._listener.remove();
+                e._listener && e._listener.remove();
               }
             }, {
               key: "delete",
@@ -7778,12 +8537,12 @@ var define = $__System.amdDefine;
           }();
       r["default"] = u, t.exports = r["default"];
     }, {
-      "./SyncObject": 117,
+      "./SyncObject": 134,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    114: [function(e, t, r) {
+    131: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
@@ -7794,18 +8553,23 @@ var define = $__System.amdDefine;
       Object.defineProperty(r, "__esModule", {value: !0});
       var c = e("./DataObject"),
           l = u(c),
-          f = {
+          f = e("./DataObjectChild"),
+          p = u(f),
+          d = {
             ANY: "any",
             START: "start",
             EXACT: "exact"
           },
-          p = function(e) {
-            function t(e, r, o, i, a, u, c) {
-              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u);
-              var l = this;
-              l._version = c, l._filters = {}, l._syncObj.observe(function(e) {
-                l._onFilter(e);
-              }), l._allocateListeners();
+          h = function(e) {
+            function t(e, r, o, i, u, c, l) {
+              s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, u.data, c);
+              var f = this;
+              f._version = l, f._filters = {}, f._syncObj.observe(function(e) {
+                f._onFilter(e);
+              }), a(u.childrens).forEach(function(e) {
+                var t = u.childrens[e];
+                f._childrenObjects[e] = new p["default"](f, e, t);
+              }), f._allocateListeners();
             }
             return o(t, e), i(t, [{
               key: "_allocateListeners",
@@ -7848,11 +8612,11 @@ var define = $__System.amdDefine;
               value: function(e, t) {
                 var r = e,
                     n = {
-                      type: f.EXACT,
+                      type: d.EXACT,
                       callback: t
                     },
                     o = e.indexOf("*");
-                o === e.length - 1 && (0 === o ? n.type = f.ANY : (n.type = f.START, r = e.substr(0, e.length - 1))), this._filters[r] = n;
+                o === e.length - 1 && (0 === o ? n.type = d.ANY : (n.type = d.START, r = e.substr(0, e.length - 1))), this._filters[r] = n;
               }
             }, {
               key: "_onFilter",
@@ -7860,14 +8624,15 @@ var define = $__System.amdDefine;
                 var t = this;
                 a(t._filters).forEach(function(r) {
                   var n = t._filters[r];
-                  n.type === f.ANY ? n.callback(e) : n.type === f.START ? 0 === e.field.indexOf(r) && n.callback(e) : n.type === f.EXACT && e.field === r && n.callback(e);
+                  n.type === d.ANY ? n.callback(e) : n.type === d.START ? 0 === e.field.indexOf(r) && n.callback(e) : n.type === d.EXACT && e.field === r && n.callback(e);
                 });
               }
             }]), t;
           }(l["default"]);
-      r["default"] = p, t.exports = r["default"];
+      r["default"] = h, t.exports = r["default"];
     }, {
-      "./DataObject": 112,
+      "./DataObject": 129,
+      "./DataObjectChild": 130,
       "babel-runtime/core-js/object/keys": 6,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
@@ -7875,18 +8640,19 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    115: [function(e, t, r) {
+    132: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/get")["default"],
           o = e("babel-runtime/helpers/inherits")["default"],
           i = e("babel-runtime/helpers/create-class")["default"],
           s = e("babel-runtime/helpers/class-call-check")["default"],
-          a = e("babel-runtime/helpers/interop-require-default")["default"];
+          a = e("babel-runtime/core-js/object/keys")["default"],
+          u = e("babel-runtime/helpers/interop-require-default")["default"];
       Object.defineProperty(r, "__esModule", {value: !0});
-      var u = e("./DataObject"),
-          c = a(u),
-          l = e("../utils/utils.js"),
-          f = function(e) {
+      var c = e("./DataObject"),
+          l = u(c),
+          f = e("../utils/utils.js"),
+          p = function(e) {
             function t(e, r, o, i, a, u) {
               s(this, t), n(Object.getPrototypeOf(t.prototype), "constructor", this).call(this, e, r, o, i, a, u);
               var c = this;
@@ -7959,7 +8725,12 @@ var define = $__System.amdDefine;
                           url: r,
                           status: "on"
                         };
-                        return t._subscriptions[r] = n, t._bus.postMessage({
+                        t._subscriptions[r] = n;
+                        var o = {};
+                        return a(t._childrenObjects).forEach(function(e) {
+                          var r = t._childrenObjects[e].data;
+                          o[e] = (0, f.deepClone)(r);
+                        }), t._bus.postMessage({
                           id: e.id,
                           type: "response",
                           from: e.to,
@@ -7968,7 +8739,10 @@ var define = $__System.amdDefine;
                             code: 200,
                             schema: t._schema,
                             version: t._version,
-                            value: (0, l.deepClone)(t.data)
+                            value: {
+                              data: (0, f.deepClone)(t.data),
+                              childrens: o
+                            }
                           }
                         }), n;
                       },
@@ -8018,18 +8792,19 @@ var define = $__System.amdDefine;
                 return this._subscriptions;
               }
             }]), t;
-          }(c["default"]);
-      r["default"] = f, t.exports = r["default"];
+          }(l["default"]);
+      r["default"] = p, t.exports = r["default"];
     }, {
-      "../utils/utils.js": 119,
-      "./DataObject": 112,
+      "../utils/utils.js": 136,
+      "./DataObject": 129,
+      "babel-runtime/core-js/object/keys": 6,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/get": 15,
       "babel-runtime/helpers/inherits": 16,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    116: [function(e, t, r) {
+    133: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"];
@@ -8074,7 +8849,7 @@ var define = $__System.amdDefine;
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13
     }],
-    117: [function(e, t, r) {
+    134: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"],
@@ -8123,7 +8898,7 @@ var define = $__System.amdDefine;
             }, {
               key: "_isObservable",
               value: function(e) {
-                return e.constructor === Object || e.constructor === Array ? !0 : !1;
+                return e.constructor === Object || e.constructor === Array;
               }
             }, {
               key: "_internalObserve",
@@ -8161,8 +8936,8 @@ var define = $__System.amdDefine;
                           f = u.toString(),
                           p = t[n].removed.length;
                       if (0 !== p) {
-                        var h = t[n].removed;
-                        h.forEach(function(t, n) {
+                        var d = t[n].removed;
+                        d.forEach(function(t, n) {
                           r._isObservable(t) && e.removeIndex(a + n);
                         }), r._fireEvent({
                           cType: l.REMOVE,
@@ -8171,10 +8946,10 @@ var define = $__System.amdDefine;
                           data: p
                         });
                       }
-                      var d = t[n].addedCount;
-                      if (0 !== d) {
-                        var y = o.slice(a, a + d);
-                        y.forEach(function(t, n) {
+                      var h = t[n].addedCount;
+                      if (0 !== h) {
+                        var b = o.slice(a, a + h);
+                        b.forEach(function(t, n) {
                           if (r._isObservable(t)) {
                             var o = e["new"](new c(t, a + n));
                             r._internalObserve(o, t);
@@ -8183,7 +8958,7 @@ var define = $__System.amdDefine;
                           cType: l.ADD,
                           oType: i,
                           field: f,
-                          data: (0, s.deepClone)(y)
+                          data: (0, s.deepClone)(b)
                         });
                       }
                       a !== o.length - 1 && e.reIndexFrom(o);
@@ -8286,12 +9061,12 @@ var define = $__System.amdDefine;
       };
       r.ObjectType = f, r["default"] = a;
     }, {
-      "../utils/utils.js": 119,
+      "../utils/utils.js": 136,
       "babel-runtime/core-js/object/keys": 6,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13
     }],
-    118: [function(e, t, r) {
+    135: [function(e, t, r) {
       "use strict";
       var n = e("babel-runtime/helpers/create-class")["default"],
           o = e("babel-runtime/helpers/class-call-check")["default"],
@@ -8304,21 +9079,22 @@ var define = $__System.amdDefine;
           l = s(c),
           f = e("./DataProvisional"),
           p = s(f),
-          h = function() {
+          d = function() {
             function e(t, r, n) {
               o(this, e);
               var i = this;
               i._owner = t, i._bus = r, i._subURL = n.runtimeURL + "/sm", i._reporters = {}, i._observers = {}, i._provisionals = {}, r.addListener(t, function(e) {
-                switch (console.log("Syncher-RCV: ", e), e.type) {
-                  case "forward":
-                    i._onForward(e);
-                    break;
-                  case "create":
-                    i._onRemoteCreate(e);
-                    break;
-                  case "delete":
-                    i._onRemoteDelete(e);
-                }
+                if (e.from !== t)
+                  switch (console.log("Syncher-RCV: ", e), e.type) {
+                    case "forward":
+                      i._onForward(e);
+                      break;
+                    case "create":
+                      i._onRemoteCreate(e);
+                      break;
+                    case "delete":
+                      i._onRemoteDelete(e);
+                  }
               });
             }
             return n(e, [{
@@ -8465,17 +9241,17 @@ var define = $__System.amdDefine;
               }
             }]), e;
           }();
-      r["default"] = h, t.exports = r["default"];
+      r["default"] = d, t.exports = r["default"];
     }, {
-      "./DataObjectObserver": 114,
-      "./DataObjectReporter": 115,
-      "./DataProvisional": 116,
+      "./DataObjectObserver": 131,
+      "./DataObjectReporter": 132,
+      "./DataProvisional": 133,
       "babel-runtime/core-js/promise": 8,
       "babel-runtime/helpers/class-call-check": 11,
       "babel-runtime/helpers/create-class": 13,
       "babel-runtime/helpers/interop-require-default": 17
     }],
-    119: [function(e, t, r) {
+    136: [function(e, t, r) {
       "use strict";
       function n(e) {
         var t = /([a-zA-Z-]*):\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi,
@@ -8494,7 +9270,7 @@ var define = $__System.amdDefine;
       }
       Object.defineProperty(r, "__esModule", {value: !0}), r.divideURL = n, r.deepClone = o;
     }, {}]
-  }, {}, [111])(111);
+  }, {}, [128])(128);
 });
 
 })();
@@ -8754,21 +9530,15 @@ $__System.register('18', ['10', '11', '13', '14', '15', '17', '19', 'e', 'f', 'd
                       }
 
                       //message to register the new hyperty, within the domain registry
-                      //TODO uncomment and remove the msg variable when the messageFactory is up.
-                      /*let messageValue = {user: identityURL,  hypertyDescriptorURL: descriptor, hypertyURL: adderessList[0]};
-                       let message = _this.messageFactory.createCreateMessageRequest(
-                        _this.registryURL,
-                        'domain://registry.' + _this.registryDomain + '/',
-                        messageValue,
-                        'policy'
-                      );
-                      console.log('messagefactory', message);*/
-                      var msg = {
-                        type: 'CREATE', from: _this.registryURL, to: 'domain://registry.' + _this.registryDomain + '/', body: { value: { user: identityURL, hypertyDescriptorURL: descriptor, hypertyURL: adderessList[0] } }
-                      };
+                      // the expires in 21600s, represents 6 hours
+                      var messageValue = { user: identityURL, hypertyDescriptorURL: descriptor, hypertyURL: adderessList[0], expires: 21600 };
 
-                      //console.log('messagenormal', msg);
-                      _this._messageBus.postMessage(msg, function (reply) {
+                      var message = _this.messageFactory.createCreateMessageRequest(_this.registryURL, 'domain://registry.' + _this.registryDomain + '/', messageValue, 'policy');
+
+                      //TODO small fix, because the connector do not yet accept lower case
+                      message.type = 'CREATE';
+
+                      _this._messageBus.postMessage(message, function (reply) {
                         console.log('===> RegisterHyperty Reply: ', reply);
                       });
 
@@ -9054,6 +9824,10 @@ $__System.register('18', ['10', '11', '13', '14', '15', '17', '19', 'e', 'f', 'd
             var _this = this;
             _this._messageBus = messageBus;
 
+            // also set up messageBus in the IdentityModule component
+            // TODO redefine a better way to add the messageBus in the IdModule
+            _this.idModule.messageBus = messageBus;
+
             // Install AddressAllocation
             var addressAllocation = new AddressAllocation(_this.registryURL, messageBus);
             _this.addressAllocation = addressAllocation;
@@ -9067,3631 +9841,8 @@ $__System.register('18', ['10', '11', '13', '14', '15', '17', '19', 'e', 'f', 'd
     }
   };
 });
-$__System.registerDynamic("1a", ["1b"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  "format cjs";
-  (function(process) {
-    if (!Object.create) {
-      Object.create = (function() {
-        function F() {}
-        return function(o) {
-          if (arguments.length != 1) {
-            throw new Error('Object.create implementation only accepts one parameter.');
-          }
-          F.prototype = o;
-          return new F();
-        };
-      })();
-    }
-    if (!Object.keys) {
-      Object.keys = function(o, k, r) {
-        r = [];
-        for (k in o) {
-          if (r.hasOwnProperty.call(o, k))
-            r.push(k);
-        }
-        return r;
-      };
-    }
-    if (!Array.prototype.indexOf) {
-      Array.prototype.indexOf = function(s) {
-        for (var j = 0; j < this.length; j++) {
-          if (this[j] === s) {
-            return j;
-          }
-        }
-        return -1;
-      };
-    }
-    if (!Array.prototype.forEach) {
-      Array.prototype.forEach = function(fun) {
-        if (this === void 0 || this === null) {
-          throw new TypeError();
-        }
-        var t = Object(this);
-        var len = t.length >>> 0;
-        if (typeof fun !== 'function') {
-          throw new TypeError();
-        }
-        var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
-        for (var i = 0; i < len; i++) {
-          if (i in t) {
-            fun.call(thisArg, t[i], i, t);
-          }
-        }
-        return this;
-      };
-    }
-    if (!Array.prototype.filter) {
-      Array.prototype.filter = function(fun, thisArg) {
-        var a = [];
-        this.forEach(function(val, i, t) {
-          if (fun.call(thisArg || void 0, val, i, t)) {
-            a.push(val);
-          }
-        });
-        return a;
-      };
-    }
-    if (!Array.prototype.map) {
-      Array.prototype.map = function(fun, thisArg) {
-        var a = [];
-        this.forEach(function(val, i, t) {
-          a.push(fun.call(thisArg || void 0, val, i, t));
-        });
-        return a;
-      };
-    }
-    if (!Array.isArray) {
-      Array.isArray = function(o) {
-        return Object.prototype.toString.call(o) === '[object Array]';
-      };
-    }
-    if (typeof window === 'object' && typeof window.location === 'object' && !window.location.assign) {
-      window.location.assign = function(url) {
-        window.location = url;
-      };
-    }
-    if (!Function.prototype.bind) {
-      Function.prototype.bind = function(b) {
-        if (typeof this !== 'function') {
-          throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
-        }
-        function C() {}
-        var a = [].slice;
-        var f = a.call(arguments, 1);
-        var _this = this;
-        var D = function() {
-          return _this.apply(this instanceof C ? this : b || window, f.concat(a.call(arguments)));
-        };
-        C.prototype = this.prototype;
-        D.prototype = new C();
-        return D;
-      };
-    }
-    var hello = function(name) {
-      return hello.use(name);
-    };
-    hello.utils = {extend: function(r) {
-        Array.prototype.slice.call(arguments, 1).forEach(function(a) {
-          if (Array.isArray(r) && Array.isArray(a)) {
-            Array.prototype.push.apply(r, a);
-          } else if (r instanceof Object && a instanceof Object && r !== a) {
-            for (var x in a) {
-              r[x] = hello.utils.extend(r[x], a[x]);
-            }
-          } else {
-            if (Array.isArray(a)) {
-              a = a.slice(0);
-            }
-            r = a;
-          }
-        });
-        return r;
-      }};
-    hello.utils.extend(hello, {
-      settings: {
-        redirect_uri: window.location.href.split('#')[0],
-        response_type: 'token',
-        display: 'popup',
-        state: '',
-        oauth_proxy: 'https://auth-server.herokuapp.com/proxy',
-        timeout: 20000,
-        popup: {
-          resizable: 1,
-          scrollbars: 1,
-          width: 500,
-          height: 550
-        },
-        scope: ['basic'],
-        scope_map: {basic: ''},
-        default_service: null,
-        force: null,
-        page_uri: window.location.href
-      },
-      services: {},
-      use: function(service) {
-        var self = Object.create(this);
-        self.settings = Object.create(this.settings);
-        if (service) {
-          self.settings.default_service = service;
-        }
-        self.utils.Event.call(self);
-        return self;
-      },
-      init: function(services, options) {
-        var utils = this.utils;
-        if (!services) {
-          return this.services;
-        }
-        for (var x in services) {
-          if (services.hasOwnProperty(x)) {
-            if (typeof(services[x]) !== 'object') {
-              services[x] = {id: services[x]};
-            }
-          }
-        }
-        utils.extend(this.services, services);
-        if (options) {
-          utils.extend(this.settings, options);
-          if ('redirect_uri' in options) {
-            this.settings.redirect_uri = utils.url(options.redirect_uri).href;
-          }
-        }
-        return this;
-      },
-      login: function() {
-        var _this = this;
-        var utils = _this.utils;
-        var error = utils.error;
-        var promise = utils.Promise();
-        var p = utils.args({
-          network: 's',
-          options: 'o',
-          callback: 'f'
-        }, arguments);
-        var url;
-        var qs = utils.diffKey(p.options, _this.settings);
-        var opts = p.options = utils.merge(_this.settings, p.options || {});
-        opts.popup = utils.merge(_this.settings.popup, p.options.popup || {});
-        p.network = p.network || _this.settings.default_service;
-        promise.proxy.then(p.callback, p.callback);
-        function emit(s, value) {
-          hello.emit(s, value);
-        }
-        promise.proxy.then(emit.bind(this, 'auth.login auth'), emit.bind(this, 'auth.failed auth'));
-        if (typeof(p.network) !== 'string' || !(p.network in _this.services)) {
-          return promise.reject(error('invalid_network', 'The provided network was not recognized'));
-        }
-        var provider = _this.services[p.network];
-        var callbackId = utils.globalEvent(function(str) {
-          var obj;
-          if (str) {
-            obj = JSON.parse(str);
-          } else {
-            obj = error('cancelled', 'The authentication was not completed');
-          }
-          if (!obj.error) {
-            utils.store(obj.network, obj);
-            promise.fulfill({
-              network: obj.network,
-              authResponse: obj
-            });
-          } else {
-            promise.reject(obj);
-          }
-        });
-        var redirectUri = utils.url(opts.redirect_uri).href;
-        var responseType = provider.oauth.response_type || opts.response_type;
-        if (/\bcode\b/.test(responseType) && !provider.oauth.grant) {
-          responseType = responseType.replace(/\bcode\b/, 'token');
-        }
-        p.qs = utils.merge(qs, {
-          client_id: encodeURIComponent(provider.id),
-          response_type: encodeURIComponent(responseType),
-          redirect_uri: encodeURIComponent(redirectUri),
-          display: opts.display,
-          state: {
-            client_id: provider.id,
-            network: p.network,
-            display: opts.display,
-            callback: callbackId,
-            state: opts.state,
-            redirect_uri: redirectUri
-          }
-        });
-        var session = utils.store(p.network);
-        var SCOPE_SPLIT = /[,\s]+/;
-        var scope = _this.settings.scope ? [_this.settings.scope.toString()] : [];
-        var scopeMap = utils.merge(_this.settings.scope_map, provider.scope || {});
-        if (opts.scope) {
-          scope.push(opts.scope.toString());
-        }
-        if (session && 'scope' in session && session.scope instanceof String) {
-          scope.push(session.scope);
-        }
-        scope = scope.join(',').split(SCOPE_SPLIT);
-        scope = utils.unique(scope).filter(filterEmpty);
-        p.qs.state.scope = scope.join(',');
-        scope = scope.map(function(item) {
-          return (item in scopeMap) ? scopeMap[item] : item;
-        });
-        scope = scope.join(',').split(SCOPE_SPLIT);
-        scope = utils.unique(scope).filter(filterEmpty);
-        p.qs.scope = scope.join(provider.scope_delim || ',');
-        if (opts.force === false) {
-          if (session && 'access_token' in session && session.access_token && 'expires' in session && session.expires > ((new Date()).getTime() / 1e3)) {
-            var diff = utils.diff((session.scope || '').split(SCOPE_SPLIT), (p.qs.state.scope || '').split(SCOPE_SPLIT));
-            if (diff.length === 0) {
-              promise.fulfill({
-                unchanged: true,
-                network: p.network,
-                authResponse: session
-              });
-              return promise;
-            }
-          }
-        }
-        if (opts.display === 'page' && opts.page_uri) {
-          p.qs.state.page_uri = utils.url(opts.page_uri).href;
-        }
-        if ('login' in provider && typeof(provider.login) === 'function') {
-          provider.login(p);
-        }
-        if (!/\btoken\b/.test(responseType) || parseInt(provider.oauth.version, 10) < 2 || (opts.display === 'none' && provider.oauth.grant && session && session.refresh_token)) {
-          p.qs.state.oauth = provider.oauth;
-          p.qs.state.oauth_proxy = opts.oauth_proxy;
-        }
-        p.qs.state = encodeURIComponent(JSON.stringify(p.qs.state));
-        if (parseInt(provider.oauth.version, 10) === 1) {
-          url = utils.qs(opts.oauth_proxy, p.qs, encodeFunction);
-        } else if (opts.display === 'none' && provider.oauth.grant && session && session.refresh_token) {
-          p.qs.refresh_token = session.refresh_token;
-          url = utils.qs(opts.oauth_proxy, p.qs, encodeFunction);
-        } else {
-          url = utils.qs(provider.oauth.auth, p.qs, encodeFunction);
-        }
-        emit('auth.init', p);
-        if (opts.display === 'none') {
-          utils.iframe(url, redirectUri);
-        } else if (opts.display === 'popup') {
-          var popup = utils.popup(url, redirectUri, opts.popup);
-          var timer = setInterval(function() {
-            if (!popup || popup.closed) {
-              clearInterval(timer);
-              if (!promise.state) {
-                var response = error('cancelled', 'Login has been cancelled');
-                if (!popup) {
-                  response = error('blocked', 'Popup was blocked');
-                }
-                response.network = p.network;
-                promise.reject(response);
-              }
-            }
-          }, 100);
-        } else {
-          window.location = url;
-        }
-        return promise.proxy;
-        function encodeFunction(s) {
-          return s;
-        }
-        function filterEmpty(s) {
-          return !!s;
-        }
-      },
-      logout: function() {
-        var _this = this;
-        var utils = _this.utils;
-        var error = utils.error;
-        var promise = utils.Promise();
-        var p = utils.args({
-          name: 's',
-          options: 'o',
-          callback: 'f'
-        }, arguments);
-        p.options = p.options || {};
-        promise.proxy.then(p.callback, p.callback);
-        function emit(s, value) {
-          hello.emit(s, value);
-        }
-        promise.proxy.then(emit.bind(this, 'auth.logout auth'), emit.bind(this, 'error'));
-        p.name = p.name || this.settings.default_service;
-        p.authResponse = utils.store(p.name);
-        if (p.name && !(p.name in _this.services)) {
-          promise.reject(error('invalid_network', 'The network was unrecognized'));
-        } else if (p.name && p.authResponse) {
-          var callback = function(opts) {
-            utils.store(p.name, null);
-            promise.fulfill(hello.utils.merge({network: p.name}, opts || {}));
-          };
-          var _opts = {};
-          if (p.options.force) {
-            var logout = _this.services[p.name].logout;
-            if (logout) {
-              if (typeof(logout) === 'function') {
-                logout = logout(callback, p);
-              }
-              if (typeof(logout) === 'string') {
-                utils.iframe(logout);
-                _opts.force = null;
-                _opts.message = 'Logout success on providers site was indeterminate';
-              } else if (logout === undefined) {
-                return promise.proxy;
-              }
-            }
-          }
-          callback(_opts);
-        } else {
-          promise.reject(error('invalid_session', 'There was no session to remove'));
-        }
-        return promise.proxy;
-      },
-      getAuthResponse: function(service) {
-        service = service || this.settings.default_service;
-        if (!service || !(service in this.services)) {
-          return null;
-        }
-        return this.utils.store(service) || null;
-      },
-      events: {}
-    });
-    hello.utils.extend(hello.utils, {
-      error: function(code, message) {
-        return {error: {
-            code: code,
-            message: message
-          }};
-      },
-      qs: function(url, params, formatFunction) {
-        if (params) {
-          formatFunction = formatFunction || encodeURIComponent;
-          for (var x in params) {
-            var str = '([\\?\\&])' + x + '=[^\\&]*';
-            var reg = new RegExp(str);
-            if (url.match(reg)) {
-              url = url.replace(reg, '$1' + x + '=' + formatFunction(params[x]));
-              delete params[x];
-            }
-          }
-        }
-        if (!this.isEmpty(params)) {
-          return url + (url.indexOf('?') > -1 ? '&' : '?') + this.param(params, formatFunction);
-        }
-        return url;
-      },
-      param: function(s, formatFunction) {
-        var b;
-        var a = {};
-        var m;
-        if (typeof(s) === 'string') {
-          formatFunction = formatFunction || decodeURIComponent;
-          m = s.replace(/^[\#\?]/, '').match(/([^=\/\&]+)=([^\&]+)/g);
-          if (m) {
-            for (var i = 0; i < m.length; i++) {
-              b = m[i].match(/([^=]+)=(.*)/);
-              a[b[1]] = formatFunction(b[2]);
-            }
-          }
-          return a;
-        } else {
-          formatFunction = formatFunction || encodeURIComponent;
-          var o = s;
-          a = [];
-          for (var x in o) {
-            if (o.hasOwnProperty(x)) {
-              if (o.hasOwnProperty(x)) {
-                a.push([x, o[x] === '?' ? '?' : formatFunction(o[x])].join('='));
-              }
-            }
-          }
-          return a.join('&');
-        }
-      },
-      store: (function() {
-        var a = ['localStorage', 'sessionStorage'];
-        var i = -1;
-        var prefix = 'test';
-        var localStorage;
-        while (a[++i]) {
-          try {
-            localStorage = window[a[i]];
-            localStorage.setItem(prefix + i, i);
-            localStorage.removeItem(prefix + i);
-            break;
-          } catch (e) {
-            localStorage = null;
-          }
-        }
-        if (!localStorage) {
-          var cache = null;
-          localStorage = {
-            getItem: function(prop) {
-              prop = prop + '=';
-              var m = document.cookie.split(';');
-              for (var i = 0; i < m.length; i++) {
-                var _m = m[i].replace(/(^\s+|\s+$)/, '');
-                if (_m && _m.indexOf(prop) === 0) {
-                  return _m.substr(prop.length);
-                }
-              }
-              return cache;
-            },
-            setItem: function(prop, value) {
-              cache = value;
-              document.cookie = prop + '=' + value;
-            }
-          };
-          cache = localStorage.getItem('hello');
-        }
-        function get() {
-          var json = {};
-          try {
-            json = JSON.parse(localStorage.getItem('hello')) || {};
-          } catch (e) {}
-          return json;
-        }
-        function set(json) {
-          localStorage.setItem('hello', JSON.stringify(json));
-        }
-        return function(name, value, days) {
-          var json = get();
-          if (name && value === undefined) {
-            return json[name] || null;
-          } else if (name && value === null) {
-            try {
-              delete json[name];
-            } catch (e) {
-              json[name] = null;
-            }
-          } else if (name) {
-            json[name] = value;
-          } else {
-            return json;
-          }
-          set(json);
-          return json || null;
-        };
-      })(),
-      append: function(node, attr, target) {
-        var n = typeof(node) === 'string' ? document.createElement(node) : node;
-        if (typeof(attr) === 'object') {
-          if ('tagName' in attr) {
-            target = attr;
-          } else {
-            for (var x in attr) {
-              if (attr.hasOwnProperty(x)) {
-                if (typeof(attr[x]) === 'object') {
-                  for (var y in attr[x]) {
-                    if (attr[x].hasOwnProperty(y)) {
-                      n[x][y] = attr[x][y];
-                    }
-                  }
-                } else if (x === 'html') {
-                  n.innerHTML = attr[x];
-                } else if (!/^on/.test(x)) {
-                  n.setAttribute(x, attr[x]);
-                } else {
-                  n[x] = attr[x];
-                }
-              }
-            }
-          }
-        }
-        if (target === 'body') {
-          (function self() {
-            if (document.body) {
-              document.body.appendChild(n);
-            } else {
-              setTimeout(self, 16);
-            }
-          })();
-        } else if (typeof(target) === 'object') {
-          target.appendChild(n);
-        } else if (typeof(target) === 'string') {
-          document.getElementsByTagName(target)[0].appendChild(n);
-        }
-        return n;
-      },
-      iframe: function(src) {
-        this.append('iframe', {
-          src: src,
-          style: {
-            position: 'absolute',
-            left: '-1000px',
-            bottom: 0,
-            height: '1px',
-            width: '1px'
-          }
-        }, 'body');
-      },
-      merge: function() {
-        var args = Array.prototype.slice.call(arguments);
-        args.unshift({});
-        return this.extend.apply(null, args);
-      },
-      args: function(o, args) {
-        var p = {};
-        var i = 0;
-        var t = null;
-        var x = null;
-        for (x in o) {
-          if (o.hasOwnProperty(x)) {
-            break;
-          }
-        }
-        if ((args.length === 1) && (typeof(args[0]) === 'object') && o[x] != 'o!') {
-          for (x in args[0]) {
-            if (o.hasOwnProperty(x)) {
-              if (x in o) {
-                return args[0];
-              }
-            }
-          }
-        }
-        for (x in o) {
-          if (o.hasOwnProperty(x)) {
-            t = typeof(args[i]);
-            if ((typeof(o[x]) === 'function' && o[x].test(args[i])) || (typeof(o[x]) === 'string' && ((o[x].indexOf('s') > -1 && t === 'string') || (o[x].indexOf('o') > -1 && t === 'object') || (o[x].indexOf('i') > -1 && t === 'number') || (o[x].indexOf('a') > -1 && t === 'object') || (o[x].indexOf('f') > -1 && t === 'function')))) {
-              p[x] = args[i++];
-            } else if (typeof(o[x]) === 'string' && o[x].indexOf('!') > -1) {
-              return false;
-            }
-          }
-        }
-        return p;
-      },
-      url: function(path) {
-        if (!path) {
-          return window.location;
-        } else if (window.URL && URL instanceof Function && URL.length !== 0) {
-          return new URL(path, window.location);
-        } else {
-          var a = document.createElement('a');
-          a.href = path;
-          return a.cloneNode(false);
-        }
-      },
-      diff: function(a, b) {
-        return b.filter(function(item) {
-          return a.indexOf(item) === -1;
-        });
-      },
-      diffKey: function(a, b) {
-        if (a || !b) {
-          var r = {};
-          for (var x in a) {
-            if (!(x in b)) {
-              r[x] = a[x];
-            }
-          }
-          return r;
-        }
-        return a;
-      },
-      unique: function(a) {
-        if (!Array.isArray(a)) {
-          return [];
-        }
-        return a.filter(function(item, index) {
-          return a.indexOf(item) === index;
-        });
-      },
-      isEmpty: function(obj) {
-        if (!obj)
-          return true;
-        if (Array.isArray(obj)) {
-          return !obj.length;
-        } else if (typeof(obj) === 'object') {
-          for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-              return false;
-            }
-          }
-        }
-        return true;
-      },
-      Promise: (function() {
-        var STATE_PENDING = 0;
-        var STATE_FULFILLED = 1;
-        var STATE_REJECTED = 2;
-        var api = function(executor) {
-          if (!(this instanceof api))
-            return new api(executor);
-          this.id = "Thenable/1.0.6";
-          this.state = STATE_PENDING;
-          this.fulfillValue = undefined;
-          this.rejectReason = undefined;
-          this.onFulfilled = [];
-          this.onRejected = [];
-          this.proxy = {then: this.then.bind(this)};
-          if (typeof executor === "function")
-            executor.call(this, this.fulfill.bind(this), this.reject.bind(this));
-        };
-        api.prototype = {
-          fulfill: function(value) {
-            return deliver(this, STATE_FULFILLED, "fulfillValue", value);
-          },
-          reject: function(value) {
-            return deliver(this, STATE_REJECTED, "rejectReason", value);
-          },
-          then: function(onFulfilled, onRejected) {
-            var curr = this;
-            var next = new api();
-            curr.onFulfilled.push(resolver(onFulfilled, next, "fulfill"));
-            curr.onRejected.push(resolver(onRejected, next, "reject"));
-            execute(curr);
-            return next.proxy;
-          }
-        };
-        var deliver = function(curr, state, name, value) {
-          if (curr.state === STATE_PENDING) {
-            curr.state = state;
-            curr[name] = value;
-            execute(curr);
-          }
-          return curr;
-        };
-        var execute = function(curr) {
-          if (curr.state === STATE_FULFILLED)
-            execute_handlers(curr, "onFulfilled", curr.fulfillValue);
-          else if (curr.state === STATE_REJECTED)
-            execute_handlers(curr, "onRejected", curr.rejectReason);
-        };
-        var execute_handlers = function(curr, name, value) {
-          if (curr[name].length === 0)
-            return;
-          var handlers = curr[name];
-          curr[name] = [];
-          var func = function() {
-            for (var i = 0; i < handlers.length; i++)
-              handlers[i](value);
-          };
-          if (typeof process === "object" && typeof process.nextTick === "function")
-            process.nextTick(func);
-          else if (typeof setImmediate === "function")
-            setImmediate(func);
-          else
-            setTimeout(func, 0);
-        };
-        var resolver = function(cb, next, method) {
-          return function(value) {
-            if (typeof cb !== "function")
-              next[method].call(next, value);
-            else {
-              var result;
-              try {
-                result = cb(value);
-              } catch (e) {
-                next.reject(e);
-                return;
-              }
-              resolve(next, result);
-            }
-          };
-        };
-        var resolve = function(promise, x) {
-          if (promise === x || promise.proxy === x) {
-            promise.reject(new TypeError("cannot resolve promise with itself"));
-            return;
-          }
-          var then;
-          if ((typeof x === "object" && x !== null) || typeof x === "function") {
-            try {
-              then = x.then;
-            } catch (e) {
-              promise.reject(e);
-              return;
-            }
-          }
-          if (typeof then === "function") {
-            var resolved = false;
-            try {
-              then.call(x, function(y) {
-                if (resolved)
-                  return;
-                resolved = true;
-                if (y === x)
-                  promise.reject(new TypeError("circular thenable chain"));
-                else
-                  resolve(promise, y);
-              }, function(r) {
-                if (resolved)
-                  return;
-                resolved = true;
-                promise.reject(r);
-              });
-            } catch (e) {
-              if (!resolved)
-                promise.reject(e);
-            }
-            return;
-          }
-          promise.fulfill(x);
-        };
-        return api;
-      })(),
-      Event: function() {
-        var separator = /[\s\,]+/;
-        this.parent = {
-          events: this.events,
-          findEvents: this.findEvents,
-          parent: this.parent,
-          utils: this.utils
-        };
-        this.events = {};
-        this.on = function(evt, callback) {
-          if (callback && typeof(callback) === 'function') {
-            var a = evt.split(separator);
-            for (var i = 0; i < a.length; i++) {
-              this.events[a[i]] = [callback].concat(this.events[a[i]] || []);
-            }
-          }
-          return this;
-        };
-        this.off = function(evt, callback) {
-          this.findEvents(evt, function(name, index) {
-            if (!callback || this.events[name][index] === callback) {
-              this.events[name][index] = null;
-            }
-          });
-          return this;
-        };
-        this.emit = function(evt) {
-          var args = Array.prototype.slice.call(arguments, 1);
-          args.push(evt);
-          var handler = function(name, index) {
-            args[args.length - 1] = (name === '*' ? evt : name);
-            this.events[name][index].apply(this, args);
-          };
-          var _this = this;
-          while (_this && _this.findEvents) {
-            _this.findEvents(evt + ',*', handler);
-            _this = _this.parent;
-          }
-          return this;
-        };
-        this.emitAfter = function() {
-          var _this = this;
-          var args = arguments;
-          setTimeout(function() {
-            _this.emit.apply(_this, args);
-          }, 0);
-          return this;
-        };
-        this.findEvents = function(evt, callback) {
-          var a = evt.split(separator);
-          for (var name in this.events) {
-            if (this.events.hasOwnProperty(name)) {
-              if (a.indexOf(name) > -1) {
-                for (var i = 0; i < this.events[name].length; i++) {
-                  if (this.events[name][i]) {
-                    callback.call(this, name, i);
-                  }
-                }
-              }
-            }
-          }
-        };
-        return this;
-      },
-      globalEvent: function(callback, guid) {
-        guid = guid || '_hellojs_' + parseInt(Math.random() * 1e12, 10).toString(36);
-        window[guid] = function() {
-          try {
-            if (callback.apply(this, arguments)) {
-              delete window[guid];
-            }
-          } catch (e) {
-            console.error(e);
-          }
-        };
-        return guid;
-      },
-      popup: function(url, redirectUri, options) {
-        var documentElement = document.documentElement;
-        if (options.height) {
-          var dualScreenTop = window.screenTop !== undefined ? window.screenTop : screen.top;
-          var height = screen.height || window.innerHeight || documentElement.clientHeight;
-          options.top = parseInt((height - options.height) / 2, 10) + dualScreenTop;
-        }
-        if (options.width) {
-          var dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
-          var width = screen.width || window.innerWidth || documentElement.clientWidth;
-          options.left = parseInt((width - options.width) / 2, 10) + dualScreenLeft;
-        }
-        var optionsArray = [];
-        Object.keys(options).forEach(function(name) {
-          var value = options[name];
-          optionsArray.push(name + (value !== null ? '=' + value : ''));
-        });
-        if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
-          url = redirectUri + '#oauth_redirect=' + encodeURIComponent(encodeURIComponent(url));
-        }
-        var popup = window.open(url, '_blank', optionsArray.join(','));
-        if (popup && popup.focus) {
-          popup.focus();
-        }
-        return popup;
-      },
-      responseHandler: function(window, parent) {
-        var _this = this;
-        var p;
-        var location = window.location;
-        p = _this.param(location.search);
-        if (p && p.state && (p.code || p.oauth_token)) {
-          var state = JSON.parse(p.state);
-          p.redirect_uri = state.redirect_uri || location.href.replace(/[\?\#].*$/, '');
-          var path = state.oauth_proxy + '?' + _this.param(p);
-          location.assign(path);
-          return;
-        }
-        p = _this.merge(_this.param(location.search || ''), _this.param(location.hash || ''));
-        if (p && 'state' in p) {
-          try {
-            var a = JSON.parse(p.state);
-            _this.extend(p, a);
-          } catch (e) {
-            console.error('Could not decode state parameter');
-          }
-          if (('access_token' in p && p.access_token) && p.network) {
-            if (!p.expires_in || parseInt(p.expires_in, 10) === 0) {
-              p.expires_in = 0;
-            }
-            p.expires_in = parseInt(p.expires_in, 10);
-            p.expires = ((new Date()).getTime() / 1e3) + (p.expires_in || (60 * 60 * 24 * 365));
-            authCallback(p, window, parent);
-          } else if (('error' in p && p.error) && p.network) {
-            p.error = {
-              code: p.error,
-              message: p.error_message || p.error_description
-            };
-            authCallback(p, window, parent);
-          } else if (p.callback && p.callback in parent) {
-            var res = 'result' in p && p.result ? JSON.parse(p.result) : false;
-            parent[p.callback](res);
-            closeWindow();
-          }
-          if (p.page_uri) {
-            location.assign(p.page_uri);
-          }
-        } else if ('oauth_redirect' in p) {
-          location.assign(decodeURIComponent(p.oauth_redirect));
-          return;
-        }
-        function authCallback(obj, window, parent) {
-          var cb = obj.callback;
-          var network = obj.network;
-          _this.store(network, obj);
-          if (('display' in obj) && obj.display === 'page') {
-            return;
-          }
-          if (parent && cb && cb in parent) {
-            try {
-              delete obj.callback;
-            } catch (e) {}
-            _this.store(network, obj);
-            var str = JSON.stringify(obj);
-            try {
-              parent[cb](str);
-            } catch (e) {}
-          }
-          closeWindow();
-        }
-        function closeWindow() {
-          if (window.frameElement) {
-            parent.document.body.removeChild(window.frameElement);
-          } else {
-            try {
-              window.close();
-            } catch (e) {}
-            if (window.addEventListener) {
-              window.addEventListener('load', function() {
-                window.close();
-              });
-            }
-          }
-        }
-      }
-    });
-    hello.utils.Event.call(hello);
-    (function(hello) {
-      var oldSessions = {};
-      var expired = {};
-      hello.on('auth.login, auth.logout', function(auth) {
-        if (auth && typeof(auth) === 'object' && auth.network) {
-          oldSessions[auth.network] = hello.utils.store(auth.network) || {};
-        }
-      });
-      (function self() {
-        var CURRENT_TIME = ((new Date()).getTime() / 1e3);
-        var emit = function(eventName) {
-          hello.emit('auth.' + eventName, {
-            network: name,
-            authResponse: session
-          });
-        };
-        for (var name in hello.services) {
-          if (hello.services.hasOwnProperty(name)) {
-            if (!hello.services[name].id) {
-              continue;
-            }
-            var session = hello.utils.store(name) || {};
-            var provider = hello.services[name];
-            var oldSess = oldSessions[name] || {};
-            if (session && 'callback' in session) {
-              var cb = session.callback;
-              try {
-                delete session.callback;
-              } catch (e) {}
-              hello.utils.store(name, session);
-              try {
-                window[cb](session);
-              } catch (e) {}
-            }
-            if (session && ('expires' in session) && session.expires < CURRENT_TIME) {
-              var refresh = provider.refresh || session.refresh_token;
-              if (refresh && (!(name in expired) || expired[name] < CURRENT_TIME)) {
-                hello.emit('notice', name + ' has expired trying to resignin');
-                hello.login(name, {
-                  display: 'none',
-                  force: false
-                });
-                expired[name] = CURRENT_TIME + 600;
-              } else if (!refresh && !(name in expired)) {
-                emit('expired');
-                expired[name] = true;
-              }
-              continue;
-            } else if (oldSess.access_token === session.access_token && oldSess.expires === session.expires) {
-              continue;
-            } else if (!session.access_token && oldSess.access_token) {
-              emit('logout');
-            } else if (session.access_token && !oldSess.access_token) {
-              emit('login');
-            } else if (session.expires !== oldSess.expires) {
-              emit('update');
-            }
-            oldSessions[name] = session;
-            if (name in expired) {
-              delete expired[name];
-            }
-          }
-        }
-        setTimeout(self, 1000);
-      })();
-    })(hello);
-    hello.api = function() {
-      var _this = this;
-      var utils = _this.utils;
-      var error = utils.error;
-      var promise = utils.Promise();
-      var p = utils.args({
-        path: 's!',
-        query: 'o',
-        method: 's',
-        data: 'o',
-        timeout: 'i',
-        callback: 'f'
-      }, arguments);
-      p.method = (p.method || 'get').toLowerCase();
-      p.headers = p.headers || {};
-      p.query = p.query || {};
-      if (p.method === 'get' || p.method === 'delete') {
-        utils.extend(p.query, p.data);
-        p.data = {};
-      }
-      var data = p.data = p.data || {};
-      promise.then(p.callback, p.callback);
-      if (!p.path) {
-        return promise.reject(error('invalid_path', 'Missing the path parameter from the request'));
-      }
-      p.path = p.path.replace(/^\/+/, '');
-      var a = (p.path.split(/[\/\:]/, 2) || [])[0].toLowerCase();
-      if (a in _this.services) {
-        p.network = a;
-        var reg = new RegExp('^' + a + ':?\/?');
-        p.path = p.path.replace(reg, '');
-      }
-      p.network = _this.settings.default_service = p.network || _this.settings.default_service;
-      var o = _this.services[p.network];
-      if (!o) {
-        return promise.reject(error('invalid_network', 'Could not match the service requested: ' + p.network));
-      }
-      if (!(!(p.method in o) || !(p.path in o[p.method]) || o[p.method][p.path] !== false)) {
-        return promise.reject(error('invalid_path', 'The provided path is not available on the selected network'));
-      }
-      if (!p.oauth_proxy) {
-        p.oauth_proxy = _this.settings.oauth_proxy;
-      }
-      if (!('proxy' in p)) {
-        p.proxy = p.oauth_proxy && o.oauth && parseInt(o.oauth.version, 10) === 1;
-      }
-      if (!('timeout' in p)) {
-        p.timeout = _this.settings.timeout;
-      }
-      if (!('formatResponse' in p)) {
-        p.formatResponse = true;
-      }
-      p.authResponse = _this.getAuthResponse(p.network);
-      if (p.authResponse && p.authResponse.access_token) {
-        p.query.access_token = p.authResponse.access_token;
-      }
-      var url = p.path;
-      var m;
-      p.options = utils.clone(p.query);
-      p.data = utils.clone(data);
-      var actions = o[{'delete': 'del'}[p.method] || p.method] || {};
-      if (p.method === 'get') {
-        var query = url.split(/[\?#]/)[1];
-        if (query) {
-          utils.extend(p.query, utils.param(query));
-          url = url.replace(/\?.*?(#|$)/, '$1');
-        }
-      }
-      if ((m = url.match(/#(.+)/, ''))) {
-        url = url.split('#')[0];
-        p.path = m[1];
-      } else if (url in actions) {
-        p.path = url;
-        url = actions[url];
-      } else if ('default' in actions) {
-        url = actions['default'];
-      }
-      p.redirect_uri = _this.settings.redirect_uri;
-      p.xhr = o.xhr;
-      p.jsonp = o.jsonp;
-      p.form = o.form;
-      if (typeof(url) === 'function') {
-        url(p, getPath);
-      } else {
-        getPath(url);
-      }
-      return promise.proxy;
-      function getPath(url) {
-        url = url.replace(/\@\{([a-z\_\-]+)(\|.*?)?\}/gi, function(m, key, defaults) {
-          var val = defaults ? defaults.replace(/^\|/, '') : '';
-          if (key in p.query) {
-            val = p.query[key];
-            delete p.query[key];
-          } else if (p.data && key in p.data) {
-            val = p.data[key];
-            delete p.data[key];
-          } else if (!defaults) {
-            promise.reject(error('missing_attribute', 'The attribute ' + key + ' is missing from the request'));
-          }
-          return val;
-        });
-        if (!url.match(/^https?:\/\//)) {
-          url = o.base + url;
-        }
-        p.url = url;
-        utils.request(p, function(r, headers) {
-          if (!p.formatResponse) {
-            if (typeof headers === 'object' ? (headers.statusCode >= 400) : (typeof r === 'object' && 'error' in r)) {
-              promise.reject(r);
-            } else {
-              promise.fulfill(r);
-            }
-            return;
-          }
-          if (r === true) {
-            r = {success: true};
-          } else if (!r) {
-            r = {};
-          }
-          if (p.method === 'delete') {
-            r = (!r || utils.isEmpty(r)) ? {success: true} : r;
-          }
-          if (o.wrap && ((p.path in o.wrap) || ('default' in o.wrap))) {
-            var wrap = (p.path in o.wrap ? p.path : 'default');
-            var time = (new Date()).getTime();
-            var b = o.wrap[wrap](r, headers, p);
-            if (b) {
-              r = b;
-            }
-          }
-          if (r && 'paging' in r && r.paging.next) {
-            if (r.paging.next[0] === '?') {
-              r.paging.next = p.path + r.paging.next;
-            } else {
-              r.paging.next += '#' + p.path;
-            }
-          }
-          if (!r || 'error' in r) {
-            promise.reject(r);
-          } else {
-            promise.fulfill(r);
-          }
-        });
-      }
-    };
-    hello.utils.extend(hello.utils, {
-      request: function(p, callback) {
-        var _this = this;
-        var error = _this.error;
-        if (!_this.isEmpty(p.data) && !('FileList' in window) && _this.hasBinary(p.data)) {
-          p.xhr = false;
-          p.jsonp = false;
-        }
-        var cors = this.request_cors(function() {
-          return ((p.xhr === undefined) || (p.xhr && (typeof(p.xhr) !== 'function' || p.xhr(p, p.query))));
-        });
-        if (cors) {
-          formatUrl(p, function(url) {
-            var x = _this.xhr(p.method, url, p.headers, p.data, callback);
-            x.onprogress = p.onprogress || null;
-            if (x.upload && p.onuploadprogress) {
-              x.upload.onprogress = p.onuploadprogress;
-            }
-          });
-          return;
-        }
-        var _query = p.query;
-        p.query = _this.clone(p.query);
-        p.callbackID = _this.globalEvent();
-        if (p.jsonp !== false) {
-          p.query.callback = p.callbackID;
-          if (typeof(p.jsonp) === 'function') {
-            p.jsonp(p, p.query);
-          }
-          if (p.method === 'get') {
-            formatUrl(p, function(url) {
-              _this.jsonp(url, callback, p.callbackID, p.timeout);
-            });
-            return;
-          } else {
-            p.query = _query;
-          }
-        }
-        if (p.form !== false) {
-          p.query.redirect_uri = p.redirect_uri;
-          p.query.state = JSON.stringify({callback: p.callbackID});
-          var opts;
-          if (typeof(p.form) === 'function') {
-            opts = p.form(p, p.query);
-          }
-          if (p.method === 'post' && opts !== false) {
-            formatUrl(p, function(url) {
-              _this.post(url, p.data, opts, callback, p.callbackID, p.timeout);
-            });
-            return;
-          }
-        }
-        callback(error('invalid_request', 'There was no mechanism for handling this request'));
-        return;
-        function formatUrl(p, callback) {
-          var sign;
-          if (p.authResponse && p.authResponse.oauth && parseInt(p.authResponse.oauth.version, 10) === 1) {
-            sign = p.query.access_token;
-            delete p.query.access_token;
-            p.proxy = true;
-          }
-          if (p.data && (p.method === 'get' || p.method === 'delete')) {
-            _this.extend(p.query, p.data);
-            p.data = null;
-          }
-          var path = _this.qs(p.url, p.query);
-          if (p.proxy) {
-            path = _this.qs(p.oauth_proxy, {
-              path: path,
-              access_token: sign || '',
-              then: p.proxy_response_type || (p.method.toLowerCase() === 'get' ? 'redirect' : 'proxy'),
-              method: p.method.toLowerCase(),
-              suppress_response_codes: true
-            });
-          }
-          callback(path);
-        }
-      },
-      request_cors: function(callback) {
-        return 'withCredentials' in new XMLHttpRequest() && callback();
-      },
-      domInstance: function(type, data) {
-        var test = 'HTML' + (type || '').replace(/^[a-z]/, function(m) {
-          return m.toUpperCase();
-        }) + 'Element';
-        if (!data) {
-          return false;
-        }
-        if (window[test]) {
-          return data instanceof window[test];
-        } else if (window.Element) {
-          return data instanceof window.Element && (!type || (data.tagName && data.tagName.toLowerCase() === type));
-        } else {
-          return (!(data instanceof Object || data instanceof Array || data instanceof String || data instanceof Number) && data.tagName && data.tagName.toLowerCase() === type);
-        }
-      },
-      clone: function(obj) {
-        if (obj === null || typeof(obj) !== 'object' || obj instanceof Date || 'nodeName' in obj || this.isBinary(obj) || (typeof FormData === 'function' && obj instanceof FormData)) {
-          return obj;
-        }
-        if (Array.isArray(obj)) {
-          return obj.map(this.clone.bind(this));
-        }
-        var clone = {};
-        for (var x in obj) {
-          clone[x] = this.clone(obj[x]);
-        }
-        return clone;
-      },
-      xhr: function(method, url, headers, data, callback) {
-        var r = new XMLHttpRequest();
-        var error = this.error;
-        var binary = false;
-        if (method === 'blob') {
-          binary = method;
-          method = 'GET';
-        }
-        method = method.toUpperCase();
-        r.onload = function(e) {
-          var json = r.response;
-          try {
-            json = JSON.parse(r.responseText);
-          } catch (_e) {
-            if (r.status === 401) {
-              json = error('access_denied', r.statusText);
-            }
-          }
-          var headers = headersToJSON(r.getAllResponseHeaders());
-          headers.statusCode = r.status;
-          callback(json || (method === 'GET' ? error('empty_response', 'Could not get resource') : {}), headers);
-        };
-        r.onerror = function(e) {
-          var json = r.responseText;
-          try {
-            json = JSON.parse(r.responseText);
-          } catch (_e) {}
-          callback(json || error('access_denied', 'Could not get resource'));
-        };
-        var x;
-        if (method === 'GET' || method === 'DELETE') {
-          data = null;
-        } else if (data && typeof(data) !== 'string' && !(data instanceof FormData) && !(data instanceof File) && !(data instanceof Blob)) {
-          var f = new FormData();
-          for (x in data)
-            if (data.hasOwnProperty(x)) {
-              if (data[x] instanceof HTMLInputElement) {
-                if ('files' in data[x] && data[x].files.length > 0) {
-                  f.append(x, data[x].files[0]);
-                }
-              } else if (data[x] instanceof Blob) {
-                f.append(x, data[x], data.name);
-              } else {
-                f.append(x, data[x]);
-              }
-            }
-          data = f;
-        }
-        r.open(method, url, true);
-        if (binary) {
-          if ('responseType' in r) {
-            r.responseType = binary;
-          } else {
-            r.overrideMimeType('text/plain; charset=x-user-defined');
-          }
-        }
-        if (headers) {
-          for (x in headers) {
-            r.setRequestHeader(x, headers[x]);
-          }
-        }
-        r.send(data);
-        return r;
-        function headersToJSON(s) {
-          var r = {};
-          var reg = /([a-z\-]+):\s?(.*);?/gi;
-          var m;
-          while ((m = reg.exec(s))) {
-            r[m[1]] = m[2];
-          }
-          return r;
-        }
-      },
-      jsonp: function(url, callback, callbackID, timeout) {
-        var _this = this;
-        var error = _this.error;
-        var bool = 0;
-        var head = document.getElementsByTagName('head')[0];
-        var operaFix;
-        var result = error('server_error', 'server_error');
-        var cb = function() {
-          if (!(bool++)) {
-            window.setTimeout(function() {
-              callback(result);
-              head.removeChild(script);
-            }, 0);
-          }
-        };
-        callbackID = _this.globalEvent(function(json) {
-          result = json;
-          return true;
-        }, callbackID);
-        url = url.replace(new RegExp('=\\?(&|$)'), '=' + callbackID + '$1');
-        var script = _this.append('script', {
-          id: callbackID,
-          name: callbackID,
-          src: url,
-          async: true,
-          onload: cb,
-          onerror: cb,
-          onreadystatechange: function() {
-            if (/loaded|complete/i.test(this.readyState)) {
-              cb();
-            }
-          }
-        });
-        if (window.navigator.userAgent.toLowerCase().indexOf('opera') > -1) {
-          operaFix = _this.append('script', {text: 'document.getElementById(\'' + callbackID + '\').onerror();'});
-          script.async = false;
-        }
-        if (timeout) {
-          window.setTimeout(function() {
-            result = error('timeout', 'timeout');
-            cb();
-          }, timeout);
-        }
-        head.appendChild(script);
-        if (operaFix) {
-          head.appendChild(operaFix);
-        }
-      },
-      post: function(url, data, options, callback, callbackID, timeout) {
-        var _this = this;
-        var error = _this.error;
-        var doc = document;
-        var form = null;
-        var reenableAfterSubmit = [];
-        var newform;
-        var i = 0;
-        var x = null;
-        var bool = 0;
-        var cb = function(r) {
-          if (!(bool++)) {
-            callback(r);
-          }
-        };
-        _this.globalEvent(cb, callbackID);
-        var win;
-        try {
-          win = doc.createElement('<iframe name="' + callbackID + '">');
-        } catch (e) {
-          win = doc.createElement('iframe');
-        }
-        win.name = callbackID;
-        win.id = callbackID;
-        win.style.display = 'none';
-        if (options && options.callbackonload) {
-          win.onload = function() {
-            cb({
-              response: 'posted',
-              message: 'Content was posted'
-            });
-          };
-        }
-        if (timeout) {
-          setTimeout(function() {
-            cb(error('timeout', 'The post operation timed out'));
-          }, timeout);
-        }
-        doc.body.appendChild(win);
-        if (_this.domInstance('form', data)) {
-          form = data.form;
-          for (i = 0; i < form.elements.length; i++) {
-            if (form.elements[i] !== data) {
-              form.elements[i].setAttribute('disabled', true);
-            }
-          }
-          data = form;
-        }
-        if (_this.domInstance('form', data)) {
-          form = data;
-          for (i = 0; i < form.elements.length; i++) {
-            if (!form.elements[i].disabled && form.elements[i].type === 'file') {
-              form.encoding = form.enctype = 'multipart/form-data';
-              form.elements[i].setAttribute('name', 'file');
-            }
-          }
-        } else {
-          for (x in data)
-            if (data.hasOwnProperty(x)) {
-              if (_this.domInstance('input', data[x]) && data[x].type === 'file') {
-                form = data[x].form;
-                form.encoding = form.enctype = 'multipart/form-data';
-              }
-            }
-          if (!form) {
-            form = doc.createElement('form');
-            doc.body.appendChild(form);
-            newform = form;
-          }
-          var input;
-          for (x in data)
-            if (data.hasOwnProperty(x)) {
-              var el = (_this.domInstance('input', data[x]) || _this.domInstance('textArea', data[x]) || _this.domInstance('select', data[x]));
-              if (!el || data[x].form !== form) {
-                var inputs = form.elements[x];
-                if (input) {
-                  if (!(inputs instanceof NodeList)) {
-                    inputs = [inputs];
-                  }
-                  for (i = 0; i < inputs.length; i++) {
-                    inputs[i].parentNode.removeChild(inputs[i]);
-                  }
-                }
-                input = doc.createElement('input');
-                input.setAttribute('type', 'hidden');
-                input.setAttribute('name', x);
-                if (el) {
-                  input.value = data[x].value;
-                } else if (_this.domInstance(null, data[x])) {
-                  input.value = data[x].innerHTML || data[x].innerText;
-                } else {
-                  input.value = data[x];
-                }
-                form.appendChild(input);
-              } else if (el && data[x].name !== x) {
-                data[x].setAttribute('name', x);
-                data[x].name = x;
-              }
-            }
-          for (i = 0; i < form.elements.length; i++) {
-            input = form.elements[i];
-            if (!(input.name in data) && input.getAttribute('disabled') !== true) {
-              input.setAttribute('disabled', true);
-              reenableAfterSubmit.push(input);
-            }
-          }
-        }
-        form.setAttribute('method', 'POST');
-        form.setAttribute('target', callbackID);
-        form.target = callbackID;
-        form.setAttribute('action', url);
-        setTimeout(function() {
-          form.submit();
-          setTimeout(function() {
-            try {
-              if (newform) {
-                newform.parentNode.removeChild(newform);
-              }
-            } catch (e) {
-              try {
-                console.error('HelloJS: could not remove iframe');
-              } catch (ee) {}
-            }
-            for (var i = 0; i < reenableAfterSubmit.length; i++) {
-              if (reenableAfterSubmit[i]) {
-                reenableAfterSubmit[i].setAttribute('disabled', false);
-                reenableAfterSubmit[i].disabled = false;
-              }
-            }
-          }, 0);
-        }, 100);
-      },
-      hasBinary: function(data) {
-        for (var x in data)
-          if (data.hasOwnProperty(x)) {
-            if (this.isBinary(data[x])) {
-              return true;
-            }
-          }
-        return false;
-      },
-      isBinary: function(data) {
-        return data instanceof Object && ((this.domInstance('input', data) && data.type === 'file') || ('FileList' in window && data instanceof window.FileList) || ('File' in window && data instanceof window.File) || ('Blob' in window && data instanceof window.Blob));
-      },
-      toBlob: function(dataURI) {
-        var reg = /^data\:([^;,]+(\;charset=[^;,]+)?)(\;base64)?,/i;
-        var m = dataURI.match(reg);
-        if (!m) {
-          return dataURI;
-        }
-        var binary = atob(dataURI.replace(reg, ''));
-        var array = [];
-        for (var i = 0; i < binary.length; i++) {
-          array.push(binary.charCodeAt(i));
-        }
-        return new Blob([new Uint8Array(array)], {type: m[1]});
-      }
-    });
-    (function(hello) {
-      var api = hello.api;
-      var utils = hello.utils;
-      utils.extend(utils, {
-        dataToJSON: function(p) {
-          var _this = this;
-          var w = window;
-          var data = p.data;
-          if (_this.domInstance('form', data)) {
-            data = _this.nodeListToJSON(data.elements);
-          } else if ('NodeList' in w && data instanceof NodeList) {
-            data = _this.nodeListToJSON(data);
-          } else if (_this.domInstance('input', data)) {
-            data = _this.nodeListToJSON([data]);
-          }
-          if (('File' in w && data instanceof w.File) || ('Blob' in w && data instanceof w.Blob) || ('FileList' in w && data instanceof w.FileList)) {
-            data = {file: data};
-          }
-          if (!('FormData' in w && data instanceof w.FormData)) {
-            for (var x in data)
-              if (data.hasOwnProperty(x)) {
-                if ('FileList' in w && data[x] instanceof w.FileList) {
-                  if (data[x].length === 1) {
-                    data[x] = data[x][0];
-                  }
-                } else if (_this.domInstance('input', data[x]) && data[x].type === 'file') {
-                  continue;
-                } else if (_this.domInstance('input', data[x]) || _this.domInstance('select', data[x]) || _this.domInstance('textArea', data[x])) {
-                  data[x] = data[x].value;
-                } else if (_this.domInstance(null, data[x])) {
-                  data[x] = data[x].innerHTML || data[x].innerText;
-                }
-              }
-          }
-          p.data = data;
-          return data;
-        },
-        nodeListToJSON: function(nodelist) {
-          var json = {};
-          for (var i = 0; i < nodelist.length; i++) {
-            var input = nodelist[i];
-            if (input.disabled || !input.name) {
-              continue;
-            }
-            if (input.type === 'file') {
-              json[input.name] = input;
-            } else {
-              json[input.name] = input.value || input.innerHTML;
-            }
-          }
-          return json;
-        }
-      });
-      hello.api = function() {
-        var p = utils.args({
-          path: 's!',
-          method: 's',
-          data: 'o',
-          timeout: 'i',
-          callback: 'f'
-        }, arguments);
-        if (p.data) {
-          utils.dataToJSON(p);
-        }
-        return api.call(this, p);
-      };
-    })(hello);
-    hello.utils.responseHandler(window, window.opener || window.parent);
-    if (typeof chrome === 'object' && typeof chrome.identity === 'object' && chrome.identity.launchWebAuthFlow) {
-      (function() {
-        hello.utils.popup = function(url) {
-          return _open(url, true);
-        };
-        hello.utils.iframe = function(url) {
-          _open(url, false);
-        };
-        hello.utils.request_cors = function(callback) {
-          callback();
-          return true;
-        };
-        var _cache = {};
-        chrome.storage.local.get('hello', function(r) {
-          _cache = r.hello || {};
-        });
-        hello.utils.store = function(name, value) {
-          if (arguments.length === 0) {
-            return _cache;
-          }
-          if (arguments.length === 1) {
-            return _cache[name] || null;
-          }
-          if (value) {
-            _cache[name] = value;
-            chrome.storage.local.set({hello: _cache});
-            return value;
-          }
-          if (value === null) {
-            delete _cache[name];
-            chrome.storage.local.set({hello: _cache});
-            return null;
-          }
-        };
-        function _open(url, interactive) {
-          var ref = {closed: false};
-          chrome.identity.launchWebAuthFlow({
-            url: url,
-            interactive: interactive
-          }, function(responseUrl) {
-            if (responseUrl === undefined) {
-              ref.closed = true;
-              return;
-            }
-            var a = hello.utils.url(responseUrl);
-            var _popup = {
-              location: {
-                assign: function(url) {
-                  _open(url, false);
-                },
-                search: a.search,
-                hash: a.hash,
-                href: a.href
-              },
-              close: function() {}
-            };
-            hello.utils.responseHandler(_popup, window);
-          });
-          return ref;
-        }
-      })();
-    }
-    (function() {
-      if (!(/^file:\/{3}[^\/]/.test(window.location.href) && window.cordova)) {
-        return;
-      }
-      hello.utils.iframe = function(url, redirectUri) {
-        hello.utils.popup(url, redirectUri, {hidden: 'yes'});
-      };
-      var utilPopup = hello.utils.popup;
-      hello.utils.popup = function(url, redirectUri, options) {
-        var popup = utilPopup.call(this, url, redirectUri, options);
-        try {
-          if (popup && popup.addEventListener) {
-            var a = hello.utils.url(redirectUri);
-            var redirectUriOrigin = a.origin || (a.protocol + '//' + a.hostname);
-            popup.addEventListener('loadstart', function(e) {
-              var url = e.url;
-              if (url.indexOf(redirectUriOrigin) !== 0) {
-                return;
-              }
-              var a = hello.utils.url(url);
-              var _popup = {
-                location: {
-                  assign: function(location) {
-                    popup.executeScript({code: 'window.location.href = "' + location + ';"'});
-                  },
-                  search: a.search,
-                  hash: a.hash,
-                  href: a.href
-                },
-                close: function() {
-                  if (popup.close) {
-                    popup.close();
-                    try {
-                      popup.closed = true;
-                    } catch (_e) {}
-                  }
-                }
-              };
-              hello.utils.responseHandler(_popup, window);
-            });
-          }
-        } catch (e) {}
-        return popup;
-      };
-    })();
-    (function(hello) {
-      var OAuth1Settings = {
-        version: '1.0',
-        auth: 'https://www.dropbox.com/1/oauth/authorize',
-        request: 'https://api.dropbox.com/1/oauth/request_token',
-        token: 'https://api.dropbox.com/1/oauth/access_token'
-      };
-      var OAuth2Settings = {
-        version: 2,
-        auth: 'https://www.dropbox.com/1/oauth2/authorize',
-        grant: 'https://api.dropbox.com/1/oauth2/token'
-      };
-      hello.init({dropbox: {
-          name: 'Dropbox',
-          oauth: OAuth2Settings,
-          login: function(p) {
-            p.qs.scope = '';
-            delete p.qs.display;
-            var redirect = decodeURIComponent(p.qs.redirect_uri);
-            if (redirect.indexOf('http:') === 0 && redirect.indexOf('http://localhost/') !== 0) {
-              hello.services.dropbox.oauth = OAuth1Settings;
-            } else {
-              hello.services.dropbox.oauth = OAuth2Settings;
-            }
-            p.options.popup.width = 1000;
-            p.options.popup.height = 1000;
-          },
-          base: 'https://api.dropbox.com/1/',
-          root: 'sandbox',
-          get: {
-            me: 'account/info',
-            'me/files': req('metadata/auto/@{parent|}'),
-            'me/folder': req('metadata/auto/@{id}'),
-            'me/folders': req('metadata/auto/'),
-            'default': function(p, callback) {
-              if (p.path.match('https://api-content.dropbox.com/1/files/')) {
-                p.method = 'blob';
-              }
-              callback(p.path);
-            }
-          },
-          post: {
-            'me/files': function(p, callback) {
-              var path = p.data.parent;
-              var fileName = p.data.name;
-              p.data = {file: p.data.file};
-              if (typeof(p.data.file) === 'string') {
-                p.data.file = hello.utils.toBlob(p.data.file);
-              }
-              callback('https://api-content.dropbox.com/1/files_put/auto/' + path + '/' + fileName);
-            },
-            'me/folders': function(p, callback) {
-              var name = p.data.name;
-              p.data = {};
-              callback('fileops/create_folder?root=@{root|sandbox}&' + hello.utils.param({path: name}));
-            }
-          },
-          del: {
-            'me/files': 'fileops/delete?root=@{root|sandbox}&path=@{id}',
-            'me/folder': 'fileops/delete?root=@{root|sandbox}&path=@{id}'
-          },
-          wrap: {
-            me: function(o) {
-              formatError(o);
-              if (!o.uid) {
-                return o;
-              }
-              o.name = o.display_name;
-              var m = o.name.split(' ');
-              o.first_name = m.shift();
-              o.last_name = m.join(' ');
-              o.id = o.uid;
-              delete o.uid;
-              delete o.display_name;
-              return o;
-            },
-            'default': function(o, headers, req) {
-              formatError(o);
-              if (o.is_dir && o.contents) {
-                o.data = o.contents;
-                delete o.contents;
-                o.data.forEach(function(item) {
-                  item.root = o.root;
-                  formatFile(item, headers, req);
-                });
-              }
-              formatFile(o, headers, req);
-              if (o.is_deleted) {
-                o.success = true;
-              }
-              return o;
-            }
-          },
-          xhr: function(p) {
-            if (p.data && p.data.file) {
-              var file = p.data.file;
-              if (file) {
-                if (file.files) {
-                  p.data = file.files[0];
-                } else {
-                  p.data = file;
-                }
-              }
-            }
-            if (p.method === 'delete') {
-              p.method = 'post';
-            }
-            return true;
-          },
-          form: function(p, qs) {
-            delete qs.state;
-            delete qs.redirect_uri;
-          }
-        }});
-      function formatError(o) {
-        if (o && 'error' in o) {
-          o.error = {
-            code: 'server_error',
-            message: o.error.message || o.error
-          };
-        }
-      }
-      function formatFile(o, headers, req) {
-        if (typeof o !== 'object' || (typeof Blob !== 'undefined' && o instanceof Blob) || (typeof ArrayBuffer !== 'undefined' && o instanceof ArrayBuffer)) {
-          return;
-        }
-        if ('error' in o) {
-          return;
-        }
-        var path = (o.root !== 'app_folder' ? o.root : '') + o.path.replace(/\&/g, '%26');
-        path = path.replace(/^\//, '');
-        if (o.thumb_exists) {
-          o.thumbnail = req.oauth_proxy + '?path=' + encodeURIComponent('https://api-content.dropbox.com/1/thumbnails/auto/' + path + '?format=jpeg&size=m') + '&access_token=' + req.options.access_token;
-        }
-        o.type = (o.is_dir ? 'folder' : o.mime_type);
-        o.name = o.path.replace(/.*\//g, '');
-        if (o.is_dir) {
-          o.files = path.replace(/^\//, '');
-        } else {
-          o.downloadLink = hello.settings.oauth_proxy + '?path=' + encodeURIComponent('https://api-content.dropbox.com/1/files/auto/' + path) + '&access_token=' + req.options.access_token;
-          o.file = 'https://api-content.dropbox.com/1/files/auto/' + path;
-        }
-        if (!o.id) {
-          o.id = o.path.replace(/^\//, '');
-        }
-      }
-      function req(str) {
-        return function(p, cb) {
-          delete p.query.limit;
-          cb(str);
-        };
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({facebook: {
-          name: 'Facebook',
-          oauth: {
-            version: 2,
-            auth: 'https://www.facebook.com/dialog/oauth/',
-            grant: 'https://graph.facebook.com/oauth/access_token'
-          },
-          scope: {
-            basic: 'public_profile',
-            email: 'email',
-            share: 'user_posts',
-            birthday: 'user_birthday',
-            events: 'user_events',
-            photos: 'user_photos',
-            videos: 'user_videos',
-            friends: 'user_friends',
-            files: 'user_photos,user_videos',
-            publish_files: 'user_photos,user_videos,publish_actions',
-            publish: 'publish_actions',
-            offline_access: ''
-          },
-          refresh: true,
-          login: function(p) {
-            if (p.options.force) {
-              p.qs.auth_type = 'reauthenticate';
-            }
-            p.options.popup.width = 580;
-            p.options.popup.height = 400;
-          },
-          logout: function(callback, options) {
-            var callbackID = hello.utils.globalEvent(callback);
-            var redirect = encodeURIComponent(hello.settings.redirect_uri + '?' + hello.utils.param({
-              callback: callbackID,
-              result: JSON.stringify({force: true}),
-              state: '{}'
-            }));
-            var token = (options.authResponse || {}).access_token;
-            hello.utils.iframe('https://www.facebook.com/logout.php?next=' + redirect + '&access_token=' + token);
-            if (!token) {
-              return false;
-            }
-          },
-          base: 'https://graph.facebook.com/v2.4/',
-          get: {
-            me: 'me?fields=email,first_name,last_name,name,timezone,verified',
-            'me/friends': 'me/friends',
-            'me/following': 'me/friends',
-            'me/followers': 'me/friends',
-            'me/share': 'me/feed',
-            'me/like': 'me/likes',
-            'me/files': 'me/albums',
-            'me/albums': 'me/albums?fields=cover_photo,name',
-            'me/album': '@{id}/photos?fields=picture',
-            'me/photos': 'me/photos',
-            'me/photo': '@{id}',
-            'friend/albums': '@{id}/albums',
-            'friend/photos': '@{id}/photos'
-          },
-          post: {
-            'me/share': 'me/feed',
-            'me/photo': '@{id}'
-          },
-          wrap: {
-            me: formatUser,
-            'me/friends': formatFriends,
-            'me/following': formatFriends,
-            'me/followers': formatFriends,
-            'me/albums': format,
-            'me/photos': format,
-            'me/files': format,
-            'default': format
-          },
-          xhr: function(p, qs) {
-            if (p.method === 'get' || p.method === 'post') {
-              qs.suppress_response_codes = true;
-            }
-            if (p.method === 'post' && p.data && typeof(p.data.file) === 'string') {
-              p.data.file = hello.utils.toBlob(p.data.file);
-            }
-            return true;
-          },
-          jsonp: function(p, qs) {
-            var m = p.method;
-            if (m !== 'get' && !hello.utils.hasBinary(p.data)) {
-              p.data.method = m;
-              p.method = 'get';
-            } else if (p.method === 'delete') {
-              qs.method = 'delete';
-              p.method = 'post';
-            }
-          },
-          form: function(p) {
-            return {callbackonload: true};
-          }
-        }});
-      var base = 'https://graph.facebook.com/';
-      function formatUser(o) {
-        if (o.id) {
-          o.thumbnail = o.picture = 'https://graph.facebook.com/' + o.id + '/picture';
-        }
-        return o;
-      }
-      function formatFriends(o) {
-        if ('data' in o) {
-          o.data.forEach(formatUser);
-        }
-        return o;
-      }
-      function format(o, headers, req) {
-        if (typeof o === 'boolean') {
-          o = {success: o};
-        }
-        if (o && 'data' in o) {
-          var token = req.query.access_token;
-          if (!(o.data instanceof Array)) {
-            var data = o.data;
-            delete o.data;
-            o.data = [data];
-          }
-          o.data.forEach(function(d) {
-            if (d.picture) {
-              d.thumbnail = d.picture;
-            }
-            d.pictures = (d.images || []).sort(function(a, b) {
-              return a.width - b.width;
-            });
-            if (d.cover_photo && d.cover_photo.id) {
-              d.thumbnail = base + d.cover_photo.id + '/picture?access_token=' + token;
-            }
-            if (d.type === 'album') {
-              d.files = d.photos = base + d.id + '/photos';
-            }
-            if (d.can_upload) {
-              d.upload_location = base + d.id + '/photos';
-            }
-          });
-        }
-        return o;
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({flickr: {
-          name: 'Flickr',
-          oauth: {
-            version: '1.0a',
-            auth: 'https://www.flickr.com/services/oauth/authorize?perms=read',
-            request: 'https://www.flickr.com/services/oauth/request_token',
-            token: 'https://www.flickr.com/services/oauth/access_token'
-          },
-          base: 'https://api.flickr.com/services/rest',
-          get: {
-            me: sign('flickr.people.getInfo'),
-            'me/friends': sign('flickr.contacts.getList', {per_page: '@{limit|50}'}),
-            'me/following': sign('flickr.contacts.getList', {per_page: '@{limit|50}'}),
-            'me/followers': sign('flickr.contacts.getList', {per_page: '@{limit|50}'}),
-            'me/albums': sign('flickr.photosets.getList', {per_page: '@{limit|50}'}),
-            'me/album': sign('flickr.photosets.getPhotos', {photoset_id: '@{id}'}),
-            'me/photos': sign('flickr.people.getPhotos', {per_page: '@{limit|50}'})
-          },
-          wrap: {
-            me: function(o) {
-              formatError(o);
-              o = checkResponse(o, 'person');
-              if (o.id) {
-                if (o.realname) {
-                  o.name = o.realname._content;
-                  var m = o.name.split(' ');
-                  o.first_name = m.shift();
-                  o.last_name = m.join(' ');
-                }
-                o.thumbnail = getBuddyIcon(o, 'l');
-                o.picture = getBuddyIcon(o, 'l');
-              }
-              return o;
-            },
-            'me/friends': formatFriends,
-            'me/followers': formatFriends,
-            'me/following': formatFriends,
-            'me/albums': function(o) {
-              formatError(o);
-              o = checkResponse(o, 'photosets');
-              paging(o);
-              if (o.photoset) {
-                o.data = o.photoset;
-                o.data.forEach(function(item) {
-                  item.name = item.title._content;
-                  item.photos = 'https://api.flickr.com/services/rest' + getApiUrl('flickr.photosets.getPhotos', {photoset_id: item.id}, true);
-                });
-                delete o.photoset;
-              }
-              return o;
-            },
-            'me/photos': function(o) {
-              formatError(o);
-              return formatPhotos(o);
-            },
-            'default': function(o) {
-              formatError(o);
-              return formatPhotos(o);
-            }
-          },
-          xhr: false,
-          jsonp: function(p, qs) {
-            if (p.method == 'get') {
-              delete qs.callback;
-              qs.jsoncallback = p.callbackID;
-            }
-          }
-        }});
-      function getApiUrl(method, extraParams, skipNetwork) {
-        var url = ((skipNetwork) ? '' : 'flickr:') + '?method=' + method + '&api_key=' + hello.services.flickr.id + '&format=json';
-        for (var param in extraParams) {
-          if (extraParams.hasOwnProperty(param)) {
-            url += '&' + param + '=' + extraParams[param];
-          }
-        }
-        return url;
-      }
-      function withUser(cb) {
-        var auth = hello.getAuthResponse('flickr');
-        cb(auth && auth.user_nsid ? auth.user_nsid : null);
-      }
-      function sign(url, params) {
-        if (!params) {
-          params = {};
-        }
-        return function(p, callback) {
-          withUser(function(userId) {
-            params.user_id = userId;
-            callback(getApiUrl(url, params, true));
-          });
-        };
-      }
-      function getBuddyIcon(profile, size) {
-        var url = 'https://www.flickr.com/images/buddyicon.gif';
-        if (profile.nsid && profile.iconserver && profile.iconfarm) {
-          url = 'https://farm' + profile.iconfarm + '.staticflickr.com/' + profile.iconserver + '/' + 'buddyicons/' + profile.nsid + ((size) ? '_' + size : '') + '.jpg';
-        }
-        return url;
-      }
-      function createPhotoUrl(id, farm, server, secret, size) {
-        size = (size) ? '_' + size : '';
-        return 'https://farm' + farm + '.staticflickr.com/' + server + '/' + id + '_' + secret + size + '.jpg';
-      }
-      function formatUser(o) {}
-      function formatError(o) {
-        if (o && o.stat && o.stat.toLowerCase() != 'ok') {
-          o.error = {
-            code: 'invalid_request',
-            message: o.message
-          };
-        }
-      }
-      function formatPhotos(o) {
-        if (o.photoset || o.photos) {
-          var set = ('photoset' in o) ? 'photoset' : 'photos';
-          o = checkResponse(o, set);
-          paging(o);
-          o.data = o.photo;
-          delete o.photo;
-          for (var i = 0; i < o.data.length; i++) {
-            var photo = o.data[i];
-            photo.name = photo.title;
-            photo.picture = createPhotoUrl(photo.id, photo.farm, photo.server, photo.secret, '');
-            photo.pictures = createPictures(photo.id, photo.farm, photo.server, photo.secret);
-            photo.source = createPhotoUrl(photo.id, photo.farm, photo.server, photo.secret, 'b');
-            photo.thumbnail = createPhotoUrl(photo.id, photo.farm, photo.server, photo.secret, 'm');
-          }
-        }
-        return o;
-      }
-      function createPictures(id, farm, server, secret) {
-        var NO_LIMIT = 2048;
-        var sizes = [{
-          id: 't',
-          max: 100
-        }, {
-          id: 'm',
-          max: 240
-        }, {
-          id: 'n',
-          max: 320
-        }, {
-          id: '',
-          max: 500
-        }, {
-          id: 'z',
-          max: 640
-        }, {
-          id: 'c',
-          max: 800
-        }, {
-          id: 'b',
-          max: 1024
-        }, {
-          id: 'h',
-          max: 1600
-        }, {
-          id: 'k',
-          max: 2048
-        }, {
-          id: 'o',
-          max: NO_LIMIT
-        }];
-        return sizes.map(function(size) {
-          return {
-            source: createPhotoUrl(id, farm, server, secret, size.id),
-            width: size.max,
-            height: size.max
-          };
-        });
-      }
-      function checkResponse(o, key) {
-        if (key in o) {
-          o = o[key];
-        } else if (!('error' in o)) {
-          o.error = {
-            code: 'invalid_request',
-            message: o.message || 'Failed to get data from Flickr'
-          };
-        }
-        return o;
-      }
-      function formatFriends(o) {
-        formatError(o);
-        if (o.contacts) {
-          o = checkResponse(o, 'contacts');
-          paging(o);
-          o.data = o.contact;
-          delete o.contact;
-          for (var i = 0; i < o.data.length; i++) {
-            var item = o.data[i];
-            item.id = item.nsid;
-            item.name = item.realname || item.username;
-            item.thumbnail = getBuddyIcon(item, 'm');
-          }
-        }
-        return o;
-      }
-      function paging(res) {
-        if (res.page && res.pages && res.page !== res.pages) {
-          res.paging = {next: '?page=' + (++res.page)};
-        }
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({foursquare: {
-          name: 'Foursquare',
-          oauth: {
-            version: 2,
-            auth: 'https://foursquare.com/oauth2/authenticate',
-            grant: 'https://foursquare.com/oauth2/access_token'
-          },
-          refresh: true,
-          base: 'https://api.foursquare.com/v2/',
-          get: {
-            me: 'users/self',
-            'me/friends': 'users/self/friends',
-            'me/followers': 'users/self/friends',
-            'me/following': 'users/self/friends'
-          },
-          wrap: {
-            me: function(o) {
-              formatError(o);
-              if (o && o.response) {
-                o = o.response.user;
-                formatUser(o);
-              }
-              return o;
-            },
-            'default': function(o) {
-              formatError(o);
-              if (o && 'response' in o && 'friends' in o.response && 'items' in o.response.friends) {
-                o.data = o.response.friends.items;
-                o.data.forEach(formatUser);
-                delete o.response;
-              }
-              return o;
-            }
-          },
-          xhr: formatRequest,
-          jsonp: formatRequest
-        }});
-      function formatError(o) {
-        if (o.meta && (o.meta.code === 400 || o.meta.code === 401)) {
-          o.error = {
-            code: 'access_denied',
-            message: o.meta.errorDetail
-          };
-        }
-      }
-      function formatUser(o) {
-        if (o && o.id) {
-          o.thumbnail = o.photo.prefix + '100x100' + o.photo.suffix;
-          o.name = o.firstName + ' ' + o.lastName;
-          o.first_name = o.firstName;
-          o.last_name = o.lastName;
-          if (o.contact) {
-            if (o.contact.email) {
-              o.email = o.contact.email;
-            }
-          }
-        }
-      }
-      function formatRequest(p, qs) {
-        var token = qs.access_token;
-        delete qs.access_token;
-        qs.oauth_token = token;
-        qs.v = 20121125;
-        return true;
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({github: {
-          name: 'GitHub',
-          oauth: {
-            version: 2,
-            auth: 'https://github.com/login/oauth/authorize',
-            grant: 'https://github.com/login/oauth/access_token',
-            response_type: 'code'
-          },
-          scope: {email: 'user:email'},
-          base: 'https://api.github.com/',
-          get: {
-            me: 'user',
-            'me/friends': 'user/following?per_page=@{limit|100}',
-            'me/following': 'user/following?per_page=@{limit|100}',
-            'me/followers': 'user/followers?per_page=@{limit|100}',
-            'me/like': 'user/starred?per_page=@{limit|100}'
-          },
-          wrap: {
-            me: function(o, headers) {
-              formatError(o, headers);
-              formatUser(o);
-              return o;
-            },
-            'default': function(o, headers, req) {
-              formatError(o, headers);
-              if (Array.isArray(o)) {
-                o = {data: o};
-              }
-              if (o.data) {
-                paging(o, headers, req);
-                o.data.forEach(formatUser);
-              }
-              return o;
-            }
-          },
-          xhr: function(p) {
-            if (p.method !== 'get' && p.data) {
-              p.headers = p.headers || {};
-              p.headers['Content-Type'] = 'application/json';
-              if (typeof(p.data) === 'object') {
-                p.data = JSON.stringify(p.data);
-              }
-            }
-            return true;
-          }
-        }});
-      function formatError(o, headers) {
-        var code = headers ? headers.statusCode : (o && 'meta' in o && 'status' in o.meta && o.meta.status);
-        if ((code === 401 || code === 403)) {
-          o.error = {
-            code: 'access_denied',
-            message: o.message || (o.data ? o.data.message : 'Could not get response')
-          };
-          delete o.message;
-        }
-      }
-      function formatUser(o) {
-        if (o.id) {
-          o.thumbnail = o.picture = o.avatar_url;
-          o.name = o.login;
-        }
-      }
-      function paging(res, headers, req) {
-        if (res.data && res.data.length && headers && headers.Link) {
-          var next = headers.Link.match(/<(.*?)>;\s*rel=\"next\"/);
-          if (next) {
-            res.paging = {next: next[1]};
-          }
-        }
-      }
-    })(hello);
-    (function(hello) {
-      var contactsUrl = 'https://www.google.com/m8/feeds/contacts/default/full?v=3.0&alt=json&max-results=@{limit|1000}&start-index=@{start|1}';
-      hello.init({google: {
-          name: 'Google Plus',
-          oauth: {
-            version: 2,
-            auth: 'https://accounts.google.com/o/oauth2/auth',
-            grant: 'https://accounts.google.com/o/oauth2/token'
-          },
-          scope: {
-            basic: 'https://www.googleapis.com/auth/plus.me profile',
-            email: 'email',
-            birthday: '',
-            events: '',
-            photos: 'https://picasaweb.google.com/data/',
-            videos: 'http://gdata.youtube.com',
-            friends: 'https://www.google.com/m8/feeds, https://www.googleapis.com/auth/plus.login',
-            files: 'https://www.googleapis.com/auth/drive.readonly',
-            publish: '',
-            publish_files: 'https://www.googleapis.com/auth/drive',
-            share: '',
-            create_event: '',
-            offline_access: ''
-          },
-          scope_delim: ' ',
-          login: function(p) {
-            if (p.qs.display === 'none') {
-              p.qs.display = '';
-            }
-            if (p.qs.response_type === 'code') {
-              p.qs.access_type = 'offline';
-            }
-            if (p.options.force) {
-              p.qs.approval_prompt = 'force';
-            }
-          },
-          base: 'https://www.googleapis.com/',
-          get: {
-            me: 'plus/v1/people/me',
-            'me/friends': 'plus/v1/people/me/people/visible?maxResults=@{limit|100}',
-            'me/following': contactsUrl,
-            'me/followers': contactsUrl,
-            'me/contacts': contactsUrl,
-            'me/share': 'plus/v1/people/me/activities/public?maxResults=@{limit|100}',
-            'me/feed': 'plus/v1/people/me/activities/public?maxResults=@{limit|100}',
-            'me/albums': 'https://picasaweb.google.com/data/feed/api/user/default?alt=json&max-results=@{limit|100}&start-index=@{start|1}',
-            'me/album': function(p, callback) {
-              var key = p.query.id;
-              delete p.query.id;
-              callback(key.replace('/entry/', '/feed/'));
-            },
-            'me/photos': 'https://picasaweb.google.com/data/feed/api/user/default?alt=json&kind=photo&max-results=@{limit|100}&start-index=@{start|1}',
-            'me/file': 'drive/v2/files/@{id}',
-            'me/files': 'drive/v2/files?q=%22@{parent|root}%22+in+parents+and+trashed=false&maxResults=@{limit|100}',
-            'me/folders': 'drive/v2/files?q=%22@{id|root}%22+in+parents+and+mimeType+=+%22application/vnd.google-apps.folder%22+and+trashed=false&maxResults=@{limit|100}',
-            'me/folder': 'drive/v2/files?q=%22@{id|root}%22+in+parents+and+trashed=false&maxResults=@{limit|100}'
-          },
-          post: {
-            'me/files': uploadDrive,
-            'me/folders': function(p, callback) {
-              p.data = {
-                title: p.data.name,
-                parents: [{id: p.data.parent || 'root'}],
-                mimeType: 'application/vnd.google-apps.folder'
-              };
-              callback('drive/v2/files');
-            }
-          },
-          put: {'me/files': uploadDrive},
-          del: {
-            'me/files': 'drive/v2/files/@{id}',
-            'me/folder': 'drive/v2/files/@{id}'
-          },
-          patch: {'me/file': 'drive/v2/files/@{id}'},
-          wrap: {
-            me: function(o) {
-              if (o.id) {
-                o.last_name = o.family_name || (o.name ? o.name.familyName : null);
-                o.first_name = o.given_name || (o.name ? o.name.givenName : null);
-                if (o.emails && o.emails.length) {
-                  o.email = o.emails[0].value;
-                }
-                formatPerson(o);
-              }
-              return o;
-            },
-            'me/friends': function(o) {
-              if (o.items) {
-                paging(o);
-                o.data = o.items;
-                o.data.forEach(formatPerson);
-                delete o.items;
-              }
-              return o;
-            },
-            'me/contacts': formatFriends,
-            'me/followers': formatFriends,
-            'me/following': formatFriends,
-            'me/share': formatFeed,
-            'me/feed': formatFeed,
-            'me/albums': gEntry,
-            'me/photos': formatPhotos,
-            'default': gEntry
-          },
-          xhr: function(p) {
-            if (p.method === 'post' || p.method === 'put') {
-              toJSON(p);
-            } else if (p.method === 'patch') {
-              hello.utils.extend(p.query, p.data);
-              p.data = null;
-            }
-            return true;
-          },
-          form: false
-        }});
-      function toInt(s) {
-        return parseInt(s, 10);
-      }
-      function formatFeed(o) {
-        paging(o);
-        o.data = o.items;
-        delete o.items;
-        return o;
-      }
-      function formatItem(o) {
-        if (o.error) {
-          return;
-        }
-        if (!o.name) {
-          o.name = o.title || o.message;
-        }
-        if (!o.picture) {
-          o.picture = o.thumbnailLink;
-        }
-        if (!o.thumbnail) {
-          o.thumbnail = o.thumbnailLink;
-        }
-        if (o.mimeType === 'application/vnd.google-apps.folder') {
-          o.type = 'folder';
-          o.files = 'https://www.googleapis.com/drive/v2/files?q=%22' + o.id + '%22+in+parents';
-        }
-        return o;
-      }
-      function formatImage(image) {
-        return {
-          source: image.url,
-          width: image.width,
-          height: image.height
-        };
-      }
-      function formatPhotos(o) {
-        o.data = o.feed.entry.map(formatEntry);
-        delete o.feed;
-      }
-      function gEntry(o) {
-        paging(o);
-        if ('feed' in o && 'entry' in o.feed) {
-          o.data = o.feed.entry.map(formatEntry);
-          delete o.feed;
-        } else if ('entry' in o) {
-          return formatEntry(o.entry);
-        } else if ('items' in o) {
-          o.data = o.items.map(formatItem);
-          delete o.items;
-        } else {
-          formatItem(o);
-        }
-        return o;
-      }
-      function formatPerson(o) {
-        o.name = o.displayName || o.name;
-        o.picture = o.picture || (o.image ? o.image.url : null);
-        o.thumbnail = o.picture;
-      }
-      function formatFriends(o, headers, req) {
-        paging(o);
-        var r = [];
-        if ('feed' in o && 'entry' in o.feed) {
-          var token = req.query.access_token;
-          for (var i = 0; i < o.feed.entry.length; i++) {
-            var a = o.feed.entry[i];
-            a.id = a.id.$t;
-            a.name = a.title.$t;
-            delete a.title;
-            if (a.gd$email) {
-              a.email = (a.gd$email && a.gd$email.length > 0) ? a.gd$email[0].address : null;
-              a.emails = a.gd$email;
-              delete a.gd$email;
-            }
-            if (a.updated) {
-              a.updated = a.updated.$t;
-            }
-            if (a.link) {
-              var pic = (a.link.length > 0) ? a.link[0].href : null;
-              if (pic && a.link[0].gd$etag) {
-                pic += (pic.indexOf('?') > -1 ? '&' : '?') + 'access_token=' + token;
-                a.picture = pic;
-                a.thumbnail = pic;
-              }
-              delete a.link;
-            }
-            if (a.category) {
-              delete a.category;
-            }
-          }
-          o.data = o.feed.entry;
-          delete o.feed;
-        }
-        return o;
-      }
-      function formatEntry(a) {
-        var group = a.media$group;
-        var photo = group.media$content.length ? group.media$content[0] : {};
-        var mediaContent = group.media$content || [];
-        var mediaThumbnail = group.media$thumbnail || [];
-        var pictures = mediaContent.concat(mediaThumbnail).map(formatImage).sort(function(a, b) {
-          return a.width - b.width;
-        });
-        var i = 0;
-        var _a;
-        var p = {
-          id: a.id.$t,
-          name: a.title.$t,
-          description: a.summary.$t,
-          updated_time: a.updated.$t,
-          created_time: a.published.$t,
-          picture: photo ? photo.url : null,
-          pictures: pictures,
-          images: [],
-          thumbnail: photo ? photo.url : null,
-          width: photo.width,
-          height: photo.height
-        };
-        if ('link' in a) {
-          for (i = 0; i < a.link.length; i++) {
-            var d = a.link[i];
-            if (d.rel.match(/\#feed$/)) {
-              p.upload_location = p.files = p.photos = d.href;
-              break;
-            }
-          }
-        }
-        if ('category' in a && a.category.length) {
-          _a = a.category;
-          for (i = 0; i < _a.length; i++) {
-            if (_a[i].scheme && _a[i].scheme.match(/\#kind$/)) {
-              p.type = _a[i].term.replace(/^.*?\#/, '');
-            }
-          }
-        }
-        if ('media$thumbnail' in group && group.media$thumbnail.length) {
-          _a = group.media$thumbnail;
-          p.thumbnail = _a[0].url;
-          p.images = _a.map(formatImage);
-        }
-        _a = group.media$content;
-        if (_a && _a.length) {
-          p.images.push(formatImage(_a[0]));
-        }
-        return p;
-      }
-      function paging(res) {
-        if ('feed' in res && res.feed.openSearch$itemsPerPage) {
-          var limit = toInt(res.feed.openSearch$itemsPerPage.$t);
-          var start = toInt(res.feed.openSearch$startIndex.$t);
-          var total = toInt(res.feed.openSearch$totalResults.$t);
-          if ((start + limit) < total) {
-            res.paging = {next: '?start=' + (start + limit)};
-          }
-        } else if ('nextPageToken' in res) {
-          res.paging = {next: '?pageToken=' + res.nextPageToken};
-        }
-      }
-      function Multipart() {
-        var body = [];
-        var boundary = (Math.random() * 1e10).toString(32);
-        var counter = 0;
-        var lineBreak = '\r\n';
-        var delim = lineBreak + '--' + boundary;
-        var ready = function() {};
-        var dataUri = /^data\:([^;,]+(\;charset=[^;,]+)?)(\;base64)?,/i;
-        function addFile(item) {
-          var fr = new FileReader();
-          fr.onload = function(e) {
-            addContent(btoa(e.target.result), item.type + lineBreak + 'Content-Transfer-Encoding: base64');
-          };
-          fr.readAsBinaryString(item);
-        }
-        function addContent(content, type) {
-          body.push(lineBreak + 'Content-Type: ' + type + lineBreak + lineBreak + content);
-          counter--;
-          ready();
-        }
-        this.append = function(content, type) {
-          if (typeof(content) === 'string' || !('length' in Object(content))) {
-            content = [content];
-          }
-          for (var i = 0; i < content.length; i++) {
-            counter++;
-            var item = content[i];
-            if ((typeof(File) !== 'undefined' && item instanceof File) || (typeof(Blob) !== 'undefined' && item instanceof Blob)) {
-              addFile(item);
-            } else if (typeof(item) === 'string' && item.match(dataUri)) {
-              var m = item.match(dataUri);
-              addContent(item.replace(dataUri, ''), m[1] + lineBreak + 'Content-Transfer-Encoding: base64');
-            } else {
-              addContent(item, type);
-            }
-          }
-        };
-        this.onready = function(fn) {
-          ready = function() {
-            if (counter === 0) {
-              body.unshift('');
-              body.push('--');
-              fn(body.join(delim), boundary);
-              body = [];
-            }
-          };
-          ready();
-        };
-      }
-      function uploadDrive(p, callback) {
-        var data = {};
-        if (p.data && (typeof(HTMLInputElement) !== 'undefined' && p.data instanceof HTMLInputElement)) {
-          p.data = {file: p.data};
-        }
-        if (!p.data.name && Object(Object(p.data.file).files).length && p.method === 'post') {
-          p.data.name = p.data.file.files[0].name;
-        }
-        if (p.method === 'post') {
-          p.data = {
-            title: p.data.name,
-            parents: [{id: p.data.parent || 'root'}],
-            file: p.data.file
-          };
-        } else {
-          data = p.data;
-          p.data = {};
-          if (data.parent) {
-            p.data.parents = [{id: p.data.parent || 'root'}];
-          }
-          if (data.file) {
-            p.data.file = data.file;
-          }
-          if (data.name) {
-            p.data.title = data.name;
-          }
-        }
-        var file;
-        if ('file' in p.data) {
-          file = p.data.file;
-          delete p.data.file;
-          if (typeof(file) === 'object' && 'files' in file) {
-            file = file.files;
-          }
-          if (!file || !file.length) {
-            callback({error: {
-                code: 'request_invalid',
-                message: 'There were no files attached with this request to upload'
-              }});
-            return;
-          }
-        }
-        var parts = new Multipart();
-        parts.append(JSON.stringify(p.data), 'application/json');
-        if (file) {
-          parts.append(file);
-        }
-        parts.onready(function(body, boundary) {
-          p.headers['content-type'] = 'multipart/related; boundary="' + boundary + '"';
-          p.data = body;
-          callback('upload/drive/v2/files' + (data.id ? '/' + data.id : '') + '?uploadType=multipart');
-        });
-      }
-      function toJSON(p) {
-        if (typeof(p.data) === 'object') {
-          try {
-            p.data = JSON.stringify(p.data);
-            p.headers['content-type'] = 'application/json';
-          } catch (e) {}
-        }
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({instagram: {
-          name: 'Instagram',
-          oauth: {
-            version: 2,
-            auth: 'https://instagram.com/oauth/authorize/',
-            grant: 'https://api.instagram.com/oauth/access_token'
-          },
-          refresh: true,
-          scope: {
-            basic: 'basic',
-            photos: '',
-            friends: 'relationships',
-            publish: 'likes comments',
-            email: '',
-            share: '',
-            publish_files: '',
-            files: '',
-            videos: '',
-            offline_access: ''
-          },
-          scope_delim: ' ',
-          login: function(p) {
-            p.qs.display = '';
-          },
-          base: 'https://api.instagram.com/v1/',
-          get: {
-            me: 'users/self',
-            'me/feed': 'users/self/feed?count=@{limit|100}',
-            'me/photos': 'users/self/media/recent?min_id=0&count=@{limit|100}',
-            'me/friends': 'users/self/follows?count=@{limit|100}',
-            'me/following': 'users/self/follows?count=@{limit|100}',
-            'me/followers': 'users/self/followed-by?count=@{limit|100}',
-            'friend/photos': 'users/@{id}/media/recent?min_id=0&count=@{limit|100}'
-          },
-          post: {'me/like': function(p, callback) {
-              var id = p.data.id;
-              p.data = {};
-              callback('media/' + id + '/likes');
-            }},
-          del: {'me/like': 'media/@{id}/likes'},
-          wrap: {
-            me: function(o) {
-              formatError(o);
-              if ('data' in o) {
-                o.id = o.data.id;
-                o.thumbnail = o.data.profile_picture;
-                o.name = o.data.full_name || o.data.username;
-              }
-              return o;
-            },
-            'me/friends': formatFriends,
-            'me/following': formatFriends,
-            'me/followers': formatFriends,
-            'me/photos': function(o) {
-              formatError(o);
-              paging(o);
-              if ('data' in o) {
-                o.data = o.data.filter(function(d) {
-                  return d.type === 'image';
-                });
-                o.data.forEach(function(d) {
-                  d.name = d.caption ? d.caption.text : null;
-                  d.thumbnail = d.images.thumbnail.url;
-                  d.picture = d.images.standard_resolution.url;
-                  d.pictures = Object.keys(d.images).map(function(key) {
-                    var image = d.images[key];
-                    return formatImage(image);
-                  }).sort(function(a, b) {
-                    return a.width - b.width;
-                  });
-                });
-              }
-              return o;
-            },
-            'default': function(o) {
-              o = formatError(o);
-              paging(o);
-              return o;
-            }
-          },
-          xhr: function(p, qs) {
-            var method = p.method;
-            var proxy = method !== 'get';
-            if (proxy) {
-              if ((method === 'post' || method === 'put') && p.query.access_token) {
-                p.data.access_token = p.query.access_token;
-                delete p.query.access_token;
-              }
-              p.proxy = proxy;
-            }
-            return proxy;
-          },
-          form: false
-        }});
-      function formatImage(image) {
-        return {
-          source: image.url,
-          width: image.width,
-          height: image.height
-        };
-      }
-      function formatError(o) {
-        if (typeof o === 'string') {
-          return {error: {
-              code: 'invalid_request',
-              message: o
-            }};
-        }
-        if (o && 'meta' in o && 'error_type' in o.meta) {
-          o.error = {
-            code: o.meta.error_type,
-            message: o.meta.error_message
-          };
-        }
-        return o;
-      }
-      function formatFriends(o) {
-        paging(o);
-        if (o && 'data' in o) {
-          o.data.forEach(formatFriend);
-        }
-        return o;
-      }
-      function formatFriend(o) {
-        if (o.id) {
-          o.thumbnail = o.profile_picture;
-          o.name = o.full_name || o.username;
-        }
-      }
-      function paging(res) {
-        if ('pagination' in res) {
-          res.paging = {next: res.pagination.next_url};
-          delete res.pagination;
-        }
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({joinme: {
-          name: 'join.me',
-          oauth: {
-            version: 2,
-            auth: 'https://secure.join.me/api/public/v1/auth/oauth2',
-            grant: 'https://secure.join.me/api/public/v1/auth/oauth2'
-          },
-          refresh: false,
-          scope: {
-            basic: 'user_info',
-            user: 'user_info',
-            scheduler: 'scheduler',
-            start: 'start_meeting',
-            email: '',
-            friends: '',
-            share: '',
-            publish: '',
-            photos: '',
-            publish_files: '',
-            files: '',
-            videos: '',
-            offline_access: ''
-          },
-          scope_delim: ' ',
-          login: function(p) {
-            p.options.popup.width = 400;
-            p.options.popup.height = 700;
-          },
-          base: 'https://api.join.me/v1/',
-          get: {
-            me: 'user',
-            meetings: 'meetings',
-            'meetings/info': 'meetings/@{id}'
-          },
-          post: {
-            'meetings/start/adhoc': function(p, callback) {
-              callback('meetings/start');
-            },
-            'meetings/start/scheduled': function(p, callback) {
-              var meetingId = p.data.meetingId;
-              p.data = {};
-              callback('meetings/' + meetingId + '/start');
-            },
-            'meetings/schedule': function(p, callback) {
-              callback('meetings');
-            }
-          },
-          patch: {'meetings/update': function(p, callback) {
-              callback('meetings/' + p.data.meetingId);
-            }},
-          del: {'meetings/delete': 'meetings/@{id}'},
-          wrap: {
-            me: function(o, headers) {
-              formatError(o, headers);
-              if (!o.email) {
-                return o;
-              }
-              o.name = o.fullName;
-              o.first_name = o.name.split(' ')[0];
-              o.last_name = o.name.split(' ')[1];
-              o.id = o.email;
-              return o;
-            },
-            'default': function(o, headers) {
-              formatError(o, headers);
-              return o;
-            }
-          },
-          xhr: formatRequest
-        }});
-      function formatError(o, headers) {
-        var errorCode;
-        var message;
-        var details;
-        if (o && ('Message' in o)) {
-          message = o.Message;
-          delete o.Message;
-          if ('ErrorCode' in o) {
-            errorCode = o.ErrorCode;
-            delete o.ErrorCode;
-          } else {
-            errorCode = getErrorCode(headers);
-          }
-          o.error = {
-            code: errorCode,
-            message: message,
-            details: o
-          };
-        }
-        return o;
-      }
-      function formatRequest(p, qs) {
-        var token = qs.access_token;
-        delete qs.access_token;
-        p.headers.Authorization = 'Bearer ' + token;
-        if (p.method !== 'get' && p.data) {
-          p.headers['Content-Type'] = 'application/json';
-          if (typeof(p.data) === 'object') {
-            p.data = JSON.stringify(p.data);
-          }
-        }
-        if (p.method === 'put') {
-          p.method = 'patch';
-        }
-        return true;
-      }
-      function getErrorCode(headers) {
-        switch (headers.statusCode) {
-          case 400:
-            return 'invalid_request';
-          case 403:
-            return 'stale_token';
-          case 401:
-            return 'invalid_token';
-          case 500:
-            return 'server_error';
-          default:
-            return 'server_error';
-        }
-      }
-    }(hello));
-    (function(hello) {
-      hello.init({linkedin: {
-          oauth: {
-            version: 2,
-            response_type: 'code',
-            auth: 'https://www.linkedin.com/uas/oauth2/authorization',
-            grant: 'https://www.linkedin.com/uas/oauth2/accessToken'
-          },
-          refresh: true,
-          scope: {
-            basic: 'r_basicprofile',
-            email: 'r_emailaddress',
-            files: '',
-            friends: '',
-            photos: '',
-            publish: 'w_share',
-            publish_files: 'w_share',
-            share: '',
-            videos: '',
-            offline_access: ''
-          },
-          scope_delim: ' ',
-          base: 'https://api.linkedin.com/v1/',
-          get: {
-            me: 'people/~:(picture-url,first-name,last-name,id,formatted-name,email-address)',
-            'me/share': 'people/~/network/updates?count=@{limit|250}'
-          },
-          post: {
-            'me/share': function(p, callback) {
-              var data = {visibility: {code: 'anyone'}};
-              if (p.data.id) {
-                data.attribution = {share: {id: p.data.id}};
-              } else {
-                data.comment = p.data.message;
-                if (p.data.picture && p.data.link) {
-                  data.content = {
-                    'submitted-url': p.data.link,
-                    'submitted-image-url': p.data.picture
-                  };
-                }
-              }
-              p.data = JSON.stringify(data);
-              callback('people/~/shares?format=json');
-            },
-            'me/like': like
-          },
-          del: {'me/like': like},
-          wrap: {
-            me: function(o) {
-              formatError(o);
-              formatUser(o);
-              return o;
-            },
-            'me/friends': formatFriends,
-            'me/following': formatFriends,
-            'me/followers': formatFriends,
-            'me/share': function(o) {
-              formatError(o);
-              paging(o);
-              if (o.values) {
-                o.data = o.values.map(formatUser);
-                o.data.forEach(function(item) {
-                  item.message = item.headline;
-                });
-                delete o.values;
-              }
-              return o;
-            },
-            'default': function(o, headers) {
-              formatError(o);
-              empty(o, headers);
-              paging(o);
-            }
-          },
-          jsonp: function(p, qs) {
-            formatQuery(qs);
-            if (p.method === 'get') {
-              qs.format = 'jsonp';
-              qs['error-callback'] = p.callbackID;
-            }
-          },
-          xhr: function(p, qs) {
-            if (p.method !== 'get') {
-              formatQuery(qs);
-              p.headers['Content-Type'] = 'application/json';
-              p.headers['x-li-format'] = 'json';
-              p.proxy = true;
-              return true;
-            }
-            return false;
-          }
-        }});
-      function formatError(o) {
-        if (o && 'errorCode' in o) {
-          o.error = {
-            code: o.status,
-            message: o.message
-          };
-        }
-      }
-      function formatUser(o) {
-        if (o.error) {
-          return;
-        }
-        o.first_name = o.firstName;
-        o.last_name = o.lastName;
-        o.name = o.formattedName || (o.first_name + ' ' + o.last_name);
-        o.thumbnail = o.pictureUrl;
-        o.email = o.emailAddress;
-        return o;
-      }
-      function formatFriends(o) {
-        formatError(o);
-        paging(o);
-        if (o.values) {
-          o.data = o.values.map(formatUser);
-          delete o.values;
-        }
-        return o;
-      }
-      function paging(res) {
-        if ('_count' in res && '_start' in res && (res._count + res._start) < res._total) {
-          res.paging = {next: '?start=' + (res._start + res._count) + '&count=' + res._count};
-        }
-      }
-      function empty(o, headers) {
-        if (JSON.stringify(o) === '{}' && headers.statusCode === 200) {
-          o.success = true;
-        }
-      }
-      function formatQuery(qs) {
-        if (qs.access_token) {
-          qs.oauth2_access_token = qs.access_token;
-          delete qs.access_token;
-        }
-      }
-      function like(p, callback) {
-        p.headers['x-li-format'] = 'json';
-        var id = p.data.id;
-        p.data = (p.method !== 'delete').toString();
-        p.method = 'put';
-        callback('people/~/network/updates/key=' + id + '/is-liked');
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({soundcloud: {
-          name: 'SoundCloud',
-          oauth: {
-            version: 2,
-            auth: 'https://soundcloud.com/connect',
-            grant: 'https://soundcloud.com/oauth2/token'
-          },
-          base: 'https://api.soundcloud.com/',
-          get: {
-            me: 'me.json',
-            'me/friends': 'me/followings.json',
-            'me/followers': 'me/followers.json',
-            'me/following': 'me/followings.json',
-            'default': function(p, callback) {
-              callback(p.path + '.json');
-            }
-          },
-          wrap: {
-            me: function(o) {
-              formatUser(o);
-              return o;
-            },
-            'default': function(o) {
-              if (Array.isArray(o)) {
-                o = {data: o.map(formatUser)};
-              }
-              paging(o);
-              return o;
-            }
-          },
-          xhr: formatRequest,
-          jsonp: formatRequest
-        }});
-      function formatRequest(p, qs) {
-        var token = qs.access_token;
-        delete qs.access_token;
-        qs.oauth_token = token;
-        qs['_status_code_map[302]'] = 200;
-        return true;
-      }
-      function formatUser(o) {
-        if (o.id) {
-          o.picture = o.avatar_url;
-          o.thumbnail = o.avatar_url;
-          o.name = o.username || o.full_name;
-        }
-        return o;
-      }
-      function paging(res) {
-        if ('next_href' in res) {
-          res.paging = {next: res.next_href};
-        }
-      }
-    })(hello);
-    (function(hello) {
-      var base = 'https://api.twitter.com/';
-      hello.init({twitter: {
-          oauth: {
-            version: '1.0a',
-            auth: base + 'oauth/authenticate',
-            request: base + 'oauth/request_token',
-            token: base + 'oauth/access_token'
-          },
-          login: function(p) {
-            var prefix = '?force_login=true';
-            this.oauth.auth = this.oauth.auth.replace(prefix, '') + (p.options.force ? prefix : '');
-          },
-          base: base + '1.1/',
-          get: {
-            me: 'account/verify_credentials.json',
-            'me/friends': 'friends/list.json?count=@{limit|200}',
-            'me/following': 'friends/list.json?count=@{limit|200}',
-            'me/followers': 'followers/list.json?count=@{limit|200}',
-            'me/share': 'statuses/user_timeline.json?count=@{limit|200}',
-            'me/like': 'favorites/list.json?count=@{limit|200}'
-          },
-          post: {
-            'me/share': function(p, callback) {
-              var data = p.data;
-              p.data = null;
-              var status = [];
-              if (data.message) {
-                status.push(data.message);
-                delete data.message;
-              }
-              if (data.link) {
-                status.push(data.link);
-                delete data.link;
-              }
-              if (data.picture) {
-                status.push(data.picture);
-                delete data.picture;
-              }
-              if (status.length) {
-                data.status = status.join(' ');
-              }
-              if (data.file) {
-                data['media[]'] = data.file;
-                delete data.file;
-                p.data = data;
-                callback('statuses/update_with_media.json');
-              } else if ('id' in data) {
-                callback('statuses/retweet/' + data.id + '.json');
-              } else {
-                hello.utils.extend(p.query, data);
-                callback('statuses/update.json?include_entities=1');
-              }
-            },
-            'me/like': function(p, callback) {
-              var id = p.data.id;
-              p.data = null;
-              callback('favorites/create.json?id=' + id);
-            }
-          },
-          del: {'me/like': function() {
-              p.method = 'post';
-              var id = p.data.id;
-              p.data = null;
-              callback('favorites/destroy.json?id=' + id);
-            }},
-          wrap: {
-            me: function(res) {
-              formatError(res);
-              formatUser(res);
-              return res;
-            },
-            'me/friends': formatFriends,
-            'me/followers': formatFriends,
-            'me/following': formatFriends,
-            'me/share': function(res) {
-              formatError(res);
-              paging(res);
-              if (!res.error && 'length' in res) {
-                return {data: res};
-              }
-              return res;
-            },
-            'default': function(res) {
-              res = arrayToDataResponse(res);
-              paging(res);
-              return res;
-            }
-          },
-          xhr: function(p) {
-            return (p.method !== 'get');
-          }
-        }});
-      function formatUser(o) {
-        if (o.id) {
-          if (o.name) {
-            var m = o.name.split(' ');
-            o.first_name = m.shift();
-            o.last_name = m.join(' ');
-          }
-          o.thumbnail = o.profile_image_url_https || o.profile_image_url;
-        }
-        return o;
-      }
-      function formatFriends(o) {
-        formatError(o);
-        paging(o);
-        if (o.users) {
-          o.data = o.users.map(formatUser);
-          delete o.users;
-        }
-        return o;
-      }
-      function formatError(o) {
-        if (o.errors) {
-          var e = o.errors[0];
-          o.error = {
-            code: 'request_failed',
-            message: e.message
-          };
-        }
-      }
-      function paging(res) {
-        if ('next_cursor_str' in res) {
-          res.paging = {next: '?cursor=' + res.next_cursor_str};
-        }
-      }
-      function arrayToDataResponse(res) {
-        return Array.isArray(res) ? {data: res} : res;
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({vk: {
-          name: 'Vk',
-          oauth: {
-            version: 2,
-            auth: 'https://oauth.vk.com/authorize',
-            grant: 'https://oauth.vk.com/access_token'
-          },
-          scope: {
-            email: 'email',
-            friends: 'friends',
-            photos: 'photos',
-            videos: 'video',
-            share: 'share',
-            offline_access: 'offline'
-          },
-          refresh: true,
-          login: function(p) {
-            p.qs.display = window.navigator && window.navigator.userAgent && /ipad|phone|phone|android/.test(window.navigator.userAgent.toLowerCase()) ? 'mobile' : 'popup';
-          },
-          base: 'https://api.vk.com/method/',
-          get: {me: function(p, callback) {
-              p.query.fields = 'id,first_name,last_name,photo_max';
-              callback('users.get');
-            }},
-          wrap: {me: function(res, headers, req) {
-              formatError(res);
-              return formatUser(res, req);
-            }},
-          xhr: false,
-          jsonp: true,
-          form: false
-        }});
-      function formatUser(o, req) {
-        if (o !== null && 'response' in o && o.response !== null && o.response.length) {
-          o = o.response[0];
-          o.id = o.uid;
-          o.thumbnail = o.picture = o.photo_max;
-          o.name = o.first_name + ' ' + o.last_name;
-          if (req.authResponse && req.authResponse.email !== null)
-            o.email = req.authResponse.email;
-        }
-        return o;
-      }
-      function formatError(o) {
-        if (o.error) {
-          var e = o.error;
-          o.error = {
-            code: e.error_code,
-            message: e.error_msg
-          };
-        }
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({windows: {
-          name: 'Windows live',
-          oauth: {
-            version: 2,
-            auth: 'https://login.live.com/oauth20_authorize.srf',
-            grant: 'https://login.live.com/oauth20_token.srf'
-          },
-          refresh: true,
-          logout: function() {
-            return 'http://login.live.com/oauth20_logout.srf?ts=' + (new Date()).getTime();
-          },
-          scope: {
-            basic: 'wl.signin,wl.basic',
-            email: 'wl.emails',
-            birthday: 'wl.birthday',
-            events: 'wl.calendars',
-            photos: 'wl.photos',
-            videos: 'wl.photos',
-            friends: 'wl.contacts_emails',
-            files: 'wl.skydrive',
-            publish: 'wl.share',
-            publish_files: 'wl.skydrive_update',
-            share: 'wl.share',
-            create_event: 'wl.calendars_update,wl.events_create',
-            offline_access: 'wl.offline_access'
-          },
-          base: 'https://apis.live.net/v5.0/',
-          get: {
-            me: 'me',
-            'me/friends': 'me/friends',
-            'me/following': 'me/contacts',
-            'me/followers': 'me/friends',
-            'me/contacts': 'me/contacts',
-            'me/albums': 'me/albums',
-            'me/album': '@{id}/files',
-            'me/photo': '@{id}',
-            'me/files': '@{parent|me/skydrive}/files',
-            'me/folders': '@{id|me/skydrive}/files',
-            'me/folder': '@{id|me/skydrive}/files'
-          },
-          post: {
-            'me/albums': 'me/albums',
-            'me/album': '@{id}/files/',
-            'me/folders': '@{id|me/skydrive/}',
-            'me/files': '@{parent|me/skydrive}/files'
-          },
-          del: {
-            'me/album': '@{id}',
-            'me/photo': '@{id}',
-            'me/folder': '@{id}',
-            'me/files': '@{id}'
-          },
-          wrap: {
-            me: formatUser,
-            'me/friends': formatFriends,
-            'me/contacts': formatFriends,
-            'me/followers': formatFriends,
-            'me/following': formatFriends,
-            'me/albums': formatAlbums,
-            'me/photos': formatDefault,
-            'default': formatDefault
-          },
-          xhr: function(p) {
-            if (p.method !== 'get' && p.method !== 'delete' && !hello.utils.hasBinary(p.data)) {
-              if (typeof(p.data.file) === 'string') {
-                p.data.file = hello.utils.toBlob(p.data.file);
-              } else {
-                p.data = JSON.stringify(p.data);
-                p.headers = {'Content-Type': 'application/json'};
-              }
-            }
-            return true;
-          },
-          jsonp: function(p) {
-            if (p.method !== 'get' && !hello.utils.hasBinary(p.data)) {
-              p.data.method = p.method;
-              p.method = 'get';
-            }
-          }
-        }});
-      function formatDefault(o) {
-        if ('data' in o) {
-          o.data.forEach(function(d) {
-            if (d.picture) {
-              d.thumbnail = d.picture;
-            }
-            if (d.images) {
-              d.pictures = d.images.map(formatImage).sort(function(a, b) {
-                return a.width - b.width;
-              });
-            }
-          });
-        }
-        return o;
-      }
-      function formatImage(image) {
-        return {
-          width: image.width,
-          height: image.height,
-          source: image.source
-        };
-      }
-      function formatAlbums(o) {
-        if ('data' in o) {
-          o.data.forEach(function(d) {
-            d.photos = d.files = 'https://apis.live.net/v5.0/' + d.id + '/photos';
-          });
-        }
-        return o;
-      }
-      function formatUser(o, headers, req) {
-        if (o.id) {
-          var token = req.query.access_token;
-          if (o.emails) {
-            o.email = o.emails.preferred;
-          }
-          if (o.is_friend !== false) {
-            var id = (o.user_id || o.id);
-            o.thumbnail = o.picture = 'https://apis.live.net/v5.0/' + id + '/picture?access_token=' + token;
-          }
-        }
-        return o;
-      }
-      function formatFriends(o, headers, req) {
-        if ('data' in o) {
-          o.data.forEach(function(d) {
-            formatUser(d, headers, req);
-          });
-        }
-        return o;
-      }
-    })(hello);
-    (function(hello) {
-      hello.init({yahoo: {
-          oauth: {
-            version: '1.0a',
-            auth: 'https://api.login.yahoo.com/oauth/v2/request_auth',
-            request: 'https://api.login.yahoo.com/oauth/v2/get_request_token',
-            token: 'https://api.login.yahoo.com/oauth/v2/get_token'
-          },
-          login: function(p) {
-            p.options.popup.width = 560;
-            try {
-              delete p.qs.state.scope;
-            } catch (e) {}
-          },
-          base: 'https://social.yahooapis.com/v1/',
-          get: {
-            me: yql('select * from social.profile(0) where guid=me'),
-            'me/friends': yql('select * from social.contacts(0) where guid=me'),
-            'me/following': yql('select * from social.contacts(0) where guid=me')
-          },
-          wrap: {
-            me: formatUser,
-            'me/friends': formatFriends,
-            'me/following': formatFriends,
-            'default': paging
-          }
-        }});
-      function formatError(o) {
-        if (o && 'meta' in o && 'error_type' in o.meta) {
-          o.error = {
-            code: o.meta.error_type,
-            message: o.meta.error_message
-          };
-        }
-      }
-      function formatUser(o) {
-        formatError(o);
-        if (o.query && o.query.results && o.query.results.profile) {
-          o = o.query.results.profile;
-          o.id = o.guid;
-          o.last_name = o.familyName;
-          o.first_name = o.givenName || o.nickname;
-          var a = [];
-          if (o.first_name) {
-            a.push(o.first_name);
-          }
-          if (o.last_name) {
-            a.push(o.last_name);
-          }
-          o.name = a.join(' ');
-          o.email = (o.emails && o.emails[0]) ? o.emails[0].handle : null;
-          o.thumbnail = o.image ? o.image.imageUrl : null;
-        }
-        return o;
-      }
-      function formatFriends(o, headers, request) {
-        formatError(o);
-        paging(o, headers, request);
-        var contact;
-        var field;
-        if (o.query && o.query.results && o.query.results.contact) {
-          o.data = o.query.results.contact;
-          delete o.query;
-          if (!Array.isArray(o.data)) {
-            o.data = [o.data];
-          }
-          o.data.forEach(formatFriend);
-        }
-        return o;
-      }
-      function formatFriend(contact) {
-        contact.id = null;
-        if (contact.fields && !(contact.fields instanceof Array)) {
-          contact.fields = [contact.fields];
-        }
-        (contact.fields || []).forEach(function(field) {
-          if (field.type === 'email') {
-            contact.email = field.value;
-          }
-          if (field.type === 'name') {
-            contact.first_name = field.value.givenName;
-            contact.last_name = field.value.familyName;
-            contact.name = field.value.givenName + ' ' + field.value.familyName;
-          }
-          if (field.type === 'yahooid') {
-            contact.id = field.value;
-          }
-        });
-      }
-      function paging(res, headers, request) {
-        if (res.query && res.query.count && request.options) {
-          res.paging = {next: '?start=' + (res.query.count + (+request.options.start || 1))};
-        }
-        return res;
-      }
-      function yql(q) {
-        return 'https://query.yahooapis.com/v1/yql?q=' + (q + ' limit @{limit|100} offset @{start|0}').replace(/\s/g, '%20') + '&format=json';
-      }
-    })(hello);
-    if (typeof define === 'function' && define.amd) {
-      define(function() {
-        return hello;
-      });
-    }
-    if (typeof module === 'object' && module.exports) {
-      module.exports = hello;
-    }
-  })($__require('1b'));
-  return module.exports;
-});
-
-$__System.registerDynamic("1c", ["1a"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  module.exports = $__require('1a');
-  return module.exports;
-});
-
-$__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
-  var _Promise, _createClass, _classCallCheck, hello, IdentityModule;
+$__System.register('1a', ['11', 'e', 'f'], function (_export) {
+  var _Promise, _createClass, _classCallCheck, OpenIdLib, GoogleInfo, FacebookInfo, MicrosoftInfo;
 
   return {
     setters: [function (_) {
@@ -12700,8 +9851,488 @@ $__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
-    }, function (_c) {
-      hello = _c['default'];
+    }],
+    execute: function () {
+      //import hello from 'hellojs';
+
+      /**
+      *  class to facilitate the operations with the openID connect, through several Identity Providers
+      *
+      */
+      'use strict';
+
+      OpenIdLib = (function () {
+        function OpenIdLib(identityProvider, clientID) {
+          _classCallCheck(this, OpenIdLib);
+
+          var _this = this;
+          _this.clientID = clientID;
+          _this.identityProvider = identityProvider;
+
+          switch (identityProvider) {
+            case 'google':
+              var googleInfo = new GoogleInfo();
+              _this.info = googleInfo;
+              break;
+            case 'facebook':
+              var facebookInfo = new FacebookInfo();
+              _this.info = facebookInfo;
+              break;
+            case 'windows':
+              var microsoftInfo = new MicrosoftInfo();
+              _this.info = microsoftInfo;
+              break;
+            default:
+              break;
+          }
+        }
+
+        //Google works fine with OpenID connect
+
+        _createClass(OpenIdLib, [{
+          key: 'openPopup',
+          value: function openPopup() {
+            var _this = this;
+
+            var REDIRECT = _this.info.REDIRECT;
+            var URL = _this.info.URL;
+
+            var acToken = undefined;
+            var tokenType = undefined;
+            var expiresIn = undefined;
+
+            return new _Promise(function (resolve, reject) {
+
+              //function to parse the query string in the given URL to obatin certain values
+              function gup(url, name) {
+                name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+                var regexS = '[\\#&?]' + name + '=([^&#]*)';
+                var regex = new RegExp(regexS);
+                var results = regex.exec(url);
+                if (results === null) return '';else return results[1];
+              }
+
+              /*hello.init({google: '808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com',
+                         facebook: '655302667942219',
+                         windows: 'asdf197f6ad6-808f-4ddc-b725-3d8fe2660349'});
+              hello(_this.identityProvider).login({scope: 'email'}).then(function(token) {
+                console.log(token);
+                resolve(token.authResponse.access_token);
+              }, function(error) {
+                console.log('errorValidating ', error);
+                reject(error);
+              });*/
+
+              var win = window.open(URL, 'openIDrequest', 'width=800, height=600');
+              var pollTimer = window.setInterval(function () {
+                try {
+                  //console.log(win.document.URL);
+
+                  if (win.closed) {
+                    reject('Some error occured.');
+                    clearInterval(pollTimer);
+                  }
+
+                  var redirectURL = document.URL; //window.location.origin;
+                  if (win.document.URL.indexOf('REDIRECT') !== -1 || win.document.URL.indexOf(redirectURL) !== -1) {
+                    window.clearInterval(pollTimer);
+                    var url = win.document.URL;
+
+                    //not working yet. Some problems with the 'POST' method
+                    if (_this.identityProvider === 'windows') {
+                      (function () {
+                        var code = gup(url, 'code');
+                        var sessionState = gup(url, 'session_state');
+
+                        var reqAccessURL = _this.info.TOKENEND + 'redirect_uri=' + _this.info.REDIRECT + '&grant_type=authorization_code' + '&client_id=' + _this.info.CLIENTID + '&code=' + code;
+
+                        win.close();
+
+                        var req = new XMLHttpRequest();
+                        req.open('POST', _this.info.TOKENEND, true);
+                        req.setRequestHeader('Access-Control-Allow-Origin', '*');
+
+                        var data = new FormData();
+                        data.append('redirect_uri', _this.info.REDIRECT);
+                        data.append('grant_type', 'authorization_code');
+                        data.append('client_id', _this.info.CLIENTID);
+                        data.append('code', code);
+
+                        req.onreadystatechange = function (e) {
+                          if (req.readyState === 4) {
+                            if (req.status === 200) {
+
+                              resolve('null');
+                            } else if (req.status === 400) {
+                              reject('There was an error processing the token');
+                            } else {
+                              reject('something else other than 200 was returned');
+                            }
+                          }
+                        };
+                        req.send(data);
+                      })();
+                    } else {
+
+                      acToken = gup(url, 'access_token');
+                      tokenType = gup(url, 'token_type'); //FACEBOOK does not return tokenType in the field
+                      expiresIn = gup(url, 'expires_in');
+
+                      win.close();
+
+                      if (_this.identityProvider === 'facebook') {
+                        _this.info.VALIDURL = 'https://graph.facebook.com/debug_token?input_token=' + acToken + '&access_token=';
+                      }
+
+                      //after receiving the access token, google requires to validate first the token to prevent confused deputy problem.
+                      resolve(acToken);
+                    }
+                  }
+                } catch (e) {
+                  //console.log(e);
+                }
+              }, 1000);
+            });
+          }
+        }, {
+          key: 'validateToken',
+          value: function validateToken(token) {
+            var _this = this;
+            var tokenID = undefined;
+            var VALIDURL = _this.info.VALIDURL;
+            return new _Promise(function (resolve, reject) {
+              var req = new XMLHttpRequest();
+              req.open('GET', VALIDURL + token, true);
+
+              req.onreadystatechange = function (e) {
+                if (req.readyState === 4) {
+                  if (req.status === 200) {
+                    tokenID = JSON.parse(req.responseText);
+
+                    resolve({ token: token, tokenID: tokenID });
+                  } else if (req.status === 400) {
+                    reject('There was an error processing the token');
+                  } else {
+                    reject('something else other than 200 was returned');
+                  }
+                }
+              };
+              req.send();
+            });
+          }
+
+          //function to exchange the access token with an ID Token containing the information
+        }, {
+          key: 'getInfoToken',
+          value: function getInfoToken(token, tokenID) {
+            var _this = this;
+
+            return new _Promise(function (resolve, reject) {
+              var USERINFURL = _this.info.USERINFURL;
+
+              var req = new XMLHttpRequest();
+              req.open('GET', USERINFURL + token, true);
+
+              req.onreadystatechange = function (e) {
+                if (req.readyState === 4) {
+                  if (req.status === 200) {
+                    var infoToken = JSON.parse(req.responseText);
+                    var email = infoToken.email;
+
+                    //contruct the identityURL to be defined as in specification
+                    // model: user://<idpdomain>/<user-identifier>
+                    var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
+
+                    //TODO remove later the 'token' field key
+                    var identityBundle = { identity: identityURL, token: infoToken, accessToken: token, idToken: tokenID, infoToken: infoToken, idp: 'google' };
+
+                    resolve(identityBundle);
+                  } else if (req.status === 400) {
+                    reject('There was an error processing the token');
+                  } else {
+                    reject('something else other than 200 was returned');
+                  }
+                }
+              };
+              req.send();
+            });
+          }
+        }]);
+
+        return OpenIdLib;
+      })();
+
+      GoogleInfo = function GoogleInfo() {
+        _classCallCheck(this, GoogleInfo);
+
+        var _this = this;
+        _this.OAUTHURL = 'https://accounts.google.com/o/oauth2/auth?';
+        _this.SCOPE = 'email%20profile';
+        _this.CLIENTID = '808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com';
+        _this.REDIRECT = document.URL;
+        _this.TYPE = 'token';
+        _this.VALIDURL = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
+        _this.USERINFURL = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=';
+
+        _this.URL = _this.OAUTHURL + 'scope=' + _this.SCOPE + '&client_id=' + _this.CLIENTID + '&redirect_uri=' + _this.REDIRECT + '&response_type=' + _this.TYPE;
+      }
+
+      //Facebook only provides the support for Oauth2 Tokens, and do not directly provide support for OpenID connect. So, no 'oficial' ID token can be requested, just information about the user.
+      ;
+
+      FacebookInfo = function FacebookInfo() {
+        _classCallCheck(this, FacebookInfo);
+
+        var _this = this;
+        _this.OAUTHURL = 'https://www.facebook.com/dialog/oauth?';
+        _this.CLIENTID = 655302667942219;
+        _this.REDIRECT = document.URL; // 'http://localhost:8080/example/index.html';
+        _this.TYPE = 'token';
+        _this.VALIDURL = 'https://graph.facebook.com/debug_token?input_token='; //must be updated later
+        _this.USERINFURL = 'https://graph.facebook.com/v2.5/me?fields=id,name,email,picture&access_token=';
+        _this.URL = _this.OAUTHURL + 'client_id=' + _this.CLIENTID + '&redirect_uri=' + _this.REDIRECT + '&response_type=' + _this.TYPE;
+      }
+
+      //Microsoft is not yet implemented to obtain the Access token / ID token. Some troubles to request the Access token, since it is required to make a http Post request with the authorization code.
+      ;
+
+      MicrosoftInfo = function MicrosoftInfo() {
+        _classCallCheck(this, MicrosoftInfo);
+
+        var _this = this;
+        _this.OAUTHURL = 'https://login.microsoftonline.com/common/oauth2/authorize?';
+        _this.CLIENTID = '7e2f3589-4b38-4b1c-a321-c9251de00ef2';
+        _this.REDIRECT = document.URL; //'http%3A%2F%2Flocalhost%3A8080%2Fexample%2Findex%2Ehtml'
+        _this.TYPE = 'code';
+
+        _this.TOKENEND = 'https://login.microsoftonline.com/3fa4042c-7c4d-4382-aba8-fc8ec61103a4/oauth2/token';
+        _this.AUTHEND = 'https://login.microsoftonline.com/3fa4042c-7c4d-4382-aba8-fc8ec61103a4/oauth2/authorize?';
+
+        _this.URL = _this.AUTHEND + 'response_type=' + _this.TYPE + '&client_id=' + _this.CLIENTID; //+ '&redirect_uri=' + _this.REDIRECT;
+      };
+
+      _export('default', OpenIdLib);
+    }
+  };
+});
+$__System.register('1b', ['11', 'e', 'f'], function (_export) {
+  var _Promise, _createClass, _classCallCheck, IdpProxyStub;
+
+  return {
+    setters: [function (_) {
+      _Promise = _['default'];
+    }, function (_e) {
+      _createClass = _e['default'];
+    }, function (_f) {
+      _classCallCheck = _f['default'];
+    }],
+    execute: function () {
+      /**
+      * Identity Provider Proxy Protocol Stub
+      */
+      'use strict';
+
+      IdpProxyStub = (function () {
+
+        /**
+        * Constructor of the IdpProxy Stub
+        * The constructor add a listener in the messageBus received and start a web worker with the idpProxy received
+        *
+        * @param  {messageBus}      messageBus
+        * @param  {domain}          Domain
+        * @param  {idpProxy}    identity Provider Proxy javascript file
+        */
+
+        function IdpProxyStub(messageBus, domain, idpProxy) {
+          _classCallCheck(this, IdpProxyStub);
+
+          var _this = this;
+          _this.messageBus = messageBus;
+          _this.domain = domain;
+          _this.idpProxy = idpProxy;
+
+          _this.messageBus.addListener('domain://' + idpProxy, function (msg) {
+            _this.requestToIdp(msg);
+          });
+
+          //start the web worker with the idpProxy
+          _this.start(idpProxy);
+        }
+
+        /**
+        * Function that see the intended method in the message received and call the respective function
+        *
+        * @param {message}  message received in the messageBus
+        */
+
+        _createClass(IdpProxyStub, [{
+          key: 'requestToIdp',
+          value: function requestToIdp(msg) {
+            var _this = this;
+            var params = msg.body.params;
+            switch (msg.body.method) {
+              case 'login':
+                _this.login(params).then(function (value) {
+                  _this.replyMessage(msg, value);
+                });
+                break;
+              case 'generateAssertion':
+                _this.generate(params).then(function (value) {
+                  _this.replyMessage(msg, value);
+                });
+                break;
+              case 'validateAssertion':
+                _this.validate(params).then(function (value) {
+                  _this.replyMessage(msg, value);
+                });
+                break;
+              default:
+                break;
+            }
+          }
+
+          /**
+          * Starts a web worker with the idpProxy javascipt file
+          *
+          * @param  {idpProxy}    identity Provider Proxy javascript file
+          */
+        }, {
+          key: 'start',
+          value: function start(idpProxy) {
+            var _this = this;
+            if (window.Worker) {
+              //check if the browser supports the worker API
+
+              var myWorker = new Worker('/src/identity/IdpProxy.js');
+              _this.myWorker = myWorker;
+              _this.myWorker.postMessage(['create', 'IdpProxy']);
+            } else {
+              return 'error';
+            }
+          }
+
+          /**
+          * function that makes a request for an identity assertion to the web worker running the idpProxy
+          *
+          * @param  {params}  parameters received in the message. In this case contains the content, origin and usernamehint
+          * @return {Promise} returns a promise with an identity assertion generate by the idpProxy
+          */
+        }, {
+          key: 'generate',
+          value: function generate(params) {
+            var _this = this;
+
+            return new _Promise(function (resolve, reject) {
+              if (window.Worker) {
+                //check if the browser supports the worker API
+
+                _this.myWorker.postMessage(['generate', params]);
+
+                _this.myWorker.onmessage = function (e) {
+                  resolve(e.data);
+                  console.log('Message received from worker', e.data);
+                };
+              } else {
+                reject('error');
+              }
+            });
+          }
+
+          /**
+          * function that makes a request to validate an identity assertion to the web worker running the idpProxy
+          *
+          * @param  {params}  parameters received in the message. In this case contains the identity assertion and origin
+          * @return {Promise} returns a promise with the identity assertion validation result, received by the idpProxy
+          */
+        }, {
+          key: 'validate',
+          value: function validate(params) {
+            var _this = this;
+
+            return new _Promise(function (resolve, reject) {
+              if (window.Worker) {
+                //check if the browser supports the worker API
+
+                _this.myWorker.postMessage(['validate', params]);
+
+                _this.myWorker.onmessage = function (e) {
+                  resolve(e.data);
+                  console.log('Message received from worker', e.data);
+                };
+              } else {
+                reject('error');
+              }
+            });
+          }
+
+          /**
+          * function that makes a request for a user identity to the web worker running the idpProxy
+          *
+          * @param  {params}  parameters received in the message. In this case contains the login scope
+          * @return {Promise} returns a promise an URL so the Identity Module can use to obtain an identity
+          */
+        }, {
+          key: 'login',
+          value: function login(params) {
+            var _this = this;
+
+            return new _Promise(function (resolve, reject) {
+              if (window.Worker) {
+                //check if the browser supports the worker API
+
+                _this.myWorker.postMessage(['login', params]);
+
+                _this.myWorker.onmessage = function (e) {
+                  resolve(e.data);
+                  console.log('Message received from worker', e.data);
+                };
+              } else {
+                reject('error');
+              }
+            });
+          }
+
+          /**
+          * This function receives a message and a value. It replies the value to the sender of the message received
+          *
+          * @param  {message}   message received
+          * @param  {value}     value to include in the new message to send
+          */
+        }, {
+          key: 'replyMessage',
+          value: function replyMessage(msg, value) {
+            var _this = this;
+
+            var message = { id: msg.id, type: 'response', to: msg.from, from: msg.to,
+              body: { code: 200, value: value } };
+
+            _this.messageBus.postMessage(message);
+          }
+        }]);
+
+        return IdpProxyStub;
+      })();
+
+      _export('default', IdpProxyStub);
+    }
+  };
+});
+$__System.register('1c', ['11', '19', 'e', 'f', '1a', '1b'], function (_export) {
+  var _Promise, getUserURLFromEmail, _createClass, _classCallCheck, OpenIdLib, IdpProxyStub, IdentityModule;
+
+  return {
+    setters: [function (_) {
+      _Promise = _['default'];
+    }, function (_2) {
+      getUserURLFromEmail = _2.getUserURLFromEmail;
+    }, function (_e) {
+      _createClass = _e['default'];
+    }, function (_f) {
+      _classCallCheck = _f['default'];
+    }, function (_a) {
+      OpenIdLib = _a['default'];
+    }, function (_b) {
+      IdpProxyStub = _b['default'];
     }],
     execute: function () {
 
@@ -12745,36 +10376,24 @@ $__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
           _classCallCheck(this, IdentityModule);
 
           var _this = this;
+
           //to store items with this format: {identity: identityURL, token: tokenID}
           _this.identities = [];
         }
 
         /**
-        * Register a new Identity with an Identity Provider
+        * return the messageBus in this Registry
+        * @param {MessageBus}           messageBus
         */
 
         _createClass(IdentityModule, [{
-          key: 'registerIdentity',
-          value: function registerIdentity() {}
-          // Body...
-
-          /**
-          * In relation with a classical Relying Party: Registration
-          */
-
-        }, {
-          key: 'registerWithRP',
-          value: function registerWithRP() {}
-          // Body...
+          key: 'getIdentities',
 
           /**
           * Function to return all the identities registered within a session by a user.
           * These identities are returned in an array containing a JSON package for each user identity.
           * @return {Array<Identities>}         Array         Identities
           */
-
-        }, {
-          key: 'getIdentities',
           value: function getIdentities() {
             var _this = this;
             return _this.identities;
@@ -12795,6 +10414,15 @@ $__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
           value: function loginWithRP(identifier, scope) {
             var _this = this;
 
+            return new _Promise(function (resolve, reject) {
+              _this.getIdentityAssertion().then(function (value) {
+                console.log('loginWithRP');
+                resolve(value);
+              }, function (err) {
+                console.log('loginWithRP err');
+                reject(err);
+              });
+            });
             /*
               When calling this function, if everything is fine, a small pop-up will open requesting a login with a google account. After the login is made, the pop-up will close and the function will return the ID token.
               This function was tested with the URL: http://127.0.0.1:8080/ and with the same redirect URI
@@ -12812,113 +10440,113 @@ $__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
                identityModule._hello.init({google: "808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com"});
               identityModule._hello("google").login();
              */
+            /*let infoToken;
+             return new Promise(function(resolve, reject) {
+               if (_this.infoToken !== undefined) {
+                //TODO verify whether the token is still valid or not.
+                return resolve(_this.infoToken);
+              } else {
+                let googleOpenID = new OpenIdLib('google', '808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com');
+                 googleOpenID.openPopup().then(function(token) {
+                  googleOpenID.validateToken(token).then(function(token) {
+                    googleOpenID.getInfoToken(token.token, token.tokenID).then(function(identityBundle) {
+                      _this.identities.push(identityBundle);
+                      infoToken = identityBundle.infoToken;
+                      _this.infoToken = infoToken;
+                      resolve(infoToken);
+                    }, function(error) {
+                      reject(error);
+                    });
+                  }, function(error) {
+                    reject(error);
+                  });
+                }, function(error) {
+                  reject(error);
+                });
+              }
+             });*/
+          }
 
-            var VALIDURL = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
-            var USERINFURL = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=';
-            var acToken = undefined;
-            var tokenType = undefined;
-            var expiresIn = undefined;
-            var user = undefined;
-            var tokenID = undefined;
-            var infoToken = undefined;
-            var loggedIn = false;
+          /**
+          *
+          * FUNCTION TO OBTAIN IDENTITY
+          *
+          */
+        }, {
+          key: 'obtainIdentity',
+          value: function obtainIdentity(identityProvider) {
+            var _this = this;
+
+            var identities = _this.identities;
+
+            if (!identities) {
+              getIdentityAssertion().then(function (value) {});
+            } else {}
+          }
+
+          /**
+          * Obtain an Identity Assertion
+          *
+          * @return {IdAssertion}              IdAssertion
+          */
+        }, {
+          key: 'getIdentityAssertion',
+          value: function getIdentityAssertion(identifier, scope) {
+            var _this = this;
 
             return new _Promise(function (resolve, reject) {
 
               if (_this.infoToken !== undefined) {
                 //TODO verify whether the token is still valid or not.
                 return resolve(_this.infoToken);
+              } else {
+                (function () {
+
+                  var message = { type: 'EXECUTE', to: 'domain://google.com', from: 'domain://localhost/id-module', body: { resource: 'identity', method: 'login' } };
+                  _this._messageBus.postMessage(message, function (result) {
+
+                    //Open a window with the URL received by the proxy
+                    //TODO later swap any existing redirectURI in the url, for a specific one in the idModule
+                    var win = window.open(result.body.value, 'openIDrequest', 'width=800, height=600');
+                    var pollTimer = window.setInterval(function () {
+                      try {
+
+                        if (win.closed) {
+                          reject('Some error occured.');
+                          clearInterval(pollTimer);
+                        }
+                        if (win.document.URL.indexOf('REDIRECT') !== -1 || win.document.URL.indexOf(location.origin) !== -1) {
+                          window.clearInterval(pollTimer);
+                          var url = win.document.URL;
+
+                          win.close();
+
+                          message = { type: 'EXECUTE', to: 'domain://google.com', from: 'domain://localhost/id-module', body: { resource: 'identity', method: 'login',
+                              params: url } };
+
+                          _this._messageBus.postMessage(message, function (res) {
+                            var result = res.body.value;
+                            result.identity = getUserURLFromEmail(result.idTokenJSON.email);
+                            result.idp = 'google';
+                            _this.identities.push(result);
+
+                            //TODO improve later
+                            _this.infoToken = result.infoToken;
+                            resolve(result.infoToken);
+                          });
+
+                          //
+                          //resolve(url);
+                        }
+                      } catch (e) {
+                        //console.log(e);
+                      }
+                    }, 500);
+                  });
+                })();
               }
-
-              //function to validate the access token received during the authentication
-              function validateToken(token) {
-                var req = new XMLHttpRequest();
-                req.open('GET', VALIDURL + token, true);
-
-                req.onreadystatechange = function (e) {
-                  if (req.readyState == 4) {
-                    if (req.status == 200) {
-                      getInfoToken(token);
-                    } else if (req.status == 400) {
-                      reject('There was an error processing the token');
-                    } else {
-                      reject('something else other than 200 was returned');
-                    }
-                  }
-                };
-                req.send();
-              }
-
-              //function to exchange the access token with an ID Token containing the information
-              function getInfoToken(token) {
-                var req = new XMLHttpRequest();
-                req.open('GET', USERINFURL + token, true);
-
-                req.onreadystatechange = function (e) {
-                  if (req.readyState === 4) {
-                    if (req.status === 200) {
-                      infoToken = JSON.parse(req.responseText);
-                      _this.infoToken = infoToken;
-                      var email = infoToken.email;
-
-                      //contruct the identityURL to be defined as in specification
-                      // model: user://<idpdomain>/<user-identifier>
-                      var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
-
-                      //TODO remove later the 'token' field key
-                      var identityBundle = { identity: identityURL, token: infoToken, accessToken: token, idToken: {}, infoToken: infoToken };
-
-                      getIDToken(token, identityBundle);
-                    } else if (req.status === 400) {
-                      reject('There was an error processing the token');
-                    } else {
-                      reject('something else other than 200 was returned');
-                    }
-                  }
-                };
-                req.send();
-              }
-
-              function getIDToken(token, identityBundle) {
-                var req = new XMLHttpRequest();
-                req.open('GET', VALIDURL + token, true);
-
-                req.onreadystatechange = function (e) {
-                  if (req.readyState === 4) {
-                    if (req.status === 200) {
-                      tokenID = JSON.parse(req.responseText);
-
-                      identityBundle.idToken = tokenID;
-                      _this.identities.push(identityBundle);
-                      resolve(identityBundle.token);
-                    } else if (req.status === 400) {
-                      reject('There was an error processing the token');
-                    } else {
-                      reject('something else other than 200 was returned');
-                    }
-                  }
-                };
-                req.send();
-              }
-
-              hello.init({ google: '808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com' });
-              hello('google').login({ scope: 'email' }).then(function (token) {
-
-                validateToken(token.authResponse.access_token);
-              }, function (error) {
-                console.log('errorValidating ', error);
-                reject(error);
-              });
             });
           }
-
-          /**
-          * In relation with a Hyperty Instance: Associate identity
-          */
-        }, {
-          key: 'setHypertyIdentity',
-          value: function setHypertyIdentity() {}
-          // Body...
 
           /**
           * Generates an Identity Assertion
@@ -12928,11 +10556,24 @@ $__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
           * @param  {DOMString} usernameHint usernameHint
           * @return {IdAssertion}              IdAssertion
           */
-
         }, {
           key: 'generateAssertion',
-          value: function generateAssertion(contents, origin, usernameHint) {}
-          // Body...
+          value: function generateAssertion(contents, origin, usernameHint) {
+            var _this = this;
+
+            var message = { type: 'EXECUTE', to: 'domain://google.com', from: 'domain://localhost/id-module', body: { resource: 'identity', method: 'generateAssertion',
+                params: { contents: contents, origin: origin, usernameHint: usernameHint } } };
+
+            return new _Promise(function (resolve, reject) {
+              _this._messageBus.postMessage(message, function (result) {
+                if (result.body.code === 200) {
+                  resolve(result.body.value);
+                } else {
+                  reject('error', result.body.code);
+                }
+              });
+            });
+          }
 
           /**
           * OTHER USER'S IDENTITY
@@ -12942,23 +10583,41 @@ $__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
           * Function to validate an identity assertion generated previously.
           * Returns a promise with the result from the validation.
           * @param  {DOMString} assertion
+          * @param  {DOMString} origin       origin
           * @return {Promise}         Promise         promise with the result from the validation
           */
-
         }, {
           key: 'validateAssertion',
-          value: function validateAssertion(assertion) {}
-          // Body...
+          value: function validateAssertion(assertion, origin) {
+            var _this = this;
+
+            var message = { type: 'EXECUTE', to: 'domain://google.com', from: 'domain://localhost/id-module', body: { resource: 'identity', method: 'validateAssertion',
+                params: { assertion: assertion, origin: origin } } };
+
+            return new _Promise(function (resolve, reject) {
+              _this._messageBus.postMessage(message, function (result) {
+                if (result.body.code === 200) {
+                  resolve(result.body.value);
+                } else {
+                  reject('error', result.body.code);
+                }
+              });
+            });
+          }
+        }, {
+          key: 'messageBus',
+          get: function get() {
+            var _this = this;
+            return _this._messageBus;
+          },
 
           /**
-          * Trust level evaluation of a received IdAssertion
-          * @param  {DOMString} assertion assertion
+          * Set the messageBus in this Registry
+          * @param {MessageBus}           messageBus
           */
-
-        }, {
-          key: 'getAssertionTrustLevel',
-          value: function getAssertionTrustLevel(assertion) {
-            // Body...
+          set: function set(messageBus) {
+            var _this = this;
+            _this._messageBus = messageBus;
           }
         }]);
 
@@ -12969,7 +10628,7 @@ $__System.register('1d', ['11', 'e', 'f', '1c'], function (_export) {
     }
   };
 });
-$__System.register("1e", ["e", "f"], function (_export) {
+$__System.register("1d", ["e", "f"], function (_export) {
   var _createClass, _classCallCheck, PEP;
 
   return {
@@ -13007,7 +10666,7 @@ $__System.register("1e", ["e", "f"], function (_export) {
     }
   };
 });
-$__System.register('1f', ['e', 'f'], function (_export) {
+$__System.register('1e', ['e', 'f'], function (_export) {
   var _createClass, _classCallCheck, PDP;
 
   return {
@@ -13017,36 +10676,115 @@ $__System.register('1f', ['e', 'f'], function (_export) {
       _classCallCheck = _f['default'];
     }],
     execute: function () {
+      /**
+      * The Policy Decision Point (PDP) decides if a message is to be authorised by checking a set of
+      * policies. The resource to be verified is specified in the first word of the 'condition' field of
+      * a Policy object. The implementation that verifies if the message is compliant with a policy is
+      * specified in a hashtable to allow dynamic definition of the implementation, providing
+      * extensibility to the Policy Engine functionalities.
+      */
       'use strict';
 
       PDP = (function () {
-        function PDP() {
+
+        /**
+        * This method is invoked by the Policy Engine and instantiates the Policy Decision Point. It initialises or loads from the Persistence Manager the object 'myLists' to store the user's lists.
+        * @param  {Registry}    runtimeRegistry
+        */
+
+        function PDP(runtimeRegistry) {
           _classCallCheck(this, PDP);
 
           var _this = this;
-          _this.blackList = [];
-          _this.whiteList = [];
+          _this.runtimeRegistry = runtimeRegistry;
+          _this.myLists = {}; // TODO: load from the Persistence Manager
         }
 
-        /* use hashtable to allow dynamic management */
+        /**
+        * Returns the list with the given list name.
+        * @param  {String}  listName
+        * @return {Array}   list
+        */
 
         _createClass(PDP, [{
+          key: 'getList',
+          value: function getList(listName) {
+            var _this = this;
+            return listName in _this.myLists ? _this.myLists[listName] : [];
+          }
+
+          /**
+          * Creates a list with the given name.
+          * @param  {String}  listName
+          */
+        }, {
+          key: 'createList',
+          value: function createList(listName) {
+            var _this = this;
+            _this.myLists[listName] = [];
+          }
+
+          /**
+          * Adds the given user email to the list with the given name.
+          * @param  {String}  userEmail
+          * @param  {String}  listName
+          */
+        }, {
+          key: 'addToList',
+          value: function addToList(userEmail, listName) {
+            var _this = this;
+            var list = _this.myLists[listName];
+            if (list === undefined) {
+              _this.createList(listName);
+              list = _this.getList(listName);
+            }
+            list.push(userEmail);
+          }
+
+          /**
+          * Removes the given user email from the list with the given name.
+          * @param  {String}  userEmail
+          * @param  {String}  listName
+          */
+        }, {
+          key: 'removeFromList',
+          value: function removeFromList(userEmail, listName) {
+            var _this = this;
+            var list = _this.myLists[listName];
+            for (var i in list) {
+              if (list[i] === userEmail) {
+                list.splice(i, 1);
+                break;
+              }
+            }
+          }
+
+          /**
+          * Verifies if the given message is compliant with the given policies. If one of the policies
+          * evaluates to 'false', then the message is not authorised. Returns the final authorisation
+          * decision and a set of actions that policies may require.
+          * @param {Message}  message
+          * @param {URL}      hypertyToVerify
+          * @param {Array}    policies
+          * @return {Array}   [authDecision, actions]
+          */
+        }, {
           key: 'evaluate',
-          value: function evaluate(registry, message, hypertyToVerify, policies) {
+          value: function evaluate(message, hypertyToVerify, policies) {
             var _this = this;
             var results = [true];
             var actions = [];
 
+            // TODO: use hashtable to allow dynamic management
             for (var i in policies) {
               var policy = policies[i];
               var result = [];
               var condition = policy.condition.split(' ');
-              switch (condition[0]) {
-                case 'blacklisted':
-                  result[0] = _this.isBlackListed(registry, hypertyToVerify) ? policy.authorise : !policy.authorise;
-                  break;
-                case 'whitelisted':
-                  result[0] = _this.isWhiteListed(hypertyToVerify) ? policy.authorise : !policy.authorise;
+              var resource = condition[0];
+              switch (resource) {
+                case 'list':
+                  var listName = condition[1];
+                  result[0] = _this.isInList(hypertyToVerify, listName) ? policy.authorise : !policy.authorise;
                   break;
                 case 'time':
                   var start = condition[1];
@@ -13054,48 +10792,42 @@ $__System.register('1f', ['e', 'f'], function (_export) {
                   result[0] = _this.isTimeBetween(start, end) ? policy.authorise : !policy.authorise;
                   break;
                 default:
-
-                  // TODO: do actions depend on the decision?
                   result[1] = policy.actions;
               }
-
               results.push(result[0]);
-              actions.push(result[1]);
+              actions.push(result[1]); // TODO: do actions depend on the final authorisation decision?
             }
 
-            var authDecision = _this.getDecision(results);
+            var authDecision = results.indexOf(false) === -1;
             return [authDecision, actions];
           }
+
+          /**
+          * Verifies if the given hyperty URL corresponds to an email that is in the list with the given
+          * name.
+          * @param {URL}        hypertyURL
+          * @param {String}     listName
+          * @return {Boolean}   boolean
+          */
         }, {
-          key: 'isSameOrigin',
-          value: function isSameOrigin() {}
-        }, {
-          key: 'isBlackListed',
-          value: function isBlackListed(registry, hypertyToVerify) {
+          key: 'isInList',
+          value: function isInList(hypertyURL, listName) {
             var _this = this;
-            var blackList = _this.blackList;
-            for (var i in blackList) {
-              if ((_this.hypertiesMatch(registry, blackList[i]), hypertyToVerify)) {
+            var list = _this.myLists[listName];
+            for (var i in list) {
+              if (_this.registry.getUserHyperty(list[i]) === hypertyURL) {
                 return true;
               }
             }
             return false;
           }
 
-          /* TODO: cache this? */
-        }, {
-          key: 'hypertiesMatch',
-          value: function hypertiesMatch(registry, URLToVerify, hypertyToVerify) {
-            registry.getUserHyperty(URLToVerify).then(function (hyperty) {
-              return hyperty.hypertyURL === hypertyToVerify;
-            });
-          }
-        }, {
-          key: 'isWhiteListed',
-          value: function isWhiteListed(userID) {
-            var _this = this;
-            return _this.whiteList.indexOf(userID) > -1;
-          }
+          /**
+          * Verifies if the current time is between the given start and end times.
+          * @param {Number}     start
+          * @param {Number}     end
+          * @return {Boolean}   boolean
+          */
         }, {
           key: 'isTimeBetween',
           value: function isTimeBetween(start, end) {
@@ -13115,71 +10847,16 @@ $__System.register('1f', ['e', 'f'], function (_export) {
             }
           }
 
-          /* Aux function for isTimeBetween() */
+          /**
+          * Returns the number of minutes that correspond to the given time in the format <HOURS>:<MINUTES>.
+          * @param {Number}   time
+          * @return {Number}  minutes
+          */
         }, {
           key: 'getMinutes',
           value: function getMinutes(time) {
             var timeSplit = time.split(':');
             return parseInt(timeSplit[0]) * 60 + parseInt(timeSplit[1]);
-          }
-        }, {
-          key: 'getBlackList',
-          value: function getBlackList() {
-            var _this = this;
-            return _this.blackList;
-          }
-        }, {
-          key: 'isContext',
-          value: function isContext() {}
-        }, {
-          key: 'isHypertyType',
-          value: function isHypertyType() {}
-
-          /* Aux function for evaluate() */
-        }, {
-          key: 'getDecision',
-          value: function getDecision(results) {
-            return results.indexOf(false) === -1;
-          }
-        }, {
-          key: 'addToBlackList',
-          value: function addToBlackList(userID) {
-            var _this = this;
-            if (_this.blackList.indexOf(userID) === -1) {
-              _this.blackList.push(userID);
-            }
-          }
-        }, {
-          key: 'removeFromBlackList',
-          value: function removeFromBlackList(userID) {
-            var _this = this;
-            var blackList = _this.blackList;
-            for (var i in blackList) {
-              if (blackList[i] === userID) {
-                blackList.splice(i, 1);
-                break;
-              }
-            }
-          }
-        }, {
-          key: 'addToWhiteList',
-          value: function addToWhiteList(userID) {
-            var _this = this;
-            if (_this.blackList.indexOf(userID) === -1) {
-              _this.whiteList.push(userID);
-            }
-          }
-        }, {
-          key: 'removeFromWhiteList',
-          value: function removeFromWhiteList(userID) {
-            var _this = this;
-            var whiteList = _this.whiteList;
-            for (var i in whiteList) {
-              if (whiteList[i] === userID) {
-                whiteList.splice(i, 1);
-                break;
-              }
-            }
           }
         }]);
 
@@ -13190,7 +10867,7 @@ $__System.register('1f', ['e', 'f'], function (_export) {
     }
   };
 });
-$__System.register('20', ['11', 'e', 'f', '1e', '1f'], function (_export) {
+$__System.register('1f', ['11', 'e', 'f', '1d', '1e'], function (_export) {
   var _Promise, _createClass, _classCallCheck, PEP, PDP, PolicyEngine;
 
   return {
@@ -13200,130 +10877,67 @@ $__System.register('20', ['11', 'e', 'f', '1e', '1f'], function (_export) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
+    }, function (_d) {
+      PEP = _d['default'];
     }, function (_e2) {
-      PEP = _e2['default'];
-    }, function (_f2) {
-      PDP = _f2['default'];
+      PDP = _e2['default'];
     }],
     execute: function () {
 
-      // import Policy from './Policy';
-
+      /**
+      * The Policy Engine intercepts all the messages sent through the Message Bus and applies the
+      * policies defined by the service provider and the user.
+      */
       'use strict';
 
       PolicyEngine = (function () {
-        function PolicyEngine(identityModule, runtimeRegistry) {
+
+        /**
+        * This method is invoked by the RuntimeUA and instantiates the Policy Engine. A Policy Decision
+        * Point (PDP) and a Policy Enforcement Point (PEP) are initialised for the evaluation of policies
+        * and the enforcement of additional actions, respectively. Adds a listener do the Message Bus to
+        * allow method invokation.
+        * @param  {MessageBus}        messageBus
+        * @param  {IdentityModule}    identityModule
+        * @param  {Registry}          runtimeRegistry
+        */
+
+        function PolicyEngine(messageBus, identityModule, runtimeRegistry) {
           _classCallCheck(this, PolicyEngine);
 
           var _this = this;
+          _this.messageBus = messageBus;
           _this.idModule = identityModule;
-          _this.registry = runtimeRegistry;
+          _this.pdp = new PDP(runtimeRegistry);
           _this.pep = new PEP();
-          _this.pdp = new PDP();
           _this.policies = {};
         }
 
-        // TODO: verify duplicates
-        // TODO: conflict detection
+        /**
+        * This method is executed when a message is intercepted in the Message Bus. The first step is the
+        * assignment of the identity associated with the message. The second step is the evaluation of the
+        * applicable policies in order to obtain an authorisation decision: if a policy evaluates to
+        * false, then the message is unauthorised. The third step is the enforcement of the actions that
+        * policies may require. Finally, the message is stamped as authorised or not and is returned to
+        * the Message Bus, where it will be forwarded or blocked.
+        * @param  {Message}  message
+        */
 
         _createClass(PolicyEngine, [{
-          key: 'addPolicies',
-          value: function addPolicies(key, policies) {
-            var _this = this;
-            for (var i in policies) {
-              if (_this.policies[key] === undefined) {
-                _this.policies[key] = [];
-              }
-              var exists = false;
-              for (var policy in _this.policies[key]) {
-                if (_this.policies[key][policy].id === policies[i].id) {
-                  exists = true;
-                  break;
-                }
-              }
-              if (!exists) {
-                _this.policies[key].push(policies[i]);
-              }
-            }
-          }
-
-          /*simulate(key) {
-            let _this = this;
-             yte
-            let policy2 = new Policy(policy.id, policy.scope, policy.condition,
-              policy.authorise, policy.actions);
-             policy = {
-              id: 'allow-whitelisted',
-              scope: 'user',
-              condition: 'whitelisted'c,
-              authorise: true,
-              actions: []
-            };
-            let policy3 = new Policy(policy.id, policy.scope, policy.condition,
-              policy.authorise, policy.actions);
-             policy = {
-              id: 'block-08-20',
-              scope: 'user',
-              condition: 'time 08:00 20:00',
-              authorise: false,
-              actions: []
-            };
-            let policy4 = new Policy(policy.id, policy.scope, policy.condition,
-              policy.authorise, policy.actions);
-             _this.addPolicies(key, [policy4]);
-          }*/
-
-        }, {
-          key: 'removePolicies',
-          value: function removePolicies(key, policyId) {
-            var _this = this;
-            var allPolicies = _this.policies;
-
-            if (key in allPolicies) {
-              if (policyId !== 'all') {
-                var policies = allPolicies[key];
-                var numPolicies = policies.length;
-
-                for (var policy = 0; policy < numPolicies; policy++) {
-                  if (policies[policy].id === policyId) {
-                    policies.splice(policy, 1);
-                    break;
-                  }
-                }
-              } else {
-                delete _this.policies[key];
-              }
-            }
-          }
-        }, {
-          key: 'addToBlackList',
-          value: function addToBlackList(userID) {
-            this.pdp.addToBlackList(userID);
-          }
-        }, {
-          key: 'removeFromBlackList',
-          value: function removeFromBlackList(userID) {
-            this.pdp.removeFromBlackList(userID);
-          }
-        }, {
-          key: 'addToWhiteList',
-          value: function addToWhiteList(userID) {
-            this.pdp.addToWhiteList(userID);
-          }
-        }, {
-          key: 'removeFromWhiteList',
-          value: function removeFromWhiteList(userID) {
-            this.pdp.removeFromWhiteList(userID);
-          }
-        }, {
           key: 'authorise',
           value: function authorise(message) {
             var _this = this;
-            /*let message = { id: 123, type:'READ', from:'hyperty://ua.pt/asdf',
-                          to:'domain://registry.ua.pt/hyperty-instance/user' };
-            _this.simulate(message.from);*/
+            if (message.to === 'domain://localhost/policy-engine') {
+              _this.processMessage(message);
+            }
+
             return new _Promise(function (resolve, reject) {
-              _this.idModule.loginWithRP('google identity', 'scope').then(function (value) {
+              //TODO turn it later into a policy
+              if (message.from === 'domain://google.com' || message.to === 'domain://google.com') {
+                message.authorised = true;
+                return resolve(message);
+              }
+              _this.idModule.getIdentityAssertion('google identity', 'scope').then(function (value) {
                 var assertedID = _this.idModule.getIdentities();
 
                 if (!message.hasOwnProperty('body')) {
@@ -13339,44 +10953,228 @@ $__System.register('20', ['11', 'e', 'f', '1e', '1f'], function (_export) {
                   hypertyToVerify = message.from;
                 }
 
-                /* TODO: get scope of the message */
-                var scope = 'user';
-
+                var scope = _this.getScope();
                 var applicablePolicies = _this.getApplicablePolicies(scope);
-                var policiesResult = undefined;
-                if (hypertyToVerify.split(':')[0] === 'hyperty') {
-                  policiesResult = _this.pdp.evaluate(_this.registry, message, hypertyToVerify, applicablePolicies);
-                } else {
-                  policiesResult = [true, []];
-                }
-
+                var policiesResult = _this.pdp.evaluate(message, hypertyToVerify, applicablePolicies);
                 _this.pep.enforce(policiesResult[1]);
 
                 if (policiesResult[0]) {
+                  message.authorised = true;
                   resolve(message);
                 } else {
-                  reject(message);
+                  message.authorised = false;
+                  reject('Unauthorised message');
                 }
               }, function (error) {
                 reject(error);
               });
             });
           }
+
+          /**
+          * Invokes the method specified in the message aimed at the Policy Engine.
+          * @param  {Message}    message
+          */
+        }, {
+          key: 'processMessage',
+          value: function processMessage(message) {
+            var _this = this;
+            var method = message.body.method;
+            var params = message.body.params;
+
+            switch (method) {
+              case 'addPolicies':
+                _this.addPolicies(params.policies, params.scope);
+                _this.sendResponse(message, 200);
+                break;
+              case 'removePolicies':
+                _this.removePolicies(params.policyID, params.scope);
+                _this.sendResponse(message, 200);
+                break;
+              case 'getList':
+                var list = _this.getList(params.listName);
+                if (list !== []) {
+                  _this.sendList(message, list);
+                } else {
+                  _this.sendResponse(message, 404);
+                }
+                break;
+              case 'createList':
+                _this.createList(params.listName);
+                _this.sendResponse(message, 200);
+                break;
+              case 'addToList':
+                _this.addToList(params.userEmail, params.listName);
+                _this.sendResponse(message, 200);
+                break;
+              case 'removeFromList':
+                _this.removeFromList(params.userEmail, params.listName);
+                _this.sendResponse(message, 200);
+                break;
+            }
+          }
+
+          /**
+          * Sends a response to the message origin.
+          * @param  {Message}   message
+          * @param  {Number}    httpCode
+          */
+        }, {
+          key: 'sendResponse',
+          value: function sendResponse(message, httpCode) {
+            var _this = this;
+            var response = { id: message.id, type: 'response', to: message.from, from: message.to, body: { code: httpCode } };
+            _this.messageBus.postMessage(response);
+          }
+
+          /**
+          * Sends the requested list to the message origin.
+          * @param  {Message}   message
+          * @param  {Array}     list
+          */
+        }, {
+          key: 'sendList',
+          value: function sendList(message, list) {
+            var _this = this;
+            var response = { id: message.id, type: 'response', to: message.from, from: message.to, body: { code: 200, value: list } };
+            _this.messageBus.postMessage(response);
+          }
+
+          /**
+          * Associates the given policies with a scope. The possible scopes are 'application', 'hyperty' and
+          * 'user'.
+          * @param  {Policy[]}  policies
+          * @param  {String}    scope
+          */
+        }, {
+          key: 'addPolicies',
+          value: function addPolicies(policies, scope) {
+            var _this = this;
+            for (var i in policies) {
+              // TODO: conflict detection
+              if (_this.policies[scope] === undefined) {
+                _this.policies[scope] = [];
+              }
+              var exists = false;
+              for (var policy in _this.policies[scope]) {
+                if (_this.policies[scope][policy].id === policies[i].id) {
+                  exists = true;
+                  break;
+                }
+              }
+              if (!exists) {
+                _this.policies[scope].push(policies[i]);
+              }
+            }
+          }
+
+          /**
+          * Removes the policy with the given ID from the given scope. If policyID is '*', removes all policies associated with the given scope.
+          * @param  {String}  policyID
+          * @param  {String}  scope
+          */
+        }, {
+          key: 'removePolicies',
+          value: function removePolicies(policyId, scope) {
+            var _this = this;
+            var allPolicies = _this.policies;
+
+            if (scope in allPolicies) {
+              if (policyId !== '*') {
+                var policies = allPolicies[scope];
+                var numPolicies = policies.length;
+
+                for (var policy = 0; policy < numPolicies; policy++) {
+                  if (policies[policy].id === policyId) {
+                    policies.splice(policy, 1);
+                    break;
+                  }
+                }
+              } else {
+                delete _this.policies[scope];
+              }
+            }
+          }
+
+          /**
+          * Retrieves the list with the given list name from the PDP.
+          * @param  {String}  listName
+          * @return {Array}   list
+          */
+        }, {
+          key: 'getList',
+          value: function getList(listName) {
+            var _this = this;
+            return _this.pdp.getList(listName);
+          }
+
+          /**
+          * Forwards a request for the creation of a list with the given name to the PDP.
+          * @param  {String}  listName
+          */
+        }, {
+          key: 'createList',
+          value: function createList(listName) {
+            var _this = this;
+            _this.pdp.createList(listName);
+          }
+
+          /**
+          * Forwards a request to add a user to the list with the given name to the PDP.
+          * @param  {String}  userEmail
+          * @param  {String}  listName
+          */
+        }, {
+          key: 'addToList',
+          value: function addToList(userEmail, listName) {
+            var _this = this;
+            _this.pdp.addToList(userEmail, listName);
+          }
+
+          /**
+          * Forwards a request to remove a user from the list with the given name to the PDP.
+          * @param  {String}  userEmail
+          * @param  {String}  listName
+          */
+        }, {
+          key: 'removeFromList',
+          value: function removeFromList(userEmail, listName) {
+            var _this = this;
+            _this.pdp.removeFromList(userEmail, listName);
+          }
+
+          /**
+          * Returns the scope of the given message to restrict policy applicability. For now, all policies
+          * are applied to each message.
+          * @return {String} scope
+          */
+        }, {
+          key: 'getScope',
+          value: function getScope() {
+            return '*';
+          }
+
+          /**
+          * Returns the policies associated with a scope.
+          * @param   {String} scope
+          * @return  {Array}  policies
+          */
         }, {
           key: 'getApplicablePolicies',
           value: function getApplicablePolicies(scope) {
             var _this = this;
-            var applicablePolicies = _this.policies[scope];
-            if (applicablePolicies === undefined) {
-              applicablePolicies = [];
+            var policiesTable = _this.policies;
+            var policies = [];
+            if (scope !== '*') {
+              if (policiesTable[scope] !== undefined) {
+                policies = policiesTable[scope];
+              }
+            } else {
+              for (var i in policiesTable) {
+                policies.push.apply(policies, policiesTable[i]);
+              }
             }
-            return applicablePolicies;
-          }
-        }, {
-          key: 'getBlackList',
-          value: function getBlackList() {
-            var _this = this;
-            return _this.pdp.getBlackList();
+            return policies;
           }
         }]);
 
@@ -13387,359 +11185,7 @@ $__System.register('20', ['11', 'e', 'f', '1e', '1f'], function (_export) {
     }
   };
 });
-$__System.registerDynamic("21", ["22", "23"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var strong = $__require('22');
-  $__require('23')('Map', function(get) {
-    return function Map() {
-      return get(this, arguments.length > 0 ? arguments[0] : undefined);
-    };
-  }, {
-    get: function get(key) {
-      var entry = strong.getEntry(this, key);
-      return entry && entry.v;
-    },
-    set: function set(key, value) {
-      return strong.def(this, key === 0 ? 0 : key, value);
-    }
-  }, strong, true);
-  return module.exports;
-});
-
-$__System.registerDynamic("24", ["8", "25"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var $export = $__require('8');
-  $export($export.P, 'Map', {toJSON: $__require('25')('Map')});
-  return module.exports;
-});
-
-$__System.registerDynamic("26", ["27", "28", "29", "21", "24", "a"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  $__require('27');
-  $__require('28');
-  $__require('29');
-  $__require('21');
-  $__require('24');
-  module.exports = $__require('a').Map;
-  return module.exports;
-});
-
-$__System.registerDynamic("2a", ["26"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  module.exports = {
-    "default": $__require('26'),
-    __esModule: true
-  };
-  return module.exports;
-});
-
-$__System.registerDynamic("22", ["3", "2b", "2c", "2d", "2e", "2f", "30", "31", "32", "33", "34", "35", "36", "37"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var $ = $__require('3'),
-      hide = $__require('2b'),
-      redefineAll = $__require('2c'),
-      ctx = $__require('2d'),
-      strictNew = $__require('2e'),
-      defined = $__require('2f'),
-      forOf = $__require('30'),
-      $iterDefine = $__require('31'),
-      step = $__require('32'),
-      ID = $__require('33')('id'),
-      $has = $__require('34'),
-      isObject = $__require('35'),
-      setSpecies = $__require('36'),
-      DESCRIPTORS = $__require('37'),
-      isExtensible = Object.isExtensible || isObject,
-      SIZE = DESCRIPTORS ? '_s' : 'size',
-      id = 0;
-  var fastKey = function(it, create) {
-    if (!isObject(it))
-      return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-    if (!$has(it, ID)) {
-      if (!isExtensible(it))
-        return 'F';
-      if (!create)
-        return 'E';
-      hide(it, ID, ++id);
-    }
-    return 'O' + it[ID];
-  };
-  var getEntry = function(that, key) {
-    var index = fastKey(key),
-        entry;
-    if (index !== 'F')
-      return that._i[index];
-    for (entry = that._f; entry; entry = entry.n) {
-      if (entry.k == key)
-        return entry;
-    }
-  };
-  module.exports = {
-    getConstructor: function(wrapper, NAME, IS_MAP, ADDER) {
-      var C = wrapper(function(that, iterable) {
-        strictNew(that, C, NAME);
-        that._i = $.create(null);
-        that._f = undefined;
-        that._l = undefined;
-        that[SIZE] = 0;
-        if (iterable != undefined)
-          forOf(iterable, IS_MAP, that[ADDER], that);
-      });
-      redefineAll(C.prototype, {
-        clear: function clear() {
-          for (var that = this,
-              data = that._i,
-              entry = that._f; entry; entry = entry.n) {
-            entry.r = true;
-            if (entry.p)
-              entry.p = entry.p.n = undefined;
-            delete data[entry.i];
-          }
-          that._f = that._l = undefined;
-          that[SIZE] = 0;
-        },
-        'delete': function(key) {
-          var that = this,
-              entry = getEntry(that, key);
-          if (entry) {
-            var next = entry.n,
-                prev = entry.p;
-            delete that._i[entry.i];
-            entry.r = true;
-            if (prev)
-              prev.n = next;
-            if (next)
-              next.p = prev;
-            if (that._f == entry)
-              that._f = next;
-            if (that._l == entry)
-              that._l = prev;
-            that[SIZE]--;
-          }
-          return !!entry;
-        },
-        forEach: function forEach(callbackfn) {
-          var f = ctx(callbackfn, arguments.length > 1 ? arguments[1] : undefined, 3),
-              entry;
-          while (entry = entry ? entry.n : this._f) {
-            f(entry.v, entry.k, this);
-            while (entry && entry.r)
-              entry = entry.p;
-          }
-        },
-        has: function has(key) {
-          return !!getEntry(this, key);
-        }
-      });
-      if (DESCRIPTORS)
-        $.setDesc(C.prototype, 'size', {get: function() {
-            return defined(this[SIZE]);
-          }});
-      return C;
-    },
-    def: function(that, key, value) {
-      var entry = getEntry(that, key),
-          prev,
-          index;
-      if (entry) {
-        entry.v = value;
-      } else {
-        that._l = entry = {
-          i: index = fastKey(key, true),
-          k: key,
-          v: value,
-          p: prev = that._l,
-          n: undefined,
-          r: false
-        };
-        if (!that._f)
-          that._f = entry;
-        if (prev)
-          prev.n = entry;
-        that[SIZE]++;
-        if (index !== 'F')
-          that._i[index] = entry;
-      }
-      return that;
-    },
-    getEntry: getEntry,
-    setStrong: function(C, NAME, IS_MAP) {
-      $iterDefine(C, NAME, function(iterated, kind) {
-        this._t = iterated;
-        this._k = kind;
-        this._l = undefined;
-      }, function() {
-        var that = this,
-            kind = that._k,
-            entry = that._l;
-        while (entry && entry.r)
-          entry = entry.p;
-        if (!that._t || !(that._l = entry = entry ? entry.n : that._t._f)) {
-          that._t = undefined;
-          return step(1);
-        }
-        if (kind == 'keys')
-          return step(0, entry.k);
-        if (kind == 'values')
-          return step(0, entry.v);
-        return step(0, [entry.k, entry.v]);
-      }, IS_MAP ? 'entries' : 'values', !IS_MAP, true);
-      setSpecies(NAME);
-    }
-  };
-  return module.exports;
-});
-
-$__System.registerDynamic("23", ["3", "38", "8", "6", "2b", "2c", "30", "2e", "35", "39", "37"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var $ = $__require('3'),
-      global = $__require('38'),
-      $export = $__require('8'),
-      fails = $__require('6'),
-      hide = $__require('2b'),
-      redefineAll = $__require('2c'),
-      forOf = $__require('30'),
-      strictNew = $__require('2e'),
-      isObject = $__require('35'),
-      setToStringTag = $__require('39'),
-      DESCRIPTORS = $__require('37');
-  module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
-    var Base = global[NAME],
-        C = Base,
-        ADDER = IS_MAP ? 'set' : 'add',
-        proto = C && C.prototype,
-        O = {};
-    if (!DESCRIPTORS || typeof C != 'function' || !(IS_WEAK || proto.forEach && !fails(function() {
-      new C().entries().next();
-    }))) {
-      C = common.getConstructor(wrapper, NAME, IS_MAP, ADDER);
-      redefineAll(C.prototype, methods);
-    } else {
-      C = wrapper(function(target, iterable) {
-        strictNew(target, C, NAME);
-        target._c = new Base;
-        if (iterable != undefined)
-          forOf(iterable, IS_MAP, target[ADDER], target);
-      });
-      $.each.call('add,clear,delete,forEach,get,has,set,keys,values,entries'.split(','), function(KEY) {
-        var IS_ADDER = KEY == 'add' || KEY == 'set';
-        if (KEY in proto && !(IS_WEAK && KEY == 'clear'))
-          hide(C.prototype, KEY, function(a, b) {
-            if (!IS_ADDER && IS_WEAK && !isObject(a))
-              return KEY == 'get' ? undefined : false;
-            var result = this._c[KEY](a === 0 ? 0 : a, b);
-            return IS_ADDER ? this : result;
-          });
-      });
-      if ('size' in proto)
-        $.setDesc(C.prototype, 'size', {get: function() {
-            return this._c.size;
-          }});
-    }
-    setToStringTag(C, NAME);
-    O[NAME] = C;
-    $export($export.G + $export.W + $export.F, O);
-    if (!IS_WEAK)
-      common.setStrong(C, NAME, IS_MAP);
-    return C;
-  };
-  return module.exports;
-});
-
-$__System.registerDynamic("3a", ["22", "23"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var strong = $__require('22');
-  $__require('23')('Set', function(get) {
-    return function Set() {
-      return get(this, arguments.length > 0 ? arguments[0] : undefined);
-    };
-  }, {add: function add(value) {
-      return strong.def(this, value = value === 0 ? 0 : value, value);
-    }}, strong);
-  return module.exports;
-});
-
-$__System.registerDynamic("25", ["30", "3b"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var forOf = $__require('30'),
-      classof = $__require('3b');
-  module.exports = function(NAME) {
-    return function toJSON() {
-      if (classof(this) != NAME)
-        throw TypeError(NAME + "#toJSON isn't generic");
-      var arr = [];
-      forOf(this, false, arr.push, arr);
-      return arr;
-    };
-  };
-  return module.exports;
-});
-
-$__System.registerDynamic("3c", ["8", "25"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var $export = $__require('8');
-  $export($export.P, 'Set', {toJSON: $__require('25')('Set')});
-  return module.exports;
-});
-
-$__System.registerDynamic("3d", ["27", "28", "29", "3a", "3c", "a"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  $__require('27');
-  $__require('28');
-  $__require('29');
-  $__require('3a');
-  $__require('3c');
-  module.exports = $__require('a').Set;
-  return module.exports;
-});
-
-$__System.registerDynamic("3e", ["3d"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  module.exports = {
-    "default": $__require('3d'),
-    __esModule: true
-  };
-  return module.exports;
-});
-
-$__System.register("3f", ["e", "f"], function (_export) {
+$__System.register("20", ["e", "f"], function (_export) {
   var _createClass, _classCallCheck, Pipeline, PipeContext, Iterator;
 
   return {
@@ -13894,26 +11340,22 @@ $__System.register("3f", ["e", "f"], function (_export) {
     }
   };
 });
-$__System.register('40', ['14', '15', '41', 'e', 'f', '2a', '3e', '3f'], function (_export) {
-  var _get, _inherits, Bus, _createClass, _classCallCheck, _Map, _Set, Pipeline, MessageBus;
+$__System.register('21', ['14', '15', '20', '22', 'e', 'f'], function (_export) {
+  var _get, _inherits, Pipeline, Bus, _createClass, _classCallCheck, MessageBus;
 
   return {
     setters: [function (_) {
       _get = _['default'];
     }, function (_2) {
       _inherits = _2['default'];
+    }, function (_4) {
+      Pipeline = _4['default'];
     }, function (_3) {
       Bus = _3['default'];
     }, function (_e) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
-    }, function (_a) {
-      _Map = _a['default'];
-    }, function (_e2) {
-      _Set = _e2['default'];
-    }, function (_f2) {
-      Pipeline = _f2['default'];
     }],
     execute: function () {
       /**
@@ -13972,63 +11414,73 @@ $__System.register('40', ['14', '15', '41', 'e', 'f', '2a', '3e', '3f'], functio
 
             return inMsg.id;
           }
-        }, {
-          key: 'addForward',
-          value: function addForward(from, to) {
-            var _this2 = this;
 
-            var _this = this;
-
-            //verify if forward exist
-            var conf = _this._forwards[from];
+          /*
+          addForward(from, to) {
+            let _this = this;
+             //verify if forward exist
+            let conf = _this._forwards[from];
             if (!conf) {
-              var forwardListener = _this.addListener(from, function (msg) {
-                conf.sandboxToUrls.forEach(function (urls, sandbox) {
+              let forwardListener = _this.addListener(from, (msg) => {
+                conf.sandboxToUrls.forEach((urls, sandbox) => {
                   console.log('MB-FORWARD: ( ' + from + ' to ' + urls.size + ' destinations)');
-                  urls.forEach(function (value) {
-                    console.log('SEND-TO: ', value);
-                  });
-
-                  sandbox.postMessage(msg);
+                  urls.forEach((value) => { console.log('SEND-TO: ', value); });
+                   sandbox.postMessage(msg);
                 });
               });
-
-              conf = {
+               conf = {
                 from: from,
                 fl: forwardListener,
-                sandboxToUrls: new _Map(),
-                urlToSandbox: new _Map(),
-
-                //remove forward detination
-                remove: function remove(url) {
-                  var sandbox = _this2.urlToSandbox.get(url);
+                sandboxToUrls: new Map(),
+                urlToSandbox: new Map(),
+                 //remove forward detination
+                remove: (url) => {
+                  let sandbox = this.urlToSandbox.get(url);
                   if (sandbox) {
-                    _this2.urlToSandbox['delete'](url);
-                    _this2.sandboxToUrls.get(sandbox)['delete'](url);
+                    this.urlToSandbox.delete(url);
+                    this.sandboxToUrls.get(sandbox).delete(url);
                   }
                 }
               };
-
-              _this._forwards[from] = conf;
+               _this._forwards[from] = conf;
             }
-
-            //add forward detination
-            this._registry.getSandbox(to).then(function (sandbox) {
-              var urls = conf.sandboxToUrls.get(sandbox);
+             //add forward detination
+            this._registry.getSandbox(to).then((sandbox) => {
+              let urls = conf.sandboxToUrls.get(sandbox);
               if (!urls) {
-                urls = new _Set();
+                urls = new Set();
                 conf.sandboxToUrls.set(sandbox, urls);
               }
-
-              urls.add(to);
+               urls.add(to);
               conf.urlToSandbox.set(to, sandbox);
             });
+             return conf;
+          }
+          */
 
-            return conf;
+        }, {
+          key: 'addPublish',
+          value: function addPublish(from) {
+            var _this = this;
+
+            return _this.addListener(from, function (msg) {
+              console.log('MB-PUBLISH: ( ' + from + ' )');
+              _this._onPostMessage(msg);
+            });
           }
         }, {
-          key: '_publish',
-          value: function _publish(url, msg) {
+          key: 'addForward',
+          value: function addForward(from, to) {
+            var _this = this;
+
+            return _this.addListener(from, function (msg) {
+              console.log('MB-FORWARD: ( ' + from + ' to ' + to + ' )');
+              _this.forward(to, msg);
+            });
+          }
+        }, {
+          key: 'forward',
+          value: function forward(url, msg) {
             var _this = this;
 
             var itemList = _this._subscriptions[url];
@@ -14043,7 +11495,7 @@ $__System.register('40', ['14', '15', '41', 'e', 'f', '2a', '3e', '3f'], functio
 
             //resolve external protostub...
             _this._registry.resolve(msg.to).then(function (route) {
-              _this._publish(route, msg);
+              _this.forward(route, msg);
             })['catch'](function (e) {
               console.log('RESOLVE-ERROR: ', e);
             });
@@ -14062,7 +11514,7 @@ $__System.register('40', ['14', '15', '41', 'e', 'f', '2a', '3e', '3f'], functio
     }
   };
 });
-$__System.register("42", ["e", "f"], function (_export) {
+$__System.register("23", ["e", "f"], function (_export) {
   var _createClass, _classCallCheck, GraphConnectorContactData;
 
   return {
@@ -14256,7 +11708,7 @@ $__System.register("42", ["e", "f"], function (_export) {
     }
   };
 });
-$__System.register('43', ['e', 'f'], function (_export) {
+$__System.register('24', ['e', 'f'], function (_export) {
   var _createClass, _classCallCheck, BloomFilter;
 
   return {
@@ -14465,7 +11917,7 @@ $__System.register('43', ['e', 'f'], function (_export) {
     }
   };
 });
-$__System.register("44", ["e", "f"], function (_export) {
+$__System.register("25", ["e", "f"], function (_export) {
   var _createClass, _classCallCheck, GlobalRegistryRecord;
 
   return {
@@ -14532,7 +11984,7 @@ $__System.register("44", ["e", "f"], function (_export) {
     }
   };
 });
-$__System.registerDynamic("45", [], true, function($__require, exports, module) {
+$__System.registerDynamic("26", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -14564,25 +12016,25 @@ $__System.registerDynamic("45", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("46", ["45"], true, function($__require, exports, module) {
+$__System.registerDynamic("27", ["26"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('45');
+  module.exports = $__require('26');
   return module.exports;
 });
 
-$__System.registerDynamic("47", ["48", "49", "46", "4a", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("28", ["29", "2a", "27", "2b", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bufferutils = $__require('48');
-    var bcrypto = $__require('49');
-    var compare = $__require('46');
-    var Transaction = $__require('4a');
+    var bufferutils = $__require('29');
+    var bcrypto = $__require('2a');
+    var compare = $__require('27');
+    var Transaction = $__require('2b');
     function Block() {
       this.version = 1;
       this.prevHash = null;
@@ -14691,25 +12143,25 @@ $__System.registerDynamic("47", ["48", "49", "46", "4a", "4b"], true, function($
       return compare(hash, target) <= 0;
     };
     module.exports = Block;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("4c", ["50", "49", "51", "52", "4d", "4e", "53", "4f", "54", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("2d", ["31", "2a", "32", "33", "2e", "2f", "34", "30", "35", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var base58check = $__require('50');
-    var bcrypto = $__require('49');
-    var createHmac = $__require('51');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
-    var NETWORKS = $__require('4e');
-    var BigInteger = $__require('53');
-    var ECPair = $__require('4f');
-    var ecurve = $__require('54');
+    var base58check = $__require('31');
+    var bcrypto = $__require('2a');
+    var createHmac = $__require('32');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
+    var NETWORKS = $__require('2f');
+    var BigInteger = $__require('34');
+    var ECPair = $__require('30');
+    var ecurve = $__require('35');
     var curve = ecurve.getCurveByName('secp256k1');
     function HDNode(keyPair, chainCode) {
       typeforce(types.tuple('ECPair', types.Buffer256bit), arguments);
@@ -14877,22 +12329,22 @@ $__System.registerDynamic("4c", ["50", "49", "51", "52", "4d", "4e", "53", "4f",
     };
     HDNode.prototype.toString = HDNode.prototype.toBase58;
     module.exports = HDNode;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("4a", ["49", "55", "48", "56", "52", "4d", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("2b", ["2a", "36", "29", "37", "33", "2e", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bcrypto = $__require('49');
-    var bscript = $__require('55');
-    var bufferutils = $__require('48');
-    var opcodes = $__require('56');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
+    var bcrypto = $__require('2a');
+    var bscript = $__require('36');
+    var bufferutils = $__require('29');
+    var opcodes = $__require('37');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
     function Transaction() {
       this.version = 1;
       this.locktime = 0;
@@ -15116,27 +12568,27 @@ $__System.registerDynamic("4a", ["49", "55", "48", "56", "52", "4d", "4b"], true
       this.ins[index].script = scriptSig;
     };
     module.exports = Transaction;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("57", ["58", "49", "55", "5a", "4e", "56", "52", "4d", "4f", "59", "4a", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("38", ["39", "2a", "36", "3b", "2f", "37", "33", "2e", "30", "3a", "2b", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var baddress = $__require('58');
-    var bcrypto = $__require('49');
-    var bscript = $__require('55');
-    var bufferEquals = $__require('5a');
-    var networks = $__require('4e');
-    var ops = $__require('56');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
-    var ECPair = $__require('4f');
-    var ECSignature = $__require('59');
-    var Transaction = $__require('4a');
+    var baddress = $__require('39');
+    var bcrypto = $__require('2a');
+    var bscript = $__require('36');
+    var bufferEquals = $__require('3b');
+    var networks = $__require('2f');
+    var ops = $__require('37');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
+    var ECPair = $__require('30');
+    var ECSignature = $__require('3a');
+    var Transaction = $__require('2b');
     function fixMSSignatures(transaction, vin, pubKeys, signatures, prevOutScript, hashType, skipPubKey) {
       var unmatched = signatures.slice();
       var cache = {};
@@ -15482,21 +12934,21 @@ $__System.registerDynamic("57", ["58", "49", "55", "5a", "4e", "56", "52", "4d",
         throw new Error('Key pair cannot sign for this input');
     };
     module.exports = TransactionBuilder;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("58", ["50", "55", "4e", "52", "4d", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("39", ["31", "36", "2f", "33", "2e", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bs58check = $__require('50');
-    var bscript = $__require('55');
-    var networks = $__require('4e');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
+    var bs58check = $__require('31');
+    var bscript = $__require('36');
+    var networks = $__require('2f');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
     function fromBase58Check(address) {
       var payload = bs58check.decode(address);
       if (payload.length < 21)
@@ -15540,16 +12992,16 @@ $__System.registerDynamic("58", ["50", "55", "4e", "52", "4d", "4b"], true, func
       toBase58Check: toBase58Check,
       toOutputScript: toOutputScript
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("49", ["5b"], true, function($__require, exports, module) {
+$__System.registerDynamic("2a", ["3c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var createHash = $__require('5b');
+  var createHash = $__require('3c');
   function hash160(buffer) {
     return ripemd160(sha256(buffer));
   }
@@ -15575,20 +13027,20 @@ $__System.registerDynamic("49", ["5b"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("5c", ["51", "52", "4d", "53", "59", "54", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("3d", ["32", "33", "2e", "34", "3a", "35", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var createHmac = $__require('51');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
-    var BigInteger = $__require('53');
-    var ECSignature = $__require('59');
+    var createHmac = $__require('32');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
+    var BigInteger = $__require('34');
+    var ECSignature = $__require('3a');
     var ZERO = new Buffer([0]);
     var ONE = new Buffer([1]);
-    var ecurve = $__require('54');
+    var ecurve = $__require('35');
     var secp256k1 = ecurve.getCurveByName('secp256k1');
     function deterministicGenerateK(hash, x, checkSig) {
       typeforce(types.tuple(types.Hash256bit, types.Buffer256bit, types.Function), arguments);
@@ -15698,11 +13150,11 @@ $__System.registerDynamic("5c", ["51", "52", "4d", "53", "59", "54", "4b"], true
       verify: verify,
       __curve: secp256k1
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("5d", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("3e", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -15775,28 +13227,28 @@ $__System.registerDynamic("5d", ["4b"], true, function($__require, exports, modu
       encode: encode,
       decode: decode
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("5e", ["5d"], true, function($__require, exports, module) {
+$__System.registerDynamic("3f", ["3e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('5d');
+  module.exports = $__require('3e');
   return module.exports;
 });
 
-$__System.registerDynamic("5f", ["5e", "5b", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("40", ["3f", "3c", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
     'use strict';
-    var base58 = $__require('5e');
-    var createHash = $__require('5b');
+    var base58 = $__require('3f');
+    var createHash = $__require('3c');
     function sha256x2(buffer) {
       var tmp = createHash('sha256').update(buffer).digest();
       return createHash('sha256').update(tmp).digest();
@@ -15818,26 +13270,26 @@ $__System.registerDynamic("5f", ["5e", "5b", "4b"], true, function($__require, e
       encode: encode,
       decode: decode
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("50", ["5f"], true, function($__require, exports, module) {
+$__System.registerDynamic("31", ["40"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('5f');
+  module.exports = $__require('40');
   return module.exports;
 });
 
-$__System.registerDynamic("60", ["50", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("41", ["31", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bs58check = $__require('50');
+    var bs58check = $__require('31');
     function decodeRaw(version, buffer) {
       if (buffer[0] !== version)
         throw new Error('Invalid network version');
@@ -15879,20 +13331,20 @@ $__System.registerDynamic("60", ["50", "4b"], true, function($__require, exports
       encode: encode,
       encodeRaw: encodeRaw
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("61", ["60"], true, function($__require, exports, module) {
+$__System.registerDynamic("42", ["41"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('60');
+  module.exports = $__require('41');
   return module.exports;
 });
 
-$__System.registerDynamic("62", [], true, function($__require, exports, module) {
+$__System.registerDynamic("43", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -15965,14 +13417,14 @@ $__System.registerDynamic("62", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("63", ["64", "53", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("44", ["45", "34", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var assert = $__require('64');
-    var BigInteger = $__require('53');
+    var assert = $__require('45');
+    var BigInteger = $__require('34');
     var THREE = BigInteger.valueOf(3);
     function Point(curve, x, y, z) {
       assert.notStrictEqual(z, undefined, 'Missing Z coordinate');
@@ -16146,18 +13598,18 @@ $__System.registerDynamic("63", ["64", "53", "4b"], true, function($__require, e
       return '(' + this.affineX.toString() + ',' + this.affineY.toString() + ')';
     };
     module.exports = Point;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("65", ["64", "53", "63"], true, function($__require, exports, module) {
+$__System.registerDynamic("46", ["45", "34", "44"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var assert = $__require('64');
-  var BigInteger = $__require('53');
-  var Point = $__require('63');
+  var assert = $__require('45');
+  var BigInteger = $__require('34');
+  var Point = $__require('44');
   function Curve(p, a, b, Gx, Gy, n, h) {
     this.p = p;
     this.a = a;
@@ -16209,14 +13661,14 @@ $__System.registerDynamic("65", ["64", "53", "63"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("66", ["53", "62", "65"], true, function($__require, exports, module) {
+$__System.registerDynamic("47", ["34", "43", "46"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BigInteger = $__require('53');
-  var curves = $__require('62');
-  var Curve = $__require('65');
+  var BigInteger = $__require('34');
+  var curves = $__require('43');
+  var Curve = $__require('46');
   function getCurveByName(name) {
     var curve = curves[name];
     if (!curve)
@@ -16234,14 +13686,14 @@ $__System.registerDynamic("66", ["53", "62", "65"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("67", ["63", "65", "66"], true, function($__require, exports, module) {
+$__System.registerDynamic("48", ["44", "46", "47"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var Point = $__require('63');
-  var Curve = $__require('65');
-  var getCurveByName = $__require('66');
+  var Point = $__require('44');
+  var Curve = $__require('46');
+  var getCurveByName = $__require('47');
   module.exports = {
     Curve: Curve,
     Point: Point,
@@ -16250,31 +13702,31 @@ $__System.registerDynamic("67", ["63", "65", "66"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("54", ["67"], true, function($__require, exports, module) {
+$__System.registerDynamic("35", ["48"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('67');
+  module.exports = $__require('48');
   return module.exports;
 });
 
-$__System.registerDynamic("4f", ["49", "50", "5c", "68", "52", "4d", "61", "4e", "53", "54", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("30", ["2a", "31", "3d", "49", "33", "2e", "42", "2f", "34", "35", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bcrypto = $__require('49');
-    var bs58check = $__require('50');
-    var ecdsa = $__require('5c');
-    var randomBytes = $__require('68');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
-    var wif = $__require('61');
-    var NETWORKS = $__require('4e');
-    var BigInteger = $__require('53');
-    var ecurve = $__require('54');
+    var bcrypto = $__require('2a');
+    var bs58check = $__require('31');
+    var ecdsa = $__require('3d');
+    var randomBytes = $__require('49');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
+    var wif = $__require('42');
+    var NETWORKS = $__require('2f');
+    var BigInteger = $__require('34');
+    var ecurve = $__require('35');
     var secp256k1 = ecdsa.__curve;
     function ECPair(d, Q, options) {
       if (options) {
@@ -16367,11 +13819,11 @@ $__System.registerDynamic("4f", ["49", "50", "5c", "68", "52", "4d", "61", "4e",
       return ecdsa.verify(hash, signature, this.Q);
     };
     module.exports = ECPair;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("69", [], true, function($__require, exports, module) {
+$__System.registerDynamic("4a", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -16411,7 +13863,7 @@ $__System.registerDynamic("69", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("6a", ["69"], true, function($__require, exports, module) {
+$__System.registerDynamic("4b", ["4a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -16429,7 +13881,7 @@ $__System.registerDynamic("6a", ["69"], true, function($__require, exports, modu
     }
   }
   var proto = BigInteger.prototype;
-  proto.__bigi = $__require('69').version;
+  proto.__bigi = $__require('4a').version;
   BigInteger.isBigInteger = function(obj, check_ver) {
     return obj && obj.__bigi && (!check_ver || obj.__bigi === proto.__bigi);
   };
@@ -17812,14 +15264,14 @@ $__System.registerDynamic("6a", ["69"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("6b", ["64", "6a", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("4c", ["45", "4b", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var assert = $__require('64');
-    var BigInteger = $__require('6a');
+    var assert = $__require('45');
+    var BigInteger = $__require('4b');
     BigInteger.fromByteArrayUnsigned = function(byteArray) {
       if (byteArray[0] & 0x80) {
         return new BigInteger([0].concat(byteArray));
@@ -17859,40 +15311,40 @@ $__System.registerDynamic("6b", ["64", "6a", "4b"], true, function($__require, e
     BigInteger.prototype.toHex = function(size) {
       return this.toBuffer(size).toString('hex');
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("6c", ["6a", "6b"], true, function($__require, exports, module) {
+$__System.registerDynamic("4d", ["4b", "4c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BigInteger = $__require('6a');
-  $__require('6b');
+  var BigInteger = $__require('4b');
+  $__require('4c');
   module.exports = BigInteger;
   return module.exports;
 });
 
-$__System.registerDynamic("53", ["6c"], true, function($__require, exports, module) {
+$__System.registerDynamic("34", ["4d"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('6c');
+  module.exports = $__require('4d');
   return module.exports;
 });
 
-$__System.registerDynamic("59", ["6d", "52", "4d", "53", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("3a", ["4e", "33", "2e", "34", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bip66 = $__require('6d');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
-    var BigInteger = $__require('53');
+    var bip66 = $__require('4e');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
+    var BigInteger = $__require('34');
     function ECSignature(r, s) {
       typeforce(types.tuple(types.BigInt, types.BigInt), arguments);
       this.r = r;
@@ -17955,23 +15407,23 @@ $__System.registerDynamic("59", ["6d", "52", "4d", "53", "4b"], true, function($
       return Buffer.concat([this.toDER(), hashTypeBuffer]);
     };
     module.exports = ECSignature;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("6e", ["48", "49", "5c", "4e", "53", "4f", "59", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("4f", ["29", "2a", "3d", "2f", "34", "30", "3a", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bufferutils = $__require('48');
-    var bcrypto = $__require('49');
-    var ecdsa = $__require('5c');
-    var networks = $__require('4e');
-    var BigInteger = $__require('53');
-    var ECPair = $__require('4f');
-    var ECSignature = $__require('59');
+    var bufferutils = $__require('29');
+    var bcrypto = $__require('2a');
+    var ecdsa = $__require('3d');
+    var networks = $__require('2f');
+    var BigInteger = $__require('34');
+    var ECPair = $__require('30');
+    var ECSignature = $__require('3a');
     function magicHash(message, network) {
       var messagePrefix = new Buffer(network.messagePrefix);
       var messageBuffer = new Buffer(message);
@@ -18007,11 +15459,11 @@ $__System.registerDynamic("6e", ["48", "49", "5c", "4e", "53", "4f", "59", "4b"]
       sign: sign,
       verify: verify
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("4e", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2f", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -18065,7 +15517,7 @@ $__System.registerDynamic("4e", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("6f", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("50", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -18175,20 +15627,20 @@ $__System.registerDynamic("6f", ["4b"], true, function($__require, exports, modu
       decode: decode,
       encode: encode
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("6d", ["6f"], true, function($__require, exports, module) {
+$__System.registerDynamic("4e", ["50"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('6f');
+  module.exports = $__require('50');
   return module.exports;
 });
 
-$__System.registerDynamic("70", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("51", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -18215,20 +15667,20 @@ $__System.registerDynamic("70", ["4b"], true, function($__require, exports, modu
       }
       return true;
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("5a", ["70"], true, function($__require, exports, module) {
+$__System.registerDynamic("3b", ["51"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('70');
+  module.exports = $__require('51');
   return module.exports;
 });
 
-$__System.registerDynamic("71", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("52", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -18243,26 +15695,26 @@ $__System.registerDynamic("71", ["4b"], true, function($__require, exports, modu
       }
       return buffer;
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("72", ["71"], true, function($__require, exports, module) {
+$__System.registerDynamic("53", ["52"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('71');
+  module.exports = $__require('52');
   return module.exports;
 });
 
-$__System.registerDynamic("48", ["56", "5a", "72", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("29", ["37", "3b", "53", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var opcodes = $__require('56');
+    var opcodes = $__require('37');
     function verifuint(value, max) {
       if (typeof value !== 'number')
         throw new Error('cannot write a non-number as a number');
@@ -18383,29 +15835,29 @@ $__System.registerDynamic("48", ["56", "5a", "72", "4b"], true, function($__requ
       return buffer;
     }
     module.exports = {
-      equal: $__require('5a'),
+      equal: $__require('3b'),
       pushDataSize: pushDataSize,
       readPushDataInt: readPushDataInt,
       readUInt64LE: readUInt64LE,
       readVarInt: readVarInt,
-      reverse: $__require('72'),
+      reverse: $__require('53'),
       varIntBuffer: varIntBuffer,
       varIntSize: varIntSize,
       writePushDataInt: writePushDataInt,
       writeUInt64LE: writeUInt64LE,
       writeVarInt: writeVarInt
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("73", ["74", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("54", ["55", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
+    var inherits = $__require('55');
     function TfTypeError(type, value) {
       this.tfError = Error.call(this);
       if (arguments.length === 1 && typeof type === 'string') {
@@ -18700,26 +16152,26 @@ $__System.registerDynamic("73", ["74", "4b"], true, function($__require, exports
     module.exports.compile = compile;
     module.exports.TfTypeError = TfTypeError;
     module.exports.TfPropertyTypeError = TfPropertyTypeError;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("52", ["73"], true, function($__require, exports, module) {
+$__System.registerDynamic("33", ["54"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('73');
+  module.exports = $__require('54');
   return module.exports;
 });
 
-$__System.registerDynamic("4d", ["52", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("2e", ["33", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var typeforce = $__require('52');
+    var typeforce = $__require('33');
     function nBuffer(value, n) {
       typeforce(types.Buffer, value);
       if (value.length !== n)
@@ -18782,11 +16234,11 @@ $__System.registerDynamic("4d", ["52", "4b"], true, function($__require, exports
       types[typeName] = typeforce[typeName];
     }
     module.exports = types;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("56", [], true, function($__require, exports, module) {
+$__System.registerDynamic("37", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -18913,7 +16365,7 @@ $__System.registerDynamic("56", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("75", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("56", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -18971,21 +16423,21 @@ $__System.registerDynamic("75", ["4b"], true, function($__require, exports, modu
       decode: decode,
       encode: encode
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("55", ["6d", "48", "52", "4d", "56", "75", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("36", ["4e", "29", "33", "2e", "37", "56", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bip66 = $__require('6d');
-    var bufferutils = $__require('48');
-    var typeforce = $__require('52');
-    var types = $__require('4d');
-    var OPS = $__require('56');
+    var bip66 = $__require('4e');
+    var bufferutils = $__require('29');
+    var typeforce = $__require('33');
+    var types = $__require('2e');
+    var OPS = $__require('37');
     var REVERSE_OPS = (function() {
       var result = {};
       for (var op in OPS) {
@@ -19246,7 +16698,7 @@ $__System.registerDynamic("55", ["6d", "48", "52", "4d", "56", "75", "4b"], true
       decompile: decompile,
       fromASM: fromASM,
       toASM: toASM,
-      number: $__require('75'),
+      number: $__require('56'),
       isCanonicalPubKey: isCanonicalPubKey,
       isCanonicalSignature: isCanonicalSignature,
       isDefinedHashType: isDefinedHashType,
@@ -19271,43 +16723,43 @@ $__System.registerDynamic("55", ["6d", "48", "52", "4d", "56", "75", "4b"], true
       multisigInput: multisigInput,
       nullDataOutput: nullDataOutput
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("76", ["47", "4f", "59", "4c", "4a", "57", "58", "48", "49", "6e", "4e", "56", "55"], true, function($__require, exports, module) {
+$__System.registerDynamic("57", ["28", "30", "3a", "2d", "2b", "38", "39", "29", "2a", "4f", "2f", "37", "36"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = {
-    Block: $__require('47'),
-    ECPair: $__require('4f'),
-    ECSignature: $__require('59'),
-    HDNode: $__require('4c'),
-    Transaction: $__require('4a'),
-    TransactionBuilder: $__require('57'),
-    address: $__require('58'),
-    bufferutils: $__require('48'),
-    crypto: $__require('49'),
-    message: $__require('6e'),
-    networks: $__require('4e'),
-    opcodes: $__require('56'),
-    script: $__require('55')
+    Block: $__require('28'),
+    ECPair: $__require('30'),
+    ECSignature: $__require('3a'),
+    HDNode: $__require('2d'),
+    Transaction: $__require('2b'),
+    TransactionBuilder: $__require('38'),
+    address: $__require('39'),
+    bufferutils: $__require('29'),
+    crypto: $__require('2a'),
+    message: $__require('4f'),
+    networks: $__require('2f'),
+    opcodes: $__require('37'),
+    script: $__require('36')
   };
   return module.exports;
 });
 
-$__System.registerDynamic("77", ["76"], true, function($__require, exports, module) {
+$__System.registerDynamic("58", ["57"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('76');
+  module.exports = $__require('57');
   return module.exports;
 });
 
-$__System.registerDynamic("78", [], true, function($__require, exports, module) {
+$__System.registerDynamic("59", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -19318,7 +16770,7 @@ $__System.registerDynamic("78", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("79", ["78", "74", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("5a", ["59", "55", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -19715,7 +17167,7 @@ $__System.registerDynamic("79", ["78", "74", "1b"], true, function($__require, e
       return arg === null || typeof arg === 'boolean' || typeof arg === 'number' || typeof arg === 'string' || typeof arg === 'symbol' || typeof arg === 'undefined';
     }
     exports.isPrimitive = isPrimitive;
-    exports.isBuffer = $__require('78');
+    exports.isBuffer = $__require('59');
     function objectToString(o) {
       return Object.prototype.toString.call(o);
     }
@@ -19731,7 +17183,7 @@ $__System.registerDynamic("79", ["78", "74", "1b"], true, function($__require, e
     exports.log = function() {
       console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
     };
-    exports.inherits = $__require('74');
+    exports.inherits = $__require('55');
     exports._extend = function(origin, add) {
       if (!add || !isObject(add))
         return origin;
@@ -19745,25 +17197,25 @@ $__System.registerDynamic("79", ["78", "74", "1b"], true, function($__require, e
     function hasOwnProperty(obj, prop) {
       return Object.prototype.hasOwnProperty.call(obj, prop);
     }
-  })($__require('1b'));
+  })($__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("7a", ["79"], true, function($__require, exports, module) {
+$__System.registerDynamic("5c", ["5a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('79');
+  module.exports = $__require('5a');
   return module.exports;
 });
 
-$__System.registerDynamic("7b", ["7a"], true, function($__require, exports, module) {
+$__System.registerDynamic("5d", ["5c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var util = $__require('7a');
+  var util = $__require('5c');
   var pSlice = Array.prototype.slice;
   var hasOwn = Object.prototype.hasOwnProperty;
   var assert = module.exports = ok;
@@ -19980,34 +17432,34 @@ $__System.registerDynamic("7b", ["7a"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("7c", ["7b"], true, function($__require, exports, module) {
+$__System.registerDynamic("5e", ["5d"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('7b');
+  module.exports = $__require('5d');
   return module.exports;
 });
 
-$__System.registerDynamic("7d", ["7c"], true, function($__require, exports, module) {
+$__System.registerDynamic("5f", ["5e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? $__System._nodeRequire('assert') : $__require('7c');
+  module.exports = $__System._nodeRequire ? $__System._nodeRequire('assert') : $__require('5e');
   return module.exports;
 });
 
-$__System.registerDynamic("64", ["7d"], true, function($__require, exports, module) {
+$__System.registerDynamic("45", ["5f"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('7d');
+  module.exports = $__require('5f');
   return module.exports;
 });
 
-$__System.registerDynamic("7e", [], true, function($__require, exports, module) {
+$__System.registerDynamic("60", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -28017,16 +25469,16 @@ $__System.registerDynamic("7e", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("7f", ["7e"], true, function($__require, exports, module) {
+$__System.registerDynamic("61", ["60"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('7e');
+  module.exports = $__require('60');
   return module.exports;
 });
 
-$__System.registerDynamic("80", [], true, function($__require, exports, module) {
+$__System.registerDynamic("62", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -28035,18 +25487,18 @@ $__System.registerDynamic("80", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("81", ["64", "5b", "82", "68", "7f", "80", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("63", ["45", "3c", "64", "49", "61", "62", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var assert = $__require('64');
-    var createHash = $__require('5b');
-    var pbkdf2 = $__require('82').pbkdf2Sync;
-    var randomBytes = $__require('68');
-    var unorm = $__require('7f');
-    var DEFAULT_WORDLIST = $__require('80');
+    var assert = $__require('45');
+    var createHash = $__require('3c');
+    var pbkdf2 = $__require('64').pbkdf2Sync;
+    var randomBytes = $__require('49');
+    var unorm = $__require('61');
+    var DEFAULT_WORDLIST = $__require('62');
     function mnemonicToSeed(mnemonic, password) {
       var mnemonicBuffer = new Buffer(mnemonic, 'utf8');
       var saltBuffer = new Buffer(salt(password), 'utf8');
@@ -28133,20 +25585,20 @@ $__System.registerDynamic("81", ["64", "5b", "82", "68", "7f", "80", "4b"], true
       validateMnemonic: validateMnemonic,
       wordlists: {EN: DEFAULT_WORDLIST}
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("83", ["81"], true, function($__require, exports, module) {
+$__System.registerDynamic("65", ["63"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('81');
+  module.exports = $__require('63');
   return module.exports;
 });
 
-$__System.registerDynamic("84", [], true, function($__require, exports, module) {
+$__System.registerDynamic("66", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -28317,14 +25769,14 @@ $__System.registerDynamic("84", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("85", ["86", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("67", ["68", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
     'use strict';
-    var assert = $__require('86');
+    var assert = $__require('68');
     function Cipher(options) {
       this.options = options;
       this.type = this.options.type;
@@ -28423,19 +25875,19 @@ $__System.registerDynamic("85", ["86", "4b"], true, function($__require, exports
       this._flushBuffer(out, 0);
       return this._unpad(out);
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("87", ["86", "74", "88"], true, function($__require, exports, module) {
+$__System.registerDynamic("69", ["68", "55", "6a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var assert = $__require('86');
-  var inherits = $__require('74');
-  var des = $__require('88');
+  var assert = $__require('68');
+  var inherits = $__require('55');
+  var des = $__require('6a');
   var utils = des.utils;
   var Cipher = des.Cipher;
   function DESState() {
@@ -28534,14 +25986,14 @@ $__System.registerDynamic("87", ["86", "74", "88"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("89", ["86", "74"], true, function($__require, exports, module) {
+$__System.registerDynamic("6b", ["68", "55"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var assert = $__require('86');
-  var inherits = $__require('74');
+  var assert = $__require('68');
+  var inherits = $__require('55');
   var proto = {};
   function CBCState(iv) {
     assert.equal(iv.length, 8, 'Invalid IV length');
@@ -28591,15 +26043,15 @@ $__System.registerDynamic("89", ["86", "74"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("8a", ["86", "74", "88"], true, function($__require, exports, module) {
+$__System.registerDynamic("6c", ["68", "55", "6a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var assert = $__require('86');
-  var inherits = $__require('74');
-  var des = $__require('88');
+  var assert = $__require('68');
+  var inherits = $__require('55');
+  var des = $__require('6a');
   var Cipher = des.Cipher;
   var DES = des.DES;
   function EDEState(type, key) {
@@ -28652,38 +26104,38 @@ $__System.registerDynamic("8a", ["86", "74", "88"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("88", ["84", "85", "87", "89", "8a"], true, function($__require, exports, module) {
+$__System.registerDynamic("6a", ["66", "67", "69", "6b", "6c"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  exports.utils = $__require('84');
-  exports.Cipher = $__require('85');
-  exports.DES = $__require('87');
-  exports.CBC = $__require('89');
-  exports.EDE = $__require('8a');
+  exports.utils = $__require('66');
+  exports.Cipher = $__require('67');
+  exports.DES = $__require('69');
+  exports.CBC = $__require('6b');
+  exports.EDE = $__require('6c');
   return module.exports;
 });
 
-$__System.registerDynamic("8b", ["88"], true, function($__require, exports, module) {
+$__System.registerDynamic("6d", ["6a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('88');
+  module.exports = $__require('6a');
   return module.exports;
 });
 
-$__System.registerDynamic("8c", ["8d", "8b", "74", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("6e", ["6f", "6d", "55", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var CipherBase = $__require('8d');
-    var des = $__require('8b');
-    var inherits = $__require('74');
+    var CipherBase = $__require('6f');
+    var des = $__require('6d');
+    var inherits = $__require('55');
     var modes = {
       'des-ede3-cbc': des.CBC.instantiate(des.EDE),
       'des-ede3': des.EDE,
@@ -28723,20 +26175,20 @@ $__System.registerDynamic("8c", ["8d", "8b", "74", "4b"], true, function($__requ
     DES.prototype._final = function() {
       return new Buffer(this._des.final());
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("8e", ["8c"], true, function($__require, exports, module) {
+$__System.registerDynamic("70", ["6e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('8c');
+  module.exports = $__require('6e');
   return module.exports;
 });
 
-$__System.registerDynamic("8f", [], true, function($__require, exports, module) {
+$__System.registerDynamic("71", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -28768,16 +26220,16 @@ $__System.registerDynamic("8f", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("90", ["91", "92", "8e", "8f", "93"], true, function($__require, exports, module) {
+$__System.registerDynamic("72", ["73", "74", "70", "71", "75"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var ebtk = $__require('91');
-  var aes = $__require('92');
-  var DES = $__require('8e');
-  var desModes = $__require('8f');
-  var aesModes = $__require('93');
+  var ebtk = $__require('73');
+  var aes = $__require('74');
+  var DES = $__require('70');
+  var desModes = $__require('71');
+  var aesModes = $__require('75');
   function createCipher(suite, password) {
     var keyLen,
         ivLen;
@@ -28850,16 +26302,16 @@ $__System.registerDynamic("90", ["91", "92", "8e", "8f", "93"], true, function($
   return module.exports;
 });
 
-$__System.registerDynamic("94", ["90"], true, function($__require, exports, module) {
+$__System.registerDynamic("76", ["72"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('90');
+  module.exports = $__require('72');
   return module.exports;
 });
 
-$__System.registerDynamic("95", [], true, function($__require, exports, module) {
+$__System.registerDynamic("77", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -28901,13 +26353,13 @@ $__System.registerDynamic("95", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("96", ["98", "97"], true, function($__require, exports, module) {
+$__System.registerDynamic("78", ["7a", "79"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var bn = $__require('98');
-  var brorand = $__require('97');
+  var bn = $__require('7a');
+  var brorand = $__require('79');
   function MillerRabin(rand) {
     this.rand = rand || new brorand.Rand();
   }
@@ -28991,27 +26443,27 @@ $__System.registerDynamic("96", ["98", "97"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("99", ["96"], true, function($__require, exports, module) {
+$__System.registerDynamic("7b", ["78"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('96');
+  module.exports = $__require('78');
   return module.exports;
 });
 
-$__System.registerDynamic("9a", ["68", "98", "99"], true, function($__require, exports, module) {
+$__System.registerDynamic("7c", ["49", "7a", "7b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var randomBytes = $__require('68');
+  var randomBytes = $__require('49');
   module.exports = findPrime;
   findPrime.simpleSieve = simpleSieve;
   findPrime.fermatTest = fermatTest;
-  var BN = $__require('98');
+  var BN = $__require('7a');
   var TWENTYFOUR = new BN(24);
-  var MillerRabin = $__require('99');
+  var MillerRabin = $__require('7b');
   var millerRabin = new MillerRabin();
   var ONE = new BN(1);
   var TWO = new BN(2);
@@ -29100,22 +26552,22 @@ $__System.registerDynamic("9a", ["68", "98", "99"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("9b", ["98", "99", "9a", "68", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("7d", ["7a", "7b", "7c", "49", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var BN = $__require('98');
-    var MillerRabin = $__require('99');
+    var BN = $__require('7a');
+    var MillerRabin = $__require('7b');
     var millerRabin = new MillerRabin();
     var TWENTYFOUR = new BN(24);
     var ELEVEN = new BN(11);
     var TEN = new BN(10);
     var THREE = new BN(3);
     var SEVEN = new BN(7);
-    var primes = $__require('9a');
-    var randomBytes = $__require('68');
+    var primes = $__require('7c');
+    var randomBytes = $__require('49');
     module.exports = DH;
     function setPublicKey(pub, enc) {
       enc = enc || 'utf8';
@@ -29246,19 +26698,19 @@ $__System.registerDynamic("9b", ["98", "99", "9a", "68", "4b"], true, function($
         return buf.toString(enc);
       }
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("9c", ["9a", "95", "9b", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("7e", ["7c", "77", "7d", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var generatePrime = $__require('9a');
-    var primes = $__require('95');
-    var DH = $__require('9b');
+    var generatePrime = $__require('7c');
+    var primes = $__require('77');
+    var DH = $__require('7d');
     function getDiffieHellman(mod) {
       var prime = new Buffer(primes[mod].prime, 'hex');
       var gen = new Buffer(primes[mod].gen, 'hex');
@@ -29289,20 +26741,20 @@ $__System.registerDynamic("9c", ["9a", "95", "9b", "4b"], true, function($__requ
     }
     exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffieHellman = getDiffieHellman;
     exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("9d", ["9c"], true, function($__require, exports, module) {
+$__System.registerDynamic("7f", ["7e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('9c');
+  module.exports = $__require('7e');
   return module.exports;
 });
 
-$__System.registerDynamic("9e", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("80", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -29379,22 +26831,22 @@ $__System.registerDynamic("9e", ["4b"], true, function($__require, exports, modu
       hash: 'md5',
       id: new Buffer('3020300c06082a864886f70d020505000410', 'hex')
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("9f", ["51", "a1", "a0", "a2", "a3", "98", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("81", ["32", "83", "82", "84", "85", "7a", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var createHmac = $__require('51');
-    var crt = $__require('a1');
-    var curves = $__require('a0');
-    var elliptic = $__require('a2');
-    var parseKeys = $__require('a3');
-    var BN = $__require('98');
+    var createHmac = $__require('32');
+    var crt = $__require('83');
+    var curves = $__require('82');
+    var elliptic = $__require('84');
+    var parseKeys = $__require('85');
+    var BN = $__require('7a');
     var EC = elliptic.ec;
     function sign(hash, key, hashType, signType) {
       var priv = parseKeys(key);
@@ -29531,11 +26983,11 @@ $__System.registerDynamic("9f", ["51", "a1", "a0", "a2", "a3", "98", "4b"], true
     module.exports = sign;
     module.exports.getKey = getKey;
     module.exports.makeKey = makeKey;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("a0", [], true, function($__require, exports, module) {
+$__System.registerDynamic("82", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -29550,16 +27002,16 @@ $__System.registerDynamic("a0", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("a4", ["a0", "a2", "a3", "98", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("86", ["82", "84", "85", "7a", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var curves = $__require('a0');
-    var elliptic = $__require('a2');
-    var parseKeys = $__require('a3');
-    var BN = $__require('98');
+    var curves = $__require('82');
+    var elliptic = $__require('84');
+    var parseKeys = $__require('85');
+    var BN = $__require('7a');
     var EC = elliptic.ec;
     function verify(sig, hash, key, signType) {
       var pub = parseKeys(key);
@@ -29641,22 +27093,22 @@ $__System.registerDynamic("a4", ["a0", "a2", "a3", "98", "4b"], true, function($
       }
     }
     module.exports = verify;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("a5", ["9e", "5b", "74", "9f", "a6", "a4", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("87", ["80", "3c", "55", "81", "88", "86", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var _algos = $__require('9e');
-    var createHash = $__require('5b');
-    var inherits = $__require('74');
-    var sign = $__require('9f');
-    var stream = $__require('a6');
-    var verify = $__require('a4');
+    var _algos = $__require('80');
+    var createHash = $__require('3c');
+    var inherits = $__require('55');
+    var sign = $__require('81');
+    var stream = $__require('88');
+    var verify = $__require('86');
     var algos = {};
     Object.keys(_algos).forEach(function(key) {
       algos[key] = algos[key.toLowerCase()] = _algos[key];
@@ -29732,20 +27184,20 @@ $__System.registerDynamic("a5", ["9e", "5b", "74", "9f", "a6", "a4", "4b"], true
       createSign: createSign,
       createVerify: createVerify
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("a7", ["a5"], true, function($__require, exports, module) {
+$__System.registerDynamic("89", ["87"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('a5');
+  module.exports = $__require('87');
   return module.exports;
 });
 
-$__System.registerDynamic("a8", [], true, function($__require, exports, module) {
+$__System.registerDynamic("8a", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -29791,14 +27243,14 @@ $__System.registerDynamic("a8", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("a9", ["98"], true, function($__require, exports, module) {
+$__System.registerDynamic("8b", ["7a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
   var utils = exports;
-  var BN = $__require('98');
+  var BN = $__require('7a');
   utils.assert = function assert(val, msg) {
     if (!val)
       throw new Error(msg || 'Assertion failed');
@@ -29943,7 +27395,7 @@ $__System.registerDynamic("a9", ["98"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("aa", [], true, function($__require, exports, module) {
+$__System.registerDynamic("8c", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -29997,23 +27449,23 @@ $__System.registerDynamic("aa", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("97", ["aa"], true, function($__require, exports, module) {
+$__System.registerDynamic("79", ["8c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('aa');
+  module.exports = $__require('8c');
   return module.exports;
 });
 
-$__System.registerDynamic("ab", ["ad", "ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("8d", ["8f", "8e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var hash = $__require('ad');
-  var elliptic = $__require('ac');
+  var hash = $__require('8f');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   var assert = utils.assert;
   function HmacDRBG(options) {
@@ -30097,14 +27549,14 @@ $__System.registerDynamic("ab", ["ad", "ac"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("ae", ["98", "ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("90", ["7a", "8e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BN = $__require('98');
-  var elliptic = $__require('ac');
+  var BN = $__require('7a');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   var getNAF = utils.getNAF;
   var getJSF = utils.getJSF;
@@ -30370,16 +27822,16 @@ $__System.registerDynamic("ae", ["98", "ac"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("af", ["b0", "ac", "98", "74"], true, function($__require, exports, module) {
+$__System.registerDynamic("91", ["92", "8e", "7a", "55"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var curve = $__require('b0');
-  var elliptic = $__require('ac');
-  var BN = $__require('98');
-  var inherits = $__require('74');
+  var curve = $__require('92');
+  var elliptic = $__require('8e');
+  var BN = $__require('7a');
+  var inherits = $__require('55');
   var Base = curve.base;
   var assert = elliptic.utils.assert;
   function ShortCurve(conf) {
@@ -31050,17 +28502,17 @@ $__System.registerDynamic("af", ["b0", "ac", "98", "74"], true, function($__requ
   return module.exports;
 });
 
-$__System.registerDynamic("b1", ["b0", "98", "74", "ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("93", ["92", "7a", "55", "8e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var curve = $__require('b0');
-  var BN = $__require('98');
-  var inherits = $__require('74');
+  var curve = $__require('92');
+  var BN = $__require('7a');
+  var inherits = $__require('55');
   var Base = curve.base;
-  var elliptic = $__require('ac');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   function MontCurve(conf) {
     Base.call(this, 'mont', conf);
@@ -31178,16 +28630,16 @@ $__System.registerDynamic("b1", ["b0", "98", "74", "ac"], true, function($__requ
   return module.exports;
 });
 
-$__System.registerDynamic("b2", ["b0", "ac", "98", "74"], true, function($__require, exports, module) {
+$__System.registerDynamic("94", ["92", "8e", "7a", "55"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var curve = $__require('b0');
-  var elliptic = $__require('ac');
-  var BN = $__require('98');
-  var inherits = $__require('74');
+  var curve = $__require('92');
+  var elliptic = $__require('8e');
+  var BN = $__require('7a');
+  var inherits = $__require('55');
   var Base = curve.base;
   var assert = elliptic.utils.assert;
   function EdwardsCurve(conf) {
@@ -31456,21 +28908,21 @@ $__System.registerDynamic("b2", ["b0", "ac", "98", "74"], true, function($__requ
   return module.exports;
 });
 
-$__System.registerDynamic("b0", ["ae", "af", "b1", "b2"], true, function($__require, exports, module) {
+$__System.registerDynamic("92", ["90", "91", "93", "94"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
   var curve = exports;
-  curve.base = $__require('ae');
-  curve.short = $__require('af');
-  curve.mont = $__require('b1');
-  curve.edwards = $__require('b2');
+  curve.base = $__require('90');
+  curve.short = $__require('91');
+  curve.mont = $__require('93');
+  curve.edwards = $__require('94');
   return module.exports;
 });
 
-$__System.registerDynamic("b3", [], true, function($__require, exports, module) {
+$__System.registerDynamic("95", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -31488,15 +28940,15 @@ $__System.registerDynamic("b3", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("b4", ["ad", "ac", "b3"], true, function($__require, exports, module) {
+$__System.registerDynamic("96", ["8f", "8e", "95"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
   var curves = exports;
-  var hash = $__require('ad');
-  var elliptic = $__require('ac');
+  var hash = $__require('8f');
+  var elliptic = $__require('8e');
   var assert = elliptic.utils.assert;
   function PresetCurve(options) {
     if (options.type === 'short')
@@ -31607,7 +29059,7 @@ $__System.registerDynamic("b4", ["ad", "ac", "b3"], true, function($__require, e
   });
   var pre;
   try {
-    pre = $__require('b3');
+    pre = $__require('95');
   } catch (e) {
     pre = undefined;
   }
@@ -31635,13 +29087,13 @@ $__System.registerDynamic("b4", ["ad", "ac", "b3"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("b5", ["98"], true, function($__require, exports, module) {
+$__System.registerDynamic("97", ["7a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BN = $__require('98');
+  var BN = $__require('7a');
   function KeyPair(ec, options) {
     this.ec = ec;
     this.priv = null;
@@ -31733,14 +29185,14 @@ $__System.registerDynamic("b5", ["98"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("b6", ["98", "ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("98", ["7a", "8e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BN = $__require('98');
-  var elliptic = $__require('ac');
+  var BN = $__require('7a');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   var assert = utils.assert;
   function Signature(options, enc) {
@@ -31859,18 +29311,18 @@ $__System.registerDynamic("b6", ["98", "ac"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("b7", ["98", "ac", "b5", "b6"], true, function($__require, exports, module) {
+$__System.registerDynamic("99", ["7a", "8e", "97", "98"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BN = $__require('98');
-  var elliptic = $__require('ac');
+  var BN = $__require('7a');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   var assert = utils.assert;
-  var KeyPair = $__require('b5');
-  var Signature = $__require('b6');
+  var KeyPair = $__require('97');
+  var Signature = $__require('98');
   function EC(options) {
     if (!(this instanceof EC))
       return new EC(options);
@@ -32030,13 +29482,13 @@ $__System.registerDynamic("b7", ["98", "ac", "b5", "b6"], true, function($__requ
   return module.exports;
 });
 
-$__System.registerDynamic("b8", ["74"], true, function($__require, exports, module) {
+$__System.registerDynamic("9a", ["55"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var utils = exports;
-  var inherits = $__require('74');
+  var inherits = $__require('55');
   function toArray(msg, enc) {
     if (Array.isArray(msg))
       return msg.slice();
@@ -32273,12 +29725,12 @@ $__System.registerDynamic("b8", ["74"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("b9", ["ba"], true, function($__require, exports, module) {
+$__System.registerDynamic("9b", ["9c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var hash = $__require('ba');
+  var hash = $__require('9c');
   var utils = hash.utils;
   var assert = utils.assert;
   function BlockHash() {
@@ -32354,12 +29806,12 @@ $__System.registerDynamic("b9", ["ba"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("bb", ["ba"], true, function($__require, exports, module) {
+$__System.registerDynamic("9d", ["9c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var hash = $__require('ba');
+  var hash = $__require('9c');
   var utils = hash.utils;
   var assert = utils.assert;
   var rotr32 = utils.rotr32;
@@ -32749,12 +30201,12 @@ $__System.registerDynamic("bb", ["ba"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("bc", ["ba"], true, function($__require, exports, module) {
+$__System.registerDynamic("9e", ["9c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var hash = $__require('ba');
+  var hash = $__require('9c');
   var utils = hash.utils;
   var rotl32 = utils.rotl32;
   var sum32 = utils.sum32;
@@ -32855,13 +30307,13 @@ $__System.registerDynamic("bc", ["ba"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("bd", ["ba"], true, function($__require, exports, module) {
+$__System.registerDynamic("9f", ["9c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var hmac = exports;
-  var hash = $__require('ba');
+  var hash = $__require('9c');
   var utils = hash.utils;
   var assert = utils.assert;
   function Hmac(hash, key, enc) {
@@ -32899,17 +30351,17 @@ $__System.registerDynamic("bd", ["ba"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("ba", ["b8", "b9", "bb", "bc", "bd"], true, function($__require, exports, module) {
+$__System.registerDynamic("9c", ["9a", "9b", "9d", "9e", "9f"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var hash = exports;
-  hash.utils = $__require('b8');
-  hash.common = $__require('b9');
-  hash.sha = $__require('bb');
-  hash.ripemd = $__require('bc');
-  hash.hmac = $__require('bd');
+  hash.utils = $__require('9a');
+  hash.common = $__require('9b');
+  hash.sha = $__require('9d');
+  hash.ripemd = $__require('9e');
+  hash.hmac = $__require('9f');
   hash.sha1 = hash.sha.sha1;
   hash.sha256 = hash.sha.sha256;
   hash.sha224 = hash.sha.sha224;
@@ -32919,22 +30371,22 @@ $__System.registerDynamic("ba", ["b8", "b9", "bb", "bc", "bd"], true, function($
   return module.exports;
 });
 
-$__System.registerDynamic("ad", ["ba"], true, function($__require, exports, module) {
+$__System.registerDynamic("8f", ["9c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('ba');
+  module.exports = $__require('9c');
   return module.exports;
 });
 
-$__System.registerDynamic("be", ["ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("a0", ["8e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var elliptic = $__require('ac');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   var assert = utils.assert;
   var parseBytes = utils.parseBytes;
@@ -33005,14 +30457,14 @@ $__System.registerDynamic("be", ["ac"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("bf", ["98", "ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("a1", ["7a", "8e"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var BN = $__require('98');
-  var elliptic = $__require('ac');
+  var BN = $__require('7a');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   var assert = utils.assert;
   var cachedProperty = utils.cachedProperty;
@@ -33057,19 +30509,19 @@ $__System.registerDynamic("bf", ["98", "ac"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("c0", ["ad", "ac", "be", "bf"], true, function($__require, exports, module) {
+$__System.registerDynamic("a2", ["8f", "8e", "a0", "a1"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var hash = $__require('ad');
-  var elliptic = $__require('ac');
+  var hash = $__require('8f');
+  var elliptic = $__require('8e');
   var utils = elliptic.utils;
   var assert = utils.assert;
   var parseBytes = utils.parseBytes;
-  var KeyPair = $__require('be');
-  var Signature = $__require('bf');
+  var KeyPair = $__require('a0');
+  var Signature = $__require('a1');
   function EDDSA(curve) {
     assert(curve === 'ed25519', 'only tested with ed25519 so far');
     if (!(this instanceof EDDSA))
@@ -33148,41 +30600,41 @@ $__System.registerDynamic("c0", ["ad", "ac", "be", "bf"], true, function($__requ
   return module.exports;
 });
 
-$__System.registerDynamic("ac", ["a8", "a9", "97", "ab", "b0", "b4", "b7", "c0"], true, function($__require, exports, module) {
+$__System.registerDynamic("8e", ["8a", "8b", "79", "8d", "92", "96", "99", "a2"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
   var elliptic = exports;
-  elliptic.version = $__require('a8').version;
-  elliptic.utils = $__require('a9');
-  elliptic.rand = $__require('97');
-  elliptic.hmacDRBG = $__require('ab');
-  elliptic.curve = $__require('b0');
-  elliptic.curves = $__require('b4');
-  elliptic.ec = $__require('b7');
-  elliptic.eddsa = $__require('c0');
+  elliptic.version = $__require('8a').version;
+  elliptic.utils = $__require('8b');
+  elliptic.rand = $__require('79');
+  elliptic.hmacDRBG = $__require('8d');
+  elliptic.curve = $__require('92');
+  elliptic.curves = $__require('96');
+  elliptic.ec = $__require('99');
+  elliptic.eddsa = $__require('a2');
   return module.exports;
 });
 
-$__System.registerDynamic("a2", ["ac"], true, function($__require, exports, module) {
+$__System.registerDynamic("84", ["8e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('ac');
+  module.exports = $__require('8e');
   return module.exports;
 });
 
-$__System.registerDynamic("c1", ["a2", "98", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("a3", ["84", "7a", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var elliptic = $__require('a2');
-    var BN = $__require('98');
+    var elliptic = $__require('84');
+    var BN = $__require('7a');
     module.exports = function createECDH(curve) {
       return new ECDH(curve);
     };
@@ -33290,33 +30742,33 @@ $__System.registerDynamic("c1", ["a2", "98", "4b"], true, function($__require, e
         return buf.toString(enc);
       }
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("c2", ["c1"], true, function($__require, exports, module) {
+$__System.registerDynamic("a4", ["a3"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('c1');
+  module.exports = $__require('a3');
   return module.exports;
 });
 
-$__System.registerDynamic("c3", ["a3", "68", "5b", "c4", "c5", "98", "c6", "a1", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("a5", ["85", "49", "3c", "a6", "a7", "7a", "a8", "83", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var parseKeys = $__require('a3');
-    var randomBytes = $__require('68');
-    var createHash = $__require('5b');
-    var mgf = $__require('c4');
-    var xor = $__require('c5');
-    var bn = $__require('98');
-    var withPublic = $__require('c6');
-    var crt = $__require('a1');
+    var parseKeys = $__require('85');
+    var randomBytes = $__require('49');
+    var createHash = $__require('3c');
+    var mgf = $__require('a6');
+    var xor = $__require('a7');
+    var bn = $__require('7a');
+    var withPublic = $__require('a8');
+    var crt = $__require('83');
     var constants = {
       RSA_PKCS1_OAEP_PADDING: 4,
       RSA_PKCS1_PADDIN: 1,
@@ -33401,11 +30853,11 @@ $__System.registerDynamic("c3", ["a3", "68", "5b", "c4", "c5", "98", "c6", "a1",
       }
       return out;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("c7", [], true, function($__require, exports, module) {
+$__System.registerDynamic("a9", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -33423,21 +30875,21 @@ $__System.registerDynamic("c7", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("c8", ["c7"], true, function($__require, exports, module) {
+$__System.registerDynamic("aa", ["a9"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('c7');
+  module.exports = $__require('a9');
   return module.exports;
 });
 
-$__System.registerDynamic("c9", ["c8"], true, function($__require, exports, module) {
+$__System.registerDynamic("ab", ["aa"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var indexOf = $__require('c8');
+  var indexOf = $__require('aa');
   var Object_keys = function(obj) {
     if (Object.keys)
       return Object.keys(obj);
@@ -33552,40 +31004,40 @@ $__System.registerDynamic("c9", ["c8"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("ca", ["c9"], true, function($__require, exports, module) {
+$__System.registerDynamic("ac", ["ab"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('c9');
+  module.exports = $__require('ab');
   return module.exports;
 });
 
-$__System.registerDynamic("cb", ["ca"], true, function($__require, exports, module) {
+$__System.registerDynamic("ad", ["ac"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? $__System._nodeRequire('vm') : $__require('ca');
+  module.exports = $__System._nodeRequire ? $__System._nodeRequire('vm') : $__require('ac');
   return module.exports;
 });
 
-$__System.registerDynamic("cc", ["cb"], true, function($__require, exports, module) {
+$__System.registerDynamic("ae", ["ad"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('cb');
+  module.exports = $__require('ad');
   return module.exports;
 });
 
-$__System.registerDynamic("cd", ["ce", "74", "cc"], true, function($__require, exports, module) {
+$__System.registerDynamic("af", ["b0", "55", "ae"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var asn1 = $__require('ce');
-  var inherits = $__require('74');
+  var asn1 = $__require('b0');
+  var inherits = $__require('55');
   var api = exports;
   api.define = function define(name, body) {
     return new Entity(name, body);
@@ -33600,7 +31052,7 @@ $__System.registerDynamic("cd", ["ce", "74", "cc"], true, function($__require, e
   Entity.prototype._createNamed = function createNamed(base) {
     var named;
     try {
-      named = $__require('cc').runInThisContext('(function ' + this.name + '(entity) {\n' + '  this._initNamed(entity);\n' + '})');
+      named = $__require('ae').runInThisContext('(function ' + this.name + '(entity) {\n' + '  this._initNamed(entity);\n' + '})');
     } catch (e) {
       named = function(entity) {
         this._initNamed(entity);
@@ -33631,12 +31083,12 @@ $__System.registerDynamic("cd", ["ce", "74", "cc"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("cf", ["74"], true, function($__require, exports, module) {
+$__System.registerDynamic("b1", ["55"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var inherits = $__require('74');
+  var inherits = $__require('55');
   function Reporter(options) {
     this._reporterState = {
       obj: null,
@@ -33722,15 +31174,15 @@ $__System.registerDynamic("cf", ["74"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("d0", ["74", "d1", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("b2", ["55", "b3", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Reporter = $__require('d1').Reporter;
-    var Buffer = $__require('4b').Buffer;
+    var inherits = $__require('55');
+    var Reporter = $__require('b3').Reporter;
+    var Buffer = $__require('2c').Buffer;
     function DecoderBuffer(base, options) {
       Reporter.call(this, options);
       if (!Buffer.isBuffer(base)) {
@@ -33827,11 +31279,11 @@ $__System.registerDynamic("d0", ["74", "d1", "4b"], true, function($__require, e
       }
       return out;
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("d2", [], true, function($__require, exports, module) {
+$__System.registerDynamic("b4", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -33848,24 +31300,24 @@ $__System.registerDynamic("d2", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("86", ["d2"], true, function($__require, exports, module) {
+$__System.registerDynamic("68", ["b4"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('d2');
+  module.exports = $__require('b4');
   return module.exports;
 });
 
-$__System.registerDynamic("d3", ["d1", "86"], true, function($__require, exports, module) {
+$__System.registerDynamic("b5", ["b3", "68"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var Reporter = $__require('d1').Reporter;
-  var EncoderBuffer = $__require('d1').EncoderBuffer;
-  var DecoderBuffer = $__require('d1').DecoderBuffer;
-  var assert = $__require('86');
+  var Reporter = $__require('b3').Reporter;
+  var EncoderBuffer = $__require('b3').EncoderBuffer;
+  var DecoderBuffer = $__require('b3').DecoderBuffer;
+  var assert = $__require('68');
   var tags = ['seq', 'seqof', 'set', 'setof', 'objid', 'bool', 'gentime', 'utctime', 'null_', 'enum', 'int', 'bitstr', 'bmpstr', 'charstr', 'genstr', 'graphstr', 'ia5str', 'iso646str', 'numstr', 'octstr', 'printstr', 't61str', 'unistr', 'utf8str', 'videostr'];
   var methods = ['key', 'obj', 'use', 'optional', 'explicit', 'implicit', 'def', 'choice', 'any', 'contains'].concat(tags);
   var overrided = ['_peekTag', '_decodeTag', '_use', '_decodeStr', '_decodeObjid', '_decodeTime', '_decodeNull', '_decodeInt', '_decodeBool', '_decodeList', '_encodeComposite', '_encodeStr', '_encodeObjid', '_encodeTime', '_encodeNull', '_encodeInt', '_encodeBool'];
@@ -34304,25 +31756,25 @@ $__System.registerDynamic("d3", ["d1", "86"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("d1", ["cf", "d0", "d3"], true, function($__require, exports, module) {
+$__System.registerDynamic("b3", ["b1", "b2", "b5"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var base = exports;
-  base.Reporter = $__require('cf').Reporter;
-  base.DecoderBuffer = $__require('d0').DecoderBuffer;
-  base.EncoderBuffer = $__require('d0').EncoderBuffer;
-  base.Node = $__require('d3');
+  base.Reporter = $__require('b1').Reporter;
+  base.DecoderBuffer = $__require('b2').DecoderBuffer;
+  base.EncoderBuffer = $__require('b2').EncoderBuffer;
+  base.Node = $__require('b5');
   return module.exports;
 });
 
-$__System.registerDynamic("d4", ["d5"], true, function($__require, exports, module) {
+$__System.registerDynamic("b6", ["b7"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var constants = $__require('d5');
+  var constants = $__require('b7');
   exports.tagClass = {
     0: 'universal',
     1: 'application',
@@ -34365,7 +31817,7 @@ $__System.registerDynamic("d4", ["d5"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("d5", ["d4"], true, function($__require, exports, module) {
+$__System.registerDynamic("b7", ["b6"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -34381,17 +31833,17 @@ $__System.registerDynamic("d5", ["d4"], true, function($__require, exports, modu
     });
     return res;
   };
-  constants.der = $__require('d4');
+  constants.der = $__require('b6');
   return module.exports;
 });
 
-$__System.registerDynamic("d6", ["74", "ce"], true, function($__require, exports, module) {
+$__System.registerDynamic("b8", ["55", "b0"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var inherits = $__require('74');
-  var asn1 = $__require('ce');
+  var inherits = $__require('55');
+  var asn1 = $__require('b0');
   var base = asn1.base;
   var bignum = asn1.bignum;
   var der = asn1.constants.der;
@@ -34642,16 +32094,16 @@ $__System.registerDynamic("d6", ["74", "ce"], true, function($__require, exports
   return module.exports;
 });
 
-$__System.registerDynamic("d7", ["74", "4b", "ce", "d6"], true, function($__require, exports, module) {
+$__System.registerDynamic("b9", ["55", "2c", "b0", "b8"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Buffer = $__require('4b').Buffer;
-    var asn1 = $__require('ce');
-    var DERDecoder = $__require('d6');
+    var inherits = $__require('55');
+    var Buffer = $__require('2c').Buffer;
+    var asn1 = $__require('b0');
+    var DERDecoder = $__require('b8');
     function PEMDecoder(entity) {
       DERDecoder.call(this, entity);
       this.enc = 'pem';
@@ -34689,30 +32141,30 @@ $__System.registerDynamic("d7", ["74", "4b", "ce", "d6"], true, function($__requ
       var input = new Buffer(base64, 'base64');
       return DERDecoder.prototype.decode.call(this, input, options);
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("d8", ["d6", "d7"], true, function($__require, exports, module) {
+$__System.registerDynamic("ba", ["b8", "b9"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var decoders = exports;
-  decoders.der = $__require('d6');
-  decoders.pem = $__require('d7');
+  decoders.der = $__require('b8');
+  decoders.pem = $__require('b9');
   return module.exports;
 });
 
-$__System.registerDynamic("d9", ["74", "4b", "ce"], true, function($__require, exports, module) {
+$__System.registerDynamic("bb", ["55", "2c", "b0"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Buffer = $__require('4b').Buffer;
-    var asn1 = $__require('ce');
+    var inherits = $__require('55');
+    var Buffer = $__require('2c').Buffer;
+    var asn1 = $__require('b0');
     var base = asn1.base;
     var bignum = asn1.bignum;
     var der = asn1.constants.der;
@@ -34920,20 +32372,20 @@ $__System.registerDynamic("d9", ["74", "4b", "ce"], true, function($__require, e
       res |= (der.tagClassByName[cls || 'universal'] << 6);
       return res;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("da", ["74", "4b", "ce", "d9"], true, function($__require, exports, module) {
+$__System.registerDynamic("bc", ["55", "2c", "b0", "bb"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Buffer = $__require('4b').Buffer;
-    var asn1 = $__require('ce');
-    var DEREncoder = $__require('d9');
+    var inherits = $__require('55');
+    var Buffer = $__require('2c').Buffer;
+    var asn1 = $__require('b0');
+    var DEREncoder = $__require('bb');
     function PEMEncoder(entity) {
       DEREncoder.call(this, entity);
       this.enc = 'pem';
@@ -34950,51 +32402,51 @@ $__System.registerDynamic("da", ["74", "4b", "ce", "d9"], true, function($__requ
       out.push('-----END ' + options.label + '-----');
       return out.join('\n');
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("db", ["d9", "da"], true, function($__require, exports, module) {
+$__System.registerDynamic("bd", ["bb", "bc"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var encoders = exports;
-  encoders.der = $__require('d9');
-  encoders.pem = $__require('da');
+  encoders.der = $__require('bb');
+  encoders.pem = $__require('bc');
   return module.exports;
 });
 
-$__System.registerDynamic("ce", ["98", "cd", "d1", "d5", "d8", "db"], true, function($__require, exports, module) {
+$__System.registerDynamic("b0", ["7a", "af", "b3", "b7", "ba", "bd"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var asn1 = exports;
-  asn1.bignum = $__require('98');
-  asn1.define = $__require('cd').define;
-  asn1.base = $__require('d1');
-  asn1.constants = $__require('d5');
-  asn1.decoders = $__require('d8');
-  asn1.encoders = $__require('db');
+  asn1.bignum = $__require('7a');
+  asn1.define = $__require('af').define;
+  asn1.base = $__require('b3');
+  asn1.constants = $__require('b7');
+  asn1.decoders = $__require('ba');
+  asn1.encoders = $__require('bd');
   return module.exports;
 });
 
-$__System.registerDynamic("dc", ["ce"], true, function($__require, exports, module) {
+$__System.registerDynamic("be", ["b0"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('ce');
+  module.exports = $__require('b0');
   return module.exports;
 });
 
-$__System.registerDynamic("dd", ["dc"], true, function($__require, exports, module) {
+$__System.registerDynamic("bf", ["be"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var asn1 = $__require('dc');
+  var asn1 = $__require('be');
   var RSAPrivateKey = asn1.define('RSAPrivateKey', function() {
     this.seq().obj(this.key('version').int(), this.key('modulus').int(), this.key('publicExponent').int(), this.key('privateExponent').int(), this.key('prime1').int(), this.key('prime2').int(), this.key('exponent1').int(), this.key('exponent2').int(), this.key('coefficient').int());
   });
@@ -35038,7 +32490,7 @@ $__System.registerDynamic("dd", ["dc"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("de", [], true, function($__require, exports, module) {
+$__System.registerDynamic("c0", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35060,7 +32512,7 @@ $__System.registerDynamic("de", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("df", ["91", "e0", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("c1", ["73", "c2", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35069,8 +32521,8 @@ $__System.registerDynamic("df", ["91", "e0", "4b"], true, function($__require, e
     var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m;
     var startRegex = /^-----BEGIN (.*) KEY-----\r?\n/m;
     var fullRegex = /^-----BEGIN (.*) KEY-----\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n-----END \1 KEY-----$/m;
-    var evp = $__require('91');
-    var ciphers = $__require('e0');
+    var evp = $__require('73');
+    var ciphers = $__require('c2');
     module.exports = function(okey, password) {
       var key = okey.toString();
       var match = key.match(findProc);
@@ -35095,23 +32547,23 @@ $__System.registerDynamic("df", ["91", "e0", "4b"], true, function($__require, e
         data: decrypted
       };
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("e1", ["e2", "8d", "74", "93", "91", "e3", "e4", "e5", "e6", "e7", "e8", "e9", "ea", "eb", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("c3", ["c4", "6f", "55", "75", "73", "c5", "c6", "c7", "c8", "c9", "ca", "cb", "cc", "cd", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var aes = $__require('e2');
-    var Transform = $__require('8d');
-    var inherits = $__require('74');
-    var modes = $__require('93');
-    var ebtk = $__require('91');
-    var StreamCipher = $__require('e3');
-    var AuthCipher = $__require('e4');
+    var aes = $__require('c4');
+    var Transform = $__require('6f');
+    var inherits = $__require('55');
+    var modes = $__require('75');
+    var ebtk = $__require('73');
+    var StreamCipher = $__require('c5');
+    var AuthCipher = $__require('c6');
     inherits(Cipher, Transform);
     function Cipher(mode, key, iv) {
       if (!(this instanceof Cipher)) {
@@ -35179,14 +32631,14 @@ $__System.registerDynamic("e1", ["e2", "8d", "74", "93", "91", "e3", "e4", "e5",
       return out;
     };
     var modelist = {
-      ECB: $__require('e5'),
-      CBC: $__require('e6'),
-      CFB: $__require('e7'),
-      CFB8: $__require('e8'),
-      CFB1: $__require('e9'),
-      OFB: $__require('ea'),
-      CTR: $__require('eb'),
-      GCM: $__require('eb')
+      ECB: $__require('c7'),
+      CBC: $__require('c8'),
+      CFB: $__require('c9'),
+      CFB8: $__require('ca'),
+      CFB1: $__require('cb'),
+      OFB: $__require('cc'),
+      CTR: $__require('cd'),
+      GCM: $__require('cd')
     };
     function createCipheriv(suite, password, iv) {
       var config = modes[suite.toLowerCase()];
@@ -35222,19 +32674,19 @@ $__System.registerDynamic("e1", ["e2", "8d", "74", "93", "91", "e3", "e4", "e5",
     }
     exports.createCipheriv = createCipheriv;
     exports.createCipher = createCipher;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("e3", ["e2", "8d", "74", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("c5", ["c4", "6f", "55", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var aes = $__require('e2');
-    var Transform = $__require('8d');
-    var inherits = $__require('74');
+    var aes = $__require('c4');
+    var Transform = $__require('6f');
+    var inherits = $__require('55');
     inherits(StreamCipher, Transform);
     module.exports = StreamCipher;
     function StreamCipher(mode, key, iv, decrypt) {
@@ -35256,11 +32708,11 @@ $__System.registerDynamic("e3", ["e2", "8d", "74", "4b"], true, function($__requ
     StreamCipher.prototype._final = function() {
       this._cipher.scrub();
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("e2", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("c4", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35441,11 +32893,11 @@ $__System.registerDynamic("e2", ["4b"], true, function($__require, exports, modu
       return [fixup_uint32(t0), fixup_uint32(t1), fixup_uint32(t2), fixup_uint32(t3)];
     };
     exports.AES = AES;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("ec", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("ce", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35528,21 +32980,21 @@ $__System.registerDynamic("ec", ["4b"], true, function($__require, exports, modu
     function xor(a, b) {
       return [a[0] ^ b[0], a[1] ^ b[1], a[2] ^ b[2], a[3] ^ b[3]];
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("e4", ["e2", "8d", "74", "ec", "ed", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("c6", ["c4", "6f", "55", "ce", "cf", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var aes = $__require('e2');
-    var Transform = $__require('8d');
-    var inherits = $__require('74');
-    var GHASH = $__require('ec');
-    var xor = $__require('ed');
+    var aes = $__require('c4');
+    var Transform = $__require('6f');
+    var inherits = $__require('55');
+    var GHASH = $__require('ce');
+    var xor = $__require('cf');
     inherits(StreamCipher, Transform);
     module.exports = StreamCipher;
     function StreamCipher(mode, key, iv, decrypt) {
@@ -35634,17 +33086,17 @@ $__System.registerDynamic("e4", ["e2", "8d", "74", "ec", "ed", "4b"], true, func
       }
       return out;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("ee", ["ef", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d0", ["d1", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var md5 = $__require('ef');
+    var md5 = $__require('d1');
     module.exports = EVP_BytesToKey;
     function EVP_BytesToKey(password, salt, keyLen, ivLen) {
       if (!Buffer.isBuffer(password)) {
@@ -35712,20 +33164,20 @@ $__System.registerDynamic("ee", ["ef", "4b"], true, function($__require, exports
         iv: iv
       };
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("91", ["ee"], true, function($__require, exports, module) {
+$__System.registerDynamic("73", ["d0"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('ee');
+  module.exports = $__require('d0');
   return module.exports;
 });
 
-$__System.registerDynamic("e5", [], true, function($__require, exports, module) {
+$__System.registerDynamic("c7", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35739,12 +33191,12 @@ $__System.registerDynamic("e5", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("e6", ["ed"], true, function($__require, exports, module) {
+$__System.registerDynamic("c8", ["cf"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var xor = $__require('ed');
+  var xor = $__require('cf');
   exports.encrypt = function(self, block) {
     var data = xor(block, self._prev);
     self._prev = self._cipher.encryptBlock(data);
@@ -35759,13 +33211,13 @@ $__System.registerDynamic("e6", ["ed"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("e7", ["ed", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("c9", ["cf", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var xor = $__require('ed');
+    var xor = $__require('cf');
     exports.encrypt = function(self, data, decrypt) {
       var out = new Buffer('');
       var len;
@@ -35792,11 +33244,11 @@ $__System.registerDynamic("e7", ["ed", "4b"], true, function($__require, exports
       self._prev = Buffer.concat([self._prev, decrypt ? data : out]);
       return out;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("e8", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("ca", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35817,11 +33269,11 @@ $__System.registerDynamic("e8", ["4b"], true, function($__require, exports, modu
       }
       return out;
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("e9", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("cb", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35862,17 +33314,17 @@ $__System.registerDynamic("e9", ["4b"], true, function($__require, exports, modu
       }
       return out;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("ea", ["ed", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("cc", ["cf", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var xor = $__require('ed');
+    var xor = $__require('cf');
     function getBlock(self) {
       self._prev = self._cipher.encryptBlock(self._prev);
       return self._prev;
@@ -35885,11 +33337,11 @@ $__System.registerDynamic("ea", ["ed", "4b"], true, function($__require, exports
       self._cache = self._cache.slice(chunk.length);
       return xor(chunk, pad);
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("f0", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d2", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -35903,26 +33355,26 @@ $__System.registerDynamic("f0", ["4b"], true, function($__require, exports, modu
       }
       return buffer;
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("ed", ["f0"], true, function($__require, exports, module) {
+$__System.registerDynamic("cf", ["d2"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f0');
+  module.exports = $__require('d2');
   return module.exports;
 });
 
-$__System.registerDynamic("eb", ["ed", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("cd", ["cf", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var xor = $__require('ed');
+    var xor = $__require('cf');
     function incr32(iv) {
       var len = iv.length;
       var item;
@@ -35950,23 +33402,23 @@ $__System.registerDynamic("eb", ["ed", "4b"], true, function($__require, exports
       self._cache = self._cache.slice(chunk.length);
       return xor(chunk, pad);
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("f1", ["e2", "8d", "74", "93", "e3", "e4", "91", "e5", "e6", "e7", "e8", "e9", "ea", "eb", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d3", ["c4", "6f", "55", "75", "c5", "c6", "73", "c7", "c8", "c9", "ca", "cb", "cc", "cd", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var aes = $__require('e2');
-    var Transform = $__require('8d');
-    var inherits = $__require('74');
-    var modes = $__require('93');
-    var StreamCipher = $__require('e3');
-    var AuthCipher = $__require('e4');
-    var ebtk = $__require('91');
+    var aes = $__require('c4');
+    var Transform = $__require('6f');
+    var inherits = $__require('55');
+    var modes = $__require('75');
+    var StreamCipher = $__require('c5');
+    var AuthCipher = $__require('c6');
+    var ebtk = $__require('73');
     inherits(Decipher, Transform);
     function Decipher(mode, key, iv) {
       if (!(this instanceof Decipher)) {
@@ -36049,14 +33501,14 @@ $__System.registerDynamic("f1", ["e2", "8d", "74", "93", "e3", "e4", "91", "e5",
       return last.slice(0, 16 - padded);
     }
     var modelist = {
-      ECB: $__require('e5'),
-      CBC: $__require('e6'),
-      CFB: $__require('e7'),
-      CFB8: $__require('e8'),
-      CFB1: $__require('e9'),
-      OFB: $__require('ea'),
-      CTR: $__require('eb'),
-      GCM: $__require('eb')
+      ECB: $__require('c7'),
+      CBC: $__require('c8'),
+      CFB: $__require('c9'),
+      CFB8: $__require('ca'),
+      CFB1: $__require('cb'),
+      OFB: $__require('cc'),
+      CTR: $__require('cd'),
+      GCM: $__require('cd')
     };
     function createDecipheriv(suite, password, iv) {
       var config = modes[suite.toLowerCase()];
@@ -36092,11 +33544,11 @@ $__System.registerDynamic("f1", ["e2", "8d", "74", "93", "e3", "e4", "91", "e5",
     }
     exports.createDecipher = createDecipher;
     exports.createDecipheriv = createDecipheriv;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("93", [], true, function($__require, exports, module) {
+$__System.registerDynamic("75", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -36275,18 +33727,18 @@ $__System.registerDynamic("93", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("92", ["e1", "f1", "93"], true, function($__require, exports, module) {
+$__System.registerDynamic("74", ["c3", "d3", "75"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var ciphers = $__require('e1');
+  var ciphers = $__require('c3');
   exports.createCipher = exports.Cipher = ciphers.createCipher;
   exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv;
-  var deciphers = $__require('f1');
+  var deciphers = $__require('d3');
   exports.createDecipher = exports.Decipher = deciphers.createDecipher;
   exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv;
-  var modes = $__require('93');
+  var modes = $__require('75');
   function getCiphers() {
     return Object.keys(modes);
   }
@@ -36294,25 +33746,25 @@ $__System.registerDynamic("92", ["e1", "f1", "93"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("e0", ["92"], true, function($__require, exports, module) {
+$__System.registerDynamic("c2", ["74"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('92');
+  module.exports = $__require('74');
   return module.exports;
 });
 
-$__System.registerDynamic("f2", ["f3", "74", "a6", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d4", ["d5", "55", "88", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
     'use strict';
-    var createHash = $__require('f3');
-    var inherits = $__require('74');
-    var Transform = $__require('a6').Transform;
+    var createHash = $__require('d5');
+    var inherits = $__require('55');
+    var Transform = $__require('88').Transform;
     var ZEROS = new Buffer(128);
     ZEROS.fill(0);
     function Hmac(alg, key) {
@@ -36357,26 +33809,26 @@ $__System.registerDynamic("f2", ["f3", "74", "a6", "4b"], true, function($__requ
     module.exports = function createHmac(alg, key) {
       return new Hmac(alg, key);
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("51", ["f2"], true, function($__require, exports, module) {
+$__System.registerDynamic("32", ["d4"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f2');
+  module.exports = $__require('d4');
   return module.exports;
 });
 
-$__System.registerDynamic("f4", ["51", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d6", ["32", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var createHmac = $__require('51');
+    var createHmac = $__require('32');
     var MAX_ALLOC = Math.pow(2, 30) - 1;
     exports.pbkdf2 = pbkdf2;
     function pbkdf2(password, salt, iterations, keylen, digest, callback) {
@@ -36440,30 +33892,30 @@ $__System.registerDynamic("f4", ["51", "4b"], true, function($__require, exports
       }
       return DK;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("82", ["f4"], true, function($__require, exports, module) {
+$__System.registerDynamic("64", ["d6"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f4');
+  module.exports = $__require('d6');
   return module.exports;
 });
 
-$__System.registerDynamic("f5", ["dd", "de", "df", "e0", "82", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d7", ["bf", "c0", "c1", "c2", "64", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var asn1 = $__require('dd');
-    var aesid = $__require('de');
-    var fixProc = $__require('df');
-    var ciphers = $__require('e0');
-    var compat = $__require('82');
+    var asn1 = $__require('bf');
+    var aesid = $__require('c0');
+    var fixProc = $__require('c1');
+    var ciphers = $__require('c2');
+    var compat = $__require('64');
     module.exports = parseKeys;
     function parseKeys(buffer) {
       var password;
@@ -36560,26 +34012,26 @@ $__System.registerDynamic("f5", ["dd", "de", "df", "e0", "82", "4b"], true, func
       out.push(cipher.final());
       return Buffer.concat(out);
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("a3", ["f5"], true, function($__require, exports, module) {
+$__System.registerDynamic("85", ["d7"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f5');
+  module.exports = $__require('d7');
   return module.exports;
 });
 
-$__System.registerDynamic("c4", ["5b", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("a6", ["3c", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var createHash = $__require('5b');
+    var createHash = $__require('3c');
     module.exports = function(seed, len) {
       var t = new Buffer('');
       var i = 0,
@@ -36595,11 +34047,11 @@ $__System.registerDynamic("c4", ["5b", "4b"], true, function($__require, exports
       out.writeUInt32BE(c, 0);
       return out;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("c5", [], true, function($__require, exports, module) {
+$__System.registerDynamic("a7", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -36615,7 +34067,7 @@ $__System.registerDynamic("c5", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("f6", ["4b", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d8", ["2c", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -36646,27 +34098,27 @@ $__System.registerDynamic("f6", ["4b", "1b"], true, function($__require, exports
       }
       return bytes;
     }
-  })($__require('4b').Buffer, $__require('1b'));
+  })($__require('2c').Buffer, $__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("68", ["f6"], true, function($__require, exports, module) {
+$__System.registerDynamic("49", ["d8"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f6');
+  module.exports = $__require('d8');
   return module.exports;
 });
 
-$__System.registerDynamic("f7", ["98", "68", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d9", ["7a", "49", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bn = $__require('98');
-    var randomBytes = $__require('68');
+    var bn = $__require('7a');
+    var randomBytes = $__require('49');
     module.exports = crt;
     function blind(priv) {
       var r = getr(priv);
@@ -36704,20 +34156,20 @@ $__System.registerDynamic("f7", ["98", "68", "4b"], true, function($__require, e
       }
       return r;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("a1", ["f7"], true, function($__require, exports, module) {
+$__System.registerDynamic("83", ["d9"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f7');
+  module.exports = $__require('d9');
   return module.exports;
 });
 
-$__System.registerDynamic("f8", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("da", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -36755,17 +34207,17 @@ $__System.registerDynamic("f8", ["4b"], true, function($__require, exports, modu
       return toBuffer(arr, hashSize, bigEndian);
     }
     exports.hash = hash;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("ef", ["f8"], true, function($__require, exports, module) {
+$__System.registerDynamic("d1", ["da"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var helpers = $__require('f8');
+  var helpers = $__require('da');
   function core_md5(x, len) {
     x[len >> 5] |= 0x80 << ((len) % 32);
     x[(((len + 64) >>> 9) << 4) + 14] = len;
@@ -36878,7 +34330,7 @@ $__System.registerDynamic("ef", ["f8"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("f9", ["4b", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("db", ["2c", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -37015,27 +34467,27 @@ $__System.registerDynamic("f9", ["4b", "1b"], true, function($__require, exports
       return new Buffer(digestbytes);
     }
     module.exports = ripemd160;
-  })($__require('4b').Buffer, $__require('1b'));
+  })($__require('2c').Buffer, $__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("fa", ["f9"], true, function($__require, exports, module) {
+$__System.registerDynamic("dc", ["db"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f9');
+  module.exports = $__require('db');
   return module.exports;
 });
 
-$__System.registerDynamic("fb", ["74", "fc", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("dd", ["55", "de", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Hash = $__require('fc');
+    var inherits = $__require('55');
+    var Hash = $__require('de');
     var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0];
     var W = new Array(80);
     function Sha() {
@@ -37101,18 +34553,18 @@ $__System.registerDynamic("fb", ["74", "fc", "4b"], true, function($__require, e
       return H;
     };
     module.exports = Sha;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("fd", ["74", "fc", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("df", ["55", "de", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Hash = $__require('fc');
+    var inherits = $__require('55');
+    var Hash = $__require('de');
     var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0];
     var W = new Array(80);
     function Sha1() {
@@ -37181,19 +34633,19 @@ $__System.registerDynamic("fd", ["74", "fc", "4b"], true, function($__require, e
       return H;
     };
     module.exports = Sha1;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("fe", ["74", "ff", "fc", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("e0", ["55", "e1", "de", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Sha256 = $__require('ff');
-    var Hash = $__require('fc');
+    var inherits = $__require('55');
+    var Sha256 = $__require('e1');
+    var Hash = $__require('de');
     var W = new Array(64);
     function Sha224() {
       this.init();
@@ -37224,18 +34676,18 @@ $__System.registerDynamic("fe", ["74", "ff", "fc", "4b"], true, function($__requ
       return H;
     };
     module.exports = Sha224;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("ff", ["74", "fc", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("e1", ["55", "de", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Hash = $__require('fc');
+    var inherits = $__require('55');
+    var Hash = $__require('de');
     var K = [0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5, 0x3956C25B, 0x59F111F1, 0x923F82A4, 0xAB1C5ED5, 0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3, 0x72BE5D74, 0x80DEB1FE, 0x9BDC06A7, 0xC19BF174, 0xE49B69C1, 0xEFBE4786, 0x0FC19DC6, 0x240CA1CC, 0x2DE92C6F, 0x4A7484AA, 0x5CB0A9DC, 0x76F988DA, 0x983E5152, 0xA831C66D, 0xB00327C8, 0xBF597FC7, 0xC6E00BF3, 0xD5A79147, 0x06CA6351, 0x14292967, 0x27B70A85, 0x2E1B2138, 0x4D2C6DFC, 0x53380D13, 0x650A7354, 0x766A0ABB, 0x81C2C92E, 0x92722C85, 0xA2BFE8A1, 0xA81A664B, 0xC24B8B70, 0xC76C51A3, 0xD192E819, 0xD6990624, 0xF40E3585, 0x106AA070, 0x19A4C116, 0x1E376C08, 0x2748774C, 0x34B0BCB5, 0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3, 0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208, 0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2];
     var W = new Array(64);
     function Sha256() {
@@ -37321,19 +34773,19 @@ $__System.registerDynamic("ff", ["74", "fc", "4b"], true, function($__require, e
       return H;
     };
     module.exports = Sha256;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("100", ["74", "101", "fc", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("e2", ["55", "e3", "de", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var SHA512 = $__require('101');
-    var Hash = $__require('fc');
+    var inherits = $__require('55');
+    var SHA512 = $__require('e3');
+    var Hash = $__require('de');
     var W = new Array(160);
     function Sha384() {
       this.init();
@@ -37375,11 +34827,11 @@ $__System.registerDynamic("100", ["74", "101", "fc", "4b"], true, function($__re
       return H;
     };
     module.exports = Sha384;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("fc", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("de", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -37432,18 +34884,18 @@ $__System.registerDynamic("fc", ["4b"], true, function($__require, exports, modu
       throw new Error('_update must be implemented by subclass');
     };
     module.exports = Hash;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("101", ["74", "fc", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("e3", ["55", "de", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var inherits = $__require('74');
-    var Hash = $__require('fc');
+    var inherits = $__require('55');
+    var Hash = $__require('de');
     var K = [0x428a2f98, 0xd728ae22, 0x71374491, 0x23ef65cd, 0xb5c0fbcf, 0xec4d3b2f, 0xe9b5dba5, 0x8189dbbc, 0x3956c25b, 0xf348b538, 0x59f111f1, 0xb605d019, 0x923f82a4, 0xaf194f9b, 0xab1c5ed5, 0xda6d8118, 0xd807aa98, 0xa3030242, 0x12835b01, 0x45706fbe, 0x243185be, 0x4ee4b28c, 0x550c7dc3, 0xd5ffb4e2, 0x72be5d74, 0xf27b896f, 0x80deb1fe, 0x3b1696b1, 0x9bdc06a7, 0x25c71235, 0xc19bf174, 0xcf692694, 0xe49b69c1, 0x9ef14ad2, 0xefbe4786, 0x384f25e3, 0x0fc19dc6, 0x8b8cd5b5, 0x240ca1cc, 0x77ac9c65, 0x2de92c6f, 0x592b0275, 0x4a7484aa, 0x6ea6e483, 0x5cb0a9dc, 0xbd41fbd4, 0x76f988da, 0x831153b5, 0x983e5152, 0xee66dfab, 0xa831c66d, 0x2db43210, 0xb00327c8, 0x98fb213f, 0xbf597fc7, 0xbeef0ee4, 0xc6e00bf3, 0x3da88fc2, 0xd5a79147, 0x930aa725, 0x06ca6351, 0xe003826f, 0x14292967, 0x0a0e6e70, 0x27b70a85, 0x46d22ffc, 0x2e1b2138, 0x5c26c926, 0x4d2c6dfc, 0x5ac42aed, 0x53380d13, 0x9d95b3df, 0x650a7354, 0x8baf63de, 0x766a0abb, 0x3c77b2a8, 0x81c2c92e, 0x47edaee6, 0x92722c85, 0x1482353b, 0xa2bfe8a1, 0x4cf10364, 0xa81a664b, 0xbc423001, 0xc24b8b70, 0xd0f89791, 0xc76c51a3, 0x0654be30, 0xd192e819, 0xd6ef5218, 0xd6990624, 0x5565a910, 0xf40e3585, 0x5771202a, 0x106aa070, 0x32bbd1b8, 0x19a4c116, 0xb8d2d0c8, 0x1e376c08, 0x5141ab53, 0x2748774c, 0xdf8eeb99, 0x34b0bcb5, 0xe19b48a8, 0x391c0cb3, 0xc5c95a63, 0x4ed8aa4a, 0xe3418acb, 0x5b9cca4f, 0x7763e373, 0x682e6ff3, 0xd6b2b8a3, 0x748f82ee, 0x5defb2fc, 0x78a5636f, 0x43172f60, 0x84c87814, 0xa1f0ab72, 0x8cc70208, 0x1a6439ec, 0x90befffa, 0x23631e28, 0xa4506ceb, 0xde82bde9, 0xbef9a3f7, 0xb2c67915, 0xc67178f2, 0xe372532b, 0xca273ece, 0xea26619c, 0xd186b8c7, 0x21c0c207, 0xeada7dd6, 0xcde0eb1e, 0xf57d4f7f, 0xee6ed178, 0x06f067aa, 0x72176fba, 0x0a637dc5, 0xa2c898a6, 0x113f9804, 0xbef90dae, 0x1b710b35, 0x131c471b, 0x28db77f5, 0x23047d84, 0x32caab7b, 0x40c72493, 0x3c9ebe0a, 0x15c9bebc, 0x431d67c4, 0x9c100d4c, 0x4cc5d4be, 0xcb3e42b6, 0x597f299c, 0xfc657e2a, 0x5fcb6fab, 0x3ad6faec, 0x6c44198c, 0x4a475817];
     var W = new Array(160);
     function Sha512() {
@@ -37616,11 +35068,11 @@ $__System.registerDynamic("101", ["74", "fc", "4b"], true, function($__require, 
       return H;
     };
     module.exports = Sha512;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("102", ["fb", "fd", "fe", "ff", "100", "101"], true, function($__require, exports, module) {
+$__System.registerDynamic("e4", ["dd", "df", "e0", "e1", "e2", "e3"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -37632,67 +35084,67 @@ $__System.registerDynamic("102", ["fb", "fd", "fe", "ff", "100", "101"], true, f
       throw new Error(algorithm + ' is not supported (we accept pull requests)');
     return new Algorithm();
   };
-  exports.sha = $__require('fb');
-  exports.sha1 = $__require('fd');
-  exports.sha224 = $__require('fe');
-  exports.sha256 = $__require('ff');
-  exports.sha384 = $__require('100');
-  exports.sha512 = $__require('101');
+  exports.sha = $__require('dd');
+  exports.sha1 = $__require('df');
+  exports.sha224 = $__require('e0');
+  exports.sha256 = $__require('e1');
+  exports.sha384 = $__require('e2');
+  exports.sha512 = $__require('e3');
   return module.exports;
 });
 
-$__System.registerDynamic("103", ["102"], true, function($__require, exports, module) {
+$__System.registerDynamic("e5", ["e4"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('102');
+  module.exports = $__require('e4');
   return module.exports;
 });
 
-$__System.registerDynamic("104", ["105", "10a", "106", "107", "108", "109"], true, function($__require, exports, module) {
+$__System.registerDynamic("e6", ["e7", "ec", "e8", "e9", "ea", "eb"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  exports = module.exports = $__require('105');
-  exports.Stream = $__require('10a');
+  exports = module.exports = $__require('e7');
+  exports.Stream = $__require('ec');
   exports.Readable = exports;
-  exports.Writable = $__require('106');
-  exports.Duplex = $__require('107');
-  exports.Transform = $__require('108');
-  exports.PassThrough = $__require('109');
+  exports.Writable = $__require('e8');
+  exports.Duplex = $__require('e9');
+  exports.Transform = $__require('ea');
+  exports.PassThrough = $__require('eb');
   return module.exports;
 });
 
-$__System.registerDynamic("10b", ["106"], true, function($__require, exports, module) {
+$__System.registerDynamic("ed", ["e8"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('106');
+  module.exports = $__require('e8');
   return module.exports;
 });
 
-$__System.registerDynamic("10c", ["107"], true, function($__require, exports, module) {
+$__System.registerDynamic("ee", ["e9"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('107');
+  module.exports = $__require('e9');
   return module.exports;
 });
 
-$__System.registerDynamic("10d", ["108"], true, function($__require, exports, module) {
+$__System.registerDynamic("ef", ["ea"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('108');
+  module.exports = $__require('ea');
   return module.exports;
 });
 
-$__System.registerDynamic("10e", [], true, function($__require, exports, module) {
+$__System.registerDynamic("f0", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -37703,16 +35155,16 @@ $__System.registerDynamic("10e", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("10f", ["10e"], true, function($__require, exports, module) {
+$__System.registerDynamic("f1", ["f0"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('10e');
+  module.exports = $__require('f0');
   return module.exports;
 });
 
-$__System.registerDynamic("110", [], true, function($__require, exports, module) {
+$__System.registerDynamic("f2", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -37933,51 +35385,51 @@ $__System.registerDynamic("110", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("111", ["110"], true, function($__require, exports, module) {
+$__System.registerDynamic("f3", ["f2"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('110');
+  module.exports = $__require('f2');
   return module.exports;
 });
 
-$__System.registerDynamic("112", ["111"], true, function($__require, exports, module) {
+$__System.registerDynamic("f4", ["f3"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? $__System._nodeRequire('events') : $__require('111');
+  module.exports = $__System._nodeRequire ? $__System._nodeRequire('events') : $__require('f3');
   return module.exports;
 });
 
-$__System.registerDynamic("113", ["112"], true, function($__require, exports, module) {
+$__System.registerDynamic("f5", ["f4"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('112');
+  module.exports = $__require('f4');
   return module.exports;
 });
 
-$__System.registerDynamic("105", ["10f", "4b", "113", "10a", "114", "74", "@empty", "107", "115", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("e7", ["f1", "2c", "f5", "ec", "f6", "55", "@empty", "e9", "f7", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer, process) {
     module.exports = Readable;
-    var isArray = $__require('10f');
-    var Buffer = $__require('4b').Buffer;
+    var isArray = $__require('f1');
+    var Buffer = $__require('2c').Buffer;
     Readable.ReadableState = ReadableState;
-    var EE = $__require('113').EventEmitter;
+    var EE = $__require('f5').EventEmitter;
     if (!EE.listenerCount)
       EE.listenerCount = function(emitter, type) {
         return emitter.listeners(type).length;
       };
-    var Stream = $__require('10a');
-    var util = $__require('114');
-    util.inherits = $__require('74');
+    var Stream = $__require('ec');
+    var util = $__require('f6');
+    util.inherits = $__require('55');
     var StringDecoder;
     var debug = $__require('@empty');
     if (debug && debug.debuglog) {
@@ -37987,7 +35439,7 @@ $__System.registerDynamic("105", ["10f", "4b", "113", "10a", "114", "74", "@empt
     }
     util.inherits(Readable, Stream);
     function ReadableState(options, stream) {
-      var Duplex = $__require('107');
+      var Duplex = $__require('e9');
       options = options || {};
       var hwm = options.highWaterMark;
       var defaultHwm = options.objectMode ? 16 : 16 * 1024;
@@ -38016,13 +35468,13 @@ $__System.registerDynamic("105", ["10f", "4b", "113", "10a", "114", "74", "@empt
       this.encoding = null;
       if (options.encoding) {
         if (!StringDecoder)
-          StringDecoder = $__require('115').StringDecoder;
+          StringDecoder = $__require('f7').StringDecoder;
         this.decoder = new StringDecoder(options.encoding);
         this.encoding = options.encoding;
       }
     }
     function Readable(options) {
-      var Duplex = $__require('107');
+      var Duplex = $__require('e9');
       if (!(this instanceof Readable))
         return new Readable(options);
       this._readableState = new ReadableState(options, this);
@@ -38088,7 +35540,7 @@ $__System.registerDynamic("105", ["10f", "4b", "113", "10a", "114", "74", "@empt
     }
     Readable.prototype.setEncoding = function(enc) {
       if (!StringDecoder)
-        StringDecoder = $__require('115').StringDecoder;
+        StringDecoder = $__require('f7').StringDecoder;
       this._readableState.decoder = new StringDecoder(enc);
       this._readableState.encoding = enc;
       return this;
@@ -38586,22 +36038,22 @@ $__System.registerDynamic("105", ["10f", "4b", "113", "10a", "114", "74", "@empt
       }
       return -1;
     }
-  })($__require('4b').Buffer, $__require('1b'));
+  })($__require('2c').Buffer, $__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("106", ["4b", "114", "74", "10a", "107", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("e8", ["2c", "f6", "55", "ec", "e9", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer, process) {
     module.exports = Writable;
-    var Buffer = $__require('4b').Buffer;
+    var Buffer = $__require('2c').Buffer;
     Writable.WritableState = WritableState;
-    var util = $__require('114');
-    util.inherits = $__require('74');
-    var Stream = $__require('10a');
+    var util = $__require('f6');
+    util.inherits = $__require('55');
+    var Stream = $__require('ec');
     util.inherits(Writable, Stream);
     function WriteReq(chunk, encoding, cb) {
       this.chunk = chunk;
@@ -38609,7 +36061,7 @@ $__System.registerDynamic("106", ["4b", "114", "74", "10a", "107", "1b"], true, 
       this.callback = cb;
     }
     function WritableState(options, stream) {
-      var Duplex = $__require('107');
+      var Duplex = $__require('e9');
       options = options || {};
       var hwm = options.highWaterMark;
       var defaultHwm = options.objectMode ? 16 : 16 * 1024;
@@ -38641,7 +36093,7 @@ $__System.registerDynamic("106", ["4b", "114", "74", "10a", "107", "1b"], true, 
       this.errorEmitted = false;
     }
     function Writable(options) {
-      var Duplex = $__require('107');
+      var Duplex = $__require('e9');
       if (!(this instanceof Writable) && !(this instanceof Duplex))
         return new Writable(options);
       this._writableState = new WritableState(options, this);
@@ -38877,11 +36329,11 @@ $__System.registerDynamic("106", ["4b", "114", "74", "10a", "107", "1b"], true, 
       }
       state.ended = true;
     }
-  })($__require('4b').Buffer, $__require('1b'));
+  })($__require('2c').Buffer, $__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("107", ["114", "74", "105", "106", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("e9", ["f6", "55", "e7", "e8", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -38894,10 +36346,10 @@ $__System.registerDynamic("107", ["114", "74", "105", "106", "1b"], true, functi
         keys.push(key);
       return keys;
     };
-    var util = $__require('114');
-    util.inherits = $__require('74');
-    var Readable = $__require('105');
-    var Writable = $__require('106');
+    var util = $__require('f6');
+    util.inherits = $__require('55');
+    var Readable = $__require('e7');
+    var Writable = $__require('e8');
     util.inherits(Duplex, Readable);
     forEach(objectKeys(Writable.prototype), function(method) {
       if (!Duplex.prototype[method])
@@ -38928,20 +36380,20 @@ $__System.registerDynamic("107", ["114", "74", "105", "106", "1b"], true, functi
         f(xs[i], i);
       }
     }
-  })($__require('1b'));
+  })($__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("108", ["107", "114", "74", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("ea", ["e9", "f6", "55", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(process) {
     module.exports = Transform;
-    var Duplex = $__require('107');
-    var util = $__require('114');
-    util.inherits = $__require('74');
+    var Duplex = $__require('e9');
+    var util = $__require('f6');
+    util.inherits = $__require('55');
     util.inherits(Transform, Duplex);
     function TransformState(options, stream) {
       this.afterTransform = function(er, data) {
@@ -39025,11 +36477,11 @@ $__System.registerDynamic("108", ["107", "114", "74", "1b"], true, function($__r
         throw new Error('calling transform done when still transforming');
       return stream.push(null);
     }
-  })($__require('1b'));
+  })($__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("116", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("f8", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -39098,28 +36550,28 @@ $__System.registerDynamic("116", ["4b"], true, function($__require, exports, mod
     function objectToString(o) {
       return Object.prototype.toString.call(o);
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("114", ["116"], true, function($__require, exports, module) {
+$__System.registerDynamic("f6", ["f8"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('116');
+  module.exports = $__require('f8');
   return module.exports;
 });
 
-$__System.registerDynamic("109", ["108", "114", "74"], true, function($__require, exports, module) {
+$__System.registerDynamic("eb", ["ea", "f6", "55"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = PassThrough;
-  var Transform = $__require('108');
-  var util = $__require('114');
-  util.inherits = $__require('74');
+  var Transform = $__require('ea');
+  var util = $__require('f6');
+  util.inherits = $__require('55');
   util.inherits(PassThrough, Transform);
   function PassThrough(options) {
     if (!(this instanceof PassThrough))
@@ -39132,29 +36584,29 @@ $__System.registerDynamic("109", ["108", "114", "74"], true, function($__require
   return module.exports;
 });
 
-$__System.registerDynamic("117", ["109"], true, function($__require, exports, module) {
+$__System.registerDynamic("f9", ["eb"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('109');
+  module.exports = $__require('eb');
   return module.exports;
 });
 
-$__System.registerDynamic("10a", ["113", "74", "104", "10b", "10c", "10d", "117"], true, function($__require, exports, module) {
+$__System.registerDynamic("ec", ["f5", "55", "e6", "ed", "ee", "ef", "f9"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = Stream;
-  var EE = $__require('113').EventEmitter;
-  var inherits = $__require('74');
+  var EE = $__require('f5').EventEmitter;
+  var inherits = $__require('55');
   inherits(Stream, EE);
-  Stream.Readable = $__require('104');
-  Stream.Writable = $__require('10b');
-  Stream.Duplex = $__require('10c');
-  Stream.Transform = $__require('10d');
-  Stream.PassThrough = $__require('117');
+  Stream.Readable = $__require('e6');
+  Stream.Writable = $__require('ed');
+  Stream.Duplex = $__require('ee');
+  Stream.Transform = $__require('ef');
+  Stream.PassThrough = $__require('f9');
   Stream.Stream = Stream;
   function Stream() {
     EE.call(this);
@@ -39221,34 +36673,34 @@ $__System.registerDynamic("10a", ["113", "74", "104", "10b", "10c", "10d", "117"
   return module.exports;
 });
 
-$__System.registerDynamic("118", ["10a"], true, function($__require, exports, module) {
+$__System.registerDynamic("fa", ["ec"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('10a');
+  module.exports = $__require('ec');
   return module.exports;
 });
 
-$__System.registerDynamic("119", ["118"], true, function($__require, exports, module) {
+$__System.registerDynamic("fb", ["fa"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? $__System._nodeRequire('stream') : $__require('118');
+  module.exports = $__System._nodeRequire ? $__System._nodeRequire('stream') : $__require('fa');
   return module.exports;
 });
 
-$__System.registerDynamic("a6", ["119"], true, function($__require, exports, module) {
+$__System.registerDynamic("88", ["fb"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('119');
+  module.exports = $__require('fb');
   return module.exports;
 });
 
-$__System.registerDynamic("11a", [], true, function($__require, exports, module) {
+$__System.registerDynamic("fc", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -39275,22 +36727,22 @@ $__System.registerDynamic("11a", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("74", ["11a"], true, function($__require, exports, module) {
+$__System.registerDynamic("55", ["fc"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('11a');
+  module.exports = $__require('fc');
   return module.exports;
 });
 
-$__System.registerDynamic("11b", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("fd", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var Buffer = $__require('4b').Buffer;
+    var Buffer = $__require('2c').Buffer;
     var isBufferEncoding = Buffer.isEncoding || function(encoding) {
       switch (encoding && encoding.toLowerCase()) {
         case 'hex':
@@ -39422,46 +36874,46 @@ $__System.registerDynamic("11b", ["4b"], true, function($__require, exports, mod
       this.charReceived = buffer.length % 3;
       this.charLength = this.charReceived ? 3 : 0;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("115", ["11b"], true, function($__require, exports, module) {
+$__System.registerDynamic("f7", ["fd"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('11b');
+  module.exports = $__require('fd');
   return module.exports;
 });
 
-$__System.registerDynamic("11c", ["115"], true, function($__require, exports, module) {
+$__System.registerDynamic("fe", ["f7"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? $__System._nodeRequire('string_decoder') : $__require('115');
+  module.exports = $__System._nodeRequire ? $__System._nodeRequire('string_decoder') : $__require('f7');
   return module.exports;
 });
 
-$__System.registerDynamic("11d", ["11c"], true, function($__require, exports, module) {
+$__System.registerDynamic("ff", ["fe"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('11c');
+  module.exports = $__require('fe');
   return module.exports;
 });
 
-$__System.registerDynamic("11e", ["a6", "74", "11d", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("100", ["88", "55", "ff", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var Transform = $__require('a6').Transform;
-    var inherits = $__require('74');
-    var StringDecoder = $__require('11d').StringDecoder;
+    var Transform = $__require('88').Transform;
+    var inherits = $__require('55');
+    var StringDecoder = $__require('ff').StringDecoder;
     module.exports = CipherBase;
     inherits(CipherBase, Transform);
     function CipherBase(hashMode) {
@@ -39543,31 +36995,31 @@ $__System.registerDynamic("11e", ["a6", "74", "11d", "4b"], true, function($__re
       }
       return out;
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("8d", ["11e"], true, function($__require, exports, module) {
+$__System.registerDynamic("6f", ["100"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('11e');
+  module.exports = $__require('100');
   return module.exports;
 });
 
-$__System.registerDynamic("f3", ["74", "ef", "fa", "103", "8d", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("d5", ["55", "d1", "dc", "e5", "6f", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
     'use strict';
-    var inherits = $__require('74');
-    var md5 = $__require('ef');
-    var rmd160 = $__require('fa');
-    var sha = $__require('103');
-    var Base = $__require('8d');
+    var inherits = $__require('55');
+    var md5 = $__require('d1');
+    var rmd160 = $__require('dc');
+    var sha = $__require('e5');
+    var Base = $__require('6f');
     function HashNoConstructor(hash) {
       Base.call(this, 'digest');
       this._hash = hash;
@@ -39602,20 +37054,20 @@ $__System.registerDynamic("f3", ["74", "ef", "fa", "103", "8d", "4b"], true, fun
         return new HashNoConstructor(rmd160);
       return new Hash(sha(alg));
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("5b", ["f3"], true, function($__require, exports, module) {
+$__System.registerDynamic("3c", ["d5"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('f3');
+  module.exports = $__require('d5');
   return module.exports;
 });
 
-$__System.registerDynamic("11f", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("101", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -41900,7 +39352,7 @@ $__System.registerDynamic("11f", ["4b"], true, function($__require, exports, mod
       };
       BN.prototype.redShl = function redShl(num) {
         assert(this.red, 'redShl works only with red numbers');
-        return this.red.ushl(this, num);
+        return this.red.shl(this, num);
       };
       BN.prototype.redMul = function redMul(num) {
         assert(this.red, 'redMul works only with red numbers');
@@ -42323,47 +39775,47 @@ $__System.registerDynamic("11f", ["4b"], true, function($__require, exports, mod
         return res._forceRed(this);
       };
     })(typeof module === 'undefined' || module, this);
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("98", ["11f"], true, function($__require, exports, module) {
+$__System.registerDynamic("7a", ["101"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('11f');
+  module.exports = $__require('101');
   return module.exports;
 });
 
-$__System.registerDynamic("c6", ["98", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("a8", ["7a", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var bn = $__require('98');
+    var bn = $__require('7a');
     function withPublic(paddedMsg, key) {
       return new Buffer(paddedMsg.toRed(bn.mont(key.modulus)).redPow(new bn(key.publicExponent)).fromRed().toArray());
     }
     module.exports = withPublic;
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("120", ["a3", "c4", "c5", "98", "a1", "5b", "c6", "4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("102", ["85", "a6", "a7", "7a", "83", "3c", "a8", "2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(Buffer) {
-    var parseKeys = $__require('a3');
-    var mgf = $__require('c4');
-    var xor = $__require('c5');
-    var bn = $__require('98');
-    var crt = $__require('a1');
-    var createHash = $__require('5b');
-    var withPublic = $__require('c6');
+    var parseKeys = $__require('85');
+    var mgf = $__require('a6');
+    var xor = $__require('a7');
+    var bn = $__require('7a');
+    var crt = $__require('83');
+    var createHash = $__require('3c');
+    var withPublic = $__require('a8');
     module.exports = function privateDecrypt(private_key, enc, reverse) {
       var padding;
       if (private_key.padding) {
@@ -42461,17 +39913,17 @@ $__System.registerDynamic("120", ["a3", "c4", "c5", "98", "a1", "5b", "c6", "4b"
       }
       return dif;
     }
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("121", ["c3", "120"], true, function($__require, exports, module) {
+$__System.registerDynamic("103", ["a5", "102"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  exports.publicEncrypt = $__require('c3');
-  exports.privateDecrypt = $__require('120');
+  exports.publicEncrypt = $__require('a5');
+  exports.privateDecrypt = $__require('102');
   exports.privateEncrypt = function privateEncrypt(key, buf) {
     return exports.publicEncrypt(key, buf, true);
   };
@@ -42481,48 +39933,48 @@ $__System.registerDynamic("121", ["c3", "120"], true, function($__require, expor
   return module.exports;
 });
 
-$__System.registerDynamic("122", ["121"], true, function($__require, exports, module) {
+$__System.registerDynamic("104", ["103"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('121');
+  module.exports = $__require('103');
   return module.exports;
 });
 
-$__System.registerDynamic("123", ["68", "5b", "51", "9e", "82", "94", "9d", "a7", "c2", "122"], true, function($__require, exports, module) {
+$__System.registerDynamic("105", ["49", "3c", "32", "80", "64", "76", "7f", "89", "a4", "104"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = $__require('68');
-  exports.createHash = exports.Hash = $__require('5b');
-  exports.createHmac = exports.Hmac = $__require('51');
-  var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys($__require('9e')));
+  exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = $__require('49');
+  exports.createHash = exports.Hash = $__require('3c');
+  exports.createHmac = exports.Hmac = $__require('32');
+  var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys($__require('80')));
   exports.getHashes = function() {
     return hashes;
   };
-  var p = $__require('82');
+  var p = $__require('64');
   exports.pbkdf2 = p.pbkdf2;
   exports.pbkdf2Sync = p.pbkdf2Sync;
-  var aes = $__require('94');
+  var aes = $__require('76');
   ;
   ['Cipher', 'createCipher', 'Cipheriv', 'createCipheriv', 'Decipher', 'createDecipher', 'Decipheriv', 'createDecipheriv', 'getCiphers', 'listCiphers'].forEach(function(key) {
     exports[key] = aes[key];
   });
-  var dh = $__require('9d');
+  var dh = $__require('7f');
   ;
   ['DiffieHellmanGroup', 'createDiffieHellmanGroup', 'getDiffieHellman', 'createDiffieHellman', 'DiffieHellman'].forEach(function(key) {
     exports[key] = dh[key];
   });
-  var sign = $__require('a7');
+  var sign = $__require('89');
   ;
   ['createSign', 'Sign', 'createVerify', 'Verify'].forEach(function(key) {
     exports[key] = sign[key];
   });
-  exports.createECDH = $__require('c2');
-  var publicEncrypt = $__require('122');
+  exports.createECDH = $__require('a4');
+  var publicEncrypt = $__require('104');
   ;
   ['publicEncrypt', 'privateEncrypt', 'publicDecrypt', 'privateDecrypt'].forEach(function(key) {
     exports[key] = publicEncrypt[key];
@@ -42536,34 +39988,34 @@ $__System.registerDynamic("123", ["68", "5b", "51", "9e", "82", "94", "9d", "a7"
   return module.exports;
 });
 
-$__System.registerDynamic("124", ["123"], true, function($__require, exports, module) {
+$__System.registerDynamic("106", ["105"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('123');
+  module.exports = $__require('105');
   return module.exports;
 });
 
-$__System.registerDynamic("125", ["124"], true, function($__require, exports, module) {
+$__System.registerDynamic("107", ["106"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? $__System._nodeRequire('crypto') : $__require('124');
+  module.exports = $__System._nodeRequire ? $__System._nodeRequire('crypto') : $__require('106');
   return module.exports;
 });
 
-$__System.registerDynamic("126", ["125"], true, function($__require, exports, module) {
+$__System.registerDynamic("108", ["107"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('125');
+  module.exports = $__require('107');
   return module.exports;
 });
 
-$__System.registerDynamic("127", ["126"], true, function($__require, exports, module) {
+$__System.registerDynamic("109", ["108"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -43432,7 +40884,7 @@ $__System.registerDynamic("127", ["126"], true, function($__require, exports, mo
       if (J = module.exports) {
         var K;
         try {
-          K = $__require('126');
+          K = $__require('108');
         } catch (L) {
           K = null;
         }
@@ -43589,16 +41041,16 @@ $__System.registerDynamic("127", ["126"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("128", ["127"], true, function($__require, exports, module) {
+$__System.registerDynamic("10a", ["109"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('127');
+  module.exports = $__require('109');
   return module.exports;
 });
 
-$__System.registerDynamic("129", [], true, function($__require, exports, module) {
+$__System.registerDynamic("10b", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -43626,16 +41078,16 @@ $__System.registerDynamic("129", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("12a", ["129"], true, function($__require, exports, module) {
+$__System.registerDynamic("10c", ["10b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('129');
+  module.exports = $__require('10b');
   return module.exports;
 });
 
-$__System.registerDynamic("12b", ["12a", "12b", "4b", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("10d", ["10c", "10d", "2c", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -56360,24 +53812,24 @@ $__System.registerDynamic("12b", ["12a", "12b", "4b", "1b"], true, function($__r
       };
     };
     function readFileUTF8(a) {
-      return $__require('12a').readFileSync(a, "utf8");
+      return $__require('10c').readFileSync(a, "utf8");
     }
     function readFileHexByBin(c) {
-      var b = $__require('12b');
-      var a = $__require('12a');
+      var b = $__require('10d');
+      var a = $__require('10c');
       return b.rstrtohex(a.readFileSync(c, "binary"));
     }
     function readFile(b) {
-      var a = $__require('12a');
+      var a = $__require('10c');
       return a.readFileSync(b, "binary");
     }
     function saveFile(c, b) {
-      var a = $__require('12a');
+      var a = $__require('10c');
       a.writeFileSync(c, b, "binary");
     }
     function saveFileBinByHex(e, b) {
-      var a = $__require('12a');
-      var c = $__require('12b');
+      var a = $__require('10c');
+      var c = $__require('10d');
       var d = c.hextorstr(b);
       a.writeFileSync(e, d, "binary");
     }
@@ -56428,20 +53880,20 @@ $__System.registerDynamic("12b", ["12a", "12b", "4b", "1b"], true, function($__r
     exports.readFile = readFile;
     exports.saveFile = saveFile;
     exports.saveFileBinByHex = saveFileBinByHex;
-  })($__require('4b').Buffer, $__require('1b'));
+  })($__require('2c').Buffer, $__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("12c", ["12b"], true, function($__require, exports, module) {
+$__System.registerDynamic("10e", ["10d"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('12b');
+  module.exports = $__require('10d');
   return module.exports;
 });
 
-$__System.registerDynamic("12d", [], true, function($__require, exports, module) {
+$__System.registerDynamic("10f", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -56546,16 +53998,16 @@ $__System.registerDynamic("12d", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("12e", ["12d"], true, function($__require, exports, module) {
+$__System.registerDynamic("110", ["10f"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('12d');
+  module.exports = $__require('10f');
   return module.exports;
 });
 
-$__System.registerDynamic("12f", [], true, function($__require, exports, module) {
+$__System.registerDynamic("111", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -56639,16 +54091,16 @@ $__System.registerDynamic("12f", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("130", ["12f"], true, function($__require, exports, module) {
+$__System.registerDynamic("112", ["111"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('12f');
+  module.exports = $__require('111');
   return module.exports;
 });
 
-$__System.registerDynamic("131", [], true, function($__require, exports, module) {
+$__System.registerDynamic("113", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -56660,24 +54112,24 @@ $__System.registerDynamic("131", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("132", ["131"], true, function($__require, exports, module) {
+$__System.registerDynamic("114", ["113"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('131');
+  module.exports = $__require('113');
   return module.exports;
 });
 
-$__System.registerDynamic("133", ["12e", "130", "132"], true, function($__require, exports, module) {
+$__System.registerDynamic("115", ["110", "112", "114"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var base64 = $__require('12e');
-  var ieee754 = $__require('130');
-  var isArray = $__require('132');
+  var base64 = $__require('110');
+  var ieee754 = $__require('112');
+  var isArray = $__require('114');
   exports.Buffer = Buffer;
   exports.SlowBuffer = SlowBuffer;
   exports.INSPECT_MAX_BYTES = 50;
@@ -57973,34 +55425,34 @@ $__System.registerDynamic("133", ["12e", "130", "132"], true, function($__requir
   return module.exports;
 });
 
-$__System.registerDynamic("134", ["133"], true, function($__require, exports, module) {
+$__System.registerDynamic("116", ["115"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('133');
+  module.exports = $__require('115');
   return module.exports;
 });
 
-$__System.registerDynamic("135", ["134"], true, function($__require, exports, module) {
+$__System.registerDynamic("117", ["116"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? $__System._nodeRequire('buffer') : $__require('134');
+  module.exports = $__System._nodeRequire ? $__System._nodeRequire('buffer') : $__require('116');
   return module.exports;
 });
 
-$__System.registerDynamic("4b", ["135"], true, function($__require, exports, module) {
+$__System.registerDynamic("2c", ["117"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('135');
+  module.exports = $__require('117');
   return module.exports;
 });
 
-$__System.registerDynamic("136", ["4b"], true, function($__require, exports, module) {
+$__System.registerDynamic("118", ["2c"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -58020,21 +55472,21 @@ $__System.registerDynamic("136", ["4b"], true, function($__require, exports, mod
     base64url.decode = function decode(str) {
       return new Buffer(this.unescape(str), 'base64').toString();
     };
-  })($__require('4b').Buffer);
+  })($__require('2c').Buffer);
   return module.exports;
 });
 
-$__System.registerDynamic("137", ["136"], true, function($__require, exports, module) {
+$__System.registerDynamic("119", ["118"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('136');
+  module.exports = $__require('118');
   return module.exports;
 });
 
-$__System.register('138', ['11', '42', '43', '44', '77', '83', '128', '137', 'e', 'f', '12c'], function (_export) {
-  var _Promise, GraphConnectorContactData, BloomFilter, GlobalRegistryRecord, bitcoin, bip39, sjcl, base64url, _createClass, _classCallCheck, jsrsasign, GraphConnector;
+$__System.register('11a', ['11', '23', '24', '25', '58', '65', '119', 'e', 'f', '10a', '10e'], function (_export) {
+  var _Promise, GraphConnectorContactData, BloomFilter, GlobalRegistryRecord, bitcoin, bip39, base64url, _createClass, _classCallCheck, sjcl, jsrsasign, GraphConnector;
 
   return {
     setters: [function (_) {
@@ -58050,15 +55502,15 @@ $__System.register('138', ['11', '42', '43', '44', '77', '83', '128', '137', 'e'
     }, function (_6) {
       bip39 = _6['default'];
     }, function (_7) {
-      sjcl = _7['default'];
-    }, function (_8) {
-      base64url = _8['default'];
+      base64url = _7['default'];
     }, function (_e) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
-    }, function (_c) {
-      jsrsasign = _c['default'];
+    }, function (_a) {
+      sjcl = _a['default'];
+    }, function (_e2) {
+      jsrsasign = _e2['default'];
     }],
     execute: function () {
 
@@ -58507,7 +55959,7 @@ $__System.register('138', ['11', '42', '43', '44', '77', '83', '128', '137', 'e'
     }
   };
 });
-$__System.register('139', ['11', 'e', 'f'], function (_export) {
+$__System.register('11b', ['11', 'e', 'f'], function (_export) {
   var _Promise, _createClass, _classCallCheck, ObjectAllocation;
 
   return {
@@ -58556,12 +56008,12 @@ $__System.register('139', ['11', 'e', 'f'], function (_export) {
            * @param  {number} number - Number of addresses to request
            * @returns {Promise<ObjectURL>}  A list of ObjectURL's
            */
-          value: function create(domain, scheme, children, number) {
+          value: function create(domain, scheme, number) {
             var _this = this;
 
             var msg = {
               type: 'create', from: _this._url, to: 'domain://msg-node.' + domain + '/object-address-allocation',
-              body: { scheme: scheme, childrenResources: children, value: { number: number } }
+              body: { scheme: scheme, value: { number: number } }
             };
 
             return new _Promise(function (resolve, reject) {
@@ -58588,26 +56040,28 @@ $__System.register('139', ['11', 'e', 'f'], function (_export) {
     }
   };
 });
-$__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
-  var divideURL, _createClass, _classCallCheck, _Object$keys, Subscription, ReporterObject;
+$__System.register('11c', ['11', '19', 'e', 'f', '11d', '11e'], function (_export) {
+  var _Promise, divideURL, _createClass, _classCallCheck, _Object$keys, Subscription, ReporterObject;
 
   return {
     setters: [function (_) {
-      divideURL = _.divideURL;
+      _Promise = _['default'];
+    }, function (_2) {
+      divideURL = _2.divideURL;
     }, function (_e) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
-    }, function (_b) {
-      _Object$keys = _b['default'];
-    }, function (_c) {
-      Subscription = _c['default'];
+    }, function (_d) {
+      _Object$keys = _d['default'];
+    }, function (_e2) {
+      Subscription = _e2['default'];
     }],
     execute: function () {
       'use strict';
 
       ReporterObject = (function () {
-        function ReporterObject(parent, owner, url, childrens) {
+        function ReporterObject(parent, owner, url) {
           _classCallCheck(this, ReporterObject);
 
           var _this = this;
@@ -58615,11 +56069,15 @@ $__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
           _this._parent = parent;
           _this._owner = owner;
           _this._url = url;
-          _this._childrens = childrens;
 
-          _this._objSubscriptorURL = _this._url + '/subscription';
           _this._bus = parent._bus;
+
+          _this._domain = divideURL(owner).domain;
+          _this._objSubscriptorURL = _this._url + '/subscription';
+
           _this._subscriptions = {};
+          _this._childrens = [];
+          _this._childrenListeners = [];
 
           _this._allocateListeners();
         }
@@ -58645,17 +56103,10 @@ $__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
               }
             });
 
-            //add children listeners...
-            var childBaseURL = _this._url + '/children/';
-            _this._childrenListeners = [];
-            _this._childrens.forEach(function (child) {
-              var childURL = childBaseURL + child;
-              var childListener = _this._bus.addListener(childURL, function (msg) {
-                //TODO: what todo here? Process child creations?
-                console.log('SyncherManager-' + childURL + '-RCV: ', msg);
-              });
-
-              _this._childrenListeners.push(childListener);
+            var changeURL = _this._url + '/changes';
+            _this._changeListener = _this._bus.addListener(changeURL, function (msg) {
+              //TODO: what todo here? Save changes?
+              console.log('SyncherManager-' + changeURL + '-RCV: ', msg);
             });
           }
         }, {
@@ -58667,6 +56118,8 @@ $__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
 
             _this._subscriptionListener.remove();
 
+            _this._changeListener.remove();
+
             _this._childrenListeners.forEach(function (cl) {
               cl.remove();
             });
@@ -58674,6 +56127,51 @@ $__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
             //remove all subscriptions
             _Object$keys(_this._subscriptions).forEach(function (key) {
               _this._subscriptions[key]._releaseListeners();
+            });
+          }
+        }, {
+          key: 'addChildrens',
+          value: function addChildrens(childrens) {
+            var _this = this;
+
+            return new _Promise(function (resolve, reject) {
+              if (childrens.length === 0) {
+                resolve();
+                return;
+              }
+
+              var childBaseURL = _this._url + '/children/';
+              _this._childrens.push(childrens);
+
+              var subscriptions = [];
+              childrens.forEach(function (child) {
+                return subscriptions.push(childBaseURL + child);
+              });
+
+              var nodeSubscribeMsg = {
+                type: 'subscribe', from: _this._parent._url, to: 'domain://msg-node.' + _this._domain + '/sm',
+                body: { subscribe: subscriptions, source: _this._owner }
+              };
+
+              _this._bus.postMessage(nodeSubscribeMsg, function (reply) {
+                console.log('node-subscribe-response(reporter): ', reply);
+                if (reply.body.code === 200) {
+
+                  //add children listeners on local ...
+                  subscriptions.forEach(function (childURL) {
+                    var childListener = _this._bus.addListener(childURL, function (msg) {
+                      //TODO: what todo here? Save childrens?
+                      console.log('SyncherManager-' + childURL + '-RCV: ', msg);
+                    });
+
+                    _this._childrenListeners.push(childListener);
+                  });
+
+                  resolve();
+                } else {
+                  reject('Error on msg-node subscription: ' + reply.body.desc);
+                }
+              });
             });
           }
         }, {
@@ -58687,6 +56185,7 @@ $__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
               type: 'delete', from: _this._objSubscriptorURL, to: _this._url + '/changes'
             });
 
+            //TODO: change delete spec!
             _this._bus.postMessage({
               type: 'delete', from: _this._parent._url, to: 'domain://msg-node.' + domain + '/object-address-allocation',
               body: { resource: _this._url, childrenResources: _this._childrens }
@@ -58736,7 +56235,7 @@ $__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
               _this._bus.postMessage(forwardMsg, function (reply) {
                 console.log('forward-reply: ', reply);
                 if (reply.body.code === 200) {
-                  _this._subscriptions[hypertyURL] = new Subscription(_this._bus, hypertyURL, _this._url, _this._childrens);
+                  _this._subscriptions[hypertyURL] = new Subscription(_this._bus, _this._owner, _this._url, _this._childrens, true);
                 }
 
                 //send subscribe-response
@@ -58770,7 +56269,7 @@ $__System.register('13a', ['19', 'e', 'f', '13b', '13c'], function (_export) {
     }
   };
 });
-$__System.register('13c', ['e', 'f'], function (_export) {
+$__System.register('11e', ['e', 'f'], function (_export) {
   var _createClass, _classCallCheck, Subscription;
 
   return {
@@ -58783,7 +56282,7 @@ $__System.register('13c', ['e', 'f'], function (_export) {
       'use strict';
 
       Subscription = (function () {
-        function Subscription(bus, hyperty, url, childrens) {
+        function Subscription(bus, owner, url, childrens, isReporter) {
           _classCallCheck(this, Subscription);
 
           var _this = this;
@@ -58795,7 +56294,7 @@ $__System.register('13c', ['e', 'f'], function (_export) {
             if (msg.type === 'delete') {
               console.log('Subscription-DELETE: ', msg);
               var deleteMessageToHyperty = {
-                type: 'delete', from: msg.from, to: hyperty,
+                type: 'delete', from: msg.from, to: owner,
                 body: { resource: url }
               };
 
@@ -58809,14 +56308,24 @@ $__System.register('13c', ['e', 'f'], function (_export) {
             }
           });
 
-          //subscription accepted (add forward and subscription)
-          _this._changeListener = bus.addForward(changeURL, hyperty);
+          //add change publish address or forward
+          if (isReporter) {
+            _this._changeListener = bus.addPublish(changeURL);
+          } else {
+            _this._changeListener = bus.addForward(changeURL, owner);
+          }
 
-          //add forward for children
           _this._childrenListeners = [];
           childrens.forEach(function (child) {
-            var childrenForward = bus.addForward(childBaseURL + child, hyperty);
+            var childId = childBaseURL + child;
+
+            //add children publish address
+            var childrenForward = bus.addPublish(childId);
             _this._childrenListeners.push(childrenForward);
+
+            //add self forward
+            var selfForward = bus.addForward(childId, owner);
+            _this._childrenListeners.push(selfForward);
           });
         }
 
@@ -58826,7 +56335,9 @@ $__System.register('13c', ['e', 'f'], function (_export) {
             var _this = this;
 
             _this._deleteListener.remove();
+
             _this._changeListener.remove();
+
             _this._childrenListeners.forEach(function (forward) {
               forward.remove();
             });
@@ -58840,7 +56351,7 @@ $__System.register('13c', ['e', 'f'], function (_export) {
     }
   };
 });
-$__System.register('13d', ['19', 'e', 'f', '13c'], function (_export) {
+$__System.register('11f', ['19', 'e', 'f', '11e'], function (_export) {
   var divideURL, _createClass, _classCallCheck, Subscription, ObserverObject;
 
   return {
@@ -58850,8 +56361,8 @@ $__System.register('13d', ['19', 'e', 'f', '13c'], function (_export) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
-    }, function (_c) {
-      Subscription = _c['default'];
+    }, function (_e2) {
+      Subscription = _e2['default'];
     }],
     execute: function () {
       'use strict';
@@ -58875,7 +56386,7 @@ $__System.register('13d', ['19', 'e', 'f', '13c'], function (_export) {
           value: function addSubscription(hyperty) {
             var _this = this;
 
-            _this._subscriptions[hyperty] = new Subscription(_this._bus, hyperty, _this._url, _this._childrens);
+            _this._subscriptions[hyperty] = new Subscription(_this._bus, hyperty, _this._url, _this._childrens, false);
           }
         }, {
           key: 'removeSubscription',
@@ -58913,22 +56424,22 @@ $__System.register('13d', ['19', 'e', 'f', '13c'], function (_export) {
     }
   };
 });
-$__System.register('13e', ['19', '139', 'e', 'f', '13a', '13d'], function (_export) {
-  var divideURL, ObjectAllocation, _createClass, _classCallCheck, ReporterObject, ObserverObject, SyncherManager;
+$__System.register('120', ['19', 'e', 'f', '11b', '11c', '11f'], function (_export) {
+  var divideURL, _createClass, _classCallCheck, ObjectAllocation, ReporterObject, ObserverObject, SyncherManager;
 
   return {
     setters: [function (_) {
       divideURL = _.divideURL;
-    }, function (_2) {
-      ObjectAllocation = _2['default'];
     }, function (_e) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
-    }, function (_a) {
-      ReporterObject = _a['default'];
-    }, function (_d) {
-      ObserverObject = _d['default'];
+    }, function (_b) {
+      ObjectAllocation = _b['default'];
+    }, function (_c) {
+      ReporterObject = _c['default'];
+    }, function (_f2) {
+      ObserverObject = _f2['default'];
     }],
     execute: function () {
 
@@ -59004,26 +56515,29 @@ $__System.register('13e', ['19', '139', 'e', 'f', '13a', '13d'], function (_expo
               var scheme = properties.scheme ? properties.scheme.constant : 'resource';
               var childrens = properties.children ? properties.children.constant : [];
 
-              _this._allocator.create(domain, scheme, childrens, 1).then(function (allocated) {
+              _this._allocator.create(domain, scheme, 1).then(function (allocated) {
                 //TODO: get address from address allocator ?
                 var objURL = allocated[0];
                 var objSubscriptorURL = objURL + '/subscription';
 
-                _this._reporters[objURL] = new ReporterObject(_this, owner, objURL, childrens);
+                var reporter = new ReporterObject(_this, owner, objURL);
+                reporter.addChildrens(childrens).then(function () {
+                  _this._reporters[objURL] = reporter;
 
-                //all ok, send response
-                _this._bus.postMessage({
-                  id: msg.id, type: 'response', from: msg.to, to: owner,
-                  body: { code: 200, resource: objURL, childrenResources: childrens }
-                });
+                  //all ok, send response
+                  _this._bus.postMessage({
+                    id: msg.id, type: 'response', from: msg.to, to: owner,
+                    body: { code: 200, resource: objURL, childrenResources: childrens }
+                  });
 
-                //send create to all observers, responses will be deliver to the Hyperty owner?
-                setTimeout(function () {
-                  //schedule for next cycle needed, because the Reporter should be available.
-                  msg.body.authorise.forEach(function (hypertyURL) {
-                    _this._bus.postMessage({
-                      type: 'create', from: objSubscriptorURL, to: hypertyURL,
-                      body: { source: msg.from, value: msg.body.value, schema: msg.body.schema }
+                  //send create to all observers, responses will be deliver to the Hyperty owner?
+                  setTimeout(function () {
+                    //schedule for next cycle needed, because the Reporter should be available.
+                    msg.body.authorise.forEach(function (hypertyURL) {
+                      _this._bus.postMessage({
+                        type: 'create', from: objSubscriptorURL, to: hypertyURL,
+                        body: { source: msg.from, value: msg.body.value, schema: msg.body.schema }
+                      });
                     });
                   });
                 });
@@ -59062,24 +56576,33 @@ $__System.register('13e', ['19', '139', 'e', 'f', '13a', '13d'], function (_expo
             var _this = this;
 
             var hypertyURL = msg.from;
-            var domain = divideURL(hypertyURL).domain;
             var objURL = msg.body.resource;
             var objURLSubscription = objURL + '/subscription';
+            var childBaseURL = objURL + '/children/';
+
+            var domain = divideURL(objURL).domain;
 
             //get schema from catalogue and parse -> (children)
             _this._catalog.getDataSchemaDescriptor(msg.body.schema).then(function (descriptor) {
               var properties = descriptor.sourcePackage.sourceCode.properties;
               var childrens = properties.children ? properties.children.constant : [];
 
+              //children addresses
+              var subscriptions = [];
+              subscriptions.push(objURL + '/changes');
+              childrens.forEach(function (child) {
+                return subscriptions.push(childBaseURL + child);
+              });
+
               //subscribe msg for the domain node
               var nodeSubscribeMsg = {
                 type: 'subscribe', from: _this._url, to: 'domain://msg-node.' + domain + '/sm',
-                body: { resource: objURL, childrenResources: childrens, schema: msg.body.schema }
+                body: { subscribe: subscriptions, source: hypertyURL }
               };
 
               //subscribe in msg-node
               _this._bus.postMessage(nodeSubscribeMsg, function (reply) {
-                console.log('node-subscribe-response: ', reply);
+                console.log('node-subscribe-response(observer): ', reply);
                 if (reply.body.code === 200) {
 
                   //send provisional response
@@ -59160,7 +56683,7 @@ $__System.register('13e', ['19', '139', 'e', 'f', '13a', '13d'], function (_expo
     }
   };
 });
-$__System.register('19', ['13b'], function (_export) {
+$__System.register('19', ['11d'], function (_export) {
   var _Object$keys;
 
   function divideURL(url) {
@@ -59229,8 +56752,8 @@ $__System.register('19', ['13b'], function (_export) {
   }
 
   return {
-    setters: [function (_b) {
-      _Object$keys = _b['default'];
+    setters: [function (_d) {
+      _Object$keys = _d['default'];
     }],
     execute: function () {
       /**
@@ -59265,23 +56788,21 @@ $__System.register('19', ['13b'], function (_export) {
     }
   };
 });
-$__System.register('13f', ['11', '18', '19', '20', '40', '138', 'e', 'f', 'b', 'c', '1d', '13e'], function (_export) {
-  var _Promise, Registry, divideURL, emptyObject, PolicyEngine, MessageBus, GraphConnector, _createClass, _classCallCheck, _Object$assign, RuntimeCatalogue, IdentityModule, SyncherManager, RuntimeUA;
+$__System.register('121', ['11', '18', '19', '21', '120', 'e', 'f', 'b', 'c', '1c', '1f', '11a'], function (_export) {
+  var _Promise, Registry, divideURL, emptyObject, MessageBus, SyncherManager, _createClass, _classCallCheck, _Object$assign, RuntimeCatalogue, IdentityModule, PolicyEngine, GraphConnector, RuntimeUA;
 
   return {
     setters: [function (_) {
       _Promise = _['default'];
     }, function (_2) {
       Registry = _2['default'];
-    }, function (_6) {
-      divideURL = _6.divideURL;
-      emptyObject = _6.emptyObject;
-    }, function (_3) {
-      PolicyEngine = _3['default'];
-    }, function (_4) {
-      MessageBus = _4['default'];
     }, function (_5) {
-      GraphConnector = _5['default'];
+      divideURL = _5.divideURL;
+      emptyObject = _5.emptyObject;
+    }, function (_3) {
+      MessageBus = _3['default'];
+    }, function (_4) {
+      SyncherManager = _4['default'];
     }, function (_e) {
       _createClass = _e['default'];
     }, function (_f) {
@@ -59290,10 +56811,12 @@ $__System.register('13f', ['11', '18', '19', '20', '40', '138', 'e', 'f', 'b', '
       _Object$assign = _b['default'];
     }, function (_c) {
       RuntimeCatalogue = _c['default'];
-    }, function (_d) {
-      IdentityModule = _d['default'];
-    }, function (_e2) {
-      SyncherManager = _e2['default'];
+    }, function (_c2) {
+      IdentityModule = _c2['default'];
+    }, function (_f2) {
+      PolicyEngine = _f2['default'];
+    }, function (_a) {
+      GraphConnector = _a['default'];
     }],
     execute: function () {
       // Service Framework dependecies
@@ -59312,9 +56835,9 @@ $__System.register('13f', ['11', '18', '19', '20', '40', '138', 'e', 'f', 'b', '
        * @property {MessageBus} messageBus - Message Bus is used like a router to redirect the messages from one component to other(s)
        * @property {GraphConnector} graphConnector - Graph Connector handling GUID and contacts
        */
+      'use strict';
 
       //Main dependecies
-      'use strict';
 
       RuntimeUA = (function () {
 
@@ -59333,9 +56856,6 @@ $__System.register('13f', ['11', '18', '19', '20', '40', '138', 'e', 'f', 'b', '
           var _this = this;
 
           _this.runtimeFactory = runtimeFactory;
-
-          console.log(RuntimeCatalogue);
-
           _this.runtimeCatalogue = new RuntimeCatalogue(runtimeFactory);
 
           // TODO: post and return registry/hypertyRuntimeInstance to and from Back-end Service
@@ -59359,11 +56879,12 @@ $__System.register('13f', ['11', '18', '19', '20', '40', '138', 'e', 'f', 'b', '
           // Instantiate the Registry Module
           _this.registry = new Registry(runtimeURL, appSandbox, _this.identityModule);
 
-          // Instantiate the Policy Engine
-          _this.policyEngine = new PolicyEngine(_this.identityModule, _this.registry);
-
           // Instantiate the Message Bus
           _this.messageBus = new MessageBus(_this.registry);
+
+          // Instantiate the Policy Engine
+          _this.policyEngine = new PolicyEngine(_this.messageBus, _this.identityModule, _this.registry);
+
           _this.messageBus.pipeline.handlers = [
 
           // Policy message authorise
@@ -59624,115 +57145,121 @@ $__System.register('13f', ['11', '18', '19', '20', '40', '138', 'e', 'f', 'b', '
               // Discover Protocol Stub
               console.info('------------------- ProtoStub ---------------------------\n');
               console.info('Discover or Create a new ProtoStub for domain: ', domain);
-              _this.registry.discoverProtostub(domain).then(function (descriptor) {
+              _this.registry.discoverProtostub(domain).then(function (runtimeProtoStubURL) {
                 // Is registed?
-                console.info('1. Proto Stub Discovered: ', descriptor);
-                _stubDescriptor = descriptor;
+                console.info('1. Proto Stub Discovered: ', runtimeProtoStubURL);
 
                 // we have completed step 2 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
 
-                return _stubDescriptor;
-              }, function (reason) {
+                // TODO: Check if the status is saved in the status of sandbox;
+                var stub = {
+                  runtimeProtoStubURL: runtimeProtoStubURL,
+                  status: 'deployed'
+                };
+
+                resolve(stub);
+                console.info('------------------- END ---------------------------\n');
+              })['catch'](function (reason) {
+
                 // is not registed?
                 console.info('1. Proto Stub not found:', reason);
 
                 // we have completed step 3 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
 
                 // we need to get ProtoStub descriptor step 4 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-                return _this.runtimeCatalogue.getStubDescriptor(protostubURL);
-              }).then(function (stubDescriptor) {
+                _this.runtimeCatalogue.getStubDescriptor(protostubURL).then(function (stubDescriptor) {
 
-                console.info('2. return the ProtoStub descriptor:', stubDescriptor);
+                  console.info('2. return the ProtoStub descriptor:', stubDescriptor);
 
-                // we have completed step 5 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  // we have completed step 5 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  _stubDescriptor = stubDescriptor;
 
-                _stubDescriptor = stubDescriptor;
+                  var sourcePackageURL = stubDescriptor.sourcePackageURL;
 
-                var sourcePackageURL = stubDescriptor.sourcePackageURL;
+                  if (sourcePackageURL === '/sourcePackage') {
+                    return stubDescriptor.sourcePackage;
+                  }
 
-                if (sourcePackageURL === '/sourcePackage') {
-                  return stubDescriptor.sourcePackage;
-                }
+                  // we need to get ProtoStub Source code from descriptor - step 6 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  return _this.runtimeCatalogue.getSourcePackageFromURL(sourcePackageURL);
+                }).then(function (stubSourcePackage) {
+                  console.info('3. return the ProtoStub Source Code: ', stubSourcePackage);
 
-                // we need to get ProtoStub Source code from descriptor - step 6 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-                return _this.runtimeCatalogue.getSourcePackageFromURL(sourcePackageURL);
-              }).then(function (stubSourcePackage) {
-                console.info('3. return the ProtoStub Source Code: ', stubSourcePackage);
+                  // we have completed step 7 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
 
-                // we have completed step 7 https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  _stubSourcePackage = stubSourcePackage;
 
-                _stubSourcePackage = stubSourcePackage;
+                  // TODO: Check on PEP (policy Engine) if we need the sandbox and check if the Sandbox Factory have the context sandbox;
+                  var policy = true;
+                  return policy;
+                }).then(function (policy) {
+                  // this will return the sandbox or one promise to getSandbox;
+                  return _this.registry.getSandbox(domain);
+                }).then(function (stubSandbox) {
 
-                // TODO: Check on PEP (policy Engine) if we need the sandbox and check if the Sandbox Factory have the context sandbox;
-                var policy = true;
-                return policy;
-              }).then(function (policy) {
-                // this will return the sandbox or one promise to getSandbox;
-                return _this.registry.getSandbox(domain);
-              }).then(function (stubSandbox) {
+                  console.info('4. if the sandbox is registered then return the sandbox', stubSandbox);
 
-                console.info('4. if the sandbox is registered then return the sandbox', stubSandbox);
+                  // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
 
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  _stubSandbox = stubSandbox;
+                  return stubSandbox;
+                })['catch'](function (reason) {
+                  console.info('5. Sandbox was not found, creating a new one', reason);
 
-                _stubSandbox = stubSandbox;
-                return stubSandbox;
-              }, function (reason) {
-                console.info('5. Sandbox was not found, creating a new one', reason);
+                  // check if the sandbox is registed for this stub descriptor url;
+                  // Make Steps xxx --- xxx
+                  // Instantiate the Sandbox
+                  var sandbox = _this.runtimeFactory.createSandbox();
+                  sandbox.addListener('*', function (msg) {
+                    _this.messageBus.postMessage(msg);
+                  });
 
-                // check if the sandbox is registed for this stub descriptor url;
-                // Make Steps xxx --- xxx
-                // Instantiate the Sandbox
-                var sandbox = _this.runtimeFactory.createSandbox();
-                sandbox.addListener('*', function (msg) {
-                  _this.messageBus.postMessage(msg);
-                });
+                  return sandbox;
+                }).then(function (sandbox) {
+                  console.info('6. return the sandbox instance and register', sandbox, 'to domain ', domain);
 
-                return sandbox;
-              }).then(function (sandbox) {
-                console.info('6. return the sandbox instance and register', sandbox, 'to domain ', domain);
+                  _stubSandbox = sandbox;
 
-                _stubSandbox = sandbox;
+                  // we need register stub on registry - step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  return _this.registry.registerStub(_stubSandbox, domain);
+                }).then(function (runtimeProtoStubURL) {
 
-                // we need register stub on registry - step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
-                return _this.registry.registerStub(_stubSandbox, domain);
-              }).then(function (runtimeProtoStubURL) {
+                  console.info('7. return the runtime protostub url: ', runtimeProtoStubURL);
 
-                console.info('7. return the runtime protostub url: ', runtimeProtoStubURL);
+                  // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
 
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  _runtimeProtoStubURL = runtimeProtoStubURL;
 
-                _runtimeProtoStubURL = runtimeProtoStubURL;
+                  console.log(_stubDescriptor);
 
-                console.log(_stubDescriptor);
+                  // Extend original hyperty configuration;
+                  var configuration = _Object$assign({}, JSON.parse(_stubDescriptor.configuration));
+                  configuration.runtimeURL = _this.runtimeURL;
 
-                // Extend original hyperty configuration;
-                var configuration = _Object$assign({}, JSON.parse(_stubDescriptor.configuration));
-                configuration.runtimeURL = _this.runtimeURL;
+                  // Deploy Component step xxx
+                  return _stubSandbox.deployComponent(_stubSourcePackage.sourceCode, runtimeProtoStubURL, configuration);
+                }).then(function (deployComponentStatus) {
+                  console.info('8: return deploy component for sandbox status: ', deployComponentStatus);
 
-                // Deploy Component step xxx
-                return _stubSandbox.deployComponent(_stubSourcePackage.sourceCode, runtimeProtoStubURL, configuration);
-              }).then(function (deployComponentStatus) {
-                console.info('8: return deploy component for sandbox status: ', deployComponentStatus);
+                  // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
 
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  // Add the message bus listener
+                  _this.messageBus.addListener(_runtimeProtoStubURL, function (msg) {
+                    _stubSandbox.postMessage(msg);
+                  });
 
-                // Add the message bus listener
-                _this.messageBus.addListener(_runtimeProtoStubURL, function (msg) {
-                  _stubSandbox.postMessage(msg);
-                });
+                  // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
 
-                // we have completed step xxx https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/deploy-protostub.md
+                  // Load Stub function resolved with success;
+                  var stub = {
+                    runtimeProtoStubURL: _runtimeProtoStubURL,
+                    status: deployComponentStatus
+                  };
 
-                // Load Stub function resolved with success;
-                var stub = {
-                  runtimeProtoStubURL: _runtimeProtoStubURL,
-                  status: deployComponentStatus
-                };
-
-                resolve(stub);
-                console.info('------------------- END ---------------------------\n');
-              })['catch'](errorReason);
+                  resolve(stub);
+                  console.info('------------------- END ---------------------------\n');
+                })['catch'](errorReason);
+              });
             });
           }
 
@@ -59754,7 +57281,7 @@ $__System.register('13f', ['11', '18', '19', '20', '40', '138', 'e', 'f', 'b', '
     }
   };
 });
-$__System.register('140', ['14', '15', '141', 'e', 'f'], function (_export) {
+$__System.register('122', ['14', '15', '123', 'e', 'f'], function (_export) {
     var _get, _inherits, Sandbox, SandboxType, _createClass, _classCallCheck, SandboxWorker;
 
     return {
@@ -59829,7 +57356,7 @@ $__System.register('140', ['14', '15', '141', 'e', 'f'], function (_export) {
         }
     };
 });
-$__System.register('142', ['e', 'f'], function (_export) {
+$__System.register('124', ['e', 'f'], function (_export) {
   var _createClass, _classCallCheck, SandboxRegistry;
 
   return {
@@ -59988,7 +57515,7 @@ $__System.register('142', ['e', 'f'], function (_export) {
     }
   };
 });
-$__System.register('141', ['11', '14', '15', '142', '143', 'e', 'f'], function (_export) {
+$__System.register('123', ['11', '14', '15', '124', '125', 'e', 'f'], function (_export) {
   var _Promise, _get, _inherits, SandboxRegistry, MiniBus, _createClass, _classCallCheck, SandboxType, Sandbox;
 
   return {
@@ -60108,13 +57635,13 @@ $__System.register('141', ['11', '14', '15', '142', '143', 'e', 'f'], function (
     }
   };
 });
-$__System.registerDynamic("144", ["145", "146"], true, function($__require, exports, module) {
+$__System.registerDynamic("126", ["127", "128"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var toIObject = $__require('145');
-  $__require('146')('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor) {
+  var toIObject = $__require('127');
+  $__require('128')('getOwnPropertyDescriptor', function($getOwnPropertyDescriptor) {
     return function getOwnPropertyDescriptor(it, key) {
       return $getOwnPropertyDescriptor(toIObject(it), key);
     };
@@ -60122,38 +57649,38 @@ $__System.registerDynamic("144", ["145", "146"], true, function($__require, expo
   return module.exports;
 });
 
-$__System.registerDynamic("147", ["3", "144"], true, function($__require, exports, module) {
+$__System.registerDynamic("129", ["3", "126"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var $ = $__require('3');
-  $__require('144');
+  $__require('126');
   module.exports = function getOwnPropertyDescriptor(it, key) {
     return $.getDesc(it, key);
   };
   return module.exports;
 });
 
-$__System.registerDynamic("148", ["147"], true, function($__require, exports, module) {
+$__System.registerDynamic("12a", ["129"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = {
-    "default": $__require('147'),
+    "default": $__require('129'),
     __esModule: true
   };
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["148"], true, function($__require, exports, module) {
+$__System.registerDynamic("14", ["12a"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var _Object$getOwnPropertyDescriptor = $__require('148')["default"];
+  var _Object$getOwnPropertyDescriptor = $__require('12a')["default"];
   exports["default"] = function get(_x, _x2, _x3) {
     var _again = true;
     _function: while (_again) {
@@ -60191,7 +57718,7 @@ $__System.registerDynamic("14", ["148"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("149", ["3"], true, function($__require, exports, module) {
+$__System.registerDynamic("12b", ["3"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -60203,58 +57730,58 @@ $__System.registerDynamic("149", ["3"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("14a", ["149"], true, function($__require, exports, module) {
+$__System.registerDynamic("12c", ["12b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = {
-    "default": $__require('149'),
+    "default": $__require('12b'),
     __esModule: true
   };
   return module.exports;
 });
 
-$__System.registerDynamic("14b", ["8", "14c"], true, function($__require, exports, module) {
+$__System.registerDynamic("12d", ["8", "12e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var $export = $__require('8');
-  $export($export.S, 'Object', {setPrototypeOf: $__require('14c').set});
+  $export($export.S, 'Object', {setPrototypeOf: $__require('12e').set});
   return module.exports;
 });
 
-$__System.registerDynamic("14d", ["14b", "a"], true, function($__require, exports, module) {
+$__System.registerDynamic("12f", ["12d", "a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  $__require('14b');
+  $__require('12d');
   module.exports = $__require('a').Object.setPrototypeOf;
   return module.exports;
 });
 
-$__System.registerDynamic("14e", ["14d"], true, function($__require, exports, module) {
+$__System.registerDynamic("130", ["12f"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = {
-    "default": $__require('14d'),
+    "default": $__require('12f'),
     __esModule: true
   };
   return module.exports;
 });
 
-$__System.registerDynamic("15", ["14a", "14e"], true, function($__require, exports, module) {
+$__System.registerDynamic("15", ["12c", "130"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var _Object$create = $__require('14a')["default"];
-  var _Object$setPrototypeOf = $__require('14e')["default"];
+  var _Object$create = $__require('12c')["default"];
+  var _Object$setPrototypeOf = $__require('130')["default"];
   exports["default"] = function(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -60272,7 +57799,7 @@ $__System.registerDynamic("15", ["14a", "14e"], true, function($__require, expor
   return module.exports;
 });
 
-$__System.register('41', ['e', 'f'], function (_export) {
+$__System.register('22', ['e', 'f'], function (_export) {
   var _createClass, _classCallCheck, Bus, MsgListener;
 
   return {
@@ -60582,7 +58109,7 @@ $__System.register('41', ['e', 'f'], function (_export) {
     }
   };
 });
-$__System.register('143', ['14', '15', '41', 'e', 'f'], function (_export) {
+$__System.register('125', ['14', '15', '22', 'e', 'f'], function (_export) {
   var _get, _inherits, Bus, _createClass, _classCallCheck, MiniBus;
 
   return {
@@ -60648,7 +58175,7 @@ $__System.register('143', ['14', '15', '41', 'e', 'f'], function (_export) {
     }
   };
 });
-$__System.register('14f', ['14', '15', '141', '143', 'e', 'f'], function (_export) {
+$__System.register('131', ['14', '15', '123', '125', 'e', 'f'], function (_export) {
     var _get, _inherits, Sandbox, SandboxType, MiniBus, _createClass, _classCallCheck, SandboxApp;
 
     return {
@@ -60723,7 +58250,7 @@ $__System.register('14f', ['14', '15', '141', '143', 'e', 'f'], function (_expor
         }
     };
 });
-$__System.registerDynamic("150", ["3"], true, function($__require, exports, module) {
+$__System.registerDynamic("132", ["3"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -60735,25 +58262,25 @@ $__System.registerDynamic("150", ["3"], true, function($__require, exports, modu
   return module.exports;
 });
 
-$__System.registerDynamic("151", ["150"], true, function($__require, exports, module) {
+$__System.registerDynamic("133", ["132"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = {
-    "default": $__require('150'),
+    "default": $__require('132'),
     __esModule: true
   };
   return module.exports;
 });
 
-$__System.registerDynamic("e", ["151"], true, function($__require, exports, module) {
+$__System.registerDynamic("e", ["133"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var _Object$defineProperty = $__require('151')["default"];
+  var _Object$defineProperty = $__require('133')["default"];
   exports["default"] = (function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -60792,19 +58319,19 @@ $__System.registerDynamic("f", [], true, function($__require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("4", ["2f"], true, function($__require, exports, module) {
+$__System.registerDynamic("4", ["134"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var defined = $__require('2f');
+  var defined = $__require('134');
   module.exports = function(it) {
     return Object(defined(it));
   };
   return module.exports;
 });
 
-$__System.registerDynamic("146", ["8", "a", "6"], true, function($__require, exports, module) {
+$__System.registerDynamic("128", ["8", "a", "6"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -60823,13 +58350,13 @@ $__System.registerDynamic("146", ["8", "a", "6"], true, function($__require, exp
   return module.exports;
 });
 
-$__System.registerDynamic("152", ["4", "146"], true, function($__require, exports, module) {
+$__System.registerDynamic("135", ["4", "128"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var toObject = $__require('4');
-  $__require('146')('keys', function($keys) {
+  $__require('128')('keys', function($keys) {
     return function keys(it) {
       return $keys(toObject(it));
     };
@@ -60837,29 +58364,29 @@ $__System.registerDynamic("152", ["4", "146"], true, function($__require, export
   return module.exports;
 });
 
-$__System.registerDynamic("153", ["152", "a"], true, function($__require, exports, module) {
+$__System.registerDynamic("136", ["135", "a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  $__require('152');
+  $__require('135');
   module.exports = $__require('a').Object.keys;
   return module.exports;
 });
 
-$__System.registerDynamic("13b", ["153"], true, function($__require, exports, module) {
+$__System.registerDynamic("11d", ["136"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = {
-    "default": $__require('153'),
+    "default": $__require('136'),
     __esModule: true
   };
   return module.exports;
 });
 
-$__System.registerDynamic("27", [], true, function($__require, exports, module) {
+$__System.registerDynamic("137", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -60868,13 +58395,13 @@ $__System.registerDynamic("27", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("154", ["155", "2f"], true, function($__require, exports, module) {
+$__System.registerDynamic("138", ["139", "134"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var toInteger = $__require('155'),
-      defined = $__require('2f');
+  var toInteger = $__require('139'),
+      defined = $__require('134');
   module.exports = function(TO_STRING) {
     return function(that, pos) {
       var s = String(defined(that)),
@@ -60891,14 +58418,14 @@ $__System.registerDynamic("154", ["155", "2f"], true, function($__require, expor
   return module.exports;
 });
 
-$__System.registerDynamic("28", ["154", "31"], true, function($__require, exports, module) {
+$__System.registerDynamic("13a", ["138", "13b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var $at = $__require('154')(true);
-  $__require('31')(String, 'String', function(iterated) {
+  var $at = $__require('138')(true);
+  $__require('13b')(String, 'String', function(iterated) {
     this._t = String(iterated);
     this._i = 0;
   }, function() {
@@ -60920,7 +58447,7 @@ $__System.registerDynamic("28", ["154", "31"], true, function($__require, export
   return module.exports;
 });
 
-$__System.registerDynamic("156", [], true, function($__require, exports, module) {
+$__System.registerDynamic("13c", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -60929,7 +58456,7 @@ $__System.registerDynamic("156", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("32", [], true, function($__require, exports, module) {
+$__System.registerDynamic("13d", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -60943,19 +58470,19 @@ $__System.registerDynamic("32", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("5", ["157"], true, function($__require, exports, module) {
+$__System.registerDynamic("5", ["13e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var cof = $__require('157');
+  var cof = $__require('13e');
   module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
     return cof(it) == 'String' ? it.split('') : Object(it);
   };
   return module.exports;
 });
 
-$__System.registerDynamic("2f", [], true, function($__require, exports, module) {
+$__System.registerDynamic("134", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -60968,30 +58495,30 @@ $__System.registerDynamic("2f", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("145", ["5", "2f"], true, function($__require, exports, module) {
+$__System.registerDynamic("127", ["5", "134"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var IObject = $__require('5'),
-      defined = $__require('2f');
+      defined = $__require('134');
   module.exports = function(it) {
     return IObject(defined(it));
   };
   return module.exports;
 });
 
-$__System.registerDynamic("158", ["3", "159", "39", "2b", "15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("13f", ["3", "140", "141", "142", "143"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
   var $ = $__require('3'),
-      descriptor = $__require('159'),
-      setToStringTag = $__require('39'),
+      descriptor = $__require('140'),
+      setToStringTag = $__require('141'),
       IteratorPrototype = {};
-  $__require('2b')(IteratorPrototype, $__require('15a')('iterator'), function() {
+  $__require('142')(IteratorPrototype, $__require('143')('iterator'), function() {
     return this;
   });
   module.exports = function(Constructor, NAME, next) {
@@ -61001,22 +58528,22 @@ $__System.registerDynamic("158", ["3", "159", "39", "2b", "15a"], true, function
   return module.exports;
 });
 
-$__System.registerDynamic("31", ["15b", "8", "15c", "2b", "34", "15d", "158", "39", "3", "15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("13b", ["144", "8", "145", "142", "146", "147", "13f", "141", "3", "143"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var LIBRARY = $__require('15b'),
+  var LIBRARY = $__require('144'),
       $export = $__require('8'),
-      redefine = $__require('15c'),
-      hide = $__require('2b'),
-      has = $__require('34'),
-      Iterators = $__require('15d'),
-      $iterCreate = $__require('158'),
-      setToStringTag = $__require('39'),
+      redefine = $__require('145'),
+      hide = $__require('142'),
+      has = $__require('146'),
+      Iterators = $__require('147'),
+      $iterCreate = $__require('13f'),
+      setToStringTag = $__require('141'),
       getProto = $__require('3').getProto,
-      ITERATOR = $__require('15a')('iterator'),
+      ITERATOR = $__require('143')('iterator'),
       BUGGY = !([].keys && 'next' in [].keys()),
       FF_ITERATOR = '@@iterator',
       KEYS = 'keys',
@@ -61087,17 +58614,17 @@ $__System.registerDynamic("31", ["15b", "8", "15c", "2b", "34", "15d", "158", "3
   return module.exports;
 });
 
-$__System.registerDynamic("15e", ["156", "32", "15d", "145", "31"], true, function($__require, exports, module) {
+$__System.registerDynamic("148", ["13c", "13d", "147", "127", "13b"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var addToUnscopables = $__require('156'),
-      step = $__require('32'),
-      Iterators = $__require('15d'),
-      toIObject = $__require('145');
-  module.exports = $__require('31')(Array, 'Array', function(iterated, kind) {
+  var addToUnscopables = $__require('13c'),
+      step = $__require('13d'),
+      Iterators = $__require('147'),
+      toIObject = $__require('127');
+  module.exports = $__require('13b')(Array, 'Array', function(iterated, kind) {
     this._t = toIObject(iterated);
     this._i = 0;
     this._k = kind;
@@ -61122,18 +58649,18 @@ $__System.registerDynamic("15e", ["156", "32", "15d", "145", "31"], true, functi
   return module.exports;
 });
 
-$__System.registerDynamic("29", ["15e", "15d"], true, function($__require, exports, module) {
+$__System.registerDynamic("149", ["148", "147"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  $__require('15e');
-  var Iterators = $__require('15d');
+  $__require('148');
+  var Iterators = $__require('147');
   Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
   return module.exports;
 });
 
-$__System.registerDynamic("15b", [], true, function($__require, exports, module) {
+$__System.registerDynamic("144", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61142,14 +58669,14 @@ $__System.registerDynamic("15b", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("8", ["38", "a", "2d"], true, function($__require, exports, module) {
+$__System.registerDynamic("8", ["14a", "a", "14b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var global = $__require('38'),
+  var global = $__require('14a'),
       core = $__require('a'),
-      ctx = $__require('2d'),
+      ctx = $__require('14b'),
       PROTOTYPE = 'prototype';
   var $export = function(type, name, source) {
     var IS_FORCED = type & $export.F,
@@ -61191,7 +58718,7 @@ $__System.registerDynamic("8", ["38", "a", "2d"], true, function($__require, exp
   return module.exports;
 });
 
-$__System.registerDynamic("2e", [], true, function($__require, exports, module) {
+$__System.registerDynamic("14c", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61204,12 +58731,12 @@ $__System.registerDynamic("2e", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("15f", ["160"], true, function($__require, exports, module) {
+$__System.registerDynamic("14d", ["14e"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var anObject = $__require('160');
+  var anObject = $__require('14e');
   module.exports = function(iterator, fn, value, entries) {
     try {
       return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -61223,13 +58750,13 @@ $__System.registerDynamic("15f", ["160"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("161", ["15d", "15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("14f", ["147", "143"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var Iterators = $__require('15d'),
-      ITERATOR = $__require('15a')('iterator'),
+  var Iterators = $__require('147'),
+      ITERATOR = $__require('143')('iterator'),
       ArrayProto = Array.prototype;
   module.exports = function(it) {
     return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
@@ -61237,7 +58764,7 @@ $__System.registerDynamic("161", ["15d", "15a"], true, function($__require, expo
   return module.exports;
 });
 
-$__System.registerDynamic("155", [], true, function($__require, exports, module) {
+$__System.registerDynamic("139", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61250,12 +58777,12 @@ $__System.registerDynamic("155", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("162", ["155"], true, function($__require, exports, module) {
+$__System.registerDynamic("150", ["139"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var toInteger = $__require('155'),
+  var toInteger = $__require('139'),
       min = Math.min;
   module.exports = function(it) {
     return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0;
@@ -61263,13 +58790,13 @@ $__System.registerDynamic("162", ["155"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("3b", ["157", "15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("151", ["13e", "143"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var cof = $__require('157'),
-      TAG = $__require('15a')('toStringTag'),
+  var cof = $__require('13e'),
+      TAG = $__require('143')('toStringTag'),
       ARG = cof(function() {
         return arguments;
       }()) == 'Arguments';
@@ -61282,7 +58809,7 @@ $__System.registerDynamic("3b", ["157", "15a"], true, function($__require, expor
   return module.exports;
 });
 
-$__System.registerDynamic("15d", [], true, function($__require, exports, module) {
+$__System.registerDynamic("147", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61291,14 +58818,14 @@ $__System.registerDynamic("15d", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("163", ["3b", "15a", "15d", "a"], true, function($__require, exports, module) {
+$__System.registerDynamic("152", ["151", "143", "147", "a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var classof = $__require('3b'),
-      ITERATOR = $__require('15a')('iterator'),
-      Iterators = $__require('15d');
+  var classof = $__require('151'),
+      ITERATOR = $__require('143')('iterator'),
+      Iterators = $__require('147');
   module.exports = $__require('a').getIteratorMethod = function(it) {
     if (it != undefined)
       return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
@@ -61306,17 +58833,17 @@ $__System.registerDynamic("163", ["3b", "15a", "15d", "a"], true, function($__re
   return module.exports;
 });
 
-$__System.registerDynamic("30", ["2d", "15f", "161", "160", "162", "163"], true, function($__require, exports, module) {
+$__System.registerDynamic("153", ["14b", "14d", "14f", "14e", "150", "152"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var ctx = $__require('2d'),
-      call = $__require('15f'),
-      isArrayIter = $__require('161'),
-      anObject = $__require('160'),
-      toLength = $__require('162'),
-      getIterFn = $__require('163');
+  var ctx = $__require('14b'),
+      call = $__require('14d'),
+      isArrayIter = $__require('14f'),
+      anObject = $__require('14e'),
+      toLength = $__require('150'),
+      getIterFn = $__require('152');
   module.exports = function(iterable, entries, fn, that) {
     var iterFn = getIterFn(iterable),
         f = ctx(fn, that, entries ? 2 : 1),
@@ -61338,14 +58865,14 @@ $__System.registerDynamic("30", ["2d", "15f", "161", "160", "162", "163"], true,
   return module.exports;
 });
 
-$__System.registerDynamic("14c", ["3", "35", "160", "2d"], true, function($__require, exports, module) {
+$__System.registerDynamic("12e", ["3", "154", "14e", "14b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var getDesc = $__require('3').getDesc,
-      isObject = $__require('35'),
-      anObject = $__require('160');
+      isObject = $__require('154'),
+      anObject = $__require('14e');
   var check = function(O, proto) {
     anObject(O);
     if (!isObject(proto) && proto !== null)
@@ -61354,7 +58881,7 @@ $__System.registerDynamic("14c", ["3", "35", "160", "2d"], true, function($__req
   module.exports = {
     set: Object.setPrototypeOf || ('__proto__' in {} ? function(test, buggy, set) {
       try {
-        set = $__require('2d')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
+        set = $__require('14b')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch (e) {
@@ -61374,7 +58901,7 @@ $__System.registerDynamic("14c", ["3", "35", "160", "2d"], true, function($__req
   return module.exports;
 });
 
-$__System.registerDynamic("164", [], true, function($__require, exports, module) {
+$__System.registerDynamic("155", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61385,12 +58912,12 @@ $__System.registerDynamic("164", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("160", ["35"], true, function($__require, exports, module) {
+$__System.registerDynamic("14e", ["154"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var isObject = $__require('35');
+  var isObject = $__require('154');
   module.exports = function(it) {
     if (!isObject(it))
       throw TypeError(it + ' is not an object!');
@@ -61399,14 +58926,14 @@ $__System.registerDynamic("160", ["35"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("165", ["160", "166", "15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("156", ["14e", "157", "143"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var anObject = $__require('160'),
-      aFunction = $__require('166'),
-      SPECIES = $__require('15a')('species');
+  var anObject = $__require('14e'),
+      aFunction = $__require('157'),
+      SPECIES = $__require('143')('species');
   module.exports = function(O, D) {
     var C = anObject(O).constructor,
         S;
@@ -61415,7 +58942,7 @@ $__System.registerDynamic("165", ["160", "166", "15a"], true, function($__requir
   return module.exports;
 });
 
-$__System.registerDynamic("166", [], true, function($__require, exports, module) {
+$__System.registerDynamic("157", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61428,12 +58955,12 @@ $__System.registerDynamic("166", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("2d", ["166"], true, function($__require, exports, module) {
+$__System.registerDynamic("14b", ["157"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var aFunction = $__require('166');
+  var aFunction = $__require('157');
   module.exports = function(fn, that, length) {
     aFunction(fn);
     if (that === undefined)
@@ -61459,7 +58986,7 @@ $__System.registerDynamic("2d", ["166"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("167", [], true, function($__require, exports, module) {
+$__System.registerDynamic("158", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61483,16 +59010,16 @@ $__System.registerDynamic("167", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("168", ["38"], true, function($__require, exports, module) {
+$__System.registerDynamic("159", ["14a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('38').document && document.documentElement;
+  module.exports = $__require('14a').document && document.documentElement;
   return module.exports;
 });
 
-$__System.registerDynamic("35", [], true, function($__require, exports, module) {
+$__System.registerDynamic("154", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61503,13 +59030,13 @@ $__System.registerDynamic("35", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("169", ["35", "38"], true, function($__require, exports, module) {
+$__System.registerDynamic("15a", ["154", "14a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var isObject = $__require('35'),
-      document = $__require('38').document,
+  var isObject = $__require('154'),
+      document = $__require('14a').document,
       is = isObject(document) && isObject(document.createElement);
   module.exports = function(it) {
     return is ? document.createElement(it) : {};
@@ -61517,17 +59044,17 @@ $__System.registerDynamic("169", ["35", "38"], true, function($__require, export
   return module.exports;
 });
 
-$__System.registerDynamic("16a", ["2d", "167", "168", "169", "38", "157", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("15b", ["14b", "158", "159", "15a", "14a", "13e", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(process) {
-    var ctx = $__require('2d'),
-        invoke = $__require('167'),
-        html = $__require('168'),
-        cel = $__require('169'),
-        global = $__require('38'),
+    var ctx = $__require('14b'),
+        invoke = $__require('158'),
+        html = $__require('159'),
+        cel = $__require('15a'),
+        global = $__require('14a'),
         process = global.process,
         setTask = global.setImmediate,
         clearTask = global.clearImmediate,
@@ -61564,7 +59091,7 @@ $__System.registerDynamic("16a", ["2d", "167", "168", "169", "38", "157", "1b"],
       clearTask = function clearImmediate(id) {
         delete queue[id];
       };
-      if ($__require('157')(process) == 'process') {
+      if ($__require('13e')(process) == 'process') {
         defer = function(id) {
           process.nextTick(ctx(run, id, 1));
         };
@@ -61595,11 +59122,11 @@ $__System.registerDynamic("16a", ["2d", "167", "168", "169", "38", "157", "1b"],
       set: setTask,
       clear: clearTask
     };
-  })($__require('1b'));
+  })($__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("157", [], true, function($__require, exports, module) {
+$__System.registerDynamic("13e", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61611,18 +59138,18 @@ $__System.registerDynamic("157", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("16b", ["38", "16a", "157", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("15c", ["14a", "15b", "13e", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   (function(process) {
-    var global = $__require('38'),
-        macrotask = $__require('16a').set,
+    var global = $__require('14a'),
+        macrotask = $__require('15b').set,
         Observer = global.MutationObserver || global.WebKitMutationObserver,
         process = global.process,
         Promise = global.Promise,
-        isNode = $__require('157')(process) == 'process',
+        isNode = $__require('13e')(process) == 'process',
         head,
         last,
         notify;
@@ -61682,11 +59209,11 @@ $__System.registerDynamic("16b", ["38", "16a", "157", "1b"], true, function($__r
       }
       last = task;
     };
-  })($__require('1b'));
+  })($__require('5b'));
   return module.exports;
 });
 
-$__System.registerDynamic("159", [], true, function($__require, exports, module) {
+$__System.registerDynamic("140", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61702,14 +59229,14 @@ $__System.registerDynamic("159", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("2b", ["3", "159", "37"], true, function($__require, exports, module) {
+$__System.registerDynamic("142", ["3", "140", "15d"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var $ = $__require('3'),
-      createDesc = $__require('159');
-  module.exports = $__require('37') ? function(object, key, value) {
+      createDesc = $__require('140');
+  module.exports = $__require('15d') ? function(object, key, value) {
     return $.setDesc(object, key, createDesc(1, value));
   } : function(object, key, value) {
     object[key] = value;
@@ -61718,21 +59245,21 @@ $__System.registerDynamic("2b", ["3", "159", "37"], true, function($__require, e
   return module.exports;
 });
 
-$__System.registerDynamic("15c", ["2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("145", ["142"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('2b');
+  module.exports = $__require('142');
   return module.exports;
 });
 
-$__System.registerDynamic("2c", ["15c"], true, function($__require, exports, module) {
+$__System.registerDynamic("15e", ["145"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var redefine = $__require('15c');
+  var redefine = $__require('145');
   module.exports = function(target, src) {
     for (var key in src)
       redefine(target, key, src[key]);
@@ -61741,7 +59268,7 @@ $__System.registerDynamic("2c", ["15c"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("34", [], true, function($__require, exports, module) {
+$__System.registerDynamic("146", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61753,14 +59280,14 @@ $__System.registerDynamic("34", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("39", ["3", "34", "15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("141", ["3", "146", "143"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   var def = $__require('3').setDesc,
-      has = $__require('34'),
-      TAG = $__require('15a')('toStringTag');
+      has = $__require('146'),
+      TAG = $__require('143')('toStringTag');
   module.exports = function(it, tag, stat) {
     if (it && !has(it = stat ? it : it.prototype, TAG))
       def(it, TAG, {
@@ -61807,7 +59334,7 @@ $__System.registerDynamic("6", [], true, function($__require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("37", ["6"], true, function($__require, exports, module) {
+$__System.registerDynamic("15d", ["6"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61820,7 +59347,7 @@ $__System.registerDynamic("37", ["6"], true, function($__require, exports, modul
   return module.exports;
 });
 
-$__System.registerDynamic("36", ["a", "3", "37", "15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("15f", ["a", "3", "15d", "143"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
@@ -61828,8 +59355,8 @@ $__System.registerDynamic("36", ["a", "3", "37", "15a"], true, function($__requi
       GLOBAL = this;
   var core = $__require('a'),
       $ = $__require('3'),
-      DESCRIPTORS = $__require('37'),
-      SPECIES = $__require('15a')('species');
+      DESCRIPTORS = $__require('15d'),
+      SPECIES = $__require('143')('species');
   module.exports = function(KEY) {
     var C = core[KEY];
     if (DESCRIPTORS && C && !C[SPECIES])
@@ -61843,12 +59370,12 @@ $__System.registerDynamic("36", ["a", "3", "37", "15a"], true, function($__requi
   return module.exports;
 });
 
-$__System.registerDynamic("16c", ["38"], true, function($__require, exports, module) {
+$__System.registerDynamic("160", ["14a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var global = $__require('38'),
+  var global = $__require('14a'),
       SHARED = '__core-js_shared__',
       store = global[SHARED] || (global[SHARED] = {});
   module.exports = function(key) {
@@ -61857,7 +59384,7 @@ $__System.registerDynamic("16c", ["38"], true, function($__require, exports, mod
   return module.exports;
 });
 
-$__System.registerDynamic("33", [], true, function($__require, exports, module) {
+$__System.registerDynamic("161", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61870,7 +59397,7 @@ $__System.registerDynamic("33", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("38", [], true, function($__require, exports, module) {
+$__System.registerDynamic("14a", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -61881,26 +59408,26 @@ $__System.registerDynamic("38", [], true, function($__require, exports, module) 
   return module.exports;
 });
 
-$__System.registerDynamic("15a", ["16c", "33", "38"], true, function($__require, exports, module) {
+$__System.registerDynamic("143", ["160", "161", "14a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var store = $__require('16c')('wks'),
-      uid = $__require('33'),
-      Symbol = $__require('38').Symbol;
+  var store = $__require('160')('wks'),
+      uid = $__require('161'),
+      Symbol = $__require('14a').Symbol;
   module.exports = function(name) {
     return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
   };
   return module.exports;
 });
 
-$__System.registerDynamic("16d", ["15a"], true, function($__require, exports, module) {
+$__System.registerDynamic("162", ["143"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var ITERATOR = $__require('15a')('iterator'),
+  var ITERATOR = $__require('143')('iterator'),
       SAFE_CLOSING = false;
   try {
     var riter = [7][ITERATOR]();
@@ -61931,7 +59458,7 @@ $__System.registerDynamic("16d", ["15a"], true, function($__require, exports, mo
   return module.exports;
 });
 
-$__System.registerDynamic("16e", [], true, function($__require, exports, module) {
+$__System.registerDynamic("163", [], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -62022,34 +59549,34 @@ $__System.registerDynamic("16e", [], true, function($__require, exports, module)
   return module.exports;
 });
 
-$__System.registerDynamic("16f", ["16e"], true, function($__require, exports, module) {
+$__System.registerDynamic("164", ["163"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('16e');
+  module.exports = $__require('163');
   return module.exports;
 });
 
-$__System.registerDynamic("170", ["16f"], true, function($__require, exports, module) {
+$__System.registerDynamic("165", ["164"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__System._nodeRequire ? process : $__require('16f');
+  module.exports = $__System._nodeRequire ? process : $__require('164');
   return module.exports;
 });
 
-$__System.registerDynamic("1b", ["170"], true, function($__require, exports, module) {
+$__System.registerDynamic("5b", ["165"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  module.exports = $__require('170');
+  module.exports = $__require('165');
   return module.exports;
 });
 
-$__System.registerDynamic("171", ["3", "15b", "38", "2d", "3b", "8", "35", "160", "166", "2e", "30", "14c", "164", "15a", "165", "16b", "37", "2c", "39", "36", "a", "16d", "1b"], true, function($__require, exports, module) {
+$__System.registerDynamic("166", ["3", "144", "14a", "14b", "151", "8", "154", "14e", "157", "14c", "153", "12e", "155", "143", "156", "15c", "15d", "15e", "141", "15f", "a", "162", "5b"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
@@ -62057,21 +59584,21 @@ $__System.registerDynamic("171", ["3", "15b", "38", "2d", "3b", "8", "35", "160"
   (function(process) {
     'use strict';
     var $ = $__require('3'),
-        LIBRARY = $__require('15b'),
-        global = $__require('38'),
-        ctx = $__require('2d'),
-        classof = $__require('3b'),
+        LIBRARY = $__require('144'),
+        global = $__require('14a'),
+        ctx = $__require('14b'),
+        classof = $__require('151'),
         $export = $__require('8'),
-        isObject = $__require('35'),
-        anObject = $__require('160'),
-        aFunction = $__require('166'),
-        strictNew = $__require('2e'),
-        forOf = $__require('30'),
-        setProto = $__require('14c').set,
-        same = $__require('164'),
-        SPECIES = $__require('15a')('species'),
-        speciesConstructor = $__require('165'),
-        asap = $__require('16b'),
+        isObject = $__require('154'),
+        anObject = $__require('14e'),
+        aFunction = $__require('157'),
+        strictNew = $__require('14c'),
+        forOf = $__require('153'),
+        setProto = $__require('12e').set,
+        same = $__require('155'),
+        SPECIES = $__require('143')('species'),
+        speciesConstructor = $__require('156'),
+        asap = $__require('15c'),
         PROMISE = 'Promise',
         process = global.process,
         isNode = classof(process) == 'process',
@@ -62097,7 +59624,7 @@ $__System.registerDynamic("171", ["3", "15b", "38", "2d", "3b", "8", "35", "160"
         if (!(P2.resolve(5).then(function() {}) instanceof P2)) {
           works = false;
         }
-        if (works && $__require('37')) {
+        if (works && $__require('15d')) {
           var thenableThenGotten = false;
           P.resolve($.setDesc({}, 'then', {get: function() {
               thenableThenGotten = true;
@@ -62275,7 +59802,7 @@ $__System.registerDynamic("171", ["3", "15b", "38", "2d", "3b", "8", "35", "160"
           $reject.call(record, err);
         }
       };
-      $__require('2c')(P.prototype, {
+      $__require('15e')(P.prototype, {
         then: function then(onFulfilled, onRejected) {
           var reaction = new PromiseCapability(speciesConstructor(this, P)),
               promise = reaction.promise,
@@ -62295,8 +59822,8 @@ $__System.registerDynamic("171", ["3", "15b", "38", "2d", "3b", "8", "35", "160"
       });
     }
     $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: P});
-    $__require('39')(P, PROMISE);
-    $__require('36')(PROMISE);
+    $__require('141')(P, PROMISE);
+    $__require('15f')(PROMISE);
     Wrapper = $__require('a')[PROMISE];
     $export($export.S + $export.F * !USE_NATIVE, PROMISE, {reject: function reject(r) {
         var capability = new PromiseCapability(this),
@@ -62312,7 +59839,7 @@ $__System.registerDynamic("171", ["3", "15b", "38", "2d", "3b", "8", "35", "160"
         $$resolve(x);
         return capability.promise;
       }});
-    $export($export.S + $export.F * !(USE_NATIVE && $__require('16d')(function(iter) {
+    $export($export.S + $export.F * !(USE_NATIVE && $__require('162')(function(iter) {
       P.all(iter)['catch'](function() {});
     })), PROMISE, {
       all: function all(iterable) {
@@ -62357,7 +59884,7 @@ $__System.registerDynamic("171", ["3", "15b", "38", "2d", "3b", "8", "35", "160"
         return capability.promise;
       }
     });
-  })($__require('1b'));
+  })($__require('5b'));
   return module.exports;
 });
 
@@ -62372,32 +59899,32 @@ $__System.registerDynamic("a", [], true, function($__require, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("172", ["27", "28", "29", "171", "a"], true, function($__require, exports, module) {
+$__System.registerDynamic("167", ["137", "13a", "149", "166", "a"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
-  $__require('27');
-  $__require('28');
-  $__require('29');
-  $__require('171');
+  $__require('137');
+  $__require('13a');
+  $__require('149');
+  $__require('166');
   module.exports = $__require('a').Promise;
   return module.exports;
 });
 
-$__System.registerDynamic("11", ["172"], true, function($__require, exports, module) {
+$__System.registerDynamic("11", ["167"], true, function($__require, exports, module) {
   ;
   var define,
       global = this,
       GLOBAL = this;
   module.exports = {
-    "default": $__require('172'),
+    "default": $__require('167'),
     __esModule: true
   };
   return module.exports;
 });
 
-$__System.register('173', ['11', 'e', 'f', '13b'], function (_export) {
+$__System.register('168', ['11', 'e', 'f', '11d'], function (_export) {
   var _Promise, _createClass, _classCallCheck, _Object$keys, methods, Request;
 
   return {
@@ -62407,8 +59934,8 @@ $__System.register('173', ['11', 'e', 'f', '13b'], function (_export) {
       _createClass = _e['default'];
     }, function (_f) {
       _classCallCheck = _f['default'];
-    }, function (_b) {
-      _Object$keys = _b['default'];
+    }, function (_d) {
+      _Object$keys = _d['default'];
     }],
     execute: function () {
       /**
@@ -62527,7 +60054,7 @@ $__System.register('173', ['11', 'e', 'f', '13b'], function (_export) {
     }
   };
 });
-$__System.register('174', ['140', '173', '14f'], function (_export) {
+$__System.register('169', ['122', '131', '168'], function (_export) {
     /**
     * Copyright 2016 PT Inovação e Sistemas SA
     * Copyright 2016 INESC-ID
@@ -62554,9 +60081,9 @@ $__System.register('174', ['140', '173', '14f'], function (_export) {
     //TODO: resources url dependency
     'use strict';
 
-    var SandboxWorker, Request, SandboxApp;
+    var SandboxWorker, SandboxApp, Request;
     function createSandbox() {
-        return new SandboxWorker('../dist/context-service.js');
+        return new SandboxWorker('./context-service.js');
     }
 
     function createAppSandbox() {
@@ -62572,16 +60099,16 @@ $__System.register('174', ['140', '173', '14f'], function (_export) {
         setters: [function (_) {
             SandboxWorker = _['default'];
         }, function (_2) {
-            Request = _2['default'];
-        }, function (_f) {
-            SandboxApp = _f['default'];
+            SandboxApp = _2['default'];
+        }, function (_3) {
+            Request = _3['default'];
         }],
         execute: function () {
             _export('default', { createSandbox: createSandbox, createAppSandbox: createAppSandbox, createHttpRequest: createHttpRequest });
         }
     };
 });
-$__System.register('1', ['174', '13f'], function (_export) {
+$__System.register('1', ['121', '169'], function (_export) {
     /**
     * Copyright 2016 PT Inovação e Sistemas SA
     * Copyright 2016 INESC-ID
@@ -62606,7 +60133,7 @@ $__System.register('1', ['174', '13f'], function (_export) {
     **/
     'use strict';
 
-    var SandboxFactory, RuntimeUA, runtime;
+    var RuntimeUA, SandboxFactory, runtime;
 
     function returnHyperty(source, hyperty) {
         source.postMessage({ to: 'runtime:loadedHyperty', body: hyperty }, '*');
@@ -62614,12 +60141,12 @@ $__System.register('1', ['174', '13f'], function (_export) {
 
     return {
         setters: [function (_) {
-            SandboxFactory = _['default'];
-        }, function (_f) {
-            RuntimeUA = _f['default'];
+            RuntimeUA = _['default'];
+        }, function (_2) {
+            SandboxFactory = _2['default'];
         }],
         execute: function () {
-            runtime = new RuntimeUA(SandboxFactory, 'localhost');
+            runtime = new RuntimeUA(SandboxFactory, window.location.hostname);
 
             window.addEventListener('message', function (event) {
                 if (event.data.to === 'core:loadHyperty') {

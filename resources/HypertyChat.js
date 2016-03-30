@@ -343,12 +343,13 @@ var HypertyChat = (function (_EventEmitter) {
     var syncher = new _syncherSyncher2['default'](hypertyURL, bus, configuration);
 
     var domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
-    var hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](domain, bus);
+    var hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](hypertyURL, bus);
 
     _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this._hypertyURL = hypertyURL;
     _this._syncher = syncher;
+    _this._domain = domain;
     _this._hypertyDiscovery = hypertyDiscovery;
 
     syncher.onNotification(function (event) {
@@ -396,8 +397,9 @@ var HypertyChat = (function (_EventEmitter) {
 
         console.info('----------------------- Mapping Particpants -------------------- \n');
         _this._mappingUser(participants).then(function (hyperties) {
-          console.info('------------------------ Syncher Create ---------------------- \n');
-          return syncher.create(_this._objectDescURL, hyperties, { communication: _communication2['default'] });
+          return _this.createSyncher(hyperties);
+        })['catch'](function (hyperties) {
+          return _this.createSyncher(hyperties);
         }).then(function (dataObjectReporter) {
           console.info('3. Return Create Data Object Reporter', dataObjectReporter);
 
@@ -409,6 +411,17 @@ var HypertyChat = (function (_EventEmitter) {
           reject(reason);
         });
       });
+    }
+  }, {
+    key: 'createSyncher',
+    value: function createSyncher(hyperties) {
+      var _this = this;
+      var syncher = _this._syncher;
+
+      console.info('Have ' + hyperties.length + ' participants;');
+
+      console.info('------------------------ Syncher Create ---------------------- \n');
+      return syncher.create(_this._objectDescURL, hyperties, { communication: _communication2['default'] });
     }
   }, {
     key: 'join',
@@ -439,24 +452,35 @@ var HypertyChat = (function (_EventEmitter) {
       var _this = this;
 
       return new Promise(function (resolve, reject) {
-        var promiseList = [];
 
-        userList.forEach(function (email) {
-          if (email.length) {
-            promiseList.push(_this._hypertyDiscovery.discoverHypertyPerUser(email));
+        var hyperties = [];
+        var count = 0;
+
+        if (userList.length === 0) reject(hyperties);
+
+        var resultUsers = function resultUsers() {
+          if (count === userList.length) {
+            console.info('Have ' + hyperties.length + 'users found;');
+            resolve(hyperties);
           }
-        });
+        };
 
-        Promise.all(promiseList).then(function (values) {
-          var hyperties = [];
+        var activeUsers = function activeUsers(user) {
+          count++;
+          hyperties.push(user.hypertyURL);
+          resultUsers();
+        };
 
-          values.forEach(function (value) {
-            hyperties.push(value.hypertyURL);
-          });
+        var inactiveUsers = function inactiveUsers() {
+          count++;
+          resultUsers();
+        };
 
-          resolve(hyperties);
-        })['catch'](function (reason) {
-          reject(reason);
+        userList.forEach(function (user) {
+          console.log(user);
+          if (user.email.length) {
+            return _this._hypertyDiscovery.discoverHypertyPerUser(user.email, user.domain).then(activeUsers)['catch'](inactiveUsers);
+          }
         });
       });
     }
@@ -622,7 +646,7 @@ var HypertyDiscovery = (function () {
     var _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;;
+    _this.domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
     _this.discoveryURL = hypertyURL;
   }
 
@@ -762,15 +786,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-   _owner: HypertyURL
+    _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-   _children: { id: DataObjectChild }
+    _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-   ----event handlers----
+    ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -812,9 +836,9 @@ var DataObject = (function () {
         _this._childrens.forEach(function (child) {
           var childURL = childBaseURL + child;
           var listener = _this._bus.addListener(childURL, function (msg) {
-            console.log('DataObject-Children-RCV: ', msg);
             //ignore msg sent by himself
             if (msg.from !== _this2._owner) {
+              console.log('DataObject-Children-RCV: ', msg);
               switch (msg.type) {
                 case 'create':
                   _this._onChildrenCreate(msg);break;
@@ -905,7 +929,7 @@ var DataObject = (function () {
         var msgId = _this._bus.postMessage(requestMsg);
 
         console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-        var newChild = new _DataObjectChild2['default'](_this, _this._owner, msgChildId, msgId, initialData);
+        var newChild = new _DataObjectChild2['default'](_this, msgChildId, initialData, _this._owner, msgId);
         newChild.onChange(function (event) {
           _this._onChange(event, { path: msgChildPath, childId: msgChildId });
         });
@@ -932,7 +956,7 @@ var DataObject = (function () {
       var msgChildId = msg.body.resource;
 
       console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
-      var newChild = new _DataObjectChild2['default'](_this, msg.from, msgChildId, 0, msg.body.value);
+      var newChild = new _DataObjectChild2['default'](_this, msgChildId, msg.body.value);
       _this._childrenObjects[msgChildId] = newChild;
 
       setTimeout(function () {
@@ -967,7 +991,7 @@ var DataObject = (function () {
       if (_this._status === 'on') {
         var changeMsg = {
           type: 'update', from: _this._url, to: _this._url + '/changes',
-          body: { version: _this._version, attribute: event.field }
+          body: { version: _this._version, source: _this._owner, attribute: event.field }
         };
 
         if (event.oType === _SyncObject.ObjectType.OBJECT) {
@@ -1087,7 +1111,7 @@ var DataObject = (function () {
      * @type {Object<ChildId, DataObjectChild>}
      */
   }, {
-    key: 'children',
+    key: 'childrens',
     get: function get() {
       return this._childrenObjects;
     }
@@ -1146,7 +1170,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-   ----event handlers----
+    ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1155,15 +1179,16 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
    * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
    */
 
-  function DataObjectChild(parent, owner, childId, msgId, initialData) {
+  function DataObjectChild(parent, childId, initialData, owner, msgId) {
     _classCallCheck(this, DataObjectChild);
 
     var _this = this;
 
     _this._parent = parent;
-    _this._owner = owner;
     _this._childId = childId;
+    _this._owner = owner;
     _this._msgId = msgId;
+
     _this._syncObj = new _SyncObject2['default'](initialData);
 
     _this._bus = parent._bus;
@@ -1175,19 +1200,24 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
     value: function _allocateListeners() {
       var _this = this;
 
-      _this._listener = _this._bus.addListener(_this._owner, function (msg) {
-        if (msg.type === 'response' && msg.id === _this._msgId) {
-          console.log('DataObjectChild.onResponse:', msg);
-          _this._onResponse(msg);
-        }
-      });
+      //this is only needed for children reporters
+      if (_this._owner) {
+        _this._listener = _this._bus.addListener(_this._owner, function (msg) {
+          if (msg.type === 'response' && msg.id === _this._msgId) {
+            console.log('DataObjectChild.onResponse:', msg);
+            _this._onResponse(msg);
+          }
+        });
+      }
     }
   }, {
     key: '_releaseListeners',
     value: function _releaseListeners() {
       var _this = this;
 
-      _this._listener.remove();
+      if (_this._listener) {
+        _this._listener.remove();
+      }
     }
 
     /**
@@ -1313,6 +1343,10 @@ var _DataObject2 = require('./DataObject');
 
 var _DataObject3 = _interopRequireDefault(_DataObject2);
 
+var _DataObjectChild = require('./DataObjectChild');
+
+var _DataObjectChild2 = _interopRequireDefault(_DataObjectChild);
+
 var FilterType = { ANY: 'any', START: 'start', EXACT: 'exact' };
 
 /**
@@ -1325,7 +1359,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-   ----event handlers----
+    ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1337,7 +1371,7 @@ var DataObjectObserver = (function (_DataObject) {
   function DataObjectObserver(syncher, url, schema, initialStatus, initialData, childrens, initialVersion) {
     _classCallCheck(this, DataObjectObserver);
 
-    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, childrens);
+    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData.data, childrens);
     var _this = this;
 
     _this._version = initialVersion;
@@ -1345,6 +1379,12 @@ var DataObjectObserver = (function (_DataObject) {
 
     _this._syncObj.observe(function (event) {
       _this._onFilter(event);
+    });
+
+    //setup childrens data from subscription
+    Object.keys(initialData.childrens).forEach(function (childId) {
+      var childData = initialData.childrens[childId];
+      _this._childrenObjects[childId] = new _DataObjectChild2['default'](_this, childId, childData);
     });
 
     _this._allocateListeners();
@@ -1463,7 +1503,7 @@ var DataObjectObserver = (function (_DataObject) {
 exports['default'] = DataObjectObserver;
 module.exports = exports['default'];
 
-},{"./DataObject":6}],9:[function(require,module,exports){
+},{"./DataObject":6,"./DataObjectChild":7}],9:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -1519,7 +1559,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-   ----event handlers----
+    ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1640,10 +1680,17 @@ var DataObjectReporter = (function (_DataObject) {
           var sub = { url: hypertyUrl, status: 'on' };
           _this._subscriptions[hypertyUrl] = sub;
 
+          //process and send childrens data
+          var childrenValues = {};
+          Object.keys(_this._childrenObjects).forEach(function (childId) {
+            var childData = _this._childrenObjects[childId].data;
+            childrenValues[childId] = (0, _utilsUtilsJs.deepClone)(childData);
+          });
+
           //send ok response message
           _this._bus.postMessage({
             id: msg.id, type: 'response', from: msg.to, to: msg.from,
-            body: { code: 200, schema: _this._schema, version: _this._version, value: (0, _utilsUtilsJs.deepClone)(_this.data) }
+            body: { code: 200, schema: _this._schema, version: _this._version, value: { data: (0, _utilsUtilsJs.deepClone)(_this.data), childrens: childrenValues } }
           });
 
           return sub;
@@ -1753,7 +1800,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-   _changes: []
+    _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1792,7 +1839,7 @@ var DataProvisional = (function () {
               console.log(msg);
             }
           });
-           _this._childrenListeners.push(listener);
+            _this._childrenListeners.push(listener);
         });
       }*/
     }
@@ -2238,11 +2285,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-   _subURL: URL
-   _reporters: <url: DataObjectReporter>
+    _subURL: URL
+    _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-   ----event handlers----
+    ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
@@ -2268,14 +2315,17 @@ var Syncher = (function () {
     _this._provisionals = {};
 
     bus.addListener(owner, function (msg) {
-      console.log('Syncher-RCV: ', msg);
-      switch (msg.type) {
-        case 'forward':
-          _this._onForward(msg);break;
-        case 'create':
-          _this._onRemoteCreate(msg);break;
-        case 'delete':
-          _this._onRemoteDelete(msg);break;
+      //ignore msg sent by himself
+      if (msg.from !== owner) {
+        console.log('Syncher-RCV: ', msg);
+        switch (msg.type) {
+          case 'forward':
+            _this._onForward(msg);break;
+          case 'create':
+            _this._onRemoteCreate(msg);break;
+          case 'delete':
+            _this._onRemoteDelete(msg);break;
+        }
       }
     });
   }

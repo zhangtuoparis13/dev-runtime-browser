@@ -24,8 +24,8 @@ import app from './ContextApp';
 import { create as createIframe } from './iframe';
 
 let RethinkBrowser = {
-    install: function(){
-        var iframe = createIframe('https://localhost/dist/index.html');
+    install: function(domain){
+        var iframe = createIframe(`https://${domain}/.well-known/runtime/index.html`);
         app.create(iframe);
 
         return {

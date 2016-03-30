@@ -2592,8 +2592,8 @@ $__System.register('52', ['50', '51', '3b'], function (_export) {
             'use strict';
 
             RethinkBrowser = {
-                install: function install() {
-                    var iframe = createIframe('https://localhost/dist/index.html');
+                install: function install(domain) {
+                    var iframe = createIframe('https://' + domain + '/.well-known/runtime/index.html');
                     app.create(iframe);
 
                     return {
@@ -2621,7 +2621,7 @@ $__System.register('52', ['50', '51', '3b'], function (_export) {
         }
     };
 });
-$__System.register('1', ['52'], function (_export) {
+$__System.register('53', ['52'], function (_export) {
     /**
     * Copyright 2016 PT Inovação e Sistemas SA
     * Copyright 2016 INESC-ID
@@ -2655,7 +2655,7 @@ $__System.register('1', ['52'], function (_export) {
             rethink = undefined;
 
             if (typeof window != undefined && window != null) {
-                rethink = RethinkBrowser.install();
+                rethink = RethinkBrowser;
             } else {
                 rethink = undefined;
             }
@@ -2663,6 +2663,20 @@ $__System.register('1', ['52'], function (_export) {
             _export('default', rethink);
         }
     };
+});
+$__System.register('1', ['53'], function (_export) {
+  'use strict';
+
+  var rethink;
+  return {
+    setters: [function (_) {
+      rethink = _['default'];
+    }],
+    execute: function () {
+
+      window.rethink = rethink;
+    }
+  };
 });
 })
 (function(factory) {
