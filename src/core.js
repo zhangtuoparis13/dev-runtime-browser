@@ -27,13 +27,26 @@ function returnHyperty(source, hyperty){
     source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
 }
 
+function searchHyperty(runtime, descriptor){
+    let hyperty = undefined;
+    let index = 0;
+    while(!!hyperty){
+        if(runtime.registry.hypertiesList[index]=== descriptor) 
+            hyperty = runtime.registry.hypertiesList[index]
+
+        index++
+    }
+
+    return hyperty;
+}
+
 let runtime = new RuntimeUA(SandboxFactory, window.location.hostname);
 
 window.addEventListener('message', function(event){
     if(event.data.to==='core:loadHyperty'){
         let descriptor = event.data.body.descriptor;
-        let hyperty = runtime.registry.hypertiesList
-            .find((hi, index, array)=>hi.descriptor === descriptor);
+        let hyperty = searchHyperty(runtime, descriptor);
+
         if(hyperty){
             returnHyperty(event.source, {runtimeHypertyURL: hyperty.hypertyURL});
         }else{

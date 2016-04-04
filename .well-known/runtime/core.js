@@ -10426,16 +10426,16 @@ $__System.register('1c', ['11', '19', 'e', 'f', '1a', '1b'], function (_export) 
             /*
               When calling this function, if everything is fine, a small pop-up will open requesting a login with a google account. After the login is made, the pop-up will close and the function will return the ID token.
               This function was tested with the URL: http://127.0.0.1:8080/ and with the same redirect URI
-             	In case the redirect URI is not accepted or is required to add others redirect URIs, a little information is provided to fix the problem:
-             	So that an application can use Google's OAuth 2.0 authentication system for user login,
-            	first is required to set up a project in the Google Developers Console to obtain OAuth 2.0 credentials and set a redirect URI.
-            	A test account was created to set the project in the Google Developers Console to obtain OAuth 2.0 credentials,	with the following credentials:
-                 	username: openidtest10@gmail.com
-                   password: testOpenID10
-             	To add more URI's, follow the steps:
-            	1º choose the project ( can be the My OpenID Project)	 from  https://console.developers.google.com/projectselector/apis/credentials using the credentials provided above.
-            	2º Open The Client Web 1 listed in OAuth 2.0 Client ID's
-            	3º Add the URI  in the authorized redirect URI section.
+                 In case the redirect URI is not accepted or is required to add others redirect URIs, a little information is provided to fix the problem:
+                 So that an application can use Google's OAuth 2.0 authentication system for user login,
+                first is required to set up a project in the Google Developers Console to obtain OAuth 2.0 credentials and set a redirect URI.
+                A test account was created to set the project in the Google Developers Console to obtain OAuth 2.0 credentials, with the following credentials:
+                        username: openidtest10@gmail.com
+                      password: testOpenID10
+                 To add more URI's, follow the steps:
+                1º choose the project ( can be the My OpenID Project)    from  https://console.developers.google.com/projectselector/apis/credentials using the credentials provided above.
+                2º Open The Client Web 1 listed in OAuth 2.0 Client ID's
+                3º Add the URI  in the authorized redirect URI section.
               4º change the REDIRECT parameter bellow with the pretended URI
                identityModule._hello.init({google: "808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com"});
               identityModule._hello("google").login();
@@ -60139,6 +60139,18 @@ $__System.register('1', ['121', '169'], function (_export) {
         source.postMessage({ to: 'runtime:loadedHyperty', body: hyperty }, '*');
     }
 
+    function searchHyperty(runtime, descriptor) {
+        var hyperty = undefined;
+        var index = 0;
+        while (!!hyperty) {
+            if (runtime.registry.hypertiesList[index] === descriptor) hyperty = runtime.registry.hypertiesList[index];
+
+            index++;
+        }
+
+        return hyperty;
+    }
+
     return {
         setters: [function (_) {
             RuntimeUA = _['default'];
@@ -60150,17 +60162,14 @@ $__System.register('1', ['121', '169'], function (_export) {
 
             window.addEventListener('message', function (event) {
                 if (event.data.to === 'core:loadHyperty') {
-                    (function () {
-                        var descriptor = event.data.body.descriptor;
-                        var hyperty = runtime.registry.hypertiesList.find(function (hi, index, array) {
-                            return hi.descriptor === descriptor;
-                        });
-                        if (hyperty) {
-                            returnHyperty(event.source, { runtimeHypertyURL: hyperty.hypertyURL });
-                        } else {
-                            runtime.loadHyperty(descriptor).then(returnHyperty.bind(null, event.source));
-                        }
-                    })();
+                    var descriptor = event.data.body.descriptor;
+                    var hyperty = searchHyperty(runtime, descriptor);
+
+                    if (hyperty) {
+                        returnHyperty(event.source, { runtimeHypertyURL: hyperty.hypertyURL });
+                    } else {
+                        runtime.loadHyperty(descriptor).then(returnHyperty.bind(null, event.source));
+                    }
                 } else if (event.data.to === 'core:loadStub') {
                     runtime.loadStub(event.data.body.domain);
                 }
