@@ -19,7 +19,7 @@ import 'array.observe';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain ="localhost" ;
+let domain ="rethink-app.quobis.com" ;
 
 
 // Hack because the GraphConnector jsrsasign module;

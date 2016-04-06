@@ -11,7 +11,7 @@ import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
-import runtimeLoader from '../src/RuntimeLoader';
+//import runtimeLoader from '../src/RuntimeLoader';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -21,7 +21,7 @@ import runtimeLoader from '../src/RuntimeLoader';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = "localhost";
+let domain = "rethink-app.quobis.com";
 //
 // let runtime = new RuntimeUA(sandboxFactory, domain);
 // window.runtime = runtime;
@@ -42,6 +42,7 @@ function documentReady() {
   hypertyHolder.removeClass('hide');
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
+  let runtimeLoader = window.rethink.install(domain);
 
   // Load First Hyperty
   setTimeout(function(){

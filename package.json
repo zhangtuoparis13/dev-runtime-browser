@@ -4,8 +4,8 @@
   "description": "browser runtime development",
   "main": "src/rethink.js",
   "scripts": {
-    "start": "sudo http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key",
-    "bundle": "jspm bundle-sfx src/exports.js .well-known/runtime/rethink.js && jspm bundle-sfx src/core.js .well-known/runtime/core.js && jspm bundle-sfx src/ContextServiceProvider.js .well-known/runtime/context-service.js",
+    "start": "sudo http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key example/",
+    "bundle": "jspm bundle-sfx src/exports.js example/.well-known/runtime/rethink.js && jspm bundle-sfx src/core.js example/.well-known/runtime/core.js && jspm bundle-sfx src/ContextServiceProvider.js example/.well-known/runtime/context-service.js && jspm bundle-sfx example/demo.js example/demo.bundle.js && jspm bundle-sfx example/demo2.js example/demo2.bundle.js",
     "test": "karma start",
     "init-setup": "npm install -g jspm karma-cli gulp-cli && npm install && jspm install"
   },
