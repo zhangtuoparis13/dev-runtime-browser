@@ -10,36 +10,21 @@ Addtionally to the iFrame, all the hyperties and protoStub will be executed as i
 ###User view
 
 ####Setup Environment
-#####Configure jspm access to runtime-core repo
-
-1. generate token with public_repo permission enabled
-2. Then execute the command below and you'll be asked for the credentials: 
- 
-        jspm registry config github
-
 #####Configure dependencies
 
-        npm install -g jspm karma-cli gulp-cli
+        npm install -g karma-cli gulp-cli
         npm install
-        jspm install
-
-or
-
-        npm run init-setup
 
 #### Example of use
 
-This repository have a folder with an use example of rethink.js. It initializes runtime and then you can use the console to invoke:
-
-* rethink.requireHyperty(hypertyDescriptor);
-* rethink.requireProtostub(domain);
+This repository have a folder with an use example of rethink.js. 
 
 To run the demo on example folder:
- - you need **live-server** running in the root folder.
+ - run start script.
  ```
- live-server --port=4000
+ npm start
  ```
- - in your browser access to http://localhost:4000/example.
+ - in your browser access to https://localhost.
 
 #### Distributable files
 * rethink.js. It is the public interface. It exposes two methods:
@@ -51,6 +36,8 @@ To run the demo on example folder:
 * context-core.js. It includes the runtime core (RuntimeUA, MiniBus and SandBox) and defines browser implementations of SandboxFactory, SandboxWorker and SandboxApp. SandboxWorker and SandboxApp are responsibles for manage communication between boundaries.
 
 * context-service.js It is responsible for load hyperties and protostub like ContextApp but in an isolated way.
+
+* index.html
 
 ###Developer view    
 #### How does it work?
@@ -73,8 +60,6 @@ To run the demo on example folder:
 ####AppSandbox
 1. Manage all the communication from and to internal components.
 
-
-
 #### Unit Testing
 
 Unit testing can be launched manually with **npm test**.
@@ -89,7 +74,6 @@ JavaScript code should be written in ES6. There are direct dependencies from nod
 -   npm
 -   karma - Make the communication between unit test tool and jenkins. See more on [karma](http://karma-runner.github.io/0.13/index.html)
 -   mocha - Unit test tool. See more on [http://mochajs.org](http://mochajs.org/)
--   jspm - Don't need compile the code, it uses babel (or traucer or typescript) to run ES6 code on browser. Know more in [jspm.io](http://jspm.io/)
 -   gulp - Automate and enhance your workflow. See more about gulp on [gulp](http://gulpjs.com/)
 
 #### Code Style and Hinting
