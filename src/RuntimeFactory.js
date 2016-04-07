@@ -24,7 +24,6 @@ import SandboxWorker from './SandboxWorker';
 import SandboxApp from './SandboxApp';
 import Request from './Request';
 
-//TODO: resources url dependency
 function createSandbox(){
     return new SandboxWorker('./context-service.js');
 }

@@ -21,7 +21,7 @@ import 'array.observe';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = "rethink-app.quobis.com";
+let domain = "localhost";
 //
 // let runtime = new RuntimeUA(sandboxFactory, domain);
 // window.runtime = runtime;

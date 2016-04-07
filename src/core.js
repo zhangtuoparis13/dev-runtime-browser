@@ -20,8 +20,10 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import RuntimeUA from 'runtime-core/src/runtime/RuntimeUA';
-import SandboxFactory from './SandboxFactory';
+import RuntimeFactory from './RuntimeFactory';
+import RuntimeCatalogue from 'service-framework/src/RuntimeCatalogue';
+
+const runtimeURL = 'hyperty-catalogue://' + window.location.hostname + '/.well-known/runtime/RuntimeUA';
 
 function returnHyperty(source, hyperty){
     source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
@@ -40,20 +42,25 @@ function searchHyperty(runtime, descriptor){
     return hyperty;
 }
 
-let runtime = new RuntimeUA(SandboxFactory, window.location.hostname);
+let catalogue = new RuntimeCatalogue(RuntimeFactory);
+catalogue.getRuntimeDescriptor(runtimeURL)
+    .then(function(descriptor){
+        eval.apply(window,[descriptor.sourcePackage.sourceCode])
 
-window.addEventListener('message', function(event){
-    if(event.data.to==='core:loadHyperty'){
-        let descriptor = event.data.body.descriptor;
-        let hyperty = searchHyperty(runtime, descriptor);
+        let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
+        window.addEventListener('message', function(event){
+            if(event.data.to==='core:loadHyperty'){
+                let descriptor = event.data.body.descriptor;
+                let hyperty = searchHyperty(runtime, descriptor);
 
-        if(hyperty){
-            returnHyperty(event.source, {runtimeHypertyURL: hyperty.hypertyURL});
-        }else{
-            runtime.loadHyperty(descriptor)
-                .then(returnHyperty.bind(null, event.source));
-        }
-    }else if(event.data.to==='core:loadStub'){
-        runtime.loadStub(event.data.body.domain)
-    }
-}, false);
+                if(hyperty){
+                    returnHyperty(event.source, {runtimeHypertyURL: hyperty.hypertyURL});
+                }else{
+                    runtime.loadHyperty(descriptor)
+                        .then(returnHyperty.bind(null, event.source));
+                }
+            }else if(event.data.to==='core:loadStub'){
+                runtime.loadStub(event.data.body.domain)
+            }
+        }, false);
+    });
