@@ -7,7 +7,8 @@ describe('Service framework', function(){
 
     describe('Require Hyperty', function(){
         it('should returns required hyperty', function(){
-            let hyperty = rethink.requireHyperty('aaa')
+            let runtime = rethink.install('domain');
+            let hyperty = runtime.requireHyperty('aaa')
 
             expect(hyperty).to.not.be.undefined;
         })
