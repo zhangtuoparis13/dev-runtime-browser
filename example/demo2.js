@@ -42,7 +42,7 @@ function documentReady() {
   hypertyHolder.removeClass('hide');
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
-  let runtimeLoader = window.rethink.install(domain);
+  let runtimeLoader = window.rethink.default.install(domain);
 
   // Load First Hyperty
   setTimeout(function(){

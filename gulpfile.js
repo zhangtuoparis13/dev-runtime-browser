@@ -1,3 +1,17 @@
+var babel = require('babelify');
+var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
+var source = require('vinyl-source-stream');
+var sourcemaps = require('gulp-sourcemaps');
+var replace = require('gulp-replace');
+var insert = require('gulp-insert');
+var uglify = require('gulp-uglify');
+var bump = require('gulp-bump');
+var argv = require('yargs').argv;
+var through = require('through2');
+var path = require('path');
+var gulpif = require('gulp-if');
+var pkg = require('./package.json');
 var gulp = require('gulp');
 var exec = require('child_process').exec;
 
@@ -13,23 +27,7 @@ gulp.task('doc', function(done) {
 
 });
 
-// Task and dependencies to distribute for all environments;
-var babel = require('babelify');
-var browserify = require('browserify');
-var buffer = require('vinyl-buffer');
-var source = require('vinyl-source-stream');
-var sourcemaps = require('gulp-sourcemaps');
-var replace = require('gulp-replace');
-var insert = require('gulp-insert');
-var uglify = require('gulp-uglify');
-var bump = require('gulp-bump');
-var argv = require('yargs').argv;
-var through = require('through2');
-var path = require('path');
-var gulpif = require('gulp-if');
-
-var pkg = require('./package.json');
-
+// Gulp task to include license in source code files
 gulp.task('license', function() {
 
   var clean = argv.clean;
@@ -90,10 +88,11 @@ function prependLicense(clean) {
 
 }
 
-gulp.task('dist', function() {
+// Gulp task to bundle files
+function bundle(file_name, bundle_name, dest) {
 
-  var bundler = browserify('./src/ContextServiceProvider.js', {
-    standalone: 'context-service', debug: false}).transform(babel);
+  var bundler = browserify(file_name, {
+      standalone: bundle_name, debug: true, transform: [['babelify', {"presets": ["es2015"]}]]});
 
   function rebundle() {
     return bundler.bundle()
@@ -101,41 +100,39 @@ gulp.task('dist', function() {
         console.error(err);
         this.emit('end');
       })
-      .pipe(source('context-service.js'))
+      .pipe(source(bundle_name + '.js'))
       .pipe(buffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
       .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
       .pipe(replace('{{version}}', pkg.version))
-      .pipe(gulp.dest('./dist'));
+      .pipe(gulp.dest(dest));
   }
 
   return rebundle();
 
+}
+
+gulp.task('bundle:rethink', function(){
+    return bundle('./src/RuntimeLoader.js', 'rethink', 'bin')
+});
+gulp.task('bundle:core', function(){
+    return bundle('./src/core.js', 'core', 'bin')
+});
+gulp.task('bundle:context', function(){
+    return bundle('./src/ContextServiceProvider.js', 'context-service', 'bin')
 });
 
-gulp.task('build-hyperties', function() {
+gulp.task('bundle:dist', ['bundle:rethink', 'bundle:core', 'bundle:context']);
 
-  function rebundle(filename) {
-
-    filename.forEach(function(filename) {
-      var bundler = browserify('./resources/' + filename + '.js', {
-        standalone: filename,
-        debug: true}).transform(babel);
-      console.log('bundle hyperty', filename);
-      bundler.bundle()
-        .on('error', function(err) {
-          console.error(err);
-          this.emit('end');
-        })
-        .pipe(source(filename + '.ES5.js'))
-        .pipe(gulp.dest('./resources'));
-    });
-
-  }
-
-  rebundle(['HelloHyperty']);
-
+gulp.task('bundle:demo1', function(){
+    return bundle('./example/demo.js', 'demo.bundle', 'example')
+});
+gulp.task('bundle:demo2', function(){
+    return bundle('./example/demo2.js', 'demo2.bundle', 'example')
 });
 
+gulp.task('bundle:demo', ['bundle:demo1', 'bundle:demo2']);
 /**
  * Bumping version number and tagging the repository with it.
  * Please read http://semver.org/

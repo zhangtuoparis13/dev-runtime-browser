@@ -43,7 +43,7 @@ function documentReady() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  let runtimeLoader = window.rethink.install(domain);
+  let runtimeLoader = window.rethink.default.install(domain);
   console.log(runtimeLoader, hyperty);
   setTimeout(function(){
       // Load First Hyperty

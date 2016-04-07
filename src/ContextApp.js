@@ -38,7 +38,7 @@ function create(iframe){
 
     window._registry = new SandboxRegistry(window._miniBus);
     window._registry._create = function(url, sourceCode, config){
-        eval(sourceCode);
+        eval.apply(window, [sourceCode]);
         return activate(url, window._miniBus, config);
     };
 };
