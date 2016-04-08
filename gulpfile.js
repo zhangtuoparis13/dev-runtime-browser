@@ -131,8 +131,11 @@ gulp.task('bundle:demo1', function(){
 gulp.task('bundle:demo2', function(){
     return bundle('./example/demo2.js', 'demo2.bundle', 'example')
 });
+gulp.task('bundle:hello', function(){
+    return bundle('./example/hello.js', 'hello.bundle', 'example')
+});
 
-gulp.task('bundle:demo', ['bundle:demo1', 'bundle:demo2']);
+gulp.task('bundle:demo', ['bundle:demo1', 'bundle:demo2', 'bundle:hello']);
 /**
  * Bumping version number and tagging the repository with it.
  * Please read http://semver.org/

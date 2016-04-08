@@ -24,6 +24,14 @@ import app from './ContextApp';
 import { create as createIframe } from './iframe';
 
 let iframe = undefined;
+let buildMsg = (hypertyComponent, msg) => {
+        return {
+         runtimeHypertyURL: msg.body.runtimeHypertyURL,
+         status: msg.body.status,
+         instance: hypertyComponent.instance,
+         name: hypertyComponent.name
+       }
+};
 
 let runtimeProxy = {
     requireHyperty: (hypertyDescriptor)=>{
@@ -31,7 +39,7 @@ let runtimeProxy = {
             let loaded = (e)=>{
                 if(e.data.to === 'runtime:loadedHyperty'){
                     window.removeEventListener('message', loaded);
-                    resolve(app.getHyperty(e.data.body.runtimeHypertyURL));
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
                 }
             };
             window.addEventListener('message', loaded);                     
