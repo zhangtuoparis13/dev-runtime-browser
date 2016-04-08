@@ -44,15 +44,13 @@ function documentReady() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  let runtimeLoader = rethink.install(domain);
-  console.log(runtimeLoader, hyperty);
-  setTimeout(function(){
-      // Load First Hyperty
-      runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
-        errorMessage(reason);
+  let runtimeLoader = rethink.install(domain)
+      .then((runtime)=>{
+          console.log(runtime, hyperty);
+          runtime.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+            errorMessage(reason);
+          }); 
       });
-  }, 10000);
-
 }
 
 let connector;

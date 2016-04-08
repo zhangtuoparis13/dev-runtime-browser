@@ -63,4 +63,5 @@ catalogue.getRuntimeDescriptor(runtimeURL)
                 runtime.loadStub(event.data.body.domain)
             }
         }, false);
+        parent.postMessage({to:'runtime:installed', body:{}}, '*');
     });

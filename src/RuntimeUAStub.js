@@ -23,30 +23,41 @@
 import app from './ContextApp';
 import { create as createIframe } from './iframe';
 
+let iframe = undefined;
+
+let runtimeProxy = {
+    requireHyperty: (hypertyDescriptor)=>{
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(app.getHyperty(e.data.body.runtimeHypertyURL));
+                }
+            };
+            window.addEventListener('message', loaded);                     
+            iframe.contentWindow.postMessage({to:'core:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*');
+        });
+    },
+
+    requireProtostub: (domain)=>{
+        iframe.contentWindow.postMessage({to:'core:loadStub', body:{"domain": domain}}, '*')
+    },
+};
+
 let RethinkBrowser = {
     install: function(domain){
-        var iframe = createIframe(`https://${domain}/.well-known/runtime/index.html`);
-        app.create(iframe);
-
-        return {
-            requireHyperty: (hypertyDescriptor)=>{
-                return new Promise((resolve, reject)=>{
-                    let loaded = (e)=>{
-                        if(e.data.to === 'runtime:loadedHyperty'){
-                            window.removeEventListener('message', loaded);
-                            resolve(app.getHyperty(e.data.body.runtimeHypertyURL));
-                        }
-                    };
-                    window.addEventListener('message', loaded);                     
-                    iframe.contentWindow.postMessage({to:'core:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*');
-                });
-            },
-
-            requireProtostub: (domain)=>{
-                iframe.contentWindow.postMessage({to:'core:loadStub', body:{"domain": domain}}, '*')
-            },
-        };
+        return new Promise((resolve, reject)=>{
+            iframe = createIframe(`https://${domain}/.well-known/runtime/index.html`);
+            let installed = (e)=>{
+                if(e.data.to === 'runtime:installed'){
+                    window.removeEventListener('message', installed);
+                    resolve(runtimeProxy);
+                }
+            };
+            window.addEventListener('message', installed);
+            app.create(iframe);
+        });
     }
-}
+};
 
 export default RethinkBrowser

@@ -11,16 +11,19 @@ This is the most straightforward way to start. This server is public and can be 
     <script src="https://rethink-app.quobis.com/.well-known/runtime/rethink.js"
     ></script>
 
-> We need to discuss others ways to deploy Rethink module.
-
 Then you can use rethink global variable in window object to install the runtime:
 
     let domain = "rethink-app.quobis.com"
-    let runtimeLoader = window.rethink.default.install(domain);
+    let runtimeLoader = window.rethink.default.install(domain).then((runtime) => {//here go the interesting things});
+
+Other option is to import it and use the reference to install the runtime
+
+    import rethink from 'Rethink'
+    rethink.install(domain).then((runtime) => {//here go the interesting things})
 
 Once the runtime is installed you can require hyperties and protostubs through the runtime instance.
 
-    runtimeLoader.requireHyperty(hyperty)
+    runtime.requireHyperty(hyperty)
         .then(hypertyDeployed)
         .catch(function(reason) {
           errorMessage(reason);
