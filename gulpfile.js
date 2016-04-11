@@ -92,7 +92,7 @@ function prependLicense(clean) {
 function bundle(file_name, bundle_name, dest) {
 
   var bundler = browserify(file_name, {
-      standalone: bundle_name, debug: true, transform: [['babelify', {"presets": ["es2015"]}]]});
+      standalone: bundle_name, debug: true, transform: [['babelify', {"presets": ["es2015"], "plugins": ["transform-object-assign"]}]]});
 
   function rebundle() {
     return bundler.bundle()
