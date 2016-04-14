@@ -20,38 +20,167 @@
   <div class="progress"><div class="indeterminate"></div></div>
 
   <div class="row container hide">
-    <div class="login-panel">
-      <div class="card blue-grey darken-1">
-        <div class="card-content not-logged white-text">
-          <span class="card-title">Login</span>
-          <p>So that an application can use Google's OAuth 2.0 authentication system for user login.
-            A test account was created to set the project in the Google Developers with
-            this credentials:</p>
+    <div class="notpolicies">
+      <div class="login-panel">
+        <div class="card blue-grey darken-1">
+          <div class="card-content not-logged white-text">
+            <span class="card-title">Login</span>
+            <p>So that an application can use Google's OAuth 2.0 authentication system for user login.
+              A test account was created to set the project in the Google Developers with
+              this credentials:</p>
 
-            <span class="row">
-              <span class="col s6">
-                <h5>1º Account</h5>
-                <p><b>username:</b> openidtest10@gmail.com</p>
-                <p><b>password:</b> testOpenID10</p>
+              <span class="row">
+                <span class="col s6">
+                  <h5>1º Account</h5>
+                  <p><b>username:</b> openidtest10@gmail.com</p>
+                  <p><b>password:</b> testOpenID10</p>
+                </span>
+                <span class="col s6">
+                  <h5>2º Account</h5>
+                  <p><b>username:</b> openidtest20@gmail.com</p>
+                  <p><b>password:</b> testOpenID20</p>
+                </span>
               </span>
-              <span class="col s6">
-                <h5>2º Account</h5>
-                <p><b>username:</b> openidtest20@gmail.com</p>
-                <p><b>password:</b> testOpenID20</p>
-              </span>
-            </span>
-          </div>
-          <div class="card-action">
+              <button class="waves-effect waves-light btn" onclick="getPolicySection()">Preferences</button>
+            </div>
+            <div class="card-action">
+            </div>
           </div>
         </div>
+
+        <section class="chat-section hide">
+
+        </section>
+
       </div>
 
-      <section class="chat-section hide">
+      <div class="policyOptions hide">
+        <button class="waves-effect waves-light btn" onclick="goHome()">Back</button>
+        <div class="row">
+          <div class="col s12">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title"><b>Groups of users</b></span>
+                <div class="myGroups">
+                  <div class="row">
+                    <div class="col s12">
+                      <p>Click on the group name for group management and related reachability preferences.</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <div id="groupsList" class="collection teal lighten-2 col s4 offset-s4 center-align">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="members hide">
+                  <div class="row">
+                    <div class="col s12">
+                      <span class="card-title" id="groupName"></span>
+                      <ul id="groupMembers"</ul>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s4">
+                        <button class="waves-effect waves-light btn" id="addUser" onclick="showNewUserPanel()">Add a user</button>
+                        <div class="newUser hide">
+                          <input placeholder="User email" id="newUserEmail" type="text">
+                          <button id="add" onclick="addUser()">Add</button>
+                        </div>
+                      </div>
+                      <div class="col s4">
+                        <button class="waves-effect waves-light btn" id="delete">Delete group</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s4">
+                        <button class="waves-effect waves-light btn" id="block">Block group</button>
+                      </div>
+                      <div class="col s4">
+                        <button class="waves-effect waves-light btn" id="allow">Allow group</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col s4">
+                        <button class="waves-effect waves-light btn" onclick="closeGroup()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="newGroup hide">
+                    <div class="row">
+                      <div class="col s12">
+                      <button class="waves-effect waves-light btn" onclick="showNewGroupPanel()">New group</button>
+                      <div class="newGroupPanel hide">
+                        <input id="newGroupName" placeholder="Group name" type="text">
+                        <button class="waves-effect waves-light btn" onclick="addGroup()">Create</button>
+                        <button class="waves-effect waves-light btn" onclick="closeGroupCreation()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      </section>
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title"><b>Time restrictions</b></span>
+                  <div class="time">
+                    <div class="showTimeRestrictions">
+                      <div class="row">
+                        <div class="col s12">
+                          <p>Click on the timeslot for details and related reachability preferences. Each timeslot must be specified in the &lt;HOURS&gt;:&lt;MINUTES&gt; format.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col s12">
+                          <div id="timeRestrictionsList" class="collection teal lighten-2 col s4 offset-s4 center-align">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeRestriction hide">
+                      <span class="card-title" id="timeslot"></span>
+                      <p id="timeDetails"></p>
+                      <button class="waves-effect waves-light btn" id="newTimeRestriction" onclick="changeTimeRestriction(true)">Allow timeslot</button>
+                      <button class="waves-effect waves-light btn" id="newTimeRestriction" onclick="changeTimeRestriction(false)">Block timeslot</button>
+                      <button class="waves-effect waves-light btn" onclick="cancelTimeDetails()">Cancel</button>
+                    </div>
+                      <div class="newRestriction">
+                        <button class="waves-effect waves-light btn" id="newRestrictionButton" onclick=showNewTimeRestrictionPanel()>New time restriction</button>
+                      </div>
+                    <div class="newRestrictionPanel hide">
+                      <div class="row">
+                        <div class="col s5">
+                          <input id="startTime" placeholder="Start time" type="text">
+                        </div>
+                        <div class="col s5 offset-s1">
+                          <input id="endTime" placeholder="End time" type="text">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col s5">
+                          <button class="waves-effect waves-light btn" id="newTimeRestriction" onclick="addTimeRestriction(true)">Allow timeslot</button>
+                        </div>
+                        <div class="col s5">
+                          <button class="waves-effect waves-light btn" id="newTimeRestriction" onclick="addTimeRestriction(false)">Block timeslot</button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col s12">
+                          <button class="waves-effect waves-light btn" onclick="cancelNewTimeRestriction()">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
     </div>
-
     <!-- Modal Structure -->
     <div class="modal modal-fixed-footer create-chat">
       <div class="modal-content">
@@ -101,5 +230,6 @@
 
   <script src=".well-known/runtime/rethink.js"></script>
   <script src="demo2.bundle.js"></script>
+  <script src="policiesGUI.js"></script>
 </body>
 </html>
