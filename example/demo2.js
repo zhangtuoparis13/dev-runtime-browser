@@ -4,6 +4,8 @@
 
 //import config from '../system.config.json!json';
 import {ready, errorMessage} from './support';
+import {startPoliciesGUI} from '../src/admin/policiesGUI';
+import {startIdentitiesGUI} from '../src/admin/identitiesGUI';
 
 // polyfills
 import 'babel-polyfill';
@@ -54,12 +56,10 @@ function documentReady() {
 
 function runtimeInstalled(runtime) {
 
-  console.log(runtimeLoader);
-
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
 
   // Load First Hyperty
-  runtime.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+  runtime.requireHyperty(hyperty).then(hypertyDeployed).catch(function (reason) {
     errorMessage(reason);
   });
 
@@ -68,6 +68,8 @@ function runtimeInstalled(runtime) {
 let hypertyChat;
 
 function hypertyDeployed(result) {
+  console.log('HEY2');
+  startPoliciesGUI();
 
   hypertyChat = result.instance;
 
@@ -77,6 +79,8 @@ function hypertyDeployed(result) {
 
   loginPanel.attr('data-url', result.runtimeHypertyURL);
   cardAction.append(hypertyInfo);
+
+  $('.admin').on('click', goToPolicySection);
 
   let messageChat = $('.chat');
   messageChat.removeClass('hide');
@@ -92,7 +96,7 @@ function hypertyDeployed(result) {
 
   let countParticipants = 0;
 
-  addParticipantBtn.on('click', function(event) {
+  addParticipantBtn.on('click', function (event) {
 
     event.preventDefault();
 
@@ -114,14 +118,14 @@ function hypertyDeployed(result) {
 
   });
 
-  createRoomBtn.on('click', function(event) {
+  createRoomBtn.on('click', function (event) {
     event.preventDefault();
 
     let participants = [];
     /* participantsForm.find('.input-email').each(function() {
       participants.push($(this).val());
     });*/
-      console.log(participantsForm)
+    console.log(participantsForm);
     let serializedObject = $(participantsForm).serializeObjectArray();
 
     // Prepare the chat
@@ -131,46 +135,46 @@ function hypertyDeployed(result) {
 
     if (serializedObject.hasOwnProperty('email')) {
 
-      serializedObject.email.forEach(function(value, index) {
-        participants.push({email: value, domain: serializedObject.domain[index]});
+      serializedObject.email.forEach(function (value, index) {
+        participants.push({ email: value, domain: serializedObject.domain[index] });
       });
 
     }
 
     console.log('Participants: ', participants);
 
-    hypertyChat.create(name, participants).then(function(chatGroup) {
+    hypertyChat.create(name, participants).then(function (chatGroup) {
 
       prepareChat(chatGroup);
 
-    }).catch(function(reason) {
+    }).catch(function (reason) {
       console.error(reason);
     });
   });
 
-  hypertyChat.addEventListener('chat:subscribe', function(chatGroup) {
+  hypertyChat.addEventListener('chat:subscribe', function (chatGroup) {
     prepareChat(chatGroup);
   });
 
   // Join Chat Modal
   let joinModal = $('.join-chat');
   let joinBtn = joinModal.find('.btn-join');
-  joinBtn.on('click', function(event) {
+  joinBtn.on('click', function (event) {
 
     event.preventDefault();
 
     let resource = joinModal.find('.input-name').val();
 
-    hypertyChat.join(resource).then(function(chatGroup) {
+    hypertyChat.join(resource).then(function (chatGroup) {
       prepareChat(chatGroup);
-    }).catch(function(reason) {
+    }).catch(function (reason) {
       console.error(reason);
     });
 
   });
 
   // Add actions
-  Handlebars.getTemplate('chat-actions').then(function(template) {
+  Handlebars.getTemplate('chat-actions').then(function (template) {
 
     let html = template();
     $('.chat-section').append(html);
@@ -181,7 +185,6 @@ function hypertyDeployed(result) {
     createBtn.on('click', createRoom);
     joinBtn.on('click', joinRoom);
   });
-
 }
 
 function createRoom(event) {
@@ -202,24 +205,24 @@ function joinRoom(event) {
 
 function prepareChat(chatGroup) {
 
-  Handlebars.getTemplate('chat-section').then(function(html) {
+  Handlebars.getTemplate('chat-section').then(function (html) {
     $('.chat-section').append(html);
 
     chatManagerReady(chatGroup);
 
     console.log('Chat Group Controller: ', chatGroup);
 
-    chatGroup.addEventListener('have:new:notification', function(event) {
+    chatGroup.addEventListener('have:new:notification', function (event) {
       console.log('have:new:notification: ', event);
       Materialize.toast('Have new notification', 3000, 'rounded');
     });
 
-    chatGroup.addEventListener('new:message:recived', function(message) {
+    chatGroup.addEventListener('new:message:recived', function (message) {
       console.info('new message recived: ', message);
       processMessage(message);
     });
 
-    chatGroup.addEventListener('participant:added', function(participant) {
+    chatGroup.addEventListener('participant:added', function (participant) {
       console.info('new participant', participant);
       addParticipant(participant);
     });
@@ -279,7 +282,7 @@ function chatManagerReady(chatGroup) {
 
   });
 
-  btnAdd.on('click', function(event) {
+  btnAdd.on('click', function (event) {
     event.preventDefault();
 
     let emailValue = addParticipantModal.find('.input-name').val();
@@ -291,11 +294,11 @@ function chatManagerReady(chatGroup) {
 
   });
 
-  btnCancel.on('click', function(event) {
+  btnCancel.on('click', function (event) {
     event.preventDefault();
   });
 
-  addParticipantBtn.on('click', function(event) {
+  addParticipantBtn.on('click', function (event) {
     event.preventDefault();
     addParticipantModal.openModal();
   });
@@ -341,9 +344,15 @@ function removeParticipant(item) {
   element.remove();
 }
 
-Handlebars.getTemplate = function(name) {
+function goToPolicySection() {
+  $('.app').addClass('hide');
+  $('.policyOptions').removeClass('hide');
+  $('.newGroup').removeClass('hide');
+}
 
-  return new Promise(function(resolve, reject) {
+Handlebars.getTemplate = function (name) {
+
+  return new Promise(function (resolve, reject) {
 
     if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
       Handlebars.templates = {};
@@ -353,12 +362,12 @@ Handlebars.getTemplate = function(name) {
 
     $.ajax({
       url: 'templates/' + name + '.hbs',
-      success: function(data) {
+      success: function (data) {
         Handlebars.templates[name] = Handlebars.compile(data);
         resolve(Handlebars.templates[name]);
       },
 
-      fail: function(reason) {
+      fail: function (reason) {
         reject(reason);
       }
     });

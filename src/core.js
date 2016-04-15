@@ -22,46 +22,49 @@
 **/
 import RuntimeFactory from './RuntimeFactory';
 import RuntimeCatalogue from 'service-framework/src/RuntimeCatalogue';
+import {startPoliciesGUI} from '../src/admin/policiesGUI';
+import {startIdentitiesGUI} from '../src/admin/identitiesGUI';
 
 const runtimeURL = 'hyperty-catalogue://' + window.location.hostname + '/.well-known/runtime/RuntimeUA';
 
-function returnHyperty(source, hyperty){
-    source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
+function returnHyperty(source, hyperty) {
+  source.postMessage({ to: 'runtime:loadedHyperty', body: hyperty }, '*');
 }
 
-function searchHyperty(runtime, descriptor){
-    let hyperty = undefined;
-    let index = 0;
-    while(!!hyperty){
-        if(runtime.registry.hypertiesList[index]=== descriptor) 
-            hyperty = runtime.registry.hypertiesList[index]
+function searchHyperty(runtime, descriptor) {
+  let index = 0;
+  while (!!hyperty) {
+    if (runtime.registry.hypertiesList[index] === descriptor)
+        hyperty = runtime.registry.hypertiesList[index];
 
-        index++
-    }
+    index++;
+  }
 
-    return hyperty;
+  return hyperty;
 }
 
 let catalogue = new RuntimeCatalogue(RuntimeFactory);
-catalogue.getRuntimeDescriptor(runtimeURL)
-    .then(function(descriptor){
-        eval.apply(window,[descriptor.sourcePackage.sourceCode])
+catalogue.getRuntimeDescriptor(runtimeURL).then(function (descriptor) {
+  eval.apply(window, [descriptor.sourcePackage.sourceCode]);
 
-        let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
-        window.addEventListener('message', function(event){
-            if(event.data.to==='core:loadHyperty'){
-                let descriptor = event.data.body.descriptor;
-                let hyperty = searchHyperty(runtime, descriptor);
+  let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
+  startPoliciesGUI(runtime.messageBus);
+  startIdentitiesGUI(runtime.messageBus);
+  window.addEventListener('message', function (event) {
+    if (event.data.to === 'core:loadHyperty') {
+      let descriptor = event.data.body.descriptor;
+      let hyperty = searchHyperty(runtime, descriptor);
 
-                if(hyperty){
-                    returnHyperty(event.source, {runtimeHypertyURL: hyperty.hypertyURL});
-                }else{
-                    runtime.loadHyperty(descriptor)
-                        .then(returnHyperty.bind(null, event.source));
-                }
-            }else if(event.data.to==='core:loadStub'){
-                runtime.loadStub(event.data.body.domain)
-            }
-        }, false);
-        parent.postMessage({to:'runtime:installed', body:{}}, '*');
-    });
+      if (hyperty) {
+        returnHyperty(event.source, { runtimeHypertyURL: hyperty.hypertyURL });
+      } else {
+        runtime.loadHyperty(descriptor)
+            .then(returnHyperty.bind(null, event.source));
+      }
+    } else if (event.data.to === 'core:loadStub') {
+      runtime.loadStub(event.data.body.domain);
+    }
+  }, false);
+
+  parent.postMessage({ to:'runtime:installed', body:{} }, '*');
+});

@@ -1,49 +1,50 @@
 // jshint browser:true, jquery: true
-let messageBus;
 
-function getPolicySection() {
-  $('.notpolicies').addClass('hide');
-  $('.policyOptions').removeClass('hide');
-  $('.newGroup').removeClass('hide');
+// var messageBus;
 
-  window.rethink.default.install('localhost').then((runtime) => {
-    console.log('runtime', runtime);
-
+export function startPoliciesGUI(bus) {
+  $('.app').addClass('hide');
+  $('.identities-gui').addClass('hide');
+  $('.policies-gui').removeClass('hide');
+  /*messageBus = bus;
     messageBus.addListener('*', (message) => {
-      console.log('RECEIVED MESSAGE', message);
-      if (message.to === 'domain://localhost/policies-gui') {
-        console.log('RESPONSE:', message);
-        let method = message.body.method;
-        switch (method) {
-          case 'getGroupsNames':
-            showGroupsNames(message.body.value);
-            break;
-          case 'getGroup':
-            showGroupMembers(message.body.value);
-            break;
-          case 'getTimeRestrictions':
-            showTimeRestrictionsList(message.body.value);
-            break;
-          case 'getTimeRestrictionById':
-            showTimeRestriction(message.body.value);
-            break;
-        }
+    if (message.to === 'domain://localhost/policies-gui') {
+      let method = message.body.method;
+      switch (method) {
+        case 'getGroupsNames':
+          showGroupsNames(message.body.value);
+          break;
+        case 'getGroup':
+          showGroupMembers(message.body.value);
+          break;
+        case 'getTimeRestrictions':
+          showTimeRestrictionsList(message.body.value);
+          break;
+        case 'getTimeRestrictionById':
+          showTimeRestriction(message.body.value);
+          break;
       }
-    });
+    }
+  });*/
+  $('.back').on('click', goHome);
+  $('.new-user').on('click', showNewUserPanel);
+  $('.add-user').on('click', addUser);
+  $('.new-group').on('.click', showNewGroupPanel);
+  $('.cancel-new-group').on('click', closeGroup);
+  $('.add-group').on('click', addGroup);
+  $('.close-new-group').on('click', closeGroupCreation);
 
-    /*********************************************************/
-    requestGroupsNames();
-    addGroupsListener();
-    addGroupMembersListener();
-    /*********************************************************/
-    requestTimeRestrictions();
-    addTimeListListener();
-  });
+  requestGroupsNames();
+  addGroupsListener();
+  addGroupMembersListener();
+
+  requestTimeRestrictions();
+  addTimeListListener();
 }
 
-function goHome() {
-  $('.notpolicies').removeClass('hide');
-  $('.policyOptions').addClass('hide');
+export function goHome() {
+  $('.app').removeClass('hide');
+  $('.policies-gui').addClass('hide');
 }
 
 function addGroupsListener() {
@@ -63,9 +64,7 @@ function requestGroupsNames() {
       method: 'getGroupsNames'
     }
   };
-  console.log('request', message);
   messageBus.postMessage(message, function (response) {
-    console.log('aqui', response);
     showGroupsNames(response.body.value);
   });
 }
@@ -171,24 +170,24 @@ function requestRemoveGroup(groupName) {
   messageBus.postMessage(message);
 }
 
-function showNewGroupPanel() {
+export function showNewGroupPanel() {
   $('.newGroupPanel').removeClass('hide');
   $('.members').addClass('hide');
   $('#newGroupName').val('');
 }
 
-function addGroup() {
+export function addGroup() {
   $('.newGroupPanel').addClass('hide');
   let newGroupName = $('#newGroupName').val();
   requestCreateGroup(newGroupName);
   requestGroupsNames();
 }
 
-function closeGroupCreation() {
+export function closeGroupCreation() {
   $('.newGroupPanel').addClass('hide');
 }
 
-function closeGroup() {
+export function closeGroup() {
   $('.members').addClass('hide');
   $('.myGroups').removeClass('hide');
   $('.newGroup').removeClass('hide');
@@ -208,12 +207,12 @@ function requestCreateGroup(groupName) {
   messageBus.postMessage(message);
 }
 
-function showNewUserPanel() {
+export function showNewUserPanel() {
   $('.newUser').removeClass('hide');
   $('#newUserEmail').val('');
 }
 
-function addUser() {
+export function addUser() {
   let newUserEmail = $('#newUserEmail').val();
   let groupName = document.getElementById('groupName').innerText;
   requestAddUser(newUserEmail, groupName);
