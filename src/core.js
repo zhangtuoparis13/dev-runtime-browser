@@ -20,10 +20,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
+import URI from 'urijs';
 import RuntimeFactory from './RuntimeFactory';
 import RuntimeCatalogue from 'service-framework/src/RuntimeCatalogue';
-
-const runtimeURL = 'hyperty-catalogue://' + window.location.hostname + '/.well-known/runtime/RuntimeUA';
 
 function returnHyperty(source, hyperty){
     source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
@@ -43,9 +42,18 @@ function searchHyperty(runtime, descriptor){
 }
 
 let catalogue = new RuntimeCatalogue(RuntimeFactory);
+let runtimeURL = new URI(window.location).search(true).runtime;
 catalogue.getRuntimeDescriptor(runtimeURL)
     .then(function(descriptor){
-        eval.apply(window,[descriptor.sourcePackage.sourceCode])
+        let sourcePackageURL = descriptor.sourcePackageURL;
+        if (sourcePackageURL === '/sourcePackage') {
+            return descriptor.sourcePackage;
+        }
+
+        return catalogue.getSourcePackageFromURL(sourcePackageURL);
+    })
+    .then(function(sourcePackage){
+        eval.apply(window,[sourcePackage.sourceCode])
 
         let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
         window.addEventListener('message', function(event){

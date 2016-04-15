@@ -21,6 +21,7 @@
 * limitations under the License.
 **/
 import app from './ContextApp';
+import URI from 'urijs';
 import { create as createIframe } from './iframe';
 
 let iframe = undefined;
@@ -52,10 +53,26 @@ let runtimeProxy = {
     },
 };
 
+let getRuntime = (domain)=>{
+    let pattern = /\:\/\//
+    
+    if(pattern.test(domain))
+        return {
+            url: domain,
+            domain: new URI(domain).hostname()
+        }
+    
+    return {
+        url: 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/RuntimeUA',
+        domain: domain
+    }
+};
+
 let RethinkBrowser = {
     install: function(domain){
         return new Promise((resolve, reject)=>{
-            iframe = createIframe(`https://${domain}/.well-known/runtime/index.html`);
+            let runtime = getRuntime(domain)
+            iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}`);
             let installed = (e)=>{
                 if(e.data.to === 'runtime:installed'){
                     window.removeEventListener('message', installed);

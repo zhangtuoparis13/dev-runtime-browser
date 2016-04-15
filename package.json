@@ -62,6 +62,7 @@
     "object.observe": "^0.2.6",
     "runtime-core": "git+https://github.com/reTHINK-project/dev-runtime-core.git#dev-0.4",
     "service-framework": "git+https://github.com/reTHINK-project/dev-service-framework.git#develop",
-    "tv4": "^1.2.7"
+    "tv4": "^1.2.7",
+    "urijs": "^1.17.1"
   }
 }
