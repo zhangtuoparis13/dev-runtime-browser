@@ -25,7 +25,7 @@ import 'array.observe';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = "localhost";
+let domain = 'localhost';
 
 // Hack because the GraphConnector jsrsasign module;
 window.KJUR = {};
@@ -68,19 +68,17 @@ function runtimeInstalled(runtime) {
 let hypertyChat;
 
 function hypertyDeployed(result) {
-  console.log('HEY2');
-  startPoliciesGUI();
-
   hypertyChat = result.instance;
 
   let loginPanel = $('.login-panel');
   let cardAction = loginPanel.find('.card-action');
-  let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span>';
+  let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span><div class="row"><div class="col s12"><button class="policies-btn waves-effect waves-light btn">Policies</button><button class="identities-btn waves-effect waves-light btn">Identities</button></div></div>';
 
   loginPanel.attr('data-url', result.runtimeHypertyURL);
   cardAction.append(hypertyInfo);
 
-  $('.admin').on('click', goToPolicySection);
+  $('.policies-btn').on('click', startPoliciesGUI);
+  $('.identities-btn').on('click', startIdentitiesGUI);
 
   let messageChat = $('.chat');
   messageChat.removeClass('hide');
@@ -342,12 +340,6 @@ function removeParticipant(item) {
   let collection = section.find('.participant-list');
   let element = collection.find('li[data-name="' + item + '"]');
   element.remove();
-}
-
-function goToPolicySection() {
-  $('.app').addClass('hide');
-  $('.policyOptions').removeClass('hide');
-  $('.newGroup').removeClass('hide');
 }
 
 Handlebars.getTemplate = function (name) {

@@ -38,6 +38,13 @@ export function startPoliciesGUI(bus) {
   addGroupsListener();
   addGroupMembersListener();
 
+  $('.time-new').on('click', showNewTimeRestrictionPanel);
+  $('.time-allow').on('click', addTimeRestriction(true));
+  $('.time-block').on('click', addTimeRestriction(false));
+  $('.time-change-allow').on('click', changeTimeRestriction(true));
+  $('.time-change-block').on('click', changeTimeRestriction(false));
+  $('.time-cancel').on('click', cancelTimeDetails);
+  $('.time-cancel-new').on('click', cancelNewTimeRestriction);
   requestTimeRestrictions();
   addTimeListListener();
 }
@@ -64,9 +71,9 @@ function requestGroupsNames() {
       method: 'getGroupsNames'
     }
   };
-  messageBus.postMessage(message, function (response) {
+  /*messageBus.postMessage(message, function (response) {
     showGroupsNames(response.body.value);
-  });
+  });*/
 }
 
 function showGroupsNames(groupsNames) {
@@ -98,7 +105,7 @@ function requestGroup(groupName) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 function showGroupMembers(groupMembers) {
@@ -167,7 +174,7 @@ function requestRemoveGroup(groupName) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 export function showNewGroupPanel() {
@@ -204,7 +211,7 @@ function requestCreateGroup(groupName) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 export function showNewUserPanel() {
@@ -237,7 +244,7 @@ function requestAddUser(userEmail, groupName) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 function requestAddPolicy(type, params, authorise) {
@@ -271,7 +278,7 @@ function requestAddPolicy(type, params, authorise) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 function addGroupMembersListener() {
@@ -296,7 +303,7 @@ function removeUserFromGroup(userEmail, groupName) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 /*******************************************************/
@@ -309,7 +316,7 @@ function requestTimeRestrictions() {
       method: 'getTimeRestrictions'
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 function addTimeListListener() {
@@ -337,7 +344,7 @@ function requestTimeRestriction(id) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 function showTimeRestrictionsList(timeRestrictions) {
@@ -384,7 +391,7 @@ function requestRemoveTimeRestriction(timeRestrictionID) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 function showNewTimeRestrictionPanel() {
@@ -428,11 +435,11 @@ function requestChangeTimePolicy(policyID, authorise) {
       }
     }
   };
-  messageBus.postMessage(message);
+  //messageBus.postMessage(message);
 }
 
 function cancelTimeDetails() {
   $('.timeRestriction').addClass('hide');
   $('.showTimeRestrictions').removeClass('hide');
-  $('.newRestriction').removeClass('hide');
+  $('striction').removeClass('hide');
 }

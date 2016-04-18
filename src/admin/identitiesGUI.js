@@ -3,7 +3,7 @@ var identities = [
   { email: 'user10@gmail.com', domain: 'google.com' },
   { email: 'camila@orange.fr', domain: 'orange.fr' },
   { email: 'user20@gmail.com', domain: 'facebook.com' }
-]
+];
 
 export function startIdentitiesGUI(messageBus) {
 
@@ -14,11 +14,19 @@ export function startIdentitiesGUI(messageBus) {
   showCurrentID({ email: 'user10@gmail.com', domain: 'google.com' });
   showMyIdentities(identities);
   $('.idp').on('click', obtainNewIdentity);
+
   // -------------------------------------------------------------------------//
 
+  $('.back').on('click', goHome);
   sendRequest('getCurrentIdentity', '');
   sendRequest('getIdentities', '');
-};
+}
+
+function goHome() {
+  $('.app').removeClass('hide');
+  $('.policies-gui').addClass('hide');
+  $('.identities-gui').addClass('hide');
+}
 
 function showCurrentID(identity) {
   $('.current-id').html('<b>Current identity: </b>' + identity.email + ' from ' + identity.domain);
@@ -36,6 +44,7 @@ function showMyIdentities(identities) {
     let tr = createTableRow(identities[i]);
     tbody.appendChild(tr);
   }
+
   table.appendChild(tbody);
   myIdentities.appendChild(table);
   $('.clickable-cell').on('click', changeID);
@@ -103,7 +112,9 @@ function removeID() {
       break;
     }
   }
+
   showMyIdentities(identities);
+
   // -------------------------------------------------------------------------//
 
   sendRequest('getIdentities', '');
