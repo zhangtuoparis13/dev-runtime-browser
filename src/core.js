@@ -48,8 +48,10 @@ catalogue.getRuntimeDescriptor(runtimeURL).then(function (descriptor) {
   eval.apply(window, [descriptor.sourcePackage.sourceCode]);
 
   let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
-  startPoliciesGUI(runtime.messageBus);
-  startIdentitiesGUI(runtime.messageBus);
+
+  startPoliciesGUI(runtime.policyEngine);
+  //startIdentitiesGUI(runtime.identityModule);
+
   window.addEventListener('message', function (event) {
     if (event.data.to === 'core:loadHyperty') {
       let descriptor = event.data.body.descriptor;

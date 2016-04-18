@@ -1,11 +1,18 @@
 // jshint browser:true, jquery: true
 
-// var messageBus;
+var policyEngine;
 
-export function startPoliciesGUI(bus) {
+function startPoliciesGUI(policyEng) {
+  var policyEngine = policyEng;
+  console.log('POLICY ENGINE @ start', policyEngine);
+}
+
+export function showPoliciesGUI() {
+  console.log('POLICY ENGINE @ show', policyEngine);
   $('.app').addClass('hide');
   $('.identities-gui').addClass('hide');
   $('.policies-gui').removeClass('hide');
+
   /*messageBus = bus;
     messageBus.addListener('*', (message) => {
     if (message.to === 'domain://localhost/policies-gui') {

@@ -1,11 +1,20 @@
 // jshint browser:true, jquery: true
+
+//var idModule;
+
 var identities = [
   { email: 'user10@gmail.com', domain: 'google.com' },
   { email: 'camila@orange.fr', domain: 'orange.fr' },
   { email: 'user20@gmail.com', domain: 'facebook.com' }
 ];
 
-export function startIdentitiesGUI(messageBus) {
+//export function startIdentitiesGUI(identityModule) {
+  //var idModule = identityModule;
+  //console.log('IDENTITY MODULE @ start', idModule);
+//}
+
+export function showIdentitiesGUI() {
+  //console.log('IDENTITY MODULE @ show', idModule);
 
   // ------------------------------- TEMPORARY -------------------------------//
   $('.app').addClass('hide');

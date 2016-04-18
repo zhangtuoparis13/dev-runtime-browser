@@ -4,8 +4,8 @@
 
 //import config from '../system.config.json!json';
 import {ready, errorMessage} from './support';
-import {startPoliciesGUI} from '../src/admin/policiesGUI';
-import {startIdentitiesGUI} from '../src/admin/identitiesGUI';
+import {showPoliciesGUI} from '../src/admin/policiesGUI';
+import {showIdentitiesGUI} from '../src/admin/identitiesGUI';
 
 // polyfills
 import 'babel-polyfill';
@@ -77,8 +77,8 @@ function hypertyDeployed(result) {
   loginPanel.attr('data-url', result.runtimeHypertyURL);
   cardAction.append(hypertyInfo);
 
-  $('.policies-btn').on('click', startPoliciesGUI);
-  $('.identities-btn').on('click', startIdentitiesGUI);
+  $('.policies-btn').on('click', showPoliciesGUI);
+  $('.identities-btn').on('click', showIdentitiesGUI);
 
   let messageChat = $('.chat');
   messageChat.removeClass('hide');
