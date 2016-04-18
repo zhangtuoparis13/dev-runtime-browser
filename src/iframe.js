@@ -25,7 +25,7 @@ export function create(src){
     iframe.setAttribute('id', 'rethink');
     iframe.setAttribute('seamless', '');
     iframe.setAttribute('src', src);
-    iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin allow-popups');
+    iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation');
     iframe.style.display = 'none';
     document.querySelector('body').appendChild(iframe);
 

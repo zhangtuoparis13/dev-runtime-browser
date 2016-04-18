@@ -20,9 +20,8 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import Sandbox from 'runtime-core/src/sandbox/Sandbox';
-import MiniBus from 'runtime-core/src/bus/MiniBus';
-import {SandboxType} from 'runtime-core/src/sandbox/Sandbox';
+import {Sandbox, SandboxRegistry, SandboxType} from 'runtime-core/dist/sandbox';
+import MiniBus from 'runtime-core/dist/minibus';
 
 export default class SandboxApp extends Sandbox{
    constructor(){

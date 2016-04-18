@@ -21,7 +21,7 @@
 * limitations under the License.
 **/
 import RuntimeFactory from './RuntimeFactory';
-import RuntimeCatalogue from 'service-framework/src/RuntimeCatalogue';
+import {RuntimeCatalogueLocal} from 'service-framework/dist/RuntimeCatalogue';
 import {startPoliciesGUI} from '../src/admin/policiesGUI';
 import {startIdentitiesGUI} from '../src/admin/identitiesGUI';
 
@@ -33,6 +33,7 @@ function returnHyperty(source, hyperty) {
 
 function searchHyperty(runtime, descriptor) {
   let index = 0;
+  let hyperty = undefined;
   while (!!hyperty) {
     if (runtime.registry.hypertiesList[index] === descriptor)
         hyperty = runtime.registry.hypertiesList[index];
@@ -43,12 +44,14 @@ function searchHyperty(runtime, descriptor) {
   return hyperty;
 }
 
-let catalogue = new RuntimeCatalogue(RuntimeFactory);
+console.log('RUNTIME: ', RuntimeFactory);
+let catalogue = new RuntimeCatalogueLocal(RuntimeFactory);
 catalogue.getRuntimeDescriptor(runtimeURL).then(function (descriptor) {
   eval.apply(window, [descriptor.sourcePackage.sourceCode]);
 
   let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
 
+  console.info('AQUI:', runtime.policyEngine, startPoliciesGUI);
   startPoliciesGUI(runtime.policyEngine);
   //startIdentitiesGUI(runtime.identityModule);
 

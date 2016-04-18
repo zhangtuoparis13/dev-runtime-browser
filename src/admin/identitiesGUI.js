@@ -8,10 +8,10 @@ var identities = [
   { email: 'user20@gmail.com', domain: 'facebook.com' }
 ];
 
-//export function startIdentitiesGUI(identityModule) {
-  //var idModule = identityModule;
-  //console.log('IDENTITY MODULE @ start', idModule);
-//}
+export function startIdentitiesGUI(identityModule) {
+  var idModule = identityModule;
+  console.log('IDENTITY MODULE @ start', idModule);
+}
 
 export function showIdentitiesGUI() {
   //console.log('IDENTITY MODULE @ show', idModule);

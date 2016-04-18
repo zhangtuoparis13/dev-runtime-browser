@@ -20,8 +20,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import Sandbox from 'runtime-core/src/sandbox/Sandbox';
-import {SandboxType} from 'runtime-core/src/sandbox/Sandbox';
+import {Sandbox, SandboxType} from 'runtime-core/dist/sandbox';
 
 export default class SandboxWorker extends Sandbox{
    constructor(script){

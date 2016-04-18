@@ -1,9 +1,9 @@
 // jshint browser:true, jquery: true
 
-var policyEngine;
+export var policyEngine;
 
-function startPoliciesGUI(policyEng) {
-  var policyEngine = policyEng;
+export function startPoliciesGUI(policyEng) {
+  policyEngine = policyEng;
   console.log('POLICY ENGINE @ start', policyEngine);
 }
 

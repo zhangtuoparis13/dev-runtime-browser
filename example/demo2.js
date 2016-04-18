@@ -55,7 +55,6 @@ function documentReady() {
 }
 
 function runtimeInstalled(runtime) {
-
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
 
   // Load First Hyperty
