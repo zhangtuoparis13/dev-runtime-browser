@@ -122,6 +122,7 @@ function removeID() {
 }
 
 function obtainNewIdentity() {
+  console.log('obtainNewIdentity');
   let idProvider = $(this).context.id;
   sendRequest('obtainNewIdentity', idProvider);
 }
