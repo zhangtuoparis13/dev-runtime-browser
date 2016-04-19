@@ -13,6 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
 </head>
 <body>
 
@@ -40,7 +41,15 @@
                   <p><b>password:</b> testOpenID20</p>
                 </span>
               </span>
-              <div class="card-action"></div>
+              <div class="card-action preferences hide">
+                <div class="row">
+                  <div class="col s3 offset-s3">
+                    <button class="policies-btn waves-effect waves-light btn" onclick="PoliciesGUI.showPoliciesGUI()">Policies</button>
+                  </div>
+                  <div class="col s3"><button class="identities-btn waves-effect waves-light btn">Identities</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -262,5 +271,6 @@
 
   <script src=".well-known/runtime/rethink.js"></script>
   <script src="demo2.bundle.js"></script>
+  <script src="policies-gui.bundle.js"></script>
 </body>
 </html>

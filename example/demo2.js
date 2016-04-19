@@ -4,8 +4,6 @@
 
 //import config from '../system.config.json!json';
 import {ready, errorMessage} from './support';
-import {showPoliciesGUI} from '../src/admin/policiesGUI';
-import {showIdentitiesGUI} from '../src/admin/identitiesGUI';
 
 // polyfills
 import 'babel-polyfill';
@@ -71,13 +69,13 @@ function hypertyDeployed(result) {
 
   let loginPanel = $('.login-panel');
   let cardAction = loginPanel.find('.card-action');
-  let hypertyInfo = '<div class="row"><div class="col s12"><span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span></div></div><div class="row"><div class="col s3 offset-s3"><button class="policies-btn waves-effect waves-light btn">Policies</button></div><div class="col s3"><button class="identities-btn waves-effect waves-light btn">Identities</button></div></div>';
+  let hypertyInfo = '<div class="row"><div class="col s12"><span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span></div></div>';
 
   loginPanel.attr('data-url', result.runtimeHypertyURL);
   cardAction.append(hypertyInfo);
-
+  $('.preferences').removeClass('hide');
   $('.policies-btn').on('click', showPoliciesGUI);
-  $('.identities-btn').on('click', showIdentitiesGUI);
+  //$('.identities-btn').on('click', showIdentitiesGUI);
 
   let messageChat = $('.chat');
   messageChat.removeClass('hide');

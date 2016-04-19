@@ -119,6 +119,11 @@ gulp.task('bundle:rethink', function(){
 gulp.task('bundle:core', function(){
     return bundle('./src/core.js', 'core', 'bin')
 });
+
+gulp.task('bundle:policies-gui', function () {
+  return bundle('./src/admin/policiesGUI.js', 'policies-gui.bundle', 'example');
+});
+
 gulp.task('bundle:context', function(){
     return bundle('./src/ContextServiceProvider.js', 'context-service', 'bin')
 });
