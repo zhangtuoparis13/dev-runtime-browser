@@ -53,25 +53,10 @@ let runtimeProxy = {
     },
 };
 
-let getRuntime = (domain)=>{
-    let pattern = /\:\/\//
-    
-    if(pattern.test(domain))
-        return {
-            url: domain,
-            domain: new URI(domain).hostname()
-        }
-    
-    return {
-        url: 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/RuntimeUA',
-        domain: domain
-    }
-};
-
 let RethinkBrowser = {
-    install: function(domain){
+    install: function({domain, runtimeURL, development}={}){
         return new Promise((resolve, reject)=>{
-            let runtime = getRuntime(domain)
+            let runtime = this.getRuntime(runtimeURL, domain, development)
             iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}`);
             let installed = (e)=>{
                 if(e.data.to === 'runtime:installed'){
@@ -82,6 +67,21 @@ let RethinkBrowser = {
             window.addEventListener('message', installed);
             app.create(iframe);
         });
+    },
+
+    getRuntime (runtimeURL, domain, development) {
+        if(!!development){
+            runtimeURL = runtimeURL || 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/RuntimeUA' //`https://${domain}/resources/descriptors/Runtimes.json`
+            domain = domain || new URI(runtimeURL).hostname()
+        }else{
+            runtimeURL = runtimeURL || `https://catalogue.${domain}/.well-known/runtime/default`
+            domain = domain || new URI(runtimeURL).hostname().replace("catalogue.", "")
+        }
+
+        return {
+            "url": runtimeURL,
+            "domain": domain
+        }
     }
 };
 

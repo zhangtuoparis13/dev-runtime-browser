@@ -22,7 +22,6 @@
 **/
 import URI from 'urijs';
 import RuntimeFactory from './RuntimeFactory';
-import RuntimeCatalogue from 'service-framework/src/RuntimeCatalogue';
 
 function returnHyperty(source, hyperty){
     source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
@@ -41,7 +40,7 @@ function searchHyperty(runtime, descriptor){
     return hyperty;
 }
 
-let catalogue = new RuntimeCatalogue(RuntimeFactory);
+let catalogue = RuntimeFactory.createRuntimeCatalogue();
 let runtimeURL = new URI(window.location).search(true).runtime;
 catalogue.getRuntimeDescriptor(runtimeURL)
     .then(function(descriptor){

@@ -60,7 +60,7 @@
     "indexeddbshim": "^2.2.1",
     "mutationobserver-shim": "^0.3.1",
     "object.observe": "^0.2.6",
-    "runtime-core": "git+https://github.com/reTHINK-project/dev-runtime-core.git#dev-0.4",
+    "runtime-core": "git+https://github.com/reTHINK-project/dev-runtime-core.git#dev-0.5",
     "service-framework": "git+https://github.com/reTHINK-project/dev-service-framework.git#develop",
     "tv4": "^1.2.7",
     "urijs": "^1.17.1"
