@@ -57,7 +57,7 @@ let RethinkBrowser = {
     install: function({domain, runtimeURL, development}={}){
         return new Promise((resolve, reject)=>{
             let runtime = this.getRuntime(runtimeURL, domain, development)
-            iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}`);
+            iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}&development=${development}`);
             let installed = (e)=>{
                 if(e.data.to === 'runtime:installed'){
                     window.removeEventListener('message', installed);

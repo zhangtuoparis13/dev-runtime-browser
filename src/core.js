@@ -40,8 +40,11 @@ function searchHyperty(runtime, descriptor){
     return hyperty;
 }
 
-let catalogue = RuntimeFactory.createRuntimeCatalogue();
-let runtimeURL = new URI(window.location).search(true).runtime;
+let parameters = new URI(window.location).search(true)
+let runtimeURL = parameters.runtime
+let development = !!parameters.development
+let catalogue = RuntimeFactory.createRuntimeCatalogue(development)
+
 catalogue.getRuntimeDescriptor(runtimeURL)
     .then(function(descriptor){
         let sourcePackageURL = descriptor.sourcePackageURL;

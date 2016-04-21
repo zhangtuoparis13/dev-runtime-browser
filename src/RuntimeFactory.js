@@ -39,9 +39,9 @@ const RuntimeFactory = Object.create({
         return request;
     },
 
-    createRuntimeCatalogue(){
+    createRuntimeCatalogue(development){
         if(!this.catalogue)
-            this.catalogue = new RuntimeCatalogueLocal(this)
+            this.catalogue = development?new RuntimeCatalogueLocal(this):new RuntimeCatalogue(this)
         
         return this.catalogue
     }
