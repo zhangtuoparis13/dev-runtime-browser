@@ -40,7 +40,7 @@ function documentReady() {
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  rethink.install(domain).then(runtimeInstalled).catch(errorMessage);
+  rethink.install({"domain": domain, development: true}).then(runtimeInstalled).catch(errorMessage);
 }
 
 function runtimeInstalled(runtime) {
