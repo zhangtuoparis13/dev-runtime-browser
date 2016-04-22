@@ -121,7 +121,7 @@ gulp.task('bundle:core', function(){
 });
 
 gulp.task('bundle:policies-gui', function () {
-  return bundle('./src/admin/policiesGUI.js', 'policies-gui.bundle', 'example');
+  return bundle('./src/admin/PoliciesGUI.js', 'policies-gui', 'bin');
 });
 
 gulp.task('bundle:context', function(){

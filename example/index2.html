@@ -41,15 +41,6 @@
                   <p><b>password:</b> testOpenID20</p>
                 </span>
               </span>
-              <div class="card-action preferences hide">
-                <div class="row">
-                  <div class="col s3 offset-s3">
-                    <button class="policies-btn waves-effect waves-light btn" onclick="PoliciesGUI.showPoliciesGUI()">Policies</button>
-                  </div>
-                  <div class="col s3"><button class="identities-btn waves-effect waves-light btn">Identities</button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -59,169 +50,6 @@
         </section>
 
       </div>
-
-      <div class="policies-gui hide">
-        <button class="back waves-effect waves-light btn">Back</button>
-        <div class="row">
-          <div class="col s12">
-            <div class="card blue-grey darken-1">
-              <div class="card-content white-text">
-                <span class="card-title"><b>Groups of users</b></span>
-                <div class="myGroups">
-                  <div class="row">
-                    <div class="col s12">
-                      <p>Click on the group name for group management and related reachability preferences.</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col s12">
-                      <div id="groupsList" class="collection teal lighten-2 col s4 offset-s4 center-align">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="members hide">
-                  <div class="row">
-                    <div class="col s12">
-                      <span class="card-title" id="groupName"></span>
-                      <ul id="groupMembers"</ul>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s4">
-                        <button class="newUser waves-effect waves-light btn">Add a user</button>
-                        <div class="new-user hide">
-                          <input placeholder="User email" id="newUserEmail" type="text">
-                          <button class="add-user">Add</button>
-                        </div>
-                      </div>
-                      <div class="col s4">
-                        <button class="waves-effect waves-light btn group-delete">Delete group</button>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s4">
-                        <button class="waves-effect waves-light btn group-block">Block group</button>
-                      </div>
-                      <div class="col s4">
-                        <button class="waves-effect waves-light btn group-allow">Allow group</button>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s4">
-                        <button class="group-cancel waves-effect waves-light btn">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="newGroup hide">
-                    <div class="row">
-                      <div class="col s12">
-                        <button class="group-new waves-effect waves-light btn">New group</button>
-                        <div class="newGroupPanel hide">
-                          <input id="newGroupName" placeholder="Group name" type="text">
-                          <button class="add-group waves-effect waves-light btn">Create</button>
-                          <button class="group-new-close waves-effect waves-light btn">Cancel</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title"><b>Time restrictions</b></span>
-              <div class="time">
-                <div class="showTimeRestrictions">
-                  <div class="row">
-                    <div class="col s12">
-                      <p>Click on the timeslot for details and related reachability preferences. Each timeslot must be specified in the &lt;HOURS&gt;:&lt;MINUTES&gt; format.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col s12">
-                      <div id="timeRestrictionsList" class="collection teal lighten-2 col s4 offset-s4 center-align">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="timeRestriction hide">
-                  <span class="card-title" id="timeslot"></span>
-                  <p id="timeDetails"></p>
-                  <button class="time-change-allow waves-effect waves-light btn">Allow timeslot</button>
-                  <button class="time-change-block waves-effect waves-light btn">Block timeslot</button>
-                  <button class="time-cancel waves-effect waves-light btn">Cancel</button>
-                </div>
-                <div class="newRestriction">
-                  <button class="time-new waves-effect waves-light btn">New time restriction</button>
-                </div>
-                <div class="newRestrictionPanel hide">
-                  <div class="row">
-                    <div class="col s5">
-                      <input id="startTime" placeholder="Start time" type="text">
-                    </div>
-                    <div class="col s5 offset-s1">
-                      <input id="endTime" placeholder="End time" type="text">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col s5">
-                      <button class="time-new-allow waves-effect waves-light btn">Allow timeslot</button>
-                    </div>
-                    <div class="col s5">
-                      <button class="time-new-block waves-effect waves-light btn">Block timeslot</button>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col s12">
-                      <button class="time-new-cancel waves-effect waves-light btn">Cancel</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      <div class="identities-gui hide">
-        <button class="back waves-effect waves-light btn">Back</button>
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">MY IDENTITIES</span>
-            <div class="row">
-              <div class="col s12">
-                <p>Select the identity to be used or add a new one:</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s12">
-                <div id="my-ids">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s12">
-                <a class='dropdown-button btn' data-activates='idproviders'>Add an identity</a>
-                <ul id='idproviders' class='dropdown-content'>
-                  <li><a class="idp" id="google">Google</a></li>
-                  <li><a class="idp" id="facebook">Facebook</a></li>
-                  <li><a class="idp" id="orange">Orange</a></li>
-                  <li><a class="idp" id="kerberos">IST Kerberos</a></li>
-                  <li><a class="idp" id="smartcard">Smart Card</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="card-action center">
-              <div class=current-id></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
     </div>
     <!-- Modal Structure -->
     <div class="modal modal-fixed-footer create-chat">
@@ -271,6 +99,5 @@
 
   <script src=".well-known/runtime/rethink.js"></script>
   <script src="demo2.bundle.js"></script>
-  <script src="policies-gui.bundle.js"></script>
 </body>
 </html>

@@ -21,6 +21,7 @@
 * limitations under the License.
 **/
 import RuntimeFactory from './RuntimeFactory';
+import PoliciesGUI from './admin/PoliciesGUI';
 import {RuntimeCatalogueLocal} from 'service-framework/dist/RuntimeCatalogue';
 
 const runtimeURL = 'hyperty-catalogue://' + window.location.hostname + '/.well-known/runtime/RuntimeUA';
@@ -42,15 +43,15 @@ function searchHyperty(runtime, descriptor) {
   return hyperty;
 }
 
-console.log('RUNTIME: ', RuntimeFactory);
 let catalogue = new RuntimeCatalogueLocal(RuntimeFactory);
 catalogue.getRuntimeDescriptor(runtimeURL).then(function (descriptor) {
   eval.apply(window, [descriptor.sourcePackage.sourceCode]);
 
+  console.log('RUNTIME: ', RuntimeFactory);
+
   let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
 
-  console.info('AQUI:', runtime.policyEngine);
-  window.policyEngine = runtime.policyEngine;
+  new PoliciesGUI(runtime.policyEngine);
 
   window.addEventListener('message', function (event) {
     if (event.data.to === 'core:loadHyperty') {

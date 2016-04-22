@@ -74,7 +74,6 @@ function hypertyDeployed(result) {
   loginPanel.attr('data-url', result.runtimeHypertyURL);
   cardAction.append(hypertyInfo);
   $('.preferences').removeClass('hide');
-  $('.policies-btn').on('click', showPoliciesGUI);
   //$('.identities-btn').on('click', showIdentitiesGUI);
 
   let messageChat = $('.chat');
