@@ -22,6 +22,7 @@
 **/
 import RuntimeFactory from './RuntimeFactory';
 import PoliciesGUI from './admin/PoliciesGUI';
+import IdentitiesGUI from './admin/IdentitiesGUI';
 import {RuntimeCatalogueLocal} from 'service-framework/dist/RuntimeCatalogue';
 
 const runtimeURL = 'hyperty-catalogue://' + window.location.hostname + '/.well-known/runtime/RuntimeUA';
@@ -52,6 +53,7 @@ catalogue.getRuntimeDescriptor(runtimeURL).then(function (descriptor) {
   let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
 
   new PoliciesGUI(runtime.policyEngine);
+  new IdentitiesGUI(runtime.identityModule);
 
   window.addEventListener('message', function (event) {
     if (event.data.to === 'core:loadHyperty') {

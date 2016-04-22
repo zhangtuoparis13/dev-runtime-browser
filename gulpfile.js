@@ -124,6 +124,10 @@ gulp.task('bundle:policies-gui', function () {
   return bundle('./src/admin/PoliciesGUI.js', 'policies-gui', 'bin');
 });
 
+gulp.task('bundle:identities-gui', function () {
+  return bundle('./src/admin/IdentitiesGUI.js', 'identities-gui', 'bin');
+});
+
 gulp.task('bundle:context', function(){
     return bundle('./src/ContextServiceProvider.js', 'context-service', 'bin')
 });
