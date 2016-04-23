@@ -194,31 +194,21 @@ class PoliciesGUI {
     $('.group-user-new-panel').addClass('hide');
   }
 
-  addPolicy(type, params, authorise) {
+  addPolicy(condition, authorise) {
     let _this = this;
-    let policy = {};
-    if (typeof params === 'string') {
-      policy = {
-        scope: 'user',
-        condition: [type, params].join(' '), //group groupname
-        authorise: authorise,
-        actions: []
-      };
-    } else {
-      policy = {
-        scope: 'user',
-        condition: [type, params.join(' ')].join(' '), //time 1:00 2:00
-        authorise: authorise,
-        actions: []
-      };
-    }
+    let policy = {
+      scope: 'user',
+      condition: condition,
+      authorise: authorise,
+      actions: []
+    };
 
     _this.policyEngine.addPolicies([policy]);
   }
 
   changeGroupReachability(authorise) {
     let _this = this;
-    let groupName = $('groupName').text();
+    let groupName = $('.group-name').text();
     _this.policyEngine.changePolicy('group ' + groupName, authorise);
     let status = authorise ? 'allowed' : 'blocked';
     Materialize.toast('Reachability of \'' + groupName + '\' group succesfuly changed to ' + status + '!', 2000);
@@ -250,7 +240,8 @@ class PoliciesGUI {
         array.shift();
         let a = document.createElement('a');
         a.className = 'collection-item';
-        a.appendChild(document.createTextNode(timeslots[i]));
+        let time = timeslots[i].split(' ');
+        a.appendChild(document.createTextNode(time[1] + ' - ' + time[2]));
         $myTimeslots.append(a);
       }
     }
@@ -261,10 +252,12 @@ class PoliciesGUI {
 
   showTimeslotDetails() {
     let _this = this;
-    let id = event.target.innerText;
-    $('.timeslot').html(id);
-    let timeslot = _this.policyEngine.getTimeslotById(id);
-    let status = timeslot.authorise ? 'allowed' : 'blocked';
+    let timeslot = event.target.innerText;
+
+    $('.timeslot').html(timeslot);
+    let time = timeslot.split(' - ');
+    let policy = _this.policyEngine.getTimeslotById('time ' + time[0] + ' ' + time[1]);
+    let status = policy.authorise ? 'allowed' : 'blocked';
     $('.timeslot-reachability').html('<p><b>Reachability status: </b> ' + status + '</p>');
 
     $('.timeslots-main').addClass('hide');
@@ -282,7 +275,7 @@ class PoliciesGUI {
     let _this = this;
     let start = $('#startTime').val();
     let end = $('#endTime').val();
-    _this.addPolicy('time', [start, end], authorise);
+    _this.addPolicy('time ' + start + ' ' + end, authorise);
     Materialize.toast('Timeslot ' + start + ' to ' + end + ' succesfuly created!', 2000);
     _this.goToPoliciesHome();
     _this.showMyTimeslots();
@@ -291,7 +284,8 @@ class PoliciesGUI {
   changeTimeslot(authorise) {
     let _this = this;
     let timeslot = $('.timeslot').text();
-    _this.policyEngine.changePolicy(timeslot, authorise);
+    let time = timeslot.split(' - ');
+    _this.policyEngine.changePolicy('time ' + time[0] + ' ' + time[1], authorise);
     let status = authorise ? 'allowed' : 'blocked';
     Materialize.toast('Timeslot reachability succesfuly changed to ' + status + '!', 2000);
     $('.timeslot-reachability').html('<p><b>Reachability status: </b> ' + status + '</p>');
@@ -300,9 +294,9 @@ class PoliciesGUI {
   deleteTimeslot() {
     let _this = this;
     let timeslot = $('.timeslot').text();
-    _this.policyEngine.removePolicies(timeslot, 'user');
-    let time = timeslot.split(' ');
-    Materialize.toast('Timeslot ' + time[1] + ' to ' + time[2] + ' succesfuly deleted!', 2000);
+    let time = timeslot.split(' - ');
+    _this.policyEngine.removePolicies('time ' + time[0] + ' ' + time[1], 'user');
+    Materialize.toast('Timeslot ' + time[0] + ' to ' + time[1] + ' succesfuly deleted!', 2000);
     _this.goToPoliciesHome();
     _this.showMyTimeslots();
   }

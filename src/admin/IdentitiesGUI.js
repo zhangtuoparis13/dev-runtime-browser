@@ -123,7 +123,7 @@ class IdentitiesGUI {
       { email: 'user10@gmail.com', domain: 'google.com' },
       { email: 'camila@orange.fr', domain: 'orange.fr' },
       { email: 'user20@gmail.com', domain: 'facebook.com' }
-    ]
+    ];
     let numIdentities = identities.length;
     for (let i = 0; i < numIdentities; i++) {
       if (identities[i].email === idToRemove) {
