@@ -11,12 +11,12 @@ class PoliciesGUI {
     $('.policies-btn').on('click', function () {
       _this.showPoliciesGUI();
     });
+
+    _this.setButtons();
   }
 
-  showPoliciesGUI() {
+  setButtons() {
     let _this = this;
-
-    $('.policies-gui').removeClass('hide');
     $('.back').on('click', (event) => _this.goHome());
 
     $('.group-new').on('click', (event) => _this.showNewGroupPanel());
@@ -29,8 +29,6 @@ class PoliciesGUI {
     $('.group-delete').on('click', (event) => _this.deleteGroup());
     $('.group-cancel').on('click', (event) => _this.goToPoliciesHome());
 
-    _this.showMyGroups();
-
     $('.timeslot-creation').on('click', (event) => _this.showNewTimeslotPanel());
     $('.timeslot-new-allow').on('click', (event) => _this.addTimeslot(true));
     $('.timeslot-new-block').on('click', (event) => _this.addTimeslot(false));
@@ -39,8 +37,14 @@ class PoliciesGUI {
     $('.timeslot-change-block').on('click', (event) => _this.changeTimeslot(false));
     $('.timeslot-delete').on('click', (event) => _this.deleteTimeslot());
     $('.timeslot-cancel').on('click', (event) => _this.goToPoliciesHome());
+  }
 
+  showPoliciesGUI() {
+    let _this = this;
+    _this.showMyGroups();
     _this.showMyTimeslots();
+
+    $('.policies-gui').removeClass('hide');
   }
 
   goHome() {
