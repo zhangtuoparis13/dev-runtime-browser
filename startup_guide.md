@@ -38,7 +38,7 @@ In order to test your app you can server it locally using http-server:
 
 You have the option to host runtime files on your own server. In this scenario the steps are pretty similar than before but changing the URIs to the right place.
 
-The distribution files are on dev-registry-browser@master repo, on .well-known/runtime:
+The distribution files are on dev-runtime-browser@master repo, on .well-known/runtime:
 
 * rethink.js
 * index.html
