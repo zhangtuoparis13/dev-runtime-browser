@@ -20,9 +20,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import Sandbox from 'runtime-core/src/sandbox/Sandbox';
 import SandboxRegistry from 'runtime-core/src/sandbox/SandboxRegistry';
 import MiniBus from 'runtime-core/src/bus/MiniBus';
+
+function manageIDMmessages(body, iframe){
+    if(body.method === 'unhideAdminPage'){
+        iframe.style.display = 'block';
+    }else if(body.method === 'hideAdminPage'){
+        iframe.style.display = 'none';
+    }
+}
 
 function create(iframe){
     window._miniBus = new MiniBus();
@@ -32,6 +39,11 @@ function create(iframe){
     window.addEventListener('message', function(event){
         if(event.data.to.startsWith('runtime:loadedHyperty'))
             return;
+
+        if(event.data.from.endsWith('idm')){
+            manageIDMmessages(event.data.body, iframe)
+            return
+        }
 
         window._miniBus._onMessage(event.data);
     }, false);
