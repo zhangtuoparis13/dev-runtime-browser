@@ -40,7 +40,7 @@ function create(iframe){
         if(event.data.to.startsWith('runtime:loadedHyperty'))
             return;
 
-        if(event.data.from.endsWith('idm')){
+        if(event.data.to.endsWith('gui-manager')){
             manageIDMmessages(event.data.body, iframe)
             return
         }
