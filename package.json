@@ -4,7 +4,7 @@
   "description": "browser runtime development",
   "main": "src/rethink.js",
   "scripts": {
-    "start": "gulp bundle:dist && /bin/cp bin/* example/.well-known/runtime/. && gulp bundle:demo && http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key example/",
+    "start": "gulp bundle:dist && copyfiles -f ./bin/* example/.well-known/runtime && gulp bundle:demo && http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key example/",
     "test": "karma start",
     "init-setup": "npm install -g jspm karma-cli gulp-cli && npm install && jspm install"
   },
@@ -34,6 +34,7 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
+    "copyfiles": "^0.2.1",
     "gulp": "^3.9.0",
     "gulp-bump": "^1.0.0",
     "gulp-if": "^2.0.0",
