@@ -23,9 +23,10 @@
 import app from './ContextApp';
 import URI from 'urijs';
 import { create as createIframe } from './iframe';
-
+import Rx from 'rx'
 let iframe = undefined;
-let buildMsg = (hypertyComponent, msg) => {
+
+const buildMsg = (hypertyComponent, msg) => {
         return {
          runtimeHypertyURL: msg.body.runtimeHypertyURL,
          status: msg.body.status,
@@ -34,34 +35,38 @@ let buildMsg = (hypertyComponent, msg) => {
        }
 };
 
-let runtimeProxy = {
-    requireHyperty: (hypertyDescriptor)=>{
+const runtimeProxy = {
+    requireHyperty (hypertyDescriptor){
+        let messages = this._messages
         return new Promise((resolve, reject)=>{
-            let loaded = (e)=>{
-                if(e.data.to === 'runtime:loadedHyperty'){
-                    window.removeEventListener('message', loaded);
-                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-                }
-            };
-            window.addEventListener('message', loaded);                     
+           messages
+               .filter(ev => ev.data.to === 'runtime:loadedHyperty')
+               .subscribe(e => resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data)))
+
             iframe.contentWindow.postMessage({to:'core:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*');
         });
     },
 
-    requireProtostub: (domain)=>{
+    requireProtostub (domain){
         iframe.contentWindow.postMessage({to:'core:loadStub', body:{"domain": domain}}, '*')
     },
 };
 
-let RethinkBrowser = {
+const runtimeProxyFactory = function(){
+    runtimeProxy._messages = Rx.Observable.fromEvent(window, 'message')
+    
+    return runtimeProxy
+}
+
+const RethinkBrowser = {
     install: function({domain, runtimeURL, development}={}){
         return new Promise((resolve, reject)=>{
-            let runtime = this.getRuntime(runtimeURL, domain, development)
+            let runtime = this._getRuntime(runtimeURL, domain, development)
             iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}&development=${development}`);
             let installed = (e)=>{
                 if(e.data.to === 'runtime:installed'){
                     window.removeEventListener('message', installed);
-                    resolve(runtimeProxy);
+                    resolve(runtimeProxyFactory());
                 }
             };
             window.addEventListener('message', installed);
@@ -69,7 +74,7 @@ let RethinkBrowser = {
         });
     },
 
-    getRuntime (runtimeURL, domain, development) {
+    _getRuntime (runtimeURL, domain, development) {
         if(!!development){
             runtimeURL = runtimeURL || 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/RuntimeUA' //`https://${domain}/resources/descriptors/Runtimes.json`
             domain = domain || new URI(runtimeURL).host()
