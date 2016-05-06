@@ -71,7 +71,13 @@ catalogue.getRuntimeDescriptor(runtimeURL)
                 }
             }else if(event.data.to==='core:loadStub'){
                 runtime.loadStub(event.data.body.domain)
-            }
+			}else if(event.data.to==='graph:generateGUID'){
+				console.log('try generating GUID');
+				console.log(runtime.graphConnector.generateGUID());
+			}else if(event.data.to==='graph:addUserID'){
+				console.log('try adding contact');
+				console.log(runtime.graphConnector.addUserID(event.data.body.userID));
+			}
         }, false);
         parent.postMessage({to:'runtime:installed', body:{}}, '*');
     });

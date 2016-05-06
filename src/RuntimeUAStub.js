@@ -51,6 +51,14 @@ let runtimeProxy = {
     requireProtostub: (domain)=>{
         iframe.contentWindow.postMessage({to:'core:loadStub', body:{"domain": domain}}, '*')
     },
+
+	generateGUID: ()=>{
+		iframe.contentWindow.postMessage({to:'graph:generateGUID', body:{}}, '*')
+	},
+
+	addUserID: (userID)=> {
+		iframe.contentWindow.postMessage({to:'graph:addUserID', body:{"userID" : userID}}, '*')
+	}
 };
 
 let RethinkBrowser = {

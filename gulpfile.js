@@ -134,6 +134,9 @@ gulp.task('bundle:demo2', function(){
 gulp.task('bundle:hello', function(){
     return bundle('./example/hello.js', 'hello.bundle', 'example')
 });
+gulp.task('bundle:guid', function(){
+    return bundle('./example/guid.js', 'guid.bundle', 'example')
+});
 
 gulp.task('bundle:demo', ['bundle:demo1', 'bundle:demo2', 'bundle:hello']);
 /**
