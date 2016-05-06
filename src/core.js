@@ -57,7 +57,10 @@ catalogue.getRuntimeDescriptor(runtimeURL)
     .then(function(sourcePackage){
         eval.apply(window,[sourcePackage.sourceCode])
 
-        let runtime = new RuntimeUA(RuntimeFactory, window.location.host);
+        let runtime = new Runtime(RuntimeFactory, window.location.host);
+        runtime.messageBus.addListener(`${runtime.runtimeURL}/gui-manager`,(e)=>{
+            parent.postMessage(e, '*')
+        })
         window.addEventListener('message', function(event){
             if(event.data.to==='core:loadHyperty'){
                 let descriptor = event.data.body.descriptor;
