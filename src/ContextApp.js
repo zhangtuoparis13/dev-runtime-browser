@@ -20,7 +20,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import Sandbox from 'runtime-core/src/sandbox/Sandbox';
 import SandboxRegistry from 'runtime-core/src/sandbox/SandboxRegistry';
 import MiniBus from 'runtime-core/src/bus/MiniBus';
 
@@ -30,7 +29,7 @@ function create(iframe){
         iframe.contentWindow.postMessage(msg, '*');
     };
     window.addEventListener('message', function(event){
-        if(event.data.to.startsWith('runtime:loadedHyperty'))
+        if(event.data.to && event.data.to.startsWith('runtime:loadedHyperty'))
             return;
 
         window._miniBus._onMessage(event.data);

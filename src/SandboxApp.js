@@ -21,7 +21,6 @@
 * limitations under the License.
 **/
 import Sandbox from 'runtime-core/src/sandbox/Sandbox';
-import MiniBus from 'runtime-core/src/bus/MiniBus';
 import {SandboxType} from 'runtime-core/src/sandbox/Sandbox';
 
 export default class SandboxApp extends Sandbox{

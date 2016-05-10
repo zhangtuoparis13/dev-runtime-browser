@@ -20,7 +20,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import Sandbox from 'runtime-core/src/sandbox/Sandbox';
 import SandboxRegistry from 'runtime-core/src/sandbox/SandboxRegistry';
 import MiniBus from 'runtime-core/src/bus/MiniBus';
 
