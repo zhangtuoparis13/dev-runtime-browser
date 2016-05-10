@@ -7,7 +7,7 @@ import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
-import rethink from '../bin/rethink';
+//import rethink from '../bin/rethink';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -40,7 +40,7 @@ function documentReady() {
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  rethink.install({"domain": domain, development: true}).then(runtimeInstalled).catch(errorMessage);
+  rethink.default.install({"domain": domain, development: true}).then(runtimeInstalled).catch(errorMessage);
 }
 
 function runtimeInstalled(runtime) {

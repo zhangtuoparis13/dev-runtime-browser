@@ -74,7 +74,9 @@ catalogue.getRuntimeDescriptor(runtimeURL)
                 }
             }else if(event.data.to==='core:loadStub'){
                 runtime.loadStub(event.data.body.domain)
+            }else{
+                runtime.messageBus._onMessage(event.data)
             }
         }, false);
-        parent.postMessage({to:'runtime:installed', body:{}}, '*');
+        parent.postMessage({to:'runtime:installed', body:{url:runtime.runtimeURL}}, '*');
     });

@@ -24,7 +24,7 @@ import app from './ContextApp';
 import URI from 'urijs';
 import { create as createIframe } from './iframe';
 import Rx from 'rx'
-let iframe = undefined;
+let iframe, iframe_auth = undefined;
 
 const buildMsg = (hypertyComponent, msg) => {
         return {
@@ -37,14 +37,11 @@ const buildMsg = (hypertyComponent, msg) => {
 
 const runtimeProxy = {
     requireHyperty (hypertyDescriptor){
-        let messages = this._messages
+        iframe.contentWindow.postMessage({to:'core:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*')
         return new Promise((resolve, reject)=>{
-           messages
-               .filter(ev => ev.data.to === 'runtime:loadedHyperty')
-               .subscribe(e => resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data)))
-
-            iframe.contentWindow.postMessage({to:'core:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*');
-        });
+            this._messages.first((e)=>e.data.to === 'runtime:loadedHyperty')
+                .subscribe((e) => resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data)))  
+        }) 
     },
 
     requireProtostub (domain){
@@ -52,26 +49,46 @@ const runtimeProxy = {
     },
 };
 
-const runtimeProxyFactory = function(){
-    runtimeProxy._messages = Rx.Observable.fromEvent(window, 'message')
-    
+const runtimeProxyFactory = function(runtimeURL, messages){
+    runtimeProxy._messages = messages
+    messages.filter((e)=>e.data.to === `${runtimeURL}/gui-manager` && e.data.body.method === "openURL")
+            .subscribe((e) => { 
+                iframe_auth.style.display = "block"
+                iframe_auth.src = e.data.body.value
+                let id = e.data.id 
+                messages.first((e)=> e.data.to === "runtime:auth")
+                        .subscribe((e) => {
+                            iframe_auth.style.display = "none"
+                            iframe.contentWindow.postMessage({
+                                id: id,
+                                to: `${runtimeURL}/idm`,
+                                from: `${runtimeURL}/gui-manager`,
+                                type: "response",
+                                body: { type: "200", value: e.data.value }
+                            }, '*')
+                        })
+            })     
+
     return runtimeProxy
 }
 
 const RethinkBrowser = {
     install: function({domain, runtimeURL, development}={}){
-        return new Promise((resolve, reject)=>{
-            let runtime = this._getRuntime(runtimeURL, domain, development)
-            iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}&development=${development}`);
-            let installed = (e)=>{
-                if(e.data.to === 'runtime:installed'){
-                    window.removeEventListener('message', installed);
-                    resolve(runtimeProxyFactory());
-                }
-            };
-            window.addEventListener('message', installed);
-            app.create(iframe);
-        });
+        if(window.location.hash && parent){
+            parent.postMessage({to: "runtime:auth", value: window.location.href}, '*')
+            return {then:()=>{}}
+        }
+
+        let runtimeData = this._getRuntime(runtimeURL, domain, development)
+        this._messages = Rx.Observable.fromEvent(window, 'message')
+        iframe = createIframe(`https://${runtimeData.domain}/.well-known/runtime/index.html?runtime=${runtimeData.url}&development=${development}`);
+        iframe_auth = createIframe("about:blank")
+        app.create(iframe);
+
+        return new Promise((resolve, reject) => {
+            this._messages.first((e)=>e.data.to === 'runtime:installed')
+                .subscribe((e)=>resolve(runtimeProxyFactory(e.data.body.url, this._messages)))
+        })
     },
 
     _getRuntime (runtimeURL, domain, development) {

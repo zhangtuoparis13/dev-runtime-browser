@@ -10,7 +10,7 @@ import 'indexeddbshim';
 import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
-import rethink from '../bin/rethink';
+//import rethink from '../bin/rethink';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -44,7 +44,7 @@ function documentReady() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  let runtimeLoader = rethink.install({"domain": domain, development: true})
+  let runtimeLoader = rethink.default.install({"domain": domain, development: true})
       .then((runtime)=>{
           console.log(runtime, hyperty);
           runtime.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
