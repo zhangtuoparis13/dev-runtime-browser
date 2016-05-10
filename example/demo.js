@@ -44,7 +44,7 @@ function documentReady() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  let runtimeLoader = self.rethink.default.install({runtimeURL: "https://rethink-app.quobis.com/RuntimeUA", development: true})
+  let runtimeLoader = self.rethink.default.install({domain: domain, development: true})
       .then((runtime)=>{
           console.log(runtime, hyperty);
           runtime.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
