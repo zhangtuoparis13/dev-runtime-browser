@@ -23,7 +23,7 @@
 import SandboxWorker from './SandboxWorker';
 import SandboxApp from './SandboxApp';
 import Request from './Request';
-import {RuntimeCatalogueLocal, RuntimeCatalogue} from 'service-framework/src/RuntimeCatalogue';
+import {RuntimeCatalogueLocal, RuntimeCatalogue} from 'service-framework/dist/RuntimeCatalogue';
 
 const RuntimeFactory = Object.create({
     createSandbox(){
