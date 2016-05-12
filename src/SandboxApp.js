@@ -32,7 +32,7 @@ export default class SandboxApp extends Sandbox{
          if(!!!this.origin)
             this.origin = e.source;
 
-         if(e.data.to.startsWith('core:'))
+         if (e.data.to.startsWith('graph:') || e.data.to.startsWith('core:'))
              return;
 
          this._onMessage(e.data);
