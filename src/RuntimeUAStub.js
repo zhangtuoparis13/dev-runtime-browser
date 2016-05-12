@@ -79,7 +79,7 @@ let RethinkBrowser = {
 
     getRuntime (runtimeURL, domain, development) {
         if(!!development){
-            runtimeURL = runtimeURL || 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/RuntimeUA' //`https://${domain}/resources/descriptors/Runtimes.json`
+            runtimeURL = runtimeURL || 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/Runtime' //`https://${domain}/resources/descriptors/Runtimes.json`
             domain = domain || new URI(runtimeURL).host()
         }else{
             runtimeURL = runtimeURL || `https://catalogue.${domain}/.well-known/runtime/default`

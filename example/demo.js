@@ -20,7 +20,7 @@ import 'array.observe';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain ="rethink-app.quobis.com" ;
+let domain ="localhost" ;
 
 
 // Hack because the GraphConnector jsrsasign module;
@@ -44,7 +44,7 @@ function documentReady() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  let runtimeLoader = self.rethink.default.install({runtimeURL: "https://rethink-app.quobis.com/RuntimeUA", development: true})
+  let runtimeLoader = self.rethink.default.install({domain: domain, development: true})
       .then((runtime)=>{
           console.log(runtime, hyperty);
           runtime.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {

@@ -57,7 +57,7 @@ catalogue.getRuntimeDescriptor(runtimeURL)
     .then(function(sourcePackage){
         eval.apply(window,[sourcePackage.sourceCode])
 
-        let runtime = new RuntimeUA(RuntimeFactory, window.location.host);
+        let runtime = new Runtime(RuntimeFactory, window.location.host);
         window.addEventListener('message', function(event){
             if(event.data.to==='core:loadHyperty'){
                 let descriptor = event.data.body.descriptor;
