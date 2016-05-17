@@ -1,4 +1,4 @@
-import {ready, errorMessage} from './support';
+import { ready, errorMessage } from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -18,7 +18,9 @@ import rethink from '../bin/rethink';
 
 // You can change this at your own domain
 let domain = "localhost";
-window.runtime = { "domain": domain }
+window.runtime = {
+  "domain": domain
+}
 
 // Hack because the GraphConnector jsrsasign module;
 window.KJUR = {};
@@ -40,16 +42,21 @@ function documentReady() {
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  rethink.install({"domain": domain, development: true}).then(runtimeInstalled).catch(errorMessage);
+  rethink.install({
+    "domain": domain,
+    development: true
+  }).then(runtimeInstalled).catch(errorMessage);
 }
 
 function runtimeInstalled(runtime) {
   console.log(runtime);
-  
+
   runtime.addUserID('facebook.com/felix');
+  runtime.getContact('test OpenID');
+  runtime.addContact("budc8fucd8cdsc98dc899dc", "reThinkUser", "Test");
 
   //runtime.generateGUID();
-  
+
   //let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
 
   // Load First Hyperty
