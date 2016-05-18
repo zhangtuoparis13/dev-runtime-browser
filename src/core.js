@@ -30,8 +30,8 @@ function returnHyperty(source, hyperty){
 function searchHyperty(runtime, descriptor){
     let hyperty = undefined;
     let index = 0;
-    while(!!hyperty){
-        if(runtime.registry.hypertiesList[index]=== descriptor) 
+    while(!hyperty && index<runtime.registry.hypertiesList.length){
+        if(runtime.registry.hypertiesList[index].descriptor === descriptor) 
             hyperty = runtime.registry.hypertiesList[index]
 
         index++
