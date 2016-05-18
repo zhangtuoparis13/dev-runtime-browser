@@ -23,37 +23,21 @@
 import URI from 'urijs';
 import RuntimeFactory from './RuntimeFactory';
 
-function returnHyperty(source, hyperty) {
-  source.postMessage({
-    to: 'runtime:loadedHyperty',
-    body: hyperty
-  }, '*')
+function returnHyperty(source, hyperty){
+    source.postMessage({to: 'runtime:loadedHyperty', body: hyperty}, '*')
 }
 
-function searchHyperty(runtime, descriptor) {
-  let hyperty = undefined;
-  let index = 0;
-  while (!!hyperty) {
-    if (runtime.registry.hypertiesList[index] === descriptor)
-      hyperty = runtime.registry.hypertiesList[index]
-    index++
-  }
+function searchHyperty(runtime, descriptor){
+    let hyperty = undefined;
+    let index = 0;
+    while(!!hyperty){
+        if(runtime.registry.hypertiesList[index]=== descriptor)
+            hyperty = runtime.registry.hypertiesList[index]
 
-  return hyperty;
-}
-//function to retrieve Contact Details
-function getContactCore(username, callback) {
-  console.log(">>>>In getContactCore ");
-  let user = runtime.graphConnector.getContact(username);
-  console.log("Finsihed retrieval");
-  callback(null, user);
-}
-//function to Add a Contact
-function addContactCore(guid, fname, lname, callback) {
-  console.log(">>>>In addContact Core");
-  let output = runtime.graphConnector.addContact(guid, fname, lname);
-  console.log("Finished Addition");
-  callback(null, output);
+        index++
+    }
+
+    return hyperty;
 }
 
 let parameters = new URI(window.location).search(true)
@@ -62,67 +46,59 @@ let development = !!parameters.development
 let catalogue = RuntimeFactory.createRuntimeCatalogue(development)
 
 catalogue.getRuntimeDescriptor(runtimeURL)
-  .then(function(descriptor) {
-    let sourcePackageURL = descriptor.sourcePackageURL;
-    if (sourcePackageURL === '/sourcePackage') {
-      return descriptor.sourcePackage;
-    }
-
-    return catalogue.getSourcePackageFromURL(sourcePackageURL);
-  })
-  .then(function(sourcePackage) {
-    eval.apply(window, [sourcePackage.sourceCode])
-
-    let runtime = new Runtime(RuntimeFactory, window.location.host);
-    window.addEventListener('message', function(event) {
-      if (event.data.to === 'core:loadHyperty') {
-        let descriptor = event.data.body.descriptor;
-        let hyperty = searchHyperty(runtime, descriptor);
-
-        if (hyperty) {
-          returnHyperty(event.source, {
-            runtimeHypertyURL: hyperty.hypertyURL
-          });
-        } else {
-          runtime.loadHyperty(descriptor)
-            .then(returnHyperty.bind(null, event.source));
+    .then(function(descriptor){
+        let sourcePackageURL = descriptor.sourcePackageURL;
+        if (sourcePackageURL === '/sourcePackage') {
+            return descriptor.sourcePackage;
         }
-      } else if (event.data.to === 'core:loadStub') {
-        runtime.loadStub(event.data.body.domain)
-      } else if (event.data.to === 'graph:generateGUID') {
-        console.log('try generating GUID');
-        console.log(runtime.graphConnector.generateGUID());
-      } else if (event.data.to === 'graph:addUserID') {
-        console.log('try adding contact');
-        console.log(runtime.graphConnector.addUserID(event.data.body.userID));
-      } else if (event.data.to === 'graph:getContact') {
-        let username = event.data.body.username;
-        console.log("Inside core: finding user with username: " + username);
-        console.log("User List " + runtime.graphConnector.getContact("OpenID").length);
-        getContactCore(username, function(err, res) {
-          if (err) {
-            console.log("Error" + err);
-          } else {
-            console.log("User is " + res);
-          }
-        });
-      } else if (event.data.to === 'graph:addContact') {
-        let guid = event.data.body.guid;
-        let fname = event.data.body.fname;
-        let lname = event.data.body.lname;
-        console.log('Inside Core: Adding a new contact with firstname: ' + fname);
-        console.log(runtime.graphConnector.addContact(guid, fname, lname));
-        addContactCore(guid, fname, lname, function(err, res) {
-          if (err) {
-            console.log("Error" + err);
-          } else {
-            console.log("Output is " + res);
-          }
-        });
-      }
-    }, false);
-    parent.postMessage({
-      to: 'runtime:installed',
-      body: {}
-    }, '*');
-  });
+
+        return catalogue.getSourcePackageFromURL(sourcePackageURL);
+    })
+    .then(function(sourcePackage){
+        eval.apply(window,[sourcePackage.sourceCode])
+
+        let runtime = new Runtime(RuntimeFactory, window.location.host);
+        window.addEventListener('message', function(event){
+            if(event.data.to==='core:loadHyperty'){
+                let descriptor = event.data.body.descriptor;
+                let hyperty = searchHyperty(runtime, descriptor);
+
+                if(hyperty){
+                    returnHyperty(event.source, {runtimeHypertyURL: hyperty.hypertyURL});
+                }else{
+                    runtime.loadHyperty(descriptor)
+                        .then(returnHyperty.bind(null, event.source));
+                }
+            }else if(event.data.to==='core:loadStub'){
+                runtime.loadStub(event.data.body.domain)
+			               }else if(event.data.to==='graph:generateGUID'){
+				                   console.log('try generating GUID');
+				                   console.log(runtime.graphConnector.generateGUID());
+			                }else if(event.data.to==='graph:addUserID'){
+				                   console.log('try adding contact');
+				                   console.log(runtime.graphConnector.addUserID(event.data.body.userID));
+			                }else if(event.data.to === 'graph:addContact'){
+                           let guid = event.data.body.guid;
+                           let fname = event.data.body.fname;
+                           let lname = event.data.body.lname;
+				                   console.log('Inside Core: Adding a new contact with firstname: ' + fname);
+				                   console.log(runtime.graphConnector.addContact(guid, fname, lname));
+			                }else if(event.data.to === 'graph:getContact'){
+                           let username = event.data.body.username;
+                           console.log("Inside core: finding user with username: " + username);
+                           let user = runtime.graphConnector.getContact(username)[0];
+                           console.log("User Found: \n Firtsname: " + user.firstName +
+                            "\n LastName " + user.lastName +
+                            "\n GUID: " + user.guid);
+			                }else if(event.data.to === 'graph:checkGUID'){
+                          let guid = event.data.body.guid;
+                          console.log("Inside core: finding user with GUID: " + guid);
+                          let usersDirectContact = runtime.graphConnector.checkGUID(guid)[0][0];
+                          let usersFoF = runtime.graphConnector.checkGUID(guid)[0][1];
+                          console.log("User Found from its GUID: \n FirstName " + usersDirectContact.firstName +
+                            "\n LastName " + usersDirectContact.lastName +
+                            "\n GUID " + usersDirectContact.guid);
+			}
+        }, false);
+        parent.postMessage({to:'runtime:installed', body:{}}, '*');
+    });

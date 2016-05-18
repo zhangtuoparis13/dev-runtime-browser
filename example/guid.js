@@ -50,12 +50,14 @@ function documentReady() {
 
 function runtimeInstalled(runtime) {
   console.log(runtime);
-
+  runtime.generateGUID();
   runtime.addUserID('facebook.com/felix');
-  runtime.getContact('test OpenID');
   runtime.addContact("budc8fucd8cdsc98dc899dc", "reThinkUser", "Test");
+  runtime.getContact('reThinkUser');
+  runtime.checkGUID("budc8fucd8cdsc98dc899dc");
 
-  //runtime.generateGUID();
+
+
 
   //let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
 

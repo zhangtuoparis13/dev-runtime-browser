@@ -26,112 +26,102 @@ import { create as createIframe } from './iframe';
 
 let iframe = undefined;
 let buildMsg = (hypertyComponent, msg) => {
-  return {
-    runtimeHypertyURL: msg.body.runtimeHypertyURL,
-    status: msg.body.status,
-    instance: hypertyComponent.instance,
-    name: hypertyComponent.name
-  }
+        return {
+         runtimeHypertyURL: msg.body.runtimeHypertyURL,
+         status: msg.body.status,
+         instance: hypertyComponent.instance,
+         name: hypertyComponent.name
+       }
 };
 
 let runtimeProxy = {
-  requireHyperty: (hypertyDescriptor) => {
-    return new Promise((resolve, reject) => {
-      let loaded = (e) => {
-        if (e.data.to === 'runtime:loadedHyperty') {
-          window.removeEventListener('message', loaded);
-          resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-        }
-      };
-      window.addEventListener('message', loaded);
-      iframe.contentWindow.postMessage({
-        to: 'core:loadHyperty',
-        body: {
-          descriptor: hypertyDescriptor
-        }
-      }, '*');
-    });
+    requireHyperty: (hypertyDescriptor)=>{
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'core:loadHyperty', body:{descriptor: hypertyDescriptor}}, '*');
+        });
+    },
+
+    requireProtostub: (domain)=>{
+        iframe.contentWindow.postMessage({to:'core:loadStub', body:{"domain": domain}}, '*')
+    },
+
+	generateGUID: ()=>{
+		iframe.contentWindow.postMessage({to:'graph:generateGUID', body:{}}, '*')
+	},
+
+	addUserID: (userID)=> {
+		iframe.contentWindow.postMessage({to:'graph:addUserID', body:{"userID" : userID}}, '*')
+	},
+
+  addContact: (guid, fname, lname)=> {
+    iframe.contentWindow.postMessage({to:'graph:addContact', body:{"guid": guid,"fname": fname,"lname": lname}}, '*')
   },
 
-  requireProtostub: (domain) => {
-    iframe.contentWindow.postMessage({
-      to: 'core:loadStub',
-      body: {
-        "domain": domain
-      }
-    }, '*')
+  getContact: (username)=> {
+    return new Promise((resolve, reject)=>{
+        let loaded = (e)=>{
+            if(e.data.to === 'runtime:loadedHyperty'){
+                window.removeEventListener('message', loaded);
+                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+            }
+        };
+        window.addEventListener('message', loaded);
+        iframe.contentWindow.postMessage({to:'graph:getContact', body:{"username": username}}, '*')
+      });
   },
 
-  generateGUID: () => {
-    iframe.contentWindow.postMessage({
-      to: 'graph:generateGUID',
-      body: {}
-    }, '*')
-  },
-
-  addUserID: (userID) => {
-    iframe.contentWindow.postMessage({
-      to: 'graph:addUserID',
-      body: {
-        "userID": userID
-      }
-    }, '*')
-  },
-
-  getContact: (username) => {
-    console.log("Inside Runtime Stub: Finding User...");
-    iframe.contentWindow.postMessage({
-      to: 'graph:getContact',
-      body: {
-        "username": username
-      }
-    }, '*');
-  },
-
-  addContact: (guid, fname, lname) => {
-    console.log("Inside Runtime Stub: Adding Contact...");
-    iframe.contentWindow.postMessage({
-      to: 'graph:addContact',
-      body: {
-        "guid": guid,
-        "fname": fname,
-        "lname": lname
-      }
-    }, '*');
+  checkGUID: (guid)=> {
+    return new Promise((resolve, reject)=>{
+        let loaded = (e)=>{
+            if(e.data.to === 'runtime:loadedHyperty'){
+                window.removeEventListener('message', loaded);
+                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+            }
+        };
+        window.addEventListener('message', loaded);
+        iframe.contentWindow.postMessage({to:'graph:checkGUID', body:{"guid": guid}}, '*')
+      });
   }
 
 };
 
 let RethinkBrowser = {
-  install: function({domain, runtimeURL, development} = {}) {
-    return new Promise((resolve, reject) => {
-      let runtime = this.getRuntime(runtimeURL, domain, development)
-      iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}&development=${development}`);
-      let installed = (e) => {
-        if (e.data.to === 'runtime:installed') {
-          window.removeEventListener('message', installed);
-          resolve(runtimeProxy);
+    install: function({domain, runtimeURL, development}={}){
+        return new Promise((resolve, reject)=>{
+            let runtime = this.getRuntime(runtimeURL, domain, development)
+            iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}&development=${development}`);
+            let installed = (e)=>{
+                if(e.data.to === 'runtime:installed'){
+                    window.removeEventListener('message', installed);
+                    resolve(runtimeProxy);
+                }
+            };
+            window.addEventListener('message', installed);
+            app.create(iframe);
+        });
+    },
+
+    getRuntime (runtimeURL, domain, development) {
+        if(!!development){
+            runtimeURL = runtimeURL || 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/Runtime' //`https://${domain}/resources/descriptors/Runtimes.json`
+            domain = domain || new URI(runtimeURL).host()
+        }else{
+            runtimeURL = runtimeURL || `https://catalogue.${domain}/.well-known/runtime/default`
+            domain = domain || new URI(runtimeURL).host().replace("catalogue.", "")
         }
-      };
-      window.addEventListener('message', installed);
-      app.create(iframe);
-    });
-  },
 
-  getRuntime(runtimeURL, domain, development) {
-    if (!!development) {
-      runtimeURL = runtimeURL || 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/Runtime' //`https://${domain}/resources/descriptors/Runtimes.json`
-      domain = domain || new URI(runtimeURL).host()
-    } else {
-      runtimeURL = runtimeURL || `https://catalogue.${domain}/.well-known/runtime/default`
-      domain = domain || new URI(runtimeURL).host().replace("catalogue.", "")
+        return {
+            "url": runtimeURL,
+            "domain": domain
+        }
     }
-
-    return {
-      "url": runtimeURL,
-      "domain": domain
-    }
-  }
 };
 
 export default RethinkBrowser
