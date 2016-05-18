@@ -78,26 +78,26 @@ catalogue.getRuntimeDescriptor(runtimeURL)
 				                   console.log('try adding contact');
 				                   console.log(runtime.graphConnector.addUserID(event.data.body.userID));
 			                }else if(event.data.to === 'graph:addContact'){
-                          let guid = event.data.body.guid;
-                          let fname = event.data.body.fname;
-                          let lname = event.data.body.lname;
-                          console.log('Inside Core: Adding a new contact with firstname: ' + fname);
-                          console.log(runtime.graphConnector.addContact(guid, fname, lname));
+								   let guid = event.data.body.guid;
+                                   let fname = event.data.body.fname;
+                                   let lname = event.data.body.lname;
+                                   console.log('Inside Core: Adding a new contact with firstname: ' + fname);
+                                   console.log(runtime.graphConnector.addContact(guid, fname, lname));
 			                }else if(event.data.to === 'graph:getContact'){
-                          let username = event.data.body.username;
-                          console.log("Inside core: finding user with username: " + username);
-                          let user = runtime.graphConnector.getContact(username)[0];
-                          console.log("User Found: \n Firtsname: " + user.firstName +
-                            "\n LastName " + user.lastName +
-                            "\n GUID: " + user.guid);
+                                   let username = event.data.body.username;
+                                   console.log("Inside core: finding user with username: " + username);
+                                   let user = runtime.graphConnector.getContact(username)[0];
+                                   console.log("User Found: \n Firtsname: " + user.firstName +
+											   "\n LastName " + user.lastName +
+											   "\n GUID: " + user.guid);
 			                }else if(event.data.to === 'graph:checkGUID'){
-                          let guid = event.data.body.guid;
-                          console.log("Inside core: finding user with GUID: " + guid);
-                          let usersDirectContact = runtime.graphConnector.checkGUID(guid)[0][0];
-                          let usersFoF = runtime.graphConnector.checkGUID(guid)[0][1];
-                          console.log("User Found from its GUID: \n FirstName " + usersDirectContact.firstName +
-                            "\n LastName " + usersDirectContact.lastName +
-                            "\n GUID " + usersDirectContact.guid);
+								   let guid = event.data.body.guid;
+                                   console.log("Inside core: finding user with GUID: " + guid);
+                                   let usersDirectContact = runtime.graphConnector.checkGUID(guid)[0][0];
+                                   let usersFoF = runtime.graphConnector.checkGUID(guid)[0][1];
+                                   console.log("User Found from its GUID: \n FirstName " + usersDirectContact.firstName +
+                                               "\n LastName " + usersDirectContact.lastName +
+                                               "\n GUID " + usersDirectContact.guid);
                       }
         }, false);
         parent.postMessage({to:'runtime:installed', body:{}}, '*');
