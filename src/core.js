@@ -72,33 +72,63 @@ catalogue.getRuntimeDescriptor(runtimeURL)
             }else if(event.data.to==='core:loadStub'){
                 runtime.loadStub(event.data.body.domain)
 			               }else if(event.data.to==='graph:generateGUID'){
-				                   console.log('try generating GUID');
-				                   console.log(runtime.graphConnector.generateGUID());
+				                  console.log('##try generating GUID');
+				                  console.log(runtime.graphConnector.generateGUID());
+                          console.log("##GUID generated");
 			                }else if(event.data.to==='graph:addUserID'){
-				                   console.log('try adding contact');
-				                   console.log(runtime.graphConnector.addUserID(event.data.body.userID));
-			                }else if(event.data.to === 'graph:addContact'){
-								   let guid = event.data.body.guid;
-                                   let fname = event.data.body.fname;
-                                   let lname = event.data.body.lname;
-                                   console.log('Inside Core: Adding a new contact with firstname: ' + fname);
-                                   console.log(runtime.graphConnector.addContact(guid, fname, lname));
+				                  console.log('##try adding contact');
+				                  console.log(runtime.graphConnector.addUserID(event.data.body.userID));
+			                }else if(event.data.to==='graph:removeUserID'){
+                          let userID = event.data.body.userID;
+                          console.log('##Removing contact with userID: '+ userID);
+                          console.log(runtime.graphConnector.removeUserID(userID));
+                          console.log("UserID removed successfully");
+                      }else if(event.data.to === 'graph:addContact'){
+								          let guid = event.data.body.guid;
+                          let fname = event.data.body.fname;
+                          let lname = event.data.body.lname;
+                          console.log('##Inside Core: Adding a new contact with firstname: ' + fname);
+                          console.log(runtime.graphConnector.addContact(guid, fname, lname));
 			                }else if(event.data.to === 'graph:getContact'){
-                                   let username = event.data.body.username;
-                                   console.log("Inside core: finding user with username: " + username);
-                                   let user = runtime.graphConnector.getContact(username)[0];
-                                   console.log("User Found: \n Firtsname: " + user.firstName +
-											   "\n LastName " + user.lastName +
-											   "\n GUID: " + user.guid);
+                          let username = event.data.body.username;
+                          console.log("##Inside core: finding user with username: " + username);
+                          let user = runtime.graphConnector.getContact(username)[0];
+                          console.log("##User Found: \n Firtsname: " + user.firstName +
+											    "\n LastName " + user.lastName +
+											    "\n GUID: " + user.guid);
 			                }else if(event.data.to === 'graph:checkGUID'){
-								   let guid = event.data.body.guid;
-                                   console.log("Inside core: finding user with GUID: " + guid);
-                                   let usersDirectContact = runtime.graphConnector.checkGUID(guid)[0][0];
-                                   let usersFoF = runtime.graphConnector.checkGUID(guid)[0][1];
-                                   console.log("User Found from its GUID: \n FirstName " + usersDirectContact.firstName +
-                                               "\n LastName " + usersDirectContact.lastName +
-                                               "\n GUID " + usersDirectContact.guid);
+								          let guid = event.data.body.guid;
+                          console.log("##Inside core: finding user with GUID: " + guid);
+                          let usersDirectContact = runtime.graphConnector.checkGUID(guid)[0][0];
+                          let usersFoF = runtime.graphConnector.checkGUID(guid)[0][1];
+                          if(usersDirectContact!= null){
+                            console.log("User Found from its GUID: \n FirstName " + usersDirectContact.firstName +
+                            "\n LastName " + usersDirectContact.lastName +
+                            "\n GUID " + usersDirectContact.guid);
+                          }
+                          else{
+                            console.log("##This user does not exist!!");
+                          }
+                      }else if(event.data.to === 'graph:removeContact'){
+                          let guid = event.data.body.guid;
+                          console.log("##Inside core: Deleting user with GUID: " + guid);
+                          let usersDirectContact = runtime.graphConnector.removeContact(guid);
+                          console.log("##User with "+guid+" is been deleted");
+                      }else if(event.data.to === 'graph:useGUID'){
+                          let seed = event.data.body.seed;
+                          console.log("##Inside core: generating keys using seed: " + seed);
+                          runtime.graphConnector.useGUID(seed);
+                          console.log("##Seed is created");
+                      }else if(event.data.to === 'graph:sendGlobalRegistryRecord'){
+                          let jwt = event.data.body.jwt;
+                          console.log("##Inside core: Sending JWT with value: " + jwt);
+                          console.log("##Global Registry record sent, this function returns promise object : " + runtime.graphConnector.sendGlobalRegistryRecord(jwt));
+                      }else if(event.data.to === 'graph:queryGlobalRegistry'){
+                          let guid = event.data.body.guid;
+                          console.log("##Inside core: Querying with GUID: " + guid);
+                          console.log("##Querying done and returned promise object is: " + runtime.graphConnector.queryGlobalRegistry(guid));
                       }
+
         }, false);
         parent.postMessage({to:'runtime:installed', body:{}}, '*');
     });
