@@ -12,7 +12,8 @@ module.exports = function(config) {
     frameworks: [ 'mocha', 'browserify'],
      
     files: [
-        'test/**/RuntimeLoader.spec.js'
+        'test/**/RuntimeLoader.spec.js',
+        'test/**/RuntimeUAStub.spec.js'
     ],
 
 

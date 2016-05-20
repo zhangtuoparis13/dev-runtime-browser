@@ -23,33 +23,28 @@
 import SandboxWorker from './SandboxWorker';
 import SandboxApp from './SandboxApp';
 import Request from './Request';
-
 import {RuntimeCatalogueLocal, RuntimeCatalogue} from 'service-framework/dist/RuntimeCatalogue';
 
-function createSandbox(){
-    return new SandboxWorker('./context-service.js');
-}
+const RuntimeFactory = Object.create({
+    createSandbox(){
+        return new SandboxWorker('./context-service.js');
+    },
 
-function createAppSandbox(){
-    return new SandboxApp();
-}
+    createAppSandbox(){
+        return new SandboxApp();
+    },
 
-function createHttpRequest() {
-    let request = new Request();
-    return request;
-}
-  // TODO optimize the parameter was passed to inside the RuntimeCatalogue
-function createRuntimeCatalogue() {
+    createHttpRequest() {
+        let request = new Request();
+        return request;
+    },
 
-  let _this = this;
-  let factory = {
-    createHttpRequest: function() {
-      return _this.createHttpRequest();
+    createRuntimeCatalogue(development){
+        if(!this.catalogue)
+            this.catalogue = development?new RuntimeCatalogueLocal(this):new RuntimeCatalogue(this)
+        
+        return this.catalogue
     }
-  };
+})
 
-  return new RuntimeCatalogueLocal(factory);
-
-}
-
-export default { createSandbox, createAppSandbox ,createHttpRequest, createRuntimeCatalogue};
+export default RuntimeFactory

@@ -27,8 +27,8 @@ export function create(src){
     iframe.setAttribute('src', src);
     iframe.setAttribute('width', '100%');
     iframe.setAttribute('height', '750px');
-    iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation');
     // iframe.style.display = 'none';
+    iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-popups-to-escape-sandbox allow-popups allow-same-origin allow-top-navigation');
     document.querySelector('body').appendChild(iframe);
 
     return iframe;

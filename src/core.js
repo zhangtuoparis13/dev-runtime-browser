@@ -20,23 +20,22 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
+import URI from 'urijs';
 import RuntimeFactory from './RuntimeFactory';
 import PoliciesGUI from './admin/PoliciesGUI';
 import IdentitiesGUI from './admin/IdentitiesGUI';
 import {RuntimeCatalogueLocal} from 'service-framework/dist/RuntimeCatalogue';
 
-const runtimeURL = 'hyperty-catalogue://' + window.location.hostname + '/.well-known/runtime/RuntimeUA';
-
 function returnHyperty(source, hyperty) {
   source.postMessage({ to: 'runtime:loadedHyperty', body: hyperty }, '*');
 }
 
-function searchHyperty(runtime, descriptor) {
-  let index = 0;
-  let hyperty = undefined;
-  while (!!hyperty) {
-    if (runtime.registry.hypertiesList[index] === descriptor)
-        hyperty = runtime.registry.hypertiesList[index];
+function searchHyperty(runtime, descriptor){
+    let hyperty = undefined;
+    let index = 0;
+    while(!hyperty && index<runtime.registry.hypertiesList.length){
+        if(runtime.registry.hypertiesList[index].descriptor === descriptor) 
+            hyperty = runtime.registry.hypertiesList[index]
 
     index++;
   }
@@ -44,32 +43,42 @@ function searchHyperty(runtime, descriptor) {
   return hyperty;
 }
 
-let catalogue = new RuntimeCatalogueLocal(RuntimeFactory);
-catalogue.getRuntimeDescriptor(runtimeURL).then(function (descriptor) {
-  eval.apply(window, [descriptor.sourcePackage.sourceCode]);
+let parameters = new URI(window.location).search(true)
+let runtimeURL = parameters.runtime
+let development = !!parameters.development
+let catalogue = RuntimeFactory.createRuntimeCatalogue(development)
 
-  console.log('RUNTIME: ', RuntimeFactory);
+catalogue.getRuntimeDescriptor(runtimeURL)
+    .then(function(descriptor){
+        let sourcePackageURL = descriptor.sourcePackageURL;
+        if (sourcePackageURL === '/sourcePackage') {
+            return descriptor.sourcePackage;
+        }
 
-  let runtime = new RuntimeUA(RuntimeFactory, window.location.hostname);
+        return catalogue.getSourcePackageFromURL(sourcePackageURL);
+    })
+    .then(function(sourcePackage){
+        eval.apply(window,[sourcePackage.sourceCode])
 
-  new PoliciesGUI(runtime.policyEngine);
-  new IdentitiesGUI(runtime.identityModule);
+        let runtime = new Runtime(RuntimeFactory, window.location.host);
 
-  window.addEventListener('message', function (event) {
-    if (event.data.to === 'core:loadHyperty') {
-      let descriptor = event.data.body.descriptor;
-      let hyperty = searchHyperty(runtime, descriptor);
+        new PoliciesGUI(runtime.policyEngine);
+        new IdentitiesGUI(runtime.identityModule);
 
-      if (hyperty) {
-        returnHyperty(event.source, { runtimeHypertyURL: hyperty.hypertyURL });
-      } else {
-        runtime.loadHyperty(descriptor)
-            .then(returnHyperty.bind(null, event.source));
-      }
-    } else if (event.data.to === 'core:loadStub') {
-      runtime.loadStub(event.data.body.domain);
-    }
-  }, false);
+        window.addEventListener('message', function(event){
+            if(event.data.to==='core:loadHyperty'){
+                let descriptor = event.data.body.descriptor;
+                let hyperty = searchHyperty(runtime, descriptor);
 
-  parent.postMessage({ to:'runtime:installed', body:{} }, '*');
-});
+                if(hyperty){
+                    returnHyperty(event.source, {runtimeHypertyURL: hyperty.hypertyURL});
+                }else{
+                    runtime.loadHyperty(descriptor)
+                        .then(returnHyperty.bind(null, event.source));
+                }
+            }else if(event.data.to==='core:loadStub'){
+                runtime.loadStub(event.data.body.domain)
+            }
+        }, false);
+        parent.postMessage({ to:'runtime:installed', body:{} }, '*');
+    });

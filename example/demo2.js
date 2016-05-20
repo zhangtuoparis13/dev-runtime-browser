@@ -47,7 +47,7 @@ function documentReady() {
 
   //let installerFactory = new InstallerFactory();
   //let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/RuntimeUA';
-  window.rethink.default.install(domain)
+  window.rethink.default.install({"domain": domain, development: true})
       .then(runtimeInstalled)
       .catch(errorMessage);
 }

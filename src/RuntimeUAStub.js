@@ -21,6 +21,7 @@
 * limitations under the License.
 **/
 import app from './ContextApp';
+import URI from 'urijs';
 import { create as createIframe } from './iframe';
 
 let iframe = undefined;
@@ -53,9 +54,10 @@ let runtimeProxy = {
 };
 
 let RethinkBrowser = {
-    install: function(domain){
+    install: function({domain, runtimeURL, development}={}){
         return new Promise((resolve, reject)=>{
-            iframe = createIframe(`https://${domain}/.well-known/runtime/index.html`);
+            let runtime = this.getRuntime(runtimeURL, domain, development)
+            iframe = createIframe(`https://${runtime.domain}/.well-known/runtime/index.html?runtime=${runtime.url}&development=${development}`);
             let installed = (e)=>{
                 if(e.data.to === 'runtime:installed'){
                     window.removeEventListener('message', installed);
@@ -65,6 +67,21 @@ let RethinkBrowser = {
             window.addEventListener('message', installed);
             app.create(iframe);
         });
+    },
+
+    getRuntime (runtimeURL, domain, development) {
+        if(!!development){
+            runtimeURL = runtimeURL || 'hyperty-catalogue://catalogue.' + domain + '/.well-known/runtime/Runtime' //`https://${domain}/resources/descriptors/Runtimes.json`
+            domain = domain || new URI(runtimeURL).host()
+        }else{
+            runtimeURL = runtimeURL || `https://catalogue.${domain}/.well-known/runtime/default`
+            domain = domain || new URI(runtimeURL).host().replace("catalogue.", "")
+        }
+
+        return {
+            "url": runtimeURL,
+            "domain": domain
+        }
     }
 };
 

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Administration Page - RETHINK</title>
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+</head>
+
+<body>
+  <div class="row container">
+
+    <div class="row">
+      <div class="col s3 offset-s3">
+        <button class="policies-btn waves-effect waves-light btn">Policies</button>
+      </div>
+      <div class="col s3"><button class="identities-btn waves-effect waves-light btn">Identities</button>
+      </div>
+    </div>
+
+    <div class="policies-gui hide">
+      <button class="back waves-effect waves-light btn">Back</button>
+      <div class="row">
+        <div class="col s12">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title"><b>Groups of users</b></span>
+              <div class="group-main">
+                <div class="row">
+                  <div class="col s12">
+                    <p>Click on the group name for group management and related reachability preferences.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="groups-names collection teal lighten-2 col s4 offset-s4 center-align">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="group-details hide">
+                <div class="row">
+                  <div class="col s12">
+                    <span class="card-title group-name"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="group-members"></div>
+                    <span class="group-reachability"></span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col s4">
+                    <button class="group-user-new waves-effect waves-light btn">Add a user</button>
+                    <div class="group-user-new-panel hide">
+                      <input placeholder="User email" id="newUserEmail" type="text">
+                      <button class="group-user-add waves-effect waves-light btn">Add</button>
+                    </div>
+                  </div>
+                  <div class="col s4">
+                    <button class="waves-effect waves-light btn group-delete">Delete group</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s4">
+                    <button class="waves-effect waves-light btn group-block">Block group</button>
+                  </div>
+                  <div class="col s4">
+                    <button class="waves-effect waves-light btn group-allow">Allow group</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s4">
+                    <button class="group-cancel waves-effect waves-light btn">Cancel</button>
+                  </div>
+                </div>
+              </div>
+              <button class="group-new waves-effect waves-light btn">New group</button>
+              <div class="group-new-panel hide">
+                <input id="newGroupName" placeholder="Group name" type="text">
+                <button class="group-add waves-effect waves-light btn">Create</button>
+                <button class="group-new-close waves-effect waves-light btn">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title"><b>Time restrictions</b></span>
+          <div class="timeslots-main">
+            <div class="row">
+              <div class="col s12">
+                <p>Click on the timeslot for details and related reachability preferences. Each timeslot must be specified in the &lt;HOURS&gt;:&lt;MINUTES&gt; format.
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <div class="timeslots collection teal lighten-2 col s4 offset-s4 center-align">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeslot-details hide">
+            <span class="card-title timeslot"></span>
+            <span class="timeslot-reachability"></span>
+            <button class="timeslot-change-allow waves-effect waves-light btn">Allow timeslot</button>
+            <button class="timeslot-change-block waves-effect waves-light btn">Block timeslot</button>
+            <button class="timeslot-delete waves-effect waves-light btn">Delete timeslot</button>
+            <button class="timeslot-cancel waves-effect waves-light btn">Cancel</button>
+          </div>
+
+          <button class="timeslot-creation waves-effect waves-light btn">New time restriction</button>
+          <div class="timeslot-new-panel hide">
+            <div class="row">
+              <div class="col s5">
+                <input id="startTime" placeholder="Start time" type="text">
+              </div>
+              <div class="col s5 offset-s1">
+                <input id="endTime" placeholder="End time" type="text">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s5">
+                <button class="timeslot-new-allow waves-effect waves-light btn">Allow timeslot</button>
+              </div>
+              <div class="col s5">
+                <button class="timeslot-new-block waves-effect waves-light btn">Block timeslot</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <button class="timeslot-new-cancel waves-effect waves-light btn">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  <div class="identities-gui hide">
+    <button class="back waves-effect waves-light btn">Back</button>
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">MY IDENTITIES</span>
+        <div class="row">
+          <div class="col s12">
+            <p>Select the identity to be used or add a new one:</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <div id="my-ids">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <a class='dropdown-button btn' data-activates='idproviders'>Add an identity</a>
+            <ul id='idproviders' class='dropdown-content'>
+              <li><a class="idp" id="google">Google</a></li>
+              <li><a class="idp" id="facebook">Facebook</a></li>
+              <li><a class="idp" id="orange">Orange</a></li>
+              <li><a class="idp" id="kerberos">IST Kerberos</a></li>
+              <li><a class="idp" id="smartcard">Smart Card</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-action center">
+          <div class=current-id></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="core.js"></script>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ import 'indexeddbshim';
 import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
-import rethink from '../bin/rethink';
+//import rethink from '../bin/rethink';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -20,7 +20,7 @@ import rethink from '../bin/rethink';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain ="localhost" ;
+let domain ="hybroker.rethink.ptinovacao.pt" ;
 
 
 // Hack because the GraphConnector jsrsasign module;
@@ -44,7 +44,7 @@ function documentReady() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  let runtimeLoader = rethink.install(domain)
+  let runtimeLoader = self.rethink.default.install({domain: domain, development: true})
       .then((runtime)=>{
           console.log(runtime, hyperty);
           runtime.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
