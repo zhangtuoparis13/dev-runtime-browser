@@ -61,13 +61,6 @@ function runtimeInstalled(runtime) {
   runtime.useGUID('grey climb demon snap shove fruit grasp hum self grey climb demon snap shove fruit grasp');
   runtime.sendGlobalRegistryRecord("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ");
   runtime.queryGlobalRegistry('budc8fucd8cdsc98dc899dc');
-
-
-  //let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
-
-  // Load First Hyperty
-  //runtime.requireHyperty(hypertyObserver).then(hypertyObserverDeployed).catch(function(reason) {
-  //  errorMessage(reason);
-  //});
-
+  runtime.calculateBloomFilter1Hop();
+  runtime.signGlobalRegistryRecord();
 }

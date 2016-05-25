@@ -180,6 +180,32 @@ let runtimeProxy = {
         window.addEventListener('message', loaded);
         iframe.contentWindow.postMessage({to:'graph:queryGlobalRegistry', body:{"guid": guid}}, '*')
       });
+  },
+
+  calculateBloomFilter1Hop: ()=> {
+    return new Promise((resolve, reject)=>{
+        let loaded = (e)=>{
+            if(e.data.to === 'runtime:loadedHyperty'){
+                window.removeEventListener('message', loaded);
+                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+            }
+        };
+        window.addEventListener('message', loaded);
+        iframe.contentWindow.postMessage({to:'graph:calculateBloomFilter1Hop', body:{}}, '*')
+      });
+  },
+
+  signGlobalRegistryRecord: ()=> {
+    return new Promise((resolve, reject)=>{
+        let loaded = (e)=>{
+            if(e.data.to === 'runtime:loadedHyperty'){
+                window.removeEventListener('message', loaded);
+                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+            }
+        };
+        window.addEventListener('message', loaded);
+        iframe.contentWindow.postMessage({to:'graph:signGlobalRegistryRecord', body:{}}, '*')
+      });
   }
 
 };

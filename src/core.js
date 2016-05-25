@@ -101,6 +101,7 @@ catalogue.getRuntimeDescriptor(runtimeURL)
                 console.log("##User Found: \n Firtsname: " + user.firstName +
                     "\n LastName " + user.lastName +
                     "\n GUID: " + user.guid);
+                return user;
             } else if (event.data.to === 'graph:checkGUID') {
                 let guid = event.data.body.guid;
                 console.log("##Inside core: finding user with GUID: " + guid);
@@ -131,6 +132,12 @@ catalogue.getRuntimeDescriptor(runtimeURL)
                 let guid = event.data.body.guid;
                 console.log("##Inside core: Querying with GUID: " + guid);
                 console.log("##Querying done and returned promise object is: " + runtime.graphConnector.queryGlobalRegistry(guid));
+            } else if (event.data.to === 'graph:calculateBloomFilter1Hop') {
+                console.log("##Inside bloom filter");
+                console.log("##Calculating Bloom filter : " + runtime.graphConnector.calculateBloomFilter1Hop());
+            } else if (event.data.to === 'graph:signGlobalRegistryRecord') {
+                console.log("##Inside signing");
+                console.log("##Signing and the returned JWT is : " + runtime.graphConnector.signGlobalRegistryRecord());
             }
 
         }, false);
