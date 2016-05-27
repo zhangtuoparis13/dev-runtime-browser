@@ -117,96 +117,97 @@ let runtimeProxy = {
         });
     },
 
-  checkGUID: (guid)=> {
-    return new Promise((resolve, reject)=>{
-        let loaded = (e)=>{
-            if(e.data.to === 'runtime:loadedHyperty'){
-                window.removeEventListener('message', loaded);
-                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-            }
-        };
-        window.addEventListener('message', loaded);
-        iframe.contentWindow.postMessage({to:'graph:checkGUID', body:{"guid": guid}}, '*')
-      });
-  },
+    checkGUID: (guid)=> {
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'graph:checkGUID', body:{"guid": guid}}, '*')
+        });
+    },
 
-  removeContact: (guid)=> {
-    return new Promise((resolve, reject)=>{
-        let loaded = (e)=>{
-            if(e.data.to === 'runtime:loadedHyperty'){
-                window.removeEventListener('message', loaded);
-                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-            }
-        };
-        window.addEventListener('message', loaded);
-        iframe.contentWindow.postMessage({to:'graph:removeContact', body:{"guid": guid}}, '*')
-      });
-  },
+    removeContact: (guid)=> {
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'graph:removeContact', body:{"guid": guid}}, '*')
+        });
+    },
 
-  useGUID: (seed)=> {
-    return new Promise((resolve, reject)=>{
-        let loaded = (e)=>{
-            if(e.data.to === 'runtime:loadedHyperty'){
-                window.removeEventListener('message', loaded);
-                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-            }
-        };
-        window.addEventListener('message', loaded);
-        iframe.contentWindow.postMessage({to:'graph:useGUID', body:{"seed": seed}}, '*')
-      });
-  },
+    useGUID: (seed)=> {
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'graph:useGUID', body:{"seed": seed}}, '*')
+        });
+    },
 
-  sendGlobalRegistryRecord: (jwt)=> {
-    return new Promise((resolve, reject)=>{
-        let loaded = (e)=>{
-            if(e.data.to === 'runtime:loadedHyperty'){
-                window.removeEventListener('message', loaded);
-                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-            }
-        };
-        window.addEventListener('message', loaded);
-        iframe.contentWindow.postMessage({to:'graph:sendGlobalRegistryRecord', body:{"jwt": jwt}}, '*')
-      });
-  },
+    sendGlobalRegistryRecord: (jwt)=> {
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'graph:sendGlobalRegistryRecord', body:{"jwt": jwt}}, '*')
+            resolve("success");
+        });
+    },
 
-  queryGlobalRegistry: (guid)=> {
-    return new Promise((resolve, reject)=>{
-        let loaded = (e)=>{
-            if(e.data.to === 'runtime:loadedHyperty'){
-                window.removeEventListener('message', loaded);
-                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-            }
-        };
-        window.addEventListener('message', loaded);
-        iframe.contentWindow.postMessage({to:'graph:queryGlobalRegistry', body:{"guid": guid}}, '*')
-      });
-  },
+    queryGlobalRegistry: (guid)=> {
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'graph:queryGlobalRegistry', body:{"guid": guid}}, '*')
+        });
+    },
 
-  calculateBloomFilter1Hop: ()=> {
-    return new Promise((resolve, reject)=>{
-        let loaded = (e)=>{
-            if(e.data.to === 'runtime:loadedHyperty'){
-                window.removeEventListener('message', loaded);
-                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-            }
-        };
-        window.addEventListener('message', loaded);
-        iframe.contentWindow.postMessage({to:'graph:calculateBloomFilter1Hop', body:{}}, '*')
-      });
-  },
+    calculateBloomFilter1Hop: ()=> {
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'graph:calculateBloomFilter1Hop', body:{}}, '*')
+        });
+    },
 
-  signGlobalRegistryRecord: ()=> {
-    return new Promise((resolve, reject)=>{
-        let loaded = (e)=>{
-            if(e.data.to === 'runtime:loadedHyperty'){
-                window.removeEventListener('message', loaded);
-                resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
-            }
-        };
-        window.addEventListener('message', loaded);
-        iframe.contentWindow.postMessage({to:'graph:signGlobalRegistryRecord', body:{}}, '*')
-      });
-  }
+    signGlobalRegistryRecord: ()=> {
+        return new Promise((resolve, reject)=>{
+            let loaded = (e)=>{
+                if(e.data.to === 'runtime:loadedHyperty'){
+                    window.removeEventListener('message', loaded);
+                    resolve(buildMsg(app.getHyperty(e.data.body.runtimeHypertyURL), e.data));
+                }
+            };
+            window.addEventListener('message', loaded);
+            iframe.contentWindow.postMessage({to:'graph:signGlobalRegistryRecord', body:{}}, '*')
+        });
+    }
 
 };
 

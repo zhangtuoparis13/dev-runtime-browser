@@ -48,27 +48,35 @@ function documentReady() {
   }).then(runtimeInstalled).catch(errorMessage);
 }
 
+function printContact(event){
+  if(event.data.to == "runtime:getContact"){
+    let userFirstName = event.data.body.firstName;
+    let userLastName = event.data.body.lastName;
+    $('.testResult').append("<h3>The user's firstName is <u>"+ userFirstName+"<h3></u> and Last Name is <u>"+ userLastName+"</u></h3>");
+  }
+}
 function runtimeInstalled(runtime) {
   console.log(runtime);
-  runtime.generateGUID();
-  runtime.addUserID('facebook.com/felix');
-  runtime.removeUserID('facebook.com/felix');
-  runtime.addContact('budc8fucd8cdsc98dc899dc', 'reThinkUser', 'Test');
-  runtime.getContact('reThinkUser');
-  runtime.checkGUID('budc8fucd8cdsc98dc899dc');
-  runtime.removeContact('budc8fucd8cdsc98dc899dc');
-  runtime.checkGUID('budc8fucd8cdsc98dc899dc');
-  runtime.useGUID('grey climb demon snap shove fruit grasp hum self grey climb demon snap shove fruit grasp');
-  runtime.sendGlobalRegistryRecord("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ");
-  runtime.queryGlobalRegistry('budc8fucd8cdsc98dc899dc');
-  runtime.calculateBloomFilter1Hop();
-  runtime.signGlobalRegistryRecord();
-
+  $('.getDet').on('click', (e)=>{
+    runtime.generateGUID();
+    runtime.addUserID('facebook.com/felix');
+    runtime.removeUserID('facebook.com/felix');
+    runtime.addContact('budc8fucd8cdsc98dc899dc', 'reThinkUser', 'Test');
+    runtime.getContact('reThinkUser');
+    runtime.checkGUID('budc8fucd8cdsc98dc899dc');
+    runtime.removeContact('budc8fucd8cdsc98dc899dc');
+    runtime.checkGUID('budc8fucd8cdsc98dc899dc');
+    runtime.useGUID('grey climb demon snap shove fruit grasp hum self grey climb demon snap shove fruit grasp');
+    runtime.sendGlobalRegistryRecord("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ");
+    runtime.queryGlobalRegistry('budc8fucd8cdsc98dc899dc');
+    runtime.calculateBloomFilter1Hop();
+    runtime.signGlobalRegistryRecord();
+    window.addEventListener("message", printContact, false);
   //let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
 
   // Load First Hyperty
   //runtime.requireHyperty(hypertyObserver).then(hypertyObserverDeployed).catch(function(reason) {
   //  errorMessage(reason);
   //});
-});
+  });
 }

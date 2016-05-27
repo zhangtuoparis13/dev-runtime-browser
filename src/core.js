@@ -101,6 +101,7 @@ catalogue.getRuntimeDescriptor(runtimeURL)
                 console.log("##User Found: \n Firtsname: " + user.firstName +
                     "\n LastName " + user.lastName +
                     "\n GUID: " + user.guid);
+                parent.postMessage({to:'runtime:getContact', body:{"firstName" : user.firstName, "lastName" : user.lastName}}, '*');
             } else if (event.data.to === 'graph:checkGUID') {
                 let guid = event.data.body.guid;
                 console.log("##Inside core: finding user with GUID: " + guid);
@@ -121,7 +122,11 @@ catalogue.getRuntimeDescriptor(runtimeURL)
             } else if (event.data.to === 'graph:useGUID') {
                 let seed = event.data.body.seed;
                 console.log("##Inside core: generating keys using seed: " + seed);
-                runtime.graphConnector.useGUID(seed);
+                runtime.graphConnector.useGUID(seed).then(function(global_registry_record){
+                    console.log("Returned value is " + global_registry_record);
+                }).catch(function(err){
+                    console.log("Caught an error "+err);
+                });
                 console.log("##Seed is created");
             } else if (event.data.to === 'graph:sendGlobalRegistryRecord') {
                 let jwt = event.data.body.jwt;
