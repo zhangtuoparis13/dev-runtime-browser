@@ -101,7 +101,6 @@ catalogue.getRuntimeDescriptor(runtimeURL)
                 console.log("##User Found: \n Firtsname: " + user.firstName +
                     "\n LastName " + user.lastName +
                     "\n GUID: " + user.guid);
-                return user;
             } else if (event.data.to === 'graph:checkGUID') {
                 let guid = event.data.body.guid;
                 console.log("##Inside core: finding user with GUID: " + guid);

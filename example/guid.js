@@ -63,4 +63,12 @@ function runtimeInstalled(runtime) {
   runtime.queryGlobalRegistry('budc8fucd8cdsc98dc899dc');
   runtime.calculateBloomFilter1Hop();
   runtime.signGlobalRegistryRecord();
+
+  //let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
+
+  // Load First Hyperty
+  //runtime.requireHyperty(hypertyObserver).then(hypertyObserverDeployed).catch(function(reason) {
+  //  errorMessage(reason);
+  //});
+});
 }
